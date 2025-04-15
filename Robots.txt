@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /includes/
+Disallow: /tmp/
+Disallow: /private/
+
+Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
+
+# Региональные поддомены
+Sitemap: https://мирум.москва/sitemap.xml
+Sitemap: https://mirum.moscow/sitemap.xml
+Sitemap: https://mirum-astrakhan.ru/sitemap.xml
+Sitemap: https://mirum-ufa.ru/sitemap.xml
+Sitemap: https://mirum-surgut.ru/sitemap.xml
+Sitemap: https://4993481327.ru/sitemap.xml
+
+# Параметры сканирования
+Crawl-delay: 2
+Clean-param: ref /search/
+Clean-param: sessionid /products/
+
+# Особые правила для поисковых систем
+User-agent: Googlebot
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+
+User-agent: Yandex
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Host: arenda-kovrov-mirum.ru
