@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Яндекс.Метрика (по вашему запросу перенесена вверх) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МИРУМ - Аренда грязезащитных ковров</title>
+    <!-- Яндекс.Метрика -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
@@ -11,23 +14,6 @@
         ym(101006678, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-
-    <!-- Основные мета-теги -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аренда грязезащитных ковров в Москве | Вестибюльные ковры и коврики на вход | мирум.рент</title>
-    <meta name="description" content="✅ Аренда вестибюльных ковров для офиса с заменой. Впитывающие коврики на вход в Москве, Санкт-Петербурге, Екатеринбурге. Сервис с 2009 года. Рассчитаем за 5 минут!">
-    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/" />
-    <meta property="og:title" content="Аренда грязезащитных ковров в Москве — сервис без головной боли">
-    <meta property="og:description" content="Впитывающие ковры на вход в офис с еженедельной заменой. Работаем с 2009 года.">
-    
-    <!-- Стили и шрифты -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="img/favicon.png" type="image/png">
-    
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -44,175 +30,153 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.6;
             background-color: #f9f9f9;
-            font-family: 'Open Sans', sans-serif;
-            padding-top: var(--header-height);
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* ... (остальные стили из предыдущего кода остаются без изменений) ... */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-        /* Стиль для SEO-текста */
-        .seo-text {
-            position: absolute;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
+        /* Меню */
+        nav {
+            background: var(--primary-color);
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        /* Основной контент */
+        main {
+            padding: 30px 0;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Футер */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+
+        .footer-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        /* Кнопка */
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Главное меню -->
-    <nav class="main-menu">
-        <div class="container menu-container">
-            <a href="https://arenda-kovrov-mirum.ru/" class="logo">
-                <img src="img/logo.png" alt="мирум.рент">
-                <span class="logo-text">мирум.рент</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#advantages">Преимущества</a></li>
-                <li><a href="#prices">Цены</a></li>
-                <li><a href="interesting.html">Это интересно</a></li>
-                <li><a href="FAQ.html">FAQ</a></li>
-                <li><a href="weather_forecast.html">Прогноз погоды</a></li>
-                <li><a href="#reviews">Отзывы</a></li>
-                <li><a href="#contract">Договор</a></li>
-            </ul>
+    <nav>
+        <div class="container">
+            <a href="#">Главная</a>
+            <a href="#">О нас</a>
+            <a href="#">Преимущества</a>
+            <a href="#">Это интересно</a>
+            <a href="#">FAQ</a>
+            <a href="#">Прогноз погоды</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Договор</a>
         </div>
     </nav>
 
-    <!-- Хедер с обновленным текстом -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <h1>Грязезащитные ковры без головной боли</h1>
-                <p>Считаем за 5 минут, отвечаем сразу. Документы без ошибок – замена без звонков.</p>
-                <a href="https://wa.me/79770005127" class="btn btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i> Рассчитать стоимость
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Основное содержимое -->
-    <main>
-        <div class="container">
-            <!-- *********** МЕСТО ДЛЯ ВСТАВКИ ФУНКЦИОНАЛЬНЫХ БЛОКОВ *********** -->
-            <!-- 
-                Здесь вы можете вставлять готовые блоки:
-                1. Калькулятор стоимости
-                2. Блок "Как мы работаем" (шаги)
-                3. Преимущества
-                4. Примеры работ/кейсы
-                5. Форма заявки
-                6. Отзывы
-                
-                Вставляйте блоки между этими комментариями, сохраняя отступы.
-                Пример:
-                <section class="calculator-block">
-                    Ваш HTML-код калькулятора
-                </section>
-            -->
-            <!-- *********** КОНЕЦ ОБЛАСТИ ДЛЯ БЛОКОВ *********** -->
-        </div>
-
-        <!-- Скрытый SEO-текст с вашим контентом -->
-        <div class="seo-text">
-            Аренда вестибюльных ковров в Москве. Сервис сменных ковров для офиса в Санкт-Петербурге. 
-            Впитывающие коврики на вход в Екатеринбурге. Грязезащитные ковры в Уфе и Республике Башкортостан. 
-            Аренда ковров в Сургуте и ХМАО — профессиональное обслуживание. Ковры для офиса в Астрахани. 
-            Недорогие впитывающие коврики в Новосибирске с доставкой. Грязезащитный коврик в стоматологию в Тюмени
-            Вестибюльные ковры в Челябинске - недорого. Аренда грязезащитных покрытий в Перми.
-            Ключевые фразы: вестибюльные ковры, ковры в офис, сервис сменных ковров, аренда впитывающих ковров, аренда грязезащитных ковриков, впитывающие коврики, ковры на вход.
-        </div>
+    <main class="container">
+        <h1>Грязезащитные ковры без головной боли</h1>
+        <p>Считаем за 5 минут, отвечаем сразу. Документы без ошибок – замена без звонков.</p>
+        <a href="#" class="btn">Рассчитать стоимость</a>
     </main>
 
-    <!-- Футер -->
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-columns">
                 <div class="footer-column">
                     <h3>Контакты</h3>
                     <ul>
-                        <li><i class="fas fa-phone-alt footer-icon"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
-                        <li><i class="fab fa-whatsapp footer-icon"></i> <a href="https://wa.me/79770005127">WhatsApp</a></li>
-                        <li><i class="fas fa-envelope footer-icon"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></li>
-                        <li><i class="fas fa-map-marker-alt footer-icon"></i> г. Москва, Сущёвская ул., 27с2</li>
+                        <li>+7 (977) 000-51-27</li>
+                        <li>matservice@yandex.ru</li>
+                        <li>Москва, Сущёвская ул., 27с2</li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Регионы обслуживания</h3>
                     <ul>
-                        <li><a href="https://мирум.москва/" rel="nofollow">Москва</a></li>
-                        <li><a href="https://mirum.moscow/" rel="nofollow">Московская область</a></li>
-                        <li><a href="#" rel="nofollow">Санкт-Петербург и ЛО</a></li>
-                        <li><a href="https://mirum-ufa.ru/" rel="nofollow">Уфа и Башкортостан</a></li>
-                        <li><a href="https://mirum-surgut.ru/" rel="nofollow">Сургут и ХМАО</a></li>
-                        <li><a href="https://mirum-astrakhan.ru/" rel="nofollow">Астрахань и область</a></li>
-                        <li><a href="#" rel="nofollow">Новосибирск и область</a></li>
-                        <li><a href="#" rel="nofollow">Тюмень и область</a></li>
-                        <li><a href="#" rel="nofollow">Екатеринбург и область</a></li>
-                        <li><a href="#" rel="nofollow">Челябинск и область</a></li>
-                        <li><a href="#" rel="nofollow">Пермь и край</a></li>
+                        <li>Москва</li>
+                        <li>Московская область</li>
+                        <li>Санкт-Петербург и ЛО</li>
+                        <li>Уфа и Башкортостан</li>
+                        <li>Сургут и ХМАО</li>
+                        <li>Астрахань и область</li>
+                        <li>Новосибирск и область</li>
+                        <li>Тюмень и область</li>
+                        <li>Екатеринбург и область</li>
+                        <li>Челябинск и область</li>
+                        <li>Пермь и край</li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Документы</h3>
                     <ul>
-                        <li><a href="#contract">Образец договора</a></li>
-                        <li><a href="#requisites">Реквизиты компании</a></li>
+                        <li><a href="#">Образец договора</a></li>
+                        <li><a href="#">Реквизиты компании</a></li>
                         <li><a href="#">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Соцсети</h3>
                     <ul>
-                        <li><i class="fab fa-vk footer-icon"></i> <a href="#">ВКонтакте</a></li>
-                        <li><i class="fab fa-telegram footer-icon"></i> <a href="#">Telegram</a></li>
+                        <li><a href="#">ВКонтакте</a></li>
+                        <li><a href="#">Telegram</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                &copy; 2009–<span id="currentYear">2025</span> мирум.рент (ООО "МИРУМ"). Все права защищены.
-            </div>
         </div>
     </footer>
-
-    <!-- Кнопка "Наверх" -->
-    <div class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <!-- Основные скрипты -->
-    <script>
-        // Обновление года в футере
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // Кнопка "Наверх"
-        const backToTopButton = document.getElementById('backToTop');
-        window.addEventListener('scroll', function() {
-            backToTopButton.classList.toggle('visible', window.pageYOffset > 300);
-        });
-        backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        // Добавляем noopener для внешних ссылок
-        document.querySelectorAll('a[href^="http"]').forEach(link => {
-            if (link.href.indexOf(window.location.host) === -1) {
-                link.setAttribute('rel', 'noopener noreferrer');
-            }
-        });
-    </script>
 </body>
 </html>
