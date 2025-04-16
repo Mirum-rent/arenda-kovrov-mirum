@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(101006678, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>грязезащитные ковры без головной боли | аренда от мирум.рент</title>
     <meta name="description" content="Считаем за 5 минут, отвечаем сразу. Аренда грязезащитных ковров с 2009 года. Документы без ошибок – замена без звонков. Москва, Сущёвская ул., 27с2.">
+    <meta name="keywords" content="аренда грязезащитных ковров, аренда ковров, вестибюльные ковры, ковры в офис, ковры на вход, сервис сменных ковров, впитывающие коврики">
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/" />
     <meta property="og:title" content="Грязезащитные ковры без головной боли">
     <meta property="og:description" content="Профессиональная аренда ковров с сервисом. Работаем с 2009 года.">
@@ -214,7 +233,283 @@
             flex-grow: 1;
         }
 
-        /* Футер (компактный) */
+        /* Секции */
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto;
+        }
+
+        /* Карточки преимуществ */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .advantage-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .advantage-header {
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2em;
+            text-align: center;
+            position: relative;
+        }
+
+        .advantage-header i {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover .advantage-header i {
+            transform: scale(1.2);
+        }
+
+        .advantage-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .advantage-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .advantage-text {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .advantage-stats {
+            margin-top: auto;
+            font-size: 0.9em;
+            color: var(--accent-color);
+            font-weight: 500;
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px dashed #eee;
+        }
+
+        /* Шаги работы */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            z-index: 2;
+        }
+
+        .step-header {
+            padding: 30px 20px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2em;
+            text-align: center;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .step-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .step-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .step-action {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        /* О нас */
+        .about-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 25px 20px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+
+        /* Реквизиты */
+        .details-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .details-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .details-header {
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .details-content {
+            padding: 25px;
+        }
+
+        .details-row {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .details-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .details-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 150px;
+            flex-shrink: 0;
+        }
+
+        .details-value {
+            flex-grow: 1;
+        }
+
+        .contact-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .whatsapp-link {
+            color: var(--whatsapp-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .whatsapp-link i {
+            font-size: 1.2em;
+        }
+
+        /* Футер */
         .footer {
             background-color: var(--primary-color);
             color: white;
@@ -270,6 +565,23 @@
             width: 16px;
             text-align: center;
             font-size: 0.9rem;
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .region-group h4 {
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .region-group ul {
+            margin-bottom: 15px;
         }
 
         .copyright {
@@ -348,6 +660,10 @@
             .footer-content {
                 grid-template-columns: 1fr 1fr;
             }
+            
+            .section {
+                padding: 40px 0;
+            }
         }
 
         @media (max-width: 576px) {
@@ -376,6 +692,14 @@
             .footer-column {
                 margin-bottom: 15px;
             }
+            
+            .about-card {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -389,14 +713,14 @@
             </a>
             <ul class="nav-links">
                 <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
+                <li><a href="#calculator">Калькулятор</a></li>
                 <li><a href="#about">О нас</a></li>
                 <li><a href="#advantages">Преимущества</a></li>
-                <li><a href="#prices">Цены</a></li>
-                <li><a href="interesting.html">Это интересно</a></li>
-                <li><a href="FAQ.html">FAQ</a></li>
-                <li><a href="weather_forecast.html">Прогноз погоды</a></li>
-                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#how-to-start">Как начать</a></li>
                 <li><a href="#contract">Договор</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="#gallery">Фото</a></li>
+                <li><a href="#requisites">Реквизиты</a></li>
             </ul>
         </div>
     </nav>
@@ -416,9 +740,384 @@
 
     <!-- Основное содержимое -->
     <main>
-        <div class="container">
-            <!-- Здесь будут добавляться блоки после доработки дизайна -->
-        </div>
+        <!-- Калькулятор (будет добавлен позже) -->
+        <section id="calculator" class="section">
+            <div class="container">
+                <h2 class="section-title">Калькулятор стоимости</h2>
+                <div style="text-align: center; padding: 40px 0; background: #f5f7fa; border-radius: 8px;">
+                    <p style="font-size: 1.2rem;">Здесь будет калькулятор стоимости аренды ковров</p>
+                    <a href="https://wa.me/79770005127" class="btn btn-whatsapp" style="margin-top: 20px;">
+                        <i class="fab fa-whatsapp"></i> Рассчитать стоимость
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section id="about" class="section" style="background-color: #f5f7fa;">
+            <div class="container">
+                <h2 class="section-title">О компании МИРУМ</h2>
+                
+                <div class="about-card">
+                    <div class="about-header">
+                        <div style="display: inline-flex; align-items: center; background: rgba(52, 152, 219, 0.1); padding: 8px 20px; border-radius: 50px; margin-bottom: 15px;">
+                            <i class="fas fa-calendar-alt" style="color: var(--accent-color); margin-right: 10px;"></i>
+                            <span style="font-weight: 500;">Работаем с 2009 года</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary-color);">
+                            Профессиональная аренда грязезащитных ковров
+                        </h3>
+                        <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+                            Обеспечиваем чистоту и безопасность ваших помещений в 20+ регионах России
+                        </p>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div style="width: 60px; height: 60px; background-color: rgba(52, 152, 219, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <i class="fas fa-map-marked-alt" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
+                            </div>
+                            <h4 style="margin-bottom: 10px; color: var(--primary-color);">Широкая география</h4>
+                            <p style="font-size: 0.95rem; color: #666;">Москва, СПб, Астрахань, Уфа, Сургут и другие города</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div style="width: 60px; height: 60px; background-color: rgba(231, 76, 60, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <i class="fas fa-sync-alt" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                            </div>
+                            <h4 style="margin-bottom: 10px; color: var(--primary-color);">Регулярная замена</h4>
+                            <p style="font-size: 0.95rem; color: #666;">
+                                Частота замены зависит от погоды<br>
+                                <a href="https://arenda-kovrov-mirum.ru/pogoda" style="color: var(--accent-color); font-weight: 500; text-decoration: none;">
+                                    <i class="fas fa-cloud-sun" style="margin-right: 5px;"></i>Актуальный прогноз
+                                </a>
+                            </p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div style="width: 60px; height: 60px; background-color: rgba(46, 204, 113, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #2ecc71;"></i>
+                            </div>
+                            <h4 style="margin-bottom: 10px; color: var(--primary-color);">Нас рекомендуют</h4>
+                            <p style="font-size: 0.95rem; color: #666;">
+                                <a href="#reviews" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">
+                                    Рекомендательные письма
+                                </a> от клиентов
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="clients-section" style="margin-bottom: 40px; padding: 25px; background: #f5f7fa; border-radius: 8px;">
+                        <h3 style="text-align: center; margin-bottom: 25px; color: var(--primary-color); position: relative;">
+                            <span style="background: #f5f7fa; padding: 0 20px; position: relative; z-index: 2;">Кто наши клиенты</span>
+                            <span style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #ddd; z-index: 1;"></span>
+                        </h3>
+                        
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 25px;">
+                            <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <i class="fas fa-hospital" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                                <span>Медицинские учреждения</span>
+                            </div>
+                            <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <i class="fas fa-store" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                                <span>Магазины и ТЦ</span>
+                            </div>
+                            <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <i class="fas fa-utensils" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                                <span>Кафе и рестораны</span>
+                            </div>
+                            <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                                <i class="fas fa-building" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                                <span>Офисные центры</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="https://wa.me/79770005127" style="display: inline-flex; align-items: center; justify-content: center; padding: 14px 30px; background-color: var(--whatsapp-color); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); max-width: 300px; margin: 0 auto;">
+                            <i class="fab fa-whatsapp" style="margin-right: 10px;"></i> Обсудить сотрудничество
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Наши преимущества -->
+        <section id="advantages" class="section">
+            <div class="container">
+                <h2 class="section-title">Наши преимущества</h2>
+                
+                <div class="advantages-grid">
+                    <!-- Преимущество 1 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-map-marked-alt"></i>
+                            Широкая география
+                        </div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Работаем более чем в 20 регионах</h3>
+                            <p class="advantage-text">Опыт с 2009 года позволяет нам предлагать лучшие решения для клиентов по всей России. Наши ковры защищают помещения от Москвы до Владивостока.</p>
+                            <div class="advantage-stats">Более 1 млн. м² ковров в аренде</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Преимущество 2 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-users"></i>
+                            Профессионализм
+                        </div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Команда экспертов</h3>
+                            <p class="advantage-text">Каждому клиенту назначается персональный менеджер, который оперативно решает все вопросы и сопровождает на всех этапах сотрудничества.</p>
+                            <div class="advantage-stats">Оперативная поддержка</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Преимущество 3 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-file-contract"></i>
+                            Документооборот
+                        </div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Идеальная документация</h3>
+                            <p class="advantage-text">Работаем с электронным документооборотом (ЭДО). Все акты, счета и отчетные документы оформляются правильно и отправляются вовремя.</p>
+                            <div class="advantage-stats">100% соответствие требованиям</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Преимущество 4 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-landmark"></i>
+                            Госзакупки
+                        </div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Работа с госучреждениями</h3>
+                            <p class="advantage-text">Полное соответствие требованиям ФЗ 44 и ФЗ 223. Готовим гарантии, коммерческие предложения, участвуем в тендерах и работаем по офертам.</p>
+                            <div class="advantage-stats">Опыт госзакупок с 2012 года</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Преимущество 5 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-credit-card"></i>
+                            Оплата
+                        </div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Удобные платежи</h3>
+                            <p class="advantage-text">Оплата по счету или банковской картой с автоматической выдачей чеков. Чистая отчетность для бухгалтерии и прозрачные финансовые потоки.</p>
+                            <div class="advantage-stats">Безналичный и онлайн-расчет</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Преимущество 6 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-handshake"></i>
+                            Индивидуальность
+                        </div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Гибкие условия</h3>
+                            <p class="advantage-text">Подбираем решения под ваш бюджет и требования. Разрабатываем индивидуальные программы сотрудничества для постоянных клиентов.</p>
+                            <div class="advantage-stats">Персональный подход к каждому</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Как начать с нами работать -->
+        <section id="how-to-start" class="section" style="background-color: #f5f7fa;">
+            <div class="container">
+                <h2 class="section-title">Как начать с нами работать</h2>
+                
+                <div class="steps-container">
+                    <!-- Шаг 1 -->
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-header">Оставить заявку</div>
+                        <div class="step-content">
+                            <p class="step-text">Напишите нам в WhatsApp и сообщите:</p>
+                            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                                <li>Город и адрес объекта</li>
+                                <li>Необходимое количество ковров</li>
+                                <li>Желаемые размеры</li>
+                                <li>Частоту замены</li>
+                            </ul>
+                            <div class="step-action">
+                                <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> Написать в WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шаг 2 -->
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-header">Заключить договор</div>
+                        <div class="step-content">
+                            <p class="step-text">Вышлите нам реквизиты вашей организации. Мы подготовим договор и отправим его вам на согласование.</p>
+                            <p class="step-text">Для начала работы достаточно скан-копии или фотографии подписанного с вашей стороны договора.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Шаг 3 -->
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-header">Согласовать детали</div>
+                        <div class="step-content">
+                            <p class="step-text">Согласуем график замены ковров с учетом режима работы вашего объекта.</p>
+                            <p class="step-text">Подскажите, как вас легче найти: вывески, название организации, контактное лицо и другие детали для удобного доступа.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Финал -->
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 30px; background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%); color: white; border-radius: 8px; margin-top: 20px;">
+                        <h3 style="font-size: 1.5em; margin-bottom: 15px; color: var(--light-color);">Все готово! Ваше помещение защищено от грязи</h3>
+                        <p style="font-size: 1.1em; max-width: 800px; margin: 0 auto;">Дальше мы сделаем все сами! В конце месяца вы получите полный комплект отчетных документов. Просто наслаждайтесь чистотой - все заботы мы берем на себя.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Договор (превью) -->
+        <section id="contract" class="section">
+            <div class="container">
+                <h2 class="section-title">Превью договора</h2>
+                <div style="text-align: center; padding: 40px 0; background: #f5f7fa; border-radius: 8px;">
+                    <p style="font-size: 1.2rem;">Здесь будет превью договора и кнопка для скачивания</p>
+                    <a href="#" class="btn" style="background-color: var(--primary-color); color: white; margin-top: 20px;">
+                        <i class="fas fa-file-download"></i> Скачать образец договора
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы (будет добавлен позже) -->
+        <section id="reviews" class="section" style="background-color: #f5f7fa;">
+            <div class="container">
+                <h2 class="section-title">Отзывы наших клиентов</h2>
+                <div style="text-align: center; padding: 40px 0;">
+                    <p style="font-size: 1.2rem;">Здесь будут отзывы клиентов</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Фотогалерея (будет добавлена позже) -->
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2 class="section-title">Фотографии с наших объектов</h2>
+                <div style="text-align: center; padding: 40px 0; background: #f5f7fa; border-radius: 8px;">
+                    <p style="font-size: 1.2rem;">Здесь будет фотогалерея</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Реквизиты -->
+        <section id="requisites" class="section" style="background-color: #f5f7fa;">
+            <div class="container">
+                <h2 class="section-title">Реквизиты компании</h2>
+                
+                <div class="details-container">
+                    <!-- Общие реквизиты -->
+                    <div class="details-card">
+                        <div class="details-header">Общие реквизиты</div>
+                        <div class="details-content">
+                            <div class="details-row">
+                                <div class="details-label">Наименование</div>
+                                <div class="details-value">Общество с ограниченной ответственностью «МИРУМ»</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Краткое название</div>
+                                <div class="details-value">ООО «МИРУМ»</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">ИНН</div>
+                                <div class="details-value">3019008619</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">КПП</div>
+                                <div class="details-value">301901001</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">ОГРН</div>
+                                <div class="details-value">1133019002599 от 06.09.2013</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Юридический адрес</div>
+                                <div class="details-value">414056, г. Астрахань, ул. Латышева, 18, оф. 104</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Почтовый адрес</div>
+                                <div class="details-value">414038, г. Астрахань, пер. Ленинградский, д. 84, а/я 1</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Банковские реквизиты -->
+                    <div class="details-card">
+                        <div class="details-header">Банковские реквизиты</div>
+                        <div class="details-content">
+                            <div class="details-row">
+                                <div class="details-label">Наименование банка</div>
+                                <div class="details-value">АО «ТБанк»</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">БИК</div>
+                                <div class="details-value">044525974</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Корреспондентский счет</div>
+                                <div class="details-value">30101810145250000974</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Расчетный счет</div>
+                                <div class="details-value">40702810210000670459</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">ИНН банка</div>
+                                <div class="details-value">771014679</div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">КПП банка</div>
+                                <div class="details-value">771301001</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Контактная информация -->
+                    <div class="details-card">
+                        <div class="details-header">Контактная информация</div>
+                        <div class="details-content">
+                            <div class="details-row">
+                                <div class="details-label">Телефон</div>
+                                <div class="details-value">
+                                    <a href="https://wa.me/79770005127" class="whatsapp-link" target="_blank">
+                                        <i class="fab fa-whatsapp"></i> +7 (977) 000-51-27
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Email</div>
+                                <div class="details-value">
+                                    <a href="mailto:matservice@yandex.ru" class="contact-link">matservice@yandex.ru</a>
+                                </div>
+                            </div>
+                            <div class="details-row">
+                                <div class="details-label">Сайт</div>
+                                <div class="details-value">
+                                    <a href="https://arenda-kovrov-mirum.ru/" target="_blank" class="contact-link">https://arenda-kovrov-mirum.ru/</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Футер -->
@@ -438,10 +1137,10 @@
                     <h3>Меню</h3>
                     <ul>
                         <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
+                        <li><a href="#calculator">Калькулятор</a></li>
                         <li><a href="#about">О компании</a></li>
                         <li><a href="#advantages">Наши преимущества</a></li>
-                        <li><a href="#prices">Цены и калькулятор</a></li>
-                        <li><a href="interesting.html">Это интересно</a></li>
+                        <li><a href="#how-to-start">Как начать</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -453,15 +1152,73 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Соцсети</h3>
-                    <ul>
-                        <li><i class="fab fa-vk footer-icon"></i> <a href="#">ВКонтакте</a></li>
-                        <li><i class="fab fa-telegram footer-icon"></i> <a href="#">Telegram</a></li>
-                    </ul>
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <!-- Центральный ФО -->
+                        <div class="region-group">
+                            <h4>Центральный округ</h4>
+                            <ul>
+                                <li><a href="https://мирум.москва/" target="_blank">Москва</a></li>
+                                <li><a href="https://mirum.moscow/" target="_blank">Московская область</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Северо-Западный ФО -->
+                        <div class="region-group">
+                            <h4>Северо-Западный округ</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Ленинградская область</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Приволжский ФО -->
+                        <div class="region-group">
+                            <h4>Приволжский округ</h4>
+                            <ul>
+                                <li><a href="https://mirum-ufa.ru/" target="_blank">Уфа и Башкортостан</a></li>
+                                <li>Пермь и Пермский край</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Уральский ФО -->
+                        <div class="region-group">
+                            <h4>Уральский округ</h4>
+                            <ul>
+                                <li>Екатеринбург и Свердловская область</li>
+                                <li>Тюмень и Тюменская область</li>
+                                <li>Челябинск и Челябинская область</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Сибирский ФО -->
+                        <div class="region-group">
+                            <h4>Сибирский округ</h4>
+                            <ul>
+                                <li>Новосибирск и Новосибирская область</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Южный ФО -->
+                        <div class="region-group">
+                            <h4>Южный округ</h4>
+                            <ul>
+                                <li><a href="https://mirum-astrakhan.ru/" target="_blank">Астрахань и Астраханская область</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- ХМАО -->
+                        <div class="region-group">
+                            <h4>Ханты-Мансийский АО</h4>
+                            <ul>
+                                <li><a href="https://mirum-surgut.ru/" target="_blank">Сургут и ХМАО</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2009–2025 мирум.рент (ООО "МИРУМ"). Все права защищены.
+                &copy; 2009–<span id="current-year">2025</span> мирум.рент (ООО "МИРУМ"). Все права защищены.
             </div>
         </div>
     </footer>
@@ -493,10 +1250,7 @@
         // Текущая дата в футере
         document.addEventListener('DOMContentLoaded', function() {
             const currentYear = new Date().getFullYear();
-            const yearElement = document.querySelector('.copyright');
-            if (yearElement) {
-                yearElement.textContent = yearElement.textContent.replace('2025', currentYear);
-            }
+            document.getElementById('current-year').textContent = currentYear;
             
             // Оптимизация для SEO: добавляем атрибуты ссылкам
             document.querySelectorAll('a[href^="http"]').forEach(link => {
