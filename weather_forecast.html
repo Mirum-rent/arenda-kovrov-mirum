@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды для вашего города | МИРУМ - аренда грязезащитных ковров</title>
+    <meta name="description" content="Актуальный прогноз погоды на неделю. МИРУМ - профессиональные решения для защиты помещений от грязи в любую погоду.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --whatsapp-color: #25D366;
+            --sunny-color: #F9D71C;
+            --cloudy-color: #BDC3C7;
+            --rainy-color: #3498DB;
+            --snowy-color: #ECF0F1;
+            --stormy-color: #8E44AD;
+            --foggy-color: #95A5A6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding: 20px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        .weather-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .search-container {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            width: 50px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .current-weather {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .location {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .date {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .weather-icon {
+            font-size: 5rem;
+            margin: 20px 0;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .temperature {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .temperature::after {
+            content: '°C';
+            position: absolute;
+            top: 0;
+            font-size: 1.5rem;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .forecast {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .forecast-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .forecast-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .forecast-day {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .forecast-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .forecast-icon {
+            font-size: 2rem;
+            margin: 10px 0;
+            animation: pulse 2s infinite;
+        }
+
+        .forecast-temp {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .forecast-high {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .forecast-low {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-color);
+            color: white;
+            border: 2px solid var(--whatsapp-color);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: transparent;
+            color: var(--whatsapp-color);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .seo-text {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .seo-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .seo-text p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .sunny {
+            color: var(--sunny-color);
+            text-shadow: 0 0 10px rgba(249, 215, 28, 0.3);
+        }
+
+        .cloudy {
+            color: var(--cloudy-color);
+        }
+
+        .rainy {
+            color: var(--rainy-color);
+        }
+
+        .snowy {
+            color: var(--snowy-color);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stormy {
+            color: var(--stormy-color);
+            animation: shake 0.5s infinite alternate;
+        }
+        
+        .foggy {
+            color: var(--foggy-color);
+            animation: fade 3s infinite alternate;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
+        }
+        
+        @keyframes fade {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Автокомплит */
+        .autocomplete {
+            position: relative;
+            width: 100%;
+        }
+        
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 0 10px 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #d4d4d4;
+        }
+        
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .autocomplete-active {
+            background-color: var(--secondary-color) !important;
+            color: white;
+        }
+
+        /* Лоадер */
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--secondary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .forecast {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            
+            .details {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .detail-item {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .weather-container {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .temperature {
+                font-size: 2.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="https://arenda-kovrov-mirum.ru/" class="logo">
+                <span>МИРУМ</span>
+            </a>
+        </header>
+
+        <h1 class="section-title">Прогноз погоды для вашего города</h1>
+
+        <div class="weather-container">
+            <div class="search-container">
+                <div class="autocomplete">
+                    <input type="text" class="search-input" placeholder="Введите название города..." id="city-input" autocomplete="off">
+                    <button class="search-btn" id="search-btn"><i class="fas fa-search"></i></button>
+                    <div id="autocomplete-list" class="autocomplete-items"></div>
+                </div>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+
+            <div class="current-weather" id="current-weather">
+                <h2 class="location" id="location">Москва</h2>
+                <div class="date" id="date"></div>
+                <div class="weather-icon sunny" id="weather-icon"><i class="fas fa-sun"></i></div>
+                <div class="temperature" id="temperature">24</div>
+                <div class="description" id="description">Солнечно</div>
+                
+                <div class="details">
+                    <div class="detail-item">
+                        <div class="detail-value" id="humidity">65%</div>
+                        <div class="detail-label">Влажность</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-value" id="wind">12 км/ч</div>
+                        <div class="detail-label">Ветер</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-value" id="pressure">765 мм</div>
+                        <div class="detail-label">Давление</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forecast" id="forecast">
+                <!-- Прогноз на 7 дней будет добавляться здесь через JavaScript -->
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="https://arenda-kovrov-mirum.ru/" class="btn btn-primary">
+                <i class="fas fa-home"></i> На главную
+            </a>
+            <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Написать в WhatsApp
+            </a>
+        </div>
+
+        <div class="seo-text">
+            <h2>Аренда грязезащитных ковров для любой погоды</h2>
+            <p>Независимо от прогноза погоды, ваши помещения могут оставаться чистыми с профессиональными грязезащитными коврами от компании МИРУМ. Наши решения особенно актуальны в дождливую и снежную погоду, когда риск загрязнения помещений значительно возрастает.</p>
+            <p>Мы предлагаем аренду качественных грязезащитных ковров в Москве, Санкт-Петербурге и других городах России. Наши ковры эффективно задерживают до 90% грязи и влаги, предотвращая их попадание внутрь помещений.</p>
+            <p>Следите за прогнозом погоды и будьте готовы к любым осадкам с МИРУМ! Мы обеспечим защиту вашего помещения в любую погоду - дождь, снег или слякоть.</p>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 МИРУМ - Аренда грязезащитных ковров. Все права защищены.
+    </footer>
+
+    <script>
+        const WEATHER_API_KEY = 'deb51b53225d44e585b232326252603';
+        const DEFAULT_CITY = 'Москва';
+        let lastUpdateTime = 0;
+        const UPDATE_INTERVAL = 3600000; // 1 час в миллисекундах
+        
+        // Элементы DOM
+        const cityInput = document.getElementById('city-input');
+        const searchBtn = document.getElementById('search-btn');
+        const locationEl = document.getElementById('location');
+        const dateEl = document.getElementById('date');
+        const weatherIcon = document.getElementById('weather-icon');
+        const temperatureEl = document.getElementById('temperature');
+        const descriptionEl = document.getElementById('description');
+        const humidityEl = document.getElementById('humidity');
+        const windEl = document.getElementById('wind');
+        const pressureEl = document.getElementById('pressure');
+        const forecastEl = document.getElementById('forecast');
+        const currentWeatherEl = document.getElementById('current-weather');
+        const loaderEl = document.getElementById('loader');
+        const autocompleteList = document.getElementById('autocomplete-list');
+        
+        // Дни недели и месяцы для форматирования даты
+        const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+        const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+        
+        // Получение текущей даты в формате "День недели, число месяц год"
+        function getFormattedDate(date) {
+            const dayOfWeek = daysOfWeek[date.getDay()];
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            return `${dayOfWeek}, ${day} ${month} ${year}`;
+        }
+        
+        // Установка текущей даты
+        function setCurrentDate() {
+            dateEl.textContent = getFormattedDate(new Date());
+        }
+        
+        // Получение данных о погоде
+        async function getWeatherData(city) {
+            try {
+                showLoader();
+                
+                // Получаем текущую погоду и прогноз одним запросом
+                const response = await fetch(
+                    `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=7&lang=ru`
+                );
+                
+                if (!response.ok) throw new Error('Город не найден или сервис недоступен');
+                
+                const data = await response.json();
+                
+                hideLoader();
+                lastUpdateTime = Date.now();
+                return {
+                    current: {
+                        location: data.location,
+                        current: data.current
+                    },
+                    forecast: data
+                };
+            } catch (error) {
+                hideLoader();
+                console.error('Ошибка при получении данных о погоде:', error);
+                alert('Не удалось получить данные. Проверьте название города или попробуйте позже.');
+                return null;
+            }
+        }
+        
+        // Обновление интерфейса текущей погодой
+        function updateCurrentWeather(data) {
+            const current = data.current.current;
+            const location = data.current.location;
+            
+            locationEl.textContent = location.name;
+            setCurrentDate();
+            temperatureEl.textContent = Math.round(current.temp_c);
+            descriptionEl.textContent = current.condition.text;
+            humidityEl.textContent = `${current.humidity}%`;
+            windEl.textContent = `${current.wind_kph} км/ч`;
+            pressureEl.textContent = `${current.pressure_mb} мм`;
+            
+            updateWeatherIcon(current.condition.code, current.is_day);
+            
+            // Показываем блок
+            currentWeatherEl.style.display = 'flex';
+        }
+        
+        // Обновление прогноза на 7 дней
+        function updateForecast(data) {
+            forecastEl.innerHTML = '';
+            
+            const forecastDays = data.forecast.forecast.forecastday;
+            
+            forecastDays.forEach(day => {
+                const date = new Date(day.date);
+                const dayOfWeek = daysOfWeek[date.getDay()];
+                const dayOfMonth = date.getDate();
+                const month = months[date.getMonth()];
+                
+                const forecastItem = document.createElement('div');
+                forecastItem.className = 'forecast-item';
+                
+                forecastItem.innerHTML = `
+                    <div class="forecast-day">${dayOfWeek}</div>
+                    <div class="forecast-date">${dayOfMonth} ${month}</div>
+                    <div class="forecast-icon">${getWeatherIcon(day.day.condition.code, true)}</div>
+                    <div class="forecast-temp">
+                        <span class="forecast-high">${Math.round(day.day.maxtemp_c)}°</span>
+                        <span class="forecast-low">${Math.round(day.day.mintemp_c)}°</span>
+                    </div>
+                    <div class="forecast-desc">${day.day.condition.text}</div>
+                `;
+                
+                forecastEl.appendChild(forecastItem);
+            });
+            
+            // Показываем блок
+            forecastEl.style.display = 'grid';
+        }
+        
+        // Получение иконки погоды по коду условия
+        function getWeatherIcon(code, isDay) {
+            // Группы погодных условий: https://www.weatherapi.com/docs/weather_conditions.json
+            if (code === 1000) { // Ясно
+                return `<i class="fas fa-sun sunny"></i>`;
+            } else if (code === 1003 || code === 1006 || code === 1009) { // Переменная облачность / Облачно / Пасмурно
+                return `<i class="fas fa-cloud cloudy"></i>`;
+            } else if (code >= 1030 && code <= 1087) { // Туман, дымка и т.д.
+                return `<i class="fas fa-smog foggy"></i>`;
+            } else if (code >= 1063 && code <= 1201 || code >= 1240 && code <= 1252) { // Дождь
+                return `<i class="fas fa-cloud-rain rainy"></i>`;
+            } else if (code >= 1204 && code <= 1237 || code >= 1255 && code <= 1264 || code >= 1279 && code <= 1282) { // Снег
+                return `<i class="fas fa-snowflake snowy"></i>`;
+            } else if (code >= 1114 && code <= 1117) { // Метель
+                return `<i class="fas fa-wind snowy"></i>`;
+            } else if (code >= 1273 && code <= 1276) { // Гроза
+                return `<i class="fas fa-bolt stormy"></i>`;
+            } else {
+                return isDay ? `<i class="fas fa-sun sunny"></i>` : `<i class="fas fa-moon"></i>`;
+            }
+        }
+        
+        // Обновление иконки текущей погоды
+        function updateWeatherIcon(code, isDay) {
+            weatherIcon.innerHTML = getWeatherIcon(code, isDay);
+            
+            // Обновляем класс для анимации
+            if (code === 1000) { // Ясно
+                weatherIcon.className = 'weather-icon sunny';
+            } else if (code === 1003 || code === 1006 || code === 1009) { // Облачно
+                weatherIcon.className = 'weather-icon cloudy';
+            } else if (code >= 1063 && code <= 1201 || code >= 1240 && code <= 1252) { // Дождь
+                weatherIcon.className = 'weather-icon rainy';
+            } else if (code >= 1204 && code <= 1237 || code >= 1255 && code <= 1264 || code >= 1279 && code <= 1282) { // Снег
+                weatherIcon.className = 'weather-icon snowy';
+            } else if (code >= 1273 && code <= 1276) { // Гроза
+                weatherIcon.className = 'weather-icon stormy';
+            } else if (code >= 1030 && code <= 1087) { // Туман
+                weatherIcon.className = 'weather-icon foggy';
+            } else {
+                weatherIcon.className = 'weather-icon';
+            }
+        }
+        
+        // Автокомплит городов
+        async function autocompleteCity(input) {
+            if (input.length < 3) {
+                autocompleteList.innerHTML = '';
+                autocompleteList.style.display = 'none';
+                return;
+            }
+            
+            try {
+                const response = await fetch(
+                    `https://api.weatherapi.com/v1/search.json?key=${WEATHER_API_KEY}&q=${input}`
+                );
+                const cities = await response.json();
+                
+                autocompleteList.innerHTML = '';
+                
+                if (cities && cities.length > 0) {
+                    cities.forEach(city => {
+                        const item = document.createElement('div');
+                        item.innerHTML = `<strong>${city.name}</strong>, ${city.region}, ${city.country}`;
+                        item.addEventListener('click', () => {
+                            cityInput.value = city.name;
+                            autocompleteList.innerHTML = '';
+                            autocompleteList.style.display = 'none';
+                            handleSearch();
+                        });
+                        autocompleteList.appendChild(item);
+                    });
+                    autocompleteList.style.display = 'block';
+                } else {
+                    autocompleteList.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Ошибка автокомплита:', error);
+                autocompleteList.style.display = 'none';
+            }
+        }
+        
+        // Показать/скрыть лоадер
+        function showLoader() {
+            loaderEl.style.display = 'block';
+            currentWeatherEl.style.display = 'none';
+            forecastEl.style.display = 'none';
+        }
+        
+        function hideLoader() {
+            loaderEl.style.display = 'none';
+        }
+        
+        // Обработчик поиска
+        async function handleSearch() {
+            const city = cityInput.value.trim();
+            if (!city) return;
+            
+            const weatherData = await getWeatherData(city);
+            if (weatherData) {
+                updateCurrentWeather(weatherData);
+                updateForecast(weatherData);
+            }
+        }
+        
+        // Инициализация при загрузке страницы
+        async function initWeather() {
+            setCurrentDate();
+            const weatherData = await getWeatherData(DEFAULT_CITY);
+            if (weatherData) {
+                updateCurrentWeather(weatherData);
+                updateForecast(weatherData);
+            }
+        }
+        
+        // События
+        searchBtn.addEventListener('click', handleSearch);
+        cityInput.addEventListener('input', () => autocompleteCity(cityInput.value));
+        cityInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+        
+        // Запуск при загрузке
+        document.addEventListener('DOMContentLoaded', initWeather);
+    </script>
+</body>
+</html>
