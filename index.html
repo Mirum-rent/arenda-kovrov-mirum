@@ -1811,26 +1811,105 @@
         <!-- КОНЕЦ БЛОКА КАЛЬКУЛЯТОР -->
 
         <!-- О нас -->
-        <section id="about" class="section" style="background-color: #f5f7fa;">
-            <div class="container">
-                <h2 class="section-title">О компании МИРУМ</h2>
-                
-                <div class="about-card">
-                    <!-- Содержимое блока "О нас" -->
+        <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании МИРУМ - аренда грязезащитных ковров</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Блок "О нас" -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">О компании МИРУМ</h2>
+            
+            <div class="about-card" style="background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 40px; max-width: 1000px; margin: 0 auto;">
+                <div class="about-header" style="text-align: center; margin-bottom: 30px;">
+                    <div style="display: inline-flex; align-items: center; background: rgba(52, 152, 219, 0.1); padding: 8px 20px; border-radius: 50px; margin-bottom: 15px;">
+                        <i class="fas fa-calendar-alt" style="color: var(--accent-color); margin-right: 10px;"></i>
+                        <span style="font-weight: 500;">Работаем с 2009 года</span>
+                    </div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary-color);">
+                        Профессиональная аренда грязезащитных ковров
+                    </h3>
+                    <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+                        Обеспечиваем чистоту и безопасность ваших помещений в 20+ регионах России
+                    </p>
                 </div>
-            </div>
-        </section>
 
-        <!-- Наши преимущества -->
-        <section id="advantages" class="section">
-            <div class="container">
-                <h2 class="section-title">Наши преимущества</h2>
-                
-                <div class="advantages-grid">
-                    <!-- Карточки преимуществ -->
+                <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 40px;">
+                    <div class="feature-item" style="text-align: center; padding: 25px 20px; border-radius: 8px; background: #f9f9f9;">
+                        <div style="width: 60px; height: 60px; background-color: rgba(52, 152, 219, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                            <i class="fas fa-map-marked-alt" style="font-size: 1.5rem; color: var(--secondary-color);"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px; color: var(--primary-color);">Широкая география</h4>
+                        <p style="font-size: 0.95rem; color: #666;">Москва, СПб, Астрахань, Уфа, Сургут и другие города</p>
+                    </div>
+                    
+                    <div class="feature-item" style="text-align: center; padding: 25px 20px; border-radius: 8px; background: #f9f9f9;">
+                        <div style="width: 60px; height: 60px; background-color: rgba(231, 76, 60, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                            <i class="fas fa-sync-alt" style="font-size: 1.5rem; color: var(--accent-color);"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px; color: var(--primary-color);">Регулярная замена</h4>
+                        <p style="font-size: 0.95rem; color: #666;">
+                            Частота замены зависит от погоды<br>
+                            <a href="https://arenda-kovrov-mirum.ru/pogoda" style="color: var(--accent-color); font-weight: 500; text-decoration: none;">
+                                <i class="fas fa-cloud-sun" style="margin-right: 5px;"></i>Актуальный прогноз
+                            </a>
+                        </p>
+                    </div>
+                    
+                    <div class="feature-item" style="text-align: center; padding: 25px 20px; border-radius: 8px; background: #f9f9f9;">
+                        <div style="width: 60px; height: 60px; background-color: rgba(46, 204, 113, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                            <i class="fas fa-check-circle" style="font-size: 1.5rem; color: #2ecc71;"></i>
+                        </div>
+                        <h4 style="margin-bottom: 10px; color: var(--primary-color);">Нас рекомендуют</h4>
+                        <p style="font-size: 0.95rem; color: #666;">
+                            <a href="#reviews" style="color: var(--accent-color); text-decoration: none; font-weight: 500;">
+                                Рекомендательные письма
+                            </a> от клиентов
+                        </p>
+                    </div>
+                </div>
+
+                <div class="clients-section" style="margin-bottom: 40px; padding: 25px; background: #f5f7fa; border-radius: 8px;">
+                    <h3 style="text-align: center; margin-bottom: 25px; color: var(--primary-color); position: relative;">
+                        <span style="background: #f5f7fa; padding: 0 20px; position: relative; z-index: 2;">Кто наши клиенты</span>
+                        <span style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #ddd; z-index: 1;"></span>
+                    </h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 25px;">
+                        <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <i class="fas fa-hospital" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                            <span>Медицинские учреждения</span>
+                        </div>
+                        <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <i class="fas fa-store" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                            <span>Магазины и ТЦ</span>
+                        </div>
+                        <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <i class="fas fa-utensils" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                            <span>Кафе и рестораны</span>
+                        </div>
+                        <div style="display: flex; align-items: center; background: white; padding: 12px 20px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <i class="fas fa-building" style="margin-right: 12px; color: var(--secondary-color);"></i>
+                            <span>Офисные центры</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://wa.me/79770005127" style="display: inline-flex; align-items: center; justify-content: center; padding: 14px 30px; background-color: var(--whatsapp-color); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); max-width: 300px; margin: 0 auto;">
+                        <span>Обсудить сотрудничество</span>
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+</body>
+</html>
 
         <!-- Как начать с нами работать -->
         <section id="how-to-start" class="section" style="background-color: #f5f7fa;">
