@@ -2,122 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://arenda-kovrov-mirum.ru/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
+        <lastmod>2023-11-15</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
+        <loc>https://arenda-kovrov-mirum.ru/#calculator</loc>
+        <lastmod>2023-11-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
         <loc>https://arenda-kovrov-mirum.ru/#about</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/#advantages</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/#prices</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>weekly</changefreq>
+        <lastmod>2023-11-15</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://arenda-kovrov-mirum.ru/#work</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>weekly</changefreq>
+        <loc>https://arenda-kovrov-mirum.ru/#advantages</loc>
+        <lastmod>2023-11-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://arenda-kovrov-mirum.ru/#how-to-start</loc>
+        <lastmod>2023-11-15</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://arenda-kovrov-mirum.ru/#contract</loc>
-        <lastmod>2025-04-15</lastmod>
+        <lastmod>2023-11-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://arenda-kovrov-mirum.ru/#reviews</loc>
-        <lastmod>2025-04-15</lastmod>
+        <lastmod>2023-11-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://arenda-kovrov-mirum.ru/#photos</loc>
-        <lastmod>2025-04-15</lastmod>
+        <loc>https://arenda-kovrov-mirum.ru/#gallery</loc>
+        <lastmod>2023-11-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/#contact</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://arenda-kovrov-mirum.ru/#requisites</loc>
-        <lastmod>2025-04-15</lastmod>
+        <lastmod>2023-11-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/faq</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/interesno_o_grjazezaschitnych_kovrah</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/politica_confidence_and_opd</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/pogoda</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://мирум.москва/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://mirum.moscow/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://mirum-astrakhan.ru/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://mirum-ufa.ru/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://mirum-surgut.ru/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://4993481327.ru/</loc>
-        <lastmod>2025-04-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
     </url>
 </urlset>
