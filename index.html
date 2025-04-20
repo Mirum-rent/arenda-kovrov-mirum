@@ -824,42 +824,255 @@
 </head>
 <body>
     <!-- Главное меню -->
-    <nav class="main-menu">
-        <div class="container menu-container">
-            <a href="https://arenda-kovrov-mirum.ru/" class="logo">
-                <img src="img/logo.png" alt="мирум.рент">
-                <span class="logo-text">мирум.рент</span>
-            </a>
-            <ul class="nav-links">
-                   <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
-                   <li><a href="#calculator">Калькулятор</a></li>
-                   <li><a href="#about">О нас</a></li>
-                   <li><a href="#advantages">Преимущества</a></li>
-                   <li><a href="#how-to-start">Как начать</a></li>
-                   <li><a href="#contract">Договор</a></li>
-                   <li><a href="#reviews">Отзывы</a></li>
-                   <li><a href="#gallery">Фото</a></li>
-                   <li><a href="interesting.html">Это интересно</a></li>
-                   <li><a href="FAQ.html">FAQ</a></li>
-                   <li><a href="pogoda.html">Прогноз погоды</a></li>
+<nav class="main-menu">
+    <div class="container menu-container">
+        <a href="https://arenda-kovrov-mirum.ru/" class="logo">
+            <img src="img/logo.png" alt="мирум.рент">
+            <span class="logo-text">мирум.рент</span>
+        </a>
+        <ul class="nav-links">
+               <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
+               <li><a href="#calculator">Калькулятор</a></li>
+               <li><a href="#about">О нас</a></li>
+               <li><a href="#advantages">Преимущества</a></li>
+               <li><a href="#how-to-start">Как начать</a></li>
+               <li><a href="#contract">Договор</a></li>
+               <li><a href="#reviews">Отзывы</a></li>
+               <li><a href="#gallery">Фото</a></li>
+               <li><a href="interesting.html">Это интересно</a></li>
+               <li><a href="FAQ.html">FAQ</a></li>
+               <li><a href="pogoda.html">Прогноз погоды</a></li>
+        </ul>
+    </div>
+</nav>
 
-            </ul>
-        </div>
-    </nav>
+<!-- Хедер -->
+<header class="header">
+    <div class="header-content">
+        <h1>Грязезащитные ковры без головной боли</h1>
+        <p>Считаем за 5 минут, отвечаем сразу. Документы без ошибок – замена без звонков.</p>
+        <a href="https://wa.me/79770005127" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Написать в WhatsApp
+        </a>
+    </div>
+</header>
 
-    <!-- НАЧАЛО ХЕДЕР -->
+<style>
+    /* Главное меню */
+    .main-menu {
+        background-color: var(--primary-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: var(--header-height);
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
 
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <h1>Грязезащитные ковры без головной боли</h1>
-                <p>Считаем за 5 минут, отвечаем сразу. Документы без ошибок – замена без звонков.</p>
-                <a href="https://wa.me/79770005127" class="btn btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i> Написать в WhatsApp
-                </a>
-            </div>
-        </div>
-    </header>
+    .menu-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .logo img {
+        height: 36px;
+        margin-right: 8px;
+        transition: transform 0.3s;
+    }
+
+    .logo:hover img {
+        transform: scale(1.1);
+    }
+
+    .logo-text {
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .nav-links li {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 0.9rem;
+        padding: 0 12px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s;
+        white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+        color: var(--accent-color);
+        background-color: rgba(255,255,255,0.05);
+    }
+
+    /* Хедер */
+    .header {
+        background-image: url('img/main-banner.png');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 80px 0;
+        position: relative;
+        margin-bottom: 40px;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    .header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.6);
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 0 20px;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .header h1 {
+        font-size: 2.3rem;
+        margin-bottom: 15px;
+        color: white;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .header p {
+        font-size: 1.15rem;
+        margin: 0 auto 25px;
+        color: #eee;
+        max-width: 600px;
+        padding: 0 10px;
+        line-height: 1.5;
+    }
+
+    /* Кнопки */
+    .btn {
+        display: inline-block;
+        padding: 12px 28px;
+        border-radius: 4px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .btn-whatsapp {
+        background-color: var(--whatsapp-color);
+        color: white;
+    }
+
+    .btn-whatsapp:hover {
+        background-color: #128C7E;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+    }
+
+    .btn-whatsapp i {
+        margin-right: 8px;
+    }
+
+    @media (max-width: 992px) {
+        .nav-links {
+            display: none;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+        }
+        
+        .header p {
+            font-size: 1.05rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        :root {
+            --header-height: 60px;
+        }
+        
+        .header {
+            padding: 60px 0;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+        }
+        
+        .logo-text {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .header {
+            padding: 50px 0;
+        }
+        
+        .header h1 {
+            font-size: 1.6rem;
+            line-height: 1.25;
+        }
+        
+        .header p {
+            font-size: 1rem;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
 
 <!-- КОНЕЦ ХЕДЕР -->
 
