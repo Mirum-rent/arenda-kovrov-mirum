@@ -1914,6 +1914,252 @@
 </body>
 </html>
 
+<!-- Конец блока О нас-->
+
+<!-- НАЧАЛО БЛОКА НАШИ ПРЕИМУЩЕСТВА-->
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши преимущества - МИРУМ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .advantage-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .advantage-header {
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2em;
+            text-align: center;
+            position: relative;
+        }
+
+        .advantage-header i {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover .advantage-header i {
+            transform: scale(1.2);
+        }
+
+        .advantage-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .advantage-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .advantage-text {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .advantage-stats {
+            margin-top: auto;
+            font-size: 0.9em;
+            color: var(--accent-color);
+            font-weight: 500;
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px dashed #eee;
+        }
+
+        @media (max-width: 768px) {
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .advantage-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .advantage-content {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Наши преимущества</h1>
+        
+        <div class="advantages-grid">
+            <!-- Преимущество 1 -->
+            <div class="advantage-card">
+                <div class="advantage-header">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Широкая география
+                </div>
+                <div class="advantage-content">
+                    <h3 class="advantage-title">Работаем более чем в 20 регионах</h3>
+                    <p class="advantage-text">Опыт с 2009 года позволяет нам предлагать лучшие решения для клиентов по всей России. Наши ковры защищают помещения от Москвы до Владивостока.</p>
+                    <div class="advantage-stats">Более 1 млн. м² ковров в аренде</div>
+                </div>
+            </div>
+            
+            <!-- Преимущество 2 -->
+            <div class="advantage-card">
+                <div class="advantage-header">
+                    <i class="fas fa-users"></i>
+                    Профессионализм
+                </div>
+                <div class="advantage-content">
+                    <h3 class="advantage-title">Команда экспертов</h3>
+                    <p class="advantage-text">Каждому клиенту назначается персональный менеджер, который оперативно решает все вопросы и сопровождает на всех этапах сотрудничества.</p>
+                    <div class="advantage-stats">Оперативная поддержка</div>
+                </div>
+            </div>
+            
+            <!-- Преимущество 3 -->
+            <div class="advantage-card">
+                <div class="advantage-header">
+                    <i class="fas fa-file-contract"></i>
+                    Документооборот
+                </div>
+                <div class="advantage-content">
+                    <h3 class="advantage-title">Идеальная документация</h3>
+                    <p class="advantage-text">Работаем с электронным документооборотом (ЭДО). Все акты, счета и отчетные документы оформляются правильно и отправляются вовремя.</p>
+                    <div class="advantage-stats">100% соответствие требованиям</div>
+                </div>
+            </div>
+            
+            <!-- Преимущество 4 -->
+            <div class="advantage-card">
+                <div class="advantage-header">
+                    <i class="fas fa-landmark"></i>
+                    Госзакупки
+                </div>
+                <div class="advantage-content">
+                    <h3 class="advantage-title">Работа с госучреждениями</h3>
+                    <p class="advantage-text">Полное соответствие требованиям ФЗ 44 и ФЗ 223. Готовим гарантии, коммерческие предложения, участвуем в тендерах и работаем по офертам.</p>
+                    <div class="advantage-stats">Опыт госзакупок с 2012 года</div>
+                </div>
+            </div>
+            
+            <!-- Преимущество 5 -->
+            <div class="advantage-card">
+                <div class="advantage-header">
+                    <i class="fas fa-credit-card"></i>
+                    Оплата
+                </div>
+                <div class="advantage-content">
+                    <h3 class="advantage-title">Удобные платежи</h3>
+                    <p class="advantage-text">Оплата по счету или банковской картой с автоматической выдачей чеков. Чистая отчетность для бухгалтерии и прозрачные финансовые потоки.</p>
+                    <div class="advantage-stats">Безналичный и онлайн-расчет</div>
+                </div>
+            </div>
+            
+            <!-- Преимущество 6 -->
+            <div class="advantage-card">
+                <div class="advantage-header">
+                    <i class="fas fa-handshake"></i>
+                    Индивидуальность
+                </div>
+                <div class="advantage-content">
+                    <h3 class="advantage-title">Гибкие условия</h3>
+                    <p class="advantage-text">Подбираем решения под ваш бюджет и требования. Разрабатываем индивидуальные программы сотрудничества для постоянных клиентов.</p>
+                    <div class="advantage-stats">Персональный подход к каждому</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- КОНЕЦ БЛОКА НАШИ ПРЕИМУЩЕСТВА-->
+
+
         <!-- Как начать с нами работать -->
         <!DOCTYPE html>
 <html lang="ru">
