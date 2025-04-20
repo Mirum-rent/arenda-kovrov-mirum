@@ -2170,6 +2170,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Как начать работать с МИРУМ - аренда грязезащитных ковров</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <section id="how-to-start" class="section">
+
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -2418,6 +2420,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Рекомендательные письма клиентов</title>
+    <section id="reviews" class="section">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -2864,6 +2867,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Образец договора - МИРУМ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <section id="contract" class="section">
+
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -3323,6 +3328,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Фотографии с наших объектов - МИРУМ</title>
     <meta name="description" content="Реальные фотографии с наших объектов по аренде грязезащитных ковров в Москве, Санкт-Петербурге, Уфе, Астрахани и других городах">
+    <section id="gallery" class="section">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -3632,10 +3638,270 @@
 </html>
         <!-- КОНЕЦ БЛОКА ФОТОГАЛЕРЕЯ -->
 
-        <!-- Реквизиты -->
-        <section id="requisites" class="section" style="background-color: #f5f7fa;">
-            <div class="container">
-                <!-- Содержимое блока "Реквизиты" -->
+        <!-- НАЧАЛО БЛОКА РЕКВИЗИТЫ -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реквизиты компании МИРУМ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <section id="requisites" class="section">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --whatsapp-color: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto;
+        }
+
+        .details-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .details-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .details-header {
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .details-content {
+            padding: 25px;
+        }
+
+        .details-row {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .details-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .details-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            min-width: 150px;
+            flex-shrink: 0;
+        }
+
+        .details-value {
+            flex-grow: 1;
+        }
+
+        .contact-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .whatsapp-link {
+            color: var(--whatsapp-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .whatsapp-link i {
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .details-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .details-row {
+                flex-direction: column;
+            }
+            
+            .details-label {
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .details-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Реквизиты компании</h1>
+        
+        <div class="details-container">
+            <!-- Общие реквизиты -->
+            <div class="details-card">
+                <div class="details-header">Общие реквизиты</div>
+                <div class="details-content">
+                    <div class="details-row">
+                        <div class="details-label">Наименование</div>
+                        <div class="details-value">Общество с ограниченной ответственностью «МИРУМ»</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Краткое название</div>
+                        <div class="details-value">ООО «МИРУМ»</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">ИНН</div>
+                        <div class="details-value">3019008619</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">КПП</div>
+                        <div class="details-value">301901001</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">ОГРН</div>
+                        <div class="details-value">1133019002599 от 06.09.2013</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Юридический адрес</div>
+                        <div class="details-value">414056, г. Астрахань, ул. Латышева, 18, оф. 104</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Почтовый адрес</div>
+                        <div class="details-value">414038, г. Астрахань, пер. Ленинградский, д. 84, а/я 1</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Банковские реквизиты -->
+            <div class="details-card">
+                <div class="details-header">Банковские реквизиты</div>
+                <div class="details-content">
+                    <div class="details-row">
+                        <div class="details-label">Наименование банка</div>
+                        <div class="details-value">АО «ТБанк»</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">БИК</div>
+                        <div class="details-value">044525974</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Корреспондентский счет</div>
+                        <div class="details-value">30101810145250000974</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Расчетный счет</div>
+                        <div class="details-value">40702810210000670459</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">ИНН банка</div>
+                        <div class="details-value">771014679</div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">КПП банка</div>
+                        <div class="details-value">771301001</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Контактная информация -->
+            <div class="details-card">
+                <div class="details-header">Контактная информация</div>
+                <div class="details-content">
+                    <div class="details-row">
+                        <div class="details-label">Телефон</div>
+                        <div class="details-value">
+                            <a href="https://wa.me/79770005127" class="whatsapp-link" target="_blank">
+                                <i class="fab fa-whatsapp"></i> +7 (977) 000-51-27
+                            </a>
+                        </div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Email</div>
+                        <div class="details-value">
+                            <a href="mailto:matservice@yandex.ru" class="contact-link">matservice@yandex.ru</a>
+                        </div>
+                    </div>
+                    <div class="details-row">
+                        <div class="details-label">Сайт</div>
+                        <div class="details-value">
+                            <a href="https://arenda-kovrov-mirum.ru/" target="_blank" class="contact-link">https://arenda-kovrov-mirum.ru/</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- КОНЕЦ БЛОКА РЕКВИЗИТЫ -->
+
             </div>
         </section>
     </main>
