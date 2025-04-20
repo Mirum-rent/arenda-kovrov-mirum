@@ -3190,21 +3190,25 @@
             cursor: pointer;
         }
 
-        .action-btn-primary {
-            background-color: var(--whatsapp-color);
-            color: white;
-            border: 2px solid var(--whatsapp-color);
-        }
+/* WhatsApp кнопка */
+.btn-whatsapp, .btn-whatsapp:hover {
+    background: var(--whatsapp-color) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
 
-        .action-btn-primary:hover {
-            background-color: transparent;
-            color: var(--primary-color);
-        }
+/* Кнопка скачивания */
+.btn-download, .btn-download:hover {
+    background: var(--primary-color) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
 
-        .action-btn i {
-            margin-right: 8px;
-        }
-
+/* Общие стили кнопок (на всякий случай) */
+.btn {
+    transition: all 0.3s !important;
+    font-weight: 600 !important;
+}
         @media (max-width: 768px) {
             .contract-viewer {
                 height: 400px;
@@ -3433,11 +3437,10 @@
         
         <div class="contract-actions">
             <a href="https://wa.me/79770005127" class="action-btn action-btn-primary" target="_blank">
-                <i class="fab fa-whatsapp"></i> Обсудить договор в WhatsApp
+                
             </a>
-            <a href="#" class="action-btn action-btn-primary">
-                <i class="fas fa-download"></i> Скачать образец (PDF)
-            </a>
+		<a href="#" class="btn btn-whatsapp">Обсудить договор WhatsApp</a>
+		<a href="#" class="btn btn-download">Скачать PDF</a>            </a>
         </div>
     </div>
 
