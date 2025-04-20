@@ -237,7 +237,7 @@
 
         /* Секции */
         .section {
-            padding: 60px 0;
+            padding: 60px 0 0 !important;;
         }
 
         .section-title {
@@ -768,7 +768,7 @@
             }
             
             .section {
-                padding: 40px 0;
+                padding: 40px 0 0 !important;;
             }
             
             table {
@@ -821,37 +821,26 @@
                 padding: 15px;
             }
         }
-		/* Гарантированное устранение отступа */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+		/* В конец CSS (перед </style>) */
+		body::after {
+    		display: none !important;
+	}
+
+		html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+	}
+
+		.footer {
+		margin-top: 0 !important;
+	}
+
+		#contract {
+		margin-bottom: 0 !important;
+		padding-bottom: 0 !important;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
-    padding-bottom: 0 !important;
-}
-
-.footer {
-    flex-shrink: 0;
-    margin-top: auto !important;
-}
-
-/* Убираем возможные скрытые отступы */
-body::after, 
-body::before,
-footer::after,
-footer::before {
-    display: none !important;
-    content: none !important;
-}
     </style>
 </head>
 <body>
