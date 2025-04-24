@@ -1010,19 +1010,19 @@
 
         <!-- НАЧАЛО БЛОКА КАЛЬКУЛЯТОР -->
 
-   <!-- Калькулятор стоимости -->
+<!-- Калькулятор стоимости -->
 <section id="calculator" class="section">
     <div class="container">
         <h2 class="section-title">Калькулятор стоимости</h2>
         
-        <div id="standard-calculator" class="calculator-container active" style="display: block; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+        <div class="calculator-section" style="background-color: #f1f5f9; border-radius: 8px; margin-bottom: 30px;">
             <div class="calculator-tabs" style="display: flex; justify-content: center; margin-bottom: 30px; flex-wrap: wrap;">
                 <button class="tab-btn active" data-tab="standard" style="padding: 10px 20px; background-color: #3498db; color: white; border: none; cursor: pointer; font-size: 16px; transition: all 0.3s;">Стандартные ковры</button>
                 <button class="tab-btn" data-tab="tender" style="padding: 10px 20px; background-color: #ddd; border: none; cursor: pointer; font-size: 16px; transition: all 0.3s;">Тендерный калькулятор</button>
-            </div>      
-      
+            </div>
+            
             <!-- Калькулятор стандартных ковров -->
-            <div id="standard-calculator" style="display: block; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+            <div id="standard-calculator" class="calculator-content active" style="display: block; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
                 <form id="standard-form">
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="region" style="display: block; margin-bottom: 8px; font-weight: 600;">Регион</label>
@@ -1165,7 +1165,7 @@
             </div>
             
             <!-- Тендерный калькулятор -->
-        <div id="tender-calculator" class="calculator-container" style="display: none; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+            <div id="tender-calculator" class="calculator-content" style="display: none; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
                 <form id="tender-form">
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label for="tenderRegion" style="display: block; margin-bottom: 8px; font-weight: 600;">Регион</label>
@@ -1246,7 +1246,7 @@
             "85*60": { "1 раз в две недели": 180, "1 раз в неделю": 180, "2 раза в неделю": 180, "3 раза в неделю": 180 },
             "85*150": { "1 раз в две недели": 420, "1 раз в неделю": 420, "2 раза в неделю": 420, "3 раза в неделю": 420 },
             "115*200": { "1 раз в две недели": 760, "1 раз в неделю": 760, "2 раза в неделю": 760, "3 раза в неделю": 760 },
-	    "115*400": { "1 раз в две недели": 4420, "1 раз в неделю": 8840, "2 раза в неделю": 17680, "3 раза в неделю": 26520 },
+            "115*400": { "1 раз в две недели": 4420, "1 раз в неделю": 8840, "2 раза в неделю": 17680, "3 раза в неделю": 26520 },
             "150*240": { "1 раз в две недели": 1180, "1 раз в неделю": 1180, "2 раза в неделю": 1180, "3 раза в неделю": 1180 },
             "150*300": { "1 раз в две недели": 1520, "1 раз в неделю": 1520, "2 раза в неделю": 1520, "3 раза в неделю": 1520 }
         },
@@ -1254,7 +1254,7 @@
             "85*60": { "1 раз в две недели": 280, "1 раз в неделю": 280, "2 раза в неделю": 280, "3 раза в неделю": 280 },
             "85*150": { "1 раз в две недели": 620, "1 раз в неделю": 620, "2 раза в неделю": 620, "3 раза в неделю": 620 },
             "115*200": { "1 раз в две недели": 1110, "1 раз в неделю": 1110, "2 раза в неделю": 1110, "3 раза в неделю": 1110 },
-            "115*400": { "1 раз в две недели": 4420, "1 раз в неделю": 8840, "2 раза в неделю": 17680, "3 раза в неделю": 26520 },
+            "115*400": { "1 раз в две недели": 4420, "1 раз в неделю": 8840, "2 раза в неделю": 17680, "3 раза в неделю": 26520 },            
             "150*240": { "1 раз в две недели": 1730, "1 раз в неделю": 1730, "2 раза в неделю": 1730, "3 раза в неделю": 1730 },
             "150*300": { "1 раз в две недели": 2160, "1 раз в неделю": 2160, "2 раза в неделю": 2160, "3 раза в неделю": 2160 }
         },
@@ -1421,32 +1421,34 @@
         initMonthInputs();
         initRegionSelects();
         
-// Табы калькуляторов
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const calculatorContainers = document.querySelectorAll('.calculator-container');
-    
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Удаляем активный класс у всех кнопок
-            tabBtns.forEach(b => {
-                b.classList.remove('active');
-                b.style.backgroundColor = '#ddd';
+        // Табы калькуляторов
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const calculatorContents = document.querySelectorAll('.calculator-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Удаляем активный класс у всех кнопок и контейнеров
+                tabBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.style.backgroundColor = '#ddd';
+                });
+                
+                // Добавляем активный класс текущей кнопке
+                this.classList.add('active');
+                this.style.backgroundColor = '#3498db';
+                this.style.color = 'white';
+                
+                // Скрываем все калькуляторы и показываем выбранный
+                calculatorContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+                
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-calculator`).style.display = 'block';
             });
-            
-            // Добавляем активный класс текущей кнопке
-            this.classList.add('active');
-            this.style.backgroundColor = '#3498db';
-            
-            // Скрываем все контейнеры
-            calculatorContainers.forEach(c => {
-                c.style.display = 'none';
-            });
-            
-            // Показываем соответствующий контейнер
-            const tabId = this.getAttribute('data-tab');
-            document.getElementById(tabId + '-calculator').style.display = 'block';
         });
     });
+
     // Инициализация выпадающих списков регионов
     function initRegionSelects() {
         const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
@@ -1967,7 +1969,6 @@
         });
     }
 </script>
-
         <!-- КОНЕЦ БЛОКА КАЛЬКУЛЯТОР -->
 
         <!-- НАЧАЛО БЛОКА О НАС-->
