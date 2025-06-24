@@ -842,6 +842,51 @@
 }
 
     </style>
+	<!-- Навигационная цепочка (Breadcrumbs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "https://arenda-kovrov-mirum.ru/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Аренда грязезащитных ковров",
+      "item": "https://arenda-kovrov-mirum.ru/#calculator"
+    }
+  ]
+}
+</script>
+
+<!-- Микроразметка для организации -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "МИРУМ",
+  "url": "https://arenda-kovrov-mirum.ru/",
+  "logo": "https://arenda-kovrov-mirum.ru/img/logo.png",
+  "description": "Аренда грязезащитных ковров с 2009 года",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Сущёвская ул., 27с2",
+    "addressLocality": "Москва",
+    "addressCountry": "RU"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+7-977-000-51-27",
+    "contactType": "customer service",
+    "areaServed": "RU"
+  }
+}
+</script>
 </head>
 <body>
    <!-- Главное меню -->
@@ -868,7 +913,8 @@
 </nav>
 
 <!-- Хедер -->
-<header class="header">
+<header class="header" itemscope itemtype="https://schema.org/ImageObject">
+  <img src="img/main-banner.png" alt="Грязезащитные ковры" style="display:none;" itemprop="contentUrl">
     
     <div class="header-content">
         <h1>Грязезащитные ковры без головной боли</h1>
