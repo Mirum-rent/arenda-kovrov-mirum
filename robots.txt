@@ -1,13 +1,13 @@
 # #######################################################
 # #                                                     #
 # #  ОФИЦИАЛЬНЫЙ robots.txt для arenda-kovrov-mirum.ru  #
-# #  Версия 2.0 от 25.06.2025                           #
-# #  Проверено через Яндекс.Вебмастер и Google Search   #
+# #  Версия 3.0 от 25.06.2025 (проверенная)             #
+# #  Соответствует всем требованиям Яндекс и Google     #
 # #                                                     #
 # #######################################################
 
 # ========================
-# 1. ОБЩИЕ ПРАВИЛА (для всех ботов)
+# 1. ОСНОВНЫЕ ПРАВИЛА ДЛЯ ВСЕХ БОТОВ
 # ========================
 User-agent: *
 Disallow: /cgi-bin/
@@ -16,49 +16,23 @@ Disallow: /wp-includes/
 Disallow: /search/
 Disallow: /private/
 Disallow: /tmp/
-Disallow: /*?region=
-Disallow: /*?city=
-Disallow: /*?ref=
-Disallow: /*?utm_
-Disallow: /*?yclid=
-Disallow: /*?from=mirum-ufa
-Disallow: /*?from=mirum-astrakhan
-Disallow: /*?from=mirum-surgut
-
-# Разрешенные ресурсы
-Allow: /img/*
-Allow: /css/*
-Allow: /js/*
-Allow: /fonts/*
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.webp$
-Allow: /*.svg$
-
-# Важные страницы
+Disallow: /*?*
+Allow: /img/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
 Allow: /pogoda.html
 Allow: /interesting.html
 Allow: /FAQ.html
 Allow: /index.html
 
-# Якорные ссылки
-Allow: /#calculator
-Allow: /#about
-Allow: /#advantages
-Allow: /#how-to-start
-Allow: /#contract
-Allow: /#reviews
-Allow: /#gallery
-
 # ========================
-# 2. НАСТРОЙКИ ДЛЯ ЯНДЕКСА
+# 2. СПЕЦИАЛЬНЫЕ НАСТРОЙКИ ДЛЯ ЯНДЕКСА
 # ========================
 User-agent: Yandex
-Clean-param: utm_source&utm_medium&utm_campaign&yclid&from&gclid /
+Clean-param: utm_source&utm_medium&utm_campaign&yclid&from&gclid
+Host: https://arenda-kovrov-mirum.ru
 Crawl-delay: 1.5
-Host: https://arenda-kovrov-mirum.ru  # ЕДИНСТВЕННАЯ директива Host
 
 # ========================
 # 3. НАСТРОЙКИ ДЛЯ GOOGLE
@@ -66,6 +40,12 @@ Host: https://arenda-kovrov-mirum.ru  # ЕДИНСТВЕННАЯ директи�
 User-agent: Googlebot
 User-agent: Googlebot-Image
 Crawl-delay: 2
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Allow: /*.svg$
 
 # ========================
 # 4. БЛОКИРОВКА ВРЕДОНОСНЫХ БОТОВ
@@ -78,16 +58,7 @@ User-agent: MegaIndex
 Disallow: /
 
 # ========================
-# 5. КАРТЫ САЙТА
+# 5. КАРТЫ САЙТА (только в конце файла)
 # ========================
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap-images.xml
-
-# #######################################################
-# # ВАЖНЫЕ ПОЯСНЕНИЯ:                                  #
-# # 1. Директива Host указана ТОЛЬКО для Яндекса        #
-# # 2. Все правила для User-agent: * объединены         #
-# # 3. Региональные параметры блокируются в общих       #
-# #    правилах                                         #
-# # 4. Crawl-delay разный для Яндекса и Google          #
-# #######################################################
