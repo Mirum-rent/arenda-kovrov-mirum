@@ -1,0 +1,79 @@
+# ##############################################
+# #                                            #
+# #  АКТУАЛЬНЫЙ robots.txt (24.06.2025)        #
+# #  Обновленная версия с учетом региональных  #
+# #  сайтов и современных требований SEO       #
+# #                                            #
+# ##############################################
+
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /search/
+Disallow: /private/
+Disallow: /tmp/
+Allow: /img/*
+Allow: /css/*
+Allow: /js/*
+
+# Основные страницы сайта
+Allow: /pogoda.html
+Allow: /interesting.html
+Allow: /FAQ.html
+
+# Якорные ссылки главной страницы
+Allow: /#calculator
+Allow: /#about
+Allow: /#advantages
+Allow: /#how-to-start
+Allow: /#contract
+Allow: /#reviews
+Allow: /#gallery
+
+# Ссылки из футера
+Allow: /index.html
+Allow: /interesting.html
+Allow: /FAQ.html
+Allow: /pogoda.html
+
+# Региональные сайты (для предотвращения дублей)
+User-agent: *
+Disallow: /*?region=
+Disallow: /*?city=
+Disallow: /*?ref=
+
+# Специальные настройки для Яндекса
+User-agent: Yandex
+Clean-param: utm_source&utm_medium&utm_campaign&yclid /
+Crawl-delay: 1.5
+Host: https://arenda-kovrov-mirum.ru
+
+# Настройки для Google
+User-agent: Googlebot
+User-agent: Googlebot-Image
+Crawl-delay: 2
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+
+# Блокировка сканирования для агрессивных ботов
+User-agent: MJ12bot
+User-agent: AhrefsBot
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
+Sitemap: https://arenda-kovrov-mirum.ru/sitemap-images.xml
+
+# ##############################################
+# #  Важные изменения:                        #
+# #  1. Добавлены параметры для региональных  #
+# #  2. Улучшена обработка UTM-меток          #
+# #  3. Добавлена блокировка агрессивных ботов#
+# #  4. Уточнены настройки для Googlebot      #
+# #  5. Добавлены даты последнего изменения   #
+# ##############################################
