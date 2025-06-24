@@ -15,6 +15,12 @@ Allow: /interesting.html
 Allow: /FAQ.html
 Allow: /index.html
 
+# Исправленные URL, которые возвращали 404
+Disallow: /photo_1_rekovevadesi
+Disallow: /stiemago
+Disallow: /interenco_o_g/praesuschthyaya_kovrah
+Disallow: /fag
+
 User-agent: Yandex
 Clean-param: utm_source&utm_medium&utm_campaign&yclid&from&gclid
 Host: https://arenda-kovrov-mirum.ru
