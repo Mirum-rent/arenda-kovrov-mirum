@@ -1,11 +1,14 @@
-# ##############################################
-# #                                            #
-# #  АКТУАЛЬНЫЙ robots.txt (24.06.2025)        #
-# #  Обновленная версия с учетом региональных  #
-# #  сайтов и современных требований SEO       #
-# #                                            #
-# ##############################################
+# #######################################################
+# #                                                     #
+# #  ОФИЦИАЛЬНЫЙ robots.txt для arenda-kovrov-mirum.ru  #
+# #  Версия 2.0 от 25.06.2025                           #
+# #  Проверено через Яндекс.Вебмастер и Google Search   #
+# #                                                     #
+# #######################################################
 
+# ========================
+# 1. ОБЩИЕ ПРАВИЛА (для всех ботов)
+# ========================
 User-agent: *
 Disallow: /cgi-bin/
 Disallow: /wp-admin/
@@ -13,16 +16,34 @@ Disallow: /wp-includes/
 Disallow: /search/
 Disallow: /private/
 Disallow: /tmp/
+Disallow: /*?region=
+Disallow: /*?city=
+Disallow: /*?ref=
+Disallow: /*?utm_
+Disallow: /*?yclid=
+Disallow: /*?from=mirum-ufa
+Disallow: /*?from=mirum-astrakhan
+Disallow: /*?from=mirum-surgut
+
+# Разрешенные ресурсы
 Allow: /img/*
 Allow: /css/*
 Allow: /js/*
+Allow: /fonts/*
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Allow: /*.svg$
 
-# Основные страницы сайта
+# Важные страницы
 Allow: /pogoda.html
 Allow: /interesting.html
 Allow: /FAQ.html
+Allow: /index.html
 
-# Якорные ссылки главной страницы
+# Якорные ссылки
 Allow: /#calculator
 Allow: /#about
 Allow: /#advantages
@@ -31,49 +52,42 @@ Allow: /#contract
 Allow: /#reviews
 Allow: /#gallery
 
-# Ссылки из футера
-Allow: /index.html
-Allow: /interesting.html
-Allow: /FAQ.html
-Allow: /pogoda.html
-
-# Региональные сайты (для предотвращения дублей)
-User-agent: *
-Disallow: /*?region=
-Disallow: /*?city=
-Disallow: /*?ref=
-
-# Специальные настройки для Яндекса
+# ========================
+# 2. НАСТРОЙКИ ДЛЯ ЯНДЕКСА
+# ========================
 User-agent: Yandex
-Clean-param: utm_source&utm_medium&utm_campaign&yclid /
+Clean-param: utm_source&utm_medium&utm_campaign&yclid&from&gclid /
 Crawl-delay: 1.5
-Host: https://arenda-kovrov-mirum.ru
+Host: https://arenda-kovrov-mirum.ru  # ЕДИНСТВЕННАЯ директива Host
 
-# Настройки для Google
+# ========================
+# 3. НАСТРОЙКИ ДЛЯ GOOGLE
+# ========================
 User-agent: Googlebot
 User-agent: Googlebot-Image
 Crawl-delay: 2
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.webp$
 
-# Блокировка сканирования для агрессивных ботов
+# ========================
+# 4. БЛОКИРОВКА ВРЕДОНОСНЫХ БОТОВ
+# ========================
 User-agent: MJ12bot
 User-agent: AhrefsBot
 User-agent: SemrushBot
+User-agent: DotBot
+User-agent: MegaIndex
 Disallow: /
 
-# Sitemaps
+# ========================
+# 5. КАРТЫ САЙТА
+# ========================
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap-images.xml
 
-# ##############################################
-# #  Важные изменения:                        #
-# #  1. Добавлены параметры для региональных  #
-# #  2. Улучшена обработка UTM-меток          #
-# #  3. Добавлена блокировка агрессивных ботов#
-# #  4. Уточнены настройки для Googlebot      #
-# #  5. Добавлены даты последнего изменения   #
-# ##############################################
+# #######################################################
+# # ВАЖНЫЕ ПОЯСНЕНИЯ:                                  #
+# # 1. Директива Host указана ТОЛЬКО для Яндекса        #
+# # 2. Все правила для User-agent: * объединены         #
+# # 3. Региональные параметры блокируются в общих       #
+# #    правилах                                         #
+# # 4. Crawl-delay разный для Яндекса и Google          #
+# #######################################################
