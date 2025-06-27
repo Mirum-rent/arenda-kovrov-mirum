@@ -1,27 +1,82 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(101006678, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ по аренде грязезащитных ковров | ООО "МИРУМ"</title>
     <meta name="description" content="Ответы на частые вопросы об аренде грязезащитных ковров. Почему важна регулярная замена, как продлить срок службы ковров, условия аренды и доставки.">
     <meta name="keywords" content="аренда грязезащитных ковров FAQ, частота замены ковров, уход за коврами, срок службы ковров, вопросы об аренде ковров, как арендовать грязезащитный ковер, стоимость аренды ковров">
-    <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/FAQ.html" />
+    <meta property="og:title" content="FAQ по аренде грязезащитных ковров">
+    <meta property="og:description" content="Ответы на частые вопросы об аренде грязезащитных ковров от компании МИРУМ">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Почему аренда выгоднее покупки?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Аренда грязезащитных ковров позволяет сэкономить до 40% бюджета на уборке помещений, избежать затрат на покупку нескольких комплектов ковров, не беспокоиться о стирке и хранении ковров, а также гибко менять количество ковров в зависимости от сезона."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему важно менять ковры не реже 2 раз в неделю?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Регулярная замена ковров предотвращает их перегрузку и сохраняет грязеудерживающую способность. Основную массу уличной грязи составляет песок, который действует как наждачная бумага, сокращая срок службы ковра."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как продлить срок службы ковров?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Соблюдайте график замены, используйте ковры правильного размера, комбинируйте типы покрытий (решетка + ворсовый ковер), увеличивайте частоту замен в межсезонье. При правильном уходе наши ковры служат 3-5 лет даже при интенсивной эксплуатации."
+          }
+        }
+      ]
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/favicon.ico" type="image/x-icon">
     <style>
+        /* Основные стили из главного файла */
         :root {
-            --primary-color: #2c3e50;
+            --primary-color: #212121;
             --secondary-color: #3498db;
             --accent-color: #e74c3c;
             --light-color: #ecf0f1;
             --dark-color: #2c3e50;
             --text-color: #333;
-            --text-light: #7f8c8d;
             --whatsapp-color: #25D366;
-            --background-color: #f9f9f9;
             --header-height: 70px;
         }
 
@@ -29,15 +84,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Open Sans', sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
             color: var(--text-color);
-            line-height: 1.6;
-            background-color: var(--background-color);
+            line-height: 1.5;
+            background-color: #f9f9f9;
+            font-family: 'Open Sans', sans-serif;
             padding-top: var(--header-height);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -80,6 +139,11 @@
         .logo img {
             height: 36px;
             margin-right: 8px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover img {
+            transform: scale(1.1);
         }
 
         .logo-text {
@@ -90,10 +154,42 @@
             letter-spacing: -0.5px;
         }
 
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .nav-links li {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0 12px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            background-color: rgba(255,255,255,0.05);
+        }
+
         /* Кнопки */
         .btn {
-            display: inline-flex;
-            align-items: center;
+            display: inline-block;
             padding: 12px 28px;
             border-radius: 4px;
             font-weight: 600;
@@ -131,8 +227,10 @@
             transform: translateY(-2px);
         }
 
-        .btn-secondary i {
-            margin-right: 8px;
+        /* Основное содержимое */
+        main {
+            padding: 30px 0;
+            flex-grow: 1;
         }
 
         /* Секции */
@@ -155,6 +253,53 @@
             height: 4px;
             background-color: var(--accent-color);
             margin: 15px auto;
+        }
+
+        /* Хлебные крошки */
+        .breadcrumbs {
+            padding: 15px 0;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumbs a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: #777;
+            margin: 0 5px;
+        }
+
+        /* Быстрые ссылки */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .quick-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--light-color);
+            border-radius: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .quick-link:hover {
+            background-color: var(--secondary-color);
+            color: white;
         }
 
         /* FAQ элементы */
@@ -292,7 +437,84 @@
             transform: translateY(-3px);
         }
 
+        /* Футер */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-icon {
+            margin-right: 8px;
+            width: 16px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
         /* Адаптивность */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
         @media (max-width: 768px) {
             :root {
                 --header-height: 60px;
@@ -302,8 +524,8 @@
                 padding: 40px 0;
             }
             
-            .section-title {
-                font-size: 1.8rem;
+            .logo-text {
+                font-size: 1.2rem;
             }
             
             .faq-question {
@@ -331,10 +553,6 @@
                 font-size: 1.6rem;
             }
             
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            
             .faq-question {
                 padding: 18px 15px;
                 font-size: 1em;
@@ -351,14 +569,44 @@
     <nav class="main-menu">
         <div class="container menu-container">
             <a href="https://arenda-kovrov-mirum.ru/" class="logo">
-                <img src="img/logo.png" alt="мирум.рент">
+                <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/logo.png" alt="мирум.рент">
                 <span class="logo-text">мирум.рент</span>
             </a>
+            <ul class="nav-links">
+                <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/#about">О нас</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/#calculator">Наши цены</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/#how-to-start">Как начать</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/#reviews">Отзывы</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/pogoda.html">Погода</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/interesting.html">Это интересно</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/FAQ.html">FAQ</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/window-cleaning.html">Мытье витрин</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Основное содержимое -->
     <main>
+        <!-- Хлебные крошки -->
+        <div class="container breadcrumbs">
+            <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
+            <span>/</span>
+            <span>Частые вопросы (FAQ)</span>
+        </div>
+
+        <!-- Быстрые ссылки -->
+        <div class="container quick-links">
+            <a href="#about" class="quick-link">О компании</a>
+            <a href="#calculator" class="quick-link">Калькулятор стоимости</a>
+            <a href="#advantages" class="quick-link">Наши преимущества</a>
+            <a href="#how-to-start" class="quick-link">Как начать работать</a>
+            <a href="#contract" class="quick-link">Образец договора</a>
+            <a href="#reviews" class="quick-link">Отзывы клиентов</a>
+            <a href="#requisites" class="quick-link">Реквизиты компании</a>
+            <a href="#window-cleaning" class="quick-link">Мытье витрин</a>
+        </div>
+
         <section class="section">
             <div class="container">
                 <div class="nav-buttons">
@@ -549,7 +797,7 @@
                         </div>
                     </div>
                     
-                    <!-- Новый вопрос 9 -->
+                    <!-- Вопрос 9 -->
                     <div class="faq-item">
                         <div class="faq-question">Можно ли арендовать ковры с логотипом компании?</div>
                         <div class="faq-answer">
@@ -568,7 +816,7 @@
                         </div>
                     </div>
                     
-                    <!-- Новый вопрос 10 -->
+                    <!-- Вопрос 10 -->
                     <div class="faq-item">
                         <div class="faq-question">Как часто меняется стоимость аренды?</div>
                         <div class="faq-answer">
@@ -585,8 +833,7 @@
                         </div>
                     </div>
                     
-                   
-                    <!-- Новый вопрос 11 -->
+                    <!-- Вопрос 11 -->
                     <div class="faq-item">
                         <div class="faq-question">Какова минимальная продолжительность аренды?</div>
                         <div class="faq-answer">
@@ -615,6 +862,146 @@
             </div>
         </section>
     </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <ul>
+                        <li><i class="fas fa-info-circle footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/#about">О нас</a></li>
+                        <li><i class="fas fa-star footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/#advantages">Преимущества</a></li>
+                        <li><i class="fas fa-play-circle footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/#how-to-start">Как начать</a></li>
+                        <li><i class="fas fa-file-contract footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/#contract">Договор</a></li>
+                        <li><i class="fas fa-comment-dots footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/#reviews">Отзывы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><i class="fas fa-calculator footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/#calculator">Калькулятор</a></li>
+                        <li><i class="fas fa-newspaper footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/interesting.html">Это интересно</a></li>
+                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/FAQ.html">FAQ</a></li>
+                        <li><i class="fas fa-cloud-sun footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/pogoda.html">Прогноз замены</a></li>
+                        <li><i class="fas fa-window-restore footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/window-cleaning.html">Мытье витрин</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt footer-icon"></i> Москва, ул. Сущёвская, 27/2</li>
+                        <li><i class="fas fa-phone-alt footer-icon"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
+                        <li><i class="fas fa-envelope footer-icon"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></li>
+                        <li><i class="fab fa-whatsapp footer-icon"></i> <a href="https://wa.me/79770005127">WhatsApp</a></li>
+                        <li><i class="fab fa-vk footer-icon"></i> <a href="#">Вконтакте</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <!-- Центральный ФО -->
+                        <div class="region-group">
+                            <h4>Центральный округ</h4>
+                            <ul>
+                                <li>Москва</li>
+                                <li>Московская обл.</li>
+                                <li>Тверская обл.</li>
+                                <li>Тульская обл.</li>
+                                <li>Ярославская обл.</li>
+                                <li>Брянская обл.</li>
+                                <li>Орловская обл.</li>
+                                <li>Владимирская обл.</li>
+                                <li>Ивановская обл.</li>
+                                <li>Калужская обл.</li>
+                                <li>Смоленская обл.</li>
+                                <li>Белгородская обл.</li>
+                                <li>Курская обл.</li>
+                                <li>Воронежская обл.</li>
+                                <li>Тамбовская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Северо-Западный ФО -->
+                        <div class="region-group">
+                            <h4>Северо-Западный округ</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Ленинградская обл.</li>
+                                <li>Архангельская обл.</li>
+                                <li>Мурманская обл.</li>
+                                <li>Псковская обл.</li>
+                                <li>Республика Карелия</li>
+                                <li>Республика Коми</li>
+                                <li>Вологодская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Южный ФО -->
+                        <div class="region-group">
+                            <h4>Южный округ</h4>
+                            <ul>
+                                <li>Астрахань</li>
+                                <li>Астраханская обл.</li>
+                                <li>Краснодар</li>
+                                <li>Краснодарский край</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Приволжский ФО -->
+                        <div class="region-group">
+                            <h4>Приволжский округ</h4>
+                            <ul>
+                                <li>Уфа</li>
+                                <li>Республика Башкортостан</li>
+                                <li>Казань</li>
+                                <li>Республика Татарстан</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Уральский ФО -->
+                        <div class="region-group">
+                            <h4>Уральский округ</h4>
+                            <ul>
+                                <li>Екатеринбург</li>
+                                <li>Свердловская обл.</li>
+                                <li>Тюмень</li>
+                                <li>Тюменская обл.</li>
+                                <li>Челябинск</li>
+                                <li>Челябинская обл.</li>
+                                <li>Сургут</li>
+                                <li>Ханты-Мансийский АО</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Сибирский ФО -->
+                        <div class="region-group">
+                            <h4>Сибирский округ</h4>
+                            <ul>
+                                <li>Новосибирск</li>
+                                <li>Новосибирская обл.</li>
+                                <li>Иркутск</li>
+                                <li>Иркутская обл.</li>
+                                <li>Кемерово</li>
+                                <li>Кемеровская обл.</li>
+                                <li>Томск</li>
+                                <li>Томская обл.</li>
+                                <li>Омск</li>
+                                <li>Омская обл.</li>
+                                <li>Красноярск</li>
+                                <li>Красноярский край</li>
+                                <li>Республика Алтай</li>
+                                <li>Республика Бурятия</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2009–<span id="current-year">2025</span> мирум.рент (ООО "МИРУМ"). Все права защищены.
+            </div>
+        </div>
+    </footer>
 
     <!-- Кнопка "Наверх" -->
     <div class="back-to-top" id="backToTop">
@@ -655,8 +1042,19 @@
             });
         });
 
-        // Открытие первого вопроса при загрузке
+        // Текущая дата в футере
         document.addEventListener('DOMContentLoaded', function() {
+            const currentYear = new Date().getFullYear();
+            document.getElementById('current-year').textContent = currentYear;
+            
+            // Оптимизация для SEO: добавляем атрибуты ссылкам
+            document.querySelectorAll('a[href^="http"]').forEach(link => {
+                if (link.href.indexOf(window.location.host) === -1) {
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+            
+            // Открытие первого вопроса при загрузке
             document.querySelector('.faq-item').classList.add('active');
         });
     </script>
