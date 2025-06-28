@@ -61,7 +61,7 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Главное меню -->
+    <!-- НАЧАЛО БЛОКА Главное меню -->
     <nav class="main-menu">
         <div class="container menu-container">
             <a href="https://arenda-kovrov-mirum.ru/" class="logo">
@@ -81,8 +81,9 @@
             </ul>
         </div>
     </nav>
+    <!-- КОНЕЦ БЛОКА Главное меню -->
 
-    <!-- Хедер -->
+    <!-- НАЧАЛО БЛОКА Хедер -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -94,17 +95,19 @@
             </div>
         </div>
     </header>
+    <!-- КОНЕЦ БЛОКА Хедер -->
 
-    <!-- Основное содержимое -->
+    <!-- НАЧАЛО БЛОКА Основное содержимое -->
     <main>
-        <!-- Хлебные крошки -->
+        <!-- НАЧАЛО БЛОКА Хлебные крошки -->
         <div class="container breadcrumbs">
             <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
             <span>/</span>
             <span>Грязезащитные ковры в аренду</span>
         </div>
+        <!-- КОНЕЦ БЛОКА Хлебные крошки -->
 
-        <!-- Быстрые ссылки -->
+        <!-- НАЧАЛО БЛОКА Быстрые ссылки -->
         <div class="container quick-links">
             <a href="#about" class="quick-link">О компании</a>
             <a href="#calculator" class="quick-link">Калькулятор стоимости</a>
@@ -115,250 +118,26 @@
             <a href="#requisites" class="quick-link">Реквизиты компании</a>
             <a href="#window-cleaning" class="quick-link">Мытье витрин</a>
         </div>
+        <!-- КОНЕЦ БЛОКА Быстрые ссылки -->
 
-        <!-- Калькулятор стоимости -->
+        <!-- НАЧАЛО БЛОКА Калькулятор стоимости -->
         <section id="calculator" class="section">
             <div class="container">
-                <div class="breadcrumbs">
-                    <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
-                    <span>/</span>
-                    <a href="#calculator">Калькулятор стоимости</a>
-                </div>
-                
-                <div class="quick-links">
-                    <a href="#standard-calculator" class="quick-link">Стандартный расчет</a>
-                    <a href="#tender-calculator" class="quick-link">Тендерный расчет</a>
-                    <a href="#requisites" class="quick-link">Реквизиты</a>
-                    <a href="#contract" class="quick-link">Договор</a>
-                </div>
-
-                <h2 class="section-title">Калькулятор стоимости</h2>
-                
-                <div class="calculator-section">
-                    <div class="calculator-tabs">
-                        <button class="tab-btn active" data-tab="standard">Стандартные ковры</button>
-                        <button class="tab-btn" data-tab="tender">Тендерный калькулятор</button>
-                    </div>
-                    
-                    <!-- Калькулятор стандартных ковров -->
-                    <div id="standard-calculator" class="calculator-content active">
-                        <form id="standard-form">
-                            <div class="form-group">
-                                <label for="region">Регион</label>
-                                <select id="region" onchange="updateSizes()">
-                                    <option value="">Выберите регион</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="size">Размер ковра</label>
-                                <select id="size" disabled onchange="updateFrequencies()">
-                                    <option value="">Сначала выберите регион</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="frequency">Периодичность замены</label>
-                                <select id="frequency" disabled onchange="calculate()">
-                                    <option value="">Сначала выберите размер</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="quantity">Количество ковров</label>
-                                <input type="number" id="quantity" min="1" value="1" onchange="calculate()">
-                            </div>
-                            
-                            <button type="button" class="btn" onclick="addPosition()">Добавить позицию</button>
-                            
-                            <div id="addedNotice">
-                                Позиция добавлена! Вы можете продолжить добавлять ковры для этого же региона или изменить параметры выше.
-                            </div>
-                            
-                            <div id="standard-result">
-                                <h3>Ваш заказ</h3>
-                                <table id="orderTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Размер</th>
-                                            <th>Кол-во</th>
-                                            <th>Замена</th>
-                                            <th>Цена за 1 замену</th>
-                                            <th>Стоимость за 4 недели</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="orderBody">
-                                        <!-- Здесь будут добавляться позиции -->
-                                    </tbody>
-                                </table>
-                                
-                                <div id="total">Общая стоимость: 0 ₽</div>
-                                
-                                <div id="discountNotice">
-                                    <p>Это предварительный расчет, напишите нам в WhatsApp, мы сделаем более выгодное предложение.</p>
-                                </div>
-                                
-                                <div id="discountSection">
-                                    <h3>Запросить скидку</h3>
-                                    <div class="form-group">
-                                        <label for="name">Ваше имя*</label>
-                                        <input type="text" id="name" placeholder="Иван Иванов" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="discountPhone">Телефон*</label>
-                                        <input type="tel" id="discountPhone" placeholder="+7 (999) 123-45-67" required>
-                                    </div>
-                                    
-                                    <div class="consent-toggle">
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" id="consent" required>
-                                            <span class="toggle-slider"></span>
-                                        </label>
-                                        <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
-                                    </div>
-                                    
-                                    <button type="button" class="btn" onclick="requestDiscount()">Отправить запрос</button>
-                                </div>
-                                
-                                <div class="action-buttons">
-                                    <button type="button" class="btn btn-whatsapp" onclick="sendToWhatsApp()">
-                                        <i class="fab fa-whatsapp"></i> Написать в WhatsApp
-                                    </button>
-                                    <button type="button" class="btn btn-secondary" onclick="showContractForm()">Отправить реквизиты</button>
-                                </div>
-                                
-                                <div class="requisites-form" id="contractForm">
-                                    <h3>Реквизиты для договора</h3>
-                                    <div class="form-row">
-                                        <div class="form-col">
-                                            <div class="form-group">
-                                                <label for="company">Название организации</label>
-                                                <input type="text" id="company" placeholder="ООО 'Ромашка'">
-                                            </div>
-                                        </div>
-                                        <div class="form-col">
-                                            <div class="form-group">
-                                                <label for="contact-person">Контактное лицо*</label>
-                                                <input type="text" id="contact-person" placeholder="Иванов Иван Иванович" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="form-col">
-                                            <div class="form-group">
-                                                <label for="contractPhone">Телефон*</label>
-                                                <input type="tel" id="contractPhone" placeholder="+7 (999) 123-45-67" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-col">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input type="email" id="email" placeholder="example@mail.ru">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="requisites">Реквизиты компании (ИНН, ОГРН, КПП, почтовый адрес):</label>
-                                        <textarea id="requisites"></textarea>
-                                    </div>
-                                    
-                                    <div class="file-upload">
-                                        <label>Или прикрепите реквизиты файлом</label>
-                                        <input type="file" id="requisitesFile">
-                                    </div>
-                                    
-                                    <div class="consent-toggle">
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" id="contractConsent" required>
-                                            <span class="toggle-slider"></span>
-                                        </label>
-                                        <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
-                                    </div>
-                                    
-                                    <button type="button" class="btn" onclick="sendContractDetails()">Отправить реквизиты</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Тендерный калькулятор -->
-                    <div id="tender-calculator" class="calculator-content">
-                        <form id="tender-form">
-                            <div class="form-group">
-                                <label for="tenderRegion">Регион</label>
-                                <select id="tenderRegion" onchange="updateTenderSizes()">
-                                    <option value="">Выберите регион</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="tenderSize">Размер ковра</label>
-                                <select id="tenderSize" disabled onchange="calculateTender()">
-                                    <option value="">Сначала выберите регион</option>
-                                </select>
-                            </div>
-                            
-                            <button type="button" class="btn" onclick="addTenderPosition()">Добавить позицию</button>
-                            
-                            <div class="month-inputs" id="monthInputs">
-                                <!-- Месячные поля будут добавлены динамически -->
-                            </div>
-                            
-                            <div id="tender-result">
-                                <h3>Расчет по тендеру</h3>
-                                <table id="tenderTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Месяц</th>
-                                            <th>Размер</th>
-                                            <th>Кол-во ковров</th>
-                                            <th>Кол-во замен</th>
-                                            <th>Стоимость</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tenderBody">
-                                        <!-- Здесь будут добавляться позиции -->
-                                    </tbody>
-                                </table>
-                                
-                                <div id="tenderTotal">Общая стоимость по контракту: 0 ₽</div>
-                                
-                                <div id="tenderDiscountNotice">
-                                    <p>Это предварительный расчет, напишите нам в WhatsApp, мы сделаем более выгодное предложение.</p>
-                                </div>
-                                
-                                <div class="tender-form">
-                                    <div class="form-group">
-                                        <label for="tenderName">Ваше имя*</label>
-                                        <input type="text" id="tenderName" placeholder="Иван Иванов" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tenderPhone">Телефон*</label>
-                                        <input type="tel" id="tenderPhone" placeholder="+7 (999) 123-45-67" required>
-                                    </div>
-                                    
-                                    <div class="consent-toggle">
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" id="tenderConsent" required>
-                                            <span class="toggle-slider"></span>
-                                        </label>
-                                        <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
-                                    </div>
-                                    
-                                    <button type="button" class="btn btn-whatsapp" onclick="sendTenderToWhatsApp()">
-                                        <i class="fab fa-whatsapp"></i> Отправить в WhatsApp
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                <h2 class="section-title">Калькулятор стоимости аренды ковров</h2>
+                <div class="calculator-container">
+                    <!-- Здесь будет размещен код калькулятора -->
+                    <div class="calculator-placeholder">
+                        <p>Калькулятор стоимости временно находится в разработке. Для расчета стоимости отправьте запрос в WhatsApp:</p>
+                        <a href="https://wa.me/79770005127" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Запросить расчет
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- О компании -->
+        <!-- КОНЕЦ БЛОКА Калькулятор стоимости -->
+        
+        <!-- НАЧАЛО БЛОКА О компании -->
         <section id="about" class="section bg-light">
             <div class="container">
                 <h2 class="section-title">О компании МИРУМ</h2>
@@ -441,8 +220,9 @@
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА О компании -->
 
-        <!-- Наши преимущества -->
+        <!-- НАЧАЛО БЛОКА Наши преимущества -->
         <section id="advantages" class="section">
             <div class="container">
                 <h2 class="section-title">Наши преимущества</h2>
@@ -528,8 +308,9 @@
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Наши преимущества -->
 
-        <!-- Как начать работать -->
+        <!-- НАЧАЛО БЛОКА Как начать работать -->
         <section id="how-to-start" class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Как начать с нами работать</h2>
@@ -582,8 +363,9 @@
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Как начать работать -->
 
-        <!-- Образец договора -->
+        <!-- НАЧАЛО БЛОКА Образец договора -->
         <section id="contract" class="section">
             <div class="container">
                 <div class="breadcrumbs">
@@ -792,8 +574,9 @@
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Образец договора -->
 
-        <!-- Отзывы клиентов -->
+        <!-- НАЧАЛО БЛОКА Отзывы клиентов -->
         <section id="reviews" class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Рекомендательные письма наших клиентов</h2>
@@ -821,7 +604,7 @@
                                 <p>Обратились в компанию МИРУМ за услугой по аренде входных ковриков (матсервис) и были приятно удивлены скорости реагирования на запрос и доведения дела до подписания договора и начала работ. Сами работы также оказываются на высоком уровне. Хотим отметить профессионализм сотрудников, которые качественно исполняют возложенные на них обязанности, помогая тем самым поддерживать чистоту на наших объектах.</p>
                             </div>
                             <div class="testimonial-image">
-                                <img src="img/review/diana.jpg" alt="Рекомендательное письмо ООО ДИАНА" width="280" height="150">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/diana.jpg" alt="Рекомендательное письмо ООО ДИАНА" width="280" height="150">
                                 <div class="image-caption">Оригинал письма</div>
                             </div>
                         </div>
@@ -847,7 +630,7 @@
                                 <p>Коллектив программы «Триумф XXI века», в лице Народного артиста России Запашного Мстислава Мстиславовича, благодарит сотрудников за усердие и высокое качество оказанных услуг, а руководство за грамотную организацию работ на объекте.</p>
                             </div>
                             <div class="testimonial-image">
-                                <img src="img/review/triumph.jpg" alt="Рекомендательное письмо Триумф XXI века" width="280" height="150">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/zapahny.jpg" alt="Рекомендательное письмо Триумф XXI века" width="280" height="150">
                                 <div class="image-caption">Оригинал письма</div>
                             </div>
                             <p class="testimonial-date">24.11.2010 г.</p>
@@ -869,7 +652,7 @@
                                 <p>Хочется отметить работу отдельных сотрудников, отвечающих за взаимодействие с нашей компанией. К выполнению своих обязанностей подходят ответственно и учитывают все наши просьбы и пожелания.</p>
                             </div>
                             <div class="testimonial-image">
-                                <img src="img/review/posuda.jpg" alt="Рекомендательное письмо Посуда-Центр сервис" width="280" height="150">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/posuda-center.jpg" alt="Рекомендательное письмо Посуда-Центр сервис" width="280" height="150">
                                 <div class="image-caption">Оригинал письма</div>
                             </div>
                             <p class="testimonial-date">21 мая 2018 г.</p>
@@ -891,17 +674,102 @@
                                 <p>Очень понравилось работать с агентством, так как они учитывают особенности работы на конкретном объекте и с конкретным заказчиком.</p>
                             </div>
                             <div class="testimonial-image">
-                                <img src="img/review/kontakt.jpg" alt="Рекомендательное письмо ООО ПКФ Контакт" width="280" height="150">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/kontact.jpg" alt="Рекомендательное письмо ООО ПКФ Контакт" width="280" height="150">
                                 <div class="image-caption">Оригинал письма</div>
                             </div>
                             <p class="testimonial-sign">Технический директор Л.Г. Егоркина</p>
                         </div>
                     </div>
+
+                    <!-- Письмо 5 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-file-alt"></i>
+                            ООО «ОКЕЙ»
+                        </div>
+                        <div class="advantage-content">
+                            <div class="testimonial-preview">
+                                Супермаркет О'Кей в городе Сочи выражает искреннюю благодарность Компании «МИРУМ» за профессионализм и высокое качество работы сотрудников...
+                            </div>
+                            <div class="testimonial-full">
+                                <p>Супермаркет О'Кей в городе Сочи выражает искреннюю благодарность Компании «МИРУМ» в лице исполнительного директора Рыбак Дмитрия Александровича за профессионализм и высокое качество работы сотрудников, ответственных за чистку и замену напольных ковровых покрытий, установленных на нашем объекте.</p>
+                                <p>Высоко ценим взаимопонимание, которое у нас сложилось за время сотрудничества с Компанией «МИРУМ»! Также благодарим за четкость, исполнительность и оперативность в процессе работы.</p>
+                            </div>
+                            <div class="testimonial-image">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/ok.jpg" alt="Рекомендательное письмо ООО ОКЕЙ" width="280" height="150">
+                                <div class="image-caption">Оригинал письма</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Письмо 6 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-file-alt"></i>
+                            АО «Ричмонт Транспортные Услуги»
+                        </div>
+                        <div class="advantage-content">
+                            <div class="testimonial-preview">
+                                Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров...
+                            </div>
+                            <div class="testimonial-full">
+                                <p>Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров. За все время работы у нас не было к ним нареканий. Сотрудники работают быстро, качественно и профессионально. Вовремя получаем консультации по интересующим нас вопросам. На запросы реагируют быстро. Услуги полностью удовлетворяют нашим потребностям - сотрудничество будем продолжать и развивать. Спасибо за работу!</p>
+                            </div>
+                            <div class="testimonial-image">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/hertz.jpg" alt="Рекомендательное письмо АО Ричмонт Транспортные Услуги" width="280" height="150">
+                                <div class="image-caption">Оригинал письма</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Письмо 7 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-file-alt"></i>
+                            ООО «Остин» Южный филиал
+                        </div>
+                        <div class="advantage-content">
+                            <div class="testimonial-preview">
+                                Универсальный спортивный магазин «Остин» (в г. Сочи) с 2012 года эффективно сотрудничает с Компанией «МИРУМ»...
+                            </div>
+                            <div class="testimonial-full">
+                                <p>Универсальный спортивный магазин «Остин» (в г. Сочи) с 2012 года эффективно сотрудничает с Компанией «МИРУМ», оказывающей комплексные услуги по профессиональному уходу за объектами недвижимости в области промышленного клиринга и сервисных услуг, в частности, по уборке торговых залов и помещений.</p>
+                                <p>За время работы специалисты Компании «МИРУМ» зарекомендовали себя квалифицированными и опытными работниками, представляющими надежного и ответственного партнера в лице господина Д. А. Рыбак.</p>
+                            </div>
+                            <div class="testimonial-image">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/ostin-sochi.jpg" alt="Рекомендательное письмо ООО Остин Южный филиал" width="280" height="150">
+                                <div class="image-caption">Оригинал письма</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Письмо 8 -->
+                    <div class="advantage-card">
+                        <div class="advantage-header">
+                            <i class="fas fa-file-alt"></i>
+                            Сбербанк России ОАО
+                        </div>
+                        <div class="advantage-content">
+                            <div class="testimonial-preview">
+                                Астраханское отделение №8625 Сберегательного банка России ОАО выражает благодарность агентству «Мирум» за профессиональный подход к делу...
+                            </div>
+                            <div class="testimonial-full">
+                                <p>Астраханское отделение №8625 Сберегательного банка России ОАО выражает благодарность агентству «Мирум» за профессиональный подход к делу. Согласно договору был успешно осуществлен и в полном объеме завершен проект по уборке, восстановлению и гидрофобизации филиалов нашей организации.</p>
+                                <p>Со стороны агентства «Мирум» был осуществлен четкий контроль по проведению всех работ, связанных с проектом, а так же мгновенное исправление выявленных недочетов в ходе работы и участие в оптимизации процесса.</p>
+                            </div>
+                            <div class="testimonial-image">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/sber.jpg" alt="Рекомендательное письмо Сбербанк России" width="280" height="150">
+                                <div class="image-caption">Оригинал письма</div>
+                            </div>
+                            <p class="testimonial-sign">Начальник Административного отдела Е. В. Черников</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Отзывы клиентов -->
 
-        <!-- Фотогалерея -->
+        <!-- НАЧАЛО БЛОКА Фотогалерея -->
         <section id="gallery" class="section">
             <div class="container">
                 <div class="breadcrumbs">
@@ -930,7 +798,7 @@
                     <!-- 1. Стоматологии -->
                     <div class="photo-card" id="gallery-medicine">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_1.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_1.webp" 
                                  alt="Грязезащитные ковры в стоматологической клинике" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Москва</div>
@@ -941,7 +809,7 @@
                     <!-- 2. Салоны красоты -->
                     <div class="photo-card" id="gallery-beauty">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_2.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_2.webp" 
                                  alt="Ковры в салоне красоты" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Санкт-Петербург</div>
@@ -952,7 +820,7 @@
                     <!-- 3. Массажные салоны -->
                     <div class="photo-card" id="gallery-beauty">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_3.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_3.webp" 
                                  alt="Грязезащита в массажном салоне" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Уфа</div>
@@ -963,7 +831,7 @@
                     <!-- 4. Юридические кабинеты -->
                     <div class="photo-card" id="gallery-business">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_4.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_4.webp" 
                                  alt="Ковры в юридическом кабинете" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Астрахань</div>
@@ -974,7 +842,7 @@
                     <!-- 5. Стоматологические кабинеты -->
                     <div class="photo-card" id="gallery-medicine">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_5.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_5.webp" 
                                  alt="Грязезащита в стоматологическом кабинете" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Новосибирск</div>
@@ -985,7 +853,7 @@
                     <!-- 6. Парикмахерские -->
                     <div class="photo-card" id="gallery-beauty">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_6.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_6.webp" 
                                  alt="Ковры в парикмахерской" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Тюмень</div>
@@ -996,7 +864,7 @@
                     <!-- 7. Салоны маникюра -->
                     <div class="photo-card" id="gallery-beauty">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_7.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_7.webp" 
                                  alt="Грязезащита в салоне маникюра" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Екатеринбург</div>
@@ -1007,7 +875,7 @@
                     <!-- 8. Цветочные магазины -->
                     <div class="photo-card" id="gallery-retail">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_8.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_8.webp" 
                                  alt="Ковры в цветочном магазине" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Челябинск</div>
@@ -1018,7 +886,7 @@
                     <!-- 9. Кофейни -->
                     <div class="photo-card" id="gallery-food">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_9.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_9.webp" 
                                  alt="Грязезащита в кофейне" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Пермь</div>
@@ -1029,7 +897,7 @@
                     <!-- 10. Сетевые магазины -->
                     <div class="photo-card" id="gallery-retail">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_10.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_10.webp" 
                                  alt="Ковры в сетевом магазине" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Москва</div>
@@ -1040,7 +908,7 @@
                     <!-- 11. Магазины у дома -->
                     <div class="photo-card" id="gallery-retail">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_11.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_11.webp" 
                                  alt="Грязезащита в магазине у дома" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Московская область</div>
@@ -1051,7 +919,7 @@
                     <!-- 12. Торговые центры -->
                     <div class="photo-card" id="gallery-retail">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_12.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_12.webp" 
                                  alt="Ковры в торговом центре" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Санкт-Петербург</div>
@@ -1062,7 +930,7 @@
                     <!-- 13. Бизнес-центры -->
                     <div class="photo-card" id="gallery-business">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_13.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_13.webp" 
                                  alt="Грязезащита в бизнес-центре" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Уфа</div>
@@ -1073,7 +941,7 @@
                     <!-- 14. Школы -->
                     <div class="photo-card" id="gallery-education">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_14.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_14.webp" 
                                  alt="Ковры в школе" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Астрахань</div>
@@ -1084,7 +952,7 @@
                     <!-- 15. Институты -->
                     <div class="photo-card" id="gallery-education">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_15.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_15.webp" 
                                  alt="Грязезащита в институте" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Новосибирск</div>
@@ -1095,7 +963,7 @@
                     <!-- 16. Автошколы -->
                     <div class="photo-card" id="gallery-education">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_16.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_16.webp" 
                                  alt="Ковры в автошколе" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Тюмень</div>
@@ -1106,7 +974,7 @@
                     <!-- 17. Тату-салоны -->
                     <div class="photo-card" id="gallery-beauty">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_17.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_17.webp" 
                                  alt="Грязезащита в тату-салоне" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Екатеринбург</div>
@@ -1117,7 +985,7 @@
                     <!-- 18. Рестораны -->
                     <div class="photo-card" id="gallery-food">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_18.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_18.webp" 
                                  alt="Ковры в ресторане" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Челябинск</div>
@@ -1128,7 +996,7 @@
                     <!-- 19. Медицинские центры -->
                     <div class="photo-card" id="gallery-medicine">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_19.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_19.webp" 
                                  alt="Грязезащита в медицинском центре" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Пермь</div>
@@ -1139,7 +1007,7 @@
                     <!-- 20. Автоцентры -->
                     <div class="photo-card" id="gallery-business">
                         <div class="photo-image-container">
-                            <img src="img/arenda_kovrov/arenda_kovrov_20.webp" 
+                            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_20.webp" 
                                  alt="Ковры в автоцентре" 
                                  class="photo-image" loading="lazy" width="280" height="210">
                             <div class="photo-location">Москва</div>
@@ -1156,33 +1024,34 @@
                   "name": "Фотографии грязезащитных ковров МИРУМ",
                   "description": "Реальные фотографии с объектов по аренде грязезащитных ковров в различных заведениях",
                   "image": [
-                    "img/arenda_kovrov/arenda_kovrov_1.webp",
-                    "img/arenda_kovrov/arenda_kovrov_2.webp",
-                    "img/arenda_kovrov/arenda_kovrov_3.webp",
-                    "img/arenda_kovrov/arenda_kovrov_4.webp",
-                    "img/arenda_kovrov/arenda_kovrov_5.webp",
-                    "img/arenda_kovrov/arenda_kovrov_6.webp",
-                    "img/arenda_kovrov/arenda_kovrov_7.webp",
-                    "img/arenda_kovrov/arenda_kovrov_8.webp",
-                    "img/arenda_kovrov/arenda_kovrov_9.webp",
-                    "img/arenda_kovrov/arenda_kovrov_10.webp",
-                    "img/arenda_kovrov/arenda_kovrov_11.webp",
-                    "img/arenda_kovrov/arenda_kovrov_12.webp",
-                    "img/arenda_kovrov/arenda_kovrov_13.webp",
-                    "img/arenda_kovrov/arenda_kovrov_14.webp",
-                    "img/arenda_kovrov/arenda_kovrov_15.webp",
-                    "img/arenda_kovrov/arenda_kovrov_16.webp",
-                    "img/arenda_kovrov/arenda_kovrov_17.webp",
-                    "img/arenda_kovrov/arenda_kovrov_18.webp",
-                    "img/arenda_kovrov/arenda_kovrov_19.webp",
-                    "img/arenda_kovrov/arenda_kovrov_20.webp"
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_1.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_2.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_3.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_4.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_5.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_6.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_7.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_8.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_9.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_10.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_11.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_12.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_13.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_14.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_15.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_16.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_17.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_18.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_19.webp",
+                    "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_20.webp"
                   ]
                 }
                 </script>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Фотогалерея -->
 
-        <!-- Мытье витрин -->
+        <!-- НАЧАЛО БЛОКА Мытье витрин -->
         <section id="window-cleaning" class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Мытье витрин</h2>
@@ -1215,8 +1084,9 @@
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Мытье витрин -->
 
-        <!-- Реквизиты компании -->
+        <!-- НАЧАЛО БЛОКА Реквизиты компании -->
         <section id="requisites" class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Реквизиты компании</h2>
@@ -1326,9 +1196,11 @@
                 </div>
             </div>
         </section>
+        <!-- КОНЕЦ БЛОКА Реквизиты компании -->
     </main>
+    <!-- КОНЕЦ БЛОКА Основное содержимое -->
 
-    <!-- Футер -->
+    <!-- НАЧАЛО БЛОКА Футер -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -1470,13 +1342,15 @@
                 </div>
             </div>
         </footer>
+        <!-- КОНЕЦ БЛОКА Футер -->
 
-        <!-- Кнопка "Наверх" -->
+        <!-- НАЧАЛО БЛОКА Кнопка "Наверх" -->
         <div class="back-to-top" id="backToTop">
             <i class="fas fa-arrow-up"></i>
         </div>
+        <!-- КОНЕЦ БЛОКА Кнопка "Наверх" -->
 
-        <!-- Cookie уведомление -->
+        <!-- НАЧАЛО БЛОКА Cookie уведомление -->
         <div class="cookie-notice" id="cookieNotice">
             <div class="cookie-text">
                 Мы используем файлы cookie для улучшения работы сайта. Оставаясь на сайте, вы соглашаетесь с <a href="#" onclick="openPrivacyModal()" style="color: white; text-decoration: underline;">политикой обработки персональных данных</a>.
@@ -1486,8 +1360,9 @@
                 <button class="cookie-btn cookie-btn-more" onclick="openPrivacyModal()">Подробнее</button>
             </div>
         </div>
+        <!-- КОНЕЦ БЛОКА Cookie уведомление -->
 
-        <!-- Модальное окно политики конфиденциальности -->
+        <!-- НАЧАЛО БЛОКА Модальное окно политики конфиденциальности -->
         <div class="modal" id="privacyModal">
             <div class="modal-content">
                 <span class="modal-close" onclick="closeModal('privacyModal')">&times;</span>
@@ -1547,6 +1422,7 @@
                 </div>
             </div>
         </div>
+        <!-- КОНЕЦ БЛОКА Модальное окно политики конфиденциальности -->
 
         <script>
             // Основные скрипты для работы сайта
