@@ -55,52 +55,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://arenda-kovrov-mirum.ru/css/style.css">
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon.ico" type="image/x-icon">
     <style>
-        /* Основные стили из главного файла */
-        :root {
-            --primary-color: #212121;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --whatsapp-color: #25D366;
-            --header-height: 70px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            color: var(--text-color);
-            line-height: 1.5;
-            background-color: #f9f9f9;
-            font-family: 'Open Sans', sans-serif;
-            padding-top: var(--header-height);
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Стили для страницы интересных фактов */
+        /* Дополнительные стили для страницы интересных фактов */
         .facts-header {
             background-color: var(--primary-color);
             color: white;
@@ -211,6 +169,30 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Стили для регионов в футере */
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .region-group h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--light-color);
+        }
+
+        .region-group ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .region-group li {
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -218,7 +200,7 @@
     <nav class="main-menu">
         <div class="container menu-container">
             <a href="https://arenda-kovrov-mirum.ru/" class="logo">
-                <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/logo.png" alt="мирум.рент">
+                <img src="https://arenda-kovrov-mirum.ru/img/logo.png" alt="мирум.рент">
                 <span class="logo-text">мирум.рент</span>
             </a>
             <ul class="nav-links">
@@ -227,10 +209,10 @@
                 <li><a href="#calculator">Наши цены</a></li>
                 <li><a href="#how-to-start">Как начать</a></li>
                 <li><a href="#reviews">Отзывы</a></li>
-                <li><a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/pogoda.html">Погода</a></li>
-                <li><a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/interesting.html">Это интересно</a></li>
-                <li><a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/FAQ.html">FAQ</a></li>
-                <li><a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/window-cleaning.html">Мытье витрин</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/pogoda.html">Погода</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/interesting.html">Это интересно</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/FAQ.html">FAQ</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/window-cleaning.html">Мытье витрин</a></li>
             </ul>
         </div>
     </nav>
@@ -262,7 +244,7 @@
         <!-- Секция с фактами о коврах -->
         <section id="mats" class="section">
             <div class="container">
-                <h2 class="facts-section-title">10 интересных фактов о грязезащитных коврах</h2>
+                <h2 class="facts-section-title">15 интересных фактов о грязезащитных коврах</h2>
                 <div class="facts-grid">
                     <!-- Факт 1 -->
                     <div class="fact-card">
@@ -333,6 +315,41 @@
                         <h3 class="fact-title">Экономия бизнеса</h3>
                         <p class="fact-text">Аренда ковров вместо покупки экономит компаниям до 70% затрат на поддержание чистоты входных зон.</p>
                     </div>
+
+                    <!-- Факт 11 -->
+                    <div class="fact-card">
+                        <div class="fact-number">11</div>
+                        <h3 class="fact-title">Гигиенический стандарт</h3>
+                        <p class="fact-text">В медицинских учреждениях грязезащитные ковры меняют каждые 2-3 дня, так как после этого срока их эффективность снижается на 50%.</p>
+                    </div>
+
+                    <!-- Факт 12 -->
+                    <div class="fact-card">
+                        <div class="fact-number">12</div>
+                        <h3 class="fact-title">Цветовая психология</h3>
+                        <p class="fact-text">Синие ковры подсознательно воспринимаются как более чистые, поэтому их чаще выбирают для общественных пространств.</p>
+                    </div>
+
+                    <!-- Факт 13 -->
+                    <div class="fact-card">
+                        <div class="fact-number">13</div>
+                        <h3 class="fact-title">Антискользящий эффект</h3>
+                        <p class="fact-text">Современные ковры снижают риск падений на мокром полу на 65% благодаря специальной резиновой основе.</p>
+                    </div>
+
+                    <!-- Факт 14 -->
+                    <div class="fact-card">
+                        <div class="fact-number">14</div>
+                        <h3 class="fact-title">Рекордный ковер</h3>
+                        <p class="fact-text">Самый большой грязезащитный ковер в мире имеет площадь 1200 кв.м. и установлен в аэропорту Дубая.</p>
+                    </div>
+
+                    <!-- Факт 15 -->
+                    <div class="fact-card">
+                        <div class="fact-number">15</div>
+                        <h3 class="fact-title">Долговечность</h3>
+                        <p class="fact-text">Качественный грязезащитный ковер при правильном уходе может прослужить до 10 лет, сохраняя свои свойства.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -340,7 +357,7 @@
         <!-- Секция с фактами о фасадах -->
         <section id="facades" class="section" style="background-color: #f5f7fa;">
             <div class="container">
-                <h2 class="facts-section-title">10 интересных фактов о фасадах и мойке окон</h2>
+                <h2 class="facts-section-title">15 интересных фактов о фасадах и мойке окон</h2>
                 <div class="facts-grid">
                     <!-- Факт 1 -->
                     <div class="fact-card">
@@ -411,6 +428,41 @@
                         <h3 class="fact-title">Эффект на бизнес</h3>
                         <p class="fact-text">Чистые фасады и витрины увеличивают посещаемость магазинов и офисов на 15-25%.</p>
                     </div>
+
+                    <!-- Факт 11 -->
+                    <div class="fact-card">
+                        <div class="fact-number">11</div>
+                        <h3 class="fact-title">Технология роботов</h3>
+                        <p class="fact-text">В 2024 году появились первые роботы-мойщики фасадов, способные работать автономно на высотных зданиях.</p>
+                    </div>
+
+                    <!-- Факт 12 -->
+                    <div class="fact-card">
+                        <div class="fact-number">12</div>
+                        <h3 class="fact-title">Частота мойки</h3>
+                        <p class="fact-text">В центрах мегаполисов фасады рекомендуется мыть 2-3 раза в год, в спальных районах - 1-2 раза в год.</p>
+                    </div>
+
+                    <!-- Факт 13 -->
+                    <div class="fact-card">
+                        <div class="fact-number">13</div>
+                        <h3 class="fact-title">Стоимость работ</h3>
+                        <p class="fact-text">Цена мойки фасада зависит от степени загрязнения и может варьироваться от 50 до 200 руб./кв.м.</p>
+                    </div>
+
+                    <!-- Факт 14 -->
+                    <div class="fact-card">
+                        <div class="fact-number">14</div>
+                        <h3 class="fact-title">Срок службы фасада</h3>
+                        <p class="fact-text">Регулярная мойка продлевает срок службы фасадных материалов на 30-50%.</p>
+                    </div>
+
+                    <!-- Факт 15 -->
+                    <div class="fact-card">
+                        <div class="fact-number">15</div>
+                        <h3 class="fact-title">Специальные условия</h3>
+                        <p class="fact-text">Некоторые виды стекол (например, с солнцезащитным покрытием) требуют особых моющих средств и техник очистки.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -449,9 +501,9 @@
                     <h3>Услуги</h3>
                     <ul>
                         <li><i class="fas fa-calculator footer-icon"></i> <a href="#calculator">Калькулятор</a></li>
-                        <li><i class="fas fa-newspaper footer-icon"></i> <a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/interesting.html">Это интересно</a></li>
-                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/FAQ.html">FAQ</a></li>
-                        <li><i class="fas fa-cloud-sun footer-icon"></i> <a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/pogoda.html">Прогноз замены</a></li>
+                        <li><i class="fas fa-newspaper footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/interesting.html">Это интересно</a></li>
+                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/FAQ.html">FAQ</a></li>
+                        <li><i class="fas fa-cloud-sun footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/pogoda.html">Прогноз замены</a></li>
                         <li><i class="fas fa-window-restore footer-icon"></i> <a href="#window-cleaning">Мытье витрин</a></li>
                     </ul>
                 </div>
@@ -468,19 +520,98 @@
                 <div class="footer-column">
                     <h3>Регионы работы</h3>
                     <div class="regions-grid">
+                        <!-- Центральный ФО -->
                         <div class="region-group">
                             <h4>Центральный округ</h4>
                             <ul>
                                 <li>Москва</li>
                                 <li>Московская обл.</li>
                                 <li>Тверская обл.</li>
+                                <li>Тульская обл.</li>
+                                <li>Ярославская обл.</li>
+                                <li>Брянская обл.</li>
+                                <li>Орловская обл.</li>
+                                <li>Владимирская обл.</li>
+                                <li>Ивановская обл.</li>
+                                <li>Калужская обл.</li>
+                                <li>Смоленская обл.</li>
+                                <li>Белгородская обл.</li>
+                                <li>Курская обл.</li>
+                                <li>Воронежская обл.</li>
+                                <li>Тамбовская обл.</li>
                             </ul>
                         </div>
+                        
+                        <!-- Северо-Западный ФО -->
                         <div class="region-group">
                             <h4>Северо-Западный округ</h4>
                             <ul>
                                 <li>Санкт-Петербург</li>
                                 <li>Ленинградская обл.</li>
+                                <li>Архангельская обл.</li>
+                                <li>Мурманская обл.</li>
+                                <li>Псковская обл.</li>
+                                <li>Республика Карелия</li>
+                                <li>Республика Коми</li>
+                                <li>Вологодская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Южный ФО -->
+                        <div class="region-group">
+                            <h4>Южный округ</h4>
+                            <ul>
+                                <li>Астрахань</li>
+                                <li>Астраханская обл.</li>
+                                <li>Краснодар</li>
+                                <li>Краснодарский край</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Приволжский ФО -->
+                        <div class="region-group">
+                            <h4>Приволжский округ</h4>
+                            <ul>
+                                <li>Уфа</li>
+                                <li>Республика Башкортостан</li>
+                                <li>Казань</li>
+                                <li>Республика Татарстан</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Уральский ФО -->
+                        <div class="region-group">
+                            <h4>Уральский округ</h4>
+                            <ul>
+                                <li>Екатеринбург</li>
+                                <li>Свердловская обл.</li>
+                                <li>Тюмень</li>
+                                <li>Тюменская обл.</li>
+                                <li>Челябинск</li>
+                                <li>Челябинская обл.</li>
+                                <li>Сургут</li>
+                                <li>Ханты-Мансийский АО</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Сибирский ФО -->
+                        <div class="region-group">
+                            <h4>Сибирский округ</h4>
+                            <ul>
+                                <li>Новосибирск</li>
+                                <li>Новосибирская обл.</li>
+                                <li>Иркутск</li>
+                                <li>Иркутская обл.</li>
+                                <li>Кемерово</li>
+                                <li>Кемеровская обл.</li>
+                                <li>Томск</li>
+                                <li>Томская обл.</li>
+                                <li>Омск</li>
+                                <li>Омская обл.</li>
+                                <li>Красноярск</li>
+                                <li>Красноярский край</li>
+                                <li>Республика Алтай</li>
+                                <li>Республика Бурятия</li>
                             </ul>
                         </div>
                     </div>
@@ -500,7 +631,7 @@
     <!-- Cookie уведомление -->
     <div class="cookie-notice" id="cookieNotice">
         <div class="cookie-text">
-            Мы используем файлы cookie для улучшения работы сайта. Оставшись на сайте, вы соглашаетесь с нашей <a href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/PDPP.html" style="color: var(--accent-color); text-decoration: underline;" id="cookiePolicyLink">Политикой конфиденциальности</a>.
+            Мы используем файлы cookie для улучшения работы сайта. Оставшись на сайте, вы соглашаетесь с нашей <a href="https://arenda-kovrov-mirum.ru/PDPP.html" style="color: var(--accent-color); text-decoration: underline;" id="cookiePolicyLink">Политикой конфиденциальности</a>.
         </div>
         <div class="cookie-buttons">
             <button class="cookie-btn cookie-btn-more" id="cookieBtnMore">Подробнее</button>
