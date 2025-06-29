@@ -48,63 +48,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://arenda-kovrov-mirum.ru/css/style.css">
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon.ico" type="image/x-icon">
     <style>
-        /* Основные стили из главного файла */
-        :root {
-            --primary-color: #212121;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --whatsapp-color: #25D366;
-            --header-height: 70px;
-            --sunny-color: #F9D71C;
-            --cloudy-color: #BDC3C7;
-            --rainy-color: #3498DB;
-            --snowy-color: #ECF0F1;
-            --stormy-color: #8E44AD;
-            --foggy-color: #95A5A6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            color: var(--text-color);
-            line-height: 1.5;
-            background-color: #f9f9f9;
-            font-family: 'Open Sans', sans-serif;
-            padding-top: var(--header-height);
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Главное меню (скрыто на этой странице) */
-        .main-menu {
-            display: none;
-        }
-
-        /* Стили для погоды */
+        /* Специфичные стили для страницы погоды */
         .weather-container {
             background: white;
             border-radius: 8px;
@@ -311,8 +258,8 @@
         }
         
         @keyframes fade {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
+            0% { opacity: 0.7); }
+            100% { opacity: 1); }
         }
 
         /* Цвета для погодных условий */
@@ -409,114 +356,29 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .seo-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-        }
-
-        .seo-section p {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
-
-        /* Хлебные крошки */
-        .breadcrumbs {
-            padding: 15px 0;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumbs a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .breadcrumbs a:hover {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-
-        .breadcrumbs span {
-            color: #777;
-            margin: 0 5px;
-        }
-
-        /* Быстрые ссылки */
-        .quick-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .quick-link {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: var(--light-color);
-            border-radius: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-
-        .quick-link:hover {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        /* Кнопки */
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 4px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--dark-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .btn-whatsapp {
-            background-color: var(--whatsapp-color);
-            color: white;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #128C7E;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37,211,102,0.3);
-        }
-
-        .btn-whatsapp i {
-            margin-right: 8px;
-        }
-
-        .action-buttons {
-            display: flex;
-            justify-content: center;
+        /* Регионы в футере */
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
-            margin-top: 30px;
-            flex-wrap: wrap;
         }
 
-        /* Адаптивность */
+        .region-group h4 {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        .region-group ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .region-group li {
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
         @media (max-width: 768px) {
             .forecast {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -535,6 +397,10 @@
             .action-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .regions-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -667,6 +533,105 @@
                         <li><i class="fas fa-phone-alt footer-icon"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
                         <li><i class="fab fa-whatsapp footer-icon"></i> <a href="https://wa.me/79770005127">WhatsApp</a></li>
                     </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <!-- Центральный ФО -->
+                        <div class="region-group">
+                            <h4>Центральный округ</h4>
+                            <ul>
+                                <li>Москва</li>
+                                <li>Московская обл.</li>
+                                <li>Тверская обл.</li>
+                                <li>Тульская обл.</li>
+                                <li>Ярославская обл.</li>
+                                <li>Брянская обл.</li>
+                                <li>Орловская обл.</li>
+                                <li>Владимирская обл.</li>
+                                <li>Ивановская обл.</li>
+                                <li>Калужская обл.</li>
+                                <li>Смоленская обл.</li>
+                                <li>Белгородская обл.</li>
+                                <li>Курская обл.</li>
+                                <li>Воронежская обл.</li>
+                                <li>Тамбовская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Северо-Западный ФО -->
+                        <div class="region-group">
+                            <h4>Северо-Западный округ</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Ленинградская обл.</li>
+                                <li>Архангельская обл.</li>
+                                <li>Мурманская обл.</li>
+                                <li>Псковская обл.</li>
+                                <li>Республика Карелия</li>
+                                <li>Республика Коми</li>
+                                <li>Вологодская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Южный ФО -->
+                        <div class="region-group">
+                            <h4>Южный округ</h4>
+                            <ul>
+                                <li>Астрахань</li>
+                                <li>Астраханская обл.</li>
+                                <li>Краснодар</li>
+                                <li>Краснодарский край</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Приволжский ФО -->
+                        <div class="region-group">
+                            <h4>Приволжский округ</h4>
+                            <ul>
+                                <li>Уфа</li>
+                                <li>Республика Башкортостан</li>
+                                <li>Казань</li>
+                                <li>Республика Татарстан</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Уральский ФО -->
+                        <div class="region-group">
+                            <h4>Уральский округ</h4>
+                            <ul>
+                                <li>Екатеринбург</li>
+                                <li>Свердловская обл.</li>
+                                <li>Тюмень</li>
+                                <li>Тюменская обл.</li>
+                                <li>Челябинск</li>
+                                <li>Челябинская обл.</li>
+                                <li>Сургут</li>
+                                <li>Ханты-Мансийский АО</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Сибирский ФО -->
+                        <div class="region-group">
+                            <h4>Сибирский округ</h4>
+                            <ul>
+                                <li>Новосибирск</li>
+                                <li>Новосибирская обл.</li>
+                                <li>Иркутск</li>
+                                <li>Иркутская обл.</li>
+                                <li>Кемерово</li>
+                                <li>Кемеровская обл.</li>
+                                <li>Томск</li>
+                                <li>Томская обл.</li>
+                                <li>Омск</li>
+                                <li>Омская обл.</li>
+                                <li>Красноярск</li>
+                                <li>Красноярский край</li>
+                                <li>Республика Алтай</li>
+                                <li>Республика Бурятия</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="copyright">
