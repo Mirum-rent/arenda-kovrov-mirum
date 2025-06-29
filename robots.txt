@@ -1,47 +1,30 @@
 User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /tmp/
 Disallow: /cgi-bin/
 Disallow: /wp-admin/
 Disallow: /wp-includes/
+Disallow: /admin/
+Disallow: /includes/
 Disallow: /search/
-Disallow: /private/
-Disallow: /tmp/
-Disallow: /*?*
-Allow: /img/
-Allow: /css/
-Allow: /js/
-Allow: /fonts/
-Allow: /pogoda.html
-Allow: /interesting.html
-Allow: /FAQ.html
-Allow: /index.html
 
-# Исправленные URL, которые возвращали 404
-Disallow: /photo_1_rekovevadesi
-Disallow: /stiemago
-Disallow: /interenco_o_g/praesuschthyaya_kovrah
-Disallow: /fag
-
+# Я.Вебмастер
 User-agent: Yandex
-Clean-param: utm_source&utm_medium&utm_campaign&yclid&from&gclid
-Host: https://arenda-kovrov-mirum.ru
-Crawl-delay: 1.5
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign /
+Clean-param: from&referrer /
+Host: arenda-kovrov-mirum.ru
 
+# Googlebot
 User-agent: Googlebot
-User-agent: Googlebot-Image
-Crawl-delay: 2
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.webp$
-Allow: /*.svg$
+Allow: /
 
+# Crawl-delay для агрессивных ботов
 User-agent: MJ12bot
+Crawl-delay: 10
+
 User-agent: AhrefsBot
-User-agent: SemrushBot
-User-agent: DotBot
-User-agent: MegaIndex
-Disallow: /
+Crawl-delay: 10
 
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
-Sitemap: https://arenda-kovrov-mirum.ru/sitemap-images.xml
