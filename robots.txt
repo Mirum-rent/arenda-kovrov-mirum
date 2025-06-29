@@ -9,6 +9,19 @@ Disallow: /admin/
 Disallow: /includes/
 Disallow: /search/
 
+# Блокировка старых URL (возвращавших 404)
+Disallow: /photo_i_rekovendacii
+Disallow: /sitemap
+Disallow: /interesno_o_grjazezaschitnych_kovrah
+Disallow: /faq
+
+# Блокировка региональных зеркал (во избежание дублей)
+Disallow: /*.moscow/
+Disallow: /*-surgut.ru/
+Disallow: /*-astrakhan.ru/
+Disallow: /*-ufa.ru/
+Disallow: /4993481327.ru/
+
 # Я.Вебмастер
 User-agent: Yandex
 Allow: /
@@ -20,10 +33,9 @@ Host: arenda-kovrov-mirum.ru
 User-agent: Googlebot
 Allow: /
 
-# Crawl-delay для агрессивных ботов
+# Ограничение для агрессивных ботов
 User-agent: MJ12bot
 Crawl-delay: 10
-
 User-agent: AhrefsBot
 Crawl-delay: 10
 
