@@ -22,7 +22,7 @@
             webvisor:true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt=""></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/">
@@ -122,12 +122,982 @@
         <!-- КОНЕЦ БЛОКА Быстрые ссылки -->
 
         <!-- НАЧАЛО БЛОКА КАЛЬКУЛЯТОР СТОИМОСТИ -->
-        <section id="calculator" class="section">
-            <div class="container">
-                <h2 class="section-title">Калькулятор стоимости аренды</h2>
-                <!-- Здесь будет калькулятор -->
+        
+    <!-- Калькулятор стоимости -->
+    <section id="calculator" class="section">
+        <div class="container">
+            <!-- Хлебные крошки внутри калькулятора (дополнительные) -->
+            <div class="breadcrumbs">
+                <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
+                <span>/</span>
+                <a href="#calculator">Калькулятор стоимости</a>
             </div>
-        </section>
+            
+            <!-- Быстрые ссылки внутри калькулятора (дополнительные) -->
+            <div class="quick-links">
+                <a href="#standard-calculator" class="quick-link">Стандартный расчет</a>
+                <a href="#tender-calculator" class="quick-link">Тендерный расчет</a>
+                <a href="#requisites" class="quick-link">Реквизиты</a>
+                <a href="#contract" class="quick-link">Договор</a>
+            </div>
+
+            <h2 class="section-title">Калькулятор стоимости</h2>
+            
+            <div class="calculator-section">
+                <div class="calculator-tabs">
+                    <button class="tab-btn active" data-tab="standard">Стандартные ковры</button>
+                    <button class="tab-btn" data-tab="tender">Тендерный калькулятор</button>
+                </div>
+                
+                <!-- Калькулятор стандартных ковров -->
+                <div id="standard-calculator" class="calculator-content active">
+                    <form id="standard-form">
+                        <div class="form-group">
+                            <label for="region">Регион</label>
+                            <select id="region" onchange="updateSizes()">
+                                <option value="">Выберите регион</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="size">Размер ковра</label>
+                            <select id="size" disabled onchange="updateFrequencies()">
+                                <option value="">Сначала выберите регион</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="frequency">Периодичность замены</label>
+                            <select id="frequency" disabled onchange="calculate()">
+                                <option value="">Сначала выберите размер</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quantity">Количество ковров</label>
+                            <input type="number" id="quantity" min="1" value="1" onchange="calculate()">
+                        </div>
+                        
+                        <button type="button" class="btn" onclick="addPosition()">Добавить позицию</button>
+                        
+                        <div id="addedNotice">
+                            Позиция добавлена! Вы можете продолжить добавлять ковры для этого же региона или изменить параметры выше.
+                        </div>
+                        
+                        <div id="standard-result">
+                            <h3>Ваш заказ</h3>
+                            <table id="orderTable">
+                                <thead>
+                                    <tr>
+                                        <th>Размер</th>
+                                        <th>Кол-во</th>
+                                        <th>Замена</th>
+                                        <th>Цена за 1 замену</th>
+                                        <th>Стоимость за 4 недели</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orderBody">
+                                    <!-- Здесь будут добавляться позиции -->
+                                </tbody>
+                            </table>
+                            
+                            <div id="total">Общая стоимость: 0 ₽</div>
+                            
+                            <div id="discountNotice">
+                                <p>Это предварительный расчет, напишите нам в WhatsApp, мы сделаем более выгодное предложение.</p>
+                            </div>
+                            
+                            <div id="discountSection" style="display: none;">
+                                <h3>Запросить скидку</h3>
+                                <div class="form-group">
+                                    <label for="name">Ваше имя*</label>
+                                    <input type="text" id="name" placeholder="Иван Иванов" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="discountPhone">Телефон*</label>
+                                    <input type="tel" id="discountPhone" placeholder="+7 (999) 123-45-67" required>
+                                </div>
+                                
+                                <div class="consent-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="consent" required>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
+                                </div>
+                                
+                                <button type="button" class="btn" onclick="requestDiscount()">Отправить запрос</button>
+                            </div>
+                            
+                            <div style="margin-top: 30px; display: flex; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-whatsapp" onclick="sendToWhatsApp()">
+                                    <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Написать в WhatsApp
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="showContractForm()">Отправить реквизиты</button>
+                            </div>
+                            
+                            <div class="requisites-form" id="contractForm" style="display: none;">
+                                <h3>Реквизиты для договора</h3>
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label for="company">Название организации</label>
+                                            <input type="text" id="company" placeholder="ООО 'Ромашка'">
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label for="contact-person">Контактное лицо*</label>
+                                            <input type="text" id="contact-person" placeholder="Иванов Иван Иванович" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label for="contractPhone">Телефон*</label>
+                                            <input type="tel" id="contractPhone" placeholder="+7 (999) 123-45-67" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-col">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" id="email" placeholder="example@mail.ru">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="requisites">Реквизиты компании (ИНН, ОГРН, КПП, почтовый адрес):</label>
+                                    <textarea id="requisites" style="min-height: 100px; resize: vertical;"></textarea>
+                                </div>
+                                
+                                <div class="file-upload" style="margin: 15px 0;">
+                                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">Или прикрепите реквизиты файлом</label>
+                                    <input type="file" id="requisitesFile">
+                                </div>
+                                
+                                <div class="consent-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="contractConsent" required>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
+                                </div>
+                                
+                                <button type="button" class="btn" onclick="sendContractDetails()">Отправить реквизиты</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Тендерный калькулятор -->
+                <div id="tender-calculator" class="calculator-content">
+                    <form id="tender-form">
+                        <div class="form-group">
+                            <label for="tenderRegion">Регион</label>
+                            <select id="tenderRegion" onchange="updateTenderSizes()">
+                                <option value="">Выберите регион</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tenderSize">Размер ковра</label>
+                            <select id="tenderSize" disabled onchange="calculateTender()">
+                                <option value="">Сначала выберите регион</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn" onclick="addTenderPosition()">Добавить позицию</button>
+                        
+                        <div class="month-inputs" id="monthInputs">
+                            <!-- Месячные поля будут добавлены динамически -->
+                        </div>
+                        
+                        <div id="tender-result">
+                            <h3>Расчет по тендеру</h3>
+                            <table id="tenderTable">
+                                <thead>
+                                    <tr>
+                                        <th>Месяц</th>
+                                        <th>Размер</th>
+                                        <th>Кол-во ковров</th>
+                                        <th>Кол-во замен</th>
+                                        <th>Стоимость</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tenderBody">
+                                    <!-- Здесь будут добавляться позиции -->
+                                </tbody>
+                            </table>
+                            
+                            <div id="tenderTotal">Общая стоимость по контракту: 0 ₽</div>
+                            
+                            <div id="tenderDiscountNotice">
+                                <p>Это предварительный расчет, напишите нам в WhatsApp, мы сделаем более выгодное предложение.</p>
+                            </div>
+                            
+                            <div style="margin-top: 30px;">
+                                <div class="form-group">
+                                    <label for="tenderName">Ваше имя*</label>
+                                    <input type="text" id="tenderName" placeholder="Иван Иванов" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tenderPhone">Телефон*</label>
+                                    <input type="tel" id="tenderPhone" placeholder="+7 (999) 123-45-67" required>
+                                </div>
+                                
+                                <div class="consent-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="tenderConsent" required>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
+                                </div>
+                                
+                                <button type="button" class="btn btn-whatsapp" onclick="sendTenderToWhatsApp()">
+                                    <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Отправить в WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Данные по ценам для каждого региона и размера
+        const priceData = {
+            "Москва": {
+                "85*60": { "1 раз в две недели": 180, "1 раз в неделю": 180, "2 раза в неделю": 180, "3 раза в неделю": 180 },
+                "85*150": { "1 раз в две недели": 420, "1 раз в неделю": 420, "2 раза в неделю": 420, "3 раза в неделю": 420 },
+                "115*200": { "1 раз в две недели": 760, "1 раз в неделю": 760, "2 раза в неделю": 760, "3 раза в неделю": 760 },
+                "115*400": { "1 раз в две недели": 2210, "1 раз в неделю": 2210, "2 раза в неделю": 2210, "3 раза в неделю": 2210 },
+                "150*240": { "1 раз в две недели": 1180, "1 раз в неделю": 1180, "2 раза в неделю": 1180, "3 раза в неделю": 1180 },
+                "150*300": { "1 раз в две недели": 1520, "1 раз в неделю": 1520, "2 раза в неделю": 1520, "3 раза в неделю": 1520 }
+            },
+            "Московская область": {
+                "85*60": { "1 раз в две недели": 280, "1 раз в неделю": 280, "2 раза в неделю": 280, "3 раза в неделю": 280 },
+                "85*150": { "1 раз в две недели": 620, "1 раз в неделю": 620, "2 раза в неделю": 620, "3 раза в неделю": 620 },
+                "115*200": { "1 раз в две недели": 1110, "1 раз в неделю": 1110, "2 раза в неделю": 1110, "3 раза в неделю": 1110 },
+                "115*400": { "1 раз в две недели": 2210, "1 раз в неделю": 2210, "2 раза в неделю": 2210, "3 раза в неделю": 2210 },            
+                "150*240": { "1 раз в две недели": 1730, "1 раз в неделю": 1730, "2 раза в неделю": 1730, "3 раза в неделю": 1730 },
+                "150*300": { "1 раз в две недели": 2160, "1 раз в неделю": 2160, "2 раза в неделю": 2160, "3 раза в неделю": 2160 }
+            },
+            "Санкт-Петербург": {
+                "85*60": { "1 раз в две недели": 830, "1 раз в неделю": 490, "2 раза в неделю": 420, "3 раза в неделю": 340 },
+                "85*150": { "1 раз в две недели": 1000, "1 раз в неделю": 660, "2 раза в неделю": 590, "3 раза в неделю": 510 },
+                "115*200": { "1 раз в две недели": 1330, "1 раз в неделю": 890, "2 раза в неделю": 840, "3 раза в неделю": 680 },
+                "115*240": { "1 раз в две недели": 1500, "1 раз в неделю": 1000, "2 раза в неделю": 840, "3 раза в неделю": 760 },
+                "115*400": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350 },
+                "150*250": { "1 раз в две недели": 2000, "1 раз в неделю": 1330, "2 раза в неделю": 1180, "3 раза в неделю": 1010 },
+                "150*300": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350 }
+            },
+            "Ленинградская область": {
+                "85*60": { "1 раз в две недели": 830, "1 раз в неделю": 490, "2 раза в неделю": 420, "3 раза в неделю": 340 },
+                "85*150": { "1 раз в две недели": 1000, "1 раз в неделю": 660, "2 раза в неделю": 590, "3 раза в неделю": 510 },
+                "115*200": { "1 раз в две недели": 1330, "1 раз в неделю": 890, "2 раза в неделю": 840, "3 раза в неделю": 680 },
+                "115*240": { "1 раз в две недели": 1500, "1 раз в неделю": 1000, "2 раза в неделю": 840, "3 раза в неделю": 760 },
+                "115*400": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350 },
+                "150*250": { "1 раз в две недели": 2000, "1 раз в неделю": 1330, "2 раза в неделю": 1180, "3 раза в неделю": 1010 },
+                "150*300": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350 }
+            },
+            "Астрахань": {
+                "85*150": { "1 раз в две недели": 560, "1 раз в неделю": 560, "2 раза в неделю": 560, "3 раза в неделю": 560 },
+                "115*200": { "1 раз в две недели": 600, "1 раз в неделю": 600, "2 раза в неделю": 600, "3 раза в неделю": 600 },
+                "150*250": { "1 раз в две недели": 720, "1 раз в неделю": 720, "2 раза в неделю": 720, "3 раза в неделю": 720 }
+            },
+            "Астраханская область": {
+                "85*150": { "1 раз в две недели": 960, "1 раз в неделю": 960, "2 раза в неделю": 960, "3 раза в неделю": 960 },
+                "115*200": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1120, "3 раза в неделю": 1120 },
+                "150*250": { "1 раз в две недели": 1280, "1 раз в неделю": 1280, "2 раза в неделю": 1280, "3 раза в неделю": 1280 }
+            },
+            "Уфа": {
+                "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260 },
+                "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400 },
+                "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650 },
+                "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080 },
+                "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130 }
+            },
+            "Республика Башкортостан": {
+                "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300 },
+                "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470 },
+                "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760 },
+                "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260 },
+                "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310 }
+            },
+            "Новосибирск": {
+                "85*150": { "1 раз в две недели": 800, "1 раз в неделю": 560, "2 раза в неделю": 530, "3 раза в неделю": 500 },
+                "115*200": { "1 раз в две недели": 1080, "1 раз в неделю": 800, "2 раза в неделю": 740, "3 раза в неделю": 710 },
+                "115*400": { "1 раз в две недели": 2000, "1 раз в неделю": 1480, "2 раза в неделю": 1270, "3 раза в неделю": 1240 },
+                "150*250": { "1 раз в две недели": 1550, "1 раз в неделю": 1160, "2 раза в неделю": 1110, "3 раза в неделю": 1060 },
+                "150*300": { "1 раз в две недели": 1920, "1 раз в неделю": 1440, "2 раза в неделю": 1200, "3 раза в неделю": 1120 }
+            },
+            "Новосибирская область": {
+                "85*150": { "1 раз в две недели": 1200, "1 раз в неделю": 840, "2 раза в неделю": 800, "3 раза в неделю": 600 },
+                "115*200": { "1 раз в две недели": 1610, "1 раз в неделю": 1200, "2 раза в неделю": 1110, "3 раза в неделю": 1080 },
+                "115*400": { "1 раз в две недели": 3000, "1 раз в неделю": 2220, "2 раза в неделю": 1900, "3 раза в неделю": 1680 },
+                "150*250": { "1 раз в две недели": 2320, "1 раз в неделю": 1730, "2 раза в неделю": 1660, "3 раза в неделю": 1600 },
+                "150*300": { "1 раз в две недели": 2880, "1 раз в неделю": 2160, "2 раза в неделю": 1800, "3 раза в неделю": 1720 }
+            },
+            "Сургут": {
+                "85*150": { "1 раз в неделю": 720, "2 раза в неделю": 680, "3 раза в неделю": 640 },
+                "115*180": { "1 раз в неделю": 1160, "2 раза в неделю": 1100, "3 раза в неделю": 1040 },
+                "115*200": { "1 раз в неделю": 1290, "2 раза в неделю": 1220, "3 раза в неделю": 1160 },
+                "115*240": { "1 раз в неделю": 1540, "2 раза в неделю": 1470, "3 раза в неделю": 1390 },
+                "115*400": { "1 раз в неделю": 2570, "2 раза в неделю": 2430, "3 раза в неделю": 2310 },
+                "150*250": { "1 раз в неделю": 2100, "2 раза в неделю": 1990, "3 раза в неделю": 1890 },
+                "150*300": { "1 раз в неделю": 2680, "2 раза в неделю": 2550, "3 раза в неделю": 2410 }
+            },
+            "ХМАО": {
+                "85*150": { "1 раз в неделю": 720, "2 раза в неделю": 680, "3 раза в неделю": 640 },
+                "115*180": { "1 раз в неделю": 1160, "2 раза в неделю": 1100, "3 раза в неделю": 1040 },
+                "115*200": { "1 раз в неделю": 1290, "2 раза в неделю": 1220, "3 раза в неделю": 1160 },
+                "115*240": { "1 раз в неделю": 1540, "2 раза в неделю": 1470, "3 раза в неделю": 1390 },
+                "115*400": { "1 раз в неделю": 2570, "2 раза в неделю": 2430, "3 раза в неделю": 2310 },
+                "150*250": { "1 раз в неделю": 2100, "2 раза в неделю": 1990, "3 раза в неделю": 1890 },
+                "150*300": { "1 раз в неделю": 2680, "2 раза в неделю": 2550, "3 раза в неделю": 2410 }
+            },
+            "Тюмень": {
+                "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260 },
+                "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400 },
+                "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650 },
+                "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080 },
+                "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130 }
+            },
+            "Тюменская область": {
+                "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300 },
+                "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470 },
+                "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760 },
+                "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260 },
+                "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310 }
+            },
+            "Екатеринбург": {
+                "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260 },
+                "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400 },
+                "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650 },
+                "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080 },
+                "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130 }
+            },
+            "Свердловская область": {
+                "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300 },
+                "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470 },
+                "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760 },
+                "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260 },
+                "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310 }
+            },
+            "Челябинск": {
+                "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260 },
+                "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400 },
+                "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650 },
+                "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080 },
+                "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130 }
+            },
+            "Челябинская область": {
+                "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300 },
+                "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470 },
+                "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760 },
+                "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260 },
+                "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310 }
+            },
+            "Пермь": {
+                "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260 },
+                "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400 },
+                "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650 },
+                "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080 },
+                "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130 }
+            },
+            "Пермский край": {
+                "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300 },
+                "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470 },
+                "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760 },
+                "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260 },
+                "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310 }
+            },
+            "Казань": {
+                "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260 },
+                "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400 },
+                "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650 },
+                "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080 },
+                "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130 }
+            },
+            "Республика Татарстан": {
+                "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300 },
+                "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470 },
+                "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760 },
+                "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260 },
+                "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310 }
+            }
+        };
+
+        // Основной калькулятор
+        let orderItems = [];
+        let currentItem = null;
+
+        // Тендерный калькулятор
+        let tenderItems = [];
+        const months = [
+            'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+        ];
+        let currentTenderItem = null;
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            initMonthInputs();
+            initRegionSelects();
+            
+            // Табы калькуляторов
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const calculatorContents = document.querySelectorAll('.calculator-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Удаляем активный класс у всех кнопок и контейнеров
+                    tabBtns.forEach(b => {
+                        b.classList.remove('active');
+                        b.style.backgroundColor = '#ddd';
+                    });
+                    
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active');
+                    this.style.backgroundColor = '#3498db';
+                    this.style.color = 'white';
+                    
+                    // Скрываем все калькуляторы и показываем выбранный
+                    calculatorContents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-calculator`).style.display = 'block';
+                });
+            });
+        });
+
+        // Инициализация выпадающих списков регионов
+        function initRegionSelects() {
+            const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
+            
+            // Порядок регионов: административный центр, затем субъект
+            const regionsOrder = [
+                "Москва", "Московская область",
+                "Санкт-Петербург", "Ленинградская область",
+                "Астрахань", "Астраханская область",
+                "Уфа", "Республика Башкортостан",
+                "Новосибирск", "Новосибирская область",
+                "Сургут", "ХМАО",
+                "Тюмень", "Тюменская область",
+                "Екатеринбург", "Свердловская область",
+                "Челябинск", "Челябинская область",
+                "Пермь", "Пермский край",
+                "Казань", "Республика Татарстан"
+            ];
+            
+            regionSelects.forEach(select => {
+                // Очищаем список
+                select.innerHTML = '<option value="">Выберите регион</option>';
+                
+                // Добавляем регионы в указанном порядке
+                regionsOrder.forEach(region => {
+                    if (priceData[region]) {
+                        const option = document.createElement('option');
+                        option.value = region;
+                        option.textContent = region;
+                        select.appendChild(option);
+                    }
+                });
+            });
+        }
+
+        // Инициализация месячных полей для тендерного калькулятора
+        function initMonthInputs() {
+            const container = document.getElementById('monthInputs');
+            container.innerHTML = '';
+            
+            months.forEach(month => {
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'month-input';
+                monthDiv.innerHTML = `
+                    <label>${month}</label>
+                    <input type="number" min="0" placeholder="Ковры" class="month-carpets" data-month="${month}" onchange="calculateTender()">
+                    <input type="number" min="0" placeholder="Замены" class="month-replacements" data-month="${month}" onchange="calculateTender()">
+                    <div class="month-cost" data-month="${month}">0 ₽</div>
+                `;
+                container.appendChild(monthDiv);
+            });
+        }
+
+        // Основной калькулятор
+        function updateSizes() {
+            const region = document.getElementById('region').value;
+            const sizeSelect = document.getElementById('size');
+            
+            sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
+            sizeSelect.disabled = !region;
+            
+            if (region && priceData[region]) {
+                Object.keys(priceData[region]).forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size;
+                    option.textContent = size;
+                    sizeSelect.appendChild(option);
+                });
+            }
+            
+            // Сброс текущего элемента при изменении региона
+            currentItem = null;
+            calculate();
+        }
+
+        function updateFrequencies() {
+            const region = document.getElementById('region').value;
+            const size = document.getElementById('size').value;
+            const frequencySelect = document.getElementById('frequency');
+            
+            frequencySelect.innerHTML = '<option value="">Выберите периодичность</option>';
+            frequencySelect.disabled = !size;
+            
+            if (region && size && priceData[region] && priceData[region][size]) {
+                Object.keys(priceData[region][size]).forEach(freq => {
+                    const option = document.createElement('option');
+                    option.value = freq;
+                    option.textContent = freq;
+                    frequencySelect.appendChild(option);
+                });
+            }
+            
+            calculate();
+        }
+
+        function calculate() {
+            const region = document.getElementById('region').value;
+            const size = document.getElementById('size').value;
+            const frequency = document.getElementById('frequency').value;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            
+            if (!region || !size || !frequency || quantity <= 0) {
+                // Если не все данные заполнены, очищаем текущий элемент
+                currentItem = null;
+                updateOrderTable();
+                return;
+            }
+            
+            const pricePerItem = priceData[region][size][frequency];
+            
+            let replacementsPerMonth;
+            if (frequency.includes('1 раз в неделю')) replacementsPerMonth = 4;
+            else if (frequency.includes('2 раза в неделю')) replacementsPerMonth = 8;
+            else if (frequency.includes('3 раза в неделю')) replacementsPerMonth = 12;
+            else if (frequency.includes('1 раз в две недели')) replacementsPerMonth = 2;
+            
+            const costForMonth = pricePerItem * replacementsPerMonth * quantity;
+            
+            currentItem = {
+                region,
+                size,
+                frequency,
+                quantity,
+                pricePerItem,
+                costForMonth
+            };
+            
+            updateOrderTable();
+        }
+
+        function addPosition() {
+            if (!currentItem) return;
+            
+            orderItems.push({...currentItem});
+            
+            // Показываем уведомление о добавлении позиции
+            document.getElementById('addedNotice').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('addedNotice').style.display = 'none';
+            }, 5000);
+            
+            // Сброс формы для нового ввода (кроме региона)
+            document.getElementById('size').value = '';
+            document.getElementById('frequency').innerHTML = '<option value="">Выберите периодичность</option>';
+            document.getElementById('frequency').disabled = true;
+            document.getElementById('quantity').value = '1';
+            
+            currentItem = null;
+            calculate();
+        }
+
+        function updateOrderTable() {
+            const tbody = document.getElementById('orderBody');
+            tbody.innerHTML = '';
+            
+            let total = 0;
+            
+            // Добавляем текущий элемент, если он есть
+            if (currentItem) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${currentItem.size}</td>
+                    <td>${currentItem.quantity}</td>
+                    <td>${currentItem.frequency}</td>
+                    <td>${currentItem.pricePerItem} ₽</td>
+                    <td>${currentItem.costForMonth} ₽</td>
+                `;
+                tbody.appendChild(row);
+                total += currentItem.costForMonth;
+            }
+            
+            // Добавляем сохраненные элементы
+            orderItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.size}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.frequency}</td>
+                    <td>${item.pricePerItem} ₽</td>
+                    <td>${item.costForMonth} ₽</td>
+                `;
+                tbody.appendChild(row);
+                total += item.costForMonth;
+            });
+            
+            document.getElementById('total').textContent = `Общая стоимость: ${total.toLocaleString('ru-RU')} ₽`;
+            
+            if (total > 20000) {
+                document.getElementById('discountNotice').style.display = 'block';
+                document.getElementById('discountSection').style.display = 'block';
+            } else {
+                document.getElementById('discountNotice').style.display = 'none';
+                document.getElementById('discountSection').style.display = 'none';
+            }
+            
+            document.getElementById('standard-result').style.display = 'block';
+        }
+
+        // Тендерный калькулятор
+        function updateTenderSizes() {
+            const region = document.getElementById('tenderRegion').value;
+            const sizeSelect = document.getElementById('tenderSize');
+            
+            sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
+            sizeSelect.disabled = !region;
+            
+            if (region && priceData[region]) {
+                Object.keys(priceData[region]).forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size;
+                    option.textContent = size;
+                    sizeSelect.appendChild(option);
+                });
+            }
+            
+            currentTenderItem = null;
+            calculateTender();
+        }
+
+        function calculateTender() {
+            const region = document.getElementById('tenderRegion').value;
+            const size = document.getElementById('tenderSize').value;
+            
+            if (!region || !size) {
+                currentTenderItem = null;
+                updateTenderTable();
+                return;
+            }
+            
+            const prices = priceData[region][size];
+            const frequencies = Object.keys(prices);
+            
+            // Для тендерного калькулятора используем минимальную цену (1 раз в две недели)
+            const pricePerItem = prices[frequencies[0]];
+            
+            currentTenderItem = {
+                region,
+                size,
+                pricePerItem
+            };
+            
+            updateTenderTable();
+        }
+
+        function addTenderPosition() {
+            if (!currentTenderItem) return;
+            
+            tenderItems.push({...currentTenderItem});
+            
+            // Сброс формы для нового ввода
+            document.getElementById('tenderSize').value = '';
+            document.getElementById('tenderSize').disabled = true;
+            
+            currentTenderItem = null;
+            calculateTender();
+        }
+
+        function updateTenderTable() {
+            const tbody = document.getElementById('tenderBody');
+            tbody.innerHTML = '';
+            
+            let total = 0;
+            
+            // Добавляем текущий элемент, если он есть
+            if (currentTenderItem) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${currentTenderItem.size}</td>
+                    <td>1</td>
+                    <td>1 раз в две недели</td>
+                    <td>${currentTenderItem.pricePerItem} ₽</td>
+                `;
+                tbody.appendChild(row);
+                total += currentTenderItem.pricePerItem * 2; // 2 замены в месяц
+            }
+            
+            // Добавляем сохраненные элементы
+            tenderItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.size}</td>
+                    <td>1</td>
+                    <td>1 раз в две недели</td>
+                    <td>${item.pricePerItem} ₽</td>
+                `;
+                tbody.appendChild(row);
+                total += item.pricePerItem * 2; // 2 замены в месяц
+            });
+            
+            // Рассчитываем стоимость по месяцам
+            months.forEach(month => {
+                const carpetsInput = document.querySelector(`.month-carpets[data-month="${month}"]`);
+                const replacementsInput = document.querySelector(`.month-replacements[data-month="${month}"]`);
+                const costElement = document.querySelector(`.month-cost[data-month="${month}"]`);
+                
+                const carpets = parseInt(carpetsInput.value) || 0;
+                const replacements = parseInt(replacementsInput.value) || 0;
+                
+                let monthCost = 0;
+                if (currentTenderItem) {
+                    monthCost += carpets * replacements * currentTenderItem.pricePerItem;
+                }
+                
+                tenderItems.forEach(item => {
+                    monthCost += carpets * replacements * item.pricePerItem;
+                });
+                
+                costElement.textContent = `${monthCost.toLocaleString('ru-RU')} ₽`;
+                total += monthCost;
+                
+                if (carpets > 0 || replacements > 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${month}</td>
+                        <td>${carpets}</td>
+                        <td>${replacements}</td>
+                        <td>${monthCost.toLocaleString('ru-RU')} ₽</td>
+                    `;
+                    tbody.appendChild(row);
+                }
+            });
+            
+            document.getElementById('tenderTotal').textContent = `Общая стоимость по контракту: ${total.toLocaleString('ru-RU')} ₽`;
+            
+            if (total > 20000) {
+                document.getElementById('tenderDiscountNotice').style.display = 'block';
+            } else {
+                document.getElementById('tenderDiscountNotice').style.display = 'none';
+            }
+            
+            document.getElementById('tender-result').style.display = 'block';
+        }
+
+        function requestDiscount() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('discountPhone').value;
+            const consent = document.getElementById('consent').checked;
+            
+            if (!name || !phone || !consent) {
+                alert('Пожалуйста, заполните все обязательные поля и дайте согласие на обработку данных');
+                return;
+            }
+            
+            let message = `Запрос на скидку:\nИмя: ${name}\nТелефон: ${phone}\n\nТекущий заказ:\n`;
+            
+            if (currentItem) {
+                message += `- ${currentItem.size}, ${currentItem.quantity} шт., ${currentItem.frequency}: ${currentItem.costForMonth} ₽/мес\n`;
+            }
+            
+            orderItems.forEach(item => {
+                message += `- ${item.size}, ${item.quantity} шт., ${item.frequency}: ${item.costForMonth} ₽/мес\n`;
+            });
+            
+            const totalElement = document.getElementById('total');
+            message += `\nОбщая стоимость: ${totalElement.textContent}`;
+            
+            sendWhatsAppMessage(message);
+        }
+
+        function sendTenderToWhatsApp() {
+            const name = document.getElementById('tenderName').value;
+            const phone = document.getElementById('tenderPhone').value;
+            const consent = document.getElementById('tenderConsent').checked;
+            
+            if (!name || !phone || !consent) {
+                alert('Пожалуйста, заполните все обязательные поля и дайте согласие на обработку данных');
+                return;
+            }
+            
+            let message = `Запрос по тендеру:\nИмя: ${name}\nТелефон: ${phone}\n\nДетали тендера:\n`;
+            
+            if (currentTenderItem) {
+                message += `- ${currentTenderItem.size}: ${currentTenderItem.pricePerItem} ₽ за замену\n`;
+            }
+            
+            tenderItems.forEach(item => {
+                message += `- ${item.size}: ${item.pricePerItem} ₽ за замену\n`;
+            });
+            
+            message += '\nПо месяцам:\n';
+            
+            months.forEach(month => {
+                const carpets = document.querySelector(`.month-carpets[data-month="${month}"]`).value || 0;
+                const replacements = document.querySelector(`.month-replacements[data-month="${month}"]`).value || 0;
+                
+                if (carpets > 0 || replacements > 0) {
+                    message += `- ${month}: ${carpets} ковров, ${replacements} замен: ${document.querySelector(`.month-cost[data-month="${month}"]`).textContent}\n`;
+                }
+            });
+            
+            const totalElement = document.getElementById('tenderTotal');
+            message += `\n${totalElement.textContent}`;
+            
+            sendWhatsAppMessage(message);
+        }
+
+        function sendToWhatsApp() {
+            let message = 'Запрос по калькулятору аренды ковров:\n\n';
+            
+            if (currentItem || orderItems.length > 0) {
+                message += 'Текущий заказ:\n';
+                
+                if (currentItem) {
+                    message += `- ${currentItem.size}, ${currentItem.quantity} шт., ${currentItem.frequency}: ${currentItem.costForMonth} ₽/мес\n`;
+                }
+                
+                orderItems.forEach(item => {
+                    message += `- ${item.size}, ${item.quantity} шт., ${item.frequency}: ${item.costForMonth} ₽/мес\n`;
+                });
+                
+                const totalElement = document.getElementById('total');
+                message += `\nОбщая стоимость: ${totalElement.textContent}`;
+            } else {
+                message += 'Пользователь начал заполнять калькулятор, но пока не добавил позиции.';
+            }
+            
+            const name = document.getElementById('name')?.value;
+            const phone = document.getElementById('discountPhone')?.value;
+            
+            if (name || phone) {
+                message += '\n\nКонтактные данные:\n';
+                if (name) message += `Имя: ${name}\n`;
+                if (phone) message += `Телефон: ${phone}\n`;
+            }
+            
+            sendWhatsAppMessage(message);
+        }
+
+        function sendContractDetails() {
+            const contactPerson = document.getElementById('contact-person').value;
+            const phone = document.getElementById('contractPhone').value;
+            const consent = document.getElementById('contractConsent').checked;
+            
+            if (!contactPerson || !phone || !consent) {
+                alert('Пожалуйста, заполните обязательные поля (имя и телефон) и дайте согласие на обработку данных');
+                return;
+            }
+            
+            let message = `Реквизиты для договора:\n\n`;
+            message += `Контактное лицо: ${contactPerson}\n`;
+            message += `Телефон: ${phone}\n`;
+            
+            const company = document.getElementById('company').value;
+            const email = document.getElementById('email').value;
+            const requisites = document.getElementById('requisites').value;
+            const fileInput = document.getElementById('requisitesFile');
+            
+            if (company) message += `Название организации: ${company}\n`;
+            if (email) message += `Email: ${email}\n`;
+            if (requisites) message += `Реквизиты компании:\n${requisites}\n`;
+            
+            if (fileInput.files.length > 0) {
+                message += `\nПрикреплен файл с реквизитами: ${fileInput.files[0].name}`;
+            }
+            
+            sendWhatsAppMessage(message);
+        }
+
+        function sendWhatsAppMessage(message) {
+            const phone = '79770005127';
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+        }
+
+        function showContractForm() {
+            // Показываем форму без проверки согласия (согласие будет внутри формы)
+            document.getElementById('contractForm').style.display = 'block';
+        }
+
+        // Модальное окно политики конфиденциальности
+        function openPrivacyModal() {
+            const modal = document.createElement('div');
+            modal.id = 'privacyModal';
+            modal.style.display = 'block';
+            modal.style.position = 'fixed';
+            modal.style.zIndex = '1000';
+            modal.style.left = '0';
+            modal.style.top = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.overflow = 'auto';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.4)';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-modal" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    <h2>Политика конфиденциальности</h2>
+                    <div style="margin-bottom: 20px;">
+                        <h3>СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ</h3>
+                        <p>Я, субъект персональных данных, даю своё согласие ООО "МИРУМ" (ИНН 3019008619) на обработку моих персональных данных, включая:</p>
+                        <ul style="margin-left: 20px;">
+                            <li>ФИО, контактный телефон, email, реквизиты организации;</li>
+                            <li>данные, указанные при оформлении заказа или заполнении форм на сайте.</li>
+                        </ul>
+                        <h3>Способы обработки:</h3>
+                        <p>Сбор, запись, хранение, уточнение, передача (в т.ч. третьим лицам — партнёрам, курьерским службам, платежным системам), обезличивание, блокирование, удаление.</p>
+                        <h3>Цели обработки:</h3>
+                        <ul style="margin-left: 20px;">
+                            <li>Заключение и исполнение договора аренды;</li>
+                            <li>Информирование о новых услугах и акциях;</li>
+                            <li>Аналитика качества сервиса;</li>                    
+                        </ul>
+                        <p>Срок действия согласия: <span style="background-color: rgba(231, 76, 60, 0.1); padding: 2px 5px; border-radius: 3px; font-weight: 500;">5 лет</span>. Отзыв возможен путём письменного уведомления на <a href="mailto:matservice@yandex.ru" style="color: #3498db; text-decoration: none;">matservice@yandex.ru</a>. В случае отзыва данные будут удалены в течение 30 дней, если иное не предусмотрено договором.</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button onclick="this.parentElement.parentElement.remove()" style="padding: 12px 25px; border-radius: 50px; font-size: 1rem; font-weight: 500; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; background-color: #2c3e50; color: white; border: 2px solid #2c3e50;">Закрыть</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Закрытие модального окна при клике вне его
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+    </script>
+
         <!-- КОНЕЦ БЛОКА КАЛЬКУЛЯТОР СТОИМОСТИ -->
         
         <!-- НАЧАЛО БЛОКА О компании -->
@@ -704,7 +1674,7 @@
                                 Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров...
                             </div>
                             <div class="testimonial-full">
-                                <p>Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров. За все время работы у нас не было к ним нареканий. Сотрудники работают быстро, качественно и профессионально. Вовремя получаем консультации по интересующим нас вопросам. На запросы реагируют быстро. Услуги полностью удовлетворяют нашим потребностям - сотрудничество будем продолжать и развивать. Спасибо за работу!</p>
+                                <p>Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров. За все время работы у нас не было к ним нареканий. Сотрудники работают быстро, качественно и профессионально. Вовремя получаем консультации по интересующим нас вопросам. Услуги полностью удовлетворяют нашим потребностям - сотрудничество будем продолжать и развивать. Спасибо за работу!</p>
                             </div>
                             <div class="testimonial-image">
                                 <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-hertz.webp" alt="Рекомендательное письмо АО Ричмонт Транспортные Услуги" width="280" height="150">
