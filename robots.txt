@@ -29,6 +29,8 @@ Clean-param: utm_source&utm_medium&utm_campaign /
 Clean-param: from&referrer /
 Host: arenda-kovrov-mirum.ru
 
+# Разрешение для изображений
+Allow: /img/
 Allow: /img/arenda_kovrov/
 Allow: /img/review/
 
@@ -37,14 +39,13 @@ User-agent: Googlebot
 Allow: /
 User-agent: Googlebot-Image
 Allow: /img/
+Allow: /img/arenda_kovrov/
+Allow: /img/review/
 
 # Ограничение для агрессивных ботов
 User-agent: MJ12bot
 Crawl-delay: 10
 User-agent: AhrefsBot
 Crawl-delay: 10
-
-Redirect 301 /photo_i_rekovendacii https://arenda-kovrov-mirum.ru/#reviews
-Redirect 301 /sitemap https://arenda-kovrov-mirum.ru/sitemap.xml
 
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
