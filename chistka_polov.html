@@ -13,162 +13,51 @@
     <link rel="apple-touch-icon" href="https://arenda-kovrov-mirum.ru/img/apple-touch-icon.png">
     
     <!-- Стили -->
+    <link rel="stylesheet" href="https://arenda-kovrov-mirum.ru/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Микроразметка Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "МИРУМ - Восстановление полов и линолеума",
+      "image": "https://arenda-kovrov-mirum.ru/img/logo.png",
+      "description": "Профессиональное восстановление полов и линолеума. Более 30 миллионов квадратных метров успешно выполненных работ с 2009 года.",
+      "telephone": "+79770005127",
+      "email": "matservice@yandex.ru",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "Россия",
+        "addressRegion": "Москва",
+        "addressLocality": "Москва",
+        "streetAddress": "Сущёвская ул., 27с2"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "priceRange": "$$",
+      "sameAs": [
+        "https://arenda-kovrov-mirum.ru/"
+      ]
+    }
+    </script>
+    
+    <!-- Дополнительные стили для этой страницы -->
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Стили для хедера */
-        .main-menu {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .menu-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-        
-        .logo img {
-            margin-right: 10px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            padding: 10px 15px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links li a:hover {
-            color: var(--primary-color);
-        }
-        
-        /* Стили для кнопок */
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            margin: 5px;
-        }
-        
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-whatsapp {
-            background-color: #25D366;
-        }
-        
-        .btn-whatsapp:hover {
-            background-color: #1da851;
-        }
-        
-        /* Стили для hero-баннера */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/objects/matservise_1.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 180px 0 100px;
-            text-align: center;
-            margin-top: 80px;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Стили для секций */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2rem;
-            color: var(--secondary-color);
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background-color: var(--primary-color);
-            margin: 15px auto 0;
-        }
-        
-        /* Стили для карточек услуг */
+        /* Дополнения к основным стилям */
         .service-card {
             background-color: white;
             border-radius: 8px;
@@ -178,30 +67,17 @@
         }
         
         .service-card h3 {
-            color: var(--primary-color);
+            color: var(--secondary-color);
             margin-bottom: 20px;
             font-size: 1.5rem;
         }
         
         .service-card h4 {
-            color: var(--secondary-color);
+            color: var(--primary-color);
             margin: 20px 0 15px;
             font-size: 1.2rem;
         }
         
-        .service-card p, .service-card ul, .service-card ol {
-            margin-bottom: 15px;
-        }
-        
-        .service-card ul, .service-card ol {
-            padding-left: 20px;
-        }
-        
-        .service-card li {
-            margin-bottom: 8px;
-        }
-        
-        /* Стили для галереи */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -238,81 +114,16 @@
             font-weight: 500;
         }
         
-        /* Стили для футера */
-        .footer {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-column a:hover {
-            color: white;
-        }
-        
-        .footer-icon {
-            margin-right: 8px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .copyright p {
-            margin-bottom: 10px;
-        }
-        
-        .copyright a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        /* Адаптивные стили */
+        /* Адаптивность для галереи */
         @media (max-width: 768px) {
-            .hero {
-                padding: 120px 0 80px;
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .nav-links {
-                display: none;
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -339,24 +150,43 @@
         </div>
     </nav>
 
+    <!-- Хлебные крошки -->
+    <div class="container breadcrumbs">
+        <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
+        <span>/</span>
+        <a href="https://arenda-kovrov-mirum.ru/services.html">Услуги</a>
+        <span>/</span>
+        <span>Восстановление полов и линолеума</span>
+    </div>
+
+    <!-- Быстрые ссылки -->
+    <div class="container quick-links">
+        <a href="#services" class="quick-link">Услуги по уходу</a>
+        <a href="#gallery" class="quick-link">Фото до/после</a>
+        <a href="#contacts" class="quick-link">Контакты</a>
+        <a href="tel:+79770005127" class="quick-link">Позвонить нам</a>
+    </div>
+
     <!-- HERO БАННЕР -->
     <section class="hero">
         <div class="container">
-            <h1>Восстановление полов и линолеума</h1>
-            <p>Профессиональный уход за напольными покрытиями с 2009 года. Более 30 миллионов квадратных метров успешно выполненных работ</p>
-            <a href="tel:+79770005127" class="btn">Заказать консультацию</a>
-            <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+            <h1 itemprop="name">Восстановление полов и линолеума</h1>
+            <p itemprop="description">Профессиональный уход за напольными покрытиями с 2009 года. Более 30 миллионов квадратных метров успешно выполненных работ</p>
+            <div class="action-buttons">
+                <a href="tel:+79770005127" class="btn" itemprop="telephone">Заказать консультацию</a>
+                <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+            </div>
         </div>
     </section>
     <!-- КОНЕЦ HERO БАННЕР -->
 
     <!-- РАЗДЕЛ УСЛУГИ ПО УХОДУ ЗА ПОЛАМИ -->
-    <section class="section" style="background-color: white;">
+    <section id="services" class="section bg-light" itemscope itemtype="https://schema.org/Service">
         <div class="container">
             <h2 class="section-title">Профессиональная обработка напольных покрытий</h2>
             
             <div class="service-card">
-                <p>Наши услуги по уходу за напольными покрытиями включают комплексный подход, который обеспечивает глубокую очистку, защиту и продление срока службы вашего пола. Мы работаем с различными типами покрытий, включая ПВХ, линолеум и другие эластичные материалы.</p>
+                <p itemprop="description">Наши услуги по уходу за напольными покрытиями включают комплексный подход, который обеспечивает глубокую очистку, защиту и продление срока службы вашего пола. Мы работаем с различными типами покрытий, включая ПВХ, линолеум и другие эластичные материалы.</p>
                 
                 <h3>Этапы обработки:</h3>
                 <ol>
@@ -426,56 +256,56 @@
     <!-- КОНЕЦ РАЗДЕЛА УСЛУГИ ПО УХОДУ ЗА ПОЛАМИ -->
 
     <!-- ГАЛЕРЕЯ ДО/ПОСЛЕ -->
-    <section class="section" style="background-color: #f8f9fa;">
+    <section id="gallery" class="section">
         <div class="container">
             <h2 class="section-title">Наши работы: до и после</h2>
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly-collage_before1.webp" alt="Напольное покрытие до обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before1.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
                     <div class="gallery-label">До обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_collage_after1.webp" alt="Напольное покрытие после обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after1.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
                     <div class="gallery-label">После обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly-collage_before2.webp" alt="Напольное покрытие до обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before2.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
                     <div class="gallery-label">До обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_collage_after2.webp" alt="Напольное покрытие после обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after2.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
                     <div class="gallery-label">После обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly-collage_before3.webp" alt="Напольное покрытие до обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before3.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
                     <div class="gallery-label">До обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_collage_after3.webp" alt="Напольное покрытие после обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after3.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
                     <div class="gallery-label">После обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poy_before1.webp" alt="Напольное покрытие до обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before1.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
                     <div class="gallery-label">До обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_after1.webp" alt="Напольное покрытие после обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
                     <div class="gallery-label">После обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poy_before2.webp" alt="Напольное покрытие до обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before2.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
                     <div class="gallery-label">До обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_after2.webp" alt="Напольное покрытие после обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after2.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
                     <div class="gallery-label">После обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poy_before3.webp" alt="Напольное покрытие до обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before3.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
                     <div class="gallery-label">До обработки</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_after3.webp" alt="Напольное покрытие после обработки">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after3.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
                     <div class="gallery-label">После обработки</div>
                 </div>
             </div>
@@ -484,28 +314,28 @@
     <!-- КОНЕЦ ГАЛЕРЕИ ДО/ПОСЛЕ -->
 
     <!-- КОНТАКТНАЯ СЕКЦИЯ -->
-    <section class="section" style="background-color: #3498db;">
+    <section id="contacts" class="section" style="background-color: var(--secondary-color);">
         <div class="container">
             <h2 class="section-title" style="color: white;">Контакты</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <h3 style="color: #e74c3c; margin-bottom: 20px;">Контактная информация</h3>
+                    <h3 style="color: var(--accent-color); margin-bottom: 20px;">Контактная информация</h3>
                     <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
-                        <i class="fas fa-phone" style="margin-right: 10px; color: #2c3e50; margin-top: 3px;"></i>
+                        <i class="fas fa-phone" style="margin-right: 10px; color: var(--primary-color); margin-top: 3px;"></i>
                         <div>
                             <p><strong>Телефон:</strong></p>
                             <a href="tel:+79770005127">+7 (977) 000-51-27</a>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
-                        <i class="fas fa-envelope" style="margin-right: 10px; color: #2c3e50; margin-top: 3px;"></i>
+                        <i class="fas fa-envelope" style="margin-right: 10px; color: var(--primary-color); margin-top: 3px;"></i>
                         <div>
                             <p><strong>Email:</strong></p>
                             <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
-                        <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #2c3e50; margin-top: 3px;"></i>
+                        <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--primary-color); margin-top: 3px;"></i>
                         <div>
                             <p><strong>Регионы работы:</strong></p>
                             <p>Вся Россия</p>
@@ -513,7 +343,7 @@
                     </div>
                 </div>
                 <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    <h3 style="color: #e74c3c; margin-bottom: 20px;">Оставьте заявку</h3>
+                    <h3 style="color: var(--accent-color); margin-bottom: 20px;">Оставьте заявку</h3>
                     <form>
                         <div style="margin-bottom: 20px;">
                             <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ваше имя*</label>
@@ -561,6 +391,8 @@
                 </div>
                 <div class="footer-column">
                     <h3>Регионы работы</h3>
+                    <div class="footer-column">
+                    <h3>Регионы работы</h3>
                     <div class="regions-grid">
                         <!-- Центральный ФО -->
                         <div class="region-group">
@@ -571,6 +403,16 @@
                                 <li>Тверская обл.</li>
                                 <li>Тульская обл.</li>
                                 <li>Ярославская обл.</li>
+                                <li>Брянская обл.</li>
+                                <li>Орловская обл.</li>
+                                <li>Владимирская обл.</li>
+                                <li>Ивановская обл.</li>
+                                <li>Калужская обл.</li>
+                                <li>Смоленская обл.</li>
+                                <li>Белгородская обл.</li>
+                                <li>Курская обл.</li>
+                                <li>Воронежская обл.</li>
+                                <li>Тамбовская обл.</li>
                             </ul>
                         </div>
                         
@@ -582,6 +424,68 @@
                                 <li>Ленинградская обл.</li>
                                 <li>Архангельская обл.</li>
                                 <li>Мурманская обл.</li>
+                                <li>Псковская обл.</li>
+                                <li>Республика Карелия</li>
+                                <li>Республика Коми</li>
+                                <li>Вологодская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Южный ФО -->
+                        <div class="region-group">
+                            <h4>Южный округ</h4>
+                            <ul>
+                                <li>Астрахань</li>
+                                <li>Астраханская обл.</li>
+                                <li>Краснодар</li>
+                                <li>Краснодарский край</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Приволжский ФО -->
+                        <div class="region-group">
+                            <h4>Приволжский округ</h4>
+                            <ul>
+                                <li>Уфа</li>
+                                <li>Республика Башкортостан</li>
+                                <li>Казань</li>
+                                <li>Республика Татарстан</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Уральский ФО -->
+                        <div class="region-group">
+                            <h4>Уральский округ</h4>
+                            <ul>
+                                <li>Екатеринбург</li>
+                                <li>Свердловская обл.</li>
+                                <li>Тюмень</li>
+                                <li>Тюменская обл.</li>
+                                <li>Челябинск</li>
+                                <li>Челябинская обл.</li>
+                                <li>Сургут</li>
+                                <li>Ханты-Мансийский АО</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Сибирский ФО -->
+                        <div class="region-group">
+                            <h4>Сибирский округ</h4>
+                            <ul>
+                                <li>Новосибирск</li>
+                                <li>Новосибирская обл.</li>
+                                <li>Иркутск</li>
+                                <li>Иркутская обл.</li>
+                                <li>Кемерово</li>
+                                <li>Кемеровская обл.</li>
+                                <li>Томск</li>
+                                <li>Томская обл.</li>
+                                <li>Омск</li>
+                                <li>Омская обл.</li>
+                                <li>Красноярск</li>
+                                <li>Красноярский край</li>
+                                <li>Республика Алтай</li>
+                                <li>Республика Бурятия</li>
                             </ul>
                         </div>
                     </div>
