@@ -10,7 +10,7 @@
         <loc>https://arenda-kovrov-mirum.ru/</loc>
         <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/"/>
         <xhtml:link rel="alternate" hreflang="ru-ru" href="https://мирум.москва/"/>
-        <lastmod>2025-06-30</lastmod>
+        <lastmod>2025-07-03</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -53,7 +53,7 @@
     <!-- Якорные ссылки для SEO -->
     <url>
         <loc>https://arenda-kovrov-mirum.ru/#about</loc>
-        <lastmod>2025-06-30</lastmod>
+        <lastmod>2025-07-03</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
