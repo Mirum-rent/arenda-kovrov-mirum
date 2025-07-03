@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Восстановление полов и линолеума | МИРУМ</title>
+    <meta name="description" content="Профессиональное восстановление полов и линолеума. Более 30 миллионов квадратных метров успешно выполненных работ с 2009 года.">
+    
+    <!-- Favicon и PWA настройки -->
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon-16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="https://arenda-kovrov-mirum.ru/img/apple-touch-icon.png">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Стили для хедера */
+        .main-menu {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .menu-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .logo img {
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Стили для кнопок */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #1da851;
+        }
+        
+        /* Стили для hero-баннера */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/objects/matservise_1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Стили для секций */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+        
+        /* Стили для карточек услуг */
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .service-card h4 {
+            color: var(--secondary-color);
+            margin: 20px 0 15px;
+            font-size: 1.2rem;
+        }
+        
+        .service-card p, .service-card ul, .service-card ol {
+            margin-bottom: 15px;
+        }
+        
+        .service-card ul, .service-card ol {
+            padding-left: 20px;
+        }
+        
+        .service-card li {
+            margin-bottom: 8px;
+        }
+        
+        /* Стили для галереи */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        /* Стили для футера */
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-icon {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .copyright p {
+            margin-bottom: 10px;
+        }
+        
+        .copyright a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Адаптивные стили */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер с главного сайта -->
+    <nav class="main-menu">
+        <div class="container menu-container">
+            <a href="https://arenda-kovrov-mirum.ru/" class="logo">
+                <img src="https://arenda-kovrov-mirum.ru/img/logo.png" alt="мирум.рент" width="120" height="36">
+                <span class="logo-text">мирум.рент</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#calculator">Наши цены</a></li>
+                <li><a href="#how-to-start">Как начать</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/pogoda.html">Погода</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/interesting.html">Это интересно</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/FAQ.html">FAQ</a></li>
+                <li><a href="https://arenda-kovrov-mirum.ru/window-cleaning.html">Мытье витрин</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO БАННЕР -->
+    <section class="hero">
+        <div class="container">
+            <h1>Восстановление полов и линолеума</h1>
+            <p>Профессиональный уход за напольными покрытиями с 2009 года. Более 30 миллионов квадратных метров успешно выполненных работ</p>
+            <a href="tel:+79770005127" class="btn">Заказать консультацию</a>
+            <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+        </div>
+    </section>
+    <!-- КОНЕЦ HERO БАННЕР -->
+
+    <!-- РАЗДЕЛ УСЛУГИ ПО УХОДУ ЗА ПОЛАМИ -->
+    <section class="section" style="background-color: white;">
+        <div class="container">
+            <h2 class="section-title">Профессиональная обработка напольных покрытий</h2>
+            
+            <div class="service-card">
+                <p>Наши услуги по уходу за напольными покрытиями включают комплексный подход, который обеспечивает глубокую очистку, защиту и продление срока службы вашего пола. Мы работаем с различными типами покрытий, включая ПВХ, линолеум и другие эластичные материалы.</p>
+                
+                <h3>Этапы обработки:</h3>
+                <ol>
+                    <li><strong>Подготовка поверхности</strong>
+                        <ul>
+                            <li>Зонирование площади для поэтапной обработки</li>
+                            <li>Удаление мебели и крупного мусора</li>
+                            <li>Использование только чистого оборудования и инвентаря</li>
+                        </ul>
+                    </li>
+                    <li><strong>Глубокая очистка</strong>
+                        <ul>
+                            <li>Удаление старых защитных покрытий специальными стрипперами</li>
+                            <li>Обработка поверхности роторными машинами и ручными инструментами</li>
+                            <li>Тщательная промывка водой для удаления остатков химических средств</li>
+                        </ul>
+                    </li>
+                    <li><strong>Нанесение защитного покрытия</strong>
+                        <ul>
+                            <li>Применение качественных полиролей (глянцевых или матовых)</li>
+                            <li>Многослойное нанесение с соблюдением технологии</li>
+                            <li>Обеспечение равномерного покрытия без дефектов</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="service-card">
+                <h3>Проблема желтых пятен на ПВХ-покрытиях</h3>
+                <p>Многие владельцы напольных ПВХ-покрытий сталкиваются с появлением желтых пятен, которые невозможно удалить обычными средствами. Это естественный процесс, связанный с особенностями материала:</p>
+                <ul>
+                    <li>Пластификаторы в составе ПВХ мигрируют к поверхности</li>
+                    <li>Взаимодействие с резиновой пылью приводит к химическим реакциям</li>
+                    <li>Образующиеся соединения вызывают изменение цвета</li>
+                </ul>
+                
+                <p><strong>Важно понимать:</strong></p>
+                <ul>
+                    <li>Эти пятна не являются загрязнениями</li>
+                    <li>Их невозможно удалить обычными чистящими средствами</li>
+                    <li>Единственное радикальное решение - замена покрытия</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>Профилактика и уход</h3>
+                <p>Чтобы максимально отсрочить появление желтых пятен и сохранить привлекательный вид покрытия, мы рекомендуем:</p>
+                <ol>
+                    <li>Регулярную профессиональную обработку (2 раза в год для зон с высокой проходимостью)</li>
+                    <li>Своевременное обновление защитного полимерного слоя</li>
+                    <li>Использование специализированных средств ухода</li>
+                </ol>
+                <p>Наши специалисты подберут оптимальный режим ухода именно для вашего типа покрытия и условий эксплуатации.</p>
+                
+                <h4>Почему выбирают нас?</h4>
+                <ul>
+                    <li>Профессиональное оборудование и качественные материалы</li>
+                    <li>Отработанные технологии обработки</li>
+                    <li>Учет особенностей конкретного типа покрытия</li>
+                    <li>Прозрачные цены и гарантия на работы</li>
+                </ul>
+                <p>Закажите консультацию нашего специалиста, и мы поможем сохранить ваши полы в идеальном состоянии на долгие годы!</p>
+                <p><em>Цена в каждом отдельном случае рассматривается индивидуально. Мы работаем по всей стране.</em></p>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ РАЗДЕЛА УСЛУГИ ПО УХОДУ ЗА ПОЛАМИ -->
+
+    <!-- ГАЛЕРЕЯ ДО/ПОСЛЕ -->
+    <section class="section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Наши работы: до и после</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly-collage_before1.webp" alt="Напольное покрытие до обработки">
+                    <div class="gallery-label">До обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_collage_after1.webp" alt="Напольное покрытие после обработки">
+                    <div class="gallery-label">После обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly-collage_before2.webp" alt="Напольное покрытие до обработки">
+                    <div class="gallery-label">До обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_collage_after2.webp" alt="Напольное покрытие после обработки">
+                    <div class="gallery-label">После обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly-collage_before3.webp" alt="Напольное покрытие до обработки">
+                    <div class="gallery-label">До обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_collage_after3.webp" alt="Напольное покрытие после обработки">
+                    <div class="gallery-label">После обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poy_before1.webp" alt="Напольное покрытие до обработки">
+                    <div class="gallery-label">До обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_after1.webp" alt="Напольное покрытие после обработки">
+                    <div class="gallery-label">После обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poy_before2.webp" alt="Напольное покрытие до обработки">
+                    <div class="gallery-label">До обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_after2.webp" alt="Напольное покрытие после обработки">
+                    <div class="gallery-label">После обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poy_before3.webp" alt="Напольное покрытие до обработки">
+                    <div class="gallery-label">До обработки</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Poly_after3.webp" alt="Напольное покрытие после обработки">
+                    <div class="gallery-label">После обработки</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ ГАЛЕРЕИ ДО/ПОСЛЕ -->
+
+    <!-- КОНТАКТНАЯ СЕКЦИЯ -->
+    <section class="section" style="background-color: #3498db;">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Контакты</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #e74c3c; margin-bottom: 20px;">Контактная информация</h3>
+                    <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                        <i class="fas fa-phone" style="margin-right: 10px; color: #2c3e50; margin-top: 3px;"></i>
+                        <div>
+                            <p><strong>Телефон:</strong></p>
+                            <a href="tel:+79770005127">+7 (977) 000-51-27</a>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                        <i class="fas fa-envelope" style="margin-right: 10px; color: #2c3e50; margin-top: 3px;"></i>
+                        <div>
+                            <p><strong>Email:</strong></p>
+                            <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #2c3e50; margin-top: 3px;"></i>
+                        <div>
+                            <p><strong>Регионы работы:</strong></p>
+                            <p>Вся Россия</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #e74c3c; margin-bottom: 20px;">Оставьте заявку</h3>
+                    <form>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ваше имя*</label>
+                            <input type="text" placeholder="Иван Иванов" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Телефон*</label>
+                            <input type="tel" placeholder="+7 (999) 123-45-67" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Сообщение</label>
+                            <textarea placeholder="Опишите вашу задачу" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; min-height: 120px; resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ КОНТАКТНОЙ СЕКЦИИ -->
+
+    <!-- Футер с главного сайта -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <ul>
+                        <li><i class="fas fa-info-circle footer-icon"></i> <a href="#about">О нас</a></li>
+                        <li><i class="fas fa-star footer-icon"></i> <a href="#advantages">Преимущества</a></li>
+                        <li><i class="fas fa-play-circle footer-icon"></i> <a href="#how-to-start">Как начать</a></li>
+                        <li><i class="fas fa-file-contract footer-icon"></i> <a href="#contract">Договор</a></li>
+                        <li><i class="fas fa-comment-dots footer-icon"></i> <a href="#reviews">Отзывы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><i class="fas fa-calculator footer-icon"></i> <a href="#calculator">Калькулятор</a></li>
+                        <li><i class="fas fa-newspaper footer-icon"></i> <a href="pogoda.html">Погода</a></li>
+                        <li><i class="fas fa-lightbulb footer-icon"></i> <a href="interesting.html">Это интересно</a></li>
+                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="FAQ.html">FAQ</a></li>
+                        <li><i class="fas fa-window-restore footer-icon"></i> <a href="window-cleaning.html">Мытье витрин</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <!-- Центральный ФО -->
+                        <div class="region-group">
+                            <h4>Центральный округ</h4>
+                            <ul>
+                                <li>Москва</li>
+                                <li>Московская обл.</li>
+                                <li>Тверская обл.</li>
+                                <li>Тульская обл.</li>
+                                <li>Ярославская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Северо-Западный ФО -->
+                        <div class="region-group">
+                            <h4>Северо-Западный округ</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Ленинградская обл.</li>
+                                <li>Архангельская обл.</li>
+                                <li>Мурманская обл.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt footer-icon"></i> Москва, Сущёвская ул., 27с2</li>
+                        <li><i class="fas fa-phone-alt footer-icon"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
+                        <li><i class="fab fa-whatsapp footer-icon"></i> <a href="https://wa.me/79770005127">WhatsApp</a></li>
+                        <li><i class="fas fa-envelope footer-icon"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></li>
+                        <li><i class="fas fa-clock footer-icon"></i> Пн-Пт: 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2009-<script>document.write(new Date().getFullYear())</script> ООО "МИРУМ". Все права защищены.</p>
+                <p><a href="#" style="color: white;">Политика конфиденциальности</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
