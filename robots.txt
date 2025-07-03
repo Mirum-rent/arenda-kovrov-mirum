@@ -33,6 +33,7 @@ Host: arenda-kovrov-mirum.ru
 Allow: /img/
 Allow: /img/arenda_kovrov/
 Allow: /img/review/
+Allow: /img/Poly/
 
 # Googlebot
 User-agent: Googlebot
@@ -41,6 +42,7 @@ User-agent: Googlebot-Image
 Allow: /img/
 Allow: /img/arenda_kovrov/
 Allow: /img/review/
+Allow: /img/Poly/
 
 # Ограничение для агрессивных ботов
 User-agent: MJ12bot
