@@ -57,20 +57,21 @@
     
     <!-- Дополнительные стили для этой страницы -->
     <style>
-		 /* Центрирование быстрых ссылок */
-		.quick-links {
-			justify-content: center;
-		}
-		
-		/* Центрирование заголовка и текста в hero */
-		.hero .container {
-			text-align: center;
-		}
-		
-		/* Центрирование кнопки WhatsApp */
-		.action-buttons {
-			justify-content: center;
-		}
+        /* Центрирование быстрых ссылок */
+        .quick-links {
+            justify-content: center;
+        }
+        
+        /* Центрирование заголовка и текста в hero */
+        .hero .container {
+            text-align: center;
+        }
+        
+        /* Центрирование кнопки WhatsApp */
+        .action-buttons {
+            justify-content: center;
+        }
+        
         /* Дополнения к основным стилям */
         .service-card {
             background-color: white;
@@ -155,6 +156,36 @@
             border-left: 4px solid var(--accent-color);
         }
         
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-question:after {
+            content: "+";
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .faq-question.active:after {
+            content: "-";
+        }
+        
+        .faq-answer {
+            display: none;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
         /* Адаптивность для галереи */
         @media (max-width: 768px) {
             .gallery-grid {
@@ -180,13 +211,11 @@
             <ul class="nav-links">
                 <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
                 <li><a href="#about">О нас</a></li>
-                <li><a href="#calculator">Наши цены</a></li>
-                <li><a href="#how-to-start">Как начать</a></li>
-                <li><a href="#reviews">Отзывы</a></li>
-                <li><a href="https://arenda-kovrov-mirum.ru/pogoda.html">Погода</a></li>
-                <li><a href="https://arenda-kovrov-mirum.ru/interesting.html">Это интересно</a></li>
-                <li><a href="https://arenda-kovrov-mirum.ru/FAQ.html">FAQ</a></li>
-                <li><a href="https://arenda-kovrov-mirum.ru/window-cleaning.html">Мытье витрин</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#how-we-work">Как мы работаем</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contacts">Контакты</a></li>
             </ul>
         </div>
     </nav>
@@ -229,8 +258,9 @@
                 
                 <h3>Почему выбирают нас?</h3>
                 <ul class="advantage-list">
-                    <li><strong>Опыт и масштаб</strong> — более 30 млн. м² обработанных полов.</li>
-                    <li><strong>Мобильные бригады</strong> — оснащены профессиональным оборудованием и готовы выехать на любой объект в России.</li>
+                    <li><strong>30+ млн м² опыта</strong> — обработали более 30 миллионов квадратных метров полов по всей России.</li>
+                    <li><strong>Сложные случаи</strong> — работаем с торговыми центрами, спортивными магазинами, гетерогенными покрытиями.</li>
+                    <li><strong>Мобильные бригады</strong> — оснащены профессиональным оборудованием и готовы выехать на любой объект.</li>
                     <li><strong>Экономия до 70%</strong> — восстановление и защита пола дешевле замены.</li>
                     <li><strong>Гарантия качества</strong> — используем только проверенные материалы и технологии.</li>
                     <li><strong>Любые объемы</strong> — от небольших офисов до торговых центров и производственных помещений.</li>
@@ -260,18 +290,35 @@
             </div>
             
             <div class="service-card">
-                <h3>2. Защитная обработка полов</h3>
-                <p>Предотвратите износ и сохраните презентабельный вид надолго:</p>
+                <h3>2. Устранение желтых пятен</h3>
+                <p>Желтые пятна на линолеуме — это не грязь, а результат миграции пластификаторов и взаимодействия с резиновой пылью:</p>
                 <ul class="advantage-list">
-                    <li>Полимерные покрытия с высоким сухим остатком (до 25%).</li>
-                    <li>Глянцевые и матовые варианты (матовые лучше скрывают неровности подложки).</li>
-                    <li>Регулярное обслуживание для поддержания эффекта.</li>
+                    <li><strong>Научный подход</strong> — понимаем химическую природу пятен.</li>
+                    <li><strong>Специальные составы</strong> — растворяем вулканизаторы без вреда для покрытия.</li>
+                    <li><strong>Защитный слой</strong> — предотвращает быстрое возвращение пятен.</li>
                 </ul>
+                <p><em>Важно: Не все пятна удаляются полностью, но мы делаем их менее заметными.</em></p>
             </div>
             
             <div class="service-card">
-                <h3>3. Удаление несмываемых загрязнений</h3>
-                <p>Желтые пятна на линолеуме — это не грязь, а результат миграции пластификаторов. Обычная уборка не поможет, но наши технологии — да!</p>
+                <h3>3. Коррекция неровностей</h3>
+                <p>Неровности на линолеуме чаще всего вызваны дефектами подложки:</p>
+                <ul class="advantage-list">
+                    <li><strong>Диагностика</strong> — определяем истинную причину неровностей.</li>
+                    <li><strong>Матовые покрытия</strong> — лучше скрывают дефекты подложки.</li>
+                    <li><strong>Оптимизация</strong> — подбираем оптимальное решение для каждого случая.</li>
+                </ul>
+                <p><em>Пример из практики: В магазинах одного из наших клиентов мы специально используем матовые покрытия, чтобы скрыть неровности подложки.</em></p>
+            </div>
+            
+            <div class="service-card">
+                <h3>4. Удаление серых пятен</h3>
+                <p>Серые пятна — следствие неправильной эксплуатации и уборки:</p>
+                <ul class="advantage-list">
+                    <li><strong>Анализ причин</strong> — определяем, что привело к появлению пятен.</li>
+                    <li><strong>Щадящая очистка</strong> — не повреждаем верхний слой покрытия.</li>
+                    <li><strong>Восстановление</strong> — возвращаем полу однородный цвет.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -285,22 +332,25 @@
             <div class="service-card">
                 <ol class="advantage-list" style="counter-reset: step-counter;">
                     <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
-                        <strong>Диагностика</strong> — определяем тип покрытия и степень повреждений.
+                        <strong>Бесплатная диагностика</strong> — определяем тип покрытия, степень повреждений и возможные решения.
                     </li>
                     <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
-                        <strong>Подготовка</strong> — очистка, обезжиривание, выравнивание (при необходимости).
+                        <strong>Подготовка</strong> — очистка, обезжиривание, выравнивание (при необходимости) с использованием профессионального оборудования.
                     </li>
                     <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
-                        <strong>Обработка</strong> — шлифовка, нанесение защитных составов.
+                        <strong>Обработка</strong> — шлифовка (для гомогенных покрытий), нанесение специальных защитных составов.
                     </li>
                     <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
-                        <strong>Финишный этап</strong> — полировка и рекомендации по уходу.
+                        <strong>Финишный этап</strong> — полировка и подробные рекомендации по уходу за покрытием.
                     </li>
                 </ol>
                 
                 <div class="section-highlight">
-                    <p><strong>Секрет нашего успеха:</strong> Специальные составы и оборудование, которые не найти в свободной продаже. Мы не раскрываем детали, но гарантируем результат!</p>
+                    <p><strong>Наше оборудование:</strong> Роторные машины, профессиональные поломоечные аппараты, пылеводососы и специальные химические составы, которые не найти в свободной продаже.</p>
                 </div>
+                
+                <h3>Контроль качества</h3>
+                <p>Каждый этап работ контролируется бригадиром, а результат фиксируется в актах приемки. Мы используем стандартизированные процессы, описанные в наших внутренних регламентах.</p>
             </div>
         </div>
     </section>
@@ -313,15 +363,16 @@
             
             <div class="service-card">
                 <ul class="advantage-list">
-                    <li><strong>Экономия времени</strong> — работы проводятся без демонтажа покрытия.</li>
-                    <li><strong>Снижение затрат</strong> — стоимость восстановления в 2-3 раза ниже замены.</li>
+                    <li><strong>Экономия времени</strong> — работы проводятся без демонтажа покрытия, обычно за 1-2 дня.</li>
+                    <li><strong>Снижение затрат</strong> — стоимость восстановления в 2-3 раза ниже замены покрытия.</li>
                     <li><strong>Минимальный простой</strong> — объект готов к использованию уже на следующий день.</li>
+                    <li><strong>Экологичность</strong> — не производим лишний мусор от демонтажа старых покрытий.</li>
                 </ul>
                 
                 <h3>Наши клиенты</h3>
                 <p>Мы работаем с:</p>
                 <ul class="advantage-list">
-                    <li>Торговыми центрами и магазинами.</li>
+                    <li>Торговыми центрами и магазинами (включая крупные сети).</li>
                     <li>Офисами и бизнес-центрами.</li>
                     <li>Медицинскими и образовательными учреждениями.</li>
                     <li>Производственными помещениями.</li>
@@ -331,58 +382,103 @@
     </section>
     <!-- КОНЕЦ РАЗДЕЛА ПРЕИМУЩЕСТВ -->
 
+    <!-- FAQ -->
+    <section id="faq" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы</h2>
+            
+            <div class="service-card">
+                <div class="faq-item">
+                    <div class="faq-question">Почему появляются желтые пятна на линолеуме?</div>
+                    <div class="faq-answer">
+                        <p>Желтые пятна возникают из-за миграции пластификаторов (специальных добавок в ПВХ) и их взаимодействия с резиновой пылью, которая попадает в помещение с улицы. Это естественный процесс, связанный с особенностями производства линолеума. Обычная уборка не удаляет эти пятна, так как они находятся в толще материала.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли полностью убрать желтые пятна?</div>
+                    <div class="faq-answer">
+                        <p>Не все пятна удаляются полностью, но мы можем сделать их значительно менее заметными. После нашей обработки пятна будут постепенно угасать, но полностью исчезнут только после нескольких циклов правильного ухода.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Почему на линолеуме видны неровности?</div>
+                    <div class="faq-answer">
+                        <p>В 90% случаев неровности вызваны дефектами подложки (стяжки пола), а не ошибками при нанесении защитного покрытия. Мы рекомендуем использовать матовые защитные составы — они лучше скрывают неровности. Глянцевые покрытия, наоборот, подчеркивают все дефекты.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Как часто нужно обновлять защитное покрытие?</div>
+                    <div class="faq-answer">
+                        <p>Для мест с высокой проходимостью (торговые центры, входные зоны) рекомендуем обновлять покрытие 2 раза в год. Для офисов и помещений с умеренной нагрузкой — 1 раз в год.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли шлифовать гетерогенный линолеум?</div>
+                    <div class="faq-answer">
+                        <p>Нет, шлифовка гетерогенных покрытий запрещена — это приведет к безвозвратной порче материала. Для таких покрытий мы используем специальные методы очистки и восстановления.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ FAQ -->
+
     <!-- ГАЛЕРЕЯ ДО/ПОСЛЕ -->
-    <section id="gallery" class="section bg-light">
+    <section id="gallery" class="section">
         <div class="container">
             <h2 class="section-title">Наши работы: до и после</h2>
             <div class="gallery-grid">
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before1.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">До обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before1.webp" alt="Линолеум с желтыми пятнами до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Желтые пятна до обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after1.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
-                    <div class="gallery-label">После обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after1.webp" alt="Линолеум после удаления желтых пятен" itemprop="contentUrl">
+                    <div class="gallery-label">После профессиональной обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before2.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">До обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before2.webp" alt="Линолеум с серыми пятнами до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Серые пятна до обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after2.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
-                    <div class="gallery-label">После обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after2.webp" alt="Линолеум после удаления серых пятен" itemprop="contentUrl">
+                    <div class="gallery-label">После восстановления</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before3.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">До обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before3.webp" alt="Неровный линолеум до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Неровности до обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after3.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
-                    <div class="gallery-label">После обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after3.webp" alt="Линолеум после коррекции неровностей" itemprop="contentUrl">
+                    <div class="gallery-label">После нанесения матового покрытия</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before1.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">До обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before1.webp" alt="Сильно изношенный линолеум до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Сильный износ до обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
-                    <div class="gallery-label">После обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Линолеум после восстановления" itemprop="contentUrl">
+                    <div class="gallery-label">После полного восстановления</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before2.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">До обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before2.webp" alt="Линолеум с царапинами до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Царапины до обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after2.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
-                    <div class="gallery-label">После обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after2.webp" alt="Линолеум после устранения царапин" itemprop="contentUrl">
+                    <div class="gallery-label">После полировки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before3.webp" alt="Напольное покрытие до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">До обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before3.webp" alt="Линолеум с неравномерным цветом до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Неравномерный цвет до обработки</div>
                 </div>
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after3.webp" alt="Напольное покрытие после обработки" itemprop="contentUrl">
-                    <div class="gallery-label">После обработки</div>
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after3.webp" alt="Линолеум с восстановленным цветом" itemprop="contentUrl">
+                    <div class="gallery-label">После восстановления цвета</div>
                 </div>
             </div>
         </div>
@@ -450,122 +546,144 @@
                     <ul>
                         <li><i class="fas fa-info-circle footer-icon"></i> <a href="#about">О нас</a></li>
                         <li><i class="fas fa-star footer-icon"></i> <a href="#advantages">Преимущества</a></li>
-                        <li><i class="fas fa-play-circle footer-icon"></i> <a href="#how-to-start">Как начать</a></li>
-                        <li><i class="fas fa-file-contract footer-icon"></i> <a href="#contract">Договор</a></li>
-                        <li><i class="fas fa-comment-dots footer-icon"></i> <a href="#reviews">Отзывы</a></li>
+                        <li><i class="fas fa-play-circle footer-icon"></i> <a href="#how-we-work">Как мы работаем</a></li>
+                        <li><i class="fas fa-images footer-icon"></i> <a href="#gallery">Галерея работ</a></li>
+                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Услуги</h3>
                     <ul>
-                        <li><i class="fas fa-calculator footer-icon"></i> <a href="#calculator">Калькулятор</a></li>
-                        <li><i class="fas fa-newspaper footer-icon"></i> <a href="pogoda.html">Погода</a></li>
-                        <li><i class="fas fa-lightbulb footer-icon"></i> <a href="interesting.html">Это интересно</a></li>
-                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="FAQ.html">FAQ</a></li>
-                        <li><i class="fas fa-window-restore footer-icon"></i> <a href="window-cleaning.html">Мытье витрин</a></li>
+                        <li><i class="fas fa-broom footer-icon"></i> <a href="#services">Восстановление полов</a></li>
+                        <li><i class="fas fa-tint footer-icon"></i> <a href="#services">Защита линолеума</a></li>
+                        <li><i class="fas fa-stainless footer-icon"></i> <a href="#services">Удаление пятен</a></li>
+                        <li><i class="fas fa-ruler-combined footer-icon"></i> <a href="#services">Коррекция неровностей</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Регионы работы</h3>
-                    <div class="footer-column">
-                    <h3>Регионы работы</h3>
-                    <div class="regions-grid">
-                        <!-- Центральный ФО -->
-                        <div class="region-group">
-                            <h4>Центральный округ</h4>
-                            <ul>
-                                <li>Москва</li>
-                                <li>Московская обл.</li>
-                                <li>Тверская обл.</li>
-                                <li>Тульская обл.</li>
-                                <li>Ярославская обл.</li>
-                                <li>Брянская обл.</li>
-                                <li>Орловская обл.</li>
-                                <li>Владимирская обл.</li>
-                                <li>Ивановская обл.</li>
-                                <li>Калужская обл.</li>
-                                <li>Смоленская обл.</li>
-                                <li>Белгородская обл.</li>
-                                <li>Курская обл.</li>
-                                <li>Воронежская обл.</li>
-                                <li>Тамбовская обл.</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Северо-Западный ФО -->
-                        <div class="region-group">
-                            <h4>Северо-Западный округ</h4>
-                            <ul>
-                                <li>Санкт-Петербург</li>
-                                <li>Ленинградская обл.</li>
-                                <li>Архангельская обл.</li>
-                                <li>Мурманская обл.</li>
-                                <li>Псковская обл.</li>
-                                <li>Республика Карелия</li>
-                                <li>Республика Коми</li>
-                                <li>Вологодская обл.</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Южный ФО -->
-                        <div class="region-group">
-                            <h4>Южный округ</h4>
-                            <ul>
-                                <li>Астрахань</li>
-                                <li>Астраханская обл.</li>
-                                <li>Краснодар</li>
-                                <li>Краснодарский край</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Приволжский ФО -->
-                        <div class="region-group">
-                            <h4>Приволжский округ</h4>
-                            <ul>
-                                <li>Уфа</li>
-                                <li>Республика Башкортостан</li>
-                                <li>Казань</li>
-                                <li>Республика Татарстан</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Уральский ФО -->
-                        <div class="region-group">
-                            <h4>Уральский округ</h4>
-                            <ul>
-                                <li>Екатеринбург</li>
-                                <li>Свердловская обл.</li>
-                                <li>Тюмень</li>
-                                <li>Тюменская обл.</li>
-                                <li>Челябинск</li>
-                                <li>Челябинская обл.</li>
-                                <li>Сургут</li>
-                                <li>Ханты-Мансийский АО</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Сибирский ФО -->
-                        <div class="region-group">
-                            <h4>Сибирский округ</h4>
-                            <ul>
-                                <li>Новосибирск</li>
-                                <li>Новосибирская обл.</li>
-                                <li>Иркутск</li>
-                                <li>Иркутская обл.</li>
-                                <li>Кемерово</li>
-                                <li>Кемеровская обл.</li>
-                                <li>Томск</li>
-                                <li>Томская обл.</li>
-                                <li>Омск</li>
-                                <li>Омская обл.</li>
-                                <li>Красноярск</li>
-                                <li>Красноярский край</li>
-                                <li>Республика Алтай</li>
-                                <li>Республика Бурятия</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+					<div class="footer-column">
+						<h3>Регионы работы</h3>
+						<div class="regions-grid">
+							<!-- Центральный ФО -->
+							<div class="region-group">
+								<h4>Центральный округ</h4>
+								<ul>
+									<li>Москва</li>
+									<li>Санкт-Петербург</li>
+									<li>Воронеж</li>
+									<li>Ярославль</li>
+									<li>Тула</li>
+									<li>Белгород</li>
+									<li>Калуга</li>
+									<li>Кострома</li>
+								</ul>
+							</div>
+							
+							<!-- Северо-Западный ФО -->
+							<div class="region-group">
+								<h4>Северо-Западный округ</h4>
+								<ul>
+									<li>Санкт-Петербург</li>
+									<li>Архангельск</li>
+									<li>Мурманск</li>
+									<li>Петрозаводск</li>
+									<li>Великий Новгород</li>
+									<li>Псков</li>
+									<li>Калининград</li>
+									<li>Сыктывкар</li>
+								</ul>
+							</div>
+							
+							<!-- Южный ФО -->
+							<div class="region-group">
+								<h4>Южный округ</h4>
+								<ul>
+									<li>Ростов-на-Дону</li>
+									<li>Краснодар</li>
+									<li>Сочи</li>
+									<li>Волгоград</li>
+									<li>Астрахань</li>
+									<li>Севастополь</li>
+									<li>Симферополь</li>
+									<li>Ставрополь</li>
+								</ul>
+							</div>
+							
+							<!-- Северо-Кавказский ФО -->
+							<div class="region-group">
+								<h4>Северо-Кавказский округ</h4>
+								<ul>
+									<li>Махачкала</li>
+									<li>Грозный</li>
+									<li>Владикавказ</li>
+									<li>Нальчик</li>
+									<li>Черкесск</li>
+									<li>Пятигорск</li>
+									<li>Кисловодск</li>
+									<li>Дербент</li>
+								</ul>
+							</div>
+							
+							<!-- Приволжский ФО -->
+							<div class="region-group">
+								<h4>Приволжский округ</h4>
+								<ul>
+									<li>Нижний Новгород</li>
+									<li>Казань</li>
+									<li>Самара</li>
+									<li>Уфа</li>
+									<li>Пермь</li>
+									<li>Саратов</li>
+									<li>Тольятти</li>
+									<li>Ижевск</li>
+								</ul>
+							</div>
+							
+							<!-- Уральский ФО -->
+							<div class="region-group">
+								<h4>Уральский округ</h4>
+								<ul>
+									<li>Екатеринбург</li>
+									<li>Челябинск</li>
+									<li>Тюмень</li>
+									<li>Магнитогорск</li>
+									<li>Курган</li>
+									<li>Сургут</li>
+									<li>Нижневартовск</li>
+									<li>Новый Уренгой</li>
+								</ul>
+							</div>
+							
+							<!-- Сибирский ФО -->
+							<div class="region-group">
+								<h4>Сибирский округ</h4>
+								<ul>
+									<li>Новосибирск</li>
+									<li>Омск</li>
+									<li>Красноярск</li>
+									<li>Иркутск</li>
+									<li>Барнаул</li>
+									<li>Томск</li>
+									<li>Кемерово</li>
+									<li>Новокузнецк</li>
+								</ul>
+							</div>
+							
+							<!-- Дальневосточный ФО -->
+							<div class="region-group">
+								<h4>Дальневосточный округ</h4>
+								<ul>
+									<li>Владивосток</li>
+									<li>Хабаровск</li>
+									<li>Якутск</li>
+									<li>Благовещенск</li>
+									<li>Петропавловск-Камчатский</li>
+									<li>Южно-Сахалинск</li>
+									<li>Комсомольск-на-Амуре</li>
+									<li>Улан-Удэ</li>
+								</ul>
+							</div>
+						</div>
+					</div>
                 <div class="footer-column">
                     <h3>Контакты</h3>
                     <ul>
@@ -601,6 +719,19 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                }
+            });
+        });
+        
+        // Работа FAQ
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const answer = this.nextElementSibling;
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    answer.style.display = 'block';
                 }
             });
         });
