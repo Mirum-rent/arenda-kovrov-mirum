@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Восстановление полов и линолеума | МИРУМ</title>
+    <meta name="description" content="Профессиональное восстановление полов и линолеума. Более 30 миллионов квадратных метров успешно выполненных работ с 2009 года.">
+    
+    <!-- Favicon и PWA настройки -->
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon-16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="https://arenda-kovrov-mirum.ru/img/apple-touch-icon.png">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://arenda-kovrov-mirum.ru/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Микроразметка Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "МИРУМ - Восстановление полов и линолеума",
+      "image": "https://arenda-kovrov-mirum.ru/img/logo.png",
+      "description": "Профессиональное восстановление полов и линолеума. Более 30 миллионов квадратных метров успешно выполненных работ с 2009 года.",
+      "telephone": "+79770005127",
+      "email": "matservice@yandex.ru",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "Россия",
+        "addressRegion": "Москва",
+        "addressLocality": "Москва",
+        "streetAddress": "Сущёвская ул., 27с2"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "priceRange": "$$",
+      "sameAs": [
+        "https://arenda-kovrov-mirum.ru/"
+      ]
+    }
+    </script>
+    
+    <!-- Дополнительные стили для этой страницы -->
+    <style>
+        /* Центрирование быстрых ссылок */
+        .quick-links {
+            justify-content: center;
+        }
+        
+        /* Центрирование заголовка и текста в hero */
+        .hero .container {
+            text-align: center;
+        }
+        
+        /* Центрирование кнопки WhatsApp */
+        .action-buttons {
+            justify-content: center;
+        }
+        
+        /* Дополнения к основным стилям */
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .service-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .service-card h4 {
+            color: var(--primary-color);
+            margin: 20px 0 15px;
+            font-size: 1.2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .advantage-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .advantage-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .advantage-list li:before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .section-highlight {
+            background-color: rgba(231, 76, 60, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-question:after {
+            content: "+";
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .faq-question.active:after {
+            content: "-";
+        }
+        
+        .faq-answer {
+            display: none;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        /* Адаптивность для галереи */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Хедер с главного сайта -->
+    <nav class="main-menu">
+        <div class="container menu-container">
+            <a href="https://arenda-kovrov-mirum.ru/" class="logo">
+                <img src="https://arenda-kovrov-mirum.ru/img/logo.png" alt="мирум.рент" width="120" height="36">
+                <span class="logo-text">мирум.рент</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://arenda-kovrov-mirum.ru/">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#how-we-work">Как мы работаем</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Хлебные крошки -->
+    <div class="container breadcrumbs">
+        <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
+        <span>/</span>
+        <a href="https://arenda-kovrov-mirum.ru/services.html">Услуги</a>
+        <span>/</span>
+        <span>Восстановление полов и линолеума</span>
+    </div>
+
+    <!-- Быстрые ссылки -->
+    <div class="container quick-links">
+        <a href="#services" class="quick-link">Услуги по уходу</a>
+        <a href="#gallery" class="quick-link">Фото до/после</a>
+        <a href="#contacts" class="quick-link">Контакты</a>
+    </div>
+
+    <!-- HERO БАННЕР -->
+    <section class="hero">
+        <div class="container">
+            <h1 itemprop="name">Профессиональное восстановление и защита полов и линолеума</h1>
+            <p itemprop="description">Более 30 миллионов квадратных метров успешно выполненных работ по всей России — от Калининграда до Владивостока!</p>
+            <div class="action-buttons">
+                <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ HERO БАННЕР -->
+
+    <!-- РАЗДЕЛ О КОМПАНИИ -->
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">О компании МИРУМ</h2>
+            
+            <div class="service-card">
+                <p>Компания <strong>МИРУМ</strong> — лидер в сфере восстановления и защиты напольных покрытий. Мы работаем с 2009 года и знаем о полах всё: как вернуть им первоначальный вид, предотвратить износ и продлить срок службы без дорогостоящей замены.</p>
+                
+                <h3>Почему выбирают нас?</h3>
+                <ul class="advantage-list">
+                    <li><strong>30+ млн м² опыта</strong> — обработали более 30 миллионов квадратных метров полов по всей России.</li>
+                    <li><strong>Сложные случаи</strong> — работаем с торговыми центрами, спортивными магазинами, гетерогенными покрытиями.</li>
+                    <li><strong>Мобильные бригады</strong> — оснащены профессиональным оборудованием и готовы выехать на любой объект.</li>
+                    <li><strong>Экономия до 70%</strong> — восстановление и защита пола дешевле замены.</li>
+                    <li><strong>Гарантия качества</strong> — используем только проверенные материалы и технологии.</li>
+                    <li><strong>Любые объемы</strong> — от небольших офисов до торговых центров и производственных помещений.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ РАЗДЕЛА О КОМПАНИИ -->
+
+    <!-- РАЗДЕЛ УСЛУГ -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            
+            <div class="service-card">
+                <h3>1. Восстановление линолеума и ПВХ-покрытий</h3>
+                <p>Желтые пятна, потертости, царапины? Мы знаем, как вернуть полу идеальный вид:</p>
+                <ul class="advantage-list">
+                    <li><strong>Глубокая очистка</strong> специальными составами.</li>
+                    <li><strong>Шлифовка</strong> (только для гомогенных покрытий).</li>
+                    <li><strong>Нанесение защитного слоя</strong>, предотвращающего повторное загрязнение.</li>
+                </ul>
+                
+                <div class="section-highlight">
+                    <p><strong>Важно:</strong> Не все полы можно шлифовать! Гетерогенные покрытия требуют особого подхода.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <h3>2. Устранение желтых пятен</h3>
+                <p>Желтые пятна на линолеуме — это не грязь, а результат миграции пластификаторов и взаимодействия с резиновой пылью:</p>
+                <ul class="advantage-list">
+                    <li><strong>Научный подход</strong> — понимаем химическую природу пятен.</li>
+                    <li><strong>Специальные составы</strong> — растворяем вулканизаторы без вреда для покрытия.</li>
+                    <li><strong>Защитный слой</strong> — предотвращает быстрое возвращение пятен.</li>
+                </ul>
+                <p><em>Важно: Не все пятна удаляются полностью, но мы делаем их менее заметными.</em></p>
+            </div>
+            
+            <div class="service-card">
+                <h3>3. Коррекция неровностей</h3>
+                <p>Неровности на линолеуме чаще всего вызваны дефектами подложки:</p>
+                <ul class="advantage-list">
+                    <li><strong>Диагностика</strong> — определяем истинную причину неровностей.</li>
+                    <li><strong>Матовые покрытия</strong> — лучше скрывают дефекты подложки.</li>
+                    <li><strong>Оптимизация</strong> — подбираем оптимальное решение для каждого случая.</li>
+                </ul>
+                <p><em>Пример из практики: В магазинах Спортмастер мы специально используем матовые покрытия, чтобы скрыть неровности подложки.</em></p>
+            </div>
+            
+            <div class="service-card">
+                <h3>4. Удаление серых пятен</h3>
+                <p>Серые пятна — следствие неправильной эксплуатации и уборки:</p>
+                <ul class="advantage-list">
+                    <li><strong>Анализ причин</strong> — определяем, что привело к появлению пятен.</li>
+                    <li><strong>Щадящая очистка</strong> — не повреждаем верхний слой покрытия.</li>
+                    <li><strong>Восстановление</strong> — возвращаем полу однородный цвет.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ РАЗДЕЛА УСЛУГ -->
+
+    <!-- РАЗДЕЛ КАК МЫ РАБОТАЕМ -->
+    <section id="how-we-work" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем?</h2>
+            
+            <div class="service-card">
+                <ol class="advantage-list" style="counter-reset: step-counter;">
+                    <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
+                        <strong>Бесплатная диагностика</strong> — определяем тип покрытия, степень повреждений и возможные решения.
+                    </li>
+                    <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
+                        <strong>Подготовка</strong> — очистка, обезжиривание, выравнивание (при необходимости) с использованием профессионального оборудования.
+                    </li>
+                    <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
+                        <strong>Обработка</strong> — шлифовка (для гомогенных покрытий), нанесение специальных защитных составов.
+                    </li>
+                    <li style="position: relative; padding-left: 30px; margin-bottom: 20px;">
+                        <strong>Финишный этап</strong> — полировка и подробные рекомендации по уходу за покрытием.
+                    </li>
+                </ol>
+                
+                <div class="section-highlight">
+                    <p><strong>Наше оборудование:</strong> Роторные машины, профессиональные поломоечные аппараты, пылеводососы и специальные химические составы, которые не найти в свободной продаже.</p>
+                </div>
+                
+                <h3>Контроль качества</h3>
+                <p>Каждый этап работ контролируется бригадиром, а результат фиксируется в актах приемки. Мы используем стандартизированные процессы, описанные в наших внутренних регламентах.</p>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ РАЗДЕЛА КАК МЫ РАБОТАЕМ -->
+
+    <!-- РАЗДЕЛ ПРЕИМУЩЕСТВ -->
+    <section id="advantages" class="section">
+        <div class="container">
+            <h2 class="section-title">Почему выгоднее восстановить, чем заменить?</h2>
+            
+            <div class="service-card">
+                <ul class="advantage-list">
+                    <li><strong>Экономия времени</strong> — работы проводятся без демонтажа покрытия, обычно за 1-2 дня.</li>
+                    <li><strong>Снижение затрат</strong> — стоимость восстановления в 2-3 раза ниже замены покрытия.</li>
+                    <li><strong>Минимальный простой</strong> — объект готов к использованию уже на следующий день.</li>
+                    <li><strong>Экологичность</strong> — не производим лишний мусор от демонтажа старых покрытий.</li>
+                </ul>
+                
+                <h3>Наши клиенты</h3>
+                <p>Мы работаем с:</p>
+                <ul class="advantage-list">
+                    <li>Торговыми центрами и магазинами (включая крупные сети).</li>
+                    <li>Офисами и бизнес-центрами.</li>
+                    <li>Медицинскими и образовательными учреждениями.</li>
+                    <li>Производственными помещениями.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ РАЗДЕЛА ПРЕИМУЩЕСТВ -->
+
+    <!-- FAQ -->
+    <section id="faq" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы</h2>
+            
+            <div class="service-card">
+                <div class="faq-item">
+                    <div class="faq-question">Почему появляются желтые пятна на линолеуме?</div>
+                    <div class="faq-answer">
+                        <p>Желтые пятна возникают из-за миграции пластификаторов (специальных добавок в ПВХ) и их взаимодействия с резиновой пылью, которая попадает в помещение с улицы. Это естественный процесс, связанный с особенностями производства линолеума. Обычная уборка не удаляет эти пятна, так как они находятся в толще материала.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли полностью убрать желтые пятна?</div>
+                    <div class="faq-answer">
+                        <p>Не все пятна удаляются полностью, но мы можем сделать их значительно менее заметными. После нашей обработки пятна будут постепенно угасать, но полностью исчезнут только после нескольких циклов правильного ухода.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Почему на линолеуме видны неровности?</div>
+                    <div class="faq-answer">
+                        <p>В 90% случаев неровности вызваны дефектами подложки (стяжки пола), а не ошибками при нанесении защитного покрытия. Мы рекомендуем использовать матовые защитные составы — они лучше скрывают неровности. Глянцевые покрытия, наоборот, подчеркивают все дефекты.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Как часто нужно обновлять защитное покрытие?</div>
+                    <div class="faq-answer">
+                        <p>Для мест с высокой проходимостью (торговые центры, входные зоны) рекомендуем обновлять покрытие 2 раза в год. Для офисов и помещений с умеренной нагрузкой — 1 раз в год.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли шлифовать гетерогенный линолеум?</div>
+                    <div class="faq-answer">
+                        <p>Нет, шлифовка гетерогенных покрытий запрещена — это приведет к безвозвратной порче материала. Для таких покрытий мы используем специальные методы очистки и восстановления.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ FAQ -->
+
+    <!-- ГАЛЕРЕЯ ДО/ПОСЛЕ -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">Наши работы: до и после</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before1.webp" alt="Линолеум с желтыми пятнами до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Желтые пятна до обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after1.webp" alt="Линолеум после удаления желтых пятен" itemprop="contentUrl">
+                    <div class="gallery-label">После профессиональной обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before2.webp" alt="Линолеум с серыми пятнами до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Серые пятна до обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after2.webp" alt="Линолеум после удаления серых пятен" itemprop="contentUrl">
+                    <div class="gallery-label">После восстановления</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before3.webp" alt="Неровный линолеум до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Неровности до обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after3.webp" alt="Линолеум после коррекции неровностей" itemprop="contentUrl">
+                    <div class="gallery-label">После нанесения матового покрытия</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before1.webp" alt="Сильно изношенный линолеум до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Сильный износ до обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Линолеум после восстановления" itemprop="contentUrl">
+                    <div class="gallery-label">После полного восстановления</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before2.webp" alt="Линолеум с царапинами до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Царапины до обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after2.webp" alt="Линолеум после устранения царапин" itemprop="contentUrl">
+                    <div class="gallery-label">После полировки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before3.webp" alt="Линолеум с неравномерным цветом до обработки" itemprop="contentUrl">
+                    <div class="gallery-label">Неравномерный цвет до обработки</div>
+                </div>
+                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after3.webp" alt="Линолеум с восстановленным цветом" itemprop="contentUrl">
+                    <div class="gallery-label">После восстановления цвета</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ ГАЛЕРЕИ ДО/ПОСЛЕ -->
+
+    <!-- КОНТАКТНАЯ СЕКЦИЯ -->
+    <section id="contacts" class="section" style="background-color: var(--secondary-color);">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Контакты</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: var(--accent-color); margin-bottom: 20px;">Контактная информация</h3>
+                    <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                        <i class="fas fa-phone" style="margin-right: 10px; color: var(--primary-color); margin-top: 3px;"></i>
+                        <div>
+                            <p><strong>Телефон:</strong></p>
+                            <a href="tel:+79770005127">+7 (977) 000-51-27</a>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                        <i class="fas fa-envelope" style="margin-right: 10px; color: var(--primary-color); margin-top: 3px;"></i>
+                        <div>
+                            <p><strong>Email:</strong></p>
+                            <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--primary-color); margin-top: 3px;"></i>
+                        <div>
+                            <p><strong>Регионы работы:</strong></p>
+                            <p>Вся Россия</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: var(--accent-color); margin-bottom: 20px;">Оставьте заявку</h3>
+                    <form>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ваше имя*</label>
+                            <input type="text" placeholder="Иван Иванов" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Телефон*</label>
+                            <input type="tel" placeholder="+7 (999) 123-45-67" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Сообщение</label>
+                            <textarea placeholder="Опишите вашу задачу" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; min-height: 120px; resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ КОНТАКТНОЙ СЕКЦИИ -->
+
+    <!-- Футер с главного сайта -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Компания</h3>
+                    <ul>
+                        <li><i class="fas fa-info-circle footer-icon"></i> <a href="#about">О нас</a></li>
+                        <li><i class="fas fa-star footer-icon"></i> <a href="#advantages">Преимущества</a></li>
+                        <li><i class="fas fa-play-circle footer-icon"></i> <a href="#how-we-work">Как мы работаем</a></li>
+                        <li><i class="fas fa-images footer-icon"></i> <a href="#gallery">Галерея работ</a></li>
+                        <li><i class="fas fa-question-circle footer-icon"></i> <a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li><i class="fas fa-broom footer-icon"></i> <a href="#services">Восстановление полов</a></li>
+                        <li><i class="fas fa-tint footer-icon"></i> <a href="#services">Защита линолеума</a></li>
+                        <li><i class="fas fa-stainless footer-icon"></i> <a href="#services">Удаление пятен</a></li>
+                        <li><i class="fas fa-ruler-combined footer-icon"></i> <a href="#services">Коррекция неровностей</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <!-- Центральный ФО -->
+                        <div class="region-group">
+                            <h4>Центральный округ</h4>
+                            <ul>
+                                <li>Москва</li>
+                                <li>Московская обл.</li>
+                                <li>Тверская обл.</li>
+                                <li>Тульская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Северо-Западный ФО -->
+                        <div class="region-group">
+                            <h4>Северо-Западный округ</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Ленинградская обл.</li>
+                                <li>Архангельская обл.</li>
+                                <li>Мурманская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Южный ФО -->
+                        <div class="region-group">
+                            <h4>Южный округ</h4>
+                            <ul>
+                                <li>Астрахань</li>
+                                <li>Астраханская обл.</li>
+                                <li>Краснодар</li>
+                                <li>Краснодарский край</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Приволжский ФО -->
+                        <div class="region-group">
+                            <h4>Приволжский округ</h4>
+                            <ul>
+                                <li>Уфа</li>
+                                <li>Республика Башкортостан</li>
+                                <li>Казань</li>
+                                <li>Республика Татарстан</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt footer-icon"></i> Москва, Сущёвская ул., 27с2</li>
+                        <li><i class="fas fa-phone-alt footer-icon"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
+                        <li><i class="fab fa-whatsapp footer-icon"></i> <a href="https://wa.me/79770005127">WhatsApp</a></li>
+                        <li><i class="fas fa-envelope footer-icon"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></li>
+                        <li><i class="fas fa-clock footer-icon"></i> Пн-Пт: 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2009-<script>document.write(new Date().getFullYear())</script> ООО "МИРУМ". Все права защищены.</p>
+                <p><a href="#" style="color: white;">Политика конфиденциальности</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Работа FAQ
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const answer = this.nextElementSibling;
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
