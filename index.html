@@ -718,6 +718,10 @@
             if (frequency.includes('1 раз в неделю')) replacementsPerMonth = 4;
             else if (frequency.includes('2 раза в неделю')) replacementsPerMonth = 8;
             else if (frequency.includes('3 раза в неделю')) replacementsPerMonth = 12;
+			else if (frequency.includes('4 раза в две неделю')) replacementsPerMonth = 16;
+			else if (frequency.includes('5 раз в две неделю')) replacementsPerMonth = 20;
+			else if (frequency.includes('6 раз в две неделю')) replacementsPerMonth = 24;
+			else if (frequency.includes('7 раз в две неделю')) replacementsPerMonth = 28;
             else if (frequency.includes('1 раз в две недели')) replacementsPerMonth = 2;
             
             const costForMonth = pricePerItem * replacementsPerMonth * quantity;
