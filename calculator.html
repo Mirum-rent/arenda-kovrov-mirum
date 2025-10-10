@@ -1,14 +1,14 @@
-<!-- calculator.html - HTML структура калькулятора стоимости -->
+<!-- calculator.html -->
 <section id="calculator" class="section">
     <div class="container">
-        <!-- Хлебные крошки внутри калькулятора (дополнительные) -->
+        <!-- Хлебные крошки -->
         <div class="breadcrumbs">
             <a href="https://arenda-kovrov-mirum.ru/">Главная</a>
             <span>/</span>
             <a href="#calculator">Калькулятор стоимости</a>
         </div>
         
-        <!-- Быстрые ссылки внутри калькулятора (дополнительные) -->
+        <!-- Быстрые ссылки -->
         <div class="quick-links">
             <a href="#standard-calculator" class="quick-link">Стандартный расчет</a>
             <a href="#tender-calculator" class="quick-link">Тендерный расчет</a>
@@ -19,20 +19,18 @@
         <h2 class="section-title">Калькулятор стоимости</h2>
         
         <div class="calculator-section">
-            <!-- Переключение между калькуляторами -->
             <div class="calculator-tabs">
                 <button class="tab-btn active" data-tab="standard">Стандартные ковры</button>
                 <button class="tab-btn" data-tab="tender">Тендерный калькулятор</button>
             </div>
             
-            <!-- Калькулятор стандартных ковров -->
+            <!-- Стандартный калькулятор -->
             <div id="standard-calculator" class="calculator-content active">
                 <form id="standard-form">
                     <div class="form-group">
                         <label for="region">Регион</label>
                         <select id="region" name="region" onchange="updateSizes()">
                             <option value="">Выберите регион</option>
-                            <!-- Регионы будут загружены динамически из prices.js -->
                         </select>
                     </div>
                     
@@ -52,8 +50,12 @@
                     
                     <div class="form-group">
                         <label for="quantity">Количество ковров</label>
-                        <input type="number" id="quantity" name="quantity" min="1" value="1" onchange="calculate()">
+                        <input type="number" id="quantity" name="quantity" min="1" value="1" 
+                               onchange="calculate()" oninput="calculate()">
                     </div>
+                    
+                    <!-- ДОБАВЛЕНА КНОПКА РАСЧЕТА -->
+                    <button type="button" class="btn" onclick="calculate()">Рассчитать</button>
                     
                     <button type="button" class="btn" onclick="addPosition()">Добавить позицию</button>
                     
@@ -61,7 +63,6 @@
                         Позиция добавлена! Вы можете продолжить добавлять ковры для этого же региона или изменить параметры выше.
                     </div>
                     
-                    <!-- Блок результатов стандартного калькулятора -->
                     <div id="standard-result" style="display: none;">
                         <h3>Ваш заказ</h3>
                         <table id="orderTable">
@@ -85,7 +86,6 @@
                             <p>Это предварительный расчет, напишите нам в WhatsApp, мы сделаем более выгодное предложение.</p>
                         </div>
                         
-                        <!-- Форма запроса скидки -->
                         <div id="discountSection" style="display: none;">
                             <h3>Запросить скидку</h3>
                             <div class="form-group">
@@ -108,7 +108,6 @@
                             <button type="button" class="btn" onclick="requestDiscount()">Отправить запрос</button>
                         </div>
                         
-                        <!-- Кнопки действий -->
                         <div style="margin-top: 30px; display: flex; flex-wrap: wrap;">
                             <button type="button" class="btn btn-whatsapp" onclick="sendToWhatsApp()">
                                 <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> Написать в WhatsApp
@@ -116,7 +115,6 @@
                             <button type="button" class="btn btn-secondary" onclick="showContractForm()">Отправить реквизиты</button>
                         </div>
                         
-                        <!-- Форма реквизитов для договора -->
                         <div class="requisites-form" id="contractForm" style="display: none;">
                             <h3>Реквизиты для договора</h3>
                             <div class="form-row">
@@ -180,7 +178,6 @@
                         <label for="tenderRegion">Регион</label>
                         <select id="tenderRegion" name="tenderRegion" onchange="updateTenderSizes()">
                             <option value="">Выберите регион</option>
-                            <!-- Регионы будут загружены динамически из prices.js -->
                         </select>
                     </div>
                     
@@ -193,12 +190,10 @@
                     
                     <button type="button" class="btn" onclick="addTenderPosition()">Добавить позицию</button>
                     
-                    <!-- Поля для ввода данных по месяцам -->
                     <div class="month-inputs" id="monthInputs">
                         <!-- Месячные поля будут добавлены динамически -->
                     </div>
                     
-                    <!-- Блок результатов тендерного калькулятора -->
                     <div id="tender-result" style="display: none;">
                         <h3>Расчет по тендеру</h3>
                         <table id="tenderTable">
@@ -222,7 +217,6 @@
                             <p>Это предварительный расчет, напишите нам в WhatsApp, мы сделаем более выгодное предложение.</p>
                         </div>
                         
-                        <!-- Форма контактных данных для тендера -->
                         <div style="margin-top: 30px;">
                             <div class="form-group">
                                 <label for="tenderName">Ваше имя*</label>
