@@ -7,45 +7,139 @@
     <meta name="description" content="Считаем за 5 минут, отвечаем сразу. Аренда грязезащитных ковров с 2009 года. Документы без ошибок – замена без звонков. Москва, Сущёвская ул., 27с2.">
     <meta name="keywords" content="аренда грязезащитных ковров, аренда ковров, вестибюльные ковры, ковры в офис, ковры на вход, сервис сменных ковров, впитывающие коврики">
     
-    <!-- Яндекс.Метрика -->
-    <script>
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<!-- Яндекс.Метрика -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(101006678, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
+    ym(101006678, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce: "dataLayer"
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Дополнительные цели для отслеживания -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Отслеживание кликов по WhatsApp
+    var whatsappLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"], .btn-whatsapp');
+    whatsappLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') {
+                ym(101006678, 'reachGoal', 'whatsapp_click');
+                console.log('Yandex Metrika: WhatsApp click tracked');
+            }
         });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/101006678" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
-    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/">
-	<link rel="canonical" href="https://arenda-kovrov-mirum.ru/" />
-	<link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/" />
-	<link rel="alternate" hreflang="ru-ru" href="https://мирум.москва/" />
-	<link rel="alternate" hreflang="ru-ru" href="https://mirum.moscow/" />
-    <meta property="og:title" content="Грязезащитные ковры без головной боли">
-    <meta property="og:description" content="Профессиональная аренда ковров с сервисом. Работаем с 2009 года.">
+    });
     
-    <!-- Open Graph / Facebook -->
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://arenda-kovrov-mirum.ru/">
-	<meta property="og:title" content="Грязезащитные ковры без головной боли">
-	<meta property="og:description" content="Профессиональная аренда ковров с сервисом. Работаем с 2009 года.">
-	<meta property="og:image" content="https://arenda-kovrov-mirum.ru/img/logo.png">
+    // Отслеживание отправки форм калькулятора
+    var calculatorForms = document.querySelectorAll('#standard-form, #tender-form');
+    calculatorForms.forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            if (typeof ym !== 'undefined') {
+                ym(101006678, 'reachGoal', 'calculator_submit');
+                console.log('Yandex Metrika: Calculator form submitted');
+            }
+        });
+    });
+    
+    // Отслеживание кликов по кнопкам расчета
+    var calculateButtons = document.querySelectorAll('button[onclick*="calculate"], button[onclick*="addPosition"]');
+    calculateButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') {
+                ym(101006678, 'reachGoal', 'calculate_click');
+                console.log('Yandex Metrika: Calculate button clicked');
+            }
+        });
+    });
+    
+    // Отслеживание запросов скидок
+    var discountButtons = document.querySelectorAll('button[onclick*="requestDiscount"], button[onclick*="sendContractDetails"]');
+    discountButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') {
+                ym(101006678, 'reachGoal', 'discount_request');
+                console.log('Yandex Metrika: Discount requested');
+            }
+        });
+    });
+    
+    // Отслеживание просмотра галереи
+    var gallerySection = document.getElementById('gallery');
+    if (gallerySection) {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && typeof ym !== 'undefined') {
+                    ym(101006678, 'reachGoal', 'gallery_view');
+                    console.log('Yandex Metrika: Gallery viewed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(gallerySection);
+    }
+    
+    // Отслеживание просмотра отзывов
+    var reviewsSection = document.getElementById('reviews');
+    if (reviewsSection) {
+        var reviewsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting && typeof ym !== 'undefined') {
+                    ym(101006678, 'reachGoal', 'reviews_view');
+                    console.log('Yandex Metrika: Reviews viewed');
+                    reviewsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        reviewsObserver.observe(reviewsSection);
+    }
+});
 
-	<!-- Twitter -->
-	<meta property="twitter:card" content="summary_large_image">
-	<meta property="twitter:url" content="https://arenda-kovrov-mirum.ru/">
-	<meta property="twitter:title" content="Грязезащитные ковры без головной боли">
-	<meta property="twitter:description" content="Профессиональная аренда ковров с сервисом. Работаем с 2009 года.">
-	<meta property="twitter:image" content="https://arenda-kovrov-mirum.ru/img/logo.png">
+// Функция для ручного вызова целей (можно использовать в других скриптах)
+function trackYandexGoal(goalName) {
+    if (typeof ym !== 'undefined') {
+        ym(101006678, 'reachGoal', goalName);
+        console.log('Yandex Metrika: Goal tracked - ' + goalName);
+    }
+}
+
+// Отслеживание eCommerce событий (для калькулятора)
+function trackCalculatorOrder(totalAmount) {
+    if (typeof ym !== 'undefined') {
+        ym(101006678, 'reachGoal', 'calculator_order');
+        
+        // eCommerce данные
+        var dataLayer = window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            'ecommerce': {
+                'purchase': {
+                    'actionField': {
+                        'id': 'calculator_' + Date.now(),
+                        'revenue': totalAmount
+                    },
+                    'products': [{
+                        'name': 'Аренда грязезащитных ковров',
+                        'category': 'Услуги',
+                        'price': totalAmount,
+                        'quantity': 1
+                    }]
+                }
+            }
+        });
+        console.log('Yandex Metrika: Calculator order tracked - ' + totalAmount);
+    }
+}
+</script>
 
 	<!-- Schema.org markup for Google -->
 	<script type="application/ld+json">
