@@ -1,94 +1,45 @@
-[file name]: sitemap.xml
-[file content begin]
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-        
-    <!-- ОСНОВНОЙ САЙТ - канонический -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://arenda-kovrov-mirum.ru/</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/"/>
-        <!-- Указываем канонические для региональных сайтов -->
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-    
     <url>
         <loc>https://arenda-kovrov-mirum.ru/FAQ.html</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/FAQ.html"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/FAQ.html"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
     <url>
         <loc>https://arenda-kovrov-mirum.ru/pogoda.html</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/pogoda.html"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/pogoda.html"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
-    
     <url>
         <loc>https://arenda-kovrov-mirum.ru/interesting.html</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/interesting.html"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/interesting.html"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
     <url>
         <loc>https://arenda-kovrov-mirum.ru/window-cleaning.html</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/window-cleaning.html"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/window-cleaning.html"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
     <url>
         <loc>https://arenda-kovrov-mirum.ru/chistka_polov.html</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/chistka_polov.html"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/chistka_polov.html"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
     <url>
         <loc>https://arenda-kovrov-mirum.ru/PDPP.html</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/PDPP.html"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/PDPP.html"/>
         <lastmod>2025-10-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.4</priority>
     </url>
-
-    <!-- Якорные ссылки для SEO -->
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/#calculator</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/#calculator"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/#calculator"/>
-        <lastmod>2025-10-10</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    
-    <url>
-        <loc>https://arenda-kovrov-mirum.ru/#gallery</loc>
-        <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/#gallery"/>
-        <xhtml:link rel="canonical" href="https://arenda-kovrov-mirum.ru/#gallery"/>
-        <lastmod>2025-10-10</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
 </urlset>
-[file content end]
