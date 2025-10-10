@@ -1933,68 +1933,29 @@
         });
     </script>
 <!-- Подключение данных о ценах -->
-<script src="js/prices.js"></script>
+    <script src="js/prices.js"></script>
 
-<!-- Загрузка HTML калькулятора с отладкой -->
-<script>
-    console.log('🔍 [1] Проверка загрузки калькулятора...');
-    console.log('🔍 [2] prices.js загружен?', typeof priceData !== 'undefined');
-    
-    if (typeof priceData !== 'undefined') {
-        console.log('✅ [3] Регионы в priceData:', Object.keys(priceData));
-        console.log('✅ [4] regionsOrder доступен?', typeof regionsOrder !== 'undefined');
-        if (typeof regionsOrder !== 'undefined') {
-            console.log('✅ [5] Список регионов для выбора:', regionsOrder);
-        }
-    } else {
-        console.error('❌ [3] priceData НЕ загружен!');
-    }
-    
-    console.log('🔍 [6] Начинаю загрузку calculator.html...');
-    
-    fetch('calculator.html')
-        .then(response => {
-            console.log('🔍 [7] Статус загрузки calculator.html:', response.status, response.ok ? 'OK' : 'ERROR');
-            if (!response.ok) {
-                throw new Error('Ошибка загрузки calculator.html: ' + response.status);
-            }
-            return response.text();
-        })
-        .then(html => {
-            console.log('✅ [8] calculator.html загружен, длина HTML:', html.length, 'символов');
-            
-            // Проверяем, есть ли контейнер для калькулятора
-            const container = document.getElementById('calculator-container');
-            if (!container) {
-                console.error('❌ [9] Не найден элемент calculator-container!');
-                return;
-            }
-            
-            console.log('✅ [9] Контейнер найден, вставляем HTML...');
-            container.innerHTML = html;
-            
-            console.log('🔍 [10] Подключаю calculator.js...');
-            const script = document.createElement('script');
-            script.src = 'js/calculator.js';
-            
-            script.onload = function() {
-                console.log('✅ [11] calculator.js загружен и выполнен');
-                console.log('🎉 [12] Калькулятор полностью инициализирован!');
-            };
-            
-            script.onerror = function() {
-                console.error('❌ [11] Ошибка загрузки calculator.js!');
-            };
-            
-            document.body.appendChild(script);
-        })
-        .catch(error => {
-            console.error('❌ [ERROR] Ошибка загрузки калькулятора:', error);
-            document.getElementById('calculator-container').innerHTML = 
-                '<p style="color: red; padding: 20px; text-align: center;">Ошибка загрузки калькулятора: ' + error.message + '</p>';
-        });
-    
-    console.log('🔍 [13] Скрипт загрузки запущен, ожидаем результаты...');
-</script>
+    <!-- Загрузка HTML калькулятора -->
+    <script>
+        // Загружаем калькулятор асинхронно
+        fetch('calculator.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка загрузки калькулятора');
+                }
+                return response.text();
+            })
+            .then(html => {
+                document.getElementById('calculator-container').innerHTML = html;
+                // После загрузки HTML подключаем логику калькулятора
+                const script = document.createElement('script');
+                script.src = 'js/calculator.js?v=' + Date.now();
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки калькулятора:', error);
+                document.getElementById('calculator-container').innerHTML = '<p>Ошибка загрузки калькулятора. Пожалуйста, обновите страницу.</p>';
+            });
+    </script>
 </body>
 </html>
