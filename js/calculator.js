@@ -1,4 +1,51 @@
 // calculator.js - Логика работы калькулятора стоимости
+// calculator.js - Логика работы калькулятора стоимости
+
+console.log('🔍 [CALC-1] calculator.js начал выполнение');
+
+// Глобальные переменные для хранения данных калькуляторов
+let orderItems = [];
+let currentItem = null;
+let tenderItems = [];
+let currentTenderItem = null;
+
+console.log('🔍 [CALC-2] Переменные инициализированы');
+
+// Проверяем доступность данных
+console.log('🔍 [CALC-3] Проверка данных:');
+console.log('  - priceData:', typeof priceData !== 'undefined' ? 'ДОСТУПЕН' : 'НЕДОСТУПЕН');
+console.log('  - regionsOrder:', typeof regionsOrder !== 'undefined' ? 'ДОСТУПЕН' : 'НЕДОСТУПЕН');
+console.log('  - months:', typeof months !== 'undefined' ? 'ДОСТУПЕН' : 'НЕДОСТУПЕН');
+
+if (typeof regionsOrder !== 'undefined') {
+    console.log('🔍 [CALC-4] Регионы для выбора:', regionsOrder);
+} else {
+    console.error('❌ [CALC-4] regionsOrder не определен!');
+}
+
+// Инициализация калькулятора при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔍 [CALC-5] DOM загружен, начинаю инициализацию');
+    
+    // Проверяем, есть ли элементы на странице
+    const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
+    console.log('🔍 [CALC-6] Найдено select элементов:', regionSelects.length);
+    
+    regionSelects.forEach((select, index) => {
+        console.log(`🔍 [CALC-7] Select ${index + 1}:`, select.id, 'options:', select.children.length);
+    });
+    
+    // Инициализация полей ввода по месяцам для тендерного калькулятора
+    initMonthInputs();
+    
+    // Инициализация выпадающих списков регионов
+    initRegionSelects();
+    
+    // Настройка переключения между вкладками калькуляторов
+    setupCalculatorTabs();
+    
+    console.log('✅ [CALC-8] Калькулятор инициализирован');
+});
 
 // Глобальные переменные для хранения данных калькуляторов
 let orderItems = [];        // Массив для хранения позиций стандартного калькулятора
@@ -57,12 +104,29 @@ function setupCalculatorTabs() {
 
 // Инициализация выпадающих списков регионов
 function initRegionSelects() {
-    const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
+    console.log('🔍 [CALC-9] Функция initRegionSelects вызвана');
     
-    regionSelects.forEach(select => {
+    const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
+    console.log('🔍 [CALC-10] Найдено select элементов:', regionSelects.length);
+    
+    if (regionSelects.length === 0) {
+        console.error('❌ [CALC-11] Не найдены элементы select для регионов!');
+        console.log('🔍 Проверяем, что есть на странице:');
+        const allSelects = document.querySelectorAll('select');
+        console.log('Все select элементы на странице:', allSelects);
+        return;
+    }
+    
+    regionSelects.forEach((select, index) => {
+        console.log(`🔍 [CALC-12] Обрабатываю select ${index + 1}:`, select.id);
+        console.log('  - Текущее состояние:', select.innerHTML);
+        
         // Очищаем список опций
         select.innerHTML = '<option value="">Выберите регион</option>';
         
+        console.log('🔍 [CALC-13] Добавляю регионы из regionsOrder:', regionsOrder);
+        
+        let addedCount = 0;
         // Добавляем регионы в указанном порядке из prices.js
         regionsOrder.forEach(region => {
             if (priceData[region]) {
@@ -70,9 +134,27 @@ function initRegionSelects() {
                 option.value = region;
                 option.textContent = region;
                 select.appendChild(option);
+                addedCount++;
+                console.log(`  ✅ Добавлен регион: ${region}`);
             }
         });
+        
+        console.log(`🔍 [CALC-14] Select ${select.id} готов, добавлено: ${addedCount} регионов`);
+        console.log('  - Итоговое состояние:', select.innerHTML);
+        
+        // Проверяем, видно ли регионы в DOM
+        setTimeout(() => {
+            console.log(`🔍 [CALC-15] Проверка DOM для ${select.id}:`);
+            console.log('  - options в DOM:', select.children.length);
+            if (select.children.length > 1) {
+                console.log('✅ Регионы добавлены в DOM');
+            } else {
+                console.error('❌ Регионы НЕ добавлены в DOM!');
+            }
+        }, 100);
     });
+    
+    console.log('✅ [CALC-16] Все select элементы обработаны');
 }
 
 // Инициализация полей ввода по месяцам для тендерного калькулятора
@@ -558,7 +640,7 @@ function sendContractDetails() {
     
     // Кодируем сообщение для URL
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/79999999999?text=${encodedMessage}`; // Замените на реальный номер
+    const whatsappUrl = `https://wa.me/79770005127?text=${encodedMessage}`; // Замените на реальный номер
     
     window.open(whatsappUrl, '_blank');
 }
