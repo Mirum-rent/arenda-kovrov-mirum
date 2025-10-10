@@ -1,5 +1,14 @@
 User-agent: *
 Allow: /
+Allow: /img/
+Allow: /img/arenda_kovrov/
+Allow: /img/review/
+Allow: /img/Poly/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
+
+# Блокировка служебных директорий
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /cgi-bin/
@@ -8,6 +17,9 @@ Disallow: /wp-includes/
 Disallow: /admin/
 Disallow: /includes/
 Disallow: /search/
+Disallow: /backup/
+Disallow: /cache/
+Disallow: /logs/
 
 # Блокировка старых URL (возвращавших 404)
 Disallow: /photo_i_rekovendacii
@@ -22,32 +34,55 @@ Disallow: /*-astrakhan.ru/
 Disallow: /*-ufa.ru/
 Disallow: /4993481327.ru/
 
-# Я.Вебмастер
-User-agent: Yandex
-Allow: /
-Clean-param: utm_source&utm_medium&utm_campaign /
-Clean-param: from&referrer /
-Host: arenda-kovrov-mirum.ru
-
-# Разрешение для изображений
-Allow: /img/
-Allow: /img/arenda_kovrov/
-Allow: /img/review/
-Allow: /img/Poly/
-
-# Googlebot
+# Разрешение для поисковых систем
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 User-agent: Googlebot-Image
 Allow: /img/
 Allow: /img/arenda_kovrov/
 Allow: /img/review/
 Allow: /img/Poly/
 
+# Яндекс
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content /
+Clean-param: from&referrer&gclid&yclid&fbclid /
+Clean-param: _openstat&ysclid /
+Host: arenda-kovrov-mirum.ru
+
+# Бинг
+User-agent: bingbot
+Allow: /
+Crawl-delay: 2
+
 # Ограничение для агрессивных ботов
 User-agent: MJ12bot
 Crawl-delay: 10
 User-agent: AhrefsBot
 Crawl-delay: 10
+User-agent: SemrushBot
+Crawl-delay: 10
+User-agent: DotBot
+Crawl-delay: 10
+User-agent: MegaIndex
+Crawl-delay: 10
+User-agent: Barkrowler
+Crawl-delay: 10
+User-agent: BLEXBot
+Crawl-delay: 10
 
+# Блокировка вредоносных ботов
+User-agent: CCBot
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: Amazonbot
+Disallow: /
+User-agent: Cliqzbot
+Disallow: /
+
+# Указание карты сайта
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
