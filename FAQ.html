@@ -159,6 +159,73 @@
             text-align: center;
             margin: 30px 0;
         }
+
+        /* Стили для формы обратной связи */
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .consent-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .consent-checkbox input[type="checkbox"] {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .consent-checkbox label {
+            font-weight: normal;
+            line-height: 1.4;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -474,6 +541,203 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- НОВЫЕ ВОПРОСЫ -->
+
+                        <!-- Вопрос 12 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Какие типы грязезащитных ковров вы предлагаете?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Мы предлагаем несколько типов грязезащитных покрытий:</p>
+                                    <ul>
+                                        <li><strong>Ворсовые ковры</strong> - для эффективного удержания пыли и мелких частиц</li>
+                                        <li><strong>Решетчатые ковры</strong> - для очистки обуви от грязи и влаги</li>
+                                        <li><strong>Комбинированные системы</strong> - решетка + ворсовый ковер для максимальной эффективности</li>
+                                        <li><strong>Влаговпитывающие ковры</strong> - для помещений с повышенной влажностью</li>
+                                    </ul>
+                                    <div class="highlight">
+                                        <strong>Рекомендация:</strong> Для большинства объектов оптимальным решением является комбинированная система.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 13 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Что делать, если ковер поврежден или утерян?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>В случае повреждения или утери ковра:</p>
+                                    <ol>
+                                        <li>Немедленно сообщите об этом вашему менеджеру</li>
+                                        <li>Мы заменим поврежденный ковер на следующий визит</li>
+                                        <li>Стоимость возмещения ущерба рассчитывается индивидуально</li>
+                                        <li>При незначительных повреждениях (пятна, мелкие порезы) ремонт производится бесплатно</li>
+                                    </ol>
+                                    <div class="warning">
+                                        <strong>Важно:</strong> Умышленная порча или утрата ковра влечет компенсацию в размере рыночной стоимости.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 14 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Можно ли изменить график замены ковров?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Да, график замены можно изменить в любой момент:</p>
+                                    <ul>
+                                        <li>Увеличить частоту замен в период непогоды</li>
+                                        <li>Уменьшить частоту в летний период</li>
+                                        <li>Временно приостановить обслуживание (отпуск, ремонт)</li>
+                                        <li>Добавить внеплановые замены перед важными мероприятиями</li>
+                                    </ul>
+                                    <p>Для изменения графика достаточно уведомить менеджера за 3 рабочих дня.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 15 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Как рассчитывается стоимость для сетевых клиентов?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Для сетевых клиентов мы предлагаем специальные условия:</p>
+                                    <ul>
+                                        <li>Единый договор на все объекты сети</li>
+                                        <li>Персональный менеджер для координации</li>
+                                        <li>Скидки в зависимости от количества объектов</li>
+                                        <li>Упрощенный документооборот</li>
+                                        <li>Гибкие условия оплаты</li>
+                                    </ul>
+                                    <div class="highlight">
+                                        <strong>Преимущество:</strong> При обслуживании 10+ объектов предоставляется дополнительная скидка до 15%.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 16 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Какие гарантии качества вы предоставляете?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Мы гарантируем:</p>
+                                    <ul>
+                                        <li>Качественную стирку ковров после каждого использования</li>
+                                        <li>Своевременную замену по утвержденному графику</li>
+                                        <li>Использование профессионального оборудования для чистки</li>
+                                        <li>Быстрое решение возникающих вопросов (в течение 24 часов)</li>
+                                        <li>Возврат средств при невыполнении обязательств</li>
+                                    </ul>
+                                    <p>Все гарантии прописаны в договоре аренды.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 17 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Как быть, если наш объект находится в труднодоступном месте?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Мы работаем с объектами любой сложности:</p>
+                                    <ul>
+                                        <li>Объекты с пропускной системой (предварительно согласовываем пропуска)</li>
+                                        <li>Помещения с ограниченным временем доступа (работаем в указанные часы)</li>
+                                        <li>Удаленные объекты (специальные условия доставки)</li>
+                                        <li>Объекты со сложной логистикой (индивидуальный график)</li>
+                                    </ul>
+                                    <div class="warning">
+                                        <strong>Важно:</strong> Для объектов со сложной логистикой может применяться дополнительная плата за доставку.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 18 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Можно ли заказать пробный период?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Да, мы предлагаем пробный период обслуживания:</p>
+                                    <ul>
+                                        <li>Продолжительность: 2 недели</li>
+                                        <li>Бесплатная доставка и установка</li>
+                                        <li>2 замены ковров в течение пробного периода</li>
+                                        <li>Полный комплект документов</li>
+                                        <li>Консультация менеджера</li>
+                                    </ul>
+                                    <p>После пробного периода вы можете заключить договор на постоянной основе или вернуть ковры без каких-либо обязательств.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 19 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Как вы обеспечиваете чистоту ковров после стирки?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Процесс профессиональной чистки включает:</p>
+                                    <ol>
+                                        <li>Предварительную обработку от сложных загрязнений</li>
+                                        <li>Стирку при оптимальной температуре с профессиональными моющими средствами</li>
+                                        <li>Тщательное полоскание для удаления остатков химии</li>
+                                        <li>Сушку в специальных камерах</li>
+                                        <li>Контроль качества перед отправкой клиенту</li>
+                                    </ol>
+                                    <div class="highlight">
+                                        <strong>Результат:</strong> Абсолютно чистые, гигиеничные ковры без посторонних запахов.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 20 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Какие дополнительные услуги вы предоставляете?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Помимо аренды ковров мы предлагаем:</p>
+                                    <ul>
+                                        <li>Профессиональную мойку витрин и окон</li>
+                                        <li>Чистку и защиту полов</li>
+                                        <li>Химчистку ковролина и мягкой мебели</li>
+                                        <li>Уборку помещений после ремонта</li>
+                                        <li>Дезинфекцию поверхностей</li>
+                                    </ul>
+                                    <p>Все дополнительные услуги можно заказать по отдельности или в комплексе.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Категория: Мойка витрин -->
@@ -604,7 +868,128 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- НОВЫЕ ВОПРОСЫ ПО МОЙКЕ ВИТРИН -->
+
+                        <!-- Вопрос 7 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Как вы удаляете сложные загрязнения с витрин?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Для удаления сложных загрязнений мы используем:</p>
+                                    <ul>
+                                        <li><strong>Специальные скребки</strong> - для удаления наклеек и этикеток</li>
+                                        <li><strong>Профессиональные химические средства</strong> - для удаления граффити и краски</li>
+                                        <li><strong>Пароочистители</strong> - для удаления жировых и масляных загрязнений</li>
+                                        <li><strong>Полировальные машины</strong> - для удаления царапин и мелких повреждений</li>
+                                    </ul>
+                                    <div class="highlight">
+                                        <strong>Результат:</strong> Идеально чистые витрины без повреждений стекла.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 8 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Можно ли заказать разовую мойку витрин?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Да, мы предоставляем как разовые, так и регулярные услуги:</p>
+                                    <ul>
+                                        <li><strong>Разовая мойка</strong> - идеально перед важными мероприятиями или после ремонта</li>
+                                        <li><strong>Регулярное обслуживание</strong> - по абонентской системе со скидками</li>
+                                        <li><strong>Сезонная мойка</strong> - специальные программы для разных времен года</li>
+                                        <li><strong>Экстренная мойка</strong> - в случае непредвиденных загрязнений</li>
+                                    </ul>
+                                    <p>Стоимость разовой мойки рассчитывается индивидуально для каждого объекта.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 9 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Какое оборудование вы используете для мойки?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Мы используем профессиональное оборудование:</p>
+                                    <ul>
+                                        <li><strong>Дистилляционные установки</strong> - для воды без минеральных примесей</li>
+                                        <li><strong>Телескопические штанги</strong> - для мойки высоких витрин</li>
+                                        <li><strong>Профессиональные моющие пылесосы</strong> - для сбора излишков воды</li>
+                                        <li><strong>Системы обратного осмоса</strong> - для идеально чистой воды без разводов</li>
+                                        <li><strong>Страховочное оборудование</strong> - для безопасной работы на высоте</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 10 -->
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Предоставляете ли вы скидки постоянным клиентам?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    <p>Да, для постоянных клиентов действует система скидок:</p>
+                                    <ul>
+                                        <li><strong>При заключении договора на 6 месяцев</strong> - скидка 5%</li>
+                                        <li><strong>При заключении договора на 12 месяцев</strong> - скидка 10%</li>
+                                        <li><strong>Для сетевых клиентов</strong> - индивидуальные условия</li>
+                                        <li><strong>Сезонные акции</strong> - специальные предложения в разные периоды года</li>
+                                    </ul>
+                                    <div class="highlight">
+                                        <strong>Бонус:</strong> При заказе комплекса услуг (мойка витрин + аренда ковров) предоставляется дополнительная скидка.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Форма обратной связи -->
+                <div class="contact-form">
+                    <h3>Остались вопросы? Напишите нам!</h3>
+                    <form id="faq-contact-form" method="POST">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="question">Ваш вопрос *</label>
+                            <textarea id="question" name="question" required></textarea>
+                        </div>
+                        
+                        <div class="form-group consent-checkbox">
+                            <input type="checkbox" id="privacy-agreement" name="privacy_agreement" required>
+                            <label for="privacy-agreement">
+                                Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">политикой обработки персональных данных</a> *
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Отправить вопрос</button>
+                    </form>
                 </div>
                 
                 <!-- Кнопка WhatsApp по центру -->
@@ -762,6 +1147,17 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- Cookie уведомление -->
+    <div class="cookie-notice" id="cookieNotice">
+        <div class="cookie-text">
+            Мы используем файлы cookie для улучшения работы сайта. Оставаясь на сайте, вы соглашаетесь с <a href="/privacy-policy.html" style="color: white; text-decoration: underline;">политикой обработки персональных данных</a>.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Принять</button>
+            <button class="cookie-btn cookie-btn-more" onclick="window.location.href='/privacy-policy.html'">Подробнее</button>
+        </div>
+    </div>
+
     <script>
         // Активация FAQ элементов
         document.querySelectorAll('.faq-question').forEach(question => {
@@ -810,6 +1206,29 @@
             
             // Открытие первого вопроса при загрузке
             document.querySelector('.faq-item').classList.add('active');
+
+            // Показать cookie-уведомление, если оно не было принято
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(function() {
+                    document.getElementById('cookieNotice').classList.add('show');
+                }, 2000);
+            }
+        });
+
+        // Принять cookies
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieNotice').classList.remove('show');
+        }
+
+        // Обработка формы обратной связи
+        document.getElementById('faq-contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Здесь должна быть логика отправки формы на сервер
+            // Временно просто показываем сообщение об успехе
+            alert('Ваш вопрос отправлен! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
         });
     </script>
 </body>
