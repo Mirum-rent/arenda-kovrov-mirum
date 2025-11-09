@@ -1,13 +1,13 @@
 User-agent: *
 Allow: /
+
+# Разрешены основные ресурсы
 Allow: /img/
-Allow: /img/arenda_kovrov/
-Allow: /img/review/
-Allow: /img/Poly/
 Allow: /css/
 Allow: /js/
 Allow: /fonts/
 
+# Запрещены служебные и системные директории
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /cgi-bin/
@@ -20,14 +20,7 @@ Disallow: /backup/
 Disallow: /cache/
 Disallow: /logs/
 
-# Заблокировать старые/ненужные страницы
-Disallow: /interesting.html
-Disallow: /photo_i_rekovendacii
-Disallow: /sitemap
-Disallow: /interesno_o_grjazezaschitnych_kovrah
-Disallow: /faq
-
-# Блокировка региональных сайтов-дублей
+# Блокировка региональных сайтов-дублей для избежания каннибализации
 Disallow: /*.moscow/
 Disallow: /*-surgut.ru/
 Disallow: /*-astrakhan.ru/
@@ -44,25 +37,28 @@ Disallow: /*-chelyabinsk.ru/
 Disallow: /*-vladivostok.ru/
 
 # Блокировка GitHub версии
-Disallow: /github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/interesting.html
+Disallow: /github.com/
 
+# Специальные правила для Яндекс
 User-agent: Yandex
 Allow: /
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content
 Clean-param: from&referrer&gclid&yclid&fbclid
 Clean-param: _openstat&ysclid
 
-# Указание канонических версий для региональных сайтов
-# Основной сайт: https://arenda-kovrov-mirum.ru/
+# Указание основной канонической версии сайта
 Host: https://arenda-kovrov-mirum.ru/
 
+# Специальные правила для Google
 User-agent: Googlebot
 Allow: /
 
+# Ограничение для агрессивных ботов
 User-agent: MJ12bot
 Crawl-delay: 10
 
 User-agent: AhrefsBot
 Crawl-delay: 10
 
+# Путь к актуальной карте сайта
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
