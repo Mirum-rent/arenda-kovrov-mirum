@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
-    <!-- Микроразметка Schema.org -->
+    <!-- Микроразметка Schema.org - ИСПРАВЛЕННАЯ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -30,9 +30,33 @@
         "@type": "Organization",
         "name": "МИРУМ",
         "url": "https://arenda-kovrov-mirum.ru/",
-        "foundingDate": "2009"
+        "foundingDate": "2009",
+        "logo": "https://arenda-kovrov-mirum.ru/img/logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ул. Сущёвская, 27с2",
+          "addressLocality": "Москва",
+          "addressCountry": "RU"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+7 (977) 000-51-27",
+          "contactType": "customer service",
+          "areaServed": "RU",
+          "availableLanguage": "Russian"
+        },
+        "sameAs": [
+          "https://мирум.москва/",
+          "https://mirum.moscow/",
+          "https://mirum-surgut.ru/",
+          "https://mirum-astrakhan.ru/",
+          "https://mirum-ufa.ru/"
+        ]
       },
-      "areaServed": "Russia",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Russia"
+      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Услуги по чистке полов",
@@ -56,6 +80,20 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Защитное покрытие полов"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Полировка гомогенных покрытий"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Комплексное восстановление полов"
             }
           }
         ]
@@ -297,8 +335,8 @@
     <!-- HERO БАННЕР -->
     <section class="hero">
         <div class="container">
-            <h1 itemprop="name">Профессиональная чистка и защита полов</h1>
-            <p itemprop="description">Восстановление линолеума, удаление пятен, полировка и защитное покрытие. Более 30 миллионов квадратных метров успешно выполненных работ по всей России!</p>
+            <h1>Профессиональная чистка и защита полов</h1>
+            <p>Восстановление линолеума, удаление пятен, полировка и защитное покрытие. Более 30 миллионов квадратных метров успешно выполненных работ по всей России!</p>
             <div class="action-buttons">
                 <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Бесплатная консультация</a>
             </div>
@@ -586,36 +624,36 @@
         <div class="container">
             <h2 class="section-title">Наши работы: до и после</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before1.webp" alt="Линолеум с желтыми пятнами до обработки" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before1.webp" alt="Линолеум с желтыми пятнами до обработки">
                     <div class="gallery-label">Желтые пятна до обработки</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after1.webp" alt="Линолеум после удаления желтых пятен" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after1.webp" alt="Линолеум после удаления желтых пятен">
                     <div class="gallery-label">После профессиональной обработки</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before2.webp" alt="Линолеум с серыми пятнами до обработки" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before2.webp" alt="Линолеум с серыми пятнами до обработки">
                     <div class="gallery-label">Серые пятна до обработки</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after2.webp" alt="Линолеум после удаления серых пятен" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after2.webp" alt="Линолеум после удаления серых пятен">
                     <div class="gallery-label">После восстановления</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before3.webp" alt="Неровный линолеум до обработки" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly-collage_before3.webp" alt="Неровный линолеум до обработки">
                     <div class="gallery-label">Неровности до обработки</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after3.webp" alt="Линолеум после коррекции неровностей" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_collage_after3.webp" alt="Линолеум после коррекции неровностей">
                     <div class="gallery-label">После нанесения матового покрытия</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before1.webp" alt="Сильно изношенный линолеум до обработки" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before1.webp" alt="Сильно изношенный линолеум до обработки">
                     <div class="gallery-label">Сильный износ до обработки</div>
                 </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Линолеум после восстановления" itemprop="contentUrl">
+                <div class="gallery-item">
+                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Линолеум после восстановления">
                     <div class="gallery-label">После полного восстановления</div>
                 </div>
             </div>
