@@ -20,11 +20,14 @@ Disallow: /backup/
 Disallow: /cache/
 Disallow: /logs/
 
+# Заблокировать старые/ненужные страницы
+Disallow: /interesting.html
 Disallow: /photo_i_rekovendacii
 Disallow: /sitemap
 Disallow: /interesno_o_grjazezaschitnych_kovrah
 Disallow: /faq
 
+# Блокировка региональных сайтов-дублей
 Disallow: /*.moscow/
 Disallow: /*-surgut.ru/
 Disallow: /*-astrakhan.ru/
@@ -40,11 +43,18 @@ Disallow: /*-perm.ru/
 Disallow: /*-chelyabinsk.ru/
 Disallow: /*-vladivostok.ru/
 
+# Блокировка GitHub версии
+Disallow: /github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/interesting.html
+
 User-agent: Yandex
 Allow: /
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content
 Clean-param: from&referrer&gclid&yclid&fbclid
 Clean-param: _openstat&ysclid
+
+# Указание канонических версий для региональных сайтов
+# Основной сайт: https://arenda-kovrov-mirum.ru/
+Host: https://arenda-kovrov-mirum.ru/
 
 User-agent: Googlebot
 Allow: /
