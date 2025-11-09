@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Восстановление полов и линолеума | МИРУМ</title>
-    <meta name="description" content="Профессиональное восстановление полов и линолеума. Более 30 миллионов квадратных метров успешно выполненных работ с 2009 года.">
+    <title>Чистка и защита полов | Восстановление линолеума | МИРУМ</title>
+    <meta name="description" content="Профессиональная чистка и защита полов. Восстановление линолеума, удаление пятен, полировка. Более 30 млн м² выполненных работ с 2009 года.">
     
     <!-- Favicon и PWA настройки -->
     <link rel="icon" href="https://arenda-kovrov-mirum.ru/img/favicon.svg" type="image/svg+xml">
@@ -23,35 +23,43 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "МИРУМ - Восстановление полов и линолеума",
-      "image": "https://arenda-kovrov-mirum.ru/img/logo.png",
-      "description": "Профессиональное восстановление полов и линолеума. Более 30 миллионов квадратных метров успешно выполненных работ с 2009 года.",
-      "telephone": "+79770005127",
-      "email": "matservice@yandex.ru",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "Россия",
-        "addressRegion": "Москва",
-        "addressLocality": "Москва",
-        "streetAddress": "Сущёвская ул., 27с2"
+      "@type": "Service",
+      "name": "Чистка и защита полов",
+      "description": "Профессиональная чистка и защита полов, восстановление линолеума, удаление пятен",
+      "provider": {
+        "@type": "Organization",
+        "name": "МИРУМ",
+        "url": "https://arenda-kovrov-mirum.ru/",
+        "foundingDate": "2009"
       },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "priceRange": "$$",
-      "sameAs": [
-        "https://arenda-kovrov-mirum.ru/"
-      ]
+      "areaServed": "Russia",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги по чистке полов",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Восстановление линолеума"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Удаление желтых пятен"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Защитное покрытие полов"
+            }
+          }
+        ]
+      }
     }
     </script>
     
@@ -186,16 +194,64 @@
             margin-top: 10px;
         }
         
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .price-table th,
+        .price-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .price-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .price-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .consent-checkbox {
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .consent-checkbox input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .consent-checkbox label {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
         /* Адаптивность для галереи */
         @media (max-width: 768px) {
             .gallery-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .price-table {
+                font-size: 0.9rem;
             }
         }
         
         @media (max-width: 576px) {
             .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .price-table th,
+            .price-table td {
+                padding: 8px 10px;
             }
         }
     </style>
@@ -213,6 +269,7 @@
                 <li><a href="#about">О нас</a></li>
                 <li><a href="#services">Услуги</a></li>
                 <li><a href="#how-we-work">Как мы работаем</a></li>
+                <li><a href="#pricing">Цены</a></li>
                 <li><a href="#gallery">Галерея</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contacts">Контакты</a></li>
@@ -226,12 +283,13 @@
         <span>/</span>
         <a href="https://arenda-kovrov-mirum.ru/services.html">Услуги</a>
         <span>/</span>
-        <span>Восстановление полов и линолеума</span>
+        <span>Чистка и защита полов</span>
     </div>
 
     <!-- Быстрые ссылки -->
     <div class="container quick-links">
         <a href="#services" class="quick-link">Услуги по уходу</a>
+        <a href="#pricing" class="quick-link">Цены</a>
         <a href="#gallery" class="quick-link">Фото до/после</a>
         <a href="#contacts" class="quick-link">Контакты</a>
     </div>
@@ -239,10 +297,10 @@
     <!-- HERO БАННЕР -->
     <section class="hero">
         <div class="container">
-            <h1 itemprop="name">Профессиональное восстановление и защита полов и линолеума</h1>
-            <p itemprop="description">Более 30 миллионов квадратных метров успешно выполненных работ по всей России — от Калининграда до Владивостока!</p>
+            <h1 itemprop="name">Профессиональная чистка и защита полов</h1>
+            <p itemprop="description">Восстановление линолеума, удаление пятен, полировка и защитное покрытие. Более 30 миллионов квадратных метров успешно выполненных работ по всей России!</p>
             <div class="action-buttons">
-                <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+                <a href="https://wa.me/79770005127" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Бесплатная консультация</a>
             </div>
         </div>
     </section>
@@ -251,7 +309,7 @@
     <!-- РАЗДЕЛ О КОМПАНИИ -->
     <section id="about" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">О компании МИРУМ</h2>
+            <h2 class="section-title">Профессиональный уход за полами</h2>
             
             <div class="service-card">
                 <p>Компания <strong>МИРУМ</strong> — лидер в сфере восстановления и защиты напольных покрытий. Мы работаем с 2009 года и знаем о полах всё: как вернуть им первоначальный вид, предотвратить износ и продлить срок службы без дорогостоящей замены.</p>
@@ -273,7 +331,7 @@
     <!-- РАЗДЕЛ УСЛУГ -->
     <section id="services" class="section">
         <div class="container">
-            <h2 class="section-title">Наши услуги</h2>
+            <h2 class="section-title">Наши услуги по чистке и защите полов</h2>
             
             <div class="service-card">
                 <h3>1. Восстановление линолеума и ПВХ-покрытий</h3>
@@ -320,12 +378,92 @@
                     <li><strong>Восстановление</strong> — возвращаем полу однородный цвет.</li>
                 </ul>
             </div>
+
+            <div class="service-card">
+                <h3>5. Защитное покрытие полов</h3>
+                <p>Современные защитные покрытия продлевают срок службы напольных покрытий:</p>
+                <ul class="advantage-list">
+                    <li><strong>Антистатические свойства</strong> — меньше пыли и грязи.</li>
+                    <li><strong>Устойчивость к истиранию</strong> — защита от интенсивной нагрузки.</li>
+                    <li><strong>Облегчение уборки</strong> — гладкая поверхность легко моется.</li>
+                    <li><strong>UV-защита</strong> — предотвращает выцветание от солнечных лучей.</li>
+                </ul>
+            </div>
         </div>
     </section>
     <!-- КОНЕЦ РАЗДЕЛА УСЛУГ -->
 
+    <!-- РАЗДЕЛ ЦЕНЫ -->
+    <section id="pricing" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Стоимость услуг</h2>
+            
+            <div class="service-card">
+                <p>Цены на услуги по чистке и защите полов зависят от типа покрытия, площади и сложности работ. Ниже приведены ориентировочные цены:</p>
+                
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th>Единица измерения</th>
+                            <th>Стоимость (руб.)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Глубокая чистка линолеума</td>
+                            <td>м²</td>
+                            <td>от 150</td>
+                        </tr>
+                        <tr>
+                            <td>Удаление желтых пятен</td>
+                            <td>м²</td>
+                            <td>от 200</td>
+                        </tr>
+                        <tr>
+                            <td>Восстановление цвета</td>
+                            <td>м²</td>
+                            <td>от 180</td>
+                        </tr>
+                        <tr>
+                            <td>Нанесение защитного покрытия</td>
+                            <td>м²</td>
+                            <td>от 120</td>
+                        </tr>
+                        <tr>
+                            <td>Полировка гомогенных покрытий</td>
+                            <td>м²</td>
+                            <td>от 250</td>
+                        </tr>
+                        <tr>
+                            <td>Комплексное восстановление</td>
+                            <td>м²</td>
+                            <td>от 350</td>
+                        </tr>
+                        <tr>
+                            <td>Выезд специалиста (диагностика)</td>
+                            <td>выезд</td>
+                            <td>бесплатно</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="section-highlight">
+                    <p><strong>Примечание:</strong> Точная стоимость определяется после бесплатной диагностики. На объемы от 100 м² предоставляем скидки до 20%.</p>
+                </div>
+                
+                <div class="text-center">
+                    <a href="https://wa.me/79770005127" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Рассчитать точную стоимость
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- КОНЕЦ РАЗДЕЛА ЦЕНЫ -->
+
     <!-- РАЗДЕЛ КАК МЫ РАБОТАЕМ -->
-    <section id="how-we-work" class="section bg-light">
+    <section id="how-we-work" class="section">
         <div class="container">
             <h2 class="section-title">Как мы работаем?</h2>
             
@@ -357,7 +495,7 @@
     <!-- КОНЕЦ РАЗДЕЛА КАК МЫ РАБОТАЕМ -->
 
     <!-- РАЗДЕЛ ПРЕИМУЩЕСТВ -->
-    <section id="advantages" class="section">
+    <section id="advantages" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Почему выгоднее восстановить, чем заменить?</h2>
             
@@ -376,6 +514,8 @@
                     <li>Офисами и бизнес-центрами.</li>
                     <li>Медицинскими и образовательными учреждениями.</li>
                     <li>Производственными помещениями.</li>
+                    <li>Спортивными объектами и фитнес-центрами.</li>
+                    <li>Гостиницами и ресторанами.</li>
                 </ul>
             </div>
         </div>
@@ -383,7 +523,7 @@
     <!-- КОНЕЦ РАЗДЕЛА ПРЕИМУЩЕСТВ -->
 
     <!-- FAQ -->
-    <section id="faq" class="section bg-light">
+    <section id="faq" class="section">
         <div class="container">
             <h2 class="section-title">Частые вопросы</h2>
             
@@ -422,13 +562,27 @@
                         <p>Нет, шлифовка гетерогенных покрытий запрещена — это приведет к безвозвратной порче материала. Для таких покрытий мы используем специальные методы очистки и восстановления.</p>
                     </div>
                 </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Сколько времени занимает процесс восстановления?</div>
+                    <div class="faq-answer">
+                        <p>Для стандартного офиса площадью 50-100 м² работы занимают 1 рабочий день. Крупные объекты (торговые центры) обрабатываем поэтапно, чтобы не мешать работе заведения.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Можно ли находиться в помещении во время работ?</div>
+                    <div class="faq-answer">
+                        <p>Мы используем экологически безопасные составы без резкого запаха. Однако для комфорта рекомендуем ограничить пребывание в помещении во время активной фазы работ. После завершения помещение готово к использованию через 2-4 часа.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <!-- КОНЕЦ FAQ -->
 
     <!-- ГАЛЕРЕЯ ДО/ПОСЛЕ -->
-    <section id="gallery" class="section">
+    <section id="gallery" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Наши работы: до и после</h2>
             <div class="gallery-grid">
@@ -463,22 +617,6 @@
                 <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
                     <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after1.webp" alt="Линолеум после восстановления" itemprop="contentUrl">
                     <div class="gallery-label">После полного восстановления</div>
-                </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before2.webp" alt="Линолеум с царапинами до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">Царапины до обработки</div>
-                </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after2.webp" alt="Линолеум после устранения царапин" itemprop="contentUrl">
-                    <div class="gallery-label">После полировки</div>
-                </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poy_before3.webp" alt="Линолеум с неравномерным цветом до обработки" itemprop="contentUrl">
-                    <div class="gallery-label">Неравномерный цвет до обработки</div>
-                </div>
-                <div class="gallery-item" itemscope itemtype="https://schema.org/ImageObject">
-                    <img src="https://arenda-kovrov-mirum.ru/img/Poly/Poly_after3.webp" alt="Линолеум с восстановленным цветом" itemprop="contentUrl">
-                    <div class="gallery-label">После восстановления цвета</div>
                 </div>
             </div>
         </div>
@@ -516,7 +654,7 @@
                 </div>
                 <div style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                     <h3 style="color: var(--accent-color); margin-bottom: 20px;">Оставьте заявку</h3>
-                    <form>
+                    <form id="contact-form">
                         <div style="margin-bottom: 20px;">
                             <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ваше имя*</label>
                             <input type="text" placeholder="Иван Иванов" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
@@ -529,6 +667,15 @@
                             <label style="display: block; margin-bottom: 8px; font-weight: 600;">Сообщение</label>
                             <textarea placeholder="Опишите вашу задачу" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; min-height: 120px; resize: vertical;"></textarea>
                         </div>
+                        
+                        <!-- Чекбокс согласия с политикой конфиденциальности -->
+                        <div class="consent-checkbox">
+                            <input type="checkbox" id="privacy-agreement" name="privacy_agreement" required>
+                            <label for="privacy-agreement">
+                                Я соглашаюсь с <a href="https://arenda-kovrov-mirum.ru/privacy-policy.html" target="_blank">политикой обработки персональных данных</a>
+                            </label>
+                        </div>
+                        
                         <button type="submit" class="btn">Отправить заявку</button>
                     </form>
                 </div>
@@ -549,6 +696,7 @@
                         <li><i class="fas fa-play-circle footer-icon"></i> <a href="#how-we-work">Как мы работаем</a></li>
                         <li><i class="fas fa-images footer-icon"></i> <a href="#gallery">Галерея работ</a></li>
                         <li><i class="fas fa-question-circle footer-icon"></i> <a href="#faq">FAQ</a></li>
+                        <li><i class="fas fa-shield-alt footer-icon"></i> <a href="https://arenda-kovrov-mirum.ru/privacy-policy.html">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -558,132 +706,56 @@
                         <li><i class="fas fa-tint footer-icon"></i> <a href="#services">Защита линолеума</a></li>
                         <li><i class="fas fa-stainless footer-icon"></i> <a href="#services">Удаление пятен</a></li>
                         <li><i class="fas fa-ruler-combined footer-icon"></i> <a href="#services">Коррекция неровностей</a></li>
+                        <li><i class="fas fa-shield-virus footer-icon"></i> <a href="#services">Защитное покрытие</a></li>
                     </ul>
                 </div>
-					<div class="footer-column">
-						<h3>Регионы работы</h3>
-						<div class="regions-grid">
-							<!-- Центральный ФО -->
-							<div class="region-group">
-								<h4>Центральный округ</h4>
-								<ul>
-									<li>Москва</li>
-									<li>Санкт-Петербург</li>
-									<li>Воронеж</li>
-									<li>Ярославль</li>
-									<li>Тула</li>
-									<li>Белгород</li>
-									<li>Калуга</li>
-									<li>Кострома</li>
-								</ul>
-							</div>
-							
-							<!-- Северо-Западный ФО -->
-							<div class="region-group">
-								<h4>Северо-Западный округ</h4>
-								<ul>
-									<li>Санкт-Петербург</li>
-									<li>Архангельск</li>
-									<li>Мурманск</li>
-									<li>Петрозаводск</li>
-									<li>Великий Новгород</li>
-									<li>Псков</li>
-									<li>Калининград</li>
-									<li>Сыктывкар</li>
-								</ul>
-							</div>
-							
-							<!-- Южный ФО -->
-							<div class="region-group">
-								<h4>Южный округ</h4>
-								<ul>
-									<li>Ростов-на-Дону</li>
-									<li>Краснодар</li>
-									<li>Сочи</li>
-									<li>Волгоград</li>
-									<li>Астрахань</li>
-									<li>Севастополь</li>
-									<li>Симферополь</li>
-									<li>Ставрополь</li>
-								</ul>
-							</div>
-							
-							<!-- Северо-Кавказский ФО -->
-							<div class="region-group">
-								<h4>Северо-Кавказский округ</h4>
-								<ul>
-									<li>Махачкала</li>
-									<li>Грозный</li>
-									<li>Владикавказ</li>
-									<li>Нальчик</li>
-									<li>Черкесск</li>
-									<li>Пятигорск</li>
-									<li>Кисловодск</li>
-									<li>Дербент</li>
-								</ul>
-							</div>
-							
-							<!-- Приволжский ФО -->
-							<div class="region-group">
-								<h4>Приволжский округ</h4>
-								<ul>
-									<li>Нижний Новгород</li>
-									<li>Казань</li>
-									<li>Самара</li>
-									<li>Уфа</li>
-									<li>Пермь</li>
-									<li>Саратов</li>
-									<li>Тольятти</li>
-									<li>Ижевск</li>
-								</ul>
-							</div>
-							
-							<!-- Уральский ФО -->
-							<div class="region-group">
-								<h4>Уральский округ</h4>
-								<ul>
-									<li>Екатеринбург</li>
-									<li>Челябинск</li>
-									<li>Тюмень</li>
-									<li>Магнитогорск</li>
-									<li>Курган</li>
-									<li>Сургут</li>
-									<li>Нижневартовск</li>
-									<li>Новый Уренгой</li>
-								</ul>
-							</div>
-							
-							<!-- Сибирский ФО -->
-							<div class="region-group">
-								<h4>Сибирский округ</h4>
-								<ul>
-									<li>Новосибирск</li>
-									<li>Омск</li>
-									<li>Красноярск</li>
-									<li>Иркутск</li>
-									<li>Барнаул</li>
-									<li>Томск</li>
-									<li>Кемерово</li>
-									<li>Новокузнецк</li>
-								</ul>
-							</div>
-							
-							<!-- Дальневосточный ФО -->
-							<div class="region-group">
-								<h4>Дальневосточный округ</h4>
-								<ul>
-									<li>Владивосток</li>
-									<li>Хабаровск</li>
-									<li>Якутск</li>
-									<li>Благовещенск</li>
-									<li>Петропавловск-Камчатский</li>
-									<li>Южно-Сахалинск</li>
-									<li>Комсомольск-на-Амуре</li>
-									<li>Улан-Удэ</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+                <div class="footer-column">
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <!-- Центральный ФО -->
+                        <div class="region-group">
+                            <h4>Центральный округ</h4>
+                            <ul>
+                                <li>Москва</li>
+                                <li>Московская обл.</li>
+                                <li>Тверская обл.</li>
+                                <li>Тульская обл.</li>
+                                <li>Ярославская обл.</li>
+                                <li>Брянская обл.</li>
+                                <li>Орловская обл.</li>
+                                <li>Владимирская обл.</li>
+                                <li>Ивановская обл.</li>
+                                <li>Калужская обл.</li>
+                                <li>Смоленская обл.</li>
+                                <li>Белгородская обл.</li>
+                                <li>Курская обл.</li>
+                                <li>Воронежская обл.</li>
+                                <li>Тамбовская обл.</li>
+                                <li>Рязанская обл.</li>
+                                <li>Липецкая обл.</li>
+                                <li>Костромская обл.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Северо-Западный ФО -->
+                        <div class="region-group">
+                            <h4>Северо-Западный округ</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Ленинградская обл.</li>
+                                <li>Архангельская обл.</li>
+                                <li>Мурманская обл.</li>
+                                <li>Псковская обл.</li>
+                                <li>Новгородская обл.</li>
+                                <li>Калининградская обл.</li>
+                                <li>Республика Карелия</li>
+                                <li>Республика Коми</li>
+                                <li>Вологодская обл.</li>
+                                <li>Ненецкий АО</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="footer-column">
                     <h3>Контакты</h3>
                     <ul>
@@ -698,10 +770,28 @@
             
             <div class="copyright">
                 <p>&copy; 2009-<script>document.write(new Date().getFullYear())</script> ООО "МИРУМ". Все права защищены.</p>
-                <p><a href="#" style="color: white;">Политика конфиденциальности</a></p>
+                <p><a href="https://arenda-kovrov-mirum.ru/privacy-policy.html" style="color: white;">Политика конфиденциальности</a></p>
             </div>
         </div>
     </footer>
+
+    <!-- НАЧАЛО БЛОКА Кнопка "Наверх" -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <!-- КОНЕЦ БЛОКА Кнопка "Наверх" -->
+
+    <!-- НАЧАЛО БЛОКА Cookie уведомление -->
+    <div class="cookie-notice" id="cookieNotice">
+        <div class="cookie-text">
+            Мы используем файлы cookie для улучшения работы сайта. Оставаясь на сайте, вы соглашаетесь с <a href="https://arenda-kovrov-mirum.ru/privacy-policy.html" style="color: white; text-decoration: underline;">политикой обработки персональных данных</a>.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Принять</button>
+            <button class="cookie-btn cookie-btn-more" onclick="window.location.href='https://arenda-kovrov-mirum.ru/privacy-policy.html'">Подробнее</button>
+        </div>
+    </div>
+    <!-- КОНЕЦ БЛОКА Cookie уведомление -->
 
     <!-- Скрипты -->
     <script>
@@ -734,6 +824,56 @@
                     answer.style.display = 'block';
                 }
             });
+        });
+
+        // Основные скрипты для работы сайта
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показать кнопку "Наверх" при прокрутке
+            window.addEventListener('scroll', function() {
+                const backToTop = document.getElementById('backToTop');
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Прокрутка вверх по клику
+            document.getElementById('backToTop').addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Показать cookie-уведомление, если оно не было принято
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(function() {
+                    document.getElementById('cookieNotice').classList.add('show');
+                }, 2000);
+            }
+        });
+        
+        // Принять cookies
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieNotice').classList.remove('show');
+        }
+
+        // Обработка формы
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Проверка согласия с политикой
+            const privacyAgreement = document.getElementById('privacy-agreement');
+            if (!privacyAgreement.checked) {
+                alert('Пожалуйста, согласитесь с политикой обработки персональных данных');
+                return;
+            }
+            
+            // Здесь можно добавить отправку формы
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+            this.reset();
         });
     </script>
 </body>
