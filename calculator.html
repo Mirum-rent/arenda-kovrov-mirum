@@ -97,12 +97,12 @@
                                 <input type="tel" id="discountPhone" name="discountPhone" placeholder="+7 (999) 123-45-67" required>
                             </div>
                             
-                            <div class="consent-toggle">
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="consent" name="consent" required>
-                                    <span class="toggle-slider"></span>
+                            <!-- ИСПРАВЛЕННЫЙ ЧЕКБОКС СОГЛАСИЯ -->
+                            <div class="form-group consent-checkbox">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <label for="consent">
+                                    Я соглашаюсь с <a href="privacy-policy.html" target="_blank" class="privacy-link">политикой обработки персональных данных</a>
                                 </label>
-                                <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
                             </div>
                             
                             <button type="button" class="btn" onclick="requestDiscount()">Отправить запрос</button>
@@ -157,12 +157,12 @@
                                 <input type="file" id="requisitesFile" name="requisitesFile">
                             </div>
                             
-                            <div class="consent-toggle">
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="contractConsent" name="contractConsent" required>
-                                    <span class="toggle-slider"></span>
+                            <!-- ИСПРАВЛЕННЫЙ ЧЕКБОКС СОГЛАСИЯ -->
+                            <div class="form-group consent-checkbox">
+                                <input type="checkbox" id="contractConsent" name="contractConsent" required>
+                                <label for="contractConsent">
+                                    Я соглашаюсь с <a href="privacy-policy.html" target="_blank" class="privacy-link">политикой обработки персональных данных</a>
                                 </label>
-                                <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
                             </div>
                             
                             <button type="button" class="btn" onclick="sendContractDetails()">Отправить реквизиты</button>
@@ -227,12 +227,12 @@
                                 <input type="tel" id="tenderPhone" name="tenderPhone" placeholder="+7 (999) 123-45-67" required>
                             </div>
                             
-                            <div class="consent-toggle">
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="tenderConsent" name="tenderConsent" required>
-                                    <span class="toggle-slider"></span>
+                            <!-- ИСПРАВЛЕННЫЙ ЧЕКБОКС СОГЛАСИЯ -->
+                            <div class="form-group consent-checkbox">
+                                <input type="checkbox" id="tenderConsent" name="tenderConsent" required>
+                                <label for="tenderConsent">
+                                    Я соглашаюсь с <a href="privacy-policy.html" target="_blank" class="privacy-link">политикой обработки персональных данных</a>
                                 </label>
-                                <span class="toggle-label">Я согласен на <a class="privacy-link" onclick="openPrivacyModal()">обработку персональных данных</a></span>
                             </div>
                             
                             <button type="button" class="btn btn-whatsapp" onclick="sendTenderToWhatsApp()">
