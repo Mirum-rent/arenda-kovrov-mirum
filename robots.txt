@@ -20,6 +20,9 @@ Disallow: /backup/
 Disallow: /cache/
 Disallow: /logs/
 
+# Запрет страницы чистки полов (больше не используется)
+Disallow: /chistka_polov.html
+
 # Блокировка региональных сайтов-дублей для избежания каннибализации
 Disallow: /*.moscow/
 Disallow: /*-surgut.ru/
