@@ -412,28 +412,38 @@ function updateTenderTable() {
     document.getElementById('tender-result').style.display = 'block';
 }
 
-// Функции отправки
+// Функции отправки в WhatsApp
 function sendToWhatsApp() {
     if (orderItems.length === 0 && !currentItem) {
         alert('Добавьте хотя бы одну позицию в заказ');
         return;
     }
     
+    // Получаем выбранный регион из формы
+    const region = document.getElementById('region').value;
+    
     let message = 'Запрос по калькулятору аренды ковров:\n\n';
+    
+    // Добавляем информацию о регионе
+    if (region) {
+        message += `📌 Регион: ${region}\n\n`;
+    }
     
     if (currentItem || orderItems.length > 0) {
         message += 'Текущий заказ:\n';
         
+        // Добавляем текущий элемент
         if (currentItem) {
-            message += `- ${currentItem.size}, ${currentItem.quantity} шт., ${currentItem.frequency}: ${currentItem.costForMonth} ₽/мес\n`;
+            message += `• Размер: ${currentItem.size}, Кол-во: ${currentItem.quantity} шт., Замена: ${currentItem.frequency}, Стоимость: ${currentItem.costForMonth} ₽/мес\n`;
         }
         
+        // Добавляем сохраненные элементы
         orderItems.forEach(item => {
-            message += `- ${item.size}, ${item.quantity} шт., ${item.frequency}: ${item.costForMonth} ₽/мес\n`;
+            message += `• Размер: ${item.size}, Кол-во: ${item.quantity} шт., Замена: ${item.frequency}, Стоимость: ${item.costForMonth} ₽/мес\n`;
         });
         
         const totalElement = document.getElementById('total');
-        message += `\nОбщая стоимость: ${totalElement.textContent}`;
+        message += `\n${totalElement.textContent}`;
     }
     
     const encodedMessage = encodeURIComponent(message);
@@ -452,17 +462,27 @@ function sendTenderToWhatsApp() {
         return;
     }
     
-    let message = `Запрос по тендеру:\nИмя: ${name}\nТелефон: ${phone}\n\nДетали тендера:\n`;
+    // Получаем выбранный регион для тендера
+    const region = document.getElementById('tenderRegion').value;
+    
+    let message = `Запрос по тендеру:\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n`;
+    
+    // Добавляем информацию о регионе
+    if (region) {
+        message += `📍 Регион: ${region}\n`;
+    }
+    
+    message += '\n📋 Детали тендера:\n';
     
     if (currentTenderItem) {
-        message += `- ${currentTenderItem.size}: ${currentTenderItem.pricePerItem} ₽ за замену\n`;
+        message += `• Размер: ${currentTenderItem.size}, Цена: ${currentTenderItem.pricePerItem} ₽ за замену\n`;
     }
     
     tenderItems.forEach(item => {
-        message += `- ${item.size}: ${item.pricePerItem} ₽ за замену\n`;
+        message += `• Размер: ${item.size}, Цена: ${item.pricePerItem} ₽ за замену\n`;
     });
     
-    message += '\nПо месяцам:\n';
+    message += '\n🗓️ По месяцам:\n';
     
     const monthInputs = document.querySelectorAll('.month-input');
     monthInputs.forEach(input => {
@@ -471,7 +491,7 @@ function sendTenderToWhatsApp() {
         const replacements = input.querySelector('.month-replacements').value || 0;
         
         if (carpets > 0 || replacements > 0) {
-            message += `- ${month}: ${carpets} ковров, ${replacements} замен\n`;
+            message += `• ${month}: ${carpets} ковров, ${replacements} замен\n`;
         }
     });
     
@@ -494,18 +514,28 @@ function requestDiscount() {
         return;
     }
     
-    let message = `Запрос на скидку:\nИмя: ${name}\nТелефон: ${phone}\n\nТекущий заказ:\n`;
+    // Получаем выбранный регион
+    const region = document.getElementById('region').value;
+    
+    let message = `Запрос на скидку:\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n`;
+    
+    // Добавляем информацию о регионе
+    if (region) {
+        message += `📍 Регион: ${region}\n`;
+    }
+    
+    message += '\n📋 Текущий заказ:\n';
     
     if (currentItem) {
-        message += `- ${currentItem.size}, ${currentItem.quantity} шт., ${currentItem.frequency}: ${currentItem.costForMonth} ₽/мес\n`;
+        message += `• Размер: ${currentItem.size}, Кол-во: ${currentItem.quantity} шт., Замена: ${currentItem.frequency}, Стоимость: ${currentItem.costForMonth} ₽/мес\n`;
     }
     
     orderItems.forEach(item => {
-        message += `- ${item.size}, ${item.quantity} шт., ${item.frequency}: ${item.costForMonth} ₽/мес\n`;
+        message += `• Размер: ${item.size}, Кол-во: ${item.quantity} шт., Замена: ${item.frequency}, Стоимость: ${item.costForMonth} ₽/мес\n`;
     });
     
     const totalElement = document.getElementById('total');
-    message += `\nОбщая стоимость: ${totalElement.textContent}`;
+    message += `\n${totalElement.textContent}`;
     
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/79770005127?text=${encodedMessage}`;
@@ -527,17 +557,41 @@ function sendContractDetails() {
         return;
     }
     
-    let message = `Реквизиты для договора:\n\n`;
-    message += `Контактное лицо: ${contactPerson}\n`;
-    message += `Телефон: ${phone}\n`;
+    // Получаем выбранный регион
+    const region = document.getElementById('region').value;
+    
+    let message = `📄 Реквизиты для договора:\n\n`;
+    message += `👤 Контактное лицо: ${contactPerson}\n`;
+    message += `📞 Телефон: ${phone}\n`;
+    
+    // Добавляем информацию о регионе
+    if (region) {
+        message += `📍 Регион аренды: ${region}\n`;
+    }
     
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
     const requisites = document.getElementById('requisites').value;
     
-    if (company) message += `Название организации: ${company}\n`;
-    if (email) message += `Email: ${email}\n`;
-    if (requisites) message += `Реквизиты компании:\n${requisites}\n`;
+    if (company) message += `🏢 Название организации: ${company}\n`;
+    if (email) message += `📧 Email: ${email}\n`;
+    if (requisites) message += `📋 Реквизиты компании:\n${requisites}\n`;
+    
+    // Добавляем информацию о заказе, если есть
+    if (currentItem || orderItems.length > 0) {
+        message += `\n📋 Заказ:\n`;
+        
+        if (currentItem) {
+            message += `• Размер: ${currentItem.size}, Кол-во: ${currentItem.quantity} шт., Замена: ${currentItem.frequency}\n`;
+        }
+        
+        orderItems.forEach(item => {
+            message += `• Размер: ${item.size}, Кол-во: ${item.quantity} шт., Замена: ${item.frequency}\n`;
+        });
+        
+        const totalElement = document.getElementById('total');
+        message += `\n${totalElement.textContent}\n`;
+    }
     
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/79770005127?text=${encodedMessage}`;
