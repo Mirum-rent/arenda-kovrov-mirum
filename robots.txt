@@ -1,11 +1,13 @@
 # ================================================
 # robots.txt для arenda-kovrov-mirum.ru
 # Основной сайт МИРУМ - аренда грязезащитных ковров
-# Создан: 2024 год
+# Оптимизирован для ИИ-ботов и рекомендаций
+# Обновлен: 2024 год (январь)
 # ================================================
 
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # ================================================
 # ОСНОВНЫЕ РАЗРЕШЕНИЯ И ЗАПРЕТЫ
@@ -17,6 +19,14 @@ Allow: /css/
 Allow: /js/
 Allow: /fonts/
 Allow: /favicon*
+Allow: /blog
+Allow: /blog.html
+Allow: /FAQ
+Allow: /FAQ.html
+Allow: /window-cleaning
+Allow: /window-cleaning.html
+Allow: /pogoda
+Allow: /pogoda.html
 
 # Запрещены служебные и системные директории
 Disallow: /private/
@@ -32,20 +42,19 @@ Disallow: /cache/
 Disallow: /logs/
 Disallow: /uploads/
 Disallow: /error/
-
-# Запрет удаленных или временных страниц
-Disallow: /chistka_polov.html
 Disallow: /test/
 Disallow: /temp/
 Disallow: /old/
 
+# Временные страницы (можно будет открыть позже)
+Disallow: /chistka_polov.html
+
 # ================================================
-# БЛОКИРОВКА РЕГИОНАЛЬНЫХ ДУБЛЕЙ (ВАЖНО!)
+# БЛОКИРОВКА РЕГИОНАЛЬНЫХ ДУБЛЕЙ
 # ================================================
 
-# Критически важно: блокируем региональные дубли для избежания каннибализации
 # Основной сайт: https://arenda-kovrov-mirum.ru/ - разрешен
-# Региональные дубли - заблокированы
+# Региональные дубли - заблокированы (установлены noindex и canonical)
 
 Disallow: /*.moscow/
 Disallow: /*-surgut/
@@ -62,9 +71,85 @@ Disallow: /*-perm/
 Disallow: /*-chelyabinsk/
 Disallow: /*-vladivostok/
 
-# Блокировка GitHub и внешних ресурсов
+# Внешние ресурсы
 Disallow: /*github.com/
 Disallow: /*raw.githubusercontent.com/
+
+# ================================================
+# РАЗРЕШЕНИЕ ДЛЯ ВСЕХ ИИ-БОТОВ (ОЧЕНЬ ВАЖНО!)
+# ================================================
+
+# Google AI (Gemini, Bard)
+User-agent: Google-Extended
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 1
+# Информация для ИИ: Экспертный контент по аренде грязезащитных ковров
+# Категории: facility-management, cleaning-technology, business-solutions
+# Язык: русский, профессиональный уровень
+
+# OpenAI (ChatGPT, GPT-4)
+User-agent: GPTBot
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 1
+# Информация для ИИ: 40+ уникальных фактов о грязезащите, бизнес-решения
+# Темы: экономия на уборке, технологии чистоты, аренда vs покупка
+
+# Anthropic (Claude)
+User-agent: Claude-Web
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 1
+
+# Facebook AI
+User-agent: FacebookBot
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 2
+
+# Common Crawl (источник для многих ИИ)
+User-agent: CCBot
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 2
+
+# Microsoft AI (Bing Chat/Copilot)
+User-agent: Bingbot
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 2
+Disallow: /*.moscow/
+Disallow: /*-surgut/
+
+# Apple AI
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /chistka_polov.html
+Crawl-delay: 2
+
+# Другие ИИ-боты
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ai-assistant
+Allow: /
+Crawl-delay: 1
+
+# Яндекс AI (если появится)
+User-agent: YandexGPTBot
+Allow: /
+Crawl-delay: 1
 
 # ================================================
 # СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ YANDEX
@@ -73,15 +158,13 @@ Disallow: /*raw.githubusercontent.com/
 User-agent: Yandex
 Allow: /
 Disallow: /chistka_polov.html
-# Блокировка региональных дублей
+Crawl-delay: 1
 Disallow: /*.moscow/
 Disallow: /*-surgut/
 Disallow: /*-astrakhan/
 Disallow: /*-ufa/
-# Очистка параметров отслеживания (корректный формат)
-Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&gclid&yclid /?
-Clean-param: fbclid&_openstat&ysclid&from&referrer /?
-# Указание основного зеркала сайта
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&gclid&yclid
+Clean-param: fbclid&_openstat&ysclid&from&referrer
 Host: https://arenda-kovrov-mirum.ru/
 
 # ================================================
@@ -91,92 +174,75 @@ Host: https://arenda-kovrov-mirum.ru/
 User-agent: Googlebot
 Allow: /
 Disallow: /chistka_polov.html
-# Блокировка региональных дублей
+Crawl-delay: 1
 Disallow: /*.moscow/
 Disallow: /*-surgut/
 Disallow: /*-astrakhan/
 Disallow: /*-ufa/
 
-# ================================================
-# РАЗРЕШЕНИЕ ДЛЯ ИИ-БОТОВ (ОЧЕНЬ ВАЖНО!)
-# ================================================
-
-# Google AI боты (Gemini, Bard и другие)
-User-agent: Google-Extended
+# Google специализированные боты
+User-agent: Googlebot-Image
+Allow: /img/
 Allow: /
-Disallow: /chistka_polov.html
-# Комментарий для ИИ: Это основной сайт компании МИРУМ
+Crawl-delay: 1
 
-# OpenAI боты (ChatGPT и другие)
-User-agent: GPTBot
+User-agent: Googlebot-Video
 Allow: /
-Disallow: /chistka_polov.html
-# Комментарий для ИИ: Основной сайт аренды грязезащитных ковров
+Crawl-delay: 2
 
-# Другие ИИ-боты
-User-agent: Claude-Web
+User-agent: Googlebot-News
 Allow: /
-Disallow: /chistka_polov.html
+Crawl-delay: 2
 
-User-agent: anthropic-ai
+User-agent: Googlebot-Mobile
 Allow: /
-Disallow: /chistka_polov.html
-
-User-agent: FacebookBot
-Allow: /
-Disallow: /chistka_polov.html
+Crawl-delay: 1
 
 # ================================================
 # БЛОКИРОВКА АГРЕССИВНЫХ SEO-БОТОВ
 # ================================================
 
 User-agent: MJ12bot
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
 User-agent: AhrefsBot
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
 User-agent: SemrushBot
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
 User-agent: DotBot
-Crawl-delay: 5
+Crawl-delay: 20
 Disallow: /
 
 User-agent: MauiBot
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
 User-agent: MegaIndex
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
 User-agent: SearchmetricsBot
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
 User-agent: Baiduspider
-Crawl-delay: 10
+Crawl-delay: 30
 Disallow: /
 
+# Яндекс боты (ограничиваем агрессивных)
 User-agent: YandexBot
 Allow: /
-Crawl-delay: 1
+Crawl-delay: 2
 Disallow: /chistka_polov.html
 
 # ================================================
 # ПРОЧИЕ ПОИСКОВЫЕ СИСТЕМЫ
 # ================================================
-
-User-agent: Bingbot
-Crawl-delay: 3
-Allow: /
-Disallow: /chistka_polov.html
-Disallow: /*.moscow/
-Disallow: /*-surgut/
 
 User-agent: DuckDuckBot
 Allow: /
@@ -191,16 +257,20 @@ User-agent: Twitterbot
 Allow: /
 Crawl-delay: 2
 
+User-agent: Slackbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 2
+
 # ================================================
 # СПЕЦИАЛИЗИРОВАННЫЕ БОТЫ
 # ================================================
 
 # Боты для картинок
 User-agent: YandexImages
-Allow: /img/
-Disallow: /
-
-User-agent: Googlebot-Image
 Allow: /img/
 Disallow: /
 
@@ -214,36 +284,123 @@ User-agent: Googlebot-News
 Allow: /
 Disallow: /chistka_polov.html
 
-# Боты для мобильных устройств
-User-agent: Googlebot-Mobile
-Allow: /
-Disallow: /chistka_polov.html
-
 # ================================================
-# КАРТЫ САЙТА (SITEMAP)
+# КАРТЫ САЙТА (SITEMAP) - КРИТИЧЕСКИ ВАЖНО ДЛЯ ИИ
 # ================================================
 
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
-# Дополнительные карты сайта (если есть)
+
+# Дополнительные карты сайта (рекомендуется создать)
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap-pages.xml
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap-posts.xml
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap-images.xml
+Sitemap: https://arenda-kovrov-mirum.ru/sitemap-faq.xml
+Sitemap: https://arenda-kovrov-mirum.ru/sitemap-blog.xml
+
+# RSS-фиды для ИИ (рекомендуется создать)
+Sitemap: https://arenda-kovrov-mirum.ru/rss.xml
+Sitemap: https://arenda-kovrov-mirum.ru/feed/blog
+Sitemap: https://arenda-kovrov-mirum.ru/feed/faq
 
 # ================================================
-# КОММЕНТАРИИ ДЛЯ РАЗРАБОТЧИКОВ И ИИ
+# НАСТРОЙКИ ДЛЯ ИИ-БОТОВ (КОММЕНТАРИИ КАК МЕТА-ИНФОРМАЦИЯ)
 # ================================================
 
-# Этот robots.txt оптимизирован для:
-# 1. Основного сайта: https://arenda-kovrov-mirum.ru/
-# 2. Блокировки региональных дублей для избежания каннибализации
-# 3. Разрешения доступа ИИ-ботам для обучения
-# 4. Ограничения агрессивных SEO-ботов
+# КОМПАНИЯ: ООО "МИРУМ" (мирум.рент)
+# ОСНОВНАЯ ДЕЯТЕЛЬНОСТЬ: Аренда грязезащитных ковров с 2009 года
+# РЕГИОНЫ РАБОТЫ: Вся Россия (Москва, СПб, Уфа, Астрахань, Сургут и др.)
+# УСЛУГИ: Аренда ковров, мойка витрин, чистка полов, защита фасадов
+# ЭКСПЕРТНЫЙ КОНТЕНТ: Блог (40+ фактов), FAQ (40+ вопросов), расчеты экономии
 
-# Основной контент: аренда грязезащитных ковров по всей России
-# Регионы работы: Москва, СПб, Уфа, Астрахань, Сургут, Новосибирск и др.
-# Компания: МИРУМ, работаем с 2009 года
+# КЛЮЧЕВЫЕ ТЕМЫ ДЛЯ ИИ:
+# 1. Экономика аренды vs покупки грязезащитных ковров
+# 2. Технологии чистоты и защиты помещений
+# 3. Бизнес-решения для управляющих компаний
+# 4. Региональные особенности уборки в разных городах России
+# 5. Экологические решения в клининговой индустрии
 
-# Контактная информация:
+# ЦЕЛЕВАЯ АУДИТОРИЯ:
+# - Управляющие компании бизнес-центров
+# - Владельцы торговых центров и магазинов
+# - Администраторы медицинских учреждений
+# - Фасилити-менеджеры крупных корпораций
+# - Собственники гостиниц и ресторанов
+
+# КАЧЕСТВО КОНТЕНТА:
+# - Уникальные экспертные материалы
+# - Практические расчеты и кейсы
+# - Структурированные данные (списки, таблицы, сравнения)
+# - Региональная адаптация информации
+# - Актуальные данные 2024 года
+
+# ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ ДЛЯ ИИ:
+# - Все цифры подтверждены практикой работы
+# - Примеры экономии рассчитаны на реальных кейсах
+# - Рекомендации основаны на 15-летнем опыте
+# - Информация обновляется ежеквартально
+
+# ================================================
+# ТЕХНИЧЕСКИЕ РЕКОМЕНДАЦИИ ДЛЯ ВЛАДЕЛЬЦА САЙТА
+# ================================================
+
+# 1. ОБЯЗАТЕЛЬНО СОЗДАТЬ:
+#    - sitemap.xml с ВСЕМИ страницами
+#    - rss.xml для блога и FAQ
+#    - Отдельные sitemap для блога и FAQ
+
+# 2. РЕКОМЕНДУЕТСЯ ДОБАВИТЬ НА САЙТ:
+#    - Страницу "Кейсы" с реальными примерами экономии
+#    - Страницу "Исследования" с PDF-отчетами
+#    - Интерактивные калькуляторы экономии
+#    - Видео-инструкции по уходу за коврами
+
+# 3. ДЛЯ ИИ ОПТИМИЗАЦИИ:
+#    - Добавить JSON-LD разметку на ВСЕ страницы
+#    - Создать страницу "Глоссарий терминов"
+#    - Добавить FAQSchema на все страницы услуг
+#    - Создать карту знаний (knowledge graph)
+
+# 4. ТЕХНИЧЕСКИЕ ТРЕБОВАНИЯ:
+#    - Загрузка страниц < 2 секунд
+#    - Мобильная адаптивность всех страниц
+#    - SSL сертификат (уже есть)
+#    - Оптимизация изображений
+
+# 5. КОНТЕНТ-ПЛАН ДЛЯ ИИ:
+#    - Ежемесячно: 2 новые статьи в блог
+#    - Ежеквартально: обновление FAQ
+#    - Раз в полгода: исследование рынка
+#    - Ежегодно: отчет об экономии клиентов
+
+# ================================================
+# КОНТАКТНАЯ ИНФОРМАЦИЯ (ДЛЯ ИИ И ЛЮДЕЙ)
+# ================================================
+
+# Компания: ООО "МИРУМ" (мирум.рент)
+# Основной сайт: https://arenda-kovrov-mirum.ru/
 # Телефон: +7 (977) 000-51-27
 # WhatsApp: https://wa.me/79770005127
 # Email: matservice@yandex.ru
+# Адрес: Москва, ул. Сущёвская, 27/2
+# Режим работы: Пн-Пт: 9:00-18:00
+
+# Год основания: 2009
+# Количество клиентов: 500+ (данные 2024)
+# География: 40+ городов России
+# Специализация: аренда грязезащитных решений
+
+# ================================================
+# ВАЖНОЕ ПРИМЕЧАНИЕ О РЕГИОНАЛЬНЫХ САЙТАХ
+# ================================================
+
+# Региональные сайты имеют настройки:
+# <meta name="robots" content="noindex, nofollow">
+# <link rel="canonical" href="https://arenda-kovrov-mirum.ru/">
+# Это корректная настройка для избежания дублей.
+# Основной сайт для индексации: arenda-kovrov-mirum.ru
+
+# КАННИБАЛИЗАЦИЯ ИСКЛЮЧЕНА благодаря:
+# 1. Noindex на региональных сайтах
+# 2. Canonical на основной сайт
+# 3. Disallow в robots.txt
+# 4. Единая структура контента
