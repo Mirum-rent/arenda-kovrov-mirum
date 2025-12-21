@@ -1,12 +1,11 @@
-// calculator.js - Логика работы калькулятора стоимости
-
+// calculator.js - Логика работы калькулятора стоимости (обновленная версия)
 console.log('🎯 calculator.js ЗАГРУЖЕН!');
 
-// Глобальные переменные (если их нет в основном скрипте)
-if (typeof orderItems === 'undefined') window.orderItems = [];
-if (typeof currentItem === 'undefined') window.currentItem = null;
-if (typeof tenderItems === 'undefined') window.tenderItems = [];
-if (typeof currentTenderItem === 'undefined') window.currentTenderItem = null;
+// Глобальные переменные
+window.orderItems = [];
+window.currentItem = null;
+window.tenderItems = [];
+window.currentTenderItem = null;
 
 // Инициализация калькулятора
 function initCalculator() {
@@ -20,6 +19,13 @@ function initCalculator() {
     
     // Настройка переключения между вкладками калькуляторов
     setupCalculatorTabs();
+    
+    // Добавляем обработчики для кнопок навигации договора (если они есть на странице)
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    if (prevBtn && nextBtn) {
+        setupContractNavigation();
+    }
     
     console.log('✅ Калькулятор инициализирован');
 }
@@ -65,18 +71,22 @@ function initRegionSelects() {
     const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
     
     regionSelects.forEach(select => {
-        // Очищаем список опций
-        select.innerHTML = '<option value="">Выберите регион</option>';
-        
-        // Добавляем регионы в указанном порядке из prices.js
-        regionsOrder.forEach(region => {
-            if (priceData[region]) {
+        // Если уже есть опции (из HTML), не перезаписываем
+        if (select.options.length <= 1) {
+            // Очищаем список опций
+            select.innerHTML = '<option value="">Выберите регион</option>';
+            
+            // Добавляем регионы в указанном порядке
+            const regions = ["Москва", "Московская область", "Санкт-Петербург", "Ленинградская область", 
+                           "Челябинск", "Тюмень", "Сургут", "Пермь", "Новосибирск"];
+            
+            regions.forEach(region => {
                 const option = document.createElement('option');
                 option.value = region;
                 option.textContent = region;
                 select.appendChild(option);
-            }
-        });
+            });
+        }
     });
 }
 
@@ -86,6 +96,9 @@ function initMonthInputs() {
     if (!container) return;
     
     container.innerHTML = '';
+    
+    const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
+                   'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     
     // Создаем поля ввода для каждого месяца
     months.forEach(month => {
@@ -111,7 +124,7 @@ function updateSizes() {
     sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
     sizeSelect.disabled = !region;
     
-    if (region && priceData[region]) {
+    if (region && typeof priceData !== 'undefined' && priceData[region]) {
         Object.keys(priceData[region]).forEach(size => {
             const option = document.createElement('option');
             option.value = size;
@@ -139,7 +152,7 @@ function updateFrequencies() {
     frequencySelect.innerHTML = '<option value="">Выберите периодичность</option>';
     frequencySelect.disabled = !size;
     
-    if (region && size && priceData[region] && priceData[region][size]) {
+    if (region && size && typeof priceData !== 'undefined' && priceData[region] && priceData[region][size]) {
         Object.keys(priceData[region][size]).forEach(freq => {
             const option = document.createElement('option');
             option.value = freq;
@@ -166,6 +179,14 @@ function calculate() {
     // Проверяем, что все необходимые данные заполнены
     if (!region || !size || !frequency || quantity <= 0) {
         console.log('❌ Не все данные заполнены');
+        currentItem = null;
+        updateOrderTable();
+        return;
+    }
+    
+    // Проверяем, есть ли данные о ценах
+    if (typeof priceData === 'undefined' || !priceData[region] || !priceData[region][size] || !priceData[region][size][frequency]) {
+        console.log('❌ Нет данных о ценах для выбранных параметров');
         currentItem = null;
         updateOrderTable();
         return;
@@ -212,10 +233,13 @@ function addPosition() {
     orderItems.push({...currentItem});
     
     // Показываем уведомление о добавлении позиции
-    document.getElementById('addedNotice').style.display = 'block';
-    setTimeout(() => {
-        document.getElementById('addedNotice').style.display = 'none';
-    }, 5000);
+    const notice = document.getElementById('addedNotice');
+    if (notice) {
+        notice.style.display = 'block';
+        setTimeout(() => {
+            notice.style.display = 'none';
+        }, 5000);
+    }
     
     // Сбрасываем форму для нового ввода (кроме региона)
     document.getElementById('size').value = '';
@@ -232,6 +256,8 @@ function updateOrderTable() {
     console.log('🔍 Обновление таблицы');
     
     const tbody = document.getElementById('orderBody');
+    if (!tbody) return;
+    
     tbody.innerHTML = '';
     
     let total = 0;
@@ -264,19 +290,30 @@ function updateOrderTable() {
         total += item.costForMonth;
     });
     
-    document.getElementById('total').textContent = `Общая стоимость: ${total.toLocaleString('ru-RU')} ₽`;
+    const totalElement = document.getElementById('total');
+    if (totalElement) {
+        totalElement.textContent = `Общая стоимость: ${total.toLocaleString('ru-RU')} ₽`;
+    }
     
     // Показываем/скрываем блок скидки
-    if (total > 20000) {
-        document.getElementById('discountNotice').style.display = 'block';
-        document.getElementById('discountSection').style.display = 'block';
-    } else {
-        document.getElementById('discountNotice').style.display = 'none';
-        document.getElementById('discountSection').style.display = 'none';
+    const discountNotice = document.getElementById('discountNotice');
+    const discountSection = document.getElementById('discountSection');
+    
+    if (discountNotice && discountSection) {
+        if (total > 20000) {
+            discountNotice.style.display = 'block';
+            discountSection.style.display = 'block';
+        } else {
+            discountNotice.style.display = 'none';
+            discountSection.style.display = 'none';
+        }
     }
     
     // Показываем блок результатов
-    document.getElementById('standard-result').style.display = 'block';
+    const standardResult = document.getElementById('standard-result');
+    if (standardResult) {
+        standardResult.style.display = 'block';
+    }
     
     console.log('✅ Таблица обновлена, общая стоимость:', total);
 }
@@ -286,10 +323,12 @@ function updateTenderSizes() {
     const region = document.getElementById('tenderRegion').value;
     const sizeSelect = document.getElementById('tenderSize');
     
+    if (!sizeSelect) return;
+    
     sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
     sizeSelect.disabled = !region;
     
-    if (region && priceData[region]) {
+    if (region && typeof priceData !== 'undefined' && priceData[region]) {
         Object.keys(priceData[region]).forEach(size => {
             const option = document.createElement('option');
             option.value = size;
@@ -312,9 +351,17 @@ function calculateTender() {
         return;
     }
     
+    // Проверяем, есть ли данные о ценах
+    if (typeof priceData === 'undefined' || !priceData[region] || !priceData[region][size]) {
+        console.log('❌ Нет данных о ценах для выбранных параметров');
+        currentTenderItem = null;
+        updateTenderTable();
+        return;
+    }
+    
     const prices = priceData[region][size];
     const frequencies = Object.keys(prices);
-    const pricePerItem = prices[frequencies[0]];
+    const pricePerItem = frequencies.length > 0 ? prices[frequencies[0]] : 0;
     
     currentTenderItem = {
         region,
@@ -341,10 +388,13 @@ function addTenderPosition() {
 
 function updateTenderTable() {
     const tbody = document.getElementById('tenderBody');
+    if (!tbody) return;
+    
     tbody.innerHTML = '';
     
     let total = 0;
     
+    // Добавляем текущий элемент
     if (currentTenderItem) {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -358,6 +408,7 @@ function updateTenderTable() {
         total += currentTenderItem.pricePerItem * 2;
     }
     
+    // Добавляем сохраненные элементы
     tenderItems.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -401,15 +452,24 @@ function updateTenderTable() {
         }
     });
     
-    document.getElementById('tenderTotal').textContent = `Общая стоимость по контракту: ${total.toLocaleString('ru-RU')} ₽`;
-    
-    if (total > 50000) {
-        document.getElementById('tenderDiscountNotice').style.display = 'block';
-    } else {
-        document.getElementById('tenderDiscountNotice').style.display = 'none';
+    const tenderTotal = document.getElementById('tenderTotal');
+    if (tenderTotal) {
+        tenderTotal.textContent = `Общая стоимость по контракту: ${total.toLocaleString('ru-RU')} ₽`;
     }
     
-    document.getElementById('tender-result').style.display = 'block';
+    const tenderDiscountNotice = document.getElementById('tenderDiscountNotice');
+    if (tenderDiscountNotice) {
+        if (total > 50000) {
+            tenderDiscountNotice.style.display = 'block';
+        } else {
+            tenderDiscountNotice.style.display = 'none';
+        }
+    }
+    
+    const tenderResult = document.getElementById('tender-result');
+    if (tenderResult) {
+        tenderResult.style.display = 'block';
+    }
 }
 
 // Функции отправки в WhatsApp
@@ -544,7 +604,10 @@ function requestDiscount() {
 }
 
 function showContractForm() {
-    document.getElementById('contractForm').style.display = 'block';
+    const contractForm = document.getElementById('contractForm');
+    if (contractForm) {
+        contractForm.style.display = 'block';
+    }
 }
 
 function sendContractDetails() {
@@ -599,9 +662,45 @@ function sendContractDetails() {
     window.open(whatsappUrl, '_blank');
 }
 
-function openPrivacyModal() {
-    alert('Модальное окно политики конфиденциальности');
+// Навигация по страницам договора
+function setupContractNavigation() {
+    const pages = document.querySelectorAll('.contract-page');
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+    
+    if (!pages.length || !prevBtn || !nextBtn) return;
+    
+    let currentPage = 0;
+    
+    function showPage(pageIndex) {
+        pages.forEach((page, index) => {
+            page.style.display = index === pageIndex ? 'block' : 'none';
+        });
+        
+        prevBtn.disabled = pageIndex === 0;
+        nextBtn.disabled = pageIndex === pages.length - 1;
+    }
+    
+    prevBtn.addEventListener('click', function() {
+        if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+        if (currentPage < pages.length - 1) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    });
+    
+    // Показываем первую страницу
+    showPage(0);
 }
 
 // Автоматическая инициализация при загрузке
-setTimeout(initCalculator, 100);
+document.addEventListener('DOMContentLoaded', function() {
+    // Ждем немного, чтобы prices.js успел загрузиться
+    setTimeout(initCalculator, 100);
+});
