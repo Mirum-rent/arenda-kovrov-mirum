@@ -1494,3 +1494,242 @@ input:checked + .toggle-slider:before {
         max-height: 80vh;
     }
 }
+/* Добавьте эти стили в конец вашего файла style.css */
+
+/* Стили для FAQ на главной */
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.faq-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 20px 25px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: #f8f9fa;
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.faq-answer {
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer.active {
+    padding: 0 25px 25px;
+    max-height: 1000px;
+}
+
+.faq-answer p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.faq-answer ul, .faq-answer ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.faq-answer li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Таблица сравнения */
+.comparison-table {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.comparison-table th {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.comparison-table td {
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+}
+
+.comparison-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.comparison-table tr:hover {
+    background-color: #e8f4fc;
+}
+
+/* Стили для скрытого SEO-контента */
+.seo-content {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Стили для калькулятора */
+.calculator-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: #f5f5f5;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 5px;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-btn:hover {
+    background: #e8f4fc;
+}
+
+.tab-btn.active {
+    background: #3498db;
+    color: white;
+    border-bottom: 2px solid #2980b9;
+}
+
+.calculator-content {
+    display: none;
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.calculator-content.active {
+    display: block;
+}
+
+.month-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.month-input {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.month-input label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.month-input input {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.month-cost {
+    font-weight: 500;
+    color: var(--primary-color);
+    text-align: center;
+    padding-top: 5px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+    
+    .faq-answer {
+        padding: 0 20px;
+    }
+    
+    .faq-answer.active {
+        padding: 0 20px 20px;
+    }
+    
+    .comparison-table {
+        font-size: 0.9rem;
+    }
+    
+    .calculator-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        margin-right: 0;
+        margin-bottom: 5px;
+        border-radius: 6px;
+        border-bottom: none;
+    }
+    
+    .calculator-content {
+        padding: 20px;
+    }
+    
+    .month-inputs {
+        grid-template-columns: 1fr;
+    }
+}
