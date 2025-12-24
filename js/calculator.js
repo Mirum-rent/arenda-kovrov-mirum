@@ -29,6 +29,9 @@ function initCalculator() {
     // Настройка переключения между вкладками калькуляторов
     setupCalculatorTabs();
     
+    // Установка обработчиков событий
+    setupEventHandlers();
+    
     console.log('✅ Калькулятор МИРУМ инициализирован');
 }
 
@@ -36,6 +39,11 @@ function initCalculator() {
 function setupCalculatorTabs() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const calculatorContents = document.querySelectorAll('.calculator-content');
+    
+    if (tabBtns.length === 0) {
+        console.log('❌ Вкладки калькулятора не найдены');
+        return;
+    }
     
     tabBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -56,13 +64,28 @@ function setupCalculatorTabs() {
             }
         });
     });
+    
+    // Активируем первую вкладку по умолчанию
+    if (tabBtns[0]) {
+        tabBtns[0].classList.add('active');
+        const firstTabId = tabBtns[0].getAttribute('data-tab');
+        const firstCalculator = document.getElementById(`${firstTabId}-calculator`);
+        if (firstCalculator) {
+            firstCalculator.classList.add('active');
+        }
+    }
 }
 
-// Инициализация выпадающих списков регионов - ИСПРАВЛЕННАЯ ВЕРСИЯ
+// Инициализация выпадающих списков регионов
 function initRegionSelects() {
     console.log('🔍 Инициализация регионов из priceData');
     
     const regionSelects = document.querySelectorAll('select[id="region"], select[id="tenderRegion"]');
+    
+    if (regionSelects.length === 0) {
+        console.log('❌ Выпадающие списки регионов не найдены');
+        return;
+    }
     
     regionSelects.forEach(select => {
         // Очищаем список опций (кроме первого)
@@ -101,7 +124,10 @@ function initRegionSelects() {
 // Инициализация полей ввода по месяцам для тендерного калькулятора
 function initMonthInputs() {
     const container = document.getElementById('monthInputs');
-    if (!container) return;
+    if (!container) {
+        console.log('❌ Контейнер для месяцев не найден');
+        return;
+    }
     
     container.innerHTML = '';
     
@@ -114,12 +140,60 @@ function initMonthInputs() {
         monthDiv.className = 'month-input';
         monthDiv.innerHTML = `
             <label>${month}</label>
-            <input type="number" min="0" placeholder="Ковров" class="month-carpets" data-month="${month}" onchange="calculateTender()">
-            <input type="number" min="0" placeholder="Замен" class="month-replacements" data-month="${month}" onchange="calculateTender()">
+            <input type="number" min="0" placeholder="Ковров" class="month-carpets" data-month="${month}">
+            <input type="number" min="0" placeholder="Замен" class="month-replacements" data-month="${month}">
             <div class="month-cost" data-month="${month}">0 ₽</div>
         `;
         container.appendChild(monthDiv);
     });
+}
+
+// Настройка обработчиков событий
+function setupEventHandlers() {
+    // Стандартный калькулятор
+    const sizeSelect = document.getElementById('size');
+    const frequencySelect = document.getElementById('frequency');
+    const quantityInput = document.getElementById('quantity');
+    
+    if (sizeSelect) {
+        sizeSelect.addEventListener('change', function() {
+            updateFrequencies();
+            calculate();
+        });
+    }
+    
+    if (frequencySelect) {
+        frequencySelect.addEventListener('change', calculate);
+    }
+    
+    if (quantityInput) {
+        quantityInput.addEventListener('input', calculate);
+    }
+    
+    // Тендерный калькулятор
+    const tenderSizeSelect = document.getElementById('tenderSize');
+    if (tenderSizeSelect) {
+        tenderSizeSelect.addEventListener('change', calculateTender);
+    }
+    
+    // Обработчики для полей месяцев
+    const monthInputs = document.querySelectorAll('.month-carpets, .month-replacements');
+    monthInputs.forEach(input => {
+        input.addEventListener('input', calculateTender);
+    });
+    
+    // Кнопки добавления позиций
+    const addPositionBtn = document.querySelector('.add-position-btn, button[onclick*="addPosition"]');
+    if (addPositionBtn) {
+        addPositionBtn.addEventListener('click', addPosition);
+    }
+    
+    const addTenderPositionBtn = document.querySelector('.add-tender-position-btn, button[onclick*="addTenderPosition"]');
+    if (addTenderPositionBtn) {
+        addTenderPositionBtn.addEventListener('click', addTenderPosition);
+    }
+    
+    console.log('✅ Обработчики событий установлены');
 }
 
 // Обновление списка размеров ковров при выборе региона
@@ -469,7 +543,7 @@ function updateTenderTable() {
     tenderResult.style.display = 'block';
 }
 
-// Функции отправки в Telegram (вместо WhatsApp)
+// Функции отправки в Telegram
 function sendToTelegram() {
     if (orderItems.length === 0 && !currentItem) {
         alert('Добавьте хотя бы одну позицию в заказ');
@@ -657,26 +731,46 @@ function sendContractDetails() {
     window.open(telegramUrl, '_blank');
 }
 
+// Экспорт функций для использования в HTML
+window.updateSizes = updateSizes;
+window.updateFrequencies = updateFrequencies;
+window.calculate = calculate;
+window.addPosition = addPosition;
+window.updateTenderSizes = updateTenderSizes;
+window.calculateTender = calculateTender;
+window.addTenderPosition = addTenderPosition;
+window.sendToTelegram = sendToTelegram;
+window.sendTenderToTelegram = sendTenderToTelegram;
+window.requestDiscount = requestDiscount;
+window.showContractForm = showContractForm;
+window.sendContractDetails = sendContractDetails;
+
 // Автоматическая инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 DOM загружен, начинаем инициализацию калькулятора');
+    
     // Ждем загрузки priceData
     const checkPriceData = setInterval(() => {
         if (typeof priceData !== 'undefined') {
             clearInterval(checkPriceData);
+            console.log('✅ priceData найден, инициализируем калькулятор');
             initCalculator();
+        } else {
+            console.log('⏳ Ожидаем загрузку priceData...');
         }
     }, 100);
     
-    // Максимальное время ожидания - 5 секунд
+    // Максимальное время ожидания - 10 секунд
     setTimeout(() => {
         if (typeof priceData === 'undefined') {
-            console.error('❌ priceData не загрузился за 5 секунд');
-            // Пытаемся инициализировать с ошибкой
-            try {
+            console.error('❌ priceData не загрузился за 10 секунд');
+            
+            // Если priceData не загрузился, создаем заглушку
+            if (typeof priceData === 'undefined') {
+                window.priceData = {};
+                console.log('⚠️ Создана пустая заглушка для priceData');
                 initCalculator();
-            } catch (e) {
-                console.error('Ошибка инициализации калькулятора:', e);
             }
         }
-    }, 5000);
+    }, 10000);
 });
