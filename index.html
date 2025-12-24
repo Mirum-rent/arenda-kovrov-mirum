@@ -1988,5 +1988,211 @@
             });
         });
     </script>
+	<script>
+// ============================================
+// СКРИПТ ДЛЯ РАБОТЫ С COOKIE (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+// ============================================
+
+// Функция для установки куки
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+// Функция для получения куки
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+// Функция для удаления куки
+function deleteCookie(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+}
+
+// Основной код для работы с уведомлением о куки
+document.addEventListener('DOMContentLoaded', function() {
+    const cookieNotice = document.getElementById('cookieNotice');
+    const cookieAccept = document.getElementById('cookieAccept');
+    const cookieReject = document.getElementById('cookieReject');
+    
+    // Проверяем, были ли уже приняты куки
+    const cookieStatus = getCookie('cookiesAccepted') || localStorage.getItem('cookiesAccepted');
+    
+    // Если куки уже приняты или отклонены, скрываем уведомление
+    if (cookieStatus === 'true' || cookieStatus === 'false') {
+        if (cookieNotice) {
+            cookieNotice.style.display = 'none';
+        }
+        return; // Выходим, не показываем уведомление
+    }
+    
+    // Если уведомление есть и куки еще не обработаны, показываем его
+    if (cookieNotice) {
+        // Показываем с небольшой задержкой
+        setTimeout(() => {
+            cookieNotice.style.opacity = '0';
+            cookieNotice.style.transform = 'translateY(100%)';
+            cookieNotice.style.display = 'flex';
+            
+            // Анимация появления
+            setTimeout(() => {
+                cookieNotice.style.transition = 'all 0.3s ease';
+                cookieNotice.style.opacity = '1';
+                cookieNotice.style.transform = 'translateY(0)';
+            }, 10);
+        }, 1000);
+    }
+    
+    // Обработка кнопки "Принять всё"
+    if (cookieAccept) {
+        cookieAccept.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Сохраняем согласие
+            setCookie('cookiesAccepted', 'true', 365); // На 1 год
+            localStorage.setItem('cookiesAccepted', 'true');
+            localStorage.setItem('cookiesDate', new Date().toISOString());
+            
+            // Скрываем уведомление с анимацией
+            if (cookieNotice) {
+                cookieNotice.style.transition = 'all 0.3s ease';
+                cookieNotice.style.opacity = '0';
+                cookieNotice.style.transform = 'translateY(100%)';
+                
+                setTimeout(() => {
+                    cookieNotice.style.display = 'none';
+                }, 300);
+            }
+            
+            console.log('✅ Куки приняты');
+        });
+    }
+    
+    // Обработка кнопки "Отклонить"
+    if (cookieReject) {
+        cookieReject.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Сохраняем отказ
+            setCookie('cookiesAccepted', 'false', 30); // На 30 дней
+            localStorage.setItem('cookiesAccepted', 'false');
+            
+            // Скрываем уведомление с анимацией
+            if (cookieNotice) {
+                cookieNotice.style.transition = 'all 0.3s ease';
+                cookieNotice.style.opacity = '0';
+                cookieNotice.style.transform = 'translateY(100%)';
+                
+                setTimeout(() => {
+                    cookieNotice.style.display = 'none';
+                }, 300);
+            }
+            
+            console.log('❌ Куки отклонены');
+        });
+    }
+});
+
+// ============================================
+// ПРОВЕРКА СОГЛАСИЯ ПРИ ОТПРАВКЕ ФОРМ
+// ============================================
+
+// Проверяем все формы при отправке
+document.addEventListener('submit', function(e) {
+    // Если форма не имеет ID, пропускаем
+    if (!e.target.id && !e.target.classList.contains('contact-form')) return;
+    
+    // Ищем чекбокс согласия в форме
+    const form = e.target;
+    const consentCheckbox = form.querySelector('input[type="checkbox"][name*="consent"]') || 
+                           form.querySelector('input[type="checkbox"][id*="consent"]') ||
+                           form.querySelector('input[type="checkbox"][id*="Consent"]') ||
+                           form.querySelector('#privacy-agreement') ||
+                           form.querySelector('#contactConsent') ||
+                           form.querySelector('#contractConsent') ||
+                           form.querySelector('#tenderConsent');
+    
+    // Если чекбокс найден и не отмечен, блокируем отправку
+    if (consentCheckbox && !consentCheckbox.checked) {
+        e.preventDefault();
+        
+        // Показываем предупреждение
+        alert('⚠️ Для отправки формы необходимо согласиться с обработкой персональных данных');
+        
+        // Прокручиваем к чекбоксу
+        consentCheckbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        consentCheckbox.focus();
+        
+        // Подсвечиваем чекбокс
+        consentCheckbox.style.outline = '2px solid #e74c3c';
+        setTimeout(() => {
+            consentCheckbox.style.outline = '';
+        }, 2000);
+        
+        return false;
+    }
+    
+    // Если чекбокс отмечен, продолжаем отправку
+    return true;
+});
+
+// ============================================
+// ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ
+// ============================================
+
+// Кнопка "Наверх"
+window.addEventListener('scroll', function() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (scrollBtn) {
+        if (window.pageYOffset > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    }
+});
+
+// Плавная прокрутка для якорных ссылок
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        if (href === '#' || href === '#!' || href.startsWith('http')) return;
+        
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+            e.preventDefault();
+            
+            const headerHeight = document.querySelector('.main-header')?.offsetHeight || 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = targetPosition - headerHeight;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Обновляем URL без перезагрузки
+            if (history.pushState) {
+                history.pushState(null, null, href);
+            }
+        }
+    });
+});
+
+console.log('✅ Все скрипты загружены и работают');
+</script>
 </body>
 </html>
