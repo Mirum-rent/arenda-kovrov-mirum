@@ -7,8 +7,8 @@
     --accent-color: #16a085;           /* Спатифиллумовый зеленый вместо оранжевого */
     --light-accent: #1abc9c;           /* Светлый акцентный */
     --background-color: #f8f9fa;       /* Светлый фон */
-    --text-color: #f2f2f2;             /* Темно-серый текст */
-    --light-text: #f2f2f2;             /* Светлый текст */
+    --text-color: ##f2f2f2;             /* Темно-серый текст */
+    --light-text: #666666;             /* Светлый текст */
     --border-color: #e0e0e0;           /* Цвет границ */
     --success-color: #27ae60;          /* Зеленый для успеха */
     --telegram-color: #0088cc;         /* Telegram синий (оставляем) */
