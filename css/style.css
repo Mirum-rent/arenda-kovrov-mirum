@@ -1,28 +1,35 @@
-/* style.css - СТИЛИ ДЛЯ МИРУМ (обновленная версия) */
+/* style.css - СТИЛИ ДЛЯ МИРУМ (исправленная версия) */
 
 :root {
-    /* НОВАЯ ЦВЕТОВАЯ ГАММА - спокойная и профессиональная */
-    --primary-color: #2c3e50;          /* Темно-синий/серый вместо ярко-синего */
+    /* ОБНОВЛЕННАЯ ЦВЕТОВАЯ ГАММА - с учетом контраста */
+    --primary-color: #2c3e50;          /* Темно-синий/серый */
     --secondary-color: #34495e;        /* Немного светлее основного */
-    --accent-color: #16a085;           /* Спатифиллумовый зеленый вместо оранжевого */
+    --accent-color: #16a085;           /* Спатифиллумовый зеленый */
     --light-accent: #1abc9c;           /* Светлый акцентный */
     --background-color: #f8f9fa;       /* Светлый фон */
-    --text-color: ##333333;             /* Темно-серый текст */
-    --light-text: #666666;             /* Светлый текст */
-    --border-color: #e0e0e0;           /* Цвет границ */
-    --success-color: #27ae60;          /* Зеленый для успеха */
-    --telegram-color: #0088cc;         /* Telegram синий (оставляем) */
     
-    /* Дополнительные цвета */
+    /* ЦВЕТА ТЕКСТА - улучшенная читаемость */
+    --text-color: #333333;             /* Основной текст - темно-серый */
+    --text-light: #666666;             /* Второстепенный текст */
+    --text-on-dark: #ffffff;           /* Текст на темном фоне - БЕЛЫЙ */
+    --text-on-dark-secondary: #e0e0e0; /* Второстепенный текст на темном фоне */
+    
+    /* ФОНЫ */
     --card-bg: #ffffff;                /* Фон карточек */
     --header-bg: #ffffff;              /* Фон шапки */
-    --footer-bg: #2c3e50;              /* Фон футера */
+    --footer-bg: #1a252f;              /* Более темный футер для контраста */
     
-    /* Тени и эффекты */
+    /* ГРАНИЦЫ И ТЕНИ */
+    --border-color: #e0e0e0;
     --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     --box-shadow-hover: 0 5px 20px rgba(0, 0, 0, 0.12);
     --transition: all 0.3s ease;
     --border-radius: 8px;
+    
+    /* БРЕНДОВЫЕ ЦВЕТА */
+    --telegram-color: #0088cc;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
 }
 
 /* Сброс стилей */
@@ -68,106 +75,81 @@ h3 {
     margin-bottom: 1rem;
 }
 
+h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+/* Параграфы и текст */
 p {
     margin-bottom: 1rem;
-    color: var(--light-text);
+    color: var(--text-color);
 }
 
-/* Секция заголовка */
-.section-title {
-    text-align: center;
-    margin-bottom: 50px;
+.text-light {
+    color: var(--text-light);
 }
 
-.section-title h2 {
-    position: relative;
-    display: inline-block;
-    padding-bottom: 15px;
+.text-white {
+    color: var(--text-on-dark);
 }
 
-.section-title h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
-}
-
-.section-title p {
-    max-width: 700px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-}
-
-/* Кнопки */
-.btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-    font-size: 1rem;
-    text-align: center;
-}
-
-.btn:hover {
-    background-color: var(--secondary-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--box-shadow-hover);
-    text-decoration: none;
-}
-
-.btn-primary {
-    background-color: var(--accent-color);
-}
-
-.btn-primary:hover {
-    background-color: var(--light-accent);
-}
-
-.btn-telegram {
-    background-color: var(--telegram-color);
-    color: white;
-}
-
-.btn-telegram:hover {
-    background-color: #0077b3;
-    color: white;
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-}
-
-.btn-secondary:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-/* Хлебные крошки */
+/* Хлебные крошки - SEO-оптимизированные и ненавязчивые */
 .breadcrumbs {
-    padding: 15px 0;
-    background-color: #f5f5f5;
+    padding: 10px 0;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0;
 }
 
 .breadcrumbs a {
-    color: var(--light-text);
+    color: var(--accent-color);
     text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 500;
 }
 
 .breadcrumbs a:hover {
-    color: var(--accent-color);
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.breadcrumbs .separator {
+    margin: 0 8px;
+    color: #aaa;
+}
+
+.breadcrumbs span:last-child {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* На главной странице делаем более компактными */
+body.home .breadcrumbs {
+    padding: 8px 0;
+    font-size: 0.85rem;
+    opacity: 0.9;
+    background-color: #fafafa;
+}
+
+/* На мобильных еще компактнее */
+@media (max-width: 768px) {
+    .breadcrumbs {
+        padding: 6px 0;
+        font-size: 0.8rem;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .breadcrumbs::-webkit-scrollbar {
+        height: 2px;
+    }
+    
+    .breadcrumbs::-webkit-scrollbar-thumb {
+        background: var(--accent-color);
+    }
 }
 
 /* Шапка сайта */
@@ -224,7 +206,7 @@ p {
 /* Главный баннер (герой) */
 .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ текст на темном фоне */
     padding: 100px 0;
     text-align: center;
     position: relative;
@@ -240,7 +222,17 @@ p {
 .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ */
+}
+
+.hero p {
+    color: var(--text-on-dark-secondary); /* Светло-серый на темном фоне */
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero p strong {
+    color: var(--text-on-dark); /* БЕЛЫЙ для акцентов */
 }
 
 .accent {
@@ -249,14 +241,25 @@ p {
     font-size: 2.7rem;
 }
 
+/* Информационное сообщение на темном фоне */
 .transition-notice {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-on-dark);
     padding: 20px;
     border-radius: var(--border-radius);
     margin: 30px 0;
     text-align: center;
     border-left: 4px solid var(--accent-color);
+    backdrop-filter: blur(5px);
+}
+
+.transition-notice strong {
+    color: var(--text-on-dark);
+}
+
+.transition-notice small {
+    color: var(--text-on-dark-secondary);
+    opacity: 0.9;
 }
 
 .hero-features {
@@ -269,10 +272,16 @@ p {
 
 .feature-badge {
     background: rgba(255, 255, 255, 0.1);
+    color: var(--text-on-dark);
     padding: 10px 20px;
     border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.feature-badge:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .trust-signals {
@@ -286,6 +295,7 @@ p {
 .trust-item {
     text-align: center;
     font-size: 0.9rem;
+    color: var(--text-on-dark-secondary);
 }
 
 .trust-number {
@@ -306,7 +316,7 @@ p {
 /* Профессиональный CTA */
 .professional-cta {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
     padding: 40px;
     border-radius: var(--border-radius);
     margin: 40px auto;
@@ -315,18 +325,109 @@ p {
 }
 
 .professional-cta h3 {
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ */
     margin-bottom: 15px;
 }
 
 .professional-cta p {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-on-dark-secondary); /* Светло-серый */
     margin-bottom: 20px;
+}
+
+.professional-cta a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.professional-cta a:hover {
+    color: var(--light-accent);
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-hover);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--light-accent);
+}
+
+.btn-telegram {
+    background-color: var(--telegram-color);
+    color: white;
+}
+
+.btn-telegram:hover {
+    background-color: #0077b3;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /* Преимущества/услуги */
 .advantages {
     padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.section-title p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--text-light);
 }
 
 .advantage-grid {
@@ -354,6 +455,11 @@ p {
     color: var(--primary-color);
 }
 
+.advantage-card p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
 .advantage-card ul {
     list-style: none;
     margin: 15px 0;
@@ -363,6 +469,7 @@ p {
     padding: 8px 0;
     padding-left: 25px;
     position: relative;
+    color: var(--text-light);
 }
 
 .advantage-card ul li::before {
@@ -421,7 +528,7 @@ p {
 
 .gallery-location {
     font-size: 0.85rem;
-    color: var(--light-text);
+    color: var(--text-light);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -454,7 +561,7 @@ p {
 }
 
 .stat-label-modern {
-    color: var(--light-text);
+    color: var(--text-light);
     font-size: 0.9rem;
 }
 
@@ -472,11 +579,12 @@ p {
     font-style: italic;
     margin-bottom: 20px;
     color: var(--text-color);
+    line-height: 1.7;
 }
 
 .testimonial-author-modern {
     text-align: right;
-    color: var(--light-text);
+    color: var(--text-light);
     font-weight: 600;
 }
 
@@ -514,11 +622,24 @@ p {
     color: var(--accent-color);
 }
 
-/* Благодарственные письма */
+.faq-item-main p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Благодарственные письма - ФИКСИРУЕМ КОНТРАСТ! */
 .testimonials-preview {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
     padding: 80px 0;
+}
+
+.testimonials-preview .section-title h2 {
+    color: var(--text-on-dark); /* БЕЛЫЙ */
+}
+
+.testimonials-preview .section-title p {
+    color: var(--text-on-dark-secondary); /* Светло-серый */
 }
 
 .testimonials-slider {
@@ -528,11 +649,27 @@ p {
 }
 
 .testimonial-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15); /* Более светлый фон для контраста */
     backdrop-filter: blur(10px);
     border-radius: var(--border-radius);
     padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
+}
+
+.testimonial-card p {
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.testimonial-card strong {
+    color: var(--text-on-dark); /* БЕЛЫЙ */
+}
+
+.testimonial-card small {
+    color: var(--text-on-dark-secondary); /* Светло-серый */
 }
 
 /* Калькулятор */
@@ -568,7 +705,7 @@ p {
     font-weight: 600;
     transition: var(--transition);
     white-space: nowrap;
-    color: var(--light-text);
+    color: var(--text-light);
 }
 
 .tab-btn.active {
@@ -748,7 +885,7 @@ p {
 
 .consent-checkbox label {
     font-size: 0.9rem;
-    color: var(--light-text);
+    color: var(--text-light);
 }
 
 .consent-checkbox a {
@@ -756,10 +893,10 @@ p {
     text-decoration: underline;
 }
 
-/* Футер */
+/* Футер - ФИКСИРУЕМ КОНТРАСТ! */
 .footer {
-    background-color: var(--footer-bg);
-    color: white;
+    background-color: var(--footer-bg); /* Еще темнее для лучшего контраста */
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
     padding: 60px 0 30px;
 }
 
@@ -771,13 +908,14 @@ p {
 }
 
 .footer-section h3 {
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ */
     margin-bottom: 20px;
     font-size: 1.2rem;
 }
 
 .footer-section p {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-on-dark-secondary); /* Светло-серый */
+    line-height: 1.6;
 }
 
 .footer-links {
@@ -789,13 +927,13 @@ p {
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-on-dark-secondary); /* Светло-серый */
     text-decoration: none;
     transition: var(--transition);
 }
 
 .footer-links a:hover {
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ при наведении */
     padding-left: 5px;
 }
 
@@ -806,7 +944,7 @@ p {
 }
 
 .region-group h4 {
-    color: var(--accent-color);
+    color: var(--accent-color); /* Зеленый акцент */
     margin-bottom: 10px;
     font-size: 1rem;
 }
@@ -818,23 +956,32 @@ p {
 
 .region-group li {
     margin-bottom: 5px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-on-dark-secondary); /* Светло-серый */
 }
 
+/* Копирайт в футере - ОСОБОЕ ВНИМАНИЕ К КОНТРАСТУ! */
 .footer-bottom {
     text-align: center;
     padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-on-dark-secondary); /* Светло-серый */
     font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-bottom p {
+    color: var(--text-on-dark-secondary); /* Светло-серый */
+    margin-bottom: 10px;
 }
 
 .footer-bottom a {
-    color: var(--accent-color);
+    color: var(--accent-color); /* Зеленый для ссылок */
     text-decoration: none;
+    transition: var(--transition);
 }
 
 .footer-bottom a:hover {
+    color: var(--light-accent); /* Светло-зеленый при наведении */
     text-decoration: underline;
 }
 
@@ -911,7 +1058,7 @@ p {
     left: 0;
     right: 0;
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
     padding: 20px 0;
     z-index: 1001;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
@@ -926,7 +1073,7 @@ p {
 }
 
 .cookie-notice p {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-on-dark-secondary); /* Светло-серый */
     margin: 0;
     flex: 1;
     min-width: 300px;
@@ -958,7 +1105,7 @@ p {
 
 .cookie-reject {
     background-color: transparent;
-    color: white;
+    color: var(--text-on-dark);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -1032,6 +1179,10 @@ p {
         font-size: 2rem;
     }
     
+    .hero p {
+        font-size: 1rem;
+    }
+    
     .hero-features {
         flex-direction: column;
         align-items: center;
@@ -1060,6 +1211,8 @@ p {
         width: 100%;
         max-width: 300px;
         margin-bottom: 10px;
+        padding: 14px 20px;
+        font-size: 1rem;
     }
     
     /* Профессиональный CTA */
@@ -1071,7 +1224,7 @@ p {
     .professional-cta .btn-telegram {
         width: 100%;
         font-size: 1rem;
-        padding: 12px 20px;
+        padding: 14px 20px;
     }
     
     /* Преимущества */
@@ -1143,6 +1296,10 @@ p {
         gap: 30px;
     }
     
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
     /* Кнопка Telegram (мобильная версия) */
     .telegram-float {
         bottom: 20px;
@@ -1197,11 +1354,17 @@ p {
     
     .cookie-notice p {
         min-width: auto;
+        font-size: 0.9rem;
     }
     
     .cookie-buttons {
         width: 100%;
         justify-content: center;
+    }
+    
+    .cookie-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
     }
 }
 
@@ -1210,4 +1373,13 @@ p {
     .container {
         max-width: 1320px;
     }
+}
+
+/* Специальные классы для улучшения читаемости */
+.contrast-fix {
+    color: var(--text-on-dark) !important;
+}
+
+.contrast-fix-secondary {
+    color: var(--text-on-dark-secondary) !important;
 }
