@@ -44,6 +44,8 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
+    padding-top: 0 !important;
+    margin-top: 0 !important;
 }
 
 /* Контейнер */
@@ -94,20 +96,22 @@ p {
     color: var(--text-on-dark);
 }
 
-/* Хлебные крошки - SEO-оптимизированные и ненавязчивые */
+/* ============================================
+   СТИЛИ ДЛЯ ХЛЕБНЫХ КРОШЕК (SEO-ОПТИМИЗИРОВАННЫЕ)
+   ============================================ */
+
 .breadcrumbs {
-    padding: 10px 0;
     background-color: #f8f9fa;
+    padding: 10px 0;
+    margin-bottom: 0;
     border-bottom: 1px solid #eaeaea;
     font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 0;
 }
 
 .breadcrumbs a {
     color: var(--accent-color);
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     font-weight: 500;
 }
 
@@ -116,29 +120,16 @@ p {
     text-decoration: underline;
 }
 
-.breadcrumbs .separator {
-    margin: 0 8px;
-    color: #aaa;
-}
-
-.breadcrumbs span:last-child {
+.breadcrumbs strong {
     color: var(--primary-color);
     font-weight: 600;
 }
 
-/* На главной странице делаем более компактными */
-body.home .breadcrumbs {
-    padding: 8px 0;
-    font-size: 0.85rem;
-    opacity: 0.9;
-    background-color: #fafafa;
-}
-
-/* На мобильных еще компактнее */
+/* Для мобильных устройств */
 @media (max-width: 768px) {
     .breadcrumbs {
-        padding: 6px 0;
-        font-size: 0.8rem;
+        padding: 8px 0;
+        font-size: 0.85rem;
         overflow-x: auto;
         white-space: nowrap;
     }
@@ -149,6 +140,7 @@ body.home .breadcrumbs {
     
     .breadcrumbs::-webkit-scrollbar-thumb {
         background: var(--accent-color);
+        border-radius: 1px;
     }
 }
 
@@ -159,6 +151,7 @@ body.home .breadcrumbs {
     position: sticky;
     top: 0;
     z-index: 1000;
+    margin-top: 0 !important;
 }
 
 .header-container {
@@ -226,13 +219,15 @@ body.home .breadcrumbs {
 }
 
 .hero p {
-    color: var(--text-on-dark-secondary); /* Светло-серый на темном фоне */
+    color: #f8f9fa !important; /* Светло-серый вместо темного */
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    line-height: 1.6;
 }
 
 .hero p strong {
-    color: var(--text-on-dark); /* БЕЛЫЙ для акцентов */
+    color: #ffffff !important; /* БЕЛЫЙ для акцентов */
+    font-weight: 700;
 }
 
 .accent {
@@ -243,23 +238,28 @@ body.home .breadcrumbs {
 
 /* Информационное сообщение на темном фоне */
 .transition-notice {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--text-on-dark);
-    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(255, 87, 34, 0.9)) !important;
+    color: #ffffff !important;
+    padding: 15px 20px;
     border-radius: var(--border-radius);
-    margin: 30px 0;
+    margin: 20px 0;
     text-align: center;
-    border-left: 4px solid var(--accent-color);
-    backdrop-filter: blur(5px);
+    border-left: 4px solid #ffffff;
+    animation: pulse 2s infinite;
 }
 
 .transition-notice strong {
-    color: var(--text-on-dark);
+    color: #ffffff !important;
 }
 
 .transition-notice small {
-    color: var(--text-on-dark-secondary);
-    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
 }
 
 .hero-features {
@@ -325,8 +325,9 @@ body.home .breadcrumbs {
 }
 
 .professional-cta h3 {
-    color: var(--text-on-dark); /* БЕЛЫЙ */
+    color: #ffffff !important; /* Делаем белым вместо светло-зеленого */
     margin-bottom: 15px;
+    font-weight: 700;
 }
 
 .professional-cta p {
@@ -376,13 +377,20 @@ body.home .breadcrumbs {
 }
 
 .btn-telegram {
-    background-color: var(--telegram-color);
-    color: white;
+    background-color: #0088cc !important;
+    color: #ffffff !important; /* БЕЛЫЙ текст на синем фоне */
+    border: 2px solid #0088cc !important;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
 .btn-telegram:hover {
-    background-color: #0077b3;
-    color: white;
+    background-color: #0077b3 !important;
+    color: #ffffff !important;
+    border-color: #0077b3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3);
 }
 
 .btn-secondary {
@@ -657,15 +665,17 @@ body.home .breadcrumbs {
     color: var(--text-on-dark); /* БЕЛЫЙ текст */
 }
 
+.testimonial-card p,
+.testimonial-card strong,
+.testimonial-card small {
+    color: #ffffff !important; /* Делаем белым вместо светло-зеленого */
+    opacity: 0.95;
+}
+
 .testimonial-card p {
-    color: var(--text-on-dark); /* БЕЛЫЙ текст */
     font-style: italic;
     margin-bottom: 20px;
     line-height: 1.7;
-}
-
-.testimonial-card strong {
-    color: var(--text-on-dark); /* БЕЛЫЙ */
 }
 
 .testimonial-card small {
@@ -872,25 +882,39 @@ body.home .breadcrumbs {
     color: var(--accent-color);
 }
 
+/* Чекбоксы согласия */
 .consent-checkbox {
     display: flex;
     align-items: flex-start;
     gap: 10px;
     margin: 20px 0;
+    padding: 10px;
+    background: rgba(22, 160, 133, 0.05);
+    border-radius: 5px;
+    border-left: 3px solid var(--accent-color);
 }
 
 .consent-checkbox input[type="checkbox"] {
     margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }
 
 .consent-checkbox label {
     font-size: 0.9rem;
     color: var(--text-light);
+    cursor: pointer;
 }
 
 .consent-checkbox a {
-    color: var(--accent-color);
+    color: var(--accent-color) !important;
+    font-weight: 600;
     text-decoration: underline;
+}
+
+.consent-checkbox a:hover {
+    color: var(--primary-color) !important;
 }
 
 /* Футер - ФИКСИРУЕМ КОНТРАСТ! */
@@ -914,7 +938,7 @@ body.home .breadcrumbs {
 }
 
 .footer-section p {
-    color: var(--text-on-dark-secondary); /* Светло-серый */
+    color: #e0e0e0 !important; /* Светло-серый */
     line-height: 1.6;
 }
 
@@ -927,13 +951,13 @@ body.home .breadcrumbs {
 }
 
 .footer-links a {
-    color: var(--text-on-dark-secondary); /* Светло-серый */
+    color: #e0e0e0 !important; /* Светло-серый */
     text-decoration: none;
     transition: var(--transition);
 }
 
 .footer-links a:hover {
-    color: var(--text-on-dark); /* БЕЛЫЙ при наведении */
+    color: #ffffff !important; /* БЕЛЫЙ при наведении */
     padding-left: 5px;
 }
 
@@ -956,32 +980,36 @@ body.home .breadcrumbs {
 
 .region-group li {
     margin-bottom: 5px;
-    color: var(--text-on-dark-secondary); /* Светло-серый */
+    color: #e0e0e0 !important; /* Светло-серый */
 }
 
 /* Копирайт в футере - ОСОБОЕ ВНИМАНИЕ К КОНТРАСТУ! */
 .footer-bottom {
+    color: #ffffff !important; /* ФОРСИРУЕМ белый цвет */
     text-align: center;
     padding-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-on-dark-secondary); /* Светло-серый */
     font-size: 0.9rem;
     line-height: 1.6;
+    width: 100%;
 }
 
 .footer-bottom p {
-    color: var(--text-on-dark-secondary); /* Светло-серый */
+    color: #ffffff !important; /* ФОРСИРУЕМ белый цвет */
     margin-bottom: 10px;
+    opacity: 0.9;
 }
 
 .footer-bottom a {
-    color: var(--accent-color); /* Зеленый для ссылок */
+    color: #1abc9c !important; /* Яркий зеленый для ссылок */
+    font-weight: 600;
     text-decoration: none;
-    transition: var(--transition);
+    margin: 0 10px;
+    transition: all 0.3s ease;
 }
 
 .footer-bottom a:hover {
-    color: var(--light-accent); /* Светло-зеленый при наведении */
+    color: #ffffff !important; /* Белый при наведении */
     text-decoration: underline;
 }
 
@@ -1051,70 +1079,90 @@ body.home .breadcrumbs {
     transform: translateY(-3px);
 }
 
-/* Уведомление о куках */
+/* ============================================
+   УВЕДОМЛЕНИЕ О КУКИ (РАБОЧИЕ СТИЛИ)
+   ============================================ */
+
 .cookie-notice {
+    background-color: #1a252f !important;
+    color: #ffffff !important;
+    padding: 15px 0 !important;
+    display: none; /* Скрываем по умолчанию */
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--primary-color);
-    color: var(--text-on-dark); /* БЕЛЫЙ текст */
-    padding: 20px 0;
-    z-index: 1001;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    border-top: 2px solid #16a085;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cookie-notice .container {
-    display: flex;
-    justify-content: space-between;
+    display: flex !important;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
 }
 
 .cookie-notice p {
-    color: var(--text-on-dark-secondary); /* Светло-серый */
+    color: #ffffff !important;
     margin: 0;
     flex: 1;
     min-width: 300px;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .cookie-notice a {
-    color: var(--accent-color);
+    color: #1abc9c !important;
+    font-weight: 600;
     text-decoration: underline;
+}
+
+.cookie-notice a:hover {
+    color: #ffffff !important;
+    text-decoration: none;
 }
 
 .cookie-buttons {
     display: flex;
     gap: 10px;
+    flex-shrink: 0;
 }
 
 .cookie-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    min-width: 120px;
+    text-align: center;
+    font-size: 0.9rem;
 }
 
 .cookie-accept {
-    background-color: var(--accent-color);
-    color: white;
-}
-
-.cookie-reject {
-    background-color: transparent;
-    color: var(--text-on-dark);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: #27ae60 !important;
+    color: #ffffff !important;
 }
 
 .cookie-accept:hover {
-    background-color: var(--light-accent);
+    background-color: #219653 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.cookie-reject {
+    background-color: #e74c3c !important;
+    color: #ffffff !important;
 }
 
 .cookie-reject:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #c0392b !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
 /* Центрирование текста */
@@ -1373,157 +1421,4 @@ body.home .breadcrumbs {
     .container {
         max-width: 1320px;
     }
-}
-
-/* Специальные классы для улучшения читаемости */
-.contrast-fix {
-    color: var(--text-on-dark) !important;
-}
-
-.contrast-fix-secondary {
-    color: var(--text-on-dark-secondary) !important;
-}
-/* ============================================
-   ЭКСТРЕННЫЕ ИСПРАВЛЕНИЯ КОНТРАСТА И ФУНКЦИОНАЛА
-   ============================================ */
-
-/* 1. ФИКС КОПИРАЙТА В ФУТЕРЕ - делаем БЕЛЫЙ текст */
-.footer-bottom {
-    color: #ffffff !important; /* ФОРСИРУЕМ белый цвет */
-}
-
-.footer-bottom p {
-    color: #ffffff !important; /* ФОРСИРУЕМ белый цвет */
-    opacity: 0.9;
-}
-
-.footer-bottom a {
-    color: #1abc9c !important; /* Яркий зеленый для ссылок */
-    font-weight: 600;
-}
-
-.footer-bottom a:hover {
-    color: #ffffff !important; /* Белый при наведении */
-    text-decoration: underline;
-}
-
-/* 2. ФИКС КНОПКИ TELEGRAM - делаем текст черным на светлом фоне */
-.btn-telegram {
-    background-color: #0088cc !important;
-    color: #ffffff !important; /* БЕЛЫЙ текст на синем фоне */
-    border: 2px solid #0088cc !important;
-    font-weight: 600;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
-}
-
-.btn-telegram:hover {
-    background-color: #0077b3 !important;
-    color: #ffffff !important;
-    border-color: #0077b3 !important;
-}
-
-/* 3. УБИРАЕМ ЛИШНЕЕ ПРОСТРАНСТВО НАД МЕНЮ */
-body {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
-.main-header {
-    margin-top: 0 !important;
-}
-
-/* 4. ФИКС КНОПОК КУКИ - делаем их рабочими и заметными */
-.cookie-notice {
-    background-color: #2c3e50 !important;
-    color: #ffffff !important;
-    padding: 15px 0 !important;
-}
-
-.cookie-notice p {
-    color: #ffffff !important;
-    margin: 0;
-    flex: 1;
-    font-size: 0.9rem;
-}
-
-.cookie-notice a {
-    color: #1abc9c !important;
-    font-weight: 600;
-    text-decoration: underline;
-}
-
-.cookie-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.cookie-btn {
-    padding: 10px 20px !important;
-    border: none !important;
-    border-radius: 5px !important;
-    cursor: pointer !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    min-width: 120px;
-}
-
-.cookie-accept {
-    background-color: #27ae60 !important; /* Яркий зеленый */
-    color: #ffffff !important;
-}
-
-.cookie-reject {
-    background-color: #e74c3c !important; /* Яркий красный */
-    color: #ffffff !important;
-}
-
-.cookie-accept:hover {
-    background-color: #219653 !important;
-    transform: translateY(-2px);
-}
-
-.cookie-reject:hover {
-    background-color: #c0392b !important;
-    transform: translateY(-2px);
-}
-
-/* 5. ФИКС СВЕТЛО-ЗЕЛЕНОГО ТЕКСТА НА СВЕТЛО-СИНЕМ */
-.hero p strong,
-.transition-notice strong,
-.professional-cta h3 {
-    color: #ffffff !important; /* Делаем белым вместо светло-зеленого */
-    font-weight: 700;
-}
-
-/* 6. ДОБАВЛЯЕМ СКРИПТ ДЛЯ РАБОТЫ КУКИ */
-/* (Это добавить в конец файла или в отдельный JS) */
-
-/* ============================================
-   ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ
-   ============================================ */
-
-/* Делаем текст в благодарственных письмах ЕЩЕ светлее */
-.testimonial-card p,
-.testimonial-card strong,
-.testimonial-card small {
-    color: #ffffff !important;
-    opacity: 0.95;
-}
-
-/* Улучшаем контраст в герое */
-.hero p {
-    color: #f0f0f0 !important; /* Светло-серый вместо темного */
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-/* Делаем футер ЕЩЕ светлее */
-.footer-section p,
-.footer-links a,
-.region-group li {
-    color: #e0e0e0 !important; /* Светло-серый */
-}
-
-.footer-links a:hover {
-    color: #ffffff !important; /* Белый при наведении */
 }
