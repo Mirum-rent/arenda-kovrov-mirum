@@ -474,11 +474,30 @@
     </script>
 </head>
 <body>
-    <!-- *************** НАЧАЛО БЛОКА Хлебные крошки *************** -->
-    <nav class="breadcrumbs container">
-        <a href="/">Главная</a>
-    </nav>
-    <!-- *************** КОНЕЦ БЛОКА Хлебные крошки *************** -->
+
+<!-- *************** НАЧАЛО БЛОКА Хлебные крошки (SEO + ИИ) *************** -->
+<nav class="breadcrumbs container" aria-label="Хлебные крошки">
+    <a href="/" itemprop="item">
+        <span itemprop="name">Главная</span>
+    </a>
+    <meta itemprop="position" content="1" />
+    <!-- Скрытый контент для ИИ -->
+    <span style="display: none;" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/" itemprop="item">
+                <span itemprop="name">Аренда грязезащитных ковров по всей России</span>
+            </a>
+            <meta itemprop="position" content="1" />
+        </span>
+        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="item">
+                <span itemprop="name">Цены на аренду ковров в Москве, Санкт-Петербурге, Ростове-на-Дону, Тюмени, Сургуту, Новосибирске, Екатеринбурге</span>
+            </span>
+            <meta itemprop="position" content="2" />
+        </span>
+    </span>
+</nav>
+<!-- *************** КОНЕЦ БЛОКА Хлебные крошки *************** -->
 
     <!-- *************** НАЧАЛО БЛОКА Шапка сайта *************** -->
     <header class="main-header">
@@ -1405,13 +1424,14 @@
     </footer>
     <!-- *************** КОНЕЦ БЛОКА Футер с регионами *************** -->
 
-    <!-- *************** НАЧАЛО БЛОКА Кнопка Telegram (вместо WhatsApp) *************** -->
-    <div class="whatsapp-float">
-        <a href="https://t.me/+79770005127" class="whatsapp-link" data-consent-required>
-            <span>💬 Написать в Telegram</span>
-        </a>
-    </div>
-    <!-- *************** КОНЕЦ БЛОКА Кнопка Telegram *************** -->
+	<!-- *************** НАЧАЛО БЛОКА Кнопка Telegram (вместо WhatsApp) *************** -->
+	<div class="telegram-float">
+		<a href="https://t.me/+79770005127" class="telegram-link" data-consent-required>
+			<i class="fab fa-telegram"></i>
+			<span>Написать в Telegram</span>
+		</a>
+	</div>
+	<!-- *************** КОНЕЦ БЛОКА Кнопка Telegram *************** -->
 
     <!-- *************** НАЧАЛО БЛОКА Кнопка "Наверх" *************** -->
     <div class="scroll-to-top" id="scrollToTop">↑</div>
