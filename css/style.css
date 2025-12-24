@@ -1383,3 +1383,147 @@ body.home .breadcrumbs {
 .contrast-fix-secondary {
     color: var(--text-on-dark-secondary) !important;
 }
+/* ============================================
+   ЭКСТРЕННЫЕ ИСПРАВЛЕНИЯ КОНТРАСТА И ФУНКЦИОНАЛА
+   ============================================ */
+
+/* 1. ФИКС КОПИРАЙТА В ФУТЕРЕ - делаем БЕЛЫЙ текст */
+.footer-bottom {
+    color: #ffffff !important; /* ФОРСИРУЕМ белый цвет */
+}
+
+.footer-bottom p {
+    color: #ffffff !important; /* ФОРСИРУЕМ белый цвет */
+    opacity: 0.9;
+}
+
+.footer-bottom a {
+    color: #1abc9c !important; /* Яркий зеленый для ссылок */
+    font-weight: 600;
+}
+
+.footer-bottom a:hover {
+    color: #ffffff !important; /* Белый при наведении */
+    text-decoration: underline;
+}
+
+/* 2. ФИКС КНОПКИ TELEGRAM - делаем текст черным на светлом фоне */
+.btn-telegram {
+    background-color: #0088cc !important;
+    color: #ffffff !important; /* БЕЛЫЙ текст на синем фоне */
+    border: 2px solid #0088cc !important;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.btn-telegram:hover {
+    background-color: #0077b3 !important;
+    color: #ffffff !important;
+    border-color: #0077b3 !important;
+}
+
+/* 3. УБИРАЕМ ЛИШНЕЕ ПРОСТРАНСТВО НАД МЕНЮ */
+body {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.main-header {
+    margin-top: 0 !important;
+}
+
+/* 4. ФИКС КНОПОК КУКИ - делаем их рабочими и заметными */
+.cookie-notice {
+    background-color: #2c3e50 !important;
+    color: #ffffff !important;
+    padding: 15px 0 !important;
+}
+
+.cookie-notice p {
+    color: #ffffff !important;
+    margin: 0;
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.cookie-notice a {
+    color: #1abc9c !important;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-btn {
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    min-width: 120px;
+}
+
+.cookie-accept {
+    background-color: #27ae60 !important; /* Яркий зеленый */
+    color: #ffffff !important;
+}
+
+.cookie-reject {
+    background-color: #e74c3c !important; /* Яркий красный */
+    color: #ffffff !important;
+}
+
+.cookie-accept:hover {
+    background-color: #219653 !important;
+    transform: translateY(-2px);
+}
+
+.cookie-reject:hover {
+    background-color: #c0392b !important;
+    transform: translateY(-2px);
+}
+
+/* 5. ФИКС СВЕТЛО-ЗЕЛЕНОГО ТЕКСТА НА СВЕТЛО-СИНЕМ */
+.hero p strong,
+.transition-notice strong,
+.professional-cta h3 {
+    color: #ffffff !important; /* Делаем белым вместо светло-зеленого */
+    font-weight: 700;
+}
+
+/* 6. ДОБАВЛЯЕМ СКРИПТ ДЛЯ РАБОТЫ КУКИ */
+/* (Это добавить в конец файла или в отдельный JS) */
+
+/* ============================================
+   ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ ЧИТАЕМОСТИ
+   ============================================ */
+
+/* Делаем текст в благодарственных письмах ЕЩЕ светлее */
+.testimonial-card p,
+.testimonial-card strong,
+.testimonial-card small {
+    color: #ffffff !important;
+    opacity: 0.95;
+}
+
+/* Улучшаем контраст в герое */
+.hero p {
+    color: #f0f0f0 !important; /* Светло-серый вместо темного */
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Делаем футер ЕЩЕ светлее */
+.footer-section p,
+.footer-links a,
+.region-group li {
+    color: #e0e0e0 !important; /* Светло-серый */
+}
+
+.footer-links a:hover {
+    color: #ffffff !important; /* Белый при наведении */
+}
