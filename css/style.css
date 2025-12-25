@@ -1422,3 +1422,149 @@ p {
         max-width: 1320px;
     }
 }
+/* Стили для блока "Как заказать восстановление полов" */
+
+#how-to-start {
+    padding: 80px 0;
+}
+
+#how-to-start .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#how-to-start .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+#how-to-start .step-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    border-left: 4px solid var(--accent-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#how-to-start .step-number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+#how-to-start .step-header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+#how-to-start .step-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+#how-to-start .step-card ul {
+    list-style: none;
+    margin: 15px 0;
+    padding-left: 0;
+    flex-grow: 1;
+}
+
+#how-to-start .step-card li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #666;
+}
+
+#how-to-start .step-card li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+#how-to-start .step-action {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#how-to-start .final-block {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--accent-color), var(--light-accent));
+    color: white;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-top: 20px;
+}
+
+#how-to-start .final-title {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+#how-to-start .final-text {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #how-to-start {
+        padding: 60px 0;
+    }
+    
+    #how-to-start .steps-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    #how-to-start .step-card {
+        padding: 20px;
+    }
+    
+    #how-to-start .final-block {
+        padding: 30px 20px;
+    }
+    
+    #how-to-start .final-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #how-to-start .step-number {
+        top: -12px;
+        left: -12px;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
