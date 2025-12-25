@@ -1,11 +1,11 @@
 {
-  "name": "МИРУМ - Аренда грязезащитных ковров",
+  "name": "МИРУМ - Аренда грязезащитных ковров и восстановление полов",
   "short_name": "МИРУМ",
-  "description": "Грязезащитные ковры - аренда и обслуживание в Москве и МО, а также по всей России, от 300 руб. Срочное заключение договора, быстрая доставка",
+  "description": "Профессиональные услуги чистоты с 2009 года. Аренда грязезащитных ковров, мойка витрин, восстановление полов, аутстаффинг персонала по всей России.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#3498db",
+  "background_color": "#1a3a5f",
+  "theme_color": "#16a085",
   "icons": [
     {
       "src": "/img/favicon-192.png",
@@ -16,6 +16,59 @@
       "src": "/img/favicon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "cleaning", "facility-management", "services"],
+  "lang": "ru-RU",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "scope": "/",
+  "shortcuts": [
+    {
+      "name": "Калькулятор стоимости",
+      "short_name": "Калькулятор",
+      "description": "Рассчитать стоимость аренды ковров",
+      "url": "/#calculator",
+      "icons": [
+        {
+          "src": "/img/icon-calc-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Заказать услугу",
+      "short_name": "Заказ",
+      "description": "Оставить заявку на услуги",
+      "url": "/#contacts",
+      "icons": [
+        {
+          "src": "/img/icon-order-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/img/screenshots/desktop-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide"
+    },
+    {
+      "src": "/img/screenshots/mobile-1.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "platform": "narrow"
     }
   ]
 }

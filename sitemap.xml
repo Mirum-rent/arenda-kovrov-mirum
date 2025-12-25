@@ -6,161 +6,204 @@
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
   xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   
-  <!-- ВЫСОКИЙ ПРИОРИТЕТ: Главная и ключевые услуги -->
+  <!-- ================================================= -->
+  <!-- ВЫСОКИЙ ПРИОРИТЕТ: Основные страницы (25.12.2025) -->
+  <!-- ================================================= -->
+  
   <url>
     <loc>https://arenda-kovrov-mirum.ru/</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://arenda-kovrov-mirum.ru/"/>
   </url>
   
+  <!-- НОВАЯ СТРАНИЦА: Восстановление полов (создана 25.12.2025) -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/blog.html</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/chistka_polov.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/chistka_polov.html"/>
   </url>
   
+  <!-- ОБНОВЛЕННАЯ СТРАНИЦА: FAQ (обновлена 25.12.2025) -->
   <url>
     <loc>https://arenda-kovrov-mirum.ru/FAQ.html</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/pogoda.html</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/FAQ.html"/>
   </url>
   
   <url>
     <loc>https://arenda-kovrov-mirum.ru/window-cleaning.html</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- ================================================= -->
+  <!-- СРЕДНИЙ ПРИОРИТЕТ: Страницы в работе -->
+  <!-- ================================================= -->
+  
+  <url>
+    <loc>https://arenda-kovrov-mirum.ru/blog.html</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/chistka_polov.html</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://arenda-kovrov-mirum.ru/pogoda.html</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
   </url>
   
-  <!-- СРЕДНИЙ ПРИОРИТЕТ: Региональные сайты (канонические) -->
+  <!-- ================================================= -->
+  <!-- РЕГИОНАЛЬНЫЕ САЙТЫ (CANONICAL - НЕ ИНДЕКСИРУЕМ) -->
+  <!-- ================================================= -->
+  
+  <!-- ВАЖНО: Эти страницы имеют noindex и canonical на основной сайт -->
   <url>
     <loc>https://мирум.москва/</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <!-- Метатеги на странице: <meta name="robots" content="noindex, nofollow"> -->
+    <!-- Метатеги на странице: <link rel="canonical" href="https://arenda-kovrov-mirum.ru/"> -->
   </url>
   
   <url>
     <loc>https://mirum-surgut.ru/</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   
   <url>
     <loc>https://mirum-astrakhan.ru/</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   
   <url>
     <loc>https://mirum-ufa.ru/</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- ================================================= -->
+  <!-- ПЛАНИРУЕМЫЕ СТРАНИЦЫ -->
+  <!-- ================================================= -->
+  
+  <url>
+    <loc>https://arenda-kovrov-mirum.ru/outstaffing.html</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
-  <!-- НИЗКИЙ ПРИОРИТЕТ: Служебные страницы -->
+  <!-- ================================================= -->
+  <!-- СЛУЖЕБНЫЕ СТРАНИЦЫ -->
+  <!-- ================================================= -->
+  
   <url>
     <loc>https://arenda-kovrov-mirum.ru/privacy-policy.html</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <url>
     <loc>https://arenda-kovrov-mirum.ru/terms-of-use.html</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/contacts.html</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+  <!-- ================================================= -->
+  <!-- SEO: Разделы и анкоры для ИИ -->
+  <!-- ================================================= -->
   
-  <!-- SEO: Статьи блога с анкорами (для ИИ) -->
+  <!-- FAQ разделы -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/blog.html#mats</loc>
-    <lastmod>2025-12-21</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/FAQ.html#kovry</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://arenda-kovrov-mirum.ru/FAQ.html#vitrini</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://arenda-kovrov-mirum.ru/FAQ.html#poly</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Блог разделы -->
+  <url>
+    <loc>https://arenda-kovrov-mirum.ru/blog.html#mats</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://arenda-kovrov-mirum.ru/blog.html#facades</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/blog.html#business</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- SEO: FAQ разделы -->
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.html#about</loc>
-    <lastmod>2025-12-21</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.html#calculator</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+  <!-- ================================================= -->
+  <!-- ИЗОБРАЖЕНИЯ для Google Images -->
+  <!-- ================================================= -->
   
-  <!-- ИЗОБРАЖЕНИЯ: Важные для ИИ -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/img/logo.png</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <loc>https://arenda-kovrov-mirum.ru/</loc>
     <image:image>
-      <image:loc>https://arenda-kovrov-mirum.ru/img/logo.png</image:loc>
-      <image:title>Логотип МИРУМ - аренда грязезащитных ковров</image:title>
-      <image:caption>Компания МИРУМ с 2009 года - лидер в аренде грязезащитных ковров по всей России</image:caption>
+      <image:loc>https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png</image:loc>
+      <image:title>Логотип МИРУМ - аренда ковров и восстановление полов с 2009 года</image:title>
+      <image:caption>Профессиональные услуги чистоты: аренда грязезащитных ковров, мойка витрин, восстановление полов по всей России</image:caption>
+      <image:geo_location>Москва, Россия</image:geo_location>
+      <image:license>https://arenda-kovrov-mirum.ru/terms-of-use.html</image:license>
     </image:image>
   </url>
   
+  <!-- Фото восстановления полов -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/img/hero-bg.jpg</loc>
-    <lastmod>2025-12-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://arenda-kovrov-mirum.ru/chistka_polov.html</loc>
     <image:image>
-      <image:loc>https://arenda-kovrov-mirum.ru/img/hero-bg.jpg</image:loc>
-      <image:title>Грязезащитные ковры на входе в бизнес-центр</image:title>
-      <image:caption>Профессиональные грязезащитные ковры МИРУМ защищают помещения от уличной грязи</image:caption>
+      <image:loc>https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after1.webp</image:loc>
+      <image:title>Восстановление линолеума до и после - МИРУМ</image:title>
+      <image:caption>Профессиональное восстановление линолеума: удаление желтых пятен, нанесение защитного покрытия. Экономия 50-70% от замены.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_parket.webp</image:loc>
+      <image:title>Циклевка паркета - до и после</image:title>
+      <image:caption>Профессиональная циклевка паркета: шлифовка, лакировка, тонировка. Гарантия до 8 лет.</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Фото мойки витрин -->
+  <url>
+    <loc>https://arenda-kovrov-mirum.ru/window-cleaning.html</loc>
+    <image:image>
+      <image:loc>https://arenda-kovrov-mirum.ru/img/window-cleaning-before-after.jpg</image:loc>
+      <image:title>Мойка витрин торгового центра</image:title>
+      <image:caption>Профессиональная мойка витрин и фасадов. Работаем в ночное время, без разводов.</image:caption>
     </image:image>
   </url>
 
