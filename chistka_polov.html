@@ -643,7 +643,7 @@
             <h4 style="color: var(--primary-color); margin-bottom: 15px;">
                 <i class="fas fa-tools"></i> Наше оборудование
             </h4>
-            <p>Используем профессиональное немецкое оборудование: шлифовальные машины Lagler, Hummel, Trio; полировальные машины с алмазными фрезами; промышленные пылесосы. Химия от Loba (Германия).</p>
+            <p>Используем профессиональное немецкое оборудование: шлифовальные машины; полировальные машины с алмазными фрезами; промышленные пылесосы. Химия.</p>
         </div>
     </div>
 </section>
@@ -652,7 +652,7 @@
 <section class="section bg-light">
     <div class="container">
         <h2 class="section-title">Наши работы: до и после</h2>
-        <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">Реальные фото с объектов в Москве и МО. Смотрим проблему и результат нашей работы.</p>
+        <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">Фотографии с объектов.</p>
         
         <div class="before-after-gallery">
             <!-- Линолеум 1 -->
@@ -706,7 +706,7 @@
         
         <div class="text-center mt-40">
             <p style="font-style: italic; color: var(--text-light);">
-                <i class="fas fa-info-circle"></i> Все фото сделаны на реальных объектах в Москве и МО. Можем показать объекты вживую по договоренности.
+                <i class="fas fa-info-circle"></i> иногда некоторые проблемы можно диагностировать удаленно по фото. Пришлите фотографии, чтобы предварительно оценить фронт работ
             </p>
         </div>
     </div>
@@ -1261,7 +1261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Обработка формы
+    // Обработка формы восстановления полов
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -1275,53 +1275,92 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Собираем данные формы
-            const formData = new FormData(this);
-            const floorType = document.getElementById('floorType').value;
-            const area = document.getElementById('area').value;
-            
-            // Формируем сообщение для Telegram
-            let message = `📋 Новая заявка на восстановление полов:\n\n`;
-            message += `👤 Имя: ${formData.get('name')}\n`;
-            message += `📞 Телефон: ${formData.get('phone')}\n`;
-            message += `📧 Email: ${formData.get('email')}\n`;
-            message += `🏢 Тип пола: ${document.getElementById('floorType').options[document.getElementById('floorType').selectedIndex].text}\n`;
-            message += `📏 Площадь: ${area} м²\n`;
-            
-            if (formData.get('message')) {
-                message += `📝 Описание: ${formData.get('message')}\n`;
+            // Валидация телефона
+            const phoneInput = document.getElementById('contactPhone');
+            const phoneRegex = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+            if (!phoneRegex.test(phoneInput.value.replace(/\s/g, ''))) {
+                alert('Пожалуйста, введите корректный номер телефона');
+                phoneInput.focus();
+                return;
             }
             
-            // Отправляем в Telegram (через Telegram Bot API)
-            const botToken = 'ВАШ_BOT_TOKEN'; // Замените на реальный токен бота
-            const chatId = 'ВАШ_CHAT_ID'; // Замените на реальный chat_id
+            // Собираем данные формы
+            const name = document.getElementById('contactName').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const floorType = document.getElementById('floorType').value;
+            const area = document.getElementById('area').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
             
-            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            // Формируем сообщение для Telegram
+            let telegramMessage = `📋 НОВАЯ ЗАЯВКА НА ВОССТАНОВЛЕНИЕ ПОЛОВ 📋\n\n`;
+            telegramMessage += `👤 Имя: ${name}\n`;
+            telegramMessage += `📞 Телефон: ${phone}\n`;
+            telegramMessage += `📧 Email: ${email || 'не указан'}\n`;
             
-            fetch(telegramUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 30 минут.');
-                    contactForm.reset();
-                } else {
-                    alert('Ошибка при отправке заявки. Пожалуйста, позвоните нам по телефону +7 (977) 000-51-27');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ошибка при отправке заявки. Пожалуйста, позвоните нам по телефону +7 (977) 000-51-27');
-            });
+            // Тип пола
+            const floorTypeText = {
+                'parket': 'Паркет / паркетная доска',
+                'marble': 'Мрамор / камень',
+                'granite': 'Гранит',
+                'linoleum': 'Линолеум / ПВХ',
+                'ceramic': 'Керамогранит / плитка',
+                'other': 'Другое'
+            }[floorType] || 'Не указан';
+            
+            telegramMessage += `🏢 Тип пола: ${floorTypeText}\n`;
+            telegramMessage += `📏 Площадь: ${area || 'не указана'} м²\n`;
+            
+            if (message) {
+                telegramMessage += `📝 Описание проблемы:\n${message}\n`;
+            }
+            
+            telegramMessage += `\n📍 Страница: Восстановление полов\n`;
+            telegramMessage += `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            // Кодируем сообщение для URL
+            const encodedMessage = encodeURIComponent(telegramMessage);
+            
+            // Открываем Telegram с готовым сообщением
+            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+            
+            // Открываем в новом окне/вкладке
+            const telegramWindow = window.open(telegramUrl, '_blank');
+            
+            if (telegramWindow) {
+                // Показываем сообщение пользователю
+                alert('Открывается Telegram с готовым сообщением. Просто нажмите "Отправить"!');
+                
+                // Очищаем форму
+                contactForm.reset();
+                
+                // Трекинг успешной отправки (если нужно)
+                console.log('Форма отправлена, открыт Telegram');
+            } else {
+                // Если открыть не удалось (блокировщик всплывающих окон)
+                alert('Не удалось открыть Telegram. Пожалуйста, напишите нам напрямую на номер +7 (977) 000-51-27 и скопируйте этот текст:\n\n' + telegramMessage);
+            }
+        });
+    }
+    
+    // Дополнительно: валидация телефона в реальном времени
+    const phoneInput = document.getElementById('contactPhone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.startsWith('7') || value.startsWith('8')) {
+                value = '+7' + value.substring(1);
+            } else if (!value.startsWith('+7') && value.length > 0) {
+                value = '+7' + value;
+            }
+            
+            // Форматирование: +7 (999) 123-45-67
+            if (value.length > 2) {
+                value = value.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3-$4-$5');
+            }
+            
+            e.target.value = value;
         });
     }
 });
