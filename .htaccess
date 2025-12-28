@@ -1,9 +1,13 @@
-# === НАЧАЛО КОНФИГУРАЦИИ СЕРВЕРА MIRUM ===
-# Apache конфигурация для сайта arenda-kovrov-mirum.ru
-# Версия: 1.0 | Дата: 29.12.2025
+# ================================================
+# .htaccess для сайта МИРУМ
+# Версия: 4.0 | Дата: 29.12.2025
+# ================================================
 
 # Включение модуля перезаписи URL
 RewriteEngine On
+
+# Настройка индексного файла
+DirectoryIndex index.php index.html
 
 # Безопасность: запрет доступа к служебным файлам
 <FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak|old|swp)$">
@@ -14,7 +18,10 @@ RewriteEngine On
 # Запрет доступа к папкам
 Options -Indexes
 
-# === НАЧАЛО РЕДИРЕКТОВ MIRUM ===
+# ================================================
+# РЕДИРЕКТЫ MIRUM
+# ================================================
+
 # Редирект со старых .html на новые .php (сохраняем SEO)
 Redirect 301 /index.html /
 Redirect 301 /calculator.html /calculator.php
@@ -23,6 +30,7 @@ Redirect 301 /blog.html /blog.php
 Redirect 301 /testimonials.html /testimonials.php
 Redirect 301 /pogoda.html /pogoda.php
 Redirect 301 /privacy-policy.html /privacy-policy.php
+Redirect 301 /terms-of-use.html /terms-of-use.php
 
 # Редирект переименованных страниц
 Redirect 301 /chistka_polov.html /vosstanovlenie-polov.php
@@ -40,26 +48,16 @@ RewriteRule ^(.*)$ https://arenda-kovrov-mirum.ru/$1 [R=301,L]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-# === КОНЕЦ РЕДИРЕКТОВ MIRUM ===
+# ================================================
+# УСТАНОВКА КОДИРОВКИ
+# ================================================
 
-# Установка кодировки по умолчанию
 AddDefaultCharset UTF-8
 
-# Настройка заголовков безопасности
-<IfModule mod_headers.c>
-    # Защита от XSS
-    Header set X-XSS-Protection "1; mode=block"
-    # Защита от MIME-спуфинга
-    Header set X-Content-Type-Options "nosniff"
-    # Защита от кликджекинга
-    Header set X-Frame-Options "SAMEORIGIN"
-    # HSTS (HTTP Strict Transport Security)
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    # CSP (Content Security Policy)
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com;"
-</IfModule>
+# ================================================
+# КЕШИРОВАНИЕ
+# ================================================
 
-# Настройки кэширования для статических файлов
 <IfModule mod_expires.c>
     ExpiresActive On
     
@@ -90,7 +88,10 @@ AddDefaultCharset UTF-8
     ExpiresByType application/xml "access plus 1 hour"
 </IfModule>
 
-# Сжатие Gzip
+# ================================================
+# СЖАТИЕ GZIP
+# ================================================
+
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html
     AddOutputFilterByType DEFLATE text/css
@@ -100,5 +101,21 @@ AddDefaultCharset UTF-8
     AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
+# ================================================
+# ЗАЩИТА ОТ XSS И ДРУГИХ АТАК
+# ================================================
 
-# === КОНЕЦ КОНФИГУРАЦИИ СЕРВЕРА MIRUM ===
+<IfModule mod_headers.c>
+    # Защита от XSS
+    Header set X-XSS-Protection "1; mode=block"
+    # Защита от MIME-спуфинга
+    Header set X-Content-Type-Options "nosniff"
+    # Защита от кликджекинга
+    Header set X-Frame-Options "SAMEORIGIN"
+    # HSTS (HTTP Strict Transport Security)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# ================================================
+# КОНЕЦ .htaccess MIRUM
+# ================================================
