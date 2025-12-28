@@ -394,14 +394,181 @@
             color: var(--accent-color);
         }
         
-        /* Популярные города */
-        .popular-cities {
+        /* Улучшенный список городов - АККОРДЕОННАЯ СИСТЕМА */
+        .cities-section {
             margin-top: 60px;
         }
         
-        .cities-grid {
+        .cities-section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .cities-search-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .cities-search {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .cities-search:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+        }
+        
+        .cities-search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--accent-color);
+            border-radius: 0 0 8px 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cities-search-results.show {
+            display: block;
+        }
+        
+        .city-search-result {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .city-search-result:hover {
+            background: var(--background-color);
+            color: var(--accent-color);
+        }
+        
+        .alphabet-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--background-color);
+            border-radius: 8px;
+        }
+        
+        .alphabet-letter {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: var(--text-color);
+        }
+        
+        .alphabet-letter:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .alphabet-letter.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        
+        /* Аккордеон для мобильных */
+        .cities-accordion {
+            margin-top: 20px;
+        }
+        
+        .accordion-letter {
+            margin-bottom: 10px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .accordion-header {
+            padding: 15px 20px;
+            background: var(--background-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-bottom: 1px solid transparent;
+        }
+        
+        .accordion-header:hover {
+            background: #f5f5f5;
+        }
+        
+        .accordion-letter.active .accordion-header {
+            background: var(--accent-color);
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+        
+        .accordion-count {
+            background: var(--card-bg);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .accordion-letter.active .accordion-count {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        .accordion-icon {
+            transition: transform 0.3s;
+        }
+        
+        .accordion-letter.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-letter.active .accordion-content {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Сетка городов для десктопов */
+        .cities-grid-desktop {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
@@ -415,12 +582,53 @@
             font-weight: 600;
             transition: all 0.3s;
             text-align: center;
+            width: 100%;
         }
         
         .city-btn:hover {
             border-color: var(--accent-color);
             background: var(--background-color);
             transform: translateY(-2px);
+        }
+        
+        /* Сетка городов для мобильных */
+        .cities-grid-mobile {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        /* Переключатель режима отображения */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .view-btn {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+        }
+        
+        .view-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .view-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
         }
         
         /* Загрузчик */
@@ -548,6 +756,46 @@
                 max-width: 300px;
                 justify-content: center;
             }
+            
+            .view-toggle {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .view-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .alphabet-filter {
+                gap: 5px;
+                padding: 10px;
+            }
+            
+            .alphabet-letter {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .cities-accordion {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .cities-grid-desktop {
+                display: none;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .cities-grid-mobile {
+                display: none;
+            }
         }
         /* *************** КОНЕЦ БЛОКА СТИЛЕЙ ПОГОДЫ *************** */
     </style>
@@ -556,7 +804,7 @@
     <!-- *************** НАЧАЛО БЛОКА ХЛЕБНЫЕ КРОШКИ *************** -->
     <nav class="breadcrumbs container">
         <a href="/">Главная</a> / 
-        <a href="/pogoda.html">Прогноз погоды для замены ковров</a>
+        <strong>Прогноз погоды для замены ковров</strong>
     </nav>
     <!-- *************** КОНЕЦ БЛОКА ХЛЕБНЫЕ КРОШКИ *************** -->
 
@@ -614,108 +862,38 @@
         </div>
         
         <!-- Популярные города -->
-        <div class="popular-cities">
-            <h3 class="text-center mb-20">Наши города работы:</h3>
-            <div class="cities-grid">
-                <!-- *************** НАЧАЛО БЛОКА СПИСКА ГОРОДОВ - МОЖНО ДОБАВЛЯТЬ НОВЫЕ ГОРОДА ЗДЕСЬ *************** -->
-                <!-- Центральный ФО -->
-                <button class="city-btn" data-city="Москва">Москва</button>
-                <button class="city-btn" data-city="Санкт-Петербург">Санкт-Петербург</button>
-                <button class="city-btn" data-city="Новосибирск">Новосибирск</button>
-                <button class="city-btn" data-city="Екатеринбург">Екатеринбург</button>
-                <button class="city-btn" data-city="Казань">Казань</button>
-                <button class="city-btn" data-city="Уфа">Уфа</button>
-                <button class="city-btn" data-city="Краснодар">Краснодар</button>
-                <button class="city-btn" data-city="Сургут">Сургут</button>
-                <button class="city-btn" data-city="Тверь">Тверь</button>
-                <button class="city-btn" data-city="Тула">Тула</button>
-                <button class="city-btn" data-city="Ярославль">Ярославль</button>
-                <button class="city-btn" data-city="Брянск">Брянск</button>
-                <button class="city-btn" data-city="Орёл">Орёл</button>
-                <button class="city-btn" data-city="Владимир">Владимир</button>
-                <button class="city-btn" data-city="Иваново">Иваново</button>
-                <button class="city-btn" data-city="Калуга">Калуга</button>
-                <button class="city-btn" data-city="Смоленск">Смоленск</button>
-                <button class="city-btn" data-city="Белгород">Белгород</button>
-                <button class="city-btn" data-city="Курск">Курск</button>
-                <button class="city-btn" data-city="Воронеж">Воронеж</button>
-                <button class="city-btn" data-city="Тамбов">Тамбов</button>
-                <button class="city-btn" data-city="Рязань">Рязань</button>
-                <button class="city-btn" data-city="Липецк">Липецк</button>
-                <button class="city-btn" data-city="Кострома">Кострома</button>
-                
-                <!-- Северо-Западный ФО -->
-                <button class="city-btn" data-city="Архангельск">Архангельск</button>
-                <button class="city-btn" data-city="Мурманск">Мурманск</button>
-                <button class="city-btn" data-city="Псков">Псков</button>
-                <button class="city-btn" data-city="Великий Новгород">Великий Новгород</button>
-                <button class="city-btn" data-city="Калининград">Калининград</button>
-                <button class="city-btn" data-city="Петрозаводск">Петрозаводск</button>
-                <button class="city-btn" data-city="Сыктывкар">Сыктывкар</button>
-                <button class="city-btn" data-city="Вологда">Вологда</button>
-                
-                <!-- Южный ФО -->
-                <button class="city-btn" data-city="Астрахань">Астрахань</button>
-                <button class="city-btn" data-city="Ростов-на-Дону">Ростов-на-Дону</button>
-                <button class="city-btn" data-city="Волгоград">Волгоград</button>
-                <button class="city-btn" data-city="Севастополь">Севастополь</button>
-                <button class="city-btn" data-city="Симферополь">Симферополь</button>
-                <button class="city-btn" data-city="Майкоп">Майкоп</button>
-                <button class="city-btn" data-city="Элиста">Элиста</button>
-                
-                <!-- Северо-Кавказский ФО -->
-                <button class="city-btn" data-city="Ставрополь">Ставрополь</button>
-                <button class="city-btn" data-city="Грозный">Грозный</button>
-                <button class="city-btn" data-city="Махачкала">Махачкала</button>
-                <button class="city-btn" data-city="Нальчик">Нальчик</button>
-                <button class="city-btn" data-city="Владикавказ">Владикавказ</button>
-                <button class="city-btn" data-city="Черкесск">Черкесск</button>
-                <button class="city-btn" data-city="Магас">Магас</button>
-                
-                <!-- Приволжский ФО -->
-                <button class="city-btn" data-city="Нижний Новгород">Нижний Новгород</button>
-                <button class="city-btn" data-city="Самара">Самара</button>
-                <button class="city-btn" data-city="Саратов">Саратов</button>
-                <button class="city-btn" data-city="Пенза">Пенза</button>
-                <button class="city-btn" data-city="Ульяновск">Ульяновск</button>
-                <button class="city-btn" data-city="Пермь">Пермь</button>
-                <button class="city-btn" data-city="Ижевск">Ижевск</button>
-                <button class="city-btn" data-city="Оренбург">Оренбург</button>
-                <button class="city-btn" data-city="Йошкар-Ола">Йошкар-Ола</button>
-                <button class="city-btn" data-city="Саранск">Саранск</button>
-                <button class="city-btn" data-city="Чебоксары">Чебоксары</button>
-                <button class="city-btn" data-city="Киров">Киров</button>
-                
-                <!-- Уральский ФО -->
-                <button class="city-btn" data-city="Тюмень">Тюмень</button>
-                <button class="city-btn" data-city="Челябинск">Челябинск</button>
-                <button class="city-btn" data-city="Ханты-Мансийск">Ханты-Мансийск</button>
-                <button class="city-btn" data-city="Курган">Курган</button>
-                <button class="city-btn" data-city="Салехард">Салехард</button>
-                
-                <!-- Сибирский ФО -->
-                <button class="city-btn" data-city="Иркутск">Иркутск</button>
-                <button class="city-btn" data-city="Кемерово">Кемерово</button>
-                <button class="city-btn" data-city="Томск">Томск</button>
-                <button class="city-btn" data-city="Омск">Омск</button>
-                <button class="city-btn" data-city="Красноярск">Красноярск</button>
-                <button class="city-btn" data-city="Барнаул">Барнаул</button>
-                <button class="city-btn" data-city="Абакан">Абакан</button>
-                <button class="city-btn" data-city="Горно-Алтайск">Горно-Алтайск</button>
-                <button class="city-btn" data-city="Улан-Удэ">Улан-Удэ</button>
-                <button class="city-btn" data-city="Чита">Чита</button>
-                
-                <!-- Дальневосточный ФО -->
-                <button class="city-btn" data-city="Владивосток">Владивосток</button>
-                <button class="city-btn" data-city="Хабаровск">Хабаровск</button>
-                <button class="city-btn" data-city="Якутск">Якутск</button>
-                <button class="city-btn" data-city="Благовещенск">Благовещенск</button>
-                <button class="city-btn" data-city="Петропавловск-Камчатский">Петропавловск-Камчатский</button>
-                <button class="city-btn" data-city="Магадан">Магадан</button>
-                <button class="city-btn" data-city="Южно-Сахалинск">Южно-Сахалинск</button>
-                <button class="city-btn" data-city="Биробиджан">Биробиджан</button>
-                <button class="city-btn" data-city="Анадырь">Анадырь</button>
-                <!-- *************** КОНЕЦ БЛОКА СПИСКА ГОРОДОВ *************** -->
+        <div class="cities-section">
+            <h3 class="cities-section-title">Наши города работы</h3>
+            
+            <!-- Поиск по городам -->
+            <div class="cities-search-container">
+                <input type="text" id="citiesSearch" class="cities-search" placeholder="Поиск города...">
+                <div id="citiesSearchResults" class="cities-search-results"></div>
+            </div>
+            
+            <!-- Алфавитный фильтр -->
+            <div class="alphabet-filter" id="alphabetFilter">
+                <!-- Буквы будут добавлены через JavaScript -->
+            </div>
+            
+            <!-- Переключатель режимов -->
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="accordion">
+                    <i class="fas fa-bars"></i> По алфавиту
+                </button>
+                <button class="view-btn" data-view="grid">
+                    <i class="fas fa-th"></i> Список
+                </button>
+            </div>
+            
+            <!-- Аккордеон для мобильных -->
+            <div class="cities-accordion" id="citiesAccordion">
+                <!-- Аккордеон будет сгенерирован через JavaScript -->
+            </div>
+            
+            <!-- Сетка для десктопов -->
+            <div class="cities-grid-desktop" id="citiesGridDesktop">
+                <!-- Сетка будет сгенерирована через JavaScript -->
             </div>
         </div>
         
@@ -919,7 +1097,7 @@
                         <li><a href="/FAQ.html">FAQ (полная версия)</a></li>
                         <li><a href="/window-cleaning.html">Мойка витрин</a></li>
                         <li><a href="/chistka_polov.html">Восстановление полов</a></li>
-						<li><a href="/pogoda.html">Прогноз погоды</a></li>
+                        <li><a href="/pogoda.html">Прогноз погоды</a></li>
                         <li><a href="/privacy-policy.html">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
@@ -1620,11 +1798,35 @@
     </div>
     <!-- *************** КОНЕЦ БЛОКА Цены для ИИ *************** -->
 
-     <!-- *************** НАЧАЛО БЛОКА JAVASCRIPT ДЛЯ ПОГОДЫ (ИСПРАВЛЕННЫЙ) *************** -->
+    <!-- *************** НАЧАЛО БЛОКА JAVASCRIPT ДЛЯ УЛУЧШЕННОЙ СТРАНИЦЫ ПОГОДЫ *************** -->
     <script>
         // ===== КОНФИГУРАЦИЯ =====
         const DEFAULT_CITY = 'Москва';
-        // *************** НАЧАЛО БЛОКА КООРДИНАТ ГОРОДОВ - ДОБАВЛЯЙТЕ НОВЫЕ ГОРОДА ЗДЕСЬ ***************
+        
+        // *************** НАЧАЛО БЛОКА КООРДИНАТ И СПИСКА ГОРОДОВ В АЛФАВИТНОМ ПОРЯДКЕ *************** 
+        const ALL_CITIES = [
+            'Абакан', 'Анадырь', 'Архангельск', 'Астрахань',
+            'Барнаул', 'Белгород', 'Биробиджан', 'Благовещенск', 'Брянск',
+            'Великий Новгород', 'Владивосток', 'Владикавказ', 'Владимир', 'Волгоград', 'Вологда', 'Воронеж',
+            'Горно-Алтайск', 'Грозный',
+            'Екатеринбург', 'Элиста',
+            'Иваново', 'Ижевск', 'Иркутск', 'Йошкар-Ола',
+            'Казань', 'Калининград', 'Калуга', 'Кемерово', 'Киров', 'Кострома', 'Краснодар', 'Красноярск', 'Курган', 'Курск',
+            'Липецк',
+            'Магадан', 'Магас', 'Майкоп', 'Махачкала', 'Москва', 'Мурманск',
+            'Нальчик', 'Нижний Новгород', 'Новосибирск',
+            'Омск', 'Оренбург', 'Орёл',
+            'Пенза', 'Пермь', 'Петрозаводск', 'Петропавловск-Камчатский', 'Псков',
+            'Ростов-на-Дону', 'Рязань',
+            'Салехард', 'Самара', 'Санкт-Петербург', 'Саранск', 'Саратов', 'Севастополь', 'Симферополь', 'Смоленск', 'Ставрополь', 'Сургут', 'Сыктывкар',
+            'Тамбов', 'Тверь', 'Томск', 'Тула', 'Тюмень',
+            'Улан-Удэ', 'Ульяновск', 'Уфа',
+            'Хабаровск', 'Ханты-Мансийск',
+            'Чебоксары', 'Челябинск', 'Черкесск', 'Чита',
+            'Южно-Сахалинск',
+            'Якутск', 'Ярославль'
+        ].sort(); // Сортируем по алфавиту
+
         const CITY_COORDINATES = {
             // Центральный ФО
             'Москва': { lat: 55.7558, lon: 37.6173 },
@@ -1723,8 +1925,8 @@
             'Южно-Сахалинск': { lat: 46.9591, lon: 142.7380 },
             'Биробиджан': { lat: 48.7947, lon: 132.9218 },
             'Анадырь': { lat: 64.7333, lon: 177.5000 }
-            // *************** КОНЕЦ БЛОКА КООРДИНАТ ГОРОДОВ ***************
         };
+        // *************** КОНЕЦ БЛОКА КООРДИНАТ И СПИСКА ГОРОДОВ ***************
 
         // Элементы DOM
         const cityInput = document.getElementById('cityInput');
@@ -1732,7 +1934,234 @@
         const weatherLoader = document.getElementById('weatherLoader');
         const currentWeather = document.getElementById('currentWeather');
         const forecastGrid = document.getElementById('forecastGrid');
-        const cityButtons = document.querySelectorAll('.city-btn');
+        const citiesSearch = document.getElementById('citiesSearch');
+        const citiesSearchResults = document.getElementById('citiesSearchResults');
+        const alphabetFilter = document.getElementById('alphabetFilter');
+        const citiesAccordion = document.getElementById('citiesAccordion');
+        const citiesGridDesktop = document.getElementById('citiesGridDesktop');
+        const viewBtns = document.querySelectorAll('.view-btn');
+
+        // Группировка городов по буквам алфавита
+        function groupCitiesByLetter() {
+            const grouped = {};
+            
+            ALL_CITIES.forEach(city => {
+                const firstLetter = city[0].toUpperCase();
+                if (!grouped[firstLetter]) {
+                    grouped[firstLetter] = [];
+                }
+                grouped[firstLetter].push(city);
+            });
+            
+            return grouped;
+        }
+
+        // Инициализация алфавитного фильтра
+        function initAlphabetFilter() {
+            const groupedCities = groupCitiesByLetter();
+            const alphabet = Object.keys(groupedCities).sort();
+            
+            alphabetFilter.innerHTML = '';
+            
+            alphabet.forEach(letter => {
+                const count = groupedCities[letter].length;
+                const letterBtn = document.createElement('button');
+                letterBtn.className = 'alphabet-letter';
+                letterBtn.textContent = letter;
+                letterBtn.title = `${count} городов на букву "${letter}"`;
+                letterBtn.dataset.letter = letter;
+                
+                letterBtn.addEventListener('click', () => {
+                    // Прокрутка к соответствующему аккордеону на мобильных
+                    if (window.innerWidth <= 768) {
+                        const accordionItem = document.querySelector(`.accordion-letter[data-letter="${letter}"]`);
+                        if (accordionItem) {
+                            accordionItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                            // Разворачиваем аккордеон
+                            if (!accordionItem.classList.contains('active')) {
+                                accordionItem.classList.add('active');
+                            }
+                        }
+                    } else {
+                        // На десктопе просто показываем уведомление
+                        alert(`На букву "${letter}" - ${count} городов: ${groupedCities[letter].join(', ')}`);
+                    }
+                });
+                
+                alphabetFilter.appendChild(letterBtn);
+            });
+        }
+
+        // Инициализация аккордеона для мобильных
+        function initCitiesAccordion() {
+            const groupedCities = groupCitiesByLetter();
+            const alphabet = Object.keys(groupedCities).sort();
+            
+            citiesAccordion.innerHTML = '';
+            
+            alphabet.forEach(letter => {
+                const cities = groupedCities[letter];
+                const count = cities.length;
+                
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'accordion-letter';
+                accordionItem.dataset.letter = letter;
+                
+                const accordionHeader = document.createElement('div');
+                accordionHeader.className = 'accordion-header';
+                accordionHeader.innerHTML = `
+                    <span>${letter} (${count})</span>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="accordion-count">${count}</span>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                `;
+                
+                const accordionContent = document.createElement('div');
+                accordionContent.className = 'accordion-content';
+                
+                // Создаем сетку городов для мобильных
+                const citiesGrid = document.createElement('div');
+                citiesGrid.className = 'cities-grid-mobile';
+                
+                cities.forEach(city => {
+                    const cityBtn = document.createElement('button');
+                    cityBtn.className = 'city-btn';
+                    cityBtn.textContent = city;
+                    cityBtn.dataset.city = city;
+                    
+                    cityBtn.addEventListener('click', () => {
+                        cityInput.value = city;
+                        loadWeather(city);
+                        // Закрываем аккордеон после выбора города
+                        accordionItem.classList.remove('active');
+                    });
+                    
+                    citiesGrid.appendChild(cityBtn);
+                });
+                
+                accordionContent.appendChild(citiesGrid);
+                
+                accordionHeader.addEventListener('click', () => {
+                    accordionItem.classList.toggle('active');
+                });
+                
+                accordionItem.appendChild(accordionHeader);
+                accordionItem.appendChild(accordionContent);
+                citiesAccordion.appendChild(accordionItem);
+                
+                // По умолчанию открываем первую букву
+                if (letter === 'А') {
+                    accordionItem.classList.add('active');
+                }
+            });
+        }
+
+        // Инициализация сетки для десктопов
+        function initCitiesGridDesktop() {
+            citiesGridDesktop.innerHTML = '';
+            
+            ALL_CITIES.forEach(city => {
+                const cityBtn = document.createElement('button');
+                cityBtn.className = 'city-btn';
+                cityBtn.textContent = city;
+                cityBtn.dataset.city = city;
+                cityBtn.title = `Посмотреть погоду в ${city}`;
+                
+                cityBtn.addEventListener('click', () => {
+                    cityInput.value = city;
+                    loadWeather(city);
+                });
+                
+                citiesGridDesktop.appendChild(cityBtn);
+            });
+        }
+
+        // Инициализация поиска по городам
+        function initCitiesSearch() {
+            citiesSearch.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    citiesSearchResults.classList.remove('show');
+                    return;
+                }
+                
+                const filteredCities = ALL_CITIES.filter(city => 
+                    city.toLowerCase().includes(searchTerm)
+                );
+                
+                if (filteredCities.length === 0) {
+                    citiesSearchResults.innerHTML = '<div class="city-search-result" style="text-align: center; padding: 20px;">Город не найден</div>';
+                    citiesSearchResults.classList.add('show');
+                    return;
+                }
+                
+                citiesSearchResults.innerHTML = '';
+                
+                filteredCities.slice(0, 10).forEach(city => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'city-search-result';
+                    resultItem.textContent = city;
+                    resultItem.dataset.city = city;
+                    
+                    resultItem.addEventListener('click', () => {
+                        citiesSearch.value = city;
+                        cityInput.value = city;
+                        citiesSearchResults.classList.remove('show');
+                        loadWeather(city);
+                    });
+                    
+                    citiesSearchResults.appendChild(resultItem);
+                });
+                
+                citiesSearchResults.classList.add('show');
+            });
+            
+            // Закрытие результатов поиска при клике вне поля
+            document.addEventListener('click', (e) => {
+                if (!citiesSearch.contains(e.target) && !citiesSearchResults.contains(e.target)) {
+                    citiesSearchResults.classList.remove('show');
+                }
+            });
+            
+            // Обработка клавиш в поле поиска
+            citiesSearch.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    citiesSearchResults.classList.remove('show');
+                }
+            });
+        }
+
+        // Инициализация переключателя режимов
+        function initViewToggle() {
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const view = this.dataset.view;
+                    
+                    // Обновляем активную кнопку
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // На мобильных всегда показываем аккордеон
+                    if (window.innerWidth <= 768) {
+                        citiesAccordion.style.display = 'block';
+                        citiesGridDesktop.style.display = 'none';
+                        return;
+                    }
+                    
+                    // На десктопе переключаем режимы
+                    if (view === 'accordion') {
+                        citiesAccordion.style.display = 'block';
+                        citiesGridDesktop.style.display = 'none';
+                    } else {
+                        citiesAccordion.style.display = 'none';
+                        citiesGridDesktop.style.display = 'grid';
+                    }
+                });
+            });
+        }
 
         // Функция форматирования даты
         function formatDate(date) {
@@ -1749,7 +2178,6 @@
 
         // Функция получения иконки погоды из кода Open-Meteo
         function getWeatherIcon(code) {
-            // Коды погоды Open-Meteo: https://open-meteo.com/en/docs
             if (code === 0) return 'fas fa-sun'; // Ясно
             if (code === 1 || code === 2) return 'fas fa-cloud-sun'; // Переменная облачность
             if (code === 3) return 'fas fa-cloud'; // Пасмурно
@@ -1956,7 +2384,7 @@
             }
         }
 
-        // Функция обновления рекомендаций (ИСПРАВЛЕННАЯ!)
+        // Функция обновления рекомендаций
         function updateRecommendations(weatherCode, temperature) {
             const recommendations = document.getElementById('recommendations');
             
@@ -2064,40 +2492,42 @@
             recommendations.innerHTML = recommendationHTML;
         }
 
-        // Обработчики событий
-        searchBtn.addEventListener('click', () => {
-            const city = cityInput.value.trim();
-            if (city) {
-                loadWeather(city);
-                // Сохраняем в историю
-                if (typeof localStorage !== 'undefined') {
-                    localStorage.setItem('lastWeatherCity', city);
+        // Инициализация при загрузке страницы
+        function initWeatherPage() {
+            // Инициализируем компоненты
+            initAlphabetFilter();
+            initCitiesAccordion();
+            initCitiesGridDesktop();
+            initCitiesSearch();
+            initViewToggle();
+            
+            // Настройка обработчиков событий для поиска погоды
+            searchBtn.addEventListener('click', () => {
+                const city = cityInput.value.trim();
+                if (city) {
+                    loadWeather(city);
+                    if (typeof localStorage !== 'undefined') {
+                        localStorage.setItem('lastWeatherCity', city);
+                    }
                 }
-            }
-        });
-        
-        cityInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchBtn.click();
-            }
-        });
-        
-        cityButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const city = btn.getAttribute('data-city');
-                cityInput.value = city;
-                loadWeather(city);
             });
-        });
-        
-        // Загрузка погоды при открытии страницы
-        document.addEventListener('DOMContentLoaded', () => {
+            
+            cityInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+            
+            // Загрузка погоды при открытии страницы
             const lastCity = localStorage.getItem('lastWeatherCity') || DEFAULT_CITY;
             cityInput.value = lastCity;
             loadWeather(lastCity);
-        });
+        }
+
+        // Запуск инициализации при загрузке DOM
+        document.addEventListener('DOMContentLoaded', initWeatherPage);
     </script>
-    <!-- *************** КОНЕЦ БЛОКА JAVASCRIPT ДЛЯ ПОГОДЫ *************** -->
+    <!-- *************** КОНЕЦ БЛОКА JAVASCRIPT ДЛЯ УЛУЧШЕННОЙ СТРАНИЦЫ ПОГОДЫ *************** -->
 
     <!-- *************** НАЧАЛО БЛОКА ОСНОВНОЙ JAVASCRIPT *************** -->
     <script>
