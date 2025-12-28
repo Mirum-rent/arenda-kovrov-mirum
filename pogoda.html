@@ -669,25 +669,27 @@
         }
         
         .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 25px;
-            background: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .contact-btn:hover {
-            background: var(--light-accent);
-            transform: translateY(-2px);
-            text-decoration: none;
-            color: white;
-        }
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 25px;
+			background: var(--telegram-color); /* ← ТЕПЕРЬ ЦВЕТ TELEGRAM */
+			color: white;
+			text-decoration: none;
+			border-radius: 8px;
+			font-weight: 600;
+			transition: all 0.3s;
+			border: 2px solid var(--telegram-color);
+		}
+
+		.contact-btn:hover {
+			background: #0077b3; /* ← ТЕМНО-СИНИЙ TELEGRAM */
+			border-color: #0077b3;
+			transform: translateY(-2px);
+			text-decoration: none;
+			color: white;
+			box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3);
+		}
         
         .contact-btn.email {
             background: #34495e;
