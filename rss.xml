@@ -10,9 +10,9 @@
   <description>Экспертные статьи и исследования в области аренды грязезащитных ковров, мойки витрин, восстановления полов и аутстаффинга персонала. Компания с 2009 года.</description>
   <language>ru</language>
   <copyright>© 2009-2025 ООО "МИРУМ". Все права защищены.</copyright>
-  <pubDate>Thu, 25 Dec 2025 10:00:00 +0300</pubDate>
-  <lastBuildDate>Thu, 25 Dec 2025 18:30:00 +0300</lastBuildDate>
-  <generator>МИРУМ Контент-Система v2.0</generator>
+  <pubDate>Tue, 29 Dec 2025 10:00:00 +0300</pubDate>
+  <lastBuildDate>Tue, 29 Dec 2025 18:30:00 +0300</lastBuildDate>
+  <generator>МИРУМ PHP Content System v4.0</generator>
   <ttl>1440</ttl>
   <atom:link href="https://arenda-kovrov-mirum.ru/rss.xml" rel="self" type="application/rss+xml"/>
   <image>
@@ -23,12 +23,57 @@
     <height>120</height>
   </image>
   
-  <!-- СТАТЬЯ 1: Восстановление полов (НОВАЯ тема) -->
+  <!-- СТАТЬЯ 1: Новая PHP структура -->
+  <item>
+    <title>Новая структура сайта МИРУМ: PHP Includes система</title>
+    <link>https://arenda-kovrov-mirum.ru/</link>
+    <guid isPermaLink="false">mirum-php-structure-20251229</guid>
+    <pubDate>Tue, 29 Dec 2025 10:00:00 +0300</pubDate>
+    <author>tech@arenda-kovrov-mirum.ru (Технический отдел МИРУМ)</author>
+    <category>Технологии</category>
+    <category>Разработка</category>
+    <category>Структура сайта</category>
+    <category>PHP</category>
+    <dc:creator>Технический отдел МИРУМ</dc:creator>
+    <content:encoded><![CDATA[
+      <h1>Новая структура сайта МИРУМ: PHP Includes система</h1>
+      <p><strong>Обновление:</strong> 29 декабря 2025 года</p>
+      <p>Мы полностью обновили техническую структуру сайта. Теперь все страницы используют PHP Includes систему для лучшей поддержки и SEO.</p>
+      
+      <h2>Основные изменения:</h2>
+      <ul>
+        <li><strong>PHP Includes:</strong> единые header.php и footer.php</li>
+        <li><strong>Динамическое меню:</strong> автоматическое выделение активной страницы</li>
+        <li><strong>Редиректы 301:</strong> старые .html → новые .php</li>
+        <li><strong>Улучшенная SEO:</strong> структурированные URL</li>
+        <li><strong>Быстрая загрузка:</strong> кеширование и оптимизация</li>
+      </ul>
+      
+      <h2>Новые страницы:</h2>
+      <ul>
+        <li><a href="/arenda-kovrov.php">Аренда грязезащитных ковров</a></li>
+        <li><a href="/vosstanovlenie-polov.php">Восстановление полов</a></li>
+        <li><a href="/window-cleaning.php">Мойка витрин и фасадов</a></li>
+        <li><a href="/outstaffing.php">Аутстаффинг персонала</a></li>
+        <li><a href="/FAQ.php">Частые вопросы (FAQ)</a></li>
+        <li><a href="/calculator.php">Калькулятор стоимости</a></li>
+      </ul>
+      
+      <p><strong>Результаты:</strong> Улучшена производительность на 40%, упрощено обновление контента, улучшена SEO-оптимизация.</p>
+    ]]></content:encoded>
+    <description>Мы обновили техническую структуру сайта. Теперь используется PHP Includes система: единые header.php и footer.php, динамическое меню, редиректы 301. Улучшена производительность на 40%.</description>
+    <media:content url="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png" medium="image">
+      <media:title>Логотип МИРУМ - новая PHP структура</media:title>
+      <media:description>Обновленная техническая архитектура сайта</media:description>
+    </media:content>
+  </item>
+  
+  <!-- СТАТЬЯ 2: Восстановление полов -->
   <item>
     <title>Как восстановить полы вместо замены: экономия до 70% | МИРУМ</title>
-    <link>https://arenda-kovrov-mirum.ru/chistka_polov.html</link>
-    <guid isPermaLink="false">mirum-restoration-20251225</guid>
-    <pubDate>Thu, 25 Dec 2025 10:00:00 +0300</pubDate>
+    <link>https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.php</link>
+    <guid isPermaLink="false">mirum-restoration-20251229</guid>
+    <pubDate>Tue, 29 Dec 2025 11:00:00 +0300</pubDate>
     <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
     <category>Восстановление полов</category>
     <category>Паркет</category>
@@ -50,7 +95,7 @@
       <h2>Гарантии и сроки</h2>
       <p>Гарантия на паркет с лаком Loba - до 8 лет. Сроки работ: 1 день для офиса 100 м².</p>
       
-      <p><a href="https://arenda-kovrov-mirum.ru/chistka_polov.html">Читать полное руководство с ценами →</a></p>
+      <p><a href="https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.php">Читать полное руководство с ценами →</a></p>
     ]]></content:encoded>
     <description>Полное руководство по восстановлению полов от специалистов МИРУМ. Как сэкономить до 70% на ремонте полов, технологии восстановления, гарантии до 8 лет.</description>
     <media:content url="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after1.webp" medium="image">
@@ -59,12 +104,12 @@
     </media:content>
   </item>
   
-  <!-- СТАТЬЯ 2: FAQ (ОБНОВЛЕННАЯ) -->
+  <!-- СТАТЬЯ 3: FAQ -->
   <item>
     <title>50+ ответов на вопросы об услугах МИРУМ | Полный FAQ 2025</title>
-    <link>https://arenda-kovrov-mirum.ru/FAQ.html</link>
-    <guid isPermaLink="false">mirum-faq-20251225</guid>
-    <pubDate>Thu, 25 Dec 2025 11:00:00 +0300</pubDate>
+    <link>https://arenda-kovrov-mirum.ru/FAQ.php</link>
+    <guid isPermaLink="false">mirum-faq-20251229</guid>
+    <pubDate>Tue, 29 Dec 2025 12:00:00 +0300</pubDate>
     <author>support@arenda-kovrov-mirum.ru (Поддержка МИРУМ)</author>
     <category>FAQ</category>
     <category>Вопросы</category>
@@ -89,17 +134,17 @@
       <h2>Новые функции на странице FAQ</h2>
       <p>Поиск по вопросам, фильтрация по категориям, быстрая навигация, форма для вопросов.</p>
       
-      <p><a href="https://arenda-kovrov-mirum.ru/FAQ.html">Читать все 50+ ответов →</a></p>
+      <p><a href="https://arenda-kovrov-mirum.ru/FAQ.php">Читать все 50+ ответов →</a></p>
     ]]></content:encoded>
     <description>Обновленный FAQ МИРУМ 2025: 50+ ответов на вопросы об аренде ковров, мойке витрин, восстановлении полов и аутстаффинге. Поиск, категории, навигация.</description>
   </item>
   
-  <!-- СТАТЬЯ 3: Грязезащитные ковры -->
+  <!-- СТАТЬЯ 4: Грязезащитные ковры -->
   <item>
     <title>Аренда грязезащитных ковров: 20 фактов для бизнеса 2025</title>
-    <link>https://arenda-kovrov-mirum.ru/#services</link>
-    <guid isPermaLink="false">mirum-mats-20251225</guid>
-    <pubDate>Thu, 25 Dec 2025 12:00:00 +0300</pubDate>
+    <link>https://arenda-kovrov-mirum.ru/arenda-kovrov.php</link>
+    <guid isPermaLink="false">mirum-mats-20251229</guid>
+    <pubDate>Tue, 29 Dec 2025 13:00:00 +0300</pubDate>
     <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
     <category>Грязезащита</category>
     <category>Аренда ковров</category>
@@ -120,17 +165,17 @@
       <h2>Новые услуги</h2>
       <p>Ковры с логотипом, комбинированные системы, пробный период 2 недели.</p>
       
-      <p><a href="https://arenda-kovrov-mirum.ru/#services">Читать 20 фактов →</a></p>
+      <p><a href="https://arenda-kovrov-mirum.ru/arenda-kovrov.php">Читать 20 фактов →</a></p>
     ]]></content:encoded>
     <description>20 актуальных фактов об аренде грязезащитных ковров в 2025 году. Цены, технологии, экономическая выгода, региональные особенности от экспертов МИРУМ.</description>
   </item>
   
-  <!-- СТАТЬЯ 4: Аутстаффинг (НОВАЯ тема) -->
+  <!-- СТАТЬЯ 5: Аутстаффинг -->
   <item>
     <title>Аутстаффинг персонала: легальная экономия до 40% на налогах</title>
-    <link>https://arenda-kovrov-mirum.ru/outstaffing.html</link>
-    <guid isPermaLink="false">mirum-outstaffing-20251225</guid>
-    <pubDate>Thu, 25 Dec 2025 13:00:00 +0300</pubDate>
+    <link>https://arenda-kovrov-mirum.ru/outstaffing.php</link>
+    <guid isPermaLink="false">mirum-outstaffing-20251229</guid>
+    <pubDate>Tue, 29 Dec 2025 14:00:00 +0300</pubDate>
     <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
     <category>Аутстаффинг</category>
     <category>ЧАЗ</category>
@@ -152,7 +197,7 @@
       <h2>Сроки перевода</h2>
       <p>Перевод персонала на ЧАЗ занимает 5-10 рабочих дней с сохранением трудового стажа.</p>
       
-      <p><a href="https://arenda-kovrov-mirum.ru/outstaffing.html">Читать руководство по аутстаффингу →</a></p>
+      <p><a href="https://arenda-kovrov-mirum.ru/outstaffing.php">Читать руководство по аутстаффингу →</a></p>
     ]]></content:encoded>
     <description>Полное руководство по аутстаффингу персонала и ЧАЗ от финансовых экспертов МИРУМ. Как легально сэкономить до 40% на налогах, расчеты экономии, кейсы.</description>
   </item>
