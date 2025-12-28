@@ -48,30 +48,33 @@
     <style>
         /* *************** НАЧАЛО БЛОКА СТИЛЕЙ ПОГОДЫ *************** */
         .weather-hero {
-            background: linear-gradient(135deg, #1a3a5f 0%, #3498db 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-on-dark);
             padding: 100px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
         .weather-hero h1 {
-            color: white;
+            color: var(--text-on-dark);
             font-size: 2.8rem;
             margin-bottom: 20px;
         }
         
         .weather-hero p {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-on-dark-secondary);
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 30px;
+            line-height: 1.6;
         }
         
         .weather-container {
             max-width: 1200px;
             margin: -50px auto 40px;
             padding: 30px;
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -88,31 +91,33 @@
         .city-search input {
             flex: 1;
             padding: 15px 20px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s;
+            font-family: inherit;
         }
         
         .city-search input:focus {
-            border-color: #3498db;
+            border-color: var(--accent-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
         }
         
         .city-search button {
             padding: 15px 30px;
-            background: #3498db;
+            background: var(--accent-color);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
+            white-space: nowrap;
         }
         
         .city-search button:hover {
-            background: #2980b9;
+            background: var(--light-accent);
             transform: translateY(-2px);
         }
         
@@ -142,11 +147,11 @@
         .weather-location {
             font-size: 2rem;
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--primary-color);
         }
         
         .weather-date {
-            color: #7f8c8d;
+            color: var(--text-light);
             font-size: 1.1rem;
         }
         
@@ -174,7 +179,7 @@
         .temperature {
             font-size: 5rem;
             font-weight: 300;
-            color: #2c3e50;
+            color: var(--primary-color);
             position: relative;
         }
         
@@ -188,7 +193,7 @@
         
         .weather-description {
             font-size: 1.5rem;
-            color: #7f8c8d;
+            color: var(--text-light);
             text-transform: capitalize;
         }
         
@@ -204,26 +209,32 @@
         .detail-item {
             text-align: center;
             padding: 20px;
-            background: white;
+            background: var(--card-bg);
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .detail-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .detail-icon {
             font-size: 2rem;
-            color: #3498db;
+            color: var(--accent-color);
             margin-bottom: 10px;
         }
         
         .detail-value {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 5px;
         }
         
         .detail-label {
-            color: #7f8c8d;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
         
@@ -234,7 +245,7 @@
         
         .forecast-title {
             font-size: 1.8rem;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 30px;
             text-align: center;
         }
@@ -246,7 +257,7 @@
         }
         
         .forecast-day {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 25px;
             text-align: center;
@@ -258,18 +269,18 @@
         .forecast-day:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: #3498db;
+            border-color: var(--accent-color);
         }
         
         .forecast-date {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 10px;
         }
         
         .forecast-day-of-week {
-            color: #7f8c8d;
+            color: var(--text-light);
             font-size: 0.9rem;
             margin-bottom: 15px;
         }
@@ -293,21 +304,21 @@
         }
         
         .forecast-low {
-            color: #3498db;
+            color: var(--accent-color);
             font-size: 1.2rem;
         }
         
         /* Рекомендации по замене ковров */
         .recommendations {
             margin-top: 60px;
-            background: #f8f9fa;
+            background: var(--background-color);
             border-radius: 15px;
             padding: 40px;
         }
         
         .recommendations-title {
             font-size: 2rem;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 30px;
             text-align: center;
         }
@@ -319,7 +330,7 @@
         }
         
         .recommendation-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
@@ -339,30 +350,27 @@
             border-radius: 25px;
             font-weight: 600;
             margin-bottom: 20px;
+            color: white;
         }
         
         .condition-sunny {
             background: linear-gradient(135deg, #ffd166, #ffb347);
-            color: white;
         }
         
         .condition-rainy {
             background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
         }
         
         .condition-snowy {
             background: linear-gradient(135deg, #bdc3c7, #95a5a6);
-            color: white;
         }
         
         .condition-cloudy {
             background: linear-gradient(135deg, #7f8c8d, #5d6d7e);
-            color: white;
         }
         
         .recommendation-text {
-            color: #34495e;
+            color: var(--text-color);
             line-height: 1.6;
             margin-bottom: 20px;
         }
@@ -371,19 +379,19 @@
             background: #ecf0f1;
             padding: 15px;
             border-radius: 8px;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid var(--accent-color);
         }
         
         .schedule-title {
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--primary-color);
             margin-bottom: 10px;
         }
         
         .schedule-frequency {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #3498db;
+            color: var(--accent-color);
         }
         
         /* Популярные города */
@@ -400,8 +408,8 @@
         
         .city-btn {
             padding: 12px;
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
@@ -410,8 +418,8 @@
         }
         
         .city-btn:hover {
-            border-color: #3498db;
-            background: #f8f9fa;
+            border-color: var(--accent-color);
+            background: var(--background-color);
             transform: translateY(-2px);
         }
         
@@ -426,7 +434,7 @@
             width: 50px;
             height: 50px;
             border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
+            border-top: 5px solid var(--accent-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
@@ -481,6 +489,15 @@
             
             .city-search {
                 flex-direction: column;
+            }
+            
+            .weather-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .recommendations {
+                padding: 25px;
             }
         }
         /* *************** КОНЕЦ БЛОКА СТИЛЕЙ ПОГОДЫ *************** */
@@ -1463,12 +1480,21 @@
     </div>
     <!-- *************** КОНЕЦ БЛОКА Цены для ИИ *************** -->
 
-    <!-- *************** НАЧАЛО БЛОКА JAVASCRIPT ДЛЯ ПОГОДЫ *************** -->
+    <!-- *************** НАЧАЛО БЛОКА JAVASCRIPT ДЛЯ ПОГОДЫ (ИСПРАВЛЕННЫЙ) *************** -->
     <script>
-        // Конфигурация
-        const API_KEY = 'bb569e4c0c5c3c5c5c5c5c5c5c5c5c5c'; // Бесплатный ключ OpenWeatherMap
+        // ===== КОНФИГУРАЦИЯ =====
         const DEFAULT_CITY = 'Москва';
-        
+        const CITY_COORDINATES = {
+            'Москва': { lat: 55.7558, lon: 37.6173 },
+            'Санкт-Петербург': { lat: 59.9343, lon: 30.3351 },
+            'Новосибирск': { lat: 55.0084, lon: 82.9357 },
+            'Екатеринбург': { lat: 56.8389, lon: 60.6057 },
+            'Казань': { lat: 55.7887, lon: 49.1221 },
+            'Уфа': { lat: 54.7388, lon: 55.9721 },
+            'Краснодар': { lat: 45.0355, lon: 38.9753 },
+            'Сургут': { lat: 61.2541, lon: 73.3962 }
+        };
+
         // Элементы DOM
         const cityInput = document.getElementById('cityInput');
         const searchBtn = document.getElementById('searchWeather');
@@ -1476,7 +1502,7 @@
         const currentWeather = document.getElementById('currentWeather');
         const forecastGrid = document.getElementById('forecastGrid');
         const cityButtons = document.querySelectorAll('.city-btn');
-        
+
         // Функция форматирования даты
         function formatDate(date) {
             const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
@@ -1489,61 +1515,100 @@
             
             return `${dayOfWeek}, ${day} ${month} ${year}`;
         }
-        
-        // Функция получения иконки погоды
+
+        // Функция получения иконки погоды из кода Open-Meteo
         function getWeatherIcon(code) {
-            if (code >= 200 && code <= 232) return 'fa-bolt'; // Гроза
-            if (code >= 300 && code <= 321) return 'fa-cloud-rain'; // Мелкий дождь
-            if (code >= 500 && code <= 531) return 'fa-cloud-showers-heavy'; // Дождь
-            if (code >= 600 && code <= 622) return 'fa-snowflake'; // Снег
-            if (code >= 701 && code <= 781) return 'fa-smog'; // Туман
-            if (code === 800) return 'fa-sun'; // Ясно
-            if (code >= 801 && code <= 804) return 'fa-cloud'; // Облачно
-            return 'fa-cloud';
+            // Коды погоды Open-Meteo: https://open-meteo.com/en/docs
+            if (code === 0) return 'fas fa-sun'; // Ясно
+            if (code === 1 || code === 2) return 'fas fa-cloud-sun'; // Переменная облачность
+            if (code === 3) return 'fas fa-cloud'; // Пасмурно
+            if (code >= 45 && code <= 48) return 'fas fa-smog'; // Туман
+            if (code >= 51 && code <= 67) return 'fas fa-cloud-rain'; // Дождь
+            if (code >= 71 && code <= 77) return 'fas fa-snowflake'; // Снег
+            if (code >= 80 && code <= 86) return 'fas fa-cloud-showers-heavy'; // Ливень
+            if (code >= 95 && code <= 99) return 'fas fa-bolt'; // Гроза
+            return 'fas fa-cloud';
         }
-        
+
+        // Функция получения описания погоды на русском
+        function getWeatherDescription(code) {
+            if (code === 0) return 'Ясно';
+            if (code === 1) return 'Преимущественно ясно';
+            if (code === 2) return 'Переменная облачность';
+            if (code === 3) return 'Пасмурно';
+            if (code === 45) return 'Туман';
+            if (code === 48) return 'Изморозь';
+            if (code === 51) return 'Легкая морось';
+            if (code === 53) return 'Умеренная морось';
+            if (code === 55) return 'Сильная морось';
+            if (code === 56) return 'Ледяная морось';
+            if (code === 57) return 'Сильная ледяная морось';
+            if (code === 61) return 'Небольшой дождь';
+            if (code === 63) return 'Умеренный дождь';
+            if (code === 65) return 'Сильный дождь';
+            if (code === 66) return 'Ледяной дождь';
+            if (code === 67) return 'Сильный ледяной дождь';
+            if (code === 71) return 'Небольшой снег';
+            if (code === 73) return 'Умеренный снег';
+            if (code === 75) return 'Сильный снег';
+            if (code === 77) return 'Снежные зерна';
+            if (code === 80) return 'Небольшой ливень';
+            if (code === 81) return 'Умеренный ливень';
+            if (code === 82) return 'Сильный ливень';
+            if (code === 85) return 'Небольшой снегопад';
+            if (code === 86) return 'Сильный снегопад';
+            if (code === 95) return 'Гроза';
+            if (code === 96) return 'Гроза с градом';
+            if (code === 99) return 'Сильная гроза с градом';
+            return 'Облачно';
+        }
+
         // Функция получения цвета иконки
         function getWeatherIconColor(code) {
-            if (code >= 200 && code <= 232) return '#9b59b6'; // Гроза - фиолетовый
-            if (code >= 300 && code <= 531) return '#3498db'; // Дождь - синий
-            if (code >= 600 && code <= 622) return '#bdc3c7'; // Снег - серый
-            if (code === 800) return '#f39c12'; // Ясно - оранжевый
-            return '#7f8c8d'; // Облачно - серый
+            if (code === 0) return '#f39c12'; // Ясно - оранжевый
+            if (code >= 1 && code <= 3) return '#7f8c8d'; // Облачно - серый
+            if (code >= 45 && code <= 48) return '#bdc3c7'; // Туман - светло-серый
+            if (code >= 51 && code <= 67) return '#3498db'; // Дождь - синий
+            if (code >= 71 && code <= 77) return '#bdc3c7'; // Снег - серый
+            if (code >= 80 && code <= 86) return '#2980b9'; // Ливень - темно-синий
+            if (code >= 95 && code <= 99) return '#9b59b6'; // Гроза - фиолетовый
+            return '#7f8c8d';
         }
-        
+
         // Функция загрузки погоды
         async function loadWeather(city) {
             try {
+                // Проверяем, есть ли город в нашем списке
+                const cityCoords = CITY_COORDINATES[city];
+                if (!cityCoords) {
+                    throw new Error('Город не найден в базе данных');
+                }
+                
                 // Показываем загрузчик
                 weatherLoader.style.display = 'block';
                 currentWeather.classList.remove('show');
                 
-                // Загружаем текущую погоду
-                const currentResponse = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=ru&appid=${API_KEY}`
+                // Загружаем текущую погоду и прогноз на 7 дней
+                const weatherResponse = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${cityCoords.lat}&longitude=${cityCoords.lon}&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe/Moscow`
                 );
                 
-                if (!currentResponse.ok) throw new Error('Город не найден');
+                if (!weatherResponse.ok) {
+                    throw new Error('Ошибка загрузки погодных данных');
+                }
                 
-                const currentData = await currentResponse.json();
-                
-                // Загружаем прогноз на 5 дней
-                const forecastResponse = await fetch(
-                    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=ru&appid=${API_KEY}`
-                );
-                
-                const forecastData = forecastResponse.ok ? await forecastResponse.json() : null;
+                const weatherData = await weatherResponse.json();
                 
                 // Обновляем интерфейс
-                updateCurrentWeather(currentData);
-                if (forecastData) updateForecast(forecastData);
+                updateCurrentWeather(city, weatherData);
+                updateForecast(weatherData);
                 
                 // Показываем блок с погодой
                 weatherLoader.style.display = 'none';
                 currentWeather.classList.add('show');
                 
                 // Обновляем рекомендации на основе текущей погоды
-                updateRecommendations(currentData.weather[0].main, currentData.main.temp);
+                updateRecommendations(weatherData.current.weather_code, weatherData.current.temperature_2m);
                 
             } catch (error) {
                 console.error('Ошибка загрузки погоды:', error);
@@ -1551,61 +1616,64 @@
                 alert('Не удалось загрузить погоду для этого города. Проверьте название и попробуйте снова.');
             }
         }
-        
+
         // Функция обновления текущей погоды
-        function updateCurrentWeather(data) {
-            document.getElementById('weatherLocation').textContent = data.name;
+        function updateCurrentWeather(city, data) {
+            document.getElementById('weatherLocation').textContent = city;
             document.getElementById('weatherDate').textContent = formatDate(new Date());
-            document.getElementById('temperature').textContent = Math.round(data.main.temp);
-            document.getElementById('weatherDescription').textContent = data.weather[0].description;
-            document.getElementById('humidity').textContent = `${data.main.humidity}%`;
-            document.getElementById('windSpeed').textContent = `${Math.round(data.wind.speed)} км/ч`;
-            document.getElementById('pressure').textContent = `${Math.round(data.main.pressure * 0.75)} мм рт.ст.`;
-            document.getElementById('visibility').textContent = `${data.visibility / 1000} км`;
+            document.getElementById('temperature').textContent = Math.round(data.current.temperature_2m);
+            
+            const weatherCode = data.current.weather_code;
+            document.getElementById('weatherDescription').textContent = getWeatherDescription(weatherCode);
+            document.getElementById('humidity').textContent = `${Math.round(data.current.relative_humidity_2m)}%`;
+            document.getElementById('windSpeed').textContent = `${Math.round(data.current.wind_speed_10m)} км/ч`;
+            document.getElementById('pressure').textContent = `${Math.round(data.current.pressure_msl * 0.75006)} мм рт.ст.`;
+            document.getElementById('visibility').textContent = '10 км'; // Open-Meteo не предоставляет видимость бесплатно
             
             // Обновляем иконку
             const icon = document.getElementById('weatherIcon');
-            const weatherCode = data.weather[0].id;
-            icon.innerHTML = `<i class="fas ${getWeatherIcon(weatherCode)}"></i>`;
+            icon.innerHTML = `<i class="${getWeatherIcon(weatherCode)}"></i>`;
             icon.style.color = getWeatherIconColor(weatherCode);
         }
-        
+
         // Функция обновления прогноза
         function updateForecast(data) {
             forecastGrid.innerHTML = '';
             
-            // Фильтруем данные для показа одного прогноза в день (12:00)
-            const dailyForecasts = data.list.filter(item => 
-                item.dt_txt.includes('12:00:00')
-            ).slice(0, 5);
-            
-            dailyForecasts.forEach(forecast => {
-                const date = new Date(forecast.dt * 1000);
+            // Показываем прогноз на 5 дней
+            for (let i = 0; i < 5; i++) {
+                const forecastDay = document.createElement('div');
+                forecastDay.className = 'forecast-day';
+                
+                const date = new Date(data.daily.time[i]);
                 const dayOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'][date.getDay()];
                 const day = date.getDate();
                 const month = date.getMonth() + 1;
                 
-                const forecastDay = document.createElement('div');
-                forecastDay.className = 'forecast-day';
+                const weatherCode = data.daily.weather_code[i];
+                const weatherIcon = getWeatherIcon(weatherCode);
+                const iconColor = getWeatherIconColor(weatherCode);
+                const weatherDesc = getWeatherDescription(weatherCode);
+                
                 forecastDay.innerHTML = `
                     <div class="forecast-date">${day}.${month}</div>
                     <div class="forecast-day-of-week">${dayOfWeek}</div>
-                    <div class="forecast-icon" style="color: ${getWeatherIconColor(forecast.weather[0].id)}">
-                        <i class="fas ${getWeatherIcon(forecast.weather[0].id)}"></i>
+                    <div class="forecast-icon" style="color: ${iconColor}">
+                        <i class="${weatherIcon}"></i>
                     </div>
-                    <div class="weather-description">${forecast.weather[0].description}</div>
+                    <div class="weather-description">${weatherDesc}</div>
                     <div class="forecast-temp">
-                        <span class="forecast-high">${Math.round(forecast.main.temp_max)}°</span>
-                        <span class="forecast-low">${Math.round(forecast.main.temp_min)}°</span>
+                        <span class="forecast-high">${Math.round(data.daily.temperature_2m_max[i])}°</span>
+                        <span class="forecast-low">${Math.round(data.daily.temperature_2m_min[i])}°</span>
                     </div>
                 `;
                 
                 forecastGrid.appendChild(forecastDay);
-            });
+            }
         }
-        
+
         // Функция обновления рекомендаций
-        function updateRecommendations(weatherCondition, temperature) {
+        function updateRecommendations(weatherCode, temperature) {
             const recommendations = document.getElementById('recommendations');
             
             let recommendationHTML = `
@@ -1613,11 +1681,11 @@
                 <div class="recommendation-cards">
             `;
             
-            // Определяем текущие условия
-            const isRainy = ['Rain', 'Drizzle', 'Thunderstorm'].includes(weatherCondition);
-            const isSnowy = weatherCondition === 'Snow' || temperature < 0;
-            const isCloudy = weatherCondition === 'Clouds';
-            const isClear = weatherCondition === 'Clear';
+            // Определяем текущие условия по коду погоды
+            const isRainy = (weatherCode >= 51 && weatherCode <= 67) || (weatherCode >= 80 && weatherCode <= 86);
+            const isSnowy = (weatherCode >= 71 && weatherCode <= 77) || temperature < 0;
+            const isCloudy = (weatherCode >= 1 && weatherCode <= 3);
+            const isClear = weatherCode === 0;
             
             // Основная рекомендация на основе текущей погоды
             if (isSnowy) {
@@ -1677,13 +1745,13 @@
             // Общие рекомендации
             recommendationHTML += `
                     <div class="recommendation-card">
-                        <div class="weather-condition" style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white;">
+                        <div class="weather-condition" style="background: linear-gradient(135deg, var(--accent-color), var(--light-accent));">
                             <i class="fas fa-chart-line"></i> Экономия при планировании
                         </div>
                         <p class="recommendation-text">Используйте наш прогноз для оптимизации графика замены. Правильное планирование позволяет экономить до 30% на обслуживании.</p>
                         <div class="replacement-schedule">
                             <div class="schedule-title">Наши услуги:</div>
-                            <div style="color: #2c3e50; font-size: 1rem; margin-top: 10px;">
+                            <div style="color: var(--primary-color); font-size: 1rem; margin-top: 10px;">
                                 • Гибкий график замены<br>
                                 • Адаптация к погоде<br>
                                 • Экономия бюджета<br>
@@ -1693,7 +1761,7 @@
                     </div>
                     
                     <div class="recommendation-card">
-                        <div class="weather-condition" style="background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white;">
+                        <div class="weather-condition" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
                             <i class="fas fa-headset"></i> Профессиональная поддержка
                         </div>
                         <p class="recommendation-text">Наши менеджеры помогут разработать оптимальный график замены ковров с учетом специфики вашего объекта и погодных условий региона.</p>
@@ -1711,7 +1779,7 @@
             
             recommendations.innerHTML = recommendationHTML;
         }
-        
+
         // Обработчики событий
         searchBtn.addEventListener('click', () => {
             const city = cityInput.value.trim();
