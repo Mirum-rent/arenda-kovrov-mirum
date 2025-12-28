@@ -1,0 +1,103 @@
+# === НАЧАЛО КОНФИГУРАЦИИ СЕРВЕРА MIRUM ===
+# Apache конфигурация для сайта arenda-kovrov-mirum.ru
+# Версия: 1.0 | Дата: 29.12.2025
+
+# Включение модуля перезаписи URL
+RewriteEngine On
+
+# Безопасность: запрет доступа к служебным файлам
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak|old|swp)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Запрет доступа к папкам
+Options -Indexes
+
+# === НАЧАЛО РЕДИРЕКТОВ MIRUM ===
+# Редирект со старых .html на новые .php (сохраняем SEO)
+Redirect 301 /index.html /
+Redirect 301 /calculator.html /calculator.php
+Redirect 301 /FAQ.html /FAQ.php
+Redirect 301 /blog.html /blog.php
+Redirect 301 /testimonials.html /testimonials.php
+Redirect 301 /pogoda.html /pogoda.php
+Redirect 301 /privacy-policy.html /privacy-policy.php
+
+# Редирект переименованных страниц
+Redirect 301 /chistka_polov.html /vosstanovlenie-polov.php
+Redirect 301 /window-cleaning.html /window-cleaning.php
+
+# Редирект для будущих страниц
+Redirect 301 /services /arenda-kovrov.php
+Redirect 301 /uslugi /arenda-kovrov.php
+
+# Редирект с www на без www
+RewriteCond %{HTTP_HOST} ^www\.arenda-kovrov-mirum\.ru$ [NC]
+RewriteRule ^(.*)$ https://arenda-kovrov-mirum.ru/$1 [R=301,L]
+
+# Принудительное использование HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# === КОНЕЦ РЕДИРЕКТОВ MIRUM ===
+
+# Установка кодировки по умолчанию
+AddDefaultCharset UTF-8
+
+# Настройка заголовков безопасности
+<IfModule mod_headers.c>
+    # Защита от XSS
+    Header set X-XSS-Protection "1; mode=block"
+    # Защита от MIME-спуфинга
+    Header set X-Content-Type-Options "nosniff"
+    # Защита от кликджекинга
+    Header set X-Frame-Options "SAMEORIGIN"
+    # HSTS (HTTP Strict Transport Security)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    # CSP (Content Security Policy)
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com;"
+</IfModule>
+
+# Настройки кэширования для статических файлов
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Изображения
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # CSS, JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # Шрифты
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    
+    # HTML
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # XML
+    ExpiresByType application/xml "access plus 1 hour"
+</IfModule>
+
+# Сжатие Gzip
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# === КОНЕЦ КОНФИГУРАЦИИ СЕРВЕРА MIRUM ===
