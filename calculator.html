@@ -1,902 +1,810 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/img/favicon-16.png" sizes="16x16" type="image/png">
-    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-    <title>Калькулятор цен на ковры</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ============================================
+         SEO-ОПТИМИЗАЦИЯ ДЛЯ КАЛЬКУЛЯТОРА
+         ============================================ -->
+    <title>🧮 Калькулятор аренды ковров МИРУМ | Рассчитать стоимость онлайн</title>
+    <meta name="description" content="Бесплатный калькулятор аренды ковров МИРУМ. Рассчитайте стоимость за 30 секунд для 40+ городов России. Тендерный калькулятор для организаций. Лучшие цены с 2009 года.">
+    <meta name="keywords" content="калькулятор аренды ковров, рассчитать стоимость ковров, аренда ковров цена, тендерный калькулятор, замена ковров стоимость, МИРУМ калькулятор">
+    
+    <!-- Гео-метатеги -->
+    <meta name="geo.region" content="RU">
+    <meta name="geo.placename" content="Россия">
+    <meta name="geo.position" content="55.7558;37.6173">
+    <meta name="ICBM" content="55.7558, 37.6173">
+    
+    <!-- Open Graph для соцсетей -->
+    <meta property="og:title" content="🧮 Калькулятор аренды ковров МИРУМ | Рассчитать стоимость онлайн">
+    <meta property="og:description" content="Бесплатный калькулятор аренды ковров. Рассчитайте стоимость за 30 секунд для вашего города.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mirum-rent.ru/calculator.html">
+    <meta property="og:image" content="https://mirum-rent.ru/img/calculator-preview.jpg">
+    <meta property="og:site_name" content="МИРУМ - Аренда ковров с 2009 года">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🧮 Калькулятор аренды ковров МИРУМ">
+    <meta name="twitter:description" content="Рассчитайте стоимость аренды ковров онлайн для 40+ городов России">
+    
+    <!-- Каноническая ссылка -->
+    <link rel="canonical" href="https://mirum-rent.ru/calculator.html">
+    
+    <!-- Микроразметка Schema.org для калькулятора -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Калькулятор аренды ковров МИРУМ",
+        "description": "Интерактивный калькулятор для расчета стоимости аренды ковров",
+        "url": "https://mirum-rent.ru/calculator.html",
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Главная",
+                    "item": "https://mirum-rent.ru/"
+                },
+                {
+                    "@type": "ListItem", 
+                    "position": 2,
+                    "name": "Калькулятор аренды ковров",
+                    "item": "https://mirum-rent.ru/calculator.html"
+                }
+            ]
+        },
+        "mainEntity": {
+            "@type": "WebApplication",
+            "name": "Калькулятор стоимости аренды ковров",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Any",
+            "description": "Онлайн калькулятор для расчета стоимости аренды ковров по размеру, частоте замен и региону",
+            "featureList": "Выбор региона, выбор размера ковра, выбор частоты замен, расчет стоимости, отправка расчета в Telegram",
+            "screenshot": "https://mirum-rent.ru/img/calculator-screenshot.jpg"
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f8f9fa;
-            padding: 15px;
-            line-height: 1.4;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            font-size: 22px;
-            padding: 10px;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: #f1f1f1;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .tab-btn.active {
-            background: #3498db;
-            color: white;
-        }
-
-        .calculator {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            background: white;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        select {
-            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 20px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 17px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background: #2980b9;
-        }
-
-        .result {
-            margin-top: 25px;
-            padding: 20px;
-            background: #e8f4fd;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .result h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .result-item {
-            background: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-        }
-
-        .total {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            padding: 15px;
-            background: white;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
-
-        .month-inputs {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .month-box {
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            text-align: center;
-        }
-
-        .month-box label {
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
-
-        .month-box input {
-            padding: 8px;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        /* Для очень маленьких экранов */
-        @media (max-width: 480px) {
-            .month-inputs {
-                grid-template-columns: repeat(3, 1fr);
+    }
+    </script>
+    
+    <!-- Favicon и PWA -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Иконки Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Скрипт для кук -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, приняты ли куки
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(function() {
+                    document.getElementById('cookieNotice').style.display = 'block';
+                }, 2000);
             }
             
-            h1 {
-                font-size: 20px;
-            }
+            // Обработка принятия кук
+            document.getElementById('acceptCookies')?.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                document.getElementById('cookieNotice').style.display = 'none';
+            });
             
-            .calculator {
-                padding: 15px;
-            }
-            
-            select, input {
-                padding: 13px;
-            }
-        }
-
-        @media (max-width: 350px) {
-            .month-inputs {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
+            // Обработка отклонения кук
+            document.getElementById('rejectCookies')?.addEventListener('click', function() {
+                localStorage.setItem('cookiesRejected', 'true');
+                document.getElementById('cookieNotice').style.display = 'none';
+            });
+        });
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Калькулятор аренды ковров</h1>
-        
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('standard')">Стандартный</button>
-            <button class="tab-btn" onclick="showTab('tender')">Тендерный</button>
+    <!-- ============================================
+         [02] ХЛЕБНЫЕ КРОШКИ С SEO
+         ============================================ -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="/">Главная</a> &gt; 
+            <strong>Калькулятор аренды ковров</strong>
         </div>
-        
-        <!-- Стандартный калькулятор -->
-        <div id="standard-calc" class="calculator">
-            <div class="form-group">
-                <label>Регион</label>
-                <select id="region" onchange="updateSizes()">
-                    <option value="">Выберите регион</option>
-                </select>
+    </div>
+
+    <!-- ============================================
+         [03] ШАПКА САЙТА
+         ============================================ -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/img/logo-mirum.png" alt="МИРУМ - Аренда ковров с 2009 года" width="180" height="60">
+                </a>
             </div>
             
-            <div class="form-group">
-                <label>Размер ковра</label>
-                <select id="size" disabled onchange="updateFrequencies()">
-                    <option value="">Сначала выберите регион</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Периодичность замены</label>
-                <select id="frequency" disabled onchange="showResult()">
-                    <option value="">Сначала выберите размер</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Количество ковров</label>
-                <input type="number" id="quantity" value="1" min="1" oninput="showResult()">
-            </div>
-            
-            <button class="btn" onclick="addPosition()">Добавить позицию</button>
-            
-            <div id="standard-result" class="result">
-                <h3>Ваш расчет:</h3>
-                <div id="positions-list"></div>
-                <div id="total-cost" class="total">Общая стоимость: 0 ₽</div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/chistka_polov.html">Восстановление полов</a></li>
+                    <li><a href="/blog.html">Блог</a></li>
+                    <li><a href="/pogoda.html">Погода и замена</a></li>
+                    <li><a href="/testimonials.html">Отзывы</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
+                    <li><a href="/calculator.html" class="active">Калькулятор</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         ГЕРОЙ СЕКЦИЯ КАЛЬКУЛЯТОРА
+         ============================================ -->
+    <section class="hero calculator-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>🧮 <span class="accent">Калькулятор аренды ковров</span></h1>
+                <p class="hero-subtitle">Рассчитайте стоимость за <strong>30 секунд</strong> для <strong>40+ городов России</strong></p>
+                
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i class="fas fa-calculator"></i> Онлайн расчет
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-map-marker-alt"></i> 40+ городов
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-percentage"></i> Скидки от 20%
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-file-contract"></i> Тендерный расчет
+                    </div>
+                </div>
+                
+                <div class="transition-notice">
+                    <p><strong>💡 Уже знаете параметры?</strong> Прокрутите вниз к калькулятору или используйте 
+                    <a href="#standard-calculator" style="color: #fff; text-decoration: underline;">стандартный калькулятор</a> 
+                    для быстрого расчета</p>
+                </div>
             </div>
         </div>
-        
-        <!-- Тендерный калькулятор -->
-        <div id="tender-calc" class="calculator" style="display: none;">
-            <div class="form-group">
-                <label>Регион</label>
-                <select id="tender-region" onchange="updateTenderSizes()">
-                    <option value="">Выберите регион</option>
-                </select>
+    </section>
+
+    <!-- ============================================
+         [13] ПОЛНАЯ ВЕРСИЯ КАЛЬКУЛЯТОРА
+         ============================================ -->
+    <section id="standard-calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>📊 Рассчитайте стоимость аренды</h2>
+                <p>Выберите ваш регион, размер ковра и частоту замен для точного расчета</p>
             </div>
             
-            <div class="form-group">
-                <label>Размер ковра</label>
-                <select id="tender-size" disabled>
-                    <option value="">Сначала выберите регион</option>
-                </select>
+            <!-- Вкладки калькуляторов -->
+            <div class="calculator-tabs">
+                <button class="tab-btn active" data-tab="standard">Стандартный калькулятор</button>
+                <button class="tab-btn" data-tab="tender">Тендерный калькулятор</button>
             </div>
             
-            <div class="month-inputs" id="month-inputs">
-                <!-- Месяцы будут добавлены через JS -->
+            <!-- Стандартный калькулятор -->
+            <div id="standard-calculator" class="calculator-content active">
+                <div class="calculator-info">
+                    <p><i class="fas fa-info-circle"></i> Выберите параметры, добавьте позиции в заказ и получите точный расчет стоимости аренды ковров.</p>
+                </div>
+                
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="region"><i class="fas fa-map-marker-alt"></i> Выберите ваш регион</label>
+                        <select id="region" onchange="updateSizes()">
+                            <option value="">Выберите регион</option>
+                            <!-- Регионы будут загружены из prices.js -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="size"><i class="fas fa-expand-arrows-alt"></i> Размер ковра</label>
+                        <select id="size" onchange="updateFrequencies()" disabled>
+                            <option value="">Сначала выберите регион</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="frequency"><i class="fas fa-sync-alt"></i> Частота замен</label>
+                        <select id="frequency" onchange="calculate()" disabled>
+                            <option value="">Сначала выберите размер</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity"><i class="fas fa-layer-group"></i> Количество ковров</label>
+                        <input type="number" id="quantity" min="1" value="1" oninput="calculate()">
+                    </div>
+                </div>
+                
+                <div class="calculator-actions">
+                    <button class="btn btn-primary" onclick="addPosition()">
+                        <i class="fas fa-plus-circle"></i> Добавить позицию
+                    </button>
+                    <button class="btn btn-telegram" onclick="sendToTelegram()">
+                        <i class="fab fa-telegram"></i> Отправить расчет в Telegram
+                    </button>
+                </div>
+                
+                <!-- Уведомление о добавлении позиции -->
+                <div id="addedNotice" class="alert alert-success" style="display: none; margin-top: 20px;">
+                    <i class="fas fa-check-circle"></i> Позиция добавлена в заказ! Вы можете добавить еще позиции или отправить расчет.
+                </div>
+                
+                <!-- Таблица заказа -->
+                <div id="standard-result" class="calculator-results" style="display: none;">
+                    <h3><i class="fas fa-shopping-cart"></i> Ваш заказ</h3>
+                    
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Размер</th>
+                                <th>Кол-во</th>
+                                <th>Частота</th>
+                                <th>Цена за замену</th>
+                                <th>Стоимость в месяц</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderBody">
+                            <!-- Строки будут добавляться через JS -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="total-section" style="text-align: right; margin-top: 20px;">
+                        <h3 id="total">Общая стоимость: 0 ₽</h3>
+                    </div>
+                    
+                    <!-- Уведомление о скидке -->
+                    <div id="discountNotice" class="alert alert-warning" style="display: none; margin-top: 20px;">
+                        <i class="fas fa-gift"></i> <strong>Внимание!</strong> При заказе от 20 000 ₽ в месяц вы получаете 
+                        <strong>скидку до 20%</strong>. Заполните форму ниже для получения персонального предложения.
+                    </div>
+                    
+                    <!-- Форма запроса скидки -->
+                    <div id="discountSection" style="display: none; margin-top: 30px;">
+                        <h4><i class="fas fa-percentage"></i> Запросите персональную скидку</h4>
+                        
+                        <div class="discount-form" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                            <div class="form-group">
+                                <label for="name">Ваше имя *</label>
+                                <input type="text" id="name" placeholder="Иван Иванов">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="discountPhone">Телефон *</label>
+                                <input type="tel" id="discountPhone" placeholder="+7 (999) 123-45-67">
+                            </div>
+                            
+                            <div class="consent-checkbox">
+                                <input type="checkbox" id="consent" checked>
+                                <label for="consent">
+                                    Даю согласие на обработку персональных данных в соответствии с 
+                                    <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a>
+                                </label>
+                            </div>
+                            
+                            <button class="btn btn-primary" onclick="requestDiscount()">
+                                <i class="fas fa-percentage"></i> Запросить скидку
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Форма реквизитов для договора -->
+                    <div style="margin-top: 30px;">
+                        <button class="btn btn-secondary" onclick="showContractForm()">
+                            <i class="fas fa-file-contract"></i> Отправить реквизиты для договора
+                        </button>
+                        
+                        <div id="contractForm" style="display: none; background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                            <h4><i class="fas fa-building"></i> Реквизиты для договора</h4>
+                            
+                            <div class="form-group">
+                                <label for="contact-person">Контактное лицо *</label>
+                                <input type="text" id="contact-person" placeholder="Иванов Иван Иванович">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Организация</label>
+                                <input type="text" id="company" placeholder="ООО 'Пример'">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contractPhone">Телефон *</label>
+                                <input type="tel" id="contractPhone" placeholder="+7 (999) 123-45-67">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="example@company.ru">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="requisites">Реквизиты (ИНН, КПП, юр. адрес)</label>
+                                <textarea id="requisites" rows="4" placeholder="ООО 'Пример'\nИНН 7701234567\nКПП 770101001\nЮридический адрес: г. Москва, ул. Примерная, д. 1"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="region-contract">Регион аренды</label>
+                                <select id="region-contract">
+                                    <option value="">Выберите регион</option>
+                                    <!-- Регионы будут загружены из prices.js -->
+                                </select>
+                            </div>
+                            
+                            <div class="consent-checkbox">
+                                <input type="checkbox" id="contractConsent" checked>
+                                <label for="contractConsent">
+                                    Даю согласие на обработку персональных данных в соответствии с 
+                                    <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a>
+                                </label>
+                            </div>
+                            
+                            <button class="btn btn-primary" onclick="sendContractDetails()">
+                                <i class="fas fa-paper-plane"></i> Отправить реквизиты
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <button class="btn" onclick="calculateTender()">Рассчитать тендер</button>
+            <!-- Тендерный калькулятор -->
+            <div id="tender-calculator" class="calculator-content">
+                <div class="calculator-info">
+                    <p><i class="fas fa-info-circle"></i> Этот калькулятор предназначен для организаций и тендерных заявок. Вы можете рассчитать стоимость на год вперед по месяцам.</p>
+                </div>
+                
+                <div class="tender-form">
+                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                        <div class="form-group">
+                            <label for="tenderRegion"><i class="fas fa-map-marker-alt"></i> Регион</label>
+                            <select id="tenderRegion" onchange="updateTenderSizes()">
+                                <option value="">Выберите регион</option>
+                                <!-- Регионы будут загружены из prices.js -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tenderSize"><i class="fas fa-expand-arrows-alt"></i> Размер ковра</label>
+                            <select id="tenderSize" onchange="calculateTender()" disabled>
+                                <option value="">Сначала выберите регион</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <button class="btn btn-secondary" onclick="addTenderPosition()">
+                            <i class="fas fa-plus-circle"></i> Добавить размер в расчет
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Расчет по месяцам -->
+                <div class="month-inputs-container">
+                    <h4><i class="fas fa-calendar-alt"></i> Расчет по месяцам</h4>
+                    <p>Укажите количество ковров и замен в каждом месяце для точного расчета годовой стоимости</p>
+                    
+                    <div id="monthInputs">
+                        <!-- Месяцы будут добавлены через JS -->
+                    </div>
+                </div>
+                
+                <div class="calculator-actions" style="margin-top: 30px;">
+                    <button class="btn btn-telegram" onclick="sendTenderToTelegram()">
+                        <i class="fab fa-telegram"></i> Отправить тендерный расчет
+                    </button>
+                </div>
+                
+                <!-- Таблица тендерного расчета -->
+                <div id="tender-result" class="calculator-results" style="display: none;">
+                    <h3><i class="fas fa-file-invoice-dollar"></i> Тендерный расчет</h3>
+                    
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Период/Размер</th>
+                                <th>Размер ковра</th>
+                                <th>Кол-во ковров</th>
+                                <th>Частота замен</th>
+                                <th>Стоимость</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tenderBody">
+                            <!-- Строки будут добавляться через JS -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="total-section" style="text-align: right; margin-top: 20px;">
+                        <h3 id="tenderTotal">Общая стоимость: 0 ₽</h3>
+                    </div>
+                    
+                    <!-- Форма для тендерного расчета -->
+                    <div id="tenderForm" style="margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                        <h4><i class="fas fa-user-tie"></i> Контактные данные для тендера</h4>
+                        
+                        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label for="tenderName">Контактное лицо *</label>
+                                <input type="text" id="tenderName" placeholder="Иванов Иван Иванович">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tenderPhone">Телефон *</label>
+                                <input type="tel" id="tenderPhone" placeholder="+7 (999) 123-45-67">
+                            </div>
+                        </div>
+                        
+                        <div class="consent-checkbox">
+                            <input type="checkbox" id="tenderConsent" checked>
+                            <label for="tenderConsent">
+                                Даю согласие на обработку персональных данных в соответствии с 
+                                <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="tenderDiscountNotice" class="alert alert-warning" style="display: none; margin-top: 20px;">
+                        <i class="fas fa-gift"></i> <strong>Специальное предложение!</strong> Для тендеров от 50 000 ₽ мы предоставляем 
+                        <strong>персональные условия и скидки</strong>. Отправьте расчет для получения коммерческого предложения.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         [11] FAQ ДЛЯ КАЛЬКУЛЯТОРА
+         ============================================ -->
+    <section class="faq-main">
+        <div class="container">
+            <div class="section-title">
+                <h2>❓ Частые вопросы о калькуляторе</h2>
+                <p>Ответы на самые популярные вопросы о расчете стоимости аренды ковров</p>
+            </div>
             
-            <div id="tender-result" class="result" style="display: none;">
-                <h3>Расчет по тендеру:</h3>
-                <div id="tender-positions"></div>
-                <div id="tender-total" class="total">Общая стоимость: 0 ₽</div>
+            <div class="faq-grid">
+                <div class="faq-item-main">
+                    <div class="faq-question-main">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Как работает калькулятор?</span>
+                    </div>
+                    <p>Калькулятор использует актуальные цены для каждого региона России. Вы выбираете регион, размер ковра и частоту замен, после чего система рассчитывает точную стоимость аренды на основе базы данных, обновляемой ежемесячно.</p>
+                </div>
+                
+                <div class="faq-item-main">
+                    <div class="faq-question-main">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Цены в калькуляторе окончательные?</span>
+                    </div>
+                    <p>Цены в калькуляторе являются базовыми. При заказе от 20 000 ₽ в месяц мы предоставляем скидки до 20%. Для получения точного коммерческого предложения отправьте расчет через форму.</p>
+                </div>
+                
+                <div class="faq-item-main">
+                    <div class="faq-question-main">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Что такое тендерный калькулятор?</span>
+                    </div>
+                    <p>Тендерный калькулятор предназначен для организаций и позволяет рассчитать стоимость на год вперед с разбивкой по месяцам. Это удобно для составления бюджета и участия в тендерах.</p>
+                </div>
+                
+                <div class="faq-item-main">
+                    <div class="faq-question-main">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Как отправить расчет менеджеру?</span>
+                    </div>
+                    <p>После заполнения калькулятора нажмите кнопку "Отправить расчет в Telegram". Расчет автоматически отправится нашему менеджеру, который свяжется с вами в течение 15 минут в рабочее время.</p>
+                </div>
+                
+                <div class="faq-item-main">
+                    <div class="faq-question-main">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Есть ли скидки для постоянных клиентов?</span>
+                    </div>
+                    <p>Да, для постоянных клиентов действует система лояльности с дополнительными скидками от 5% до 15%. Также предоставляем специальные условия при заключении договора на год.</p>
+                </div>
+                
+                <div class="faq-item-main">
+                    <div class="faq-question-main">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Можно ли получить расчет для нескольких регионов?</span>
+                    </div>
+                    <p>Да, вы можете сделать несколько расчетов для разных регионов и отправить их менеджеру. Мы работаем в 40+ городах России и можем обслуживать объекты в разных регионах.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         [14] КОНТАКТЫ
+         ============================================ -->
+    <section id="contacts" class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>📞 Контакты для связи</h2>
+                <p>Остались вопросы? Свяжитесь с нами удобным способом</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3><i class="fas fa-headset"></i> Служба поддержки</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Телефон</strong>
+                            <p><a href="tel:+79770005127">+7 (977) 000-51-27</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <div>
+                            <strong>Telegram</strong>
+                            <p><a href="https://t.me/+79770005127" target="_blank">@mirum_rent_bot</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p><a href="mailto:info@mirum-rent.ru">info@mirum-rent.ru</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Время работы</strong>
+                            <p>Пн-Пт: 9:00-18:00<br>Сб: 10:00-16:00<br>Вс: выходной</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3><i class="fas fa-paper-plane"></i> Быстрая заявка</h3>
+                    
+                    <form id="quickForm">
+                        <div class="form-group">
+                            <label for="quickName">Ваше имя *</label>
+                            <input type="text" id="quickName" required placeholder="Иван Иванов">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quickPhone">Телефон *</label>
+                            <input type="tel" id="quickPhone" required placeholder="+7 (999) 123-45-67">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quickMessage">Сообщение</label>
+                            <textarea id="quickMessage" rows="3" placeholder="Интересующая услуга или вопрос"></textarea>
+                        </div>
+                        
+                        <div class="consent-checkbox">
+                            <input type="checkbox" id="quickConsent" checked required>
+                            <label for="quickConsent">
+                                Даю согласие на обработку персональных данных в соответствии с 
+                                <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Отправить заявку
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         [15] ФУТЕР
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>МИРУМ</h3>
+                    <p>Аренда ковров и услуги по поддержанию чистоты с 2009 года. Работаем в 40+ городах России.</p>
+                    <p>Опыт, качество и надежность — наши главные преимущества.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/chistka_polov.html">Восстановление полов</a></li>
+                        <li><a href="/blog.html">Блог</a></li>
+                        <li><a href="/pogoda.html">Погода и замена</a></li>
+                        <li><a href="/calculator.html">Калькулятор</a></li>
+                        <li><a href="/faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
+                        <li><a href="mailto:info@mirum-rent.ru">info@mirum-rent.ru</a></li>
+                        <li><a href="https://t.me/+79770005127" target="_blank">Telegram</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Регионы работы</h3>
+                    <div class="regions-grid">
+                        <div class="region-group">
+                            <h4>Центральный ФО</h4>
+                            <ul>
+                                <li>Москва</li>
+                                <li>Воронеж</li>
+                                <li>Нижний Новгород</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="region-group">
+                            <h4>Северо-Западный ФО</h4>
+                            <ul>
+                                <li>Санкт-Петербург</li>
+                                <li>Йошкар-Ола</li>
+                                <li>Чебоксары</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2009-2025 МИРУМ. Аренда ковров и услуги по поддержанию чистоты.</p>
+                <p>
+                    <a href="/privacy-policy.html">Политика конфиденциальности</a> | 
+                    <a href="/terms.html">Пользовательское соглашение</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         [16] ПЛАВАЮЩАЯ КНОПКА TELEGRAM
+         ============================================ -->
+    <div class="telegram-float">
+        <a href="https://t.me/+79770005127" class="telegram-link" target="_blank">
+            <i class="fab fa-telegram"></i>
+            <span>Задать вопрос</span>
+        </a>
+    </div>
+
+    <!-- ============================================
+         [17] КНОПКА "НАВЕРХ"
+         ============================================ -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- ============================================
+         [18] УВЕДОМЛЕНИЕ О КУКАХ
+         ============================================ -->
+    <div class="cookie-notice" id="cookieNotice">
+        <div class="container">
+            <p>
+                🍪 Мы используем файлы cookie для улучшения работы сайта. 
+                Продолжая использовать сайт, вы соглашаетесь с 
+                <a href="/privacy-policy.html">Политикой конфиденциальности</a>.
+            </p>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-accept" id="acceptCookies">Принять</button>
+                <button class="cookie-btn cookie-reject" id="rejectCookies">Отклонить</button>
             </div>
         </div>
     </div>
 
+    <!-- ============================================
+         СКРИПТЫ
+         ============================================ -->
+    <!-- Подключаем базу цен -->
+    <script src="/js/prices.js"></script>
+    
+    <!-- Подключаем калькулятор -->
+    <script src="/js/calculator.js"></script>
+    
+    <!-- Основные скрипты сайта -->
     <script>
-        // Простые данные - только основные регионы для теста
-const priceData = {
-    "Москва": {
-        "85*60": { "1 раз в две недели": 180, "1 раз в неделю": 180, "2 раза в неделю": 180, "3 раза в неделю": 180, "4 раза в неделю": 180, "5 раз в неделю": 180, "6 раз в неделю": 180, "7 раз в неделю": 180 },
-        "85*150": { "1 раз в две недели": 420, "1 раз в неделю": 420, "2 раза в неделю": 420, "3 раза в неделю": 420, "4 раза в неделю": 420, "5 раз в неделю": 420, "6 раз в неделю": 420, "7 раз в неделю": 420 },
-        "115*200": { "1 раз в две недели": 760, "1 раз в неделю": 760, "2 раза в неделю": 760, "3 раза в неделю": 760, "4 раза в неделю": 760, "5 раз в неделю": 760, "6 раз в неделю": 760, "7 раз в неделю": 760 },
-        "115*400": { "1 раз в две недели": 2210, "1 раз в неделю": 2210, "2 раза в неделю": 2210, "3 раза в неделю": 2210, "4 раза в неделю": 2210, "5 раз в неделю": 2210, "6 раз в неделю": 2210, "7 раз в неделю": 2210 },
-        "150*240": { "1 раз в две недели": 1180, "1 раз в неделю": 1180, "2 раза в неделю": 1180, "3 раза в неделю": 1180, "4 раза в неделю": 1180, "5 раз в неделю": 1180, "6 раз в неделю": 1180, "7 раз в неделю": 1180 },
-        "150*300": { "1 раз в две недели": 1520, "1 раз в неделю": 1520, "2 раза в неделю": 1520, "3 раза в неделю": 1520, "4 раза в неделю": 1520, "5 раз в неделю": 1520, "6 раз в неделю": 1520, "7 раз в неделю": 1520 }
-    },
-    "Московская область": {
-        "85*60": { "1 раз в две недели": 280, "1 раз в неделю": 280, "2 раза в неделю": 280, "3 раза в неделю": 280, "4 раза в неделю": 280, "5 раз в неделю": 280, "6 раз в неделю": 280, "7 раз в неделю": 280 },
-        "85*150": { "1 раз в две недели": 620, "1 раз в неделю": 620, "2 раза в неделю": 620, "3 раза в неделю": 620, "4 раза в неделю": 620, "5 раз в неделю": 620, "6 раз в неделю": 620, "7 раз в неделю": 620 },
-        "115*200": { "1 раз в две недели": 1110, "1 раз в неделю": 1110, "2 раза в неделю": 1110, "3 раза в неделю": 1110, "4 раза в неделю": 1110, "5 раз в неделю": 1110, "6 раз в неделю": 1110, "7 раз в неделю": 1110 },
-        "115*400": { "1 раз в две недели": 2210, "1 раз в неделю": 2210, "2 раза в неделю": 2210, "3 раза в неделю": 2210, "4 раза в неделю": 2210, "5 раз в неделю": 2210, "6 раз в неделю": 2210, "7 раз в неделю": 2210 },
-        "150*240": { "1 раз в две недели": 1730, "1 раз в неделю": 1730, "2 раза в неделю": 1730, "3 раза в неделю": 1730, "4 раза в неделю": 1730, "5 раз в неделю": 1730, "6 раз в неделю": 1730, "7 раз в неделю": 1730 },
-        "150*300": { "1 раз в две недели": 2160, "1 раз в неделю": 2160, "2 раза в неделю": 2160, "3 раза в неделю": 2160, "4 раза в неделю": 2160, "5 раз в неделю": 2160, "6 раз в неделю": 2160, "7 раз в неделю": 2160 }
-    },
-    "Санкт-Петербург": {
-        "85*60": { "1 раз в две недели": 830, "1 раз в неделю": 490, "2 раза в неделю": 420, "3 раза в неделю": 340, "4 раза в неделю": 340, "5 раз в неделю": 340, "6 раз в неделю": 340, "7 раз в неделю": 340 },
-        "85*150": { "1 раз в две недели": 1000, "1 раз в неделю": 660, "2 раза в неделю": 590, "3 раза в неделю": 510, "4 раза в неделю": 510, "5 раз в неделю": 510, "6 раз в неделю": 510, "7 раз в неделю": 510 },
-        "115*200": { "1 раз в две недели": 1330, "1 раз в неделю": 890, "2 раза в неделю": 840, "3 раза в неделю": 680, "4 раза в неделю": 680, "5 раз в неделю": 680, "6 раз в неделю": 680, "7 раз в неделю": 680 },
-        "115*240": { "1 раз в две недели": 1500, "1 раз в неделю": 1000, "2 раза в неделю": 840, "3 раза в неделю": 760, "4 раза в неделю": 760, "5 раз в неделю": 760, "6 раз в неделю": 760, "7 раз в неделю": 760 },
-        "115*400": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350, "4 раза в неделю": 1350, "5 раз в неделю": 1350, "6 раз в неделю": 1350, "7 раз в неделю": 1350 },
-        "150*250": { "1 раз в две недели": 2000, "1 раз в неделю": 1330, "2 раза в неделю": 1180, "3 раза в неделю": 1010, "4 раза в неделю": 1010, "5 раз в неделю": 1010, "6 раз в неделю": 1010, "7 раз в неделю": 1010 },
-        "150*300": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350, "4 раза в неделю": 1350, "5 раз в неделю": 1350, "6 раз в неделю": 1350, "7 раз в неделю": 1350 }
-    },
-    "Ленинградская область": {
-        "85*60": { "1 раз в две недели": 830, "1 раз в неделю": 490, "2 раза в неделю": 420, "3 раза в неделю": 340, "4 раза в неделю": 340, "5 раз в неделю": 340, "6 раз в неделю": 340, "7 раз в неделю": 340 },
-        "85*150": { "1 раз в две недели": 1000, "1 раз в неделю": 660, "2 раза в неделю": 590, "3 раза в неделю": 510, "4 раза в неделю": 510, "5 раз в неделю": 510, "6 раз в неделю": 510, "7 раз в неделю": 510 },
-        "115*200": { "1 раз в две недели": 1330, "1 раз в неделю": 890, "2 раза в неделю": 840, "3 раза в неделю": 680, "4 раза в неделю": 680, "5 раз в неделю": 680, "6 раз в неделю": 680, "7 раз в неделю": 680 },
-        "115*240": { "1 раз в две недели": 1500, "1 раз в неделю": 1000, "2 раза в неделю": 840, "3 раза в неделю": 760, "4 раза в неделю": 760, "5 раз в неделю": 760, "6 раз в неделю": 760, "7 раз в неделю": 760 },
-        "115*400": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350, "4 раза в неделю": 1350, "5 раз в неделю": 1350, "6 раз в неделю": 1350, "7 раз в неделю": 1350 },
-        "150*250": { "1 раз в две недели": 2000, "1 раз в неделю": 1330, "2 раза в неделю": 1180, "3 раза в неделю": 1010, "4 раза в неделю": 1010, "5 раз в неделю": 1010, "6 раз в неделю": 1010, "7 раз в неделю": 1010 },
-        "150*300": { "1 раз в две недели": 2510, "1 раз в неделю": 1670, "2 раза в неделю": 1520, "3 раза в неделю": 1350, "4 раза в неделю": 1350, "5 раз в неделю": 1350, "6 раз в неделю": 1350, "7 раз в неделю": 1350 }
-    },
-    "Астрахань": {
-        "85*150": { "1 раз в две недели": 1320, "1 раз в неделю": 760, "2 раза в неделю": 760, "3 раза в неделю": 760, "4 раза в неделю": 760, "5 раз в неделю": 760, "6 раз в неделю": 760, "7 раз в неделю": 760 },
-        "115*200": { "1 раз в две недели": 2040, "1 раз в неделю": 1160, "2 раза в неделю": 1160, "3 раза в неделю": 1160, "4 раза в неделю": 1160, "5 раз в неделю": 1160, "6 раз в неделю": 1160, "7 раз в неделю": 1160 },
-        "150*250": { "1 раз в две недели": 3400, "1 раз в неделю": 1960, "2 раза в неделю": 1960, "3 раза в неделю": 1960, "4 раза в неделю": 1960, "5 раз в неделю": 1960, "6 раз в неделю": 1960, "7 раз в неделю": 1960 }
-    },
-    "Астраханская область": {
-        "85*150": { "1 раз в две недели": 1320, "1 раз в неделю": 760, "2 раза в неделю": 760, "3 раза в неделю": 760, "4 раза в неделю": 760, "5 раз в неделю": 760, "6 раз в неделю": 760, "7 раз в неделю": 760 },
-        "115*200": { "1 раз в две недели": 2040, "1 раз в неделю": 1160, "2 раза в неделю": 1160, "3 раза в неделю": 1160, "4 раза в неделю": 1160, "5 раз в неделю": 1160, "6 раз в неделю": 1160, "7 раз в неделю": 1160 },
-        "150*250": { "1 раз в две недели": 3400, "1 раз в неделю": 1960, "2 раза в неделю": 1960, "3 раза в неделю": 1960, "4 раза в неделю": 1960, "5 раз в неделю": 1960, "6 раз в неделю": 1960, "7 раз в неделю": 1960 }
-    },
-    "Воронеж": {
-        "85*60": { "1 раз в две недели": 670, "1 раз в неделю": 530, "2 раза в неделю": 490, "3 раза в неделю": 490, "4 раза в неделю": 490, "5 раз в неделю": 490, "6 раз в неделю": 490, "7 раз в неделю": 490 },
-        "85*150": { "1 раз в две недели": 1380, "1 раз в неделю": 890, "2 раза в неделю": 840, "3 раза в неделю": 840, "4 раза в неделю": 840, "5 раз в неделю": 840, "6 раз в неделю": 840, "7 раз в неделю": 840 },
-        "115*200": { "1 раз в две недели": 1760, "1 раз в неделю": 1150, "2 раза в неделю": 1060, "3 раза в неделю": 1060, "4 раза в неделю": 1060, "5 раз в неделю": 1060, "6 раз в неделю": 1060, "7 раз в неделю": 1060 },
-        "150*300": { "1 раз в две недели": 2660, "1 раз в неделю": 2060, "2 раза в неделю": 1970, "3 раза в неделю": 1970, "4 раза в неделю": 1970, "5 раз в неделю": 1970, "6 раз в неделю": 1970, "7 раз в неделю": 1970 },
-        "150*250": { "1 раз в две недели": 2160, "1 раз в неделю": 1860, "2 раза в неделю": 1630, "3 раза в неделю": 1630, "4 раза в неделю": 1630, "5 раз в неделю": 1630, "6 раз в неделю": 1630, "7 раз в неделю": 1630 }
-    },
-    "Воронежская область": {
-        "85*60": { "1 раз в две недели": 700, "1 раз в неделю": 570, "2 раза в неделю": 520, "3 раза в неделю": 520, "4 раза в неделю": 520, "5 раз в неделю": 520, "6 раз в неделю": 520, "7 раз в неделю": 520 },
-        "85*150": { "1 раз в две недели": 1470, "1 раз в неделю": 990, "2 раза в неделю": 930, "3 раза в неделю": 930, "4 раза в неделю": 930, "5 раз в неделю": 930, "6 раз в неделю": 930, "7 раз в неделю": 930 },
-        "115*200": { "1 раз в две недели": 1920, "1 раз в неделю": 1280, "2 раза в неделю": 1180, "3 раза в неделю": 610, "4 раза в неделю": 1180, "5 раз в неделю": 1180, "6 раз в неделю": 1180, "7 раз в неделю": 1180 },
-        "150*300": { "1 раз в две недели": 2970, "1 раз в неделю": 2300, "2 раза в неделю": 2170, "3 раза в неделю": 2170, "4 раза в неделю": 2170, "5 раз в неделю": 2170, "6 раз в неделю": 2170, "7 раз в неделю": 2170 },
-        "150*250": { "1 раз в две недели": 2520, "1 раз в неделю": 2110, "2 раза в неделю": 1840, "3 раза в неделю": 1840, "4 раза в неделю": 1840, "5 раз в неделю": 1840, "6 раз в неделю": 1840, "7 раз в неделю": 1840 }
-    },
-    "Екатеринбург": {
-        "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260, "4 раза в неделю": 240, "5 раз в неделю": 220, "6 раз в неделю": 200, "7 раз в неделю": 190 },
-        "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400, "4 раза в неделю": 400, "5 раз в неделю": 390, "6 раз в неделю": 380, "7 раз в неделю": 360 },
-        "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650, "4 раза в неделю": 640, "5 раз в неделю": 640, "6 раз в неделю": 610, "7 раз в неделю": 580 },
-        "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080, "4 раза в неделю": 1110, "5 раз в неделю": 1050, "6 раз в неделю": 1010, "7 раз в неделю": 970 },
-        "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130, "4 раза в неделю": 1080, "5 раз в неделю": 1030, "6 раз в неделю": 990, "7 раз в неделю": 970 }
-    },
-    "Иркутск": {
-        "85*60": { "1 раз в две недели": 400, "1 раз в неделю": 400, "2 раза в неделю": 360, "3 раза в неделю": 360, "4 раза в неделю": 360, "5 раз в неделю": 360, "6 раз в неделю": 360, "7 раз в неделю": 360 },
-        "85*150": { "1 раз в две недели": 640, "1 раз в неделю": 640, "2 раза в неделю": 580, "3 раза в неделю": 580, "4 раза в неделю": 580, "5 раз в неделю": 580, "6 раз в неделю": 580, "7 раз в неделю": 580 },
-        "115*200": { "1 раз в две недели": 920, "1 раз в неделю": 920, "2 раза в неделю": 830, "3 раза в неделю": 830, "4 раза в неделю": 830, "5 раз в неделю": 830, "6 раз в неделю": 830, "7 раз в неделю": 830 },
-        "115*240": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1010, "3 раза в неделю": 1010, "4 раза в неделю": 1010, "5 раз в неделю": 1010, "6 раз в неделю": 1010, "7 раз в неделю": 1010 },
-        "150*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1260, "3 раза в неделю": 1260, "4 раза в неделю": 1260, "5 раз в неделю": 1260, "6 раз в неделю": 1260, "7 раз в неделю": 1260 }
-    },
-    "Иркутская область": {
-        "85*60": { "1 раз в две недели": 400, "1 раз в неделю": 400, "2 раза в неделю": 360, "3 раза в неделю": 360, "4 раза в неделю": 360, "5 раз в неделю": 360, "6 раз в неделю": 360, "7 раз в неделю": 360 },
-        "85*150": { "1 раз в две недели": 640, "1 раз в неделю": 640, "2 раза в неделю": 580, "3 раза в неделю": 580, "4 раза в неделю": 580, "5 раз в неделю": 580, "6 раз в неделю": 580, "7 раз в неделю": 580 },
-        "115*200": { "1 раз в две недели": 920, "1 раз в неделю": 920, "2 раза в неделю": 830, "3 раза в неделю": 830, "4 раза в неделю": 830, "5 раз в неделю": 830, "6 раз в неделю": 830, "7 раз в неделю": 830 },
-        "115*240": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1010, "3 раза в неделю": 1010, "4 раза в неделю": 1010, "5 раз в неделю": 1010, "6 раз в неделю": 1010, "7 раз в неделю": 1010 },
-        "150*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1260, "3 раза в неделю": 1260, "4 раза в неделю": 1260, "5 раз в неделю": 1260, "6 раз в неделю": 1260, "7 раз в неделю": 1260 }
-    },
-    "Йошкар-Ола": {
-        "60*90": { "1 раз в две недели": 520, "1 раз в неделю": 520, "2 раза в неделю": 520, "3 раза в неделю": 520, "4 раза в неделю": 520, "5 раз в неделю": 520, "6 раз в неделю": 520, "7 раз в неделю": 520 },
-        "90*150": { "1 раз в две недели": 680, "1 раз в неделю": 680, "2 раза в неделю": 680, "3 раза в неделю": 680, "4 раза в неделю": 680, "5 раз в неделю": 680, "6 раз в неделю": 680, "7 раз в неделю": 680 },
-        "120*180": { "1 раз в две недели": 1000, "1 раз в неделю": 1000, "2 раза в неделю": 1000, "3 раза в неделю": 1000, "4 раза в неделю": 1000, "5 раз в неделю": 1000, "6 раз в неделю": 1000, "7 раз в неделю": 1000 },
-        "120*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1400, "3 раза в неделю": 1400, "4 раза в неделю": 1400, "5 раз в неделю": 1400, "6 раз в неделю": 1400, "7 раз в неделю": 1400 }
-    },
-    "Казань": {
-        "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260, "4 раза в неделю": 240, "5 раз в неделю": 220, "6 раз в неделю": 200, "7 раз в неделю": 190 },
-        "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400, "4 раза в неделю": 400, "5 раз в неделю": 390, "6 раз в неделю": 380, "7 раз в неделю": 360 },
-        "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650, "4 раза в неделю": 640, "5 раз в неделю": 640, "6 раз в неделю": 610, "7 раз в неделю": 580 },
-        "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080, "4 раза в неделю": 1110, "5 раз в неделю": 1050, "6 раз в неделю": 1010, "7 раз в неделю": 970 },
-        "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130, "4 раза в неделю": 1080, "5 раз в неделю": 1030, "6 раз в неделю": 990, "7 раз в неделю": 970 }
-    },
-    "Нижний Новгород": {
-        "85*150": { "1 раз в две недели": 960, "1 раз в неделю": 960, "2 раза в неделю": 960, "3 раза в неделю": 960, "4 раза в неделю": 960, "5 раз в неделю": 960, "6 раз в неделю": 960, "7 раз в неделю": 960 },
-        "115*200": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1120, "3 раза в неделю": 1120, "4 раза в неделю": 1120, "5 раз в неделю": 1120, "6 раз в неделю": 1120, "7 раз в неделю": 1120 },
-        "150*300": { "1 раз в две недели": 2240, "1 раз в неделю": 2240, "2 раза в неделю": 2240, "3 раза в неделю": 2240, "4 раза в неделю": 2240, "5 раз в неделю": 2240, "6 раз в неделю": 2240, "7 раз в неделю": 2240 }
-    },
-    "Нижегородская область": {
-        "85*150": { "1 раз в две недели": 960, "1 раз в неделю": 960, "2 раза в неделю": 960, "3 раза в неделю": 960, "4 раза в неделю": 960, "5 раз в неделю": 960, "6 раз в неделю": 960, "7 раз в неделю": 960 },
-        "115*200": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1120, "3 раза в неделю": 1120, "4 раза в неделю": 1120, "5 раз в неделю": 1120, "6 раз в неделю": 1120, "7 раз в неделю": 1120 },
-        "150*300": { "1 раз в две недели": 2240, "1 раз в неделю": 2240, "2 раза в неделю": 2240, "3 раза в неделю": 2240, "4 раза в неделю": 2240, "5 раз в неделю": 2240, "6 раз в неделю": 2240, "7 раз в неделю": 2240 }
-    },
-    "Новосибирск": {
-        "85*150": { "1 раз в две недели": 800, "1 раз в неделю": 560, "2 раза в неделю": 530, "3 раза в неделю": 500, "4 раза в неделю": 480, "5 раз в неделю": 450, "6 раз в неделю": 430, "7 раз в неделю": 400 },
-        "115*200": { "1 раз в две недели": 1080, "1 раз в неделю": 800, "2 раза в неделю": 740, "3 раза в неделю": 710, "4 раза в неделю": 680, "5 раз в неделю": 660, "6 раз в неделю": 640, "7 раз в неделю": 610 },
-        "115*400": { "1 раз в две недели": 2000, "1 раз в неделю": 1480, "2 раза в неделю": 1270, "3 раза в неделю": 1240, "4 раза в неделю": 1200, "5 раз в неделю": 1170, "6 раз в неделю": 1140, "7 раз в неделю": 1110 },
-        "150*250": { "1 раз в две недели": 1550, "1 раз в неделю": 1160, "2 раза в неделю": 1110, "3 раза в неделю": 1060, "4 раза в неделю": 1020, "5 раз в неделю": 980, "6 раз в неделю": 940, "7 раз в неделю": 900 },
-        "150*300": { "1 раз в две недели": 1920, "1 раз в неделю": 1440, "2 раза в неделю": 1200, "3 раза в неделю": 1120, "4 раза в неделю": 1080, "5 раз в неделю": 1040, "6 раз в неделю": 1000, "7 раз в неделю": 960 }
-    },
-    "Новосибирская область": {
-        "85*150": { "1 раз в две недели": 1200, "1 раз в неделю": 840, "2 раза в неделю": 800, "3 раза в неделю": 600, "4 раза в неделю": 570, "5 раз в неделю": 550, "6 раз в неделю": 520, "7 раз в неделю": 500 },
-        "115*200": { "1 раз в две недели": 1610, "1 раз в неделю": 1200, "2 раза в неделю": 1110, "3 раза в неделю": 1080, "4 раза в неделю": 1040, "5 раз в неделю": 1020, "6 раз в неделю": 1000, "7 раз в неделю": 970 },
-        "115*400": { "1 раз в две недели": 3000, "1 раз в неделю": 2220, "2 раза в неделю": 1900, "3 раза в неделю": 1680, "4 раза в неделю": 1640, "5 раз в неделю": 1620, "6 раз в неделю": 1600, "7 раз в неделю": 1570 },
-        "150*250": { "1 раз в две недели": 2320, "1 раз в неделю": 1730, "2 раза в неделю": 1660, "3 раза в неделю": 1600, "4 раза в неделю": 1570, "5 раз в неделю": 1550, "6 раз в неделю": 1520, "7 раз в неделю": 1500 },
-        "150*300": { "1 раз в две недели": 2880, "1 раз в неделю": 2160, "2 раза в неделю": 1800, "3 раза в неделю": 1720, "4 раза в неделю": 1680, "5 раз в неделю": 1660, "6 раз в неделю": 1640, "7 раз в неделю": 1610 }
-    },
-    "Пермь": {
-        "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260, "4 раза в неделю": 240, "5 раз в неделю": 220, "6 раз в неделю": 200, "7 раз в неделю": 190 },
-        "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400, "4 раза в неделю": 400, "5 раз в неделю": 390, "6 раз в неделю": 380, "7 раз в неделю": 360 },
-        "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650, "4 раза в неделю": 640, "5 раз в неделю": 640, "6 раз в неделю": 610, "7 раз в неделю": 580 },
-        "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080, "4 раза в неделю": 1110, "5 раз в неделю": 1050, "6 раз в неделю": 1010, "7 раз в неделю": 970 },
-        "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130, "4 раза в неделю": 1080, "5 раз в неделю": 1030, "6 раз в неделю": 990, "7 раз в неделю": 970 }
-    },
-    "Пермский край": {
-        "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300, "3 раза в неделю": 280, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 260, "7 раз в неделю": 250 },
-        "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470, "3 раза в неделю": 450, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 430, "7 раз в неделю": 420 },
-        "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760, "3 раза в неделю": 730, "4 раза в неделю": 720, "5 раз в неделю": 700, "6 раз в неделю": 680, "7 раз в неделю": 670 },
-        "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260, "3 раза в неделю": 1210, "4 раза в неделю": 1190, "5 раз в неделю": 1160, "6 раз в неделю": 1140, "7 раз в неделю": 1120 },
-        "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310, "3 раза в неделю": 1240, "4 раза в неделю": 1220, "5 раз в неделю": 1200, "6 раз в неделю": 1170, "7 раз в неделю": 1150 }
-    },
-    "Ростов-на-Дону": {
-        "85*60": { "1 раз в две недели": 470, "1 раз в неделю": 280, "2 раза в неделю": 200, "3 раза в неделю": 180, "4 раза в неделю": 180, "5 раз в неделю": 180, "6 раз в неделю": 180, "7 раз в неделю": 180 },
-        "85*150": { "1 раз в две недели": 790, "1 раз в неделю": 530, "2 раза в неделю": 480, "3 раза в неделю": 440, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 440, "7 раз в неделю": 440 },
-        "115*180": { "1 раз в две недели": 1160, "1 раз в неделю": 790, "2 раза в неделю": 720, "3 раза в неделю": 660, "4 раза в неделю": 660, "5 раз в неделю": 660, "6 раз в неделю": 660, "7 раз в неделю": 660 },
-        "150*250": { "1 раз в две недели": 1700, "1 раз в неделю": 1280, "2 раза в неделю": 1160, "3 раза в неделю": 1060, "4 раза в неделю": 1060, "5 раз в неделю": 1060, "6 раз в неделю": 1060, "7 раз в неделю": 1060 },
-        "150*600": { "1 раз в две недели": 4000, "1 раз в неделю": 3040, "2 раза в неделю": 2720, "3 раза в неделю": 2480, "4 раза в неделю": 2480, "5 раз в неделю": 2480, "6 раз в неделю": 2480, "7 раз в неделю": 2480 }
-    },
-    "Ростовская область": {
-        "85*60": { "1 раз в две недели": 470, "1 раз в неделю": 280, "2 раза в неделю": 200, "3 раза в неделю": 180, "4 раза в неделю": 180, "5 раз в неделю": 180, "6 раз в неделю": 180, "7 раз в неделю": 180 },
-        "85*150": { "1 раз в две недели": 790, "1 раз в неделю": 530, "2 раза в неделю": 480, "3 раза в неделю": 440, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 440, "7 раз в неделю": 440 },
-        "115*180": { "1 раз в две недели": 1160, "1 раз в неделю": 790, "2 раза в неделю": 720, "3 раза в неделю": 660, "4 раза в неделю": 660, "5 раз в неделю": 660, "6 раз в неделю": 660, "7 раз в неделю": 660 },
-        "150*250": { "1 раз в две недели": 1700, "1 раз в неделю": 1280, "2 раза в неделю": 1160, "3 раза в неделю": 1060, "4 раза в неделю": 1060, "5 раз в неделю": 1060, "6 раз в неделю": 1060, "7 раз в неделю": 1060 },
-        "150*600": { "1 раз в две недели": 4000, "1 раз в неделю": 3040, "2 раза в неделю": 2720, "3 раза в неделю": 2480, "4 раза в неделю": 2480, "5 раз в неделю": 2480, "6 раз в неделю": 2480, "7 раз в неделю": 2480 }
-    },
-    "Сургут": {
-        "85*150": { "1 раз в две недели": 960, "1 раз в неделю": 720, "2 раза в неделю": 680, "3 раза в неделю": 640, "4 раза в неделю": 640, "5 раз в неделю": 570, "6 раз в неделю": 570, "7 раз в неделю": 580 },
-        "115*180": { "1 раз в две недели": 1440, "1 раз в неделю": 1160, "2 раза в неделю": 1100, "3 раза в неделю": 1040, "4 раза в неделю": 1040, "5 раз в неделю": 930, "6 раз в неделю": 930, "7 раз в неделю": 930 },
-        "115*200": { "1 раз в две недели": 1600, "1 раз в неделю": 1290, "2 раза в неделю": 1220, "3 раза в неделю": 1160, "4 раза в неделю": 1160, "5 раз в неделю": 1030, "6 раз в неделю": 1030, "7 раз в неделю": 1040 },
-        "115*240": { "1 раз в две недели": 1760, "1 раз в неделю": 1540, "2 раза в неделю": 1470, "3 раза в неделю": 1390, "4 раза в неделю": 1390, "5 раз в неделю": 1240, "6 раз в неделю": 1240, "7 раз в неделю": 1240 },
-        "115*400": { "1 раз в две недели": 3200, "1 раз в неделю": 2570, "2 раза в неделю": 2430, "3 раза в неделю": 2310, "4 раза в неделю": 2310, "5 раз в неделю": 2060, "6 раз в неделю": 2060, "7 раз в неделю": 2070 },
-        "150*250": { "1 раз в две недели": 2560, "1 раз в неделю": 2100, "2 раза в неделю": 1990, "3 раза в неделю": 1890, "4 раза в неделю": 1890, "5 раз в неделю": 1680, "6 раз в неделю": 1680, "7 раз в неделю": 1690 },
-        "150*300": { "1 раз в две недели": 3040, "1 раз в неделю": 2680, "2 раза в неделю": 2550, "3 раза в неделю": 2410, "4 раза в неделю": 2410, "5 раз в неделю": 2150, "6 раз в неделю": 2150, "7 раз в неделю": 2150 }
-    },
-    "Тюмень": {
-        "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260, "4 раза в неделю": 240, "5 раз в неделю": 220, "6 раз в неделю": 200, "7 раз в неделю": 190 },
-        "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400, "4 раза в неделю": 400, "5 раз в неделю": 390, "6 раз в неделю": 380, "7 раз в неделю": 360 },
-        "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650, "4 раза в неделю": 640, "5 раз в неделю": 640, "6 раз в неделю": 610, "7 раз в неделю": 580 },
-        "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080, "4 раза в неделю": 1110, "5 раз в неделю": 1050, "6 раз в неделю": 1010, "7 раз в неделю": 970 },
-        "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130, "4 раза в неделю": 1080, "5 раз в неделю": 1030, "6 раз в неделю": 990, "7 раз в неделю": 970 }
-    },
-    "Улан-Удэ": {
-        "85*60": { "1 раз в две недели": 400, "1 раз в неделю": 400, "2 раза в неделю": 360, "3 раза в неделю": 360, "4 раза в неделю": 360, "5 раз в неделю": 360, "6 раз в неделю": 360, "7 раз в неделю": 360 },
-        "85*150": { "1 раз в две недели": 640, "1 раз в неделю": 640, "2 раза в неделю": 580, "3 раза в неделю": 580, "4 раза в неделю": 580, "5 раз в неделю": 580, "6 раз в неделю": 580, "7 раз в неделю": 580 },
-        "115*200": { "1 раз в две недели": 920, "1 раз в неделю": 920, "2 раза в неделю": 830, "3 раза в неделю": 830, "4 раза в неделю": 830, "5 раз в неделю": 830, "6 раз в неделю": 830, "7 раз в неделю": 830 },
-        "115*240": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1010, "3 раза в неделю": 1010, "4 раза в неделю": 1010, "5 раз в неделю": 1010, "6 раз в неделю": 1010, "7 раз в неделю": 1010 },
-        "150*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1260, "3 раза в неделю": 1260, "4 раза в неделю": 1260, "5 раз в неделю": 1260, "6 раз в неделю": 1260, "7 раз в неделю": 1260 }
-    },
-    "Уфа": {
-        "85*150": { "1 раз в две недели": 580, "1 раз в неделю": 390, "2 раза в неделю": 330, "3 раза в неделю": 320, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 240, "7 раз в неделю": 200 },
-        "115*200": { "1 раз в две недели": 760, "1 раз в неделю": 510, "2 раза в неделю": 400, "3 раза в неделю": 370, "4 раза в неделю": 320, "5 раз в неделю": 300, "6 раз в неделю": 270, "7 раз в неделю": 240 },
-        "115*300": { "1 раз в две недели": 1190, "1 раз в неделю": 800, "2 раза в неделю": 710, "3 раза в неделю": 690, "4 раза в неделю": 610, "5 раз в неделю": 600, "6 раз в неделю": 570, "7 раз в неделю": 550 },
-        "150*250": { "1 раз в две недели": 1300, "1 раз в неделю": 870, "2 раза в неделю": 780, "3 раза в неделю": 760, "4 раза в неделю": 720, "5 раз в неделю": 690, "6 раз в неделю": 610, "7 раз в неделю": 560 },
-        "115*400": { "1 раз в две недели": 2200, "1 раз в неделю": 1470, "2 раза в неделю": 1360, "3 раза в неделю": 1270, "4 раза в неделю": 1250, "5 раз в неделю": 1240, "6 раз в неделю": 1200, "7 раз в неделю": 1170 },
-        "85*300": { "1 раз в две недели": 1890, "1 раз в неделю": 1270, "2 раза в неделю": 1170, "3 раза в неделю": 1080, "4 раза в неделю": 1040, "5 раз в неделю": 1040, "6 раз в неделю": 1000, "7 раз в неделю": 960 },
-        "150*600": { "1 раз в две недели": 3720, "1 раз в неделю": 2480, "2 раза в неделю": 2340, "3 раза в неделю": 2290, "4 раза в неделю": 2240, "5 раз в неделю": 2200, "6 раз в неделю": 2140, "7 раз в неделю": 2080 }
-    },
-    "Чебоксары": {
-        "60*90": { "1 раз в две недели": 520, "1 раз в неделю": 520, "2 раза в неделю": 520, "3 раза в неделю": 520, "4 раза в неделю": 520, "5 раз в неделю": 520, "6 раз в неделю": 520, "7 раз в неделю": 520 },
-        "90*150": { "1 раз в две недели": 680, "1 раз в неделю": 680, "2 раза в неделю": 680, "3 раза в неделю": 680, "4 раза в неделю": 680, "5 раз в неделю": 680, "6 раз в неделю": 680, "7 раз в неделю": 680 },
-        "120*180": { "1 раз в две недели": 1000, "1 раз в неделю": 1000, "2 раза в неделю": 1000, "3 раза в неделю": 1000, "4 раза в неделю": 1000, "5 раз в неделю": 1000, "6 раз в неделю": 1000, "7 раз в неделю": 1000 },
-        "120*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1400, "3 раза в неделю": 1400, "4 раза в неделю": 1400, "5 раз в неделю": 1400, "6 раз в неделю": 1400, "7 раз в неделю": 1400 }
-    },
-    "Челябинск": {
-        "85*60": { "1 раз в две недели": 410, "1 раз в неделю": 300, "2 раза в неделю": 270, "3 раза в неделю": 260, "4 раза в неделю": 240, "5 раз в неделю": 220, "6 раз в неделю": 200, "7 раз в неделю": 190 },
-        "85*150": { "1 раз в две недели": 610, "1 раз в неделю": 440, "2 раза в неделю": 420, "3 раза в неделю": 400, "4 раза в неделю": 400, "5 раз в неделю": 390, "6 раз в неделю": 380, "7 раз в неделю": 360 },
-        "115*180": { "1 раз в две недели": 990, "1 раз в неделю": 710, "2 раза в неделю": 680, "3 раза в неделю": 650, "4 раза в неделю": 640, "5 раз в неделю": 640, "6 раз в неделю": 610, "7 раз в неделю": 580 },
-        "115*300": { "1 раз в две недели": 1640, "1 раз в неделю": 1170, "2 раза в неделю": 1130, "3 раза в неделю": 1080, "4 раза в неделю": 1110, "5 раз в неделю": 1050, "6 раз в неделю": 1010, "7 раз в неделю": 970 },
-        "150*240": { "1 раз в две недели": 1710, "1 раз в неделю": 1220, "2 раза в неделю": 1180, "3 раза в неделю": 1130, "4 раза в неделю": 1080, "5 раз в неделю": 1030, "6 раз в неделю": 990, "7 раз в неделю": 970 }
-    },
-    "Свердловская область": {
-        "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300, "3 раза в неделю": 280, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 260, "7 раз в неделю": 250 },
-        "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470, "3 раза в неделю": 450, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 430, "7 раз в неделю": 420 },
-        "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760, "3 раза в неделю": 730, "4 раза в неделю": 720, "5 раз в неделю": 700, "6 раз в неделю": 680, "7 раз в неделю": 670 },
-        "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260, "3 раза в неделю": 1210, "4 раза в неделю": 1190, "5 раз в неделю": 1160, "6 раз в неделю": 1140, "7 раз в неделю": 1120 },
-        "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310, "3 раза в неделю": 1240, "4 раза в неделю": 1220, "5 раз в неделю": 1200, "6 раз в неделю": 1170, "7 раз в неделю": 1150 }
-    },
-    "Тюменская область": {
-        "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300, "3 раза в неделю": 280, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 260, "7 раз в неделю": 250 },
-        "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470, "3 раза в неделю": 450, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 430, "7 раз в неделю": 420 },
-        "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760, "3 раза в неделю": 730, "4 раза в неделю": 720, "5 раз в неделю": 700, "6 раз в неделю": 680, "7 раз в неделю": 670 },
-        "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260, "3 раза в неделю": 1210, "4 раза в неделю": 1190, "5 раз в неделю": 1160, "6 раз в неделю": 1140, "7 раз в неделю": 1120 },
-        "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310, "3 раза в неделю": 1240, "4 раза в неделю": 1220, "5 раз в неделю": 1200, "6 раз в неделю": 1170, "7 раз в неделю": 1150 }
-    },
-    "Челябинская область": {
-        "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300, "3 раза в неделю": 280, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 260, "7 раз в неделю": 250 },
-        "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470, "3 раза в неделю": 450, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 430, "7 раз в неделю": 420 },
-        "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760, "3 раза в неделю": 730, "4 раза в неделю": 720, "5 раз в неделю": 700, "6 раз в неделю": 680, "7 раз в неделю": 670 },
-        "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260, "3 раза в неделю": 1210, "4 раза в неделю": 1190, "5 раз в неделю": 1160, "6 раз в неделю": 1140, "7 раз в неделю": 1120 },
-        "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310, "3 раза в неделю": 1240, "4 раза в неделю": 1220, "5 раз в неделю": 1200, "6 раз в неделю": 1170, "7 раз в неделю": 1150 }
-    },
-    "ХМАО": {
-        "85*150": { "1 раз в две недели": 960, "1 раз в неделю": 720, "2 раза в неделю": 680, "3 раза в неделю": 640, "4 раза в неделю": 640, "5 раз в неделю": 570, "6 раз в неделю": 570, "7 раз в неделю": 580 },
-        "115*180": { "1 раз в две недели": 1440, "1 раз в неделю": 1160, "2 раза в неделю": 1100, "3 раза в неделю": 1040, "4 раза в неделю": 1040, "5 раз в неделю": 930, "6 раз в неделю": 930, "7 раз в неделю": 930 },
-        "115*200": { "1 раз в две недели": 1600, "1 раз в неделю": 1290, "2 раза в неделю": 1220, "3 раза в неделю": 1160, "4 раза в неделю": 1160, "5 раз в неделю": 1030, "6 раз в неделю": 1030, "7 раз в неделю": 1040 },
-        "115*240": { "1 раз в две недели": 1760, "1 раз в неделю": 1540, "2 раза в неделю": 1470, "3 раза в неделю": 1390, "4 раза в неделю": 1390, "5 раз в неделю": 1240, "6 раз в неделю": 1240, "7 раз в неделю": 1240 },
-        "115*400": { "1 раз в две недели": 3200, "1 раз в неделю": 2570, "2 раза в неделю": 2430, "3 раза в неделю": 2310, "4 раза в неделю": 2310, "5 раз в неделю": 2060, "6 раз в неделю": 2060, "7 раз в неделю": 2070 },
-        "150*250": { "1 раз в две недели": 2560, "1 раз в неделю": 2100, "2 раза в неделю": 1990, "3 раза в неделю": 1890, "4 раза в неделю": 1890, "5 раз в неделю": 1680, "6 раз в неделю": 1680, "7 раз в неделю": 1690 },
-        "150*300": { "1 раз в две недели": 3040, "1 раз в неделю": 2680, "2 раза в неделю": 2550, "3 раза в неделю": 2410, "4 раза в неделю": 2410, "5 раз в неделю": 2150, "6 раз в неделю": 2150, "7 раз в неделю": 2150 }
-    },
-    "Республика Башкортостан": {
-        "85*150": { "1 раз в две недели": 580, "1 раз в неделю": 390, "2 раза в неделю": 330, "3 раза в неделю": 320, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 240, "7 раз в неделю": 200 },
-        "115*200": { "1 раз в две недели": 760, "1 раз в неделю": 510, "2 раза в неделю": 400, "3 раза в неделю": 370, "4 раза в неделю": 320, "5 раз в неделю": 300, "6 раз в неделю": 270, "7 раз в неделю": 240 },
-        "115*300": { "1 раз в две недели": 1190, "1 раз в неделю": 800, "2 раза в неделю": 710, "3 раза в неделю": 690, "4 раза в неделю": 610, "5 раз в неделю": 600, "6 раз в неделю": 570, "7 раз в неделю": 550 },
-        "150*250": { "1 раз в две недели": 1300, "1 раз в неделю": 870, "2 раза в неделю": 780, "3 раза в неделю": 760, "4 раза в неделю": 720, "5 раз в неделю": 690, "6 раз в неделю": 610, "7 раз в неделю": 560 },
-        "115*400": { "1 раз в две недели": 2200, "1 раз в неделю": 1470, "2 раза в неделю": 1360, "3 раза в неделю": 1270, "4 раза в неделю": 1250, "5 раз в неделю": 1240, "6 раз в неделю": 1200, "7 раз в неделю": 1170 },
-        "85*300": { "1 раз в две недели": 1890, "1 раз в неделю": 1270, "2 раза в неделю": 1170, "3 раза в неделю": 1080, "4 раза в неделю": 1040, "5 раз в неделю": 1040, "6 раз в неделю": 1000, "7 раз в неделю": 960 },
-        "150*600": { "1 раз в две недели": 3720, "1 раз в неделю": 2480, "2 раза в неделю": 2340, "3 раза в неделю": 2290, "4 раза в неделю": 2240, "5 раз в неделю": 2200, "6 раз в неделю": 2140, "7 раз в неделю": 2080 }
-    },
-    "Республика Бурятия": {
-        "85*60": { "1 раз в две недели": 400, "1 раз в неделю": 400, "2 раза в неделю": 360, "3 раза в неделю": 360, "4 раза в неделю": 360, "5 раз в неделю": 360, "6 раз в неделю": 360, "7 раз в неделю": 360 },
-        "85*150": { "1 раз в две недели": 640, "1 раз в неделю": 640, "2 раза в неделю": 580, "3 раза в неделю": 580, "4 раза в неделю": 580, "5 раз в неделю": 580, "6 раз в неделю": 580, "7 раз в неделю": 580 },
-        "115*200": { "1 раз в две недели": 920, "1 раз в неделю": 920, "2 раза в неделю": 830, "3 раза в неделю": 830, "4 раза в неделю": 830, "5 раз в неделю": 830, "6 раз в неделю": 830, "7 раз в неделю": 830 },
-        "115*240": { "1 раз в две недели": 1120, "1 раз в неделю": 1120, "2 раза в неделю": 1010, "3 раза в неделю": 1010, "4 раза в неделю": 1010, "5 раз в неделю": 1010, "6 раз в неделю": 1010, "7 раз в неделю": 1010 },
-        "150*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1260, "3 раза в неделю": 1260, "4 раза в неделю": 1260, "5 раз в неделю": 1260, "6 раз в неделю": 1260, "7 раз в неделю": 1260 }
-    },
-    "Республика Татарстан": {
-        "85*60": { "1 раз в две недели": 440, "1 раз в неделю": 320, "2 раза в неделю": 300, "3 раза в неделю": 280, "4 раза в неделю": 280, "5 раз в неделю": 270, "6 раз в неделю": 260, "7 раз в неделю": 250 },
-        "85*150": { "1 раз в две недели": 670, "1 раз в неделю": 480, "2 раза в неделю": 470, "3 раза в неделю": 450, "4 раза в неделю": 440, "5 раз в неделю": 440, "6 раз в неделю": 430, "7 раз в неделю": 420 },
-        "115*180": { "1 раз в две недели": 1080, "1 раз в неделю": 780, "2 раза в неделю": 760, "3 раза в неделю": 730, "4 раза в неделю": 720, "5 раз в неделю": 700, "6 раз в неделю": 680, "7 раз в неделю": 670 },
-        "115*300": { "1 раз в две недели": 1800, "1 раз в неделю": 1300, "2 раза в неделю": 1260, "3 раза в неделю": 1210, "4 раза в неделю": 1190, "5 раз в неделю": 1160, "6 раз в неделю": 1140, "7 раз в неделю": 1120 },
-        "150*240": { "1 раз в две недели": 1880, "1 раз в неделю": 1370, "2 раза в неделю": 1310, "3 раза в неделю": 1240, "4 раза в неделю": 1220, "5 раз в неделю": 1200, "6 раз в неделю": 1170, "7 раз в неделю": 1150 }
-    },
-    "Республика Чувашия": {
-        "60*90": { "1 раз в две недели": 520, "1 раз в неделю": 520, "2 раза в неделю": 520, "3 раза в неделю": 520, "4 раза в неделю": 520, "5 раз в неделю": 520, "6 раз в неделю": 520, "7 раз в неделю": 520 },
-        "90*150": { "1 раз в две недели": 680, "1 раз в неделю": 680, "2 раза в неделю": 680, "3 раза в неделю": 680, "4 раза в неделю": 680, "5 раз в неделю": 680, "6 раз в неделю": 680, "7 раз в неделю": 680 },
-        "120*180": { "1 раз в две недели": 1000, "1 раз в неделю": 1000, "2 раза в неделю": 1000, "3 раза в неделю": 1000, "4 раза в неделю": 1000, "5 раз в неделю": 1000, "6 раз в неделю": 1000, "7 раз в неделю": 1000 },
-        "120*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1400, "3 раза в неделю": 1400, "4 раза в неделю": 1400, "5 раз в неделю": 1400, "6 раз в неделю": 1400, "7 раз в неделю": 1400 }
-    },
-    "Республика Марий Эл": {
-        "60*90": { "1 раз в две недели": 520, "1 раз в неделю": 520, "2 раза в неделю": 520, "3 раза в неделю": 520, "4 раза в неделю": 520, "5 раз в неделю": 520, "6 раз в неделю": 520, "7 раз в неделю": 520 },
-        "90*150": { "1 раз в две недели": 680, "1 раз в неделю": 680, "2 раза в неделю": 680, "3 раза в неделю": 680, "4 раза в неделю": 680, "5 раз в неделю": 680, "6 раз в неделю": 680, "7 раз в неделю": 680 },
-        "120*180": { "1 раз в две недели": 1000, "1 раз в неделю": 1000, "2 раза в неделю": 1000, "3 раза в неделю": 1000, "4 раза в неделю": 1000, "5 раз в неделю": 1000, "6 раз в неделю": 1000, "7 раз в неделю": 1000 },
-        "120*250": { "1 раз в две недели": 1400, "1 раз в неделю": 1400, "2 раза в неделю": 1400, "3 раза в неделю": 1400, "4 раза в неделю": 1400, "5 раз в неделю": 1400, "6 раз в неделю": 1400, "7 раз в неделю": 1400 }
-    },
-    "Омск": {
-        "85*60": { "1 раз в две недели": 560, "1 раз в неделю": 470, "2 раза в неделю": 430, "3 раза в неделю": 430, "4 раза в неделю": 430, "5 раз в неделю": 430, "6 раз в неделю": 430, "7 раз в неделю": 430 },
-        "85*150": { "1 раз в две недели": 1370, "1 раз в неделю": 950, "2 раза в неделю": 790, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "115*200": { "1 раз в две недели": 1800, "1 раз в неделю": 1270, "2 раза в неделю": 1170, "3 раза в неделю": 1170, "4 раза в неделю": 1170, "5 раз в неделю": 1170, "6 раз в неделю": 1170, "7 раз в неделю": 1170 },
-        "150*250": { "1 раз в две недели": 3410, "1 раз в неделю": 1720, "2 раза в неделю": 1580, "3 раза в неделю": 1580, "4 раза в неделю": 1580, "5 раз в неделю": 1580, "6 раз в неделю": 1580, "7 раз в неделю": 1580 },
-        "150*300": { "1 раз в две недели": 2670, "1 раз в неделю": 2150, "2 раза в неделю": 1780, "3 раза в неделю": 1780, "4 раза в неделю": 1780, "5 раз в неделю": 1780, "6 раз в неделю": 1780, "7 раз в неделю": 1780 }
-    },
-    "Томск": {
-        "85*60": { "1 раз в две недели": 560, "1 раз в неделю": 470, "2 раза в неделю": 430, "3 раза в неделю": 430, "4 раза в неделю": 430, "5 раз в неделю": 430, "6 раз в неделю": 430, "7 раз в неделю": 430 },
-        "85*150": { "1 раз в две недели": 1370, "1 раз в неделю": 950, "2 раза в неделю": 790, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "115*200": { "1 раз в две недели": 1800, "1 раз в неделю": 1270, "2 раза в неделю": 1170, "3 раза в неделю": 1170, "4 раза в неделю": 1170, "5 раз в неделю": 1170, "6 раз в неделю": 1170, "7 раз в неделю": 1170 },
-        "150*250": { "1 раз в две недели": 3410, "1 раз в неделю": 1720, "2 раза в неделю": 1580, "3 раза в неделю": 1580, "4 раза в неделю": 1580, "5 раз в неделю": 1580, "6 раз в неделю": 1580, "7 раз в неделю": 1580 },
-        "150*300": { "1 раз в две недели": 2670, "1 раз в неделю": 2150, "2 раза в неделю": 1780, "3 раза в неделю": 1780, "4 раза в неделю": 1780, "5 раз в неделю": 1780, "6 раз в неделю": 1780, "7 раз в неделю": 1780 }
-    },
-    "Красноярск": {
-        "85*60": { "1 раз в две недели": 560, "1 раз в неделю": 470, "2 раза в неделю": 430, "3 раза в неделю": 430, "4 раза в неделю": 430, "5 раз в неделю": 430, "6 раз в неделю": 430, "7 раз в неделю": 430 },
-        "85*150": { "1 раз в две недели": 1370, "1 раз в неделю": 950, "2 раза в неделю": 790, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "115*200": { "1 раз в две недели": 1800, "1 раз в неделю": 1270, "2 раза в неделю": 1170, "3 раза в неделю": 1170, "4 раза в неделю": 1170, "5 раз в неделю": 1170, "6 раз в неделю": 1170, "7 раз в неделю": 1170 },
-        "150*250": { "1 раз в две недели": 3410, "1 раз в неделю": 1720, "2 раза в неделю": 1580, "3 раза в неделю": 1580, "4 раза в неделю": 1580, "5 раз в неделю": 1580, "6 раз в неделю": 1580, "7 раз в неделю": 1580 },
-        "150*300": { "1 раз в две недели": 2670, "1 раз в неделю": 2150, "2 раза в неделю": 1780, "3 раза в неделю": 1780, "4 раза в неделю": 1780, "5 раз в неделю": 1780, "6 раз в неделю": 1780, "7 раз в неделю": 1780 }
-    },
-    "Кемерово": {
-        "85*60": { "1 раз в две недели": 560, "1 раз в неделю": 470, "2 раза в неделю": 430, "3 раза в неделю": 430, "4 раза в неделю": 430, "5 раз в неделю": 430, "6 раз в неделю": 430, "7 раз в неделю": 430 },
-        "85*150": { "1 раз в две недели": 1370, "1 раз в неделю": 950, "2 раза в неделю": 790, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "115*200": { "1 раз в две недели": 1800, "1 раз в неделю": 1270, "2 раза в неделю": 1170, "3 раза в неделю": 1170, "4 раза в неделю": 1170, "5 раз в неделю": 1170, "6 раз в неделю": 1170, "7 раз в неделю": 1170 },
-        "150*250": { "1 раз в две недели": 3410, "1 раз в неделю": 1720, "2 раза в неделю": 1580, "3 раза в неделю": 1580, "4 раза в неделю": 1580, "5 раз в неделю": 1580, "6 раз в неделю": 1580, "7 раз в неделю": 1580 },
-        "150*300": { "1 раз в две недели": 2670, "1 раз в неделю": 2150, "2 раза в неделю": 1780, "3 раза в неделю": 1780, "4 раза в неделю": 1780, "5 раз в неделю": 1780, "6 раз в неделю": 1780, "7 раз в неделю": 1780 }
-    },
-    "Омская область": {
-        "85*60": { "1 раз в две недели": 610, "1 раз в неделю": 520, "2 раза в неделю": 480, "3 раза в неделю": 480, "4 раза в неделю": 480, "5 раз в неделю": 480, "6 раз в неделю": 480, "7 раз в неделю": 480 },
-        "85*150": { "1 раз в две недели": 1250, "1 раз в неделю": 1040, "2 раза в неделю": 860, "3 раза в неделю": 860, "4 раза в неделю": 860, "5 раз в неделю": 860, "6 раз в неделю": 860, "7 раз в неделю": 860 },
-        "115*200": { "1 раз в две недели": 1970, "1 раз в неделю": 1390, "2 раза в неделю": 1280, "3 раза в неделю": 1280, "4 раза в неделю": 1280, "5 раз в неделю": 1280, "6 раз в неделю": 1280, "7 раз в неделю": 1280 },
-        "150*250": { "1 раз в две недели": 2250, "1 раз в неделю": 1850, "2 раза в неделю": 1680, "3 раза в неделю": 1680, "4 раза в неделю": 1680, "5 раз в неделю": 1680, "6 раз в неделю": 1680, "7 раз в неделю": 1680 },
-        "150*300": { "1 раз в две недели": 2920, "1 раз в неделю": 2350, "2 раза в неделю": 1940, "3 раза в неделю": 1940, "4 раза в неделю": 1940, "5 раз в неделю": 1940, "6 раз в неделю": 1940, "7 раз в неделю": 1940 }
-    },
-    "Томская область": {
-        "85*60": { "1 раз в две недели": 610, "1 раз в неделю": 520, "2 раза в неделю": 480, "3 раза в неделю": 480, "4 раза в неделю": 480, "5 раз в неделю": 480, "6 раз в неделю": 480, "7 раз в неделю": 480 },
-        "85*150": { "1 раз в две недели": 1250, "1 раз в неделю": 1040, "2 раза в неделю": 860, "3 раза в неделю": 860, "4 раза в неделю": 860, "5 раз в неделю": 860, "6 раз в неделю": 860, "7 раз в неделю": 860 },
-        "115*200": { "1 раз в две недели": 1970, "1 раз в неделю": 1390, "2 раза в неделю": 1280, "3 раза в неделю": 1280, "4 раза в неделю": 1280, "5 раз в неделю": 1280, "6 раз в неделю": 1280, "7 раз в неделю": 1280 },
-        "150*250": { "1 раз в две недели": 2250, "1 раз в неделю": 1850, "2 раза в неделю": 1680, "3 раза в неделю": 1680, "4 раза в неделю": 1680, "5 раз в неделю": 1680, "6 раз в неделю": 1680, "7 раз в неделю": 1680 },
-        "150*300": { "1 раз в две недели": 2920, "1 раз в неделю": 2350, "2 раза в неделю": 1940, "3 раза в неделю": 1940, "4 раза в неделю": 1940, "5 раз в неделю": 1940, "6 раз в неделю": 1940, "7 раз в неделю": 1940 }
-    },
-    "Красноярский край": {
-        "85*60": { "1 раз в две недели": 610, "1 раз в неделю": 520, "2 раза в неделю": 480, "3 раза в неделю": 480, "4 раза в неделю": 480, "5 раз в неделю": 480, "6 раз в неделю": 480, "7 раз в неделю": 480 },
-        "85*150": { "1 раз в две недели": 1250, "1 раз в неделю": 1040, "2 раза в неделю": 860, "3 раза в неделю": 860, "4 раза в неделю": 860, "5 раз в неделю": 860, "6 раз в неделю": 860, "7 раз в неделю": 860 },
-        "115*200": { "1 раз в две недели": 1970, "1 раз в неделю": 1390, "2 раза в неделю": 1280, "3 раза в неделю": 1280, "4 раза в неделю": 1280, "5 раз в неделю": 1280, "6 раз в неделю": 1280, "7 раз в неделю": 1280 },
-        "150*250": { "1 раз в две недели": 2250, "1 раз в неделю": 1850, "2 раза в неделю": 1680, "3 раза в неделю": 1680, "4 раза в неделю": 1680, "5 раз в неделю": 1680, "6 раз в неделю": 1680, "7 раз в неделю": 1680 },
-        "150*300": { "1 раз в две недели": 2920, "1 раз в неделю": 2350, "2 раза в неделю": 1940, "3 раза в неделю": 1940, "4 раза в неделю": 1940, "5 раз в неделю": 1940, "6 раз в неделю": 1940, "7 раз в неделю": 1940 }
-    },
-    "Кемеровская область": {
-        "85*60": { "1 раз в две недели": 610, "1 раз в неделю": 520, "2 раза в неделю": 480, "3 раза в неделю": 480, "4 раза в неделю": 480, "5 раз в неделю": 480, "6 раз в неделю": 480, "7 раз в неделю": 480 },
-        "85*150": { "1 раз в две недели": 1250, "1 раз в неделю": 1040, "2 раза в неделю": 860, "3 раза в неделю": 860, "4 раза в неделю": 860, "5 раз в неделю": 860, "6 раз в неделю": 860, "7 раз в неделю": 860 },
-        "115*200": { "1 раз в две недели": 1970, "1 раз в неделю": 1390, "2 раза в неделю": 1280, "3 раза в неделю": 1280, "4 раза в неделю": 1280, "5 раз в неделю": 1280, "6 раз в неделю": 1280, "7 раз в неделю": 1280 },
-        "150*250": { "1 раз в две недели": 2250, "1 раз в неделю": 1850, "2 раза в неделю": 1680, "3 раза в неделю": 1680, "4 раза в неделю": 1680, "5 раз в неделю": 1680, "6 раз в неделю": 1680, "7 раз в неделю": 1680 },
-        "150*300": { "1 раз в две недели": 2920, "1 раз в неделю": 2350, "2 раза в неделю": 1940, "3 раза в неделю": 1940, "4 раза в неделю": 1940, "5 раз в неделю": 1940, "6 раз в неделю": 1940, "7 раз в неделю": 1940 }
-    },
-    "Волгоград": {
-        "85*60": { "1 раз в две недели": 560, "1 раз в неделю": 330, "2 раза в неделю": 240, "3 раза в неделю": 220, "4 раза в неделю": 220, "5 раз в неделю": 220, "6 раз в неделю": 220, "7 раз в неделю": 220 },
-        "85*150": { "1 раз в две недели": 950, "1 раз в неделю": 790, "2 раза в неделю": 710, "3 раза в неделю": 710, "4 раза в неделю": 710, "5 раз в неделю": 710, "6 раз в неделю": 710, "7 раз в неделю": 710 },
-        "115*180": { "1 раз в две недели": 1390, "1 раз в неделю": 950, "2 раза в неделю": 870, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "115*200": { "1 раз в две недели": 1040, "1 раз в неделю": 950, "2 раза в неделю": 790, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "150*250": { "1 раз в две недели": 2040, "1 раз в неделю": 1540, "2 раза в неделю": 1390, "3 раза в неделю": 1270, "4 раза в неделю": 1270, "5 раз в неделю": 1270, "6 раз в неделю": 1270, "7 раз в неделю": 1270 },
-        "150*600": { "1 раз в две недели": 4800, "1 раз в неделю": 3650, "2 раза в неделю": 3270, "3 раза в неделю": 2980, "4 раза в неделю": 2980, "5 раз в неделю": 2980, "6 раз в неделю": 2980, "7 раз в неделю": 2980 }
-    },
-    "Волгоградская область": {
-        "85*60": { "1 раз в две недели": 560, "1 раз в неделю": 330, "2 раза в неделю": 240, "3 раза в неделю": 220, "4 раза в неделю": 220, "5 раз в неделю": 220, "6 раз в неделю": 220, "7 раз в неделю": 220 },
-        "85*150": { "1 раз в две недели": 950, "1 раз в неделю": 790, "2 раза в неделю": 710, "3 раза в неделю": 710, "4 раза в неделю": 710, "5 раз в неделю": 710, "6 раз в неделю": 710, "7 раз в неделю": 710 },
-        "115*180": { "1 раз в две недели": 1390, "1 раз в неделю": 950, "2 раза в неделю": 870, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "115*200": { "1 раз в две недели": 1040, "1 раз в неделю": 950, "2 раза в неделю": 790, "3 раза в неделю": 790, "4 раза в неделю": 790, "5 раз в неделю": 790, "6 раз в неделю": 790, "7 раз в неделю": 790 },
-        "150*250": { "1 раз в две недели": 2040, "1 раз в неделю": 1540, "2 раза в неделю": 1390, "3 раза в неделю": 1270, "4 раза в неделю": 1270, "5 раз в неделю": 1270, "6 раз в неделю": 1270, "7 раз в неделю": 1270 },
-        "150*600": { "1 раз в две недели": 4800, "1 раз в неделю": 3650, "2 раза в неделю": 3270, "3 раза в неделю": 2980, "4 раза в неделю": 2980, "5 раз в неделю": 2980, "6 раз в неделю": 2980, "7 раз в неделю": 2980 }
-    },
-    "Саратов": {
-        "85*150": { "1 раз в две недели": 1490, "1 раз в неделю": 1240, "2 раза в неделю": 1000, "3 раза в неделю": 1000, "4 раза в неделю": 1000, "5 раз в неделю": 1000, "6 раз в неделю": 1000, "7 раз в неделю": 1000 },
-        "115*200": { "1 раз в две недели": 1770, "1 раз в неделю": 1480, "2 раза в неделю": 1180, "3 раза в неделю": 1180, "4 раза в неделю": 1180, "5 раз в неделю": 1180, "6 раз в неделю": 1180, "7 раз в неделю": 1180 },
-        "150*240": { "1 раз в две недели": 2880, "1 раз в неделю": 2400, "2 раза в неделю": 1920, "3 раза в неделю": 1920, "4 раза в неделю": 1920, "5 раз в неделю": 1920, "6 раз в неделю": 1920, "7 раз в неделю": 1920 },
-        "150*300": { "1 раз в две недели": 3460, "1 раз в неделю": 2880, "2 раза в неделю": 2310, "3 раза в неделю": 2310, "4 раза в неделю": 2310, "5 раз в неделю": 2310, "6 раз в неделю": 2310, "7 раз в неделю": 2310 },
-        "85*150": { "1 раз в две недели": 1850, "1 раз в неделю": 1540, "2 раза в неделю": 1230, "3 раза в неделю": 1230, "4 раза в неделю": 1230, "5 раз в неделю": 1230, "6 раз в неделю": 1230, "7 раз в неделю": 1230 },
-        "115*200": { "1 раз в две недели": 2650, "1 раз в неделю": 2210, "2 раза в неделю": 1770, "3 раза в неделю": 1770, "4 раза в неделю": 1770, "5 раз в неделю": 1770, "6 раз в неделю": 1770, "7 раз в неделю": 1770 },
-        "150*300": { "1 раз в две недели": 5190, "1 раз в неделю": 4320, "2 раза в неделю": 3460, "3 раза в неделю": 3460, "4 раза в неделю": 3460, "5 раз в неделю": 3460, "6 раз в неделю": 3460, "7 раз в неделю": 3460 }
-    },
-    "Саратовская область": {
-        "85*150": { "1 раз в две недели": 1490, "1 раз в неделю": 1240, "2 раза в неделю": 1000, "3 раза в неделю": 1000, "4 раза в неделю": 1000, "5 раз в неделю": 1000, "6 раз в неделю": 1000, "7 раз в неделю": 1000 },
-        "115*200": { "1 раз в две недели": 1770, "1 раз в неделю": 1480, "2 раза в неделю": 1180, "3 раза в неделю": 1180, "4 раза в неделю": 1180, "5 раз в неделю": 1180, "6 раз в неделю": 1180, "7 раз в неделю": 1180 },
-        "150*240": { "1 раз в две недели": 2880, "1 раз в неделю": 2400, "2 раза в неделю": 1920, "3 раза в неделю": 1920, "4 раза в неделю": 1920, "5 раз в неделю": 1920, "6 раз в неделю": 1920, "7 раз в неделю": 1920 },
-        "150*300": { "1 раз в две недели": 3460, "1 раз в неделю": 2880, "2 раза в неделю": 2310, "3 раза в неделю": 2310, "4 раза в неделю": 2310, "5 раз в неделю": 2310, "6 раз в неделю": 2310, "7 раз в неделю": 2310 },
-        "85*150": { "1 раз в две недели": 1850, "1 раз в неделю": 1540, "2 раза в неделю": 1230, "3 раза в неделю": 1230, "4 раза в неделю": 1230, "5 раз в неделю": 1230, "6 раз в неделю": 1230, "7 раз в неделю": 1230 },
-        "115*200": { "1 раз в две недели": 2650, "1 раз в неделю": 2210, "2 раза в неделю": 1770, "3 раза в неделю": 1770, "4 раза в неделю": 1770, "5 раз в неделю": 1770, "6 раз в неделю": 1770, "7 раз в неделю": 1770 },
-        "150*300": { "1 раз в две недели": 5190, "1 раз в неделю": 4320, "2 раза в неделю": 3460, "3 раза в неделю": 3460, "4 раза в неделю": 3460, "5 раз в неделю": 3460, "6 раз в неделю": 3460, "7 раз в неделю": 3460 }
-    }
-};
-
-// Порядок отображения регионов в выпадающих списках
-const regionsOrder = [
-    "Москва",
-    "Московская область", 
-    "Санкт-Петербург",
-    "Ленинградская область",
-    "Астрахань",
-    "Астраханская область",
-    "Волгоград",
-    "Волгоградская область",
-    "Воронеж",
-    "Воронежская область",
-    "Екатеринбург", 
-    "Свердловская область",
-    "Иркутск",
-    "Иркутская область",
-    "Йошкар-Ола",
-    "Республика Марий Эл",
-    "Казань",
-    "Республика Татарстан",
-    "Кемерово",
-    "Кемеровская область",
-    "Красноярск",
-    "Красноярский край",
-    "Нижний Новгород",
-    "Нижегородская область",
-    "Новосибирск",
-    "Новосибирская область", 
-    "Омск",
-    "Омская область",
-    "Пермь",
-    "Пермский край",
-    "Ростов-на-Дону",
-    "Ростовская область",
-    "Саратов",
-    "Саратовская область",
-    "Сургут",
-    "ХМАО",
-    "Томск",
-    "Томская область",
-    "Тюмень",
-    "Тюменская область",
-    "Улан-Удэ",
-    "Республика Бурятия",
-    "Уфа",
-    "Республика Башкортостан", 
-    "Чебоксары",
-    "Республика Чувашия",
-    "Челябинск",
-    "Челябинская область"
-];
-
-// Конец блока цен
-
-
-        let positions = [];
-        let tenderPositions = [];
-
-        // Инициализация при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            // Заполняем регионы
-            const regionSelect = document.getElementById('region');
-            const tenderRegionSelect = document.getElementById('tender-region');
-            
-            Object.keys(priceData).forEach(region => {
-                const option1 = document.createElement('option');
-                option1.value = region;
-                option1.textContent = region;
-                regionSelect.appendChild(option1);
-                
-                const option2 = document.createElement('option');
-                option2.value = region;
-                option2.textContent = region;
-                tenderRegionSelect.appendChild(option2);
-            });
-
-            // Инициализируем месяцы для тендера
-            initMonths();
-        });
-
-        function showTab(tabName) {
-            // Переключаем вкладки
-            document.getElementById('standard-calc').style.display = 'none';
-            document.getElementById('tender-calc').style.display = 'none';
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            if (tabName === 'standard') {
-                document.getElementById('standard-calc').style.display = 'block';
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        // Кнопка "Наверх"
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
             } else {
-                document.getElementById('tender-calc').style.display = 'block';
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                scrollToTopBtn.classList.remove('visible');
             }
-        }
-
-        function updateSizes() {
-            const region = document.getElementById('region').value;
-            const sizeSelect = document.getElementById('size');
+        });
+        
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Обработка быстрой формы
+        document.getElementById('quickForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
-            sizeSelect.disabled = true;
+            const name = document.getElementById('quickName').value;
+            const phone = document.getElementById('quickPhone').value;
+            const message = document.getElementById('quickMessage').value;
+            const consent = document.getElementById('quickConsent').checked;
             
-            if (region && priceData[region]) {
-                sizeSelect.disabled = false;
-                Object.keys(priceData[region]).forEach(size => {
-                    const option = document.createElement('option');
-                    option.value = size;
-                    option.textContent = size;
-                    sizeSelect.appendChild(option);
-                });
-            }
-        }
-
-        function updateFrequencies() {
-            const region = document.getElementById('region').value;
-            const size = document.getElementById('size').value;
-            const freqSelect = document.getElementById('frequency');
-            
-            freqSelect.innerHTML = '<option value="">Выберите периодичность</option>';
-            freqSelect.disabled = true;
-            
-            if (region && size && priceData[region][size]) {
-                freqSelect.disabled = false;
-                Object.keys(priceData[region][size]).forEach(freq => {
-                    const option = document.createElement('option');
-                    option.value = freq;
-                    option.textContent = freq;
-                    freqSelect.appendChild(option);
-                });
-            }
-        }
-
-        function showResult() {
-            // Показываем блок с результатом
-            document.getElementById('standard-result').style.display = 'block';
-        }
-
-        function addPosition() {
-            const region = document.getElementById('region').value;
-            const size = document.getElementById('size').value;
-            const frequency = document.getElementById('frequency').value;
-            const quantity = parseInt(document.getElementById('quantity').value) || 1;
-            
-            if (!region || !size || !frequency) {
-                alert('Пожалуйста, выберите все параметры');
+            if (!name || !phone || !consent) {
+                alert('Пожалуйста, заполните обязательные поля и дайте согласие на обработку данных');
                 return;
             }
             
-            const price = priceData[region][size][frequency];
-            const changes = getChanges(frequency);
-            const cost = price * changes * quantity;
+            let telegramMessage = `📞 Новая заявка с калькулятора:\n`;
+            telegramMessage += `👤 Имя: ${name}\n`;
+            telegramMessage += `📞 Телефон: ${phone}\n`;
             
-            positions.push({
-                region,
-                size,
-                frequency,
-                quantity,
-                price,
-                cost
-            });
-            
-            updatePositionsList();
-            showResult();
-        }
-
-        function updatePositionsList() {
-            const list = document.getElementById('positions-list');
-            list.innerHTML = '';
-            
-            let total = 0;
-            
-            positions.forEach((pos, index) => {
-                total += pos.cost;
-                
-                const div = document.createElement('div');
-                div.className = 'result-item';
-                div.innerHTML = `
-                    <strong>${pos.size}</strong> × ${pos.quantity} шт.<br>
-                    ${pos.frequency}<br>
-                    Цена за замену: ${pos.price} ₽<br>
-                    <strong>Стоимость: ${pos.cost} ₽</strong>
-                    <button onclick="removePosition(${index})" style="float:right; background:#e74c3c; color:white; border:none; padding:5px 10px; border-radius:4px; margin-top:5px;">×</button>
-                `;
-                list.appendChild(div);
-            });
-            
-            document.getElementById('total-cost').textContent = `Общая стоимость: ${total} ₽`;
-        }
-
-        function removePosition(index) {
-            positions.splice(index, 1);
-            updatePositionsList();
-        }
-
-        function getChanges(frequency) {
-            switch(frequency) {
-                case '1 раз в две недели': return 2;
-                case '1 раз в неделю': return 4;
-                case '2 раза в неделю': return 8;
-                default: return 4;
-            }
-        }
-
-        // Тендерный калькулятор
-        function updateTenderSizes() {
-            const region = document.getElementById('tender-region').value;
-            const sizeSelect = document.getElementById('tender-size');
-            
-            sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
-            sizeSelect.disabled = true;
-            
-            if (region && priceData[region]) {
-                sizeSelect.disabled = false;
-                Object.keys(priceData[region]).forEach(size => {
-                    const option = document.createElement('option');
-                    option.value = size;
-                    option.textContent = size;
-                    sizeSelect.appendChild(option);
-                });
-            }
-        }
-
-        function initMonths() {
-            const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-            const container = document.getElementById('month-inputs');
-            
-            months.forEach(month => {
-                const div = document.createElement('div');
-                div.className = 'month-box';
-                div.innerHTML = `
-                    <label>${month}</label>
-                    <input type="number" min="0" placeholder="Кол-во" id="${month}-qty" style="margin-bottom:5px;">
-                    <input type="number" min="0" placeholder="Замены" id="${month}-changes">
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function calculateTender() {
-            const region = document.getElementById('tender-region').value;
-            const size = document.getElementById('tender-size').value;
-            
-            if (!region || !size) {
-                alert('Выберите регион и размер');
-                return;
+            if (message) {
+                telegramMessage += `📝 Сообщение: ${message}\n`;
             }
             
-            const price = priceData[region][size]["1 раз в неделю"]; // Базовая цена
-            const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+            telegramMessage += `🌐 Страница: Калькулятор\n`;
+            telegramMessage += `⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
             
-            let total = 0;
-            const list = document.getElementById('tender-positions');
-            list.innerHTML = '';
+            const encodedMessage = encodeURIComponent(telegramMessage);
+            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
             
-            months.forEach(month => {
-                const qty = parseInt(document.getElementById(`${month}-qty`).value) || 0;
-                const changes = parseInt(document.getElementById(`${month}-changes`).value) || 0;
-                
-                if (qty > 0 && changes > 0) {
-                    const cost = price * qty * changes;
-                    total += cost;
+            window.open(telegramUrl, '_blank');
+            
+            // Сброс формы
+            document.getElementById('quickForm').reset();
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение 15 минут.');
+        });
+        
+        // Настройка вкладок калькулятора
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const calculatorContents = document.querySelectorAll('.calculator-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Удаляем активный класс у всех кнопок
+                    tabBtns.forEach(b => b.classList.remove('active'));
                     
-                    const div = document.createElement('div');
-                    div.className = 'result-item';
-                    div.innerHTML = `
-                        <strong>${month}</strong><br>
-                        Размер: ${size}<br>
-                        Ковров: ${qty} шт.<br>
-                        Замен: ${changes}<br>
-                        <strong>${cost} ₽</strong>
-                    `;
-                    list.appendChild(div);
-                }
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active');
+                    
+                    // Скрываем все калькуляторы
+                    calculatorContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Показываем выбранный калькулятор
+                    const tabId = this.getAttribute('data-tab');
+                    const targetCalculator = document.getElementById(`${tabId}-calculator`);
+                    if (targetCalculator) {
+                        targetCalculator.classList.add('active');
+                    }
+                });
             });
             
-            document.getElementById('tender-total').textContent = `Общая стоимость: ${total} ₽`;
-            document.getElementById('tender-result').style.display = 'block';
-        }
+            // Активируем первую вкладку по умолчанию
+            if (tabBtns[0]) {
+                tabBtns[0].classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
