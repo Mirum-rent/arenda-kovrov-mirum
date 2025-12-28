@@ -1,4 +1,8 @@
-AddType application/x-httpd-php .php .php5 .php4 .php3
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>
+AddType application/x-httpd-php .php
+
 # ================================================
 # .htaccess для сайта МИРУМ
 # Версия: 4.0 | Дата: 29.12.2025
@@ -120,4 +124,5 @@ AddDefaultCharset UTF-8
 # ================================================
 # КОНЕЦ .htaccess MIRUM
 # ================================================
+
 
