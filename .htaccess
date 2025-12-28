@@ -100,4 +100,5 @@ AddDefaultCharset UTF-8
     AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
+
 # === КОНЕЦ КОНФИГУРАЦИИ СЕРВЕРА MIRUM ===
