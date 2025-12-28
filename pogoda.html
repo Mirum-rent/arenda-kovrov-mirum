@@ -451,6 +451,44 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* Обновленные стили для кнопок связи */
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .contact-btn:hover {
+            background: var(--light-accent);
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .contact-btn.email {
+            background: #34495e;
+        }
+        
+        .contact-btn.email:hover {
+            background: #2c3e50;
+        }
+        
         /* Адаптивность */
         @media (max-width: 768px) {
             .weather-hero {
@@ -498,6 +536,17 @@
             
             .recommendations {
                 padding: 25px;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
             }
         }
         /* *************** КОНЕЦ БЛОКА СТИЛЕЙ ПОГОДЫ *************** */
@@ -566,8 +615,10 @@
         
         <!-- Популярные города -->
         <div class="popular-cities">
-            <h3 class="text-center mb-20">Популярные города наших клиентов:</h3>
+            <h3 class="text-center mb-20">Наши города работы:</h3>
             <div class="cities-grid">
+                <!-- *************** НАЧАЛО БЛОКА СПИСКА ГОРОДОВ - МОЖНО ДОБАВЛЯТЬ НОВЫЕ ГОРОДА ЗДЕСЬ *************** -->
+                <!-- Центральный ФО -->
                 <button class="city-btn" data-city="Москва">Москва</button>
                 <button class="city-btn" data-city="Санкт-Петербург">Санкт-Петербург</button>
                 <button class="city-btn" data-city="Новосибирск">Новосибирск</button>
@@ -576,6 +627,95 @@
                 <button class="city-btn" data-city="Уфа">Уфа</button>
                 <button class="city-btn" data-city="Краснодар">Краснодар</button>
                 <button class="city-btn" data-city="Сургут">Сургут</button>
+                <button class="city-btn" data-city="Тверь">Тверь</button>
+                <button class="city-btn" data-city="Тула">Тула</button>
+                <button class="city-btn" data-city="Ярославль">Ярославль</button>
+                <button class="city-btn" data-city="Брянск">Брянск</button>
+                <button class="city-btn" data-city="Орёл">Орёл</button>
+                <button class="city-btn" data-city="Владимир">Владимир</button>
+                <button class="city-btn" data-city="Иваново">Иваново</button>
+                <button class="city-btn" data-city="Калуга">Калуга</button>
+                <button class="city-btn" data-city="Смоленск">Смоленск</button>
+                <button class="city-btn" data-city="Белгород">Белгород</button>
+                <button class="city-btn" data-city="Курск">Курск</button>
+                <button class="city-btn" data-city="Воронеж">Воронеж</button>
+                <button class="city-btn" data-city="Тамбов">Тамбов</button>
+                <button class="city-btn" data-city="Рязань">Рязань</button>
+                <button class="city-btn" data-city="Липецк">Липецк</button>
+                <button class="city-btn" data-city="Кострома">Кострома</button>
+                
+                <!-- Северо-Западный ФО -->
+                <button class="city-btn" data-city="Архангельск">Архангельск</button>
+                <button class="city-btn" data-city="Мурманск">Мурманск</button>
+                <button class="city-btn" data-city="Псков">Псков</button>
+                <button class="city-btn" data-city="Великий Новгород">Великий Новгород</button>
+                <button class="city-btn" data-city="Калининград">Калининград</button>
+                <button class="city-btn" data-city="Петрозаводск">Петрозаводск</button>
+                <button class="city-btn" data-city="Сыктывкар">Сыктывкар</button>
+                <button class="city-btn" data-city="Вологда">Вологда</button>
+                
+                <!-- Южный ФО -->
+                <button class="city-btn" data-city="Астрахань">Астрахань</button>
+                <button class="city-btn" data-city="Ростов-на-Дону">Ростов-на-Дону</button>
+                <button class="city-btn" data-city="Волгоград">Волгоград</button>
+                <button class="city-btn" data-city="Севастополь">Севастополь</button>
+                <button class="city-btn" data-city="Симферополь">Симферополь</button>
+                <button class="city-btn" data-city="Майкоп">Майкоп</button>
+                <button class="city-btn" data-city="Элиста">Элиста</button>
+                
+                <!-- Северо-Кавказский ФО -->
+                <button class="city-btn" data-city="Ставрополь">Ставрополь</button>
+                <button class="city-btn" data-city="Грозный">Грозный</button>
+                <button class="city-btn" data-city="Махачкала">Махачкала</button>
+                <button class="city-btn" data-city="Нальчик">Нальчик</button>
+                <button class="city-btn" data-city="Владикавказ">Владикавказ</button>
+                <button class="city-btn" data-city="Черкесск">Черкесск</button>
+                <button class="city-btn" data-city="Магас">Магас</button>
+                
+                <!-- Приволжский ФО -->
+                <button class="city-btn" data-city="Нижний Новгород">Нижний Новгород</button>
+                <button class="city-btn" data-city="Самара">Самара</button>
+                <button class="city-btn" data-city="Саратов">Саратов</button>
+                <button class="city-btn" data-city="Пенза">Пенза</button>
+                <button class="city-btn" data-city="Ульяновск">Ульяновск</button>
+                <button class="city-btn" data-city="Пермь">Пермь</button>
+                <button class="city-btn" data-city="Ижевск">Ижевск</button>
+                <button class="city-btn" data-city="Оренбург">Оренбург</button>
+                <button class="city-btn" data-city="Йошкар-Ола">Йошкар-Ола</button>
+                <button class="city-btn" data-city="Саранск">Саранск</button>
+                <button class="city-btn" data-city="Чебоксары">Чебоксары</button>
+                <button class="city-btn" data-city="Киров">Киров</button>
+                
+                <!-- Уральский ФО -->
+                <button class="city-btn" data-city="Тюмень">Тюмень</button>
+                <button class="city-btn" data-city="Челябинск">Челябинск</button>
+                <button class="city-btn" data-city="Ханты-Мансийск">Ханты-Мансийск</button>
+                <button class="city-btn" data-city="Курган">Курган</button>
+                <button class="city-btn" data-city="Салехард">Салехард</button>
+                
+                <!-- Сибирский ФО -->
+                <button class="city-btn" data-city="Иркутск">Иркутск</button>
+                <button class="city-btn" data-city="Кемерово">Кемерово</button>
+                <button class="city-btn" data-city="Томск">Томск</button>
+                <button class="city-btn" data-city="Омск">Омск</button>
+                <button class="city-btn" data-city="Красноярск">Красноярск</button>
+                <button class="city-btn" data-city="Барнаул">Барнаул</button>
+                <button class="city-btn" data-city="Абакан">Абакан</button>
+                <button class="city-btn" data-city="Горно-Алтайск">Горно-Алтайск</button>
+                <button class="city-btn" data-city="Улан-Удэ">Улан-Удэ</button>
+                <button class="city-btn" data-city="Чита">Чита</button>
+                
+                <!-- Дальневосточный ФО -->
+                <button class="city-btn" data-city="Владивосток">Владивосток</button>
+                <button class="city-btn" data-city="Хабаровск">Хабаровск</button>
+                <button class="city-btn" data-city="Якутск">Якутск</button>
+                <button class="city-btn" data-city="Благовещенск">Благовещенск</button>
+                <button class="city-btn" data-city="Петропавловск-Камчатский">Петропавловск-Камчатский</button>
+                <button class="city-btn" data-city="Магадан">Магадан</button>
+                <button class="city-btn" data-city="Южно-Сахалинск">Южно-Сахалинск</button>
+                <button class="city-btn" data-city="Биробиджан">Биробиджан</button>
+                <button class="city-btn" data-city="Анадырь">Анадырь</button>
+                <!-- *************** КОНЕЦ БЛОКА СПИСКА ГОРОДОВ *************** -->
             </div>
         </div>
         
@@ -734,12 +874,12 @@
             <div class="professional-cta mt-40">
                 <h3>Нужна консультация по оптимальному графику замены?</h3>
                 <p>Наши специалисты проанализируют ваше местоположение, тип помещения и пешеходную нагрузку, чтобы предложить оптимальный график замены ковров с учетом погодных условий.</p>
-                <div class="hero-buttons">
-                    <a href="https://t.me/+79770005127" class="btn btn-telegram">
-                        <i class="fab fa-telegram"></i> Получить консультацию в Telegram
+                <div class="contact-buttons">
+                    <a href="https://t.me/+79770005127" class="contact-btn">
+                        <i class="fab fa-telegram"></i> Написать в Telegram
                     </a>
-                    <a href="tel:+79770005127" class="btn btn-primary">
-                        <i class="fas fa-phone"></i> Позвонить +7 (977) 000-51-27
+                    <a href="mailto:matservice@yandex.ru" class="contact-btn email">
+                        <i class="fas fa-envelope"></i> Написать на почту
                     </a>
                 </div>
             </div>
@@ -1484,7 +1624,9 @@
     <script>
         // ===== КОНФИГУРАЦИЯ =====
         const DEFAULT_CITY = 'Москва';
+        // *************** НАЧАЛО БЛОКА КООРДИНАТ ГОРОДОВ - ДОБАВЛЯЙТЕ НОВЫЕ ГОРОДА ЗДЕСЬ ***************
         const CITY_COORDINATES = {
+            // Центральный ФО
             'Москва': { lat: 55.7558, lon: 37.6173 },
             'Санкт-Петербург': { lat: 59.9343, lon: 30.3351 },
             'Новосибирск': { lat: 55.0084, lon: 82.9357 },
@@ -1492,7 +1634,96 @@
             'Казань': { lat: 55.7887, lon: 49.1221 },
             'Уфа': { lat: 54.7388, lon: 55.9721 },
             'Краснодар': { lat: 45.0355, lon: 38.9753 },
-            'Сургут': { lat: 61.2541, lon: 73.3962 }
+            'Сургут': { lat: 61.2541, lon: 73.3962 },
+            'Тверь': { lat: 56.8587, lon: 35.9176 },
+            'Тула': { lat: 54.1930, lon: 37.6173 },
+            'Ярославль': { lat: 57.6261, lon: 39.8845 },
+            'Брянск': { lat: 53.2521, lon: 34.3717 },
+            'Орёл': { lat: 52.9700, lon: 36.0645 },
+            'Владимир': { lat: 56.1290, lon: 40.4066 },
+            'Иваново': { lat: 57.0004, lon: 40.9739 },
+            'Калуга': { lat: 54.5070, lon: 36.2523 },
+            'Смоленск': { lat: 54.7826, lon: 32.0453 },
+            'Белгород': { lat: 50.5955, lon: 36.5873 },
+            'Курск': { lat: 51.7304, lon: 36.1930 },
+            'Воронеж': { lat: 51.6606, lon: 39.2003 },
+            'Тамбов': { lat: 52.7212, lon: 41.4523 },
+            'Рязань': { lat: 54.6294, lon: 39.7417 },
+            'Липецк': { lat: 52.6088, lon: 39.5992 },
+            'Кострома': { lat: 57.7679, lon: 40.9269 },
+            
+            // Северо-Западный ФО
+            'Архангельск': { lat: 64.5401, lon: 40.5433 },
+            'Мурманск': { lat: 68.9707, lon: 33.0750 },
+            'Псков': { lat: 57.8194, lon: 28.3318 },
+            'Великий Новгород': { lat: 58.5250, lon: 31.2752 },
+            'Калининград': { lat: 54.7104, lon: 20.4522 },
+            'Петрозаводск': { lat: 61.7850, lon: 34.3468 },
+            'Сыктывкар': { lat: 61.6688, lon: 50.8361 },
+            'Вологда': { lat: 59.2187, lon: 39.8906 },
+            
+            // Южный ФО
+            'Астрахань': { lat: 46.3497, lon: 48.0408 },
+            'Ростов-на-Дону': { lat: 47.2224, lon: 39.7189 },
+            'Волгоград': { lat: 48.7080, lon: 44.5133 },
+            'Севастополь': { lat: 44.6166, lon: 33.5254 },
+            'Симферополь': { lat: 44.9521, lon: 34.1024 },
+            'Майкоп': { lat: 44.6098, lon: 40.1007 },
+            'Элиста': { lat: 46.3080, lon: 44.2551 },
+            
+            // Северо-Кавказский ФО
+            'Ставрополь': { lat: 45.0445, lon: 41.9691 },
+            'Грозный': { lat: 43.3180, lon: 45.6922 },
+            'Махачкала': { lat: 42.9849, lon: 47.5047 },
+            'Нальчик': { lat: 43.4853, lon: 43.6071 },
+            'Владикавказ': { lat: 43.0246, lon: 44.6819 },
+            'Черкесск': { lat: 44.2269, lon: 42.0462 },
+            'Магас': { lat: 43.1666, lon: 44.8131 },
+            
+            // Приволжский ФО
+            'Нижний Новгород': { lat: 56.3269, lon: 44.0059 },
+            'Самара': { lat: 53.1959, lon: 50.1002 },
+            'Саратов': { lat: 51.5336, lon: 46.0343 },
+            'Пенза': { lat: 53.2007, lon: 45.0046 },
+            'Ульяновск': { lat: 54.3142, lon: 48.4031 },
+            'Пермь': { lat: 58.0105, lon: 56.2294 },
+            'Ижевск': { lat: 56.8527, lon: 53.2115 },
+            'Оренбург': { lat: 51.7873, lon: 55.1019 },
+            'Йошкар-Ола': { lat: 56.6323, lon: 47.8909 },
+            'Саранск': { lat: 54.1874, lon: 45.1839 },
+            'Чебоксары': { lat: 56.1463, lon: 47.2511 },
+            'Киров': { lat: 58.6035, lon: 49.6680 },
+            
+            // Уральский ФО
+            'Тюмень': { lat: 57.1522, lon: 65.5272 },
+            'Челябинск': { lat: 55.1600, lon: 61.4007 },
+            'Ханты-Мансийск': { lat: 61.0032, lon: 69.0189 },
+            'Курган': { lat: 55.4440, lon: 65.3441 },
+            'Салехард': { lat: 66.5300, lon: 66.6022 },
+            
+            // Сибирский ФО
+            'Иркутск': { lat: 52.2864, lon: 104.2807 },
+            'Кемерово': { lat: 55.3547, lon: 86.0880 },
+            'Томск': { lat: 56.4977, lon: 84.9744 },
+            'Омск': { lat: 54.9893, lon: 73.3682 },
+            'Красноярск': { lat: 56.0153, lon: 92.8932 },
+            'Барнаул': { lat: 53.3478, lon: 83.7798 },
+            'Абакан': { lat: 53.7150, lon: 91.4292 },
+            'Горно-Алтайск': { lat: 51.9581, lon: 85.9603 },
+            'Улан-Удэ': { lat: 51.8272, lon: 107.6062 },
+            'Чита': { lat: 52.0333, lon: 113.5006 },
+            
+            // Дальневосточный ФО
+            'Владивосток': { lat: 43.1155, lon: 131.8855 },
+            'Хабаровск': { lat: 48.4802, lon: 135.0719 },
+            'Якутск': { lat: 62.0278, lon: 129.7315 },
+            'Благовещенск': { lat: 50.2907, lon: 127.5272 },
+            'Петропавловск-Камчатский': { lat: 53.0374, lon: 158.6559 },
+            'Магадан': { lat: 59.5612, lon: 150.8006 },
+            'Южно-Сахалинск': { lat: 46.9591, lon: 142.7380 },
+            'Биробиджан': { lat: 48.7947, lon: 132.9218 },
+            'Анадырь': { lat: 64.7333, lon: 177.5000 }
+            // *************** КОНЕЦ БЛОКА КООРДИНАТ ГОРОДОВ ***************
         };
 
         // Элементы DOM
@@ -1527,7 +1758,7 @@
             if (code >= 71 && code <= 77) return 'fas fa-snowflake'; // Снег
             if (code >= 80 && code <= 86) return 'fas fa-cloud-showers-heavy'; // Ливень
             if (code >= 95 && code <= 99) return 'fas fa-bolt'; // Гроза
-            return 'fas fa-cloud';
+            return 'fas fa-cloud'; // По умолчанию
         }
 
         // Функция получения описания погоды на русском
@@ -1572,7 +1803,7 @@
             if (code >= 71 && code <= 77) return '#bdc3c7'; // Снег - серый
             if (code >= 80 && code <= 86) return '#2980b9'; // Ливень - темно-синий
             if (code >= 95 && code <= 99) return '#9b59b6'; // Гроза - фиолетовый
-            return '#7f8c8d';
+            return '#7f8c8d'; // По умолчанию
         }
 
         // Функция загрузки погоды
@@ -1581,39 +1812,92 @@
                 // Проверяем, есть ли город в нашем списке
                 const cityCoords = CITY_COORDINATES[city];
                 if (!cityCoords) {
-                    throw new Error('Город не найден в базе данных');
+                    // Если города нет в списке, пробуем получить координаты через API
+                    const geocodeResponse = await fetch(
+                        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=ru&format=json`
+                    );
+                    
+                    if (!geocodeResponse.ok) {
+                        throw new Error('Город не найден');
+                    }
+                    
+                    const geocodeData = await geocodeResponse.json();
+                    
+                    if (!geocodeData.results || geocodeData.results.length === 0) {
+                        throw new Error('Город не найден в базе данных');
+                    }
+                    
+                    const result = geocodeData.results[0];
+                    const newCoords = { lat: result.latitude, lon: result.longitude };
+                    
+                    // Добавляем город в наш список для будущих запросов
+                    CITY_COORDINATES[city] = newCoords;
+                    
+                    weatherLoader.style.display = 'block';
+                    currentWeather.classList.remove('show');
+                    
+                    const weatherResponse = await fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${newCoords.lat}&longitude=${newCoords.lon}&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe/Moscow`
+                    );
+                    
+                    if (!weatherResponse.ok) {
+                        throw new Error('Ошибка загрузки погодных данных');
+                    }
+                    
+                    const weatherData = await weatherResponse.json();
+                    
+                    updateCurrentWeather(city, weatherData);
+                    updateForecast(weatherData);
+                    
+                    weatherLoader.style.display = 'none';
+                    currentWeather.classList.add('show');
+                    
+                    updateRecommendations(weatherData.current.weather_code, weatherData.current.temperature_2m);
+                    
+                } else {
+                    // Если город есть в списке, используем его координаты
+                    weatherLoader.style.display = 'block';
+                    currentWeather.classList.remove('show');
+                    
+                    const weatherResponse = await fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${cityCoords.lat}&longitude=${cityCoords.lon}&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe/Moscow`
+                    );
+                    
+                    if (!weatherResponse.ok) {
+                        throw new Error('Ошибка загрузки погодных данных');
+                    }
+                    
+                    const weatherData = await weatherResponse.json();
+                    
+                    updateCurrentWeather(city, weatherData);
+                    updateForecast(weatherData);
+                    
+                    weatherLoader.style.display = 'none';
+                    currentWeather.classList.add('show');
+                    
+                    updateRecommendations(weatherData.current.weather_code, weatherData.current.temperature_2m);
                 }
-                
-                // Показываем загрузчик
-                weatherLoader.style.display = 'block';
-                currentWeather.classList.remove('show');
-                
-                // Загружаем текущую погоду и прогноз на 7 дней
-                const weatherResponse = await fetch(
-                    `https://api.open-meteo.com/v1/forecast?latitude=${cityCoords.lat}&longitude=${cityCoords.lon}&current=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe/Moscow`
-                );
-                
-                if (!weatherResponse.ok) {
-                    throw new Error('Ошибка загрузки погодных данных');
-                }
-                
-                const weatherData = await weatherResponse.json();
-                
-                // Обновляем интерфейс
-                updateCurrentWeather(city, weatherData);
-                updateForecast(weatherData);
-                
-                // Показываем блок с погодой
-                weatherLoader.style.display = 'none';
-                currentWeather.classList.add('show');
-                
-                // Обновляем рекомендации на основе текущей погоды
-                updateRecommendations(weatherData.current.weather_code, weatherData.current.temperature_2m);
                 
             } catch (error) {
                 console.error('Ошибка загрузки погоды:', error);
                 weatherLoader.style.display = 'none';
-                alert('Не удалось загрузить погоду для этого города. Проверьте название и попробуйте снова.');
+                
+                // Показываем дружественное сообщение об ошибке
+                const errorMessage = `
+                    <div style="text-align: center; padding: 40px; background: #f8d7da; border-radius: 10px; color: #721c24;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>Не удалось загрузить погоду</h3>
+                        <p>Пожалуйста, проверьте название города и попробуйте снова.</p>
+                        <p>Вы можете выбрать город из списка ниже.</p>
+                    </div>
+                `;
+                
+                if (currentWeather.classList.contains('show')) {
+                    currentWeather.innerHTML = errorMessage;
+                } else {
+                    currentWeather.innerHTML = errorMessage;
+                    currentWeather.classList.add('show');
+                }
             }
         }
 
@@ -1768,8 +2052,8 @@
                         <div class="replacement-schedule">
                             <div class="schedule-title">Свяжитесь с нами:</div>
                             <div style="margin-top: 15px;">
-                                <a href="https://t.me/+79770005127" class="btn btn-telegram" style="padding: 10px 15px; font-size: 0.9rem;">
-                                    <i class="fab fa-telegram"></i> Консультация в Telegram
+                                <a href="https://t.me/+79770005127" class="contact-btn" style="padding: 10px 15px; font-size: 0.9rem; display: inline-flex;">
+                                    <i class="fab fa-telegram"></i> Telegram
                                 </a>
                             </div>
                         </div>
