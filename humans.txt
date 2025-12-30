@@ -1,55 +1,38 @@
 # humans.txt for arenda-kovrov-mirum.ru
-# Last update: 2025-12-29
-# PHP Version: 4.0
+# Last update: 2025-12-30
 
 /* TEAM */
   Founder: Дмитрий Рыбак
   Site: https://arenda-kovrov-mirum.ru/
   Email: matservice@yandex.ru
-  Telegram: @mirum_rent
+  Twitter: @mirum_rent
   
-  Developer: AI-Assisted PHP Development
+  Developer: AI-Assisted Development
   Site: https://arenda-kovrov-mirum.ru/
   Contact: via Telegram +7 (977) 000-51-27
   
   Designer: МИРУМ Design Team
   Site: https://arenda-kovrov-mirum.ru/
   Style: Modern Business Clean
-  Version: PHP 4.0
 
 /* THANKS */
   Font Awesome: https://fontawesome.com/
-  Leaflet.js: https://leafletjs.com/
+  Google Fonts: https://fonts.google.com/
   GitHub: https://github.com/
   OpenAI: ChatGPT assistance
-  PHP: Server-side scripting
 
 /* SITE */
-  Last update: 2025-12-29
+  Last update: 2025-12-30
   Language: Russian
-  Doctype: HTML5 with PHP
-  Architecture: Modular PHP Includes
+  Doctype: HTML5
   Components: 19 modular blocks
   IDE: VS Code
-  Standards: HTML5, CSS3, ES6+, PHP 7.4+
-  Server: Apache with .htaccess
-  CSS: Native CSS with Variables
+  Standards: HTML5, CSS3, ES6+
+  CSS Preprocessor: Native CSS
   JS Framework: Vanilla JavaScript
-  Maps: Leaflet.js + OpenStreetMap
-  Icons: Font Awesome 6.4.0
-
-/* PHP STRUCTURE */
-  Includes: /includes/header.php
-  Includes: /includes/footer.php
-  Pages: *.php (dynamic)
-  Redirects: .html → .php (301)
-  SEO: Schema.org, Open Graph
-  Performance: Gzip, Caching
-  Security: HTTPS, CSP Headers
 
 /* NOTE */
-  This site uses PHP Includes system for better maintainability
-  AI-assisted development for improved user experience and SEO
+  This site uses AI-assisted development
+  for improved user experience and SEO optimization
   All content is verified by human experts
   Company founded in 2009
-  New PHP structure implemented: 29.12.2025

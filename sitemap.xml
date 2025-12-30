@@ -1,231 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   
-  <!-- ================================================= -->
-  <!-- ВЫСОКИЙ ПРИОРИТЕТ: Основные PHP страницы (29.12.2025) -->
-  <!-- ================================================= -->
-  
+  <!-- Главная страница (высокий приоритет) -->
   <url>
     <loc>https://arenda-kovrov-mirum.ru/</loc>
-    <lastmod>2025-12-29</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://arenda-kovrov-mirum.ru/"/>
   </url>
   
-  <!-- НОВАЯ PHP СТРАНИЦА: Аренда ковров -->
+  <!-- Основные услуги (высокий приоритет) -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/arenda-kovrov.php</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/chistka_polov.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/arenda-kovrov.php"/>
   </url>
   
-  <!-- НОВАЯ PHP СТРАНИЦА: Восстановление полов -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.php</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/window-cleaning.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.php"/>
   </url>
   
-  <!-- НОВАЯ PHP СТРАНИЦА: Мойка витрин -->
+  <!-- Новая страница аутстаффинга -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/window-cleaning.php</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/outstaffing.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/window-cleaning.php"/>
   </url>
   
-  <!-- НОВАЯ PHP СТРАНИЦА: Аутстаффинг -->
+  <!-- Информационные страницы -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/outstaffing.php</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/outstaffing.php"/>
-  </url>
-  
-  <!-- НОВАЯ PHP СТРАНИЦА: FAQ -->
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.php</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://arenda-kovrov-mirum.ru/FAQ.php"/>
-  </url>
-  
-  <!-- НОВАЯ PHP СТРАНИЦА: Калькулятор -->
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/calculator.php</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- ================================================= -->
-  <!-- СРЕДНИЙ ПРИОРИТЕТ: Дополнительные страницы -->
-  <!-- ================================================= -->
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/blog.php</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/FAQ.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/testimonials.php</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://arenda-kovrov-mirum.ru/blog.html</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/pogoda.php</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/pogoda.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   
-  <!-- ================================================= -->
-  <!-- СЛУЖЕБНЫЕ СТРАНИЦЫ -->
-  <!-- ================================================= -->
-  
+  <!-- Юридические страницы -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/privacy-policy.php</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://arenda-kovrov-mirum.ru/privacy-policy.html</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   
+  <!-- Региональные страницы (добавлять по мере создания) -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/terms-of-use.php</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <!-- ================================================= -->
-  <!-- РЕГИОНАЛЬНЫЕ ДОМЕНЫ (CANONICAL - НЕ ИНДЕКСИРУЕМ) -->
-  <!-- ================================================= -->
-  
-  <!-- ВАЖНО: Эти домены имеют noindex и canonical на основной сайт -->
-  <url>
-    <loc>https://мирум.москва/</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
-    <!-- Метатеги: <meta name="robots" content="noindex, nofollow"> -->
-    <!-- Метатеги: <link rel="canonical" href="https://arenda-kovrov-mirum.ru/"> -->
-  </url>
-  
-  <url>
-    <loc>https://mirum-surgut.ru/</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
-  </url>
-  
-  <url>
-    <loc>https://mirum-astrakhan.ru/</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
-  </url>
-  
-  <url>
-    <loc>https://mirum-ufa.ru/</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.1</priority>
-  </url>
-  
-  <!-- ================================================= -->
-  <!-- SEO: Разделы и анкоры для ИИ -->
-  <!-- ================================================= -->
-  
-  <!-- FAQ разделы -->
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.php#kovry</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.php#vitrini</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.php#poly</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/FAQ.php#outstaffing</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Главная страница - разделы -->
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/#services</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/arenda-kovrov-moscow.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/#advantages</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://arenda-kovrov-mirum.ru/arenda-kovrov-spb.html</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   
+  <!-- Изображения для Google Images -->
   <url>
-    <loc>https://arenda-kovrov-mirum.ru/#how-to-start</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://arenda-kovrov-mirum.ru/</loc>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png</image:loc>
+      <image:title>МИРУМ - аренда ковров и восстановление полов</image:title>
+      <image:caption>Профессиональные услуги чистоты с 2009 года</image:caption>
+    </image:image>
   </url>
   
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/#gallery</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/#faq</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://arenda-kovrov-mirum.ru/#contacts</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- ================================================= -->
-  <!-- ИЗОБРАЖЕНИЯ для Google Images -->
-  <!-- ================================================= -->
-  
-  <!-- Изображения будут в отдельном sitemap-image.xml -->
+  <!-- Добавить остальные изображения из галереи -->
   
 </urlset>
