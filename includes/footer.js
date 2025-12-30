@@ -1,168 +1,253 @@
-// === НАЧАЛО MAIN.JS ===
-// Основные функции для сайта МИРУМ
+// === НАЧАЛО FOOTER.JS ===
+// Общий футер сайта для всех страниц
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ main.js загружен');
-    
-    // Инициализация выпадающего меню
-    initDropdownMenu();
-    
-    // Плавная прокрутка для якорных ссылок
-    initSmoothScroll();
-    
-    // Инициализация кнопки "Наверх"
-    initScrollToTop();
-    
-    // Проверка текущей страницы для активного меню
-    setActiveNavItem();
-});
-
-// Функция для инициализации выпадающего меню
-function initDropdownMenu() {
-    const dropdowns = document.querySelectorAll('.dropdown');
-    
-    dropdowns.forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        const menu = dropdown.querySelector('.dropdown-menu');
+document.write(`
+<footer class="footer">
+    <div class="container">
+        <div class="footer-container">
+            <!-- О компании -->
+            <div class="footer-section">
+                <h3>О компании</h3>
+                <p><strong>МИРУМ</strong> - профессиональные услуги чистоты с 2009 года. Мы работаем по всей России, предоставляя комплексные решения для бизнеса.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-phone"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></p>
+                    <p><i class="fab fa-telegram"></i> <a href="https://t.me/+79770005127">Telegram</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Сущёвская, 27с2</p>
+                </div>
+                <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                    <p style="font-size: 0.85rem; margin: 0;">
+                        <strong>⚠️ Информация:</strong><br>
+                        Перешли на Telegram и почту. Приносим извинения за временные неудобства.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Услуги -->
+            <div class="footer-section">
+                <h3>Услуги</h3>
+                <ul class="footer-links">
+                    <li><a href="/calculator.html">Аренда грязезащитных ковров (матсервис)</a></li>
+                    <li><a href="/window-cleaning.html">Мойка витрин и фасадов</a></li>
+                    <li><a href="/chistka_polov.html">Восстановление полов</a></li>
+                    <li><a href="https://resursoria.ru/">Аутстаффинг персонала</a></li>
+                    <li><a href="/calculator.html">Калькулятор стоимости</a></li>
+                    <li><a href="/pogoda.html">Погода и рекомендации</a></li>
+                </ul>
+            </div>
+            
+            <!-- Регионы работы -->
+            <div class="footer-section">
+                <h3>Регионы работы</h3>
+                <div class="regions-grid">
+                    <!-- Центральный ФО -->
+                    <div class="region-group">
+                        <h4>Центральный округ</h4>
+                        <ul>
+                            <li>Москва</li>
+                            <li>Московская обл.</li>
+                            <li>Тверская обл.</li>
+                            <li>Тульская обл.</li>
+                            <li>Ярославская обл.</li>
+                            <li>Брянская обл.</li>
+                            <li>Орловская обл.</li>
+                            <li>Владимирская обл.</li>
+                            <li>Ивановская обл.</li>
+                            <li>Калужская обл.</li>
+                            <li>Смоленская обл.</li>
+                            <li>Белгородская обл.</li>
+                            <li>Курская обл.</li>
+                            <li>Воронежская обл.</li>
+                            <li>Тамбовская обл.</li>
+                            <li>Рязанская обл.</li>
+                            <li>Липецкая обл.</li>
+                            <li>Костромская обл.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Северо-Западный ФО -->
+                    <div class="region-group">
+                        <h4>Северо-Западный округ</h4>
+                        <ul>
+                            <li>Санкт-Петербург</li>
+                            <li>Ленинградская обл.</li>
+                            <li>Архангельская обл.</li>
+                            <li>Мурманская обл.</li>
+                            <li>Псковская обл.</li>
+                            <li>Новгородская обл.</li>
+                            <li>Калининградская обл.</li>
+                            <li>Республика Карелия</li>
+                            <li>Республика Коми</li>
+                            <li>Вологодская обл.</li>
+                            <li>Ненецкий АО</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Южный ФО -->
+                    <div class="region-group">
+                        <h4>Южный округ</h4>
+                        <ul>
+                            <li>Астрахань</li>
+                            <li>Астраханская обл.</li>
+                            <li>Краснодар</li>
+                            <li>Краснодарский край</li>
+                            <li>Ростов-на-Дону</li>
+                            <li>Ростовская обл.</li>
+                            <li>Волгоград</li>
+                            <li>Волгоградская обл.</li>
+                            <li>Севастополь</li>
+                            <li>Республика Крым</li>
+                            <li>Республика Адыгея</li>
+                            <li>Республика Калмыкия</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Северо-Кавказский ФО -->
+                    <div class="region-group">
+                        <h4>Северо-Кавказский округ</h4>
+                        <ul>
+                            <li>Ставрополь</li>
+                            <li>Ставропольский край</li>
+                            <li>Грозный</li>
+                            <li>Чеченская Республика</li>
+                            <li>Махачкала</li>
+                            <li>Республика Дагестан</li>
+                            <li>Нальчик</li>
+                            <li>Кабардино-Балкария</li>
+                            <li>Владикавказ</li>
+                            <li>Республика Северная Осетия</li>
+                            <li>Черкесск</li>
+                            <li>Карачаево-Черкесия</li>
+                            <li>Магас</li>
+                            <li>Ингушетия</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Приволжский ФО -->
+                    <div class="region-group">
+                        <h4>Приволжский округ</h4>
+                        <ul>
+                            <li>Уфа</li>
+                            <li>Республика Башкортостан</li>
+                            <li>Казань</li>
+                            <li>Республика Татарстан</li>
+                            <li>Нижний Новгород</li>
+                            <li>Нижегородская обл.</li>
+                            <li>Самара</li>
+                            <li>Самарская обл.</li>
+                            <li>Саратов</li>
+                            <li>Саратовская обл.</li>
+                            <li>Пенза</li>
+                            <li>Пензенская обл.</li>
+                            <li>Ульяновск</li>
+                            <li>Ульяновская обл.</li>
+                            <li>Пермь</li>
+                            <li>Пермский край</li>
+                            <li>Ижевск</li>
+                            <li>Удмуртия</li>
+                            <li>Оренбург</li>
+                            <li>Оренбургская обл.</li>
+                            <li>Йошкар-Ола</li>
+                            <li>Марий Эл</li>
+                            <li>Саранск</li>
+                            <li>Мордовия</li>
+                            <li>Чебоксары</li>
+                            <li>Чувашия</li>
+                            <li>Киров</li>
+                            <li>Кировская обл.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Уральский ФО -->
+                    <div class="region-group">
+                        <h4>Уральский округ</h4>
+                        <ul>
+                            <li>Екатеринбург</li>
+                            <li>Свердловская обл.</li>
+                            <li>Тюмень</li>
+                            <li>Тюменская обл.</li>
+                            <li>Челябинск</li>
+                            <li>Челябинская обл.</li>
+                            <li>Сургут</li>
+                            <li>Ханты-Мансийский АО</li>
+                            <li>Курган</li>
+                            <li>Курганская обл.</li>
+                            <li>Ханты-Мансийск</li>
+                            <li>Ямало-Ненецкий АО</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Сибирский ФО -->
+                    <div class="region-group">
+                        <h4>Сибирский округ</h4>
+                        <ul>
+                            <li>Новосибирск</li>
+                            <li>Новосибирская обл.</li>
+                            <li>Иркутск</li>
+                            <li>Иркутская обл.</li>
+                            <li>Кемерово</li>
+                            <li>Кемеровская обл.</li>
+                            <li>Томск</li>
+                            <li>Томская обл.</li>
+                            <li>Омск</li>
+                            <li>Омская обл.</li>
+                            <li>Красноярск</li>
+                            <li>Красноярский край</li>
+                            <li>Барнаул</li>
+                            <li>Алтайский край</li>
+                            <li>Абакан</li>
+                            <li>Республика Хакасия</li>
+                            <li>Горно-Алтайск</li>
+                            <li>Республика Алтай</li>
+                            <li>Улан-Удэ</li>
+                            <li>Республика Бурятия</li>
+                            <li>Чита</li>
+                            <li>Забайкальский край</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Дальневосточный ФО -->
+                    <div class="region-group">
+                        <h4>Дальневосточный округ</h4>
+                        <ul>
+                            <li>Владивосток</li>
+                            <li>Приморский край</li>
+                            <li>Хабаровск</li>
+                            <li>Хабаровский край</li>
+                            <li>Якутск</li>
+                            <li>Республика Саха (Якутия)</li>
+                            <li>Благовещенск</li>
+                            <li>Амурская обл.</li>
+                            <li>Петропавловск-Камчатский</li>
+                            <li>Камчатский край</li>
+                            <li>Магадан</li>
+                            <li>Магаданская обл.</li>
+                            <li>Южно-Сахалинск</li>
+                            <li>Сахалинская обл.</li>
+                            <li>Биробиджан</li>
+                            <li>Еврейская АО</li>
+                            <li>Анадырь</li>
+                            <li>Чукотский АО</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        if (toggle && menu) {
-            // Клик по кнопке
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Закрываем другие открытые меню
-                document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
-                    if (openMenu !== menu) {
-                        openMenu.classList.remove('show');
-                    }
-                });
-                
-                // Переключаем текущее меню
-                menu.classList.toggle('show');
-            });
-            
-            // Клик вне меню закрывает его
-            document.addEventListener('click', function(e) {
-                if (!dropdown.contains(e.target)) {
-                    menu.classList.remove('show');
-                }
-            });
-            
-            // Наведение для десктопов
-            if (window.innerWidth > 768) {
-                dropdown.addEventListener('mouseenter', function() {
-                    menu.classList.add('show');
-                });
-                
-                dropdown.addEventListener('mouseleave', function() {
-                    menu.classList.remove('show');
-                });
-            }
-        }
-    });
-    
-    console.log('✅ Выпадающее меню инициализировано');
-}
-
-// Функция для плавной прокрутки
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Пропускаем якоря на текущей странице и внешние ссылки
-            if (href === '#' || href === '#!' || href.startsWith('http')) return;
-            
-            const targetElement = document.querySelector(href);
-            if (targetElement) {
-                e.preventDefault();
-                
-                const headerHeight = document.querySelector('.main-header')?.offsetHeight || 80;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = targetPosition - headerHeight;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Закрываем выпадающее меню на мобильных
-                if (window.innerWidth <= 768) {
-                    document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-                        menu.classList.remove('show');
-                    });
-                }
-            }
-        });
-    });
-}
-
-// Функция для кнопки "Наверх"
-function initScrollToTop() {
-    const scrollBtn = document.getElementById('scrollToTop');
-    if (scrollBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
-        });
-        
-        scrollBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-}
-
-// Функция для установки активного пункта меню
-function setActiveNavItem() {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        
-        const href = link.getAttribute('href');
-        if (href === currentPath || 
-            (currentPath === '/' && href === '/index.html') ||
-            (currentPath === '/index.html' && href === '/')) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Утилитная функция для проверки поддержки localStorage
-function supportsLocalStorage() {
-    try {
-        return 'localStorage' in window && window.localStorage !== null;
-    } catch (e) {
-        return false;
-    }
-}
-
-// Утилитная функция для форматирования чисел
-function formatNumber(num) {
-    return new Intl.NumberFormat('ru-RU').format(num);
-}
-
-// Утилитная функция для определения устройства
-function isMobileDevice() {
-    return window.innerWidth <= 768;
-}
-
-// Экспорт функций для глобального использования
-window.initDropdownMenu = initDropdownMenu;
-window.initSmoothScroll = initSmoothScroll;
-window.initScrollToTop = initScrollToTop;
-window.setActiveNavItem = setActiveNavItem;
-window.supportsLocalStorage = supportsLocalStorage;
-window.formatNumber = formatNumber;
-window.isMobileDevice = isMobileDevice;
-
-console.log('✅ Все функции main.js экспортированы');
-// === КОНЕЦ MAIN.JS ===
+        <!-- Копирайт -->
+        <div class="footer-bottom">
+            <p>&copy; 2009-2024 МИРУМ. Аренда грязезащитных ковров (матсервис, ковросервис), мойка фасадов, восстановление полов, аутстаффинг персонала.</p>
+            <p>
+                <a href="/privacy-policy.html">Политика конфиденциальности</a> | 
+                <a href="/terms.html">Пользовательское соглашение</a> | 
+                <a href="/sitemap.xml">Карта сайта</a>
+            </p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                ИП Иванов И.И., ИНН 123456789012, ОГРНИП 123456789012345<br>
+                Все права защищены. Копирование материалов сайта запрещено.
+            </p>
+        </div>
+    </div>
+</footer>
+`);
+// === КОНЕЦ FOOTER.JS ===
