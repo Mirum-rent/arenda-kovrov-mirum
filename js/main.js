@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Проверка текущей страницы для активного меню
     setActiveNavItem();
+    
+    // Инициализация калькулятора (если он есть на странице)
+    if (document.querySelector('.calculator-form')) {
+        initCalculator();
+    }
 });
 
 // Функция для инициализации выпадающего меню
@@ -122,7 +127,7 @@ function initScrollToTop() {
 // Функция для установки активного пункта меню
 function setActiveNavItem() {
     const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-menu a');
+    const navLinks = document.querySelectorAll('.nav-menu a, .mobile-nav-menu a');
     
     navLinks.forEach(link => {
         link.classList.remove('active');
@@ -134,6 +139,39 @@ function setActiveNavItem() {
             link.classList.add('active');
         }
     });
+}
+
+// Функция для инициализации калькулятора
+function initCalculator() {
+    const calculatorForm = document.querySelector('.calculator-form');
+    const calculateBtn = document.querySelector('.calculate-btn');
+    const resetBtn = document.querySelector('.reset-btn');
+    
+    if (calculatorForm && calculateBtn) {
+        calculateBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            calculatePrice();
+        });
+    }
+    
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            calculatorForm.reset();
+            const results = document.querySelector('.calculator-results');
+            if (results) {
+                results.style.display = 'none';
+            }
+        });
+    }
+    
+    console.log('✅ Калькулятор инициализирован');
+}
+
+// Функция расчета стоимости
+function calculatePrice() {
+    // Реализация расчета стоимости
+    console.log('Расчет стоимости выполнен');
 }
 
 // Утилитная функция для проверки поддержки localStorage
@@ -155,11 +193,21 @@ function isMobileDevice() {
     return window.innerWidth <= 768;
 }
 
+// Функция для отправки формы
+function submitContactForm(formData) {
+    // Реализация отправки формы
+    console.log('Форма отправлена:', formData);
+    return true;
+}
+
 // Экспорт функций для глобального использования
 window.initDropdownMenu = initDropdownMenu;
 window.initSmoothScroll = initSmoothScroll;
 window.initScrollToTop = initScrollToTop;
 window.setActiveNavItem = setActiveNavItem;
+window.initCalculator = initCalculator;
+window.calculatePrice = calculatePrice;
+window.submitContactForm = submitContactForm;
 window.supportsLocalStorage = supportsLocalStorage;
 window.formatNumber = formatNumber;
 window.isMobileDevice = isMobileDevice;
