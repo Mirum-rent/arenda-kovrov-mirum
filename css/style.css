@@ -144,7 +144,10 @@ p {
     }
 }
 
-/* Шапка сайта */
+/* ============================================
+   ШАПКА САЙТА
+   ============================================ */
+
 .main-header {
     background-color: var(--header-bg);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -166,13 +169,24 @@ p {
     width: auto;
 }
 
-.nav-links {
+/* Основная навигация */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+}
+
+.nav-menu {
     display: flex;
     list-style: none;
     gap: 25px;
+    margin: 0;
+    padding: 0;
+    flex: 1;
 }
 
-.nav-links a {
+.nav-menu a {
     text-decoration: none;
     color: var(--primary-color);
     font-weight: 500;
@@ -181,12 +195,12 @@ p {
     position: relative;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-menu a:hover,
+.nav-menu a.active {
     color: var(--accent-color);
 }
 
-.nav-links a.active::after {
+.nav-menu a.active::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -196,10 +210,83 @@ p {
     background-color: var(--accent-color);
 }
 
-/* Главный баннер (герой) */
+/* Выпадающее меню */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.7em;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--card-bg);
+    min-width: 250px;
+    box-shadow: var(--box-shadow-hover);
+    border-radius: var(--border-radius);
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    font-size: 0.95rem;
+}
+
+.dropdown-menu a:hover {
+    background: var(--background-color);
+    color: var(--accent-color);
+    border-left-color: var(--accent-color);
+    padding-left: 25px;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* ============================================
+   ГЛАВНЫЙ БАННЕР (ГЕРОЙ)
+   ============================================ */
+
 .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: var(--text-on-dark); /* БЕЛЫЙ текст на темном фоне */
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
     padding: 100px 0;
     text-align: center;
     position: relative;
@@ -313,38 +400,10 @@ p {
     margin-top: 30px;
 }
 
-/* Профессиональный CTA */
-.professional-cta {
-    background-color: var(--primary-color);
-    color: var(--text-on-dark); /* БЕЛЫЙ текст */
-    padding: 40px;
-    border-radius: var(--border-radius);
-    margin: 40px auto;
-    max-width: 800px;
-    text-align: center;
-}
+/* ============================================
+   КНОПКИ
+   ============================================ */
 
-.professional-cta h3 {
-    color: #ffffff !important; /* Делаем белым вместо светло-зеленого */
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.professional-cta p {
-    color: var(--text-on-dark-secondary); /* Светло-серый */
-    margin-bottom: 20px;
-}
-
-.professional-cta a {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-.professional-cta a:hover {
-    color: var(--light-accent);
-}
-
-/* Кнопки */
 .btn {
     display: inline-block;
     padding: 12px 30px;
@@ -404,9 +463,16 @@ p {
     color: white;
 }
 
-/* Преимущества/услуги */
-.advantages {
+/* ============================================
+   СЕКЦИИ И ЗАГОЛОВКИ
+   ============================================ */
+
+.section {
     padding: 80px 0;
+}
+
+.section.bg-light {
+    background-color: var(--background-color);
 }
 
 .section-title {
@@ -436,6 +502,14 @@ p {
     margin: 0 auto;
     font-size: 1.1rem;
     color: var(--text-light);
+}
+
+/* ============================================
+   ПРЕИМУЩЕСТВА/УСЛУГИ
+   ============================================ */
+
+.advantages {
+    padding: 80px 0;
 }
 
 .advantage-grid {
@@ -488,7 +562,199 @@ p {
     font-weight: bold;
 }
 
-/* Фотогалерея */
+/* ============================================
+   СЕТКИ ПРЕИМУЩЕСТВ И ШАГОВ
+   ============================================ */
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.advantage-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+}
+
+.advantage-header i {
+    font-size: 1.2rem;
+}
+
+.advantage-content {
+    padding: 25px;
+}
+
+.advantage-title {
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.advantage-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.advantage-stats {
+    background: rgba(22, 160, 133, 0.1);
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: var(--accent-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.step-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    border-left: 4px solid var(--accent-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+.step-header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.step-text {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.step-card ul {
+    list-style: none;
+    margin: 15px 0;
+    padding-left: 0;
+    flex-grow: 1;
+}
+
+.step-card li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #666;
+}
+
+.step-card li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.step-action {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.final-block {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--accent-color), var(--light-accent));
+    color: white;
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.final-title {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.final-text {
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ============================================
+   ПРОФЕССИОНАЛЬНЫЙ CTA
+   ============================================ */
+
+.professional-cta {
+    background-color: var(--primary-color);
+    color: var(--text-on-dark); /* БЕЛЫЙ текст */
+    padding: 40px;
+    border-radius: var(--border-radius);
+    margin: 40px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.professional-cta h3 {
+    color: #ffffff !important; /* Делаем белым вместо светло-зеленого */
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.professional-cta p {
+    color: var(--text-on-dark-secondary); /* Светло-серый */
+    margin-bottom: 20px;
+}
+
+.professional-cta a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.professional-cta a:hover {
+    color: var(--light-accent);
+}
+
+/* ============================================
+   ФОТОГАЛЕРЕЯ
+   ============================================ */
+
 .gallery-preview {
     padding: 80px 0;
 }
@@ -542,100 +808,10 @@ p {
     gap: 5px;
 }
 
-/* Социальное доказательство */
-.social-proof-modern {
-    padding: 60px 0;
-    text-align: center;
-}
+/* ============================================
+   БЛАГОДАРСТВЕННЫЕ ПИСЬМА
+   ============================================ */
 
-.social-proof-stats-modern {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 40px 0;
-    flex-wrap: wrap;
-}
-
-.stat-item-modern {
-    text-align: center;
-}
-
-.stat-number-modern {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--accent-color);
-    margin-bottom: 5px;
-}
-
-.stat-label-modern {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-.testimonial-modern {
-    max-width: 800px;
-    margin: 40px auto 0;
-    padding: 30px;
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    border-left: 4px solid var(--accent-color);
-}
-
-.testimonial-text-modern {
-    font-style: italic;
-    margin-bottom: 20px;
-    color: var(--text-color);
-    line-height: 1.7;
-}
-
-.testimonial-author-modern {
-    text-align: right;
-    color: var(--text-light);
-    font-weight: 600;
-}
-
-/* FAQ */
-.faq-main {
-    background: var(--background-color);
-    padding: 80px 0;
-}
-
-.faq-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.faq-item-main {
-    background: white;
-    padding: 25px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    border-left: 4px solid var(--accent-color);
-}
-
-.faq-question-main {
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.faq-question-main i {
-    color: var(--accent-color);
-}
-
-.faq-item-main p {
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-/* Благодарственные письма - ФИКСИРУЕМ КОНТРАСТ! */
 .testimonials-preview {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--text-on-dark); /* БЕЛЫЙ текст */
@@ -682,7 +858,95 @@ p {
     color: var(--text-on-dark-secondary); /* Светло-серый */
 }
 
-/* Калькулятор */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* ============================================
+   FAQ
+   ============================================ */
+
+.faq-main {
+    background: var(--background-color);
+    padding: 80px 0;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.faq-item-main {
+    background: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--accent-color);
+}
+
+.faq-question-main {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.faq-question-main i {
+    color: var(--accent-color);
+}
+
+.faq-item-main p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ============================================
+   КАЛЬКУЛЯТОР
+   ============================================ */
+
+.calculator-preview {
+    padding: 80px 0;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.calculator-preview-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.calculator-quick-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.quick-result {
+    margin-top: 30px;
+    padding: 20px;
+    background: #e7f3ff;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.calculator-cta {
+    margin-top: 30px;
+}
+
 .calculator-section {
     padding: 80px 0;
     background: var(--background-color);
@@ -829,7 +1093,10 @@ p {
     border-radius: 5px;
 }
 
-/* Контакты */
+/* ============================================
+   КОНТАКТЫ
+   ============================================ */
+
 .contact-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -917,7 +1184,10 @@ p {
     color: var(--primary-color) !important;
 }
 
-/* Футер - ФИКСИРУЕМ КОНТРАСТ! */
+/* ============================================
+   ФУТЕР
+   ============================================ */
+
 .footer {
     background-color: var(--footer-bg); /* Еще темнее для лучшего контраста */
     color: var(--text-on-dark); /* БЕЛЫЙ текст */
@@ -1012,6 +1282,10 @@ p {
     color: #ffffff !important; /* Белый при наведении */
     text-decoration: underline;
 }
+
+/* ============================================
+   ПЛАВАЮЩИЕ КНОПКИ
+   ============================================ */
 
 /* Кнопка Telegram (плавающая) */
 .telegram-float {
@@ -1165,6 +1439,101 @@ p {
     box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
+/* ============================================
+   КАРТА РОССИИ
+   ============================================ */
+
+.map-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-top: 30px;
+    border: 3px solid var(--accent-color);
+}
+
+#russiaMap {
+    width: 100%;
+    height: 500px;
+    z-index: 1;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.legend-active {
+    background-color: #27ae60;
+}
+
+.legend-planned {
+    background-color: #f39c12;
+}
+
+.map-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.map-btn {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.map-btn:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.city-info-window {
+    padding: 10px;
+    max-width: 250px;
+}
+
+.city-info-window h4 {
+    margin: 0 0 8px 0;
+    color: var(--primary-color);
+}
+
+.city-services {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 5px 0;
+}
+
+/* ============================================
+   УТИЛИТЫ
+   ============================================ */
+
 /* Центрирование текста */
 .text-center {
     text-align: center;
@@ -1183,7 +1552,10 @@ p {
 .mb-30 { margin-bottom: 30px; }
 .mb-40 { margin-bottom: 40px; }
 
-/* Адаптивность для мобильных */
+/* ============================================
+   АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ
+   ============================================ */
+
 @media (max-width: 768px) {
     .container {
         padding: 0 15px;
@@ -1208,10 +1580,52 @@ p {
         padding: 15px 0;
     }
     
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
+    .main-nav {
+        flex-direction: column;
+        width: 100%;
         gap: 15px;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    
+    .nav-menu > li:not(.dropdown) {
+        width: 100%;
+    }
+    
+    .nav-menu > li:not(.dropdown) a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        background: var(--background-color);
+        border-radius: var(--border-radius);
+    }
+    
+    .dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        background: var(--background-color);
+        border-radius: var(--border-radius);
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .contact-buttons .btn {
+        width: 100%;
+        text-align: center;
     }
     
     /* Главный баннер */
@@ -1276,7 +1690,8 @@ p {
     }
     
     /* Преимущества */
-    .advantage-grid {
+    .advantage-grid,
+    .advantages-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
@@ -1285,18 +1700,27 @@ p {
         padding: 20px;
     }
     
-    /* Галерея */
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-    
-    /* Социальное доказательство */
-    .social-proof-stats-modern {
+    /* Шаги */
+    .steps-container {
+        grid-template-columns: 1fr;
         gap: 20px;
     }
     
-    .stat-number-modern {
-        font-size: 2rem;
+    .step-card {
+        padding: 20px;
+    }
+    
+    .final-block {
+        padding: 30px 20px;
+    }
+    
+    .final-title {
+        font-size: 1.5rem;
+    }
+    
+    /* Галерея */
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
     
     /* Калькулятор */
@@ -1310,7 +1734,8 @@ p {
         font-size: 0.9rem;
     }
     
-    .calculator-form {
+    .calculator-form,
+    .calculator-quick-form {
         grid-template-columns: 1fr;
     }
     
@@ -1348,6 +1773,11 @@ p {
         padding: 40px 0 20px;
     }
     
+    /* Карта */
+    #russiaMap {
+        height: 400px;
+    }
+    
     /* Кнопка Telegram (мобильная версия) */
     .telegram-float {
         bottom: 20px;
@@ -1382,6 +1812,18 @@ p {
         .telegram-link i {
             font-size: 1.8rem;
             margin: 0;
+        }
+        
+        #russiaMap {
+            height: 350px;
+        }
+        
+        .step-number {
+            top: -12px;
+            left: -12px;
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
         }
     }
     
@@ -1422,152 +1864,7 @@ p {
         max-width: 1320px;
     }
 }
-/* Стили для блока "Как заказать восстановление полов" */
 
-#how-to-start {
-    padding: 80px 0;
-}
-
-#how-to-start .section-title {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-#how-to-start .steps-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-#how-to-start .step-card {
-    background: white;
-    border-radius: var(--border-radius);
-    padding: 30px;
-    box-shadow: var(--box-shadow);
-    position: relative;
-    border-left: 4px solid var(--accent-color);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-#how-to-start .step-number {
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 40px;
-    height: 40px;
-    background: var(--accent-color);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    z-index: 2;
-}
-
-#how-to-start .step-header {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-#how-to-start .step-text {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    flex-grow: 1;
-}
-
-#how-to-start .step-card ul {
-    list-style: none;
-    margin: 15px 0;
-    padding-left: 0;
-    flex-grow: 1;
-}
-
-#how-to-start .step-card li {
-    padding: 8px 0;
-    padding-left: 25px;
-    position: relative;
-    color: #666;
-}
-
-#how-to-start .step-card li:before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--accent-color);
-    font-weight: bold;
-}
-
-#how-to-start .step-action {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#how-to-start .final-block {
-    grid-column: 1 / -1;
-    background: linear-gradient(135deg, var(--accent-color), var(--light-accent));
-    color: white;
-    padding: 40px;
-    border-radius: var(--border-radius);
-    text-align: center;
-    margin-top: 20px;
-}
-
-#how-to-start .final-title {
-    color: white;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-}
-
-#how-to-start .final-text {
-    color: rgba(255, 255, 255, 0.9);
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.7;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    #how-to-start {
-        padding: 60px 0;
-    }
-    
-    #how-to-start .steps-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    #how-to-start .step-card {
-        padding: 20px;
-    }
-    
-    #how-to-start .final-block {
-        padding: 30px 20px;
-    }
-    
-    #how-to-start .final-title {
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    #how-to-start .step-number {
-        top: -12px;
-        left: -12px;
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-    }
-}
 /* ============================================
    СТИЛИ ДЛЯ СТРАНИЦЫ ПОГОДЫ
    ============================================ */
@@ -2027,184 +2324,7 @@ p {
         padding: 25px;
     }
 }
-/* Добавить в конец файла style.css */
 
 /* ============================================
-   СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО МЕНЮ (дополнение к style.css)
+   КОНЕЦ ФАЙЛА STYLE.CSS
    ============================================ */
-
-.main-nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.dropdown-toggle::after {
-    content: '▼';
-    font-size: 0.7em;
-    margin-left: 5px;
-    transition: transform 0.3s ease;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--card-bg);
-    min-width: 250px;
-    box-shadow: var(--box-shadow-hover);
-    border-radius: var(--border-radius);
-    padding: 10px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    list-style: none;
-    margin: 0;
-}
-
-.dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu li {
-    margin: 0;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 12px 20px;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
-    font-size: 0.95rem;
-}
-
-.dropdown-menu a:hover {
-    background: var(--background-color);
-    color: var(--accent-color);
-    border-left-color: var(--accent-color);
-    padding-left: 25px;
-}
-
-.contact-buttons {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-/* Адаптивность для выпадающего меню */
-@media (max-width: 1024px) {
-    .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .nav-menu {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        background: transparent;
-        padding-left: 20px;
-        display: none;
-        min-width: auto;
-    }
-    
-    .dropdown-menu.show {
-        display: block;
-    }
-    
-    .dropdown-toggle::after {
-        content: ' ▼';
-        transition: transform 0.3s ease;
-    }
-    
-    .dropdown.active .dropdown-toggle::after {
-        transform: rotate(180deg);
-    }
-    
-    .dropdown-menu a {
-        padding: 10px 15px;
-        border-left: 2px solid transparent;
-    }
-    
-    .dropdown-menu a:hover {
-        padding-left: 20px;
-    }
-    
-    .contact-buttons {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 15px;
-    }
-    
-    .contact-buttons .btn {
-        width: 100%;
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-menu {
-        flex-direction: column;
-        width: 100%;
-        gap: 15px;
-    }
-    
-    .nav-menu > li:not(.dropdown) {
-        width: 100%;
-    }
-    
-    .nav-menu > li:not(.dropdown) a {
-        display: block;
-        width: 100%;
-        text-align: center;
-        padding: 12px;
-        background: var(--background-color);
-        border-radius: var(--border-radius);
-    }
-    
-    .dropdown {
-        width: 100%;
-    }
-    
-    .dropdown-toggle {
-        width: 100%;
-        justify-content: center;
-        padding: 12px;
-        background: var(--background-color);
-        border-radius: var(--border-radius);
-    }
-}
