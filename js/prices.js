@@ -1,9 +1,9 @@
 // ============================================
 // PRICES.JS - База цен для калькулятора МИРУМ
-// Версия: 5.0 (30.12.2025)
+// Версия: 5.0 (30.12.2025) - Адаптированный формат
 // ============================================
 
-// Основной объект с ценами для всех регионов
+// Основной объект с ценами (формат из вашего примера)
 const priceData = {
     "Москва": {
         "85*60": { 
@@ -485,85 +485,37 @@ const priceData = {
     }
 };
 
-// Дополнительные данные для калькулятора
-const calculatorConfig = {
-    // Месяцы для тендерного калькулятора
-    months: [
-        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
-        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-    ],
-    
-    // Размеры ковров
-    sizes: [
-        "85*60",
-        "85*150", 
-        "115*200",
-        "115*240",
-        "115*400",
-        "150*240",
-        "150*250",
-        "150*300"
-    ],
-    
-    // Периодичность замены
-    frequencies: [
-        "1 раз в две недели",
-        "1 раз в неделю",
-        "2 раза в неделю",
-        "3 раза в неделю",
-        "4 раза в неделю",
-        "5 раз в неделю",
-        "6 раз в неделю",
-        "7 раз в неделю"
-    ],
-    
-    // Регионы работы
-    regions: [
-        "Москва",
-        "Московская область",
-        "Санкт-Петербург",
-        "Ленинградская область",
-        "Уфа",
-        "Казань",
-        "Екатеринбург",
-        "Новосибирск",
-        "Краснодар"
-    ],
-    
-    // Скидки
-    discounts: {
-        "20000": 5,   // 5% скидка при заказе от 20,000 руб
-        "50000": 10,  // 10% скидка при заказе от 50,000 руб
-        "100000": 15, // 15% скидка при заказе от 100,000 руб
-        "200000": 20  // 20% скидка при заказе от 200,000 руб
-    },
-    
-    // Коэффициенты замен в месяц для разных периодичностей
-    replacementsPerMonth: {
-        "1 раз в две недели": 2,
-        "1 раз в неделю": 4,
-        "2 раза в неделю": 8,
-        "3 раза в неделю": 12,
-        "4 раза в неделю": 16,
-        "5 раз в неделю": 20,
-        "6 раз в неделю": 24,
-        "7 раз в неделю": 28
-    },
-    
-    // Текст для Telegram сообщений
-    telegramMessages: {
-        standard: "📋 Запрос по калькулятору аренды ковров МИРУМ",
-        tender: "📋 Запрос по тендеру МИРУМ",
-        contract: "📄 Реквизиты для договора МИРУМ",
-        discount: "💰 Запрос на скидку МИРУМ"
-    }
-};
+// Порядок отображения регионов (для правильной сортировки)
+const regionsOrder = [
+    "Москва",
+    "Московская область",
+    "Санкт-Петербург", 
+    "Ленинградская область",
+    "Уфа",
+    "Казань",
+    "Екатеринбург",
+    "Новосибирск",
+    "Краснодар"
+];
 
 // Утилиты для работы с ценами
 const PriceUtils = {
-    // Получить все доступные регионы
+    // Получить все доступные регионы в правильном порядке
     getRegions: function() {
-        return Object.keys(priceData).sort();
+        const regions = [];
+        // Сначала добавляем регионы из порядка
+        regionsOrder.forEach(region => {
+            if (priceData[region]) {
+                regions.push(region);
+            }
+        });
+        // Затем добавляем остальные регионы
+        Object.keys(priceData).forEach(region => {
+            if (!regions.includes(region)) {
+                regions.push(region);
+            }
+        });
+        return regions;
     },
     
     // Получить все доступные размеры для региона
@@ -595,43 +547,18 @@ const PriceUtils = {
     // Рассчитать стоимость за месяц
     calculateMonthlyCost: function(region, size, frequency, quantity = 1) {
         const pricePerReplacement = this.getPrice(region, size, frequency);
-        const replacements = calculatorConfig.replacementsPerMonth[frequency] || 0;
+        let replacements = 4; // По умолчанию 1 раз в неделю
+        
+        if (frequency.includes('1 раз в две недели')) replacements = 2;
+        else if (frequency.includes('1 раз в неделю')) replacements = 4;
+        else if (frequency.includes('2 раза в неделю')) replacements = 8;
+        else if (frequency.includes('3 раза в неделю')) replacements = 12;
+        else if (frequency.includes('4 раза в неделю')) replacements = 16;
+        else if (frequency.includes('5 раз в неделю')) replacements = 20;
+        else if (frequency.includes('6 раз в неделю')) replacements = 24;
+        else if (frequency.includes('7 раз в неделю')) replacements = 28;
+        
         return pricePerReplacement * replacements * quantity;
-    },
-    
-    // Получить скидку в зависимости от суммы
-    getDiscountForAmount: function(amount) {
-        const discounts = calculatorConfig.discounts;
-        let discount = 0;
-        
-        // Ищем максимальную доступную скидку
-        for (const [minAmount, discountPercent] of Object.entries(discounts)) {
-            if (amount >= parseInt(minAmount) && discountPercent > discount) {
-                discount = discountPercent;
-            }
-        }
-        
-        return discount;
-    },
-    
-    // Применить скидку к сумме
-    applyDiscount: function(amount, discountPercent) {
-        if (discountPercent > 0) {
-            const discountAmount = amount * (discountPercent / 100);
-            return {
-                original: amount,
-                discount: discountAmount,
-                final: amount - discountAmount,
-                percent: discountPercent
-            };
-        }
-        
-        return {
-            original: amount,
-            discount: 0,
-            final: amount,
-            percent: 0
-        };
     },
     
     // Форматировать цену в читаемый вид
@@ -642,53 +569,14 @@ const PriceUtils = {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
         }).format(price);
-    },
-    
-    // Проверить доступность комбинации
-    isCombinationAvailable: function(region, size, frequency) {
-        return this.getPrice(region, size, frequency) > 0;
-    },
-    
-    // Получить самую дешевую частоту для региона и размера
-    getCheapestFrequency: function(region, size) {
-        const frequencies = this.getFrequenciesForSize(region, size);
-        if (frequencies.length === 0) return null;
-        
-        let cheapest = frequencies[0];
-        let cheapestPrice = this.getPrice(region, size, cheapest);
-        
-        for (const frequency of frequencies) {
-            const price = this.getPrice(region, size, frequency);
-            if (price < cheapestPrice) {
-                cheapest = frequency;
-                cheapestPrice = price;
-            }
-        }
-        
-        return {
-            frequency: cheapest,
-            price: cheapestPrice
-        };
-    },
-    
-    // Получить самый популярный размер (для дефолтных значений)
-    getMostPopularSize: function() {
-        return "85*60"; // Самый популярный размер
-    },
-    
-    // Получить самую популярную частоту (для дефолтных значений)
-    getMostPopularFrequency: function() {
-        return "1 раз в неделю"; // Самая популярная частота
     }
 };
 
 // Экспорт для использования в других скриптах
 if (typeof window !== 'undefined') {
     window.priceData = priceData;
-    window.calculatorConfig = calculatorConfig;
     window.PriceUtils = PriceUtils;
     
     console.log('✅ prices.js загружен успешно!');
     console.log('📊 Регионов:', PriceUtils.getRegions().length);
-    console.log('📦 Размеров:', calculatorConfig.sizes.length);
 }
