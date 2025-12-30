@@ -1,5 +1,140 @@
 // === НАЧАЛО MAIN.JS ===
 // Основные функции для сайта МИРУМ
+// ============================================
+// ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ КАЛЬКУЛЯТОРА
+// ============================================
+
+// Улучшенная функция для инициализации калькулятора
+function initCalculatorEnhanced() {
+    const calculatorForm = document.querySelector('.calculator-form');
+    if (!calculatorForm) return;
+    
+    // Добавляем класс для страницы калькулятора
+    document.body.classList.add('calculator-page');
+    
+    // Кнопка показа/скрытия меню на мобильных
+    const showMenuBtn = document.createElement('button');
+    showMenuBtn.className = 'show-menu-btn';
+    showMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    showMenuBtn.style.display = 'none';
+    document.body.appendChild(showMenuBtn);
+    
+    // Обработка фокуса на полях ввода
+    const formInputs = calculatorForm.querySelectorAll('select, input');
+    formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            document.body.classList.add('calculator-active');
+            if (window.innerWidth <= 768) {
+                showMenuBtn.style.display = 'flex';
+            }
+        });
+        
+        input.addEventListener('blur', function() {
+            // Не убираем активный режим сразу, только если не все поля пустые
+            const hasValues = Array.from(formInputs).some(input => input.value.trim() !== '');
+            if (!hasValues) {
+                document.body.classList.remove('calculator-active');
+                showMenuBtn.style.display = 'none';
+            }
+        });
+    });
+    
+    // Обработка кнопки показа меню
+    showMenuBtn.addEventListener('click', function() {
+        document.body.classList.remove('calculator-active');
+        this.style.display = 'none';
+        // Прокрутка к верху
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Адаптация для мобильных при открытии результатов
+    const viewOrderBtn = document.getElementById('viewOrderSection');
+    if (viewOrderBtn) {
+        viewOrderBtn.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                document.body.classList.add('calculator-active');
+                showMenuBtn.style.display = 'flex';
+            }
+        });
+    }
+    
+    // Обработка отправки формы в Telegram с полной информацией
+    const sendButtons = document.querySelectorAll('.btn-telegram');
+    sendButtons.forEach(btn => {
+        if (btn.onclick) return; // Если уже есть обработчик
+        
+        btn.addEventListener('click', function() {
+            sendOrderToTelegramEnhanced();
+        });
+    });
+    
+    console.log('✅ Калькулятор улучшен для мобильных устройств');
+}
+
+// Улучшенная функция отправки в Telegram
+function sendOrderToTelegramEnhanced() {
+    try {
+        // Получаем данные из формы
+        const region = document.getElementById('region')?.value;
+        const size = document.getElementById('size')?.value;
+        const frequency = document.getElementById('frequency')?.value;
+        const quantity = document.getElementById('quantity')?.value;
+        
+        if (!region || !size || !frequency || !quantity) {
+            alert('Пожалуйста, заполните все поля калькулятора');
+            return;
+        }
+        
+        // Получаем цены из localStorage или расчетов
+        const orderPositions = getOrderPositions();
+        let message = '🧮 Расчет аренды ковров МИРУМ:\n\n';
+        
+        if (orderPositions.length > 0) {
+            orderPositions.forEach((pos, index) => {
+                message += `${index + 1}. ${pos.size}, ${pos.quantity} шт.\n`;
+                message += `   Частота: ${pos.frequency}\n`;
+                message += `   Регион: ${pos.region}\n`;
+                message += `   Цена за замену: ${pos.pricePerChange} ₽\n`;
+                message += `   Стоимость в месяц: ${pos.monthlyCost} ₽\n\n`;
+            });
+            
+            const total = orderPositions.reduce((sum, pos) => sum + pos.monthlyCost, 0);
+            message += `💰 Общая стоимость в месяц: ${total} ₽\n`;
+        } else {
+            // Базовая информация из формы
+            message += `📍 Регион: ${region}\n`;
+            message += `📏 Размер ковра: ${size}\n`;
+            message += `🔄 Частота замены: ${frequency}\n`;
+            message += `📦 Количество: ${quantity} шт.\n\n`;
+            message += `📊 Для точного расчета заполните калькулятор полностью.\n`;
+        }
+        
+        message += `\n📞 Свяжитесь со мной для уточнения деталей.\n`;
+        message += `⏰ Время запроса: ${new Date().toLocaleString('ru-RU')}\n`;
+        message += `🌐 Страница: Калькулятор`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+        
+        window.open(telegramUrl, '_blank');
+        
+    } catch (error) {
+        console.error('Ошибка отправки в Telegram:', error);
+        alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram.');
+    }
+}
+
+// Обновляем инициализацию в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... существующий код ...
+    
+    // Улучшенная инициализация калькулятора
+    if (document.querySelector('.calculator-form')) {
+        initCalculatorEnhanced();
+    }
+    
+    // ... остальной код ...
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ main.js загружен');
