@@ -1145,3 +1145,383 @@ p {
 .breadcrumbs a:hover {
     text-decoration: underline;
 }
+/* ============================================
+   ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ МОБИЛЬНОГО КАЛЬКУЛЯТОРА
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Компактный хедер на странице калькулятора */
+    body.calculator-page .main-header {
+        height: 60px;
+        padding: 10px 0;
+        transition: all 0.3s ease;
+    }
+    
+    body.calculator-page .header-container {
+        padding: 0 15px;
+    }
+    
+    body.calculator-page .logo img {
+        height: 40px;
+    }
+    
+    /* Скрытие хедера при фокусе на форме */
+    body.calculator-page.calculator-active .main-header {
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    body.calculator-page.calculator-active .breadcrumbs {
+        display: none;
+    }
+    
+    /* Кнопка "Показать меню" */
+    .show-menu-btn {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: #16a085;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    /* Герой секция калькулятора компактнее */
+    .calculator-hero {
+        padding: 60px 0 40px !important;
+    }
+    
+    .calculator-hero h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .hero-features {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        padding: 10px 0 !important;
+        margin: 15px 0 !important;
+        gap: 10px !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .feature-badge {
+        flex-shrink: 0 !important;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Улучшенная форма калькулятора для мобильных */
+    .calculator-form {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .calculator-form .form-group {
+        width: 100% !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .calculator-form label {
+        font-size: 0.9rem !important;
+        margin-bottom: 5px !important;
+        display: block !important;
+    }
+    
+    .calculator-form select,
+    .calculator-form input {
+        width: 100% !important;
+        padding: 14px 12px !important;
+        font-size: 16px !important; /* Предотвращает масштабирование iOS */
+        height: 50px !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Кнопки действий */
+    .calculator-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-top: 20px !important;
+    }
+    
+    .calculator-actions .btn {
+        width: 100% !important;
+        padding: 16px !important;
+        font-size: 1rem !important;
+        margin: 5px 0 !important;
+    }
+    
+    /* Таблица заказа - адаптивная с горизонтальным скроллом */
+    .result-table {
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        margin: 0 -15px !important;
+        width: calc(100% + 30px) !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .result-table thead {
+        font-size: 0.85rem !important;
+    }
+    
+    .result-table th,
+    .result-table td {
+        padding: 10px 8px !important;
+        font-size: 0.9rem !important;
+        min-width: 90px !important;
+    }
+    
+    .result-table th:first-child,
+    .result-table td:first-child {
+        min-width: 120px !important;
+    }
+    
+    .result-table th:last-child,
+    .result-table td:last-child {
+        min-width: 60px !important;
+    }
+    
+    /* Окно с расчетом - полноэкранное на мобильных */
+    .calculator-results {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: white !important;
+        z-index: 10000 !important;
+        padding: 20px 15px !important;
+        overflow-y: auto !important;
+        transform: translateX(100%) !important;
+        transition: transform 0.3s ease !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .calculator-results.active {
+        transform: translateX(0) !important;
+    }
+    
+    .calculator-results h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 20px !important;
+        position: sticky !important;
+        top: 0 !important;
+        background: white !important;
+        padding: 10px 0 !important;
+        z-index: 1 !important;
+    }
+    
+    .total-section {
+        position: sticky !important;
+        bottom: 0 !important;
+        background: white !important;
+        padding: 15px 0 !important;
+        border-top: 2px solid #16a085 !important;
+        margin-top: 20px !important;
+    }
+    
+    .total-section h3 {
+        font-size: 1.5rem !important;
+        margin: 0 !important;
+    }
+    
+    /* Кнопка закрытия результатов */
+    .close-results-btn {
+        position: fixed !important;
+        top: 15px !important;
+        right: 15px !important;
+        background: #e74c3c !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 50% !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.2rem !important;
+        z-index: 10001 !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+        cursor: pointer !important;
+    }
+    
+    /* Формы внутри калькулятора */
+    .discount-form,
+    #contractForm,
+    .send-form {
+        padding: 15px !important;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .consent-checkbox {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        margin: 15px 0 !important;
+    }
+    
+    /* Уведомления */
+    .alert {
+        padding: 12px 15px !important;
+        font-size: 0.9rem !important;
+        margin: 15px 0 !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Кнопка "Вернуться к расчету" */
+    .back-to-calc-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        background: #2c3e50 !important;
+        color: white !important;
+        padding: 12px !important;
+        border-radius: 5px !important;
+        text-decoration: none !important;
+        margin-bottom: 20px !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Хлебные крошки - скрываем на мобильных в калькуляторе */
+    .calculator-page .breadcrumbs {
+        padding: 8px 0 !important;
+        font-size: 0.8rem !important;
+    }
+    
+    /* Главный заголовок - компактнее */
+    .calculator-page .section-title h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    .calculator-page .section-title p {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Вкладки калькулятора для мобильных */
+    .calculator-tabs {
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        padding-bottom: 5px !important;
+        margin-bottom: 20px !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .tab-btn {
+        flex-shrink: 0 !important;
+        padding: 12px 20px !important;
+        margin-right: 5px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Кнопки отправки расчета */
+    .send-buttons {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin-top: 20px !important;
+    }
+    
+    .send-buttons .btn {
+        width: 100% !important;
+        padding: 14px !important;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .calculator-hero {
+        padding: 50px 0 30px !important;
+    }
+    
+    .calculator-hero h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+    }
+    
+    .feature-badge {
+        padding: 6px 10px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .tab-btn {
+        padding: 10px 15px !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+    }
+    
+    .calculator-tabs {
+        overflow-x: auto !important;
+        padding-bottom: 5px !important;
+    }
+    
+    /* Увеличиваем зону клика для селектов */
+    .calculator-form select {
+        height: 52px !important;
+    }
+    
+    /* Размеры для миниатюрных экранов */
+    .result-table th,
+    .result-table td {
+        min-width: 80px !important;
+        font-size: 0.85rem !important;
+        padding: 8px 6px !important;
+    }
+    
+    .result-table th:first-child,
+    .result-table td:first-child {
+        min-width: 110px !important;
+    }
+    
+    /* Плавающие кнопки на мобильных */
+    .telegram-float {
+        bottom: 80px !important;
+        right: 15px !important;
+    }
+    
+    .telegram-link span {
+        display: none !important;
+    }
+    
+    .telegram-link {
+        padding: 15px !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        justify-content: center !important;
+    }
+    
+    .scroll-to-top {
+        bottom: 150px !important;
+        right: 15px !important;
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1.2rem !important;
+    }
+}
