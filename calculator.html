@@ -6,74 +6,102 @@
     <title>Калькулятор стоимости аренды ковров | МИРУМ</title>
     <meta name="description" content="Рассчитайте точную стоимость аренды грязезащитных ковров для вашего бизнеса">
     
+    <!-- ИКОНКИ (добавил) -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
     <!-- Подключение стилей -->
     <link rel="stylesheet" href="/css/calculator.css">
+    
+    <!-- Дополнительные стили для мобильной версии -->
     <style>
-        /* Дополнительные стили для мобильной версии */
+        /* Меню калькулятора */
+        .calculator-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        
+        .calculator-nav {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .calculator-logo {
+            height: 40px;
+        }
+        
+        .back-to-home {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8f9fa;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .back-to-home:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        /* Для мобильных */
         @media (max-width: 768px) {
-            .calculator-section {
-                padding: 20px 0;
+            .calculator-header {
+                padding: 8px 0;
             }
             
-            .calculator-content {
-                padding: 20px;
-                margin: 0 10px;
+            .calculator-logo {
+                height: 35px;
             }
             
-            .tab-btn {
-                padding: 12px 15px;
-                font-size: 14px;
-                min-width: 140px;
-            }
-            
-            .form-group label {
+            .back-to-home {
+                padding: 8px 12px;
                 font-size: 14px;
             }
             
-            select, input {
-                padding: 12px;
-                font-size: 16px;
-            }
-            
-            .btn {
-                padding: 15px;
-                font-size: 16px;
-            }
-            
-            .result-item {
-                font-size: 14px;
-                padding: 15px;
-            }
-            
-            .month-box {
-                padding: 10px;
-            }
-            
-            .month-box label {
-                font-size: 12px;
+            .back-to-home span {
+                display: none;
             }
         }
         
-        /* Для очень маленьких экранов */
         @media (max-width: 480px) {
-            .tabs {
-                flex-direction: column;
+            .calculator-nav {
+                padding: 0 10px;
             }
             
-            .tab-btn {
-                width: 100%;
-                border-radius: 8px;
-                margin-bottom: 5px;
+            .calculator-logo {
+                height: 30px;
             }
             
-            .month-inputs {
-                grid-template-columns: repeat(2, 1fr);
+            .back-to-home {
+                padding: 8px;
+            }
+            
+            .back-to-home i {
+                margin: 0;
             }
         }
         
-        /* Стили для калькулятора */
+        /* Остальные стили калькулятора */
         .calculator-section {
-            padding: 40px 0;
+            padding: 20px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             min-height: 100vh;
         }
@@ -343,6 +371,20 @@
     </style>
 </head>
 <body>
+    <!-- ШАПКА КАЛЬКУЛЯТОРА С МЕНЮ -->
+    <header class="calculator-header">
+        <nav class="calculator-nav">
+            <a href="/" class="logo">
+                <img src="/img/logo.png" alt="МИРУМ" class="calculator-logo">
+            </a>
+            <a href="/" class="back-to-home">
+                <i class="fas fa-home"></i>
+                <span>Вернуться на главную</span>
+            </a>
+        </nav>
+    </header>
+    
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="calculator-section">
         <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 15px;">
             <h1 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Калькулятор аренды ковров</h1>
@@ -387,19 +429,21 @@
                     <input type="number" id="quantity" value="1" min="1">
                 </div>
                 
-                <button class="btn" id="addPositionBtn">Добавить позицию</button>
-                <button class="btn btn-telegram" id="sendToTelegramBtn" style="display: none;">Отправить в Telegram</button>
+                <!-- Кнопки теперь под результатом -->
+                <div class="result" id="standard-result">
+                    <h3>Ваш расчет:</h3>
+                    <div class="positions-list" id="positions-list">
+                        <!-- Сюда добавляется текущий расчет -->
+                    </div>
+                    <div id="total-cost" class="total">Общая стоимость: 0 ₽</div>
+                    
+                    <button class="btn" id="addPositionBtn">Добавить эту позицию в заказ</button>
+                    <button class="btn btn-telegram" id="sendToTelegramBtn" style="display: none;">Отправить заказ в Telegram</button>
+                </div>
                 
                 <!-- Уведомления -->
                 <div class="notice" id="addedNotice">Позиция добавлена в заказ!</div>
                 <div class="notice" id="emptyNotice">Добавьте хотя бы одну позицию в заказ</div>
-                
-                <!-- Результаты -->
-                <div class="result" id="standard-result">
-                    <h3>Ваш расчет:</h3>
-                    <div class="positions-list" id="positions-list"></div>
-                    <div id="total-cost" class="total">Общая стоимость: 0 ₽</div>
-                </div>
             </div>
             
             <!-- Тендерный калькулятор -->
@@ -422,14 +466,13 @@
                     <!-- Месяцы будут добавлены через JS -->
                 </div>
                 
-                <button class="btn" id="calculateTenderBtn">Рассчитать тендер</button>
-                <button class="btn btn-telegram" id="sendTenderToTelegramBtn" style="display: none;">Отправить тендер в Telegram</button>
-                
-                <!-- Результаты тендера -->
                 <div class="result" id="tender-result">
                     <h3>Расчет по тендеру:</h3>
                     <div class="positions-list" id="tender-positions"></div>
                     <div id="tender-total" class="total">Общая стоимость: 0 ₽</div>
+                    
+                    <button class="btn" id="calculateTenderBtn">Рассчитать тендер</button>
+                    <button class="btn btn-telegram" id="sendTenderToTelegramBtn" style="display: none;">Отправить тендер в Telegram</button>
                 </div>
             </div>
             
@@ -441,6 +484,9 @@
         </div>
     </div>
 
+    <!-- Подключение FontAwesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <!-- Подключение скриптов -->
     <script src="/js/prices.js"></script>
     <script>
@@ -450,6 +496,7 @@
         let positions = [];
         let tenderData = [];
         let currentTenderTotal = 0;
+        let currentPosition = null;
 
         // ============================================
         // Функция инициализации калькулятора
@@ -479,6 +526,10 @@
             
             // Настройка обработчиков событий
             setupEventListeners();
+            
+            // Показываем блок результатов
+            document.getElementById('standard-result').classList.add('active');
+            document.getElementById('tender-result').classList.add('active');
             
             console.log('✅ Калькулятор инициализирован');
         }
@@ -564,17 +615,23 @@
             // Стандартный калькулятор
             document.getElementById('region').addEventListener('change', updateSizes);
             document.getElementById('size').addEventListener('change', updateFrequencies);
+            document.getElementById('frequency').addEventListener('change', calculateCurrentPosition);
+            document.getElementById('quantity').addEventListener('input', calculateCurrentPosition);
             document.getElementById('addPositionBtn').addEventListener('click', addPosition);
             document.getElementById('sendToTelegramBtn').addEventListener('click', sendToTelegram);
             
             // Тендерный калькулятор
             document.getElementById('tender-region').addEventListener('change', updateTenderSizes);
+            document.getElementById('tender-size').addEventListener('change', calculateTender);
             document.getElementById('calculateTenderBtn').addEventListener('click', calculateTender);
             document.getElementById('sendTenderToTelegramBtn').addEventListener('click', sendTenderToTelegram);
             
             // Поля ввода для тендера
-            document.querySelectorAll('.month-carpets, .month-changes').forEach(input => {
-                input.addEventListener('input', calculateTender);
+            document.addEventListener('input', function(e) {
+                if (e.target.classList.contains('month-carpets') || 
+                    e.target.classList.contains('month-changes')) {
+                    calculateTender();
+                }
             });
         }
 
@@ -609,6 +666,10 @@
             // Сбрасываем частоту
             document.getElementById('frequency').innerHTML = '<option value="">Выберите периодичность</option>';
             document.getElementById('frequency').disabled = true;
+            
+            // Сбрасываем текущую позицию
+            currentPosition = null;
+            updatePositionsList();
         }
 
         function updateFrequencies() {
@@ -638,7 +699,7 @@
             });
         }
 
-        function addPosition() {
+        function calculateCurrentPosition() {
             const region = document.getElementById('region').value;
             const size = document.getElementById('size').value;
             const frequency = document.getElementById('frequency').value;
@@ -646,29 +707,43 @@
             
             // Проверка заполненности полей
             if (!region || !size || !frequency) {
-                alert('Пожалуйста, выберите регион, размер и периодичность');
+                currentPosition = null;
+                updatePositionsList();
                 return;
             }
             
             // Получаем цену
             const price = PriceUtils.getPrice(region, size, frequency);
             if (!price) {
-                alert('Для выбранной комбинации нет цены');
+                currentPosition = null;
+                updatePositionsList();
                 return;
             }
             
             // Рассчитываем стоимость за месяц
             const cost = PriceUtils.calculateMonthlyCost(region, size, frequency, quantity);
             
-            // Добавляем позицию
-            positions.push({
+            // Сохраняем текущую позицию
+            currentPosition = {
                 region,
                 size,
                 frequency,
                 quantity,
                 price,
                 cost
-            });
+            };
+            
+            updatePositionsList();
+        }
+
+        function addPosition() {
+            if (!currentPosition) {
+                alert('Пожалуйста, сначала заполните все поля для расчета');
+                return;
+            }
+            
+            // Добавляем позицию
+            positions.push({...currentPosition});
             
             // Обновляем список позиций
             updatePositionsList();
@@ -691,6 +766,25 @@
             
             let total = 0;
             
+            // Показываем текущую позицию (если есть)
+            if (currentPosition) {
+                total += currentPosition.cost;
+                
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <strong>${currentPosition.size}</strong> × ${currentPosition.quantity} шт.<br>
+                    ${currentPosition.frequency}<br>
+                    Цена за замену: ${PriceUtils.formatPrice(currentPosition.price)}<br>
+                    <strong>Стоимость в месяц: ${PriceUtils.formatPrice(currentPosition.cost)}</strong>
+                    <div style="margin-top: 10px; font-size: 12px; color: #666;">
+                        Это ваш текущий расчет. Нажмите "Добавить эту позицию в заказ", чтобы сохранить его.
+                    </div>
+                `;
+                list.appendChild(div);
+            }
+            
+            // Показываем сохраненные позиции
             positions.forEach((pos, index) => {
                 total += pos.cost;
                 
@@ -700,16 +794,13 @@
                     <strong>${pos.size}</strong> × ${pos.quantity} шт.<br>
                     ${pos.frequency}<br>
                     Цена за замену: ${PriceUtils.formatPrice(pos.price)}<br>
-                    <strong>Стоимость: ${PriceUtils.formatPrice(pos.cost)}</strong>
+                    <strong>Стоимость в месяц: ${PriceUtils.formatPrice(pos.cost)}</strong>
                     <button class="remove-btn" onclick="removePosition(${index})">×</button>
                 `;
                 list.appendChild(div);
             });
             
-            totalElement.textContent = `Общая стоимость: ${PriceUtils.formatPrice(total)}`;
-            
-            // Показываем блок с результатами
-            document.getElementById('standard-result').classList.add('active');
+            totalElement.textContent = `Общая стоимость в месяц: ${PriceUtils.formatPrice(total)}`;
         }
 
         function removePosition(index) {
@@ -719,7 +810,6 @@
             // Скрываем кнопку отправки, если нет позиций
             if (positions.length === 0) {
                 document.getElementById('sendToTelegramBtn').style.display = 'none';
-                document.getElementById('standard-result').classList.remove('active');
             }
         }
 
@@ -784,14 +874,18 @@
             const size = document.getElementById('tender-size').value;
             
             if (!region || !size) {
-                alert('Выберите регион и размер ковра');
+                tenderData = [];
+                currentTenderTotal = 0;
+                updateTenderPositionsList();
                 return;
             }
             
             // Получаем базовую цену (берем первую доступную частоту)
             const frequencies = PriceUtils.getFrequenciesForSize(region, size);
             if (frequencies.length === 0) {
-                alert('Для выбранного региона и размера нет цен');
+                tenderData = [];
+                currentTenderTotal = 0;
+                updateTenderPositionsList();
                 return;
             }
             
@@ -838,12 +932,34 @@
             
             list.innerHTML = '';
             
+            // Показываем базовую информацию
+            const region = document.getElementById('tender-region').value;
+            const size = document.getElementById('tender-size').value;
+            
+            if (region && size) {
+                const frequencies = PriceUtils.getFrequenciesForSize(region, size);
+                const basePrice = frequencies.length > 0 ? PriceUtils.getPrice(region, size, frequencies[0]) : 0;
+                
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'result-item';
+                infoDiv.innerHTML = `
+                    <strong>Базовая информация:</strong><br>
+                    Регион: ${region}<br>
+                    Размер ковра: ${size}<br>
+                    Цена за замену: ${PriceUtils.formatPrice(basePrice)}<br>
+                    <div style="margin-top: 10px; font-size: 12px; color: #666;">
+                        Введите количество ковров и замен для каждого месяца ниже
+                    </div>
+                `;
+                list.appendChild(infoDiv);
+            }
+            
+            // Показываем расчет по месяцам
             tenderData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'result-item';
                 div.innerHTML = `
                     <strong>${item.month}</strong><br>
-                    Размер: ${item.size}<br>
                     Ковров: ${item.carpets} шт.<br>
                     Замен: ${item.changes}<br>
                     <strong>${PriceUtils.formatPrice(item.cost)}</strong>
@@ -852,14 +968,11 @@
             });
             
             totalElement.textContent = `Общая стоимость: ${PriceUtils.formatPrice(currentTenderTotal)}`;
-            
-            // Показываем блок с результатами
-            document.getElementById('tender-result').classList.add('active');
         }
 
         function sendTenderToTelegram() {
             if (tenderData.length === 0) {
-                alert('Нет данных для отправки. Рассчитайте тендер сначала.');
+                alert('Нет данных для отправки. Заполните данные по месяцам.');
                 return;
             }
             
