@@ -1,888 +1,896 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- [01] SEO-ЗАГОЛОВОК И МЕТАТЕГИ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Калькулятор стоимости аренды ковров | МИРУМ с 2009</title>
-    <meta name="description" content="✅ Рассчитайте точную стоимость аренды грязезащитных ковров для вашего бизнеса. Учитываем регион, размеры и периодичность замены. Работаем по всей России.">
+    <title>Калькулятор стоимости аренды ковров | МИРУМ</title>
+    <meta name="description" content="Рассчитайте точную стоимость аренды грязезащитных ковров для вашего бизнеса">
     
-    <!-- SEO метатеги -->
-    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/calculator.html" />
-    <meta name="robots" content="index, follow" />
-    
-    <!-- Ключевые слова -->
-    <meta name="keywords" content="калькулятор аренды ковров, рассчитать стоимость ковров, цена аренды грязезащитных ковров, тендерный калькулятор ковров">
-    
-    <!-- Гео-метатеги -->
-    <meta name="geo.region" content="RU">
-    <meta name="geo.placename" content="Russia">
-    <meta name="geo.position" content="55.755826;37.6173">
-    <meta name="ICBM" content="55.755826, 37.6173">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Калькулятор стоимости аренды ковров | МИРУМ">
-    <meta property="og:description" content="Точный расчет стоимости аренды грязезащитных ковров для вашего бизнеса по всей России.">
-    <meta property="og:url" content="https://arenda-kovrov-mirum.ru/calculator.html">
-    <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png">
-    
-    <!-- Фавиконки -->
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#1a3a5f">
-    
-    <!-- Подключаем обновленные стили -->
-    <link rel="stylesheet" href="/css/style.css">
-    
-    <!-- Стили калькулятора -->
+    <!-- Подключение стилей -->
     <link rel="stylesheet" href="/css/calculator.css">
-    
-    <!-- Мобильные стили -->
-    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 768px)">
-    
-    <!-- Font Awesome для иконок -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Микроразметка Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Калькулятор стоимости аренды ковров МИРУМ",
-        "description": "Интерактивный калькулятор для расчета стоимости аренды грязезащитных ковров по всей России",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "browserRequirements": "Requires JavaScript",
-        "offers": {
-            "@type": "Offer",
-            "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "priceCurrency": "RUB",
-                "unitCode": "C62",
-                "price": "180"
+    <style>
+        /* Дополнительные стили для мобильной версии */
+        @media (max-width: 768px) {
+            .calculator-section {
+                padding: 20px 0;
             }
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "МИРУМ"
+            
+            .calculator-content {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .tab-btn {
+                padding: 12px 15px;
+                font-size: 14px;
+                min-width: 140px;
+            }
+            
+            .form-group label {
+                font-size: 14px;
+            }
+            
+            select, input {
+                padding: 12px;
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            .result-item {
+                font-size: 14px;
+                padding: 15px;
+            }
+            
+            .month-box {
+                padding: 10px;
+            }
+            
+            .month-box label {
+                font-size: 12px;
+            }
         }
-    }
-    </script>
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                border-radius: 8px;
+                margin-bottom: 5px;
+            }
+            
+            .month-inputs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Стили для калькулятора */
+        .calculator-section {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            font-size: 16px;
+            min-width: 160px;
+            text-align: center;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .tab-btn.active {
+            background: #16a085;
+            color: white;
+        }
+        
+        .tab-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .tab-btn.active:hover {
+            background: #16a085;
+        }
+        
+        .calculator-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calculator-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: #16a085;
+            box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+        }
+        
+        select {
+            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 17px;
+            background: #16a085;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #138a72;
+        }
+        
+        .btn-telegram {
+            background: #0088cc;
+        }
+        
+        .btn-telegram:hover {
+            background: #0077b3;
+        }
+        
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            border: 2px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #e8f4fd;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .result.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .result-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 4px solid #16a085;
+        }
+        
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .month-inputs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .month-box {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .month-box label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .month-box input {
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .positions-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            margin-top: 5px;
+        }
+        
+        .remove-btn:hover {
+            background: #c0392b;
+        }
+        
+        /* Уведомления */
+        .notice {
+            padding: 15px;
+            background: #fff3cd;
+            color: #856404;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+            display: none;
+        }
+        
+        .notice.active {
+            display: block;
+        }
+        
+        .notice.success {
+            background: #d4edda;
+            color: #155724;
+            border-left-color: #28a745;
+        }
+        
+        /* Загрузка */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading.active {
+            display: block;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #16a085;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-
-<!-- [02] Хлебные крошки -->
-<nav class="calculator-breadcrumbs container" aria-label="Хлебные крошки">
-    <div itemscope itemtype="https://schema.org/BreadcrumbList">
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="https://arenda-kovrov-mirum.ru/" itemprop="item">
-                <span itemprop="name">Главная</span>
-            </a>
-            <meta itemprop="position" content="1" />
-        </span>
-        &nbsp;→&nbsp;
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="https://arenda-kovrov-mirum.ru/calculator.html" itemprop="item">
-                <span itemprop="name">Калькулятор стоимости аренды ковров</span>
-            </a>
-            <meta itemprop="position" content="2" />
-        </span>
-    </div>
-</nav>
-<!-- [02] КОНЕЦ Хлебные крошки -->
-
-    <!-- [03] Шапка сайта -->
-    <header class="main-header" id="mainHeader">
-        <div class="header-container container">
-            <a href="/" class="logo">
-                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png" 
-                     alt="МИРУМ - аренда ковров и восстановление полов" 
-                     width="150" height="50">
-            </a>
-            
-            <!-- Десктопная навигация -->
-            <nav class="desktop-nav">
-                <ul class="nav-links">
-                    <li><a href="/">Главная</a></li>
-                    
-                    <!-- Выпадающее меню "Услуги" -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Услуги</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/arenda-kovrov.html">Аренда грязезащитных ковров</a></li>
-                            <li><a href="/window-cleaning.html">Мойка витрин и фасадов</a></li>
-                            <li><a href="/chistka_polov.html">Восстановление полов</a></li>
-                            <li><a href="https://resursoria.ru/" target="_blank">Аутстаффинг персонала</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li><a href="/calculator.html" class="active">Калькулятор</a></li>
-                    <li><a href="/FAQ.html">FAQ</a></li>
-                    <li><a href="/blog.html">Блог</a></li>
-                    <li><a href="/pogoda.html">Прогноз погоды</a></li>
-                </ul>
-            </nav>
-            
-            <a href="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13" 
-               class="btn-avito" 
-               target="_blank">
-                Мы на Авито
-            </a>
-            
-            <!-- Мобильное меню-бургер -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-        
-        <!-- Мобильное меню -->
-        <nav class="mobile-nav" id="mobileNav">
-            <ul class="mobile-menu">
-                <li><a href="/">Главная</a></li>
-                
-                <!-- Выпадающее меню "Услуги" -->
-                <li class="mobile-dropdown">
-                    <a href="#" class="mobile-dropdown-toggle">Услуги</a>
-                    <ul class="mobile-dropdown-menu">
-                        <li><a href="/arenda-kovrov.html">Аренда грязезащитных ковров</a></li>
-                        <li><a href="/window-cleaning.html">Мойка витрин и фасадов</a></li>
-                        <li><a href="/chistka_polov.html">Восстановление полов</a></li>
-                        <li><a href="https://resursoria.ru/" target="_blank">Аутстаффинг персонала</a></li>
-                    </ul>
-                </li>
-                
-                <li><a href="/calculator.html" class="active">Калькулятор</a></li>
-                <li><a href="/FAQ.html">FAQ</a></li>
-                <li><a href="/blog.html">Блог</a></li>
-                <li><a href="/pogoda.html">Прогноз погоды</a></li>
-                <li><a href="#contacts">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- [03] КОНЕЦ Шапка сайта -->
-
-    <!-- [04] Калькулятор стоимости (ПОЛНАЯ ВЕРСИЯ) -->
-    <section id="calculator" class="calculator-section">
-        <div class="container">
-            <div class="section-title">
-                <h1>🧮 Калькулятор стоимости аренды ковров</h1>
-                <p>Рассчитайте точную стоимость для вашего бизнеса с учетом региона, размеров и периодичности замены</p>
-            </div>
+    <div class="calculator-section">
+        <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 15px;">
+            <h1 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Калькулятор аренды ковров</h1>
             
             <!-- Вкладки калькулятора -->
-            <div class="calculator-tabs">
+            <div class="tabs">
                 <button class="tab-btn active" data-tab="standard">Стандартный калькулятор</button>
                 <button class="tab-btn" data-tab="tender">Тендерный калькулятор</button>
-                <button class="tab-btn" data-tab="quick">Быстрый расчет</button>
+            </div>
+            
+            <!-- Индикатор загрузки -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Загружаем данные...</p>
             </div>
             
             <!-- Стандартный калькулятор -->
-            <div id="standard-calculator" class="calculator-content active">
-                <div class="calculator-form">
-                    <div class="form-group">
-                        <label for="region"><i class="fas fa-map-marker-alt calculator-icon"></i> Выберите регион:</label>
-                        <select id="region">
-                            <option value="">Выберите регион</option>
-                            <!-- Регионы будут заполнены JavaScript -->
-                        </select>
-                        <small class="form-help">Выберите город или регион, где находится ваш объект</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="size"><i class="fas fa-ruler-combined calculator-icon"></i> Выберите размер ковра:</label>
-                        <select id="size" disabled>
-                            <option value="">Сначала выберите регион</option>
-                        </select>
-                        <small class="form-help">Размеры: 85×60 см, 85×150 см, 115×200 см, 150×300 см и другие</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="frequency"><i class="fas fa-sync-alt calculator-icon"></i> Периодичность замены:</label>
-                        <select id="frequency" disabled>
-                            <option value="">Сначала выберите размер</option>
-                        </select>
-                        <small class="form-help">От 1 раза в 2 недели до ежедневной замены</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="quantity"><i class="fas fa-layer-group calculator-icon"></i> Количество ковров:</label>
-                        <input type="number" id="quantity" min="1" value="1" disabled>
-                        <small class="form-help">Введите необходимое количество ковров</small>
-                    </div>
-                </div>
-                
-                <div class="calculator-actions">
-                    <button class="btn btn-primary" id="calculateBtn">
-                        <i class="fas fa-calculator"></i> Рассчитать стоимость
-                    </button>
-                    <button class="btn btn-secondary" id="addPositionBtn" disabled>
-                        <i class="fas fa-plus-circle"></i> Добавить в заказ
-                    </button>
-                    <button class="btn btn-telegram" id="resetBtn">
-                        <i class="fas fa-redo"></i> Сбросить
-                    </button>
-                </div>
-                
-                <!-- Индикатор загрузки -->
-                <div class="calculator-loading" id="loadingIndicator">
-                    <div class="loading-spinner"></div>
-                    <p>Загружаем данные...</p>
-                </div>
-                
-                <!-- Сообщения об ошибках -->
-                <div class="calculator-error" id="errorMessage" style="display: none;"></div>
-                
-                <!-- Результаты -->
-                <div id="standard-result" class="calculator-results" style="display: none;">
-                    <h3><i class="fas fa-shopping-cart"></i> Ваш заказ</h3>
-                    
-                    <div class="calculator-notice success" id="addedNotice" style="display: none;">
-                        <i class="fas fa-check-circle"></i> Позиция успешно добавлена в заказ!
-                    </div>
-                    
-                    <table class="result-table" id="orderTable">
-                        <thead>
-                            <tr>
-                                <th>Размер ковра</th>
-                                <th>Количество</th>
-                                <th>Частота замены</th>
-                                <th>Цена за замену</th>
-                                <th>Стоимость в месяц</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody id="orderBody">
-                            <!-- Данные будут добавляться динамически -->
-                        </tbody>
-                    </table>
-                    
-                    <div class="calculator-total" id="totalSection">
-                        <h4 id="total">Общая стоимость: 0 ₽</h4>
-                        <div id="discountInfo" style="display: none;">
-                            <p id="discountText"></p>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-special-offer" id="discountNotice" style="display: none;">
-                        <h4><i class="fas fa-gift"></i> 🎉 Специальное предложение!</h4>
-                        <p id="discountMessage">При заказе от 20 000 ₽ в месяц вы получаете <strong>скидку до 15%</strong>.</p>
-                        <button class="btn btn-primary" id="requestDiscountBtn">
-                            <i class="fas fa-percentage"></i> Запросить скидку
-                        </button>
-                    </div>
-                    
-                    <div class="calculator-info-box">
-                        <h4><i class="fas fa-info-circle"></i> Что входит в стоимость?</h4>
-                        <ul>
-                            <li>Бесплатная доставка и установка ковров</li>
-                            <li>Регулярная замена по выбранному графику</li>
-                            <li>Профессиональная чистка и обслуживание</li>
-                            <li>Замена изношенных ковров бесплатно</li>
-                            <li>Полный комплект документов для бухгалтерии</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="calculator-actions">
-                        <button class="btn btn-telegram" id="sendToTelegramBtn">
-                            <i class="fab fa-telegram"></i> Отправить заказ в Telegram
-                        </button>
-                        <button class="btn btn-primary" id="showContractFormBtn">
-                            <i class="fas fa-file-contract"></i> Запросить договор
-                        </button>
-                        <button class="btn btn-secondary" id="printBtn">
-                            <i class="fas fa-print"></i> Распечатать расчет
-                        </button>
-                    </div>
-                    
-                    <!-- Форма для договора -->
-                    <div id="contractForm" class="contract-form" style="display: none;">
-                        <h4><i class="fas fa-file-signature"></i> Реквизиты для договора</h4>
-                        <p>Заполните данные для подготовки договора. Все поля обязательны для заполнения.</p>
-                        
-                        <div class="calculator-form">
-                            <div class="form-group">
-                                <label for="contact-person">Контактное лицо *</label>
-                                <input type="text" id="contact-person" required placeholder="Иван Иванов">
-                            </div>
-                            <div class="form-group">
-                                <label for="company">Название организации *</label>
-                                <input type="text" id="company" required placeholder="ООО 'Ваша компания'">
-                            </div>
-                            <div class="form-group">
-                                <label for="contractPhone">Телефон *</label>
-                                <input type="tel" id="contractPhone" required placeholder="+7 (999) 123-45-67">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" required placeholder="example@mail.ru">
-                            </div>
-                            <div class="form-group">
-                                <label for="requisites">Реквизиты (ИНН, КПП, юридический адрес) *</label>
-                                <textarea id="requisites" rows="4" required placeholder="ИНН: 1234567890
-КПП: 123456789
-Юридический адрес: г. Москва, ул. Примерная, д. 1"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Адрес установки ковров</label>
-                                <textarea id="address" rows="2" placeholder="Фактический адрес, где будут установлены ковры"></textarea>
-                            </div>
-                            
-                            <div class="consent-checkbox">
-                                <input type="checkbox" id="contractConsent" required>
-                                <label for="contractConsent">
-                                    Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">обработкой персональных данных</a> и даю согласие на подготовку договора
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="calculator-actions">
-                            <button class="btn btn-telegram" id="sendContractBtn">
-                                <i class="fas fa-paper-plane"></i> Отправить реквизиты
-                            </button>
-                            <button class="btn btn-secondary" id="cancelContractBtn">
-                                <i class="fas fa-times"></i> Отмена
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Форма запроса скидки -->
-                    <div id="discountForm" class="discount-form" style="display: none;">
-                        <h4><i class="fas fa-percentage"></i> Запрос на индивидуальную скидку</h4>
-                        <p>Заполните форму, и наш менеджер свяжется с вами для обсуждения специальных условий.</p>
-                        
-                        <div class="calculator-form">
-                            <div class="form-group">
-                                <label for="discountName">Ваше имя *</label>
-                                <input type="text" id="discountName" required placeholder="Иван Иванов">
-                            </div>
-                            <div class="form-group">
-                                <label for="discountPhone">Телефон *</label>
-                                <input type="tel" id="discountPhone" required placeholder="+7 (999) 123-45-67">
-                            </div>
-                            <div class="form-group">
-                                <label for="discountEmail">Email</label>
-                                <input type="email" id="discountEmail" placeholder="example@mail.ru">
-                            </div>
-                            <div class="form-group">
-                                <label for="discountCompany">Название организации</label>
-                                <input type="text" id="discountCompany" placeholder="ООО 'Ваша компания'">
-                            </div>
-                            <div class="form-group">
-                                <label for="discountComment">Комментарий (опционально)</label>
-                                <textarea id="discountComment" rows="3" placeholder="Дополнительная информация о вашем заказе или особые пожелания"></textarea>
-                            </div>
-                            
-                            <div class="consent-checkbox">
-                                <input type="checkbox" id="discountConsent" required>
-                                <label for="discountConsent">
-                                    Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">обработкой персональных данных</a>
-                                </label>
-                            </div>
-                        </div>
-                        
-                        <div class="calculator-actions">
-                            <button class="btn btn-primary" id="sendDiscountBtn">
-                                <i class="fas fa-paper-plane"></i> Отправить запрос
-                            </button>
-                            <button class="btn btn-secondary" id="cancelDiscountBtn">
-                                <i class="fas fa-times"></i> Отмена
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-						<!-- Тендерный калькулятор -->
-			<div id="tender-calculator" class="calculator-content">
-				<div class="calculator-form">
-				<!-- [ПРОДОЛЖЕНИЕ calculator.html] -->
-
+            <div id="standard-calc" class="calculator-content active">
                 <div class="form-group">
-                    <label for="tenderRegion"><i class="fas fa-map-marker-alt calculator-icon"></i> Выберите регион:</label>
-                    <select id="tenderRegion">
+                    <label for="region">Регион</label>
+                    <select id="region">
                         <option value="">Выберите регион</option>
-                        <!-- Регионы будут заполнены JavaScript -->
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tenderSize"><i class="fas fa-ruler-combined calculator-icon"></i> Выберите размер ковра:</label>
-                    <select id="tenderSize" disabled>
+                    <label for="size">Размер ковра</label>
+                    <select id="size" disabled>
                         <option value="">Сначала выберите регион</option>
                     </select>
                 </div>
-            </div>
-            
-            <div class="calculator-actions">
-                <button class="btn btn-secondary" id="addTenderPositionBtn">
-                    <i class="fas fa-plus-circle"></i> Добавить размер
-                </button>
-                <button class="btn btn-primary" id="calculateTenderBtn">
-                    <i class="fas fa-calculator"></i> Рассчитать тендер
-                </button>
-            </div>
-            
-            <!-- Поля ввода по месяцам -->
-            <div class="month-inputs-container">
-                <h4><i class="fas fa-calendar-alt"></i> Введите количество ковров и замен по месяцам:</h4>
-                <div id="monthInputs">
-                    <!-- Поля будут добавлены динамически -->
-                </div>
-            </div>
-            
-            <!-- Результаты тендера -->
-            <div id="tender-result" class="calculator-results" style="display: none;">
-                <h3><i class="fas fa-file-contract"></i> Детали тендерного предложения</h3>
                 
-                <table class="result-table" id="tenderTable">
-                    <thead>
-                        <tr>
-                            <th>Месяц</th>
-                            <th>Размер ковра</th>
-                            <th>Количество ковров</th>
-                            <th>Количество замен</th>
-                            <th>Стоимость в месяц</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tenderBody">
-                        <!-- Данные будут добавляться динамически -->
-                    </tbody>
-                </table>
-                
-                <div class="calculator-total" id="tenderTotalSection">
-                    <h4 id="tenderTotal">Общая стоимость тендера: 0 ₽</h4>
-                    <p id="tenderDuration">Срок: 12 месяцев</p>
-                </div>
-                
-                <div class="calculator-special-offer" id="tenderDiscountNotice" style="display: none;">
-                    <h4><i class="fas fa-handshake"></i> 🎉 Специальное предложение для тендеров!</h4>
-                    <p>При объеме от 50 000 ₽ мы подготовим <strong>индивидуальное коммерческое предложение</strong> с дополнительными условиями.</p>
-                </div>
-                
-                <div class="calculator-form" style="margin-top: 30px;">
-                    <h4><i class="fas fa-user-tie"></i> Контактная информация для тендера</h4>
-                    
-                    <div class="form-group">
-                        <label for="tenderName">Ваше имя *</label>
-                        <input type="text" id="tenderName" required placeholder="Иван Иванов">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tenderPosition">Должность</label>
-                        <input type="text" id="tenderPosition" placeholder="Менеджер по закупкам">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tenderCompany">Название организации *</label>
-                        <input type="text" id="tenderCompany" required placeholder="ООО 'Ваша компания'">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tenderPhone">Телефон *</label>
-                        <input type="tel" id="tenderPhone" required placeholder="+7 (999) 123-45-67">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tenderEmail">Email *</label>
-                        <input type="email" id="tenderEmail" required placeholder="example@mail.ru">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="tenderComment">Комментарий к тендеру</label>
-                        <textarea id="tenderComment" rows="3" placeholder="Особые условия, требования или пожелания"></textarea>
-                    </div>
-                    
-                    <div class="consent-checkbox">
-                        <input type="checkbox" id="tenderConsent" required>
-                        <label for="tenderConsent">
-                            Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">обработкой персональных данных</a> и даю согласие на подготовку тендерного предложения
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="calculator-actions">
-                    <button class="btn btn-telegram" id="sendTenderToTelegramBtn">
-                        <i class="fab fa-telegram"></i> Отправить тендер в Telegram
-                    </button>
-                    <button class="btn btn-primary" id="downloadTenderBtn">
-                        <i class="fas fa-download"></i> Скачать расчет (PDF)
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Быстрый расчет -->
-        <div id="quick-calculator" class="calculator-content">
-            <div class="calculator-info-box">
-                <h4><i class="fas fa-bolt"></i> Быстрый расчет стоимости</h4>
-                <p>Для получения примерной стоимости заполните минимальные данные:</p>
-            </div>
-            
-            <div class="calculator-form">
                 <div class="form-group">
-                    <label for="quickRegion">Регион:</label>
-                    <select id="quickRegion">
+                    <label for="frequency">Периодичность замены</label>
+                    <select id="frequency" disabled>
+                        <option value="">Сначала выберите размер</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Количество ковров</label>
+                    <input type="number" id="quantity" value="1" min="1">
+                </div>
+                
+                <button class="btn" id="addPositionBtn">Добавить позицию</button>
+                <button class="btn btn-telegram" id="sendToTelegramBtn" style="display: none;">Отправить в Telegram</button>
+                
+                <!-- Уведомления -->
+                <div class="notice" id="addedNotice">Позиция добавлена в заказ!</div>
+                <div class="notice" id="emptyNotice">Добавьте хотя бы одну позицию в заказ</div>
+                
+                <!-- Результаты -->
+                <div class="result" id="standard-result">
+                    <h3>Ваш расчет:</h3>
+                    <div class="positions-list" id="positions-list"></div>
+                    <div id="total-cost" class="total">Общая стоимость: 0 ₽</div>
+                </div>
+            </div>
+            
+            <!-- Тендерный калькулятор -->
+            <div id="tender-calc" class="calculator-content">
+                <div class="form-group">
+                    <label for="tender-region">Регион</label>
+                    <select id="tender-region">
                         <option value="">Выберите регион</option>
-                        <option value="Москва">Москва</option>
-                        <option value="Московская область">Московская область</option>
-                        <option value="Санкт-Петербург">Санкт-Петербург</option>
-                        <option value="Ленинградская область">Ленинградская область</option>
-                        <option value="Уфа">Уфа</option>
-                        <option value="Казань">Казань</option>
-                        <option value="Екатеринбург">Екатеринбург</option>
-                        <option value="Новосибирск">Новосибирск</option>
-                        <option value="Краснодар">Краснодар</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="quickSize">Типовой размер:</label>
-                    <select id="quickSize">
-                        <option value="85*60">85×60 см (стандартный вход)</option>
-                        <option value="85*150">85×150 см (узкий коридор)</option>
-                        <option value="115*200">115×200 см (широкий вход)</option>
-                        <option value="150*300">150×300 см (большое пространство)</option>
+                    <label for="tender-size">Размер ковра</label>
+                    <select id="tender-size" disabled>
+                        <option value="">Сначала выберите регион</option>
                     </select>
                 </div>
                 
-                <div class="form-group">
-                    <label for="quickQuantity">Количество ковров:</label>
-                    <input type="number" id="quickQuantity" min="1" value="1">
+                <div class="month-inputs" id="month-inputs">
+                    <!-- Месяцы будут добавлены через JS -->
                 </div>
                 
-                <div class="form-group">
-                    <label for="quickFrequency">Частота замены:</label>
-                    <select id="quickFrequency">
-                        <option value="1 раз в две недели">1 раз в 2 недели</option>
-                        <option value="1 раз в неделю">1 раз в неделю</option>
-                        <option value="2 раза в неделю">2 раза в неделю</option>
-                        <option value="5 раз в неделю">Ежедневно (5 дней)</option>
-                    </select>
+                <button class="btn" id="calculateTenderBtn">Рассчитать тендер</button>
+                <button class="btn btn-telegram" id="sendTenderToTelegramBtn" style="display: none;">Отправить тендер в Telegram</button>
+                
+                <!-- Результаты тендера -->
+                <div class="result" id="tender-result">
+                    <h3>Расчет по тендеру:</h3>
+                    <div class="positions-list" id="tender-positions"></div>
+                    <div id="tender-total" class="total">Общая стоимость: 0 ₽</div>
                 </div>
             </div>
             
-            <div class="calculator-actions">
-                <button class="btn btn-primary" id="quickCalculateBtn">
-                    <i class="fas fa-bolt"></i> Быстрый расчет
-                </button>
-            </div>
-            
-            <div id="quick-result" class="calculator-results" style="display: none;">
-                <h3><i class="fas fa-chart-line"></i> Примерная стоимость</h3>
-                
-                <div class="calculator-total">
-                    <h4 id="quickTotal">Примерная стоимость: 0 ₽/месяц</h4>
-                    <p id="quickDetails">Детали расчета будут отображены здесь</p>
-                </div>
-                
-                <div class="calculator-actions">
-                    <button class="btn btn-telegram" id="quickToStandardBtn">
-                        <i class="fas fa-exchange-alt"></i> Перейти к точному расчету
-                    </button>
-                    <button class="btn btn-primary" id="quickContactBtn">
-                        <i class="fas fa-phone-alt"></i> Обсудить детали
-                    </button>
-                </div>
+            <!-- Информация о больших объемах -->
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px; text-align: center;">
+                <p style="color: #666; margin-bottom: 10px;">💼 <strong>Для крупных заказов</strong></p>
+                <p style="color: #444;">При больших объемах готовы рассмотреть индивидуальные условия и специальные предложения. Свяжитесь с нами для обсуждения деталей.</p>
             </div>
         </div>
     </div>
-</section>
-<!-- [04] КОНЕЦ Калькулятор стоимости -->
 
-<!-- [05] Информационный блок -->
-<section class="section bg-light">
-    <div class="container">
-        <div class="section-title">
-            <h2><i class="fas fa-question-circle"></i> Частые вопросы о калькуляторе</h2>
-            <p>Ответы на самые популярные вопросы об аренде ковров</p>
-        </div>
-        
-        <div class="faq-grid">
-            <div class="faq-item-main">
-                <div class="faq-question-main">
-                    <i class="fas fa-calculator"></i> Как работает калькулятор?
-                </div>
-                <p>Калькулятор использует актуальные цены для каждого региона России. Вы выбираете регион, размер ковра, частоту замены и количество - система автоматически рассчитывает стоимость с учетом всех параметров.</p>
-            </div>
-            
-            <div class="faq-item-main">
-                <div class="faq-question-main">
-                    <i class="fas fa-percentage"></i> Какие скидки предусмотрены?
-                </div>
-                <p>Мы предоставляем скидки при объеме заказа от 20 000 ₽/месяц (5%), от 50 000 ₽/месяц (10%), от 100 000 ₽/месяц (15%), от 200 000 ₽/месяц (20%). Для тендеров действуют специальные условия.</p>
-            </div>
-            
-            <div class="faq-item-main">
-                <div class="faq-question-main">
-                    <i class="fas fa-truck"></i> Входит ли доставка в стоимость?
-                </div>
-                <p>Да, доставка, установка и замена ковров включены в стоимость. Вы платите только за аренду ковров и их обслуживание.</p>
-            </div>
-            
-            <div class="faq-item-main">
-                <div class="faq-question-main">
-                    <i class="fas fa-file-contract"></i> Как заключить договор?
-                </div>
-                <p>После расчета вы можете отправить заявку на договор прямо из калькулятора. Мы подготовим все документы и отправим вам на подписание в течение 1 рабочего дня.</p>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- [05] КОНЕЦ Информационный блок -->
+    <!-- Подключение скриптов -->
+    <script src="/js/prices.js"></script>
+    <script>
+        // ============================================
+        // Глобальные переменные
+        // ============================================
+        let positions = [];
+        let tenderData = [];
+        let currentTenderTotal = 0;
 
-<!-- [06] Контакты -->
-<section id="contacts" class="section">
-    <div class="container">
-        <div class="section-title">
-            <h2><i class="fas fa-phone-alt"></i> Контакты</h2>
-            <p>Свяжитесь с нами для уточнения деталей или консультации</p>
-        </div>
-        
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Контактная информация</h3>
+        // ============================================
+        // Функция инициализации калькулятора
+        // ============================================
+        function initCalculator() {
+            console.log('🔧 Инициализация калькулятора...');
+            
+            // Проверяем загрузку цен
+            if (typeof priceData === 'undefined') {
+                console.error('❌ priceData не загружен!');
+                document.getElementById('loading').classList.add('active');
+                setTimeout(initCalculator, 500);
+                return;
+            }
+            
+            // Скрываем загрузку
+            document.getElementById('loading').classList.remove('active');
+            
+            // Заполняем регионы
+            initRegions();
+            
+            // Инициализируем месяцы для тендера
+            initMonths();
+            
+            // Настройка переключения вкладок
+            setupTabs();
+            
+            // Настройка обработчиков событий
+            setupEventListeners();
+            
+            console.log('✅ Калькулятор инициализирован');
+        }
+
+        // ============================================
+        // Инициализация регионов
+        // ============================================
+        function initRegions() {
+            const regions = PriceUtils.getRegions();
+            const regionSelect = document.getElementById('region');
+            const tenderRegionSelect = document.getElementById('tender-region');
+            
+            // Очищаем select (кроме первого option)
+            while (regionSelect.options.length > 1) regionSelect.remove(1);
+            while (tenderRegionSelect.options.length > 1) tenderRegionSelect.remove(1);
+            
+            // Заполняем регионы
+            regions.forEach(region => {
+                const option1 = new Option(region, region);
+                const option2 = new Option(region, region);
+                regionSelect.add(option1);
+                tenderRegionSelect.add(option2);
+            });
+            
+            console.log(`📊 Загружено регионов: ${regions.length}`);
+        }
+
+        // ============================================
+        // Инициализация месяцев для тендера
+        // ============================================
+        function initMonths() {
+            const months = [
+                'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+            ];
+            const container = document.getElementById('month-inputs');
+            container.innerHTML = '';
+            
+            months.forEach(month => {
+                const div = document.createElement('div');
+                div.className = 'month-box';
+                div.innerHTML = `
+                    <label>${month}</label>
+                    <input type="number" min="0" placeholder="Ковров" data-month="${month}" class="month-carpets">
+                    <input type="number" min="0" placeholder="Замен" data-month="${month}" class="month-changes">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // ============================================
+        // Настройка переключения вкладок
+        // ============================================
+        function setupTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const calculatorContents = document.querySelectorAll('.calculator-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Удаляем активный класс у всех кнопок
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active');
+                    
+                    // Скрываем все калькуляторы
+                    calculatorContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Показываем выбранный калькулятор
+                    const tabId = this.getAttribute('data-tab');
+                    const targetCalculator = document.getElementById(`${tabId}-calc`);
+                    if (targetCalculator) {
+                        targetCalculator.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // ============================================
+        // Настройка обработчиков событий
+        // ============================================
+        function setupEventListeners() {
+            // Стандартный калькулятор
+            document.getElementById('region').addEventListener('change', updateSizes);
+            document.getElementById('size').addEventListener('change', updateFrequencies);
+            document.getElementById('addPositionBtn').addEventListener('click', addPosition);
+            document.getElementById('sendToTelegramBtn').addEventListener('click', sendToTelegram);
+            
+            // Тендерный калькулятор
+            document.getElementById('tender-region').addEventListener('change', updateTenderSizes);
+            document.getElementById('calculateTenderBtn').addEventListener('click', calculateTender);
+            document.getElementById('sendTenderToTelegramBtn').addEventListener('click', sendTenderToTelegram);
+            
+            // Поля ввода для тендера
+            document.querySelectorAll('.month-carpets, .month-changes').forEach(input => {
+                input.addEventListener('input', calculateTender);
+            });
+        }
+
+        // ============================================
+        // Функции стандартного калькулятора
+        // ============================================
+        function updateSizes() {
+            const region = document.getElementById('region').value;
+            const sizeSelect = document.getElementById('size');
+            
+            if (!region) return;
+            
+            // Очищаем select
+            sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
+            sizeSelect.disabled = false;
+            
+            // Получаем размеры для региона
+            const sizes = PriceUtils.getSizesForRegion(region);
+            
+            if (sizes.length === 0) {
+                sizeSelect.innerHTML = '<option value="">Нет доступных размеров</option>';
+                sizeSelect.disabled = true;
+                return;
+            }
+            
+            // Заполняем размеры
+            sizes.forEach(size => {
+                const option = new Option(size, size);
+                sizeSelect.add(option);
+            });
+            
+            // Сбрасываем частоту
+            document.getElementById('frequency').innerHTML = '<option value="">Выберите периодичность</option>';
+            document.getElementById('frequency').disabled = true;
+        }
+
+        function updateFrequencies() {
+            const region = document.getElementById('region').value;
+            const size = document.getElementById('size').value;
+            const freqSelect = document.getElementById('frequency');
+            
+            if (!region || !size) return;
+            
+            // Очищаем select
+            freqSelect.innerHTML = '<option value="">Выберите периодичность</option>';
+            freqSelect.disabled = false;
+            
+            // Получаем частоты для размера
+            const frequencies = PriceUtils.getFrequenciesForSize(region, size);
+            
+            if (frequencies.length === 0) {
+                freqSelect.innerHTML = '<option value="">Нет доступных частот</option>';
+                freqSelect.disabled = true;
+                return;
+            }
+            
+            // Заполняем частоты
+            frequencies.forEach(freq => {
+                const option = new Option(freq, freq);
+                freqSelect.add(option);
+            });
+        }
+
+        function addPosition() {
+            const region = document.getElementById('region').value;
+            const size = document.getElementById('size').value;
+            const frequency = document.getElementById('frequency').value;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            
+            // Проверка заполненности полей
+            if (!region || !size || !frequency) {
+                alert('Пожалуйста, выберите регион, размер и периодичность');
+                return;
+            }
+            
+            // Получаем цену
+            const price = PriceUtils.getPrice(region, size, frequency);
+            if (!price) {
+                alert('Для выбранной комбинации нет цены');
+                return;
+            }
+            
+            // Рассчитываем стоимость за месяц
+            const cost = PriceUtils.calculateMonthlyCost(region, size, frequency, quantity);
+            
+            // Добавляем позицию
+            positions.push({
+                region,
+                size,
+                frequency,
+                quantity,
+                price,
+                cost
+            });
+            
+            // Обновляем список позиций
+            updatePositionsList();
+            
+            // Показываем уведомление
+            document.getElementById('addedNotice').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('addedNotice').classList.remove('active');
+            }, 3000);
+            
+            // Показываем кнопку отправки
+            document.getElementById('sendToTelegramBtn').style.display = 'block';
+        }
+
+        function updatePositionsList() {
+            const list = document.getElementById('positions-list');
+            const totalElement = document.getElementById('total-cost');
+            
+            list.innerHTML = '';
+            
+            let total = 0;
+            
+            positions.forEach((pos, index) => {
+                total += pos.cost;
                 
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <strong>Телефон</strong>
-                        <p><a href="tel:+79770005127">+7 (977) 000-51-27</a></p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fab fa-telegram"></i>
-                    <div>
-                        <strong>Telegram</strong>
-                        <p><a href="https://t.me/+79770005127" target="_blank">@mirum_rent</a></p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <strong>Email</strong>
-                        <p><a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <strong>Режим работы</strong>
-                        <p>Пн-Пт: 9:00-18:00<br>Сб-Вс: по договоренности</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <strong>География работы</strong>
-                        <p>По всей России: Москва, СПб, Уфа, Казань, Екатеринбург, Новосибирск, Краснодар и другие города</p>
-                    </div>
-                </div>
-            </div>
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <strong>${pos.size}</strong> × ${pos.quantity} шт.<br>
+                    ${pos.frequency}<br>
+                    Цена за замену: ${PriceUtils.formatPrice(pos.price)}<br>
+                    <strong>Стоимость: ${PriceUtils.formatPrice(pos.cost)}</strong>
+                    <button class="remove-btn" onclick="removePosition(${index})">×</button>
+                `;
+                list.appendChild(div);
+            });
             
-            <div class="contact-form">
-                <h3>Остались вопросы?</h3>
-                <p>Заполните форму, и мы свяжемся с вами в течение 30 минут</p>
+            totalElement.textContent = `Общая стоимость: ${PriceUtils.formatPrice(total)}`;
+            
+            // Показываем блок с результатами
+            document.getElementById('standard-result').classList.add('active');
+        }
+
+        function removePosition(index) {
+            positions.splice(index, 1);
+            updatePositionsList();
+            
+            // Скрываем кнопку отправки, если нет позиций
+            if (positions.length === 0) {
+                document.getElementById('sendToTelegramBtn').style.display = 'none';
+                document.getElementById('standard-result').classList.remove('active');
+            }
+        }
+
+        function sendToTelegram() {
+            if (positions.length === 0) {
+                document.getElementById('emptyNotice').classList.add('active');
+                setTimeout(() => {
+                    document.getElementById('emptyNotice').classList.remove('active');
+                }, 3000);
+                return;
+            }
+            
+            let message = '📋 Запрос по калькулятору аренды ковров МИРУМ:\n\n';
+            
+            positions.forEach(pos => {
+                message += `• ${pos.size}, ${pos.quantity} шт., ${pos.frequency}, ${PriceUtils.formatPrice(pos.cost)}\n`;
+            });
+            
+            // Добавляем общую стоимость
+            const total = positions.reduce((sum, pos) => sum + pos.cost, 0);
+            message += `\n💰 Общая стоимость: ${PriceUtils.formatPrice(total)}\n`;
+            message += `📍 Регион: ${positions[0].region}\n`;
+            
+            // Кодируем сообщение для URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Открываем Telegram
+            window.open(`https://t.me/+79770005127?text=${encodedMessage}`, '_blank');
+        }
+
+        // ============================================
+        // Функции тендерного калькулятора
+        // ============================================
+        function updateTenderSizes() {
+            const region = document.getElementById('tender-region').value;
+            const sizeSelect = document.getElementById('tender-size');
+            
+            if (!region) return;
+            
+            // Очищаем select
+            sizeSelect.innerHTML = '<option value="">Выберите размер</option>';
+            sizeSelect.disabled = false;
+            
+            // Получаем размеры для региона
+            const sizes = PriceUtils.getSizesForRegion(region);
+            
+            if (sizes.length === 0) {
+                sizeSelect.innerHTML = '<option value="">Нет доступных размеров</option>';
+                sizeSelect.disabled = true;
+                return;
+            }
+            
+            // Заполняем размеры
+            sizes.forEach(size => {
+                const option = new Option(size, size);
+                sizeSelect.add(option);
+            });
+        }
+
+        function calculateTender() {
+            const region = document.getElementById('tender-region').value;
+            const size = document.getElementById('tender-size').value;
+            
+            if (!region || !size) {
+                alert('Выберите регион и размер ковра');
+                return;
+            }
+            
+            // Получаем базовую цену (берем первую доступную частоту)
+            const frequencies = PriceUtils.getFrequenciesForSize(region, size);
+            if (frequencies.length === 0) {
+                alert('Для выбранного региона и размера нет цен');
+                return;
+            }
+            
+            const basePrice = PriceUtils.getPrice(region, size, frequencies[0]);
+            
+            // Собираем данные по месяцам
+            const months = [
+                'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+            ];
+            
+            tenderData = [];
+            currentTenderTotal = 0;
+            
+            months.forEach(month => {
+                const carpets = parseInt(document.querySelector(`.month-carpets[data-month="${month}"]`).value) || 0;
+                const changes = parseInt(document.querySelector(`.month-changes[data-month="${month}"]`).value) || 0;
                 
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="contactName">Ваше имя *</label>
-                        <input type="text" id="contactName" required>
-                    </div>
+                if (carpets > 0 && changes > 0) {
+                    const cost = basePrice * carpets * changes;
+                    currentTenderTotal += cost;
                     
-                    <div class="form-group">
-                        <label for="contactPhone">Телефон *</label>
-                        <input type="tel" id="contactPhone" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contactQuestion">Ваш вопрос</label>
-                        <textarea id="contactQuestion" rows="4"></textarea>
-                    </div>
-                    
-                    <div class="consent-checkbox">
-                        <input type="checkbox" id="contactConsent" required>
-                        <label for="contactConsent">
-                            Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">обработкой персональных данных</a>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fas fa-paper-plane"></i> Отправить вопрос
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- [06] КОНЕЦ Контакты -->
-
-<!-- [07] Футер сайта -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>МИРУМ</h3>
-                <p>Профессиональные услуги чистоты с 2009 года. Аренда грязезащитных ковров, мойка витрин, восстановление полов, аутстаффинг персонала.</p>
-                <div class="trust-signals">
-                    <div class="trust-item">
-                        <span class="trust-number">15+</span>
-                        <span>лет опыта</span>
-                    </div>
-                    <div class="trust-item">
-                        <span class="trust-number">40+</span>
-                        <span>городов</span>
-                    </div>
-                    <div class="trust-item">
-                        <span class="trust-number">5000+</span>
-                        <span>клиентов</span>
-                    </div>
-                </div>
-            </div>
+                    tenderData.push({
+                        month,
+                        size,
+                        carpets,
+                        changes,
+                        pricePerChange: basePrice,
+                        cost
+                    });
+                }
+            });
             
-            <div class="footer-section">
-                <h3>Услуги</h3>
-                <ul class="footer-links">
-                    <li><a href="/arenda-kovrov.html">Аренда грязезащитных ковров</a></li>
-                    <li><a href="/window-cleaning.html">Мойка витрин и фасадов</a></li>
-                    <li><a href="/chistka_polov.html">Восстановление полов</a></li>
-                    <li><a href="https://resursoria.ru/" target="_blank">Аутстаффинг персонала</a></li>
-                    <li><a href="/calculator.html">Калькулятор стоимости</a></li>
-                </ul>
-            </div>
+            // Обновляем отображение
+            updateTenderPositionsList();
             
-            <div class="footer-section">
-                <h3>Информация</h3>
-                <ul class="footer-links">
-                    <li><a href="/FAQ.html">Частые вопросы (FAQ)</a></li>
-                    <li><a href="/blog.html">Блог</a></li>
-                    <li><a href="/testimonials.html">Отзывы клиентов</a></li>
-                    <li><a href="/pogoda.html">Прогноз погоды</a></li>
-                    <li><a href="/privacy-policy.html">Политика конфиденциальности</a></li>
-                    <li><a href="/terms-of-use.html">Пользовательское соглашение</a></li>
-                </ul>
-            </div>
+            // Показываем кнопку отправки
+            document.getElementById('sendTenderToTelegramBtn').style.display = 'block';
+        }
+
+        function updateTenderPositionsList() {
+            const list = document.getElementById('tender-positions');
+            const totalElement = document.getElementById('tender-total');
             
-            <div class="footer-section">
-                <h3>Регионы работы</h3>
-                <div class="regions-grid">
-                    <div class="region-group">
-                        <h4>Центральный ФО</h4>
-                        <ul>
-                            <li>Москва</li>
-                            <li>Московская область</li>
-                            <li>Санкт-Петербург</li>
-                            <li>Ленинградская область</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="region-group">
-                        <h4>Приволжский ФО</h4>
-                        <ul>
-                            <li>Уфа</li>
-                            <li>Казань</li>
-                            <li>Екатеринбург</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="region-group">
-                        <h4>Сибирский ФО</h4>
-                        <ul>
-                            <li>Новосибирск</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="region-group">
-                        <h4>Южный ФО</h4>
-                        <ul>
-                            <li>Краснодар</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>© 2009–2025 МИРУМ. Все права защищены.</p>
-            <p>ОГРН: 1234567890123 | ИНН: 1234567890 | КПП: 123456789</p>
-            <p>
-                <a href="/privacy-policy.html">Политика конфиденциальности</a> | 
-                <a href="/terms-of-use.html">Пользовательское соглашение</a> | 
-                <a href="/sitemap.xml">Карта сайта</a>
-            </p>
-        </div>
-    </div>
-</footer>
-<!-- [07] КОНЕЦ Футер сайта -->
+            list.innerHTML = '';
+            
+            tenderData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <strong>${item.month}</strong><br>
+                    Размер: ${item.size}<br>
+                    Ковров: ${item.carpets} шт.<br>
+                    Замен: ${item.changes}<br>
+                    <strong>${PriceUtils.formatPrice(item.cost)}</strong>
+                `;
+                list.appendChild(div);
+            });
+            
+            totalElement.textContent = `Общая стоимость: ${PriceUtils.formatPrice(currentTenderTotal)}`;
+            
+            // Показываем блок с результатами
+            document.getElementById('tender-result').classList.add('active');
+        }
 
-<!-- [08] Плавающие кнопки -->
-<div class="telegram-float">
-    <a href="https://t.me/+79770005127" class="telegram-link" target="_blank" aria-label="Написать в Telegram">
-        <i class="fab fa-telegram"></i>
-        <span>Telegram</span>
-    </a>
-</div>
+        function sendTenderToTelegram() {
+            if (tenderData.length === 0) {
+                alert('Нет данных для отправки. Рассчитайте тендер сначала.');
+                return;
+            }
+            
+            const region = document.getElementById('tender-region').value;
+            const size = document.getElementById('tender-size').value;
+            
+            let message = '📋 Запрос по тендеру на аренду ковров МИРУМ:\n\n';
+            message += `📍 Регион: ${region}\n`;
+            message += `📏 Размер: ${size}\n\n`;
+            message += '🗓️ Расчет по месяцам:\n';
+            
+            tenderData.forEach(item => {
+                message += `• ${item.month}: ${item.carpets} ковров × ${item.changes} замен = ${PriceUtils.formatPrice(item.cost)}\n`;
+            });
+            
+            message += `\n💰 Общая стоимость тендера: ${PriceUtils.formatPrice(currentTenderTotal)}\n`;
+            message += `\n📞 Для обсуждения индивидуальных условий свяжитесь с нами.`;
+            
+            // Кодируем сообщение для URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Открываем Telegram
+            window.open(`https://t.me/+79770005127?text=${encodedMessage}`, '_blank');
+        }
 
-<div class="scroll-to-top" id="scrollToTop" aria-label="Вернуться наверх">
-    <i class="fas fa-chevron-up"></i>
-</div>
-
-<!-- [09] Cookie-уведомление -->
-<div class="cookie-notice" id="cookieNotice">
-    <div class="container">
-        <p>
-            🍪 Мы используем файлы cookie для улучшения работы сайта. 
-            <a href="/privacy-policy.html" target="_blank">Узнать больше</a>
-        </p>
-        <div class="cookie-buttons">
-            <button class="cookie-btn cookie-accept" id="cookieAccept">Принять</button>
-            <button class="cookie-btn cookie-reject" id="cookieReject">Отклонить</button>
-        </div>
-    </div>
-</div>
-<!-- [08-09] КОНЕЦ Плавающие кнопки и Cookie -->
-
-<!-- [10] JavaScript -->
-<script src="/js/prices.js"></script>
-<script src="/js/calculator.js"></script>
-<script src="/js/mobile.js"></script>
-<script src="/js/forms.js"></script>
-<script src="/js/main.js"></script>
-
-<script>
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Сайт калькулятора МИРУМ загружен!');
-    
-    // Инициализация калькулятора
-    if (typeof initCalculator === 'function') {
-        initCalculator();
-    }
-    
-    // Инициализация мобильных функций
-    if (window.MobileMenu) {
-        console.log('📱 Мобильное меню инициализировано');
-    }
-    
-    // Инициализация форм
-    if (typeof initForms === 'function') {
-        initForms();
-    }
-    
-    // Проверка загрузки цен
-    if (typeof priceData !== 'undefined') {
-        console.log('✅ База цен загружена:', Object.keys(priceData).length, 'регионов');
-    }
-});
-</script>
-<!-- [10] КОНЕЦ JavaScript -->
-
+        // ============================================
+        // Инициализация при загрузке
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            initCalculator();
+        });
+    </script>
 </body>
 </html>
