@@ -1,0 +1,656 @@
+/* ============================================
+   MOBILE.CSS - Адаптивные стили для МИРУМ
+   (max-width: 768px)
+============================================ */
+
+/* ============ БАЗОВЫЕ СТИЛИ ============ */
+@media (max-width: 768px) {
+    /* Общие настройки */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+        padding-top: 60px !important;
+    }
+    
+    .container {
+        padding: 0 15px;
+        max-width: 100%;
+    }
+    
+    /* Шрифты для заголовков */
+    h1 { font-size: 1.8rem !important; }
+    h2 { font-size: 1.5rem !important; }
+    h3 { font-size: 1.3rem !important; }
+    h4 { font-size: 1.1rem !important; }
+    
+    /* Кликабельные элементы */
+    button, a.btn, input[type="submit"], 
+    input[type="button"], .clickable {
+        min-height: 44px;
+        min-width: 44px;
+        font-size: 16px;
+    }
+    
+    /* Поля ввода */
+    input, textarea, select {
+        font-size: 16px !important;
+        padding: 12px 15px !important;
+        height: auto !important;
+    }
+    
+    /* Предотвращение iOS зума */
+    select:focus, textarea:focus, input:focus {
+        font-size: 16px !important;
+    }
+    
+    /* Убираем горизонтальный скролл */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+}
+
+/* ============ ШАПКА САЙТА ============ */
+@media (max-width: 768px) {
+    /* Компактный хедер */
+    .main-header {
+        height: 60px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1001;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        padding: 0 15px;
+    }
+    
+    .main-header.hidden {
+        transform: translateY(-100%);
+    }
+    
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        padding: 0;
+    }
+    
+    /* Логотип */
+    .logo img {
+        height: 40px;
+        width: auto;
+        max-width: 120px;
+    }
+    
+    /* Мобильное меню-бургер */
+    .mobile-menu-toggle {
+        display: block !important;
+        background: none;
+        border: none;
+        width: 30px;
+        height: 24px;
+        position: relative;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1002;
+    }
+    
+    .mobile-menu-toggle span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: var(--primary-color);
+        border-radius: 3px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+    }
+    
+    .mobile-menu-toggle span:nth-child(1) {
+        top: 0px;
+    }
+    
+    .mobile-menu-toggle span:nth-child(2) {
+        top: 10px;
+    }
+    
+    .mobile-menu-toggle span:nth-child(3) {
+        top: 20px;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(1) {
+        top: 10px;
+        transform: rotate(135deg);
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+        left: -60px;
+    }
+    
+    .mobile-menu-toggle.active span:nth-child(3) {
+        top: 10px;
+        transform: rotate(-135deg);
+    }
+    
+    /* Десктопная навигация - скрываем */
+    .nav-links {
+        display: none !important;
+    }
+    
+    /* Кнопки связи */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px 20px;
+        margin: 5px 0;
+    }
+    
+    /* Мобильное меню */
+    .mobile-nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+    
+    .mobile-nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .mobile-menu {
+        list-style: none;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    .mobile-menu li {
+        margin: 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .mobile-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-menu a {
+        display: block;
+        padding: 15px 10px;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .mobile-menu a:hover {
+        color: var(--accent-color);
+        background: rgba(22, 160, 133, 0.05);
+        padding-left: 20px;
+    }
+    
+    /* Выпадающее меню в мобильной версии */
+    .mobile-dropdown-menu {
+        display: none;
+        list-style: none;
+        padding-left: 20px;
+        background: #f8f9fa;
+        margin: 5px -10px;
+        border-radius: 5px;
+    }
+    
+    .mobile-dropdown.active .mobile-dropdown-menu {
+        display: block;
+    }
+    
+    .mobile-dropdown-toggle {
+        position: relative;
+    }
+    
+    .mobile-dropdown-toggle::after {
+        content: '›';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%) rotate(90deg);
+        transition: transform 0.3s;
+    }
+    
+    .mobile-dropdown.active .mobile-dropdown-toggle::after {
+        transform: translateY(-50%) rotate(-90deg);
+    }
+}
+
+/* ============ ГЛАВНЫЙ БАННЕР ============ */
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 0 40px !important;
+        margin-top: 0 !important;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .accent {
+        font-size: 2rem !important;
+        display: inline !important;
+    }
+    
+    .hero p {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .feature-badge {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .trust-signals {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .trust-item {
+        min-width: 120px;
+    }
+    
+    .trust-number {
+        font-size: 1.2rem;
+    }
+    
+    /* Информационное сообщение */
+    .transition-notice {
+        font-size: 0.9rem;
+        padding: 12px 15px;
+        margin: 15px 0;
+    }
+}
+
+/* ============ УСЛУГИ И ПРЕИМУЩЕСТВА ============ */
+@media (max-width: 768px) {
+    .advantage-grid,
+    .advantages-grid,
+    .steps-container {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+    
+    .advantage-card,
+    .step-card {
+        padding: 20px !important;
+    }
+    
+    .advantage-header {
+        padding: 15px !important;
+        font-size: 1rem;
+    }
+    
+    .step-number {
+        width: 30px;
+        height: 30px;
+        top: -10px;
+        left: -10px;
+        font-size: 1rem;
+    }
+}
+
+/* ============ КАЛЬКУЛЯТОР ============ */
+@media (max-width: 768px) {
+    .calculator-section {
+        padding: 40px 0 !important;
+    }
+    
+    .calculator-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+    }
+    
+    .calculator-tabs::-webkit-scrollbar {
+        height: 3px;
+    }
+    
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .calculator-form {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+    
+    .calculator-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .calculator-actions .btn {
+        width: 100%;
+        padding: 15px 20px;
+    }
+    
+    .result-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .month-input {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+        padding: 10px !important;
+    }
+    
+    .calculator-preview-box {
+        padding: 20px !important;
+    }
+    
+    .calculator-quick-form {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ============ ФОТОГАЛЕРЕЯ ============ */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .gallery-item img {
+        height: 150px;
+    }
+    
+    .gallery-caption {
+        padding: 10px;
+    }
+}
+
+/* ============ КАРТА РОССИИ ============ */
+@media (max-width: 768px) {
+    .map-section {
+        padding: 40px 0 !important;
+    }
+    
+    #russiaMap {
+        height: 350px !important;
+    }
+    
+    .map-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .map-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 5px 0;
+    }
+    
+    .map-legend {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+
+/* ============ ФОРМЫ И КОНТАКТЫ ============ */
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+    
+    .contact-info, 
+    .contact-form {
+        padding: 20px;
+    }
+    
+    .contact-item {
+        padding: 10px 0;
+    }
+}
+
+/* ============ ФУТЕР ============ */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+    
+    .regions-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 0.85rem;
+    }
+    
+    .footer-bottom a {
+        display: inline-block;
+        margin: 5px 10px;
+    }
+}
+
+/* ============ ПЛАВАЮЩИЕ КНОПКИ ============ */
+@media (max-width: 768px) {
+    .telegram-float {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .telegram-link {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .scroll-to-top {
+        bottom: 80px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    /* Для очень маленьких экранов скрываем текст в кнопке Telegram */
+    @media (max-width: 480px) {
+        .telegram-link span {
+            display: none;
+        }
+        
+        .telegram-link {
+            padding: 15px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            justify-content: center;
+        }
+        
+        .telegram-link i {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+    }
+}
+
+/* ============ КОНТРАСТНОСТЬ И ЧИТАЕМОСТЬ ============ */
+@media (max-width: 768px) {
+    /* Исправляем светлый текст на светлом фоне */
+    .text-light-on-light {
+        color: #333333 !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Исправляем темный текст на темном фоне */
+    .text-dark-on-dark {
+        color: #ffffff !important;
+        background-color: #1a252f !important;
+    }
+    
+    /* Улучшаем контрастность в карточках */
+    .advantage-card,
+    .step-card,
+    .faq-item-main,
+    .testimonial-card {
+        background: #ffffff !important;
+        color: #333333 !important;
+        border: 1px solid #e0e0e0 !important;
+    }
+    
+    /* Увеличиваем контрастность ссылок */
+    a:not(.btn) {
+        color: var(--accent-color) !important;
+        text-decoration: underline;
+    }
+    
+    /* Улучшаем читаемость текста на темных фонах */
+    .hero p,
+    .testimonials-preview p,
+    .professional-cta p {
+        color: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    /* Увеличиваем интерлиньяж */
+    p, li, td, th {
+        line-height: 1.6 !important;
+    }
+    
+    /* Увеличиваем межбуквенный интервал в заголовках */
+    h1, h2, h3, h4 {
+        letter-spacing: 0.01em;
+    }
+}
+
+/* ============ ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ ============ */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .hero h1 {
+        font-size: 1.6rem !important;
+    }
+    
+    .accent {
+        font-size: 1.8rem !important;
+    }
+    
+    .feature-badge {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-section {
+        padding: 0 10px;
+    }
+    
+    #russiaMap {
+        height: 300px !important;
+    }
+}
+
+/* ============ ТАБЛЕТКИ ============ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .advantage-grid,
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+/* ============ ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ ============ */
+.mobile-hidden {
+    display: none !important;
+}
+
+.mobile-visible {
+    display: block !important;
+}
+
+.mobile-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.mobile-text-center {
+    text-align: center !important;
+}
+
+/* Анимация появления для мобильного меню */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.mobile-nav.active {
+    animation: slideInDown 0.3s ease-out;
+}
