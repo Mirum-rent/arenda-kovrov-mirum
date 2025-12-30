@@ -2030,7 +2030,7 @@ p {
 /* Добавить в конец файла style.css */
 
 /* ============================================
-   СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО МЕНЮ
+   СТИЛИ ДЛЯ ВЫПАДАЮЩЕГО МЕНЮ (дополнение к style.css)
    ============================================ */
 
 .main-nav {
@@ -2055,6 +2055,14 @@ p {
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.7em;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
 }
 
 .dropdown-menu {
@@ -2075,7 +2083,7 @@ p {
     margin: 0;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown-menu.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -2092,6 +2100,7 @@ p {
     text-decoration: none;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
+    font-size: 0.95rem;
 }
 
 .dropdown-menu a:hover {
@@ -2130,13 +2139,72 @@ p {
         background: transparent;
         padding-left: 20px;
         display: none;
+        min-width: auto;
     }
     
-    .dropdown.active .dropdown-menu {
+    .dropdown-menu.show {
         display: block;
     }
     
     .dropdown-toggle::after {
         content: ' ▼';
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown.active .dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-menu a {
+        padding: 10px 15px;
+        border-left: 2px solid transparent;
+    }
+    
+    .dropdown-menu a:hover {
+        padding-left: 20px;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .contact-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+    
+    .nav-menu > li:not(.dropdown) {
+        width: 100%;
+    }
+    
+    .nav-menu > li:not(.dropdown) a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        background: var(--background-color);
+        border-radius: var(--border-radius);
+    }
+    
+    .dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        background: var(--background-color);
+        border-radius: var(--border-radius);
     }
 }
