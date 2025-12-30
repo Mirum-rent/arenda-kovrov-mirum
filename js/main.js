@@ -20,6 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.calculator-form')) {
         initCalculator();
     }
+    
+    // Инициализация карты (если она есть на странице)
+    if (document.getElementById('russiaMap')) {
+        initMap();
+    }
+    
+    // Инициализация мобильного меню
+    initMobileMenu();
+    
+    // Инициализация формы обратной связи
+    initContactForm();
 });
 
 // Функция для инициализации выпадающего меню
@@ -53,17 +64,6 @@ function initDropdownMenu() {
                     menu.classList.remove('show');
                 }
             });
-            
-            // Наведение для десктопов
-            if (window.innerWidth > 768) {
-                dropdown.addEventListener('mouseenter', function() {
-                    menu.classList.add('show');
-                });
-                
-                dropdown.addEventListener('mouseleave', function() {
-                    menu.classList.remove('show');
-                });
-            }
         }
     });
     
@@ -91,13 +91,6 @@ function initSmoothScroll() {
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
-                
-                // Закрываем выпадающее меню на мобильных
-                if (window.innerWidth <= 768) {
-                    document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-                        menu.classList.remove('show');
-                    });
-                }
             }
         });
     });
@@ -127,7 +120,7 @@ function initScrollToTop() {
 // Функция для установки активного пункта меню
 function setActiveNavItem() {
     const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-menu a, .mobile-nav-menu a');
+    const navLinks = document.querySelectorAll('.nav-links a');
     
     navLinks.forEach(link => {
         link.classList.remove('active');
@@ -141,40 +134,193 @@ function setActiveNavItem() {
     });
 }
 
+// Функция для инициализации мобильного меню
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    
+    if (mobileMenuToggle && mobileMenu) {
+        // Открытие мобильного меню
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.add('active');
+            }
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Закрытие мобильного меню
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            if (mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        }
+        
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+        }
+        
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+        }
+        
+        // Закрытие при клике на ссылку
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+    }
+}
+
+// Функция для инициализации карты
+function initMap() {
+    // Проверяем, есть ли библиотека Leaflet
+    if (typeof L === 'undefined') {
+        console.log('⚠️ Leaflet.js не загружен');
+        return;
+    }
+    
+    try {
+        // Создаем карту с центром в Москве
+        const map = L.map('russiaMap').setView([55.7558, 37.6176], 4);
+        
+        // Добавляем слой OpenStreetMap БЕЗ украинских тайлов
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 12,
+            minZoom: 3
+        }).addTo(map);
+        
+        // Массив регионов России
+        const regions = [
+            // Центральный ФО
+            { name: "Москва", lat: 55.7558, lng: 37.6176, color: "green", status: "active" },
+            { name: "Санкт-Петербург", lat: 59.9343, lng: 30.3351, color: "green", status: "active" },
+            { name: "Нижний Новгород", lat: 56.2965, lng: 43.9361, color: "green", status: "active" },
+            { name: "Казань", lat: 55.8304, lng: 49.0661, color: "green", status: "active" },
+            { name: "Уфа", lat: 54.7388, lng: 55.9721, color: "green", status: "active" },
+            { name: "Екатеринбург", lat: 56.8389, lng: 60.6057, color: "green", status: "active" },
+            { name: "Челябинск", lat: 55.1644, lng: 61.4368, color: "green", status: "active" },
+            { name: "Новосибирск", lat: 55.0302, lng: 82.9204, color: "green", status: "active" },
+            { name: "Красноярск", lat: 56.0153, lng: 92.8932, color: "green", status: "active" },
+            { name: "Сургут", lat: 61.2541, lng: 73.3962, color: "green", status: "active" },
+            { name: "Тюмень", lat: 57.1613, lng: 65.525, color: "green", status: "active" },
+            { name: "Пермь", lat: 58.0105, lng: 56.2502, color: "green", status: "active" },
+            { name: "Астрахань", lat: 46.3479, lng: 48.0336, color: "green", status: "active" },
+            { name: "Ростов-на-Дону", lat: 47.2225, lng: 39.7188, color: "green", status: "active" },
+            { name: "Краснодар", lat: 45.0355, lng: 38.9753, color: "green", status: "active" },
+        ];
+        
+        // Добавляем маркеры
+        regions.forEach(region => {
+            const icon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background-color: ${region.color}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [16, 16]
+            });
+            
+            const marker = L.marker([region.lat, region.lng], { icon: icon }).addTo(map);
+            
+            const popupContent = `
+                <div style="padding: 10px; max-width: 250px;">
+                    <h4 style="margin: 0 0 8px 0; color: #2c3e50;">${region.name}</h4>
+                    <p style="margin: 0 0 5px 0;"><strong>Статус:</strong> ✅ Работаем</p>
+                    <p style="margin: 0 0 5px 0; font-size: 0.9em; color: #666;">
+                        • Аренда ковров<br>
+                        • Мойка витрин<br>
+                        • Восстановление полов
+                    </p>
+                    <a href="/calculator.html" style="color: #16a085; font-weight: 600; text-decoration: none;">
+                        Рассчитать стоимость →
+                    </a>
+                </div>
+            `;
+            
+            marker.bindPopup(popupContent);
+        });
+        
+        // Сохраняем карту в глобальной области видимости
+        window.russiaMap = map;
+        
+        // Функции управления картой
+        window.zoomToMoscow = function() {
+            map.setView([55.7558, 37.6176], 10);
+        };
+        
+        window.zoomToSpb = function() {
+            map.setView([59.9343, 30.3351], 10);
+        };
+        
+        window.zoomToAllRussia = function() {
+            map.setView([55.7558, 37.6176], 4);
+        };
+        
+        console.log('✅ Карта России загружена');
+    } catch (error) {
+        console.error('❌ Ошибка при загрузке карты:', error);
+    }
+}
+
+// Функция для инициализации формы обратной связи
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Получаем данные формы
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value;
+            const message = document.getElementById('contactMessage').value;
+            const consent = document.getElementById('contactConsent').checked;
+            
+            // Проверяем согласие
+            if (!consent) {
+                alert('Пожалуйста, дайте согласие на обработку данных');
+                return;
+            }
+            
+            // Формируем сообщение для Telegram
+            let telegramMessage = `📞 Новая заявка с сайта:\n`;
+            telegramMessage += `👤 Имя: ${name}\n`;
+            telegramMessage += `📧 Email: ${email}\n`;
+            telegramMessage += `📞 Телефон: ${phone}\n`;
+            
+            if (message) {
+                telegramMessage += `📝 Сообщение: ${message}\n`;
+            }
+            
+            telegramMessage += `🌐 Страница: ${window.location.href}\n`;
+            telegramMessage += `⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            // Кодируем сообщение для URL
+            const encodedMessage = encodeURIComponent(telegramMessage);
+            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+            
+            // Открываем Telegram
+            window.open(telegramUrl, '_blank');
+            
+            // Сбрасываем форму
+            contactForm.reset();
+            
+            // Показываем сообщение об успехе
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+        });
+    }
+}
+
 // Функция для инициализации калькулятора
 function initCalculator() {
-    const calculatorForm = document.querySelector('.calculator-form');
-    const calculateBtn = document.querySelector('.calculate-btn');
-    const resetBtn = document.querySelector('.reset-btn');
-    
-    if (calculatorForm && calculateBtn) {
-        calculateBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            calculatePrice();
-        });
-    }
-    
-    if (resetBtn) {
-        resetBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            calculatorForm.reset();
-            const results = document.querySelector('.calculator-results');
-            if (results) {
-                results.style.display = 'none';
-            }
-        });
-    }
-    
-    console.log('✅ Калькулятор инициализирован');
+    // Эта функция будет в отдельном файле calculator.js
+    console.log('Калькулятор найден, инициализация в calculator.js');
 }
 
-// Функция расчета стоимости
-function calculatePrice() {
-    // Реализация расчета стоимости
-    console.log('Расчет стоимости выполнен');
-}
-
-// Утилитная функция для проверки поддержки localStorage
+// Утилитные функции
 function supportsLocalStorage() {
     try {
         return 'localStorage' in window && window.localStorage !== null;
@@ -183,21 +329,12 @@ function supportsLocalStorage() {
     }
 }
 
-// Утилитная функция для форматирования чисел
 function formatNumber(num) {
     return new Intl.NumberFormat('ru-RU').format(num);
 }
 
-// Утилитная функция для определения устройства
 function isMobileDevice() {
     return window.innerWidth <= 768;
-}
-
-// Функция для отправки формы
-function submitContactForm(formData) {
-    // Реализация отправки формы
-    console.log('Форма отправлена:', formData);
-    return true;
 }
 
 // Экспорт функций для глобального использования
@@ -205,12 +342,9 @@ window.initDropdownMenu = initDropdownMenu;
 window.initSmoothScroll = initSmoothScroll;
 window.initScrollToTop = initScrollToTop;
 window.setActiveNavItem = setActiveNavItem;
-window.initCalculator = initCalculator;
-window.calculatePrice = calculatePrice;
-window.submitContactForm = submitContactForm;
-window.supportsLocalStorage = supportsLocalStorage;
-window.formatNumber = formatNumber;
-window.isMobileDevice = isMobileDevice;
+window.initMobileMenu = initMobileMenu;
+window.initMap = initMap;
+window.initContactForm = initContactForm;
 
-console.log('✅ Все функции main.js экспортированы');
+console.log('✅ Все функции main.js инициализированы');
 // === КОНЕЦ MAIN.JS ===
