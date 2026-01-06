@@ -1,6 +1,9 @@
-/* style.css - ОСНОВНЫЕ СТИЛИ ДЛЯ МИРУМ */
-/* Версия: 6.0 (05.01.2026) */
+/* ============================================
+   STYLE.CSS - ПОЛНЫЕ ОСНОВНЫЕ СТИЛИ МИРУМ
+   Версия: 6.1 (05.01.2026) - Полная версия
+   ============================================ */
 
+/* ============ ПЕРЕМЕННЫЕ ============ */
 :root {
     /* ЦВЕТОВАЯ ПАЛИТРА */
     --primary-color: #2c3e50;          /* Темно-синий/серый */
@@ -526,6 +529,481 @@ section {
     background-color: var(--background-color);
 }
 
+/* ============ СЕТКА ПРЕИМУЩЕСТВ ============ */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.advantage-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    border-top: 4px solid var(--accent-color);
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.advantage-header {
+    background-color: rgba(22, 160, 133, 0.1);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.advantage-header i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+.advantage-content {
+    padding: 25px;
+}
+
+.advantage-title {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.advantage-text {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.advantage-stats {
+    background-color: rgba(22, 160, 133, 0.05);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    border-left: 3px solid var(--accent-color);
+}
+
+/* ============ ШАГИ ПРОЦЕССА ============ */
+.steps-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.step-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--accent-color);
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.step-header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.step-text {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.step-card ul {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.step-card ul li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-light);
+}
+
+.step-card ul li::before {
+    content: '•';
+    position: absolute;
+    left: 10px;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.step-action {
+    margin-top: 20px;
+}
+
+.final-block {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-on-dark);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-top: 40px;
+}
+
+.final-title {
+    color: var(--text-on-dark);
+    margin-bottom: 15px;
+}
+
+.final-text {
+    color: var(--text-on-dark-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ============ МАТЕРИАЛЫ/УСЛУГИ СЕТКА ============ */
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(20px, 3vw, 30px);
+    margin-top: 40px;
+}
+
+.material-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.material-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.material-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.material-card:hover .material-image img {
+    transform: scale(1.05);
+}
+
+.material-content {
+    padding: clamp(20px, 3vw, 25px);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.material-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+.material-content p {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.material-price {
+    background: rgba(22, 160, 133, 0.1);
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-top: 15px;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+/* ============ ТАБЛИЦА СРАВНЕНИЯ ============ */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: clamp(12px, 2vw, 15px);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+.comparison-table tr:hover {
+    background: rgba(22, 160, 133, 0.05);
+}
+
+/* ============ ШАГИ ПРОЦЕССА (альтернативный вариант) ============ */
+.process-steps {
+    counter-reset: step-counter;
+    margin-top: 40px;
+}
+
+.process-step {
+    position: relative;
+    padding-left: clamp(40px, 6vw, 50px);
+    margin-bottom: clamp(20px, 3vw, 30px);
+}
+
+.process-step:before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: clamp(30px, 5vw, 35px);
+    height: clamp(30px, 5vw, 35px);
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+/* ============ ГАЛЕРЕЯ ДО/ПОСЛЕ ============ */
+.before-after-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(20px, 3vw, 30px);
+    margin-top: 40px;
+}
+
+.ba-item {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.ba-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    padding: 5px;
+}
+
+.ba-label {
+    padding: 10px 15px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.ba-label.before {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.ba-label.after {
+    background: rgba(46, 204, 113, 0.1);
+}
+
+/* ============ FAQ НА СТРАНИЦАХ УСЛУГ ============ */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(20px, 3vw, 30px);
+    margin-top: 40px;
+}
+
+.faq-item-main {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: clamp(20px, 3vw, 25px);
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--accent-color);
+}
+
+.faq-question-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+}
+
+.faq-question-main i {
+    color: var(--accent-color);
+}
+
+/* ============ КОНТАКТНАЯ ФОРМА ДЛЯ УСЛУГ ============ */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(30px, 5vw, 50px);
+    margin-top: 40px;
+}
+
+.contact-info {
+    background: white;
+    padding: clamp(25px, 4vw, 30px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.contact-form {
+    background: white;
+    padding: clamp(25px, 4vw, 30px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    width: 24px;
+}
+
+.contact-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.contact-item a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-item a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* ============ ФОРМЫ НА СТРАНИЦАХ УСЛУГ ============ */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: clamp(15px, 2vw, 20px);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: clamp(15px, 2vw, 20px);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: clamp(10px, 1.5vw, 12px);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.1);
+}
+
+/* ============ ЧЕКБОКС СОГЛАСИЯ ============ */
+.consent-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.consent-checkbox input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.consent-checkbox label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.consent-checkbox a {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.consent-checkbox a:hover {
+    color: var(--primary-color);
+}
+
 /* ============ ФУТЕР ============ */
 .footer {
     background-color: var(--footer-bg);
@@ -786,6 +1264,434 @@ section {
     box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
+/* ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ OUTSTAFFING ============ */
+/* Стили для страницы аутстаффинга */
+.outstaffing-features {
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 3vw, 30px);
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.outstaffing-feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: clamp(15px, 2vw, 20px);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.outstaffing-feature:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.outstaffing-feature i {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.outstaffing-feature div {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.outstaffing-feature small {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+/* Сетка преимуществ аутстаффинга */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.benefit-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--accent-color);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.benefit-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.benefit-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.benefit-description {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Таблица сравнения для аутстаффинга */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.comparison-column {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.comparison-header {
+    padding: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+
+.comparison-header.our {
+    background: var(--accent-color);
+}
+
+.comparison-header.traditional {
+    background: var(--primary-color);
+}
+
+.comparison-list {
+    padding: 20px;
+    list-style: none;
+}
+
+.comparison-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comparison-list li:last-child {
+    border-bottom: none;
+}
+
+.comparison-list i.fa-check {
+    color: var(--success-color);
+}
+
+.comparison-list i.fa-times {
+    color: var(--danger-color);
+}
+
+/* Стоимость услуг */
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.pricing-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+    border-color: var(--accent-color);
+}
+
+.pricing-card.popular {
+    border-color: var(--accent-color);
+    position: relative;
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pricing-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.pricing-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin: 20px 0;
+}
+
+.pricing-period {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.pricing-features {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.pricing-features li {
+    padding: 8px 0;
+    color: var(--text-light);
+}
+
+/* ============ УТИЛИТНЫЕ КЛАССЫ ============ */
+.mt-40 {
+    margin-top: 40px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+/* ============ АДАПТИВНОСТЬ ============ */
+@media (max-width: 768px) {
+    /* Основные адаптивные стили */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Скрываем десктопное меню, показываем бургер */
+    .desktop-nav {
+        display: none !important;
+    }
+    
+    .header-contacts {
+        display: none !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .mobile-nav {
+        display: block;
+    }
+    
+    /* Логотип */
+    .logo img {
+        width: 120px;
+    }
+    
+    /* Хедер */
+    .main-header {
+        height: 60px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .main-header.hidden {
+        transform: translateY(-100%);
+    }
+    
+    .header-container {
+        padding: 10px 0;
+        height: 60px;
+    }
+    
+    /* Скрываем хлебные крошки на мобильных */
+    .breadcrumbs {
+        display: none;
+    }
+    
+    /* Секции */
+    section {
+        padding: 60px 0 !important;
+    }
+    
+    .section-title {
+        margin-bottom: 30px !important;
+    }
+    
+    /* Сетки */
+    .advantages-grid,
+    .materials-grid,
+    .faq-grid,
+    .benefits-grid,
+    .comparison-grid,
+    .pricing-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Контактные формы */
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Таблицы */
+    .comparison-table {
+        font-size: 0.9rem;
+        display: block;
+        overflow-x: auto;
+    }
+    
+    /* Галерея */
+    .before-after-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .ba-images {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Плавающие кнопки */
+    .telegram-float {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .telegram-link span {
+        display: none;
+    }
+    
+    .telegram-link {
+        padding: 15px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+    }
+    
+    .telegram-link i {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+    
+    .scroll-to-top {
+        bottom: 90px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Уведомление о куках */
+    .cookie-notice .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .cookie-btn {
+        min-width: 100px;
+    }
+    
+    /* Особенности услуг */
+    .service-features,
+    .outstaffing-features {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .service-feature,
+    .outstaffing-feature {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Регионы в футере */
+    .regions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .logo img {
+        width: 100px;
+    }
+    
+    .cookie-notice p {
+        min-width: auto;
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 { font-size: 1.8rem !important; }
+    h2 { font-size: 1.5rem !important; }
+    h3 { font-size: 1.3rem !important; }
+    p, li { font-size: 1rem !important; line-height: 1.6 !important; }
+}
+
+/* Увеличение зон клика для мобильных */
+@media (max-width: 768px) {
+    .btn, 
+    .cookie-btn,
+    .mobile-menu a,
+    .footer-links a,
+    .telegram-link,
+    .scroll-to-top {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    input, 
+    select, 
+    textarea {
+        font-size: 16px !important; /* Предотвращает зум в iOS */
+    }
+}
+
 /* ============ ПРИНТЕР ============ */
 @media print {
     .telegram-float,
@@ -811,3 +1717,5 @@ section {
         padding: 0;
     }
 }
+
+/* ============ КОНЕЦ STYLE.CSS ============ */
