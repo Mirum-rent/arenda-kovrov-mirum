@@ -18,7 +18,21 @@
     <meta name="description" content="✅ Аренда грязезащитных ковров, мойка фасадов, восстановление полов. Работаем по всей России с 2009 года. Быстрый переход на Telegram и почту.">
     
     <!-- SEO метатеги -->
-    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/" />
+    // В начало файла header.js добавить:
+const currentPage = window.location.pathname;
+
+// Затем динамически генерировать canonical:
+let canonicalUrl = 'https://arenda-kovrov-mirum.ru/';
+
+if (currentPage.includes('outstaffing.html')) {
+    canonicalUrl = 'https://arenda-kovrov-mirum.ru/outstaffing.html';
+} else if (currentPage.includes('arenda-kovrov.html')) {
+    canonicalUrl = 'https://arenda-kovrov-mirum.ru/arenda-kovrov.html';
+}
+// и так далее для всех страниц
+
+// В шаблон вставить:
+<link rel="canonical" href="${canonicalUrl}" />
     <meta name="robots" content="index, follow" />
     
     <!-- Ключевые слова -->
