@@ -4,7 +4,7 @@
   "description": "Профессиональные услуги чистоты с 2009 года. Аренда грязезащитных ковров, мойка витрин, восстановление полов, аутстаффинг персонала по всей России.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a3a5f",
+  "background_color": "#ffffff",
   "theme_color": "#16a085",
   "icons": [
     {
@@ -36,7 +36,7 @@
       "name": "Калькулятор стоимости",
       "short_name": "Калькулятор",
       "description": "Рассчитать стоимость аренды ковров",
-      "url": "/#calculator",
+      "url": "/calculator.html",
       "icons": [
         {
           "src": "/img/icon-calc-192.png",
@@ -52,6 +52,18 @@
       "icons": [
         {
           "src": "/img/icon-order-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Аутстаффинг",
+      "short_name": "ЧАЗ",
+      "description": "Легализация и экономия на налогах",
+      "url": "/outstaffing.html",
+      "icons": [
+        {
+          "src": "/img/icon-staff-192.png",
           "sizes": "192x192"
         }
       ]

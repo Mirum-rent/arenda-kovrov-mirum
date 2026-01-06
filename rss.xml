@@ -9,10 +9,10 @@
   <link>https://arenda-kovrov-mirum.ru/</link>
   <description>Экспертные статьи и исследования в области аренды грязезащитных ковров, мойки витрин, восстановления полов и аутстаффинга персонала. Компания с 2009 года.</description>
   <language>ru</language>
-  <copyright>© 2009-2025 ООО "МИРУМ". Все права защищены.</copyright>
-  <pubDate>Thu, 30 Dec 2025 10:00:00 +0300</pubDate>
-  <lastBuildDate>Thu, 30 Dec 2025 18:30:00 +0300</lastBuildDate>
-  <generator>МИРУМ Контент-Система v2.0</generator>
+  <copyright>© 2009-2026 ООО "МИРУМ". Все права защищены.</copyright>
+  <pubDate>Wed, 06 Jan 2026 10:00:00 +0300</pubDate>
+  <lastBuildDate>Wed, 06 Jan 2026 18:30:00 +0300</lastBuildDate>
+  <generator>МИРУМ Контент-Система v3.0</generator>
   <ttl>1440</ttl>
   <atom:link href="https://arenda-kovrov-mirum.ru/rss.xml" rel="self" type="application/rss+xml"/>
   <image>
@@ -23,114 +23,12 @@
     <height>120</height>
   </image>
   
-  <!-- СТАТЬЯ 1: Восстановление полов (НОВАЯ тема) -->
+  <!-- СТАТЬЯ 1: Новая страница аутстаффинга -->
   <item>
-    <title>Как восстановить полы вместо замены: экономия до 70% | МИРУМ</title>
-    <link>https://arenda-kovrov-mirum.ru/chistka_polov.html</link>
-    <guid isPermaLink="false">mirum-restoration-20251225</guid>
-    <pubDate>Thu, 30 Dec 2025 10:00:00 +0300</pubDate>
-    <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
-    <category>Восстановление полов</category>
-    <category>Паркет</category>
-    <category>Линолеум</category>
-    <category>Мрамор</category>
-    <category>Экономия</category>
-    <dc:creator>Специалисты МИРУМ</dc:creator>
-    <content:encoded><![CDATA[
-      <h1>Как восстановить полы вместо замены: экономия до 70%</h1>
-      <p><strong>Эксперт:</strong> Команда специалистов МИРУМ (опыт с 2009 года)</p>
-      <p>Полное руководство по восстановлению всех типов напольных покрытий. Почему в 90% случаев восстановление выгоднее полной замены.</p>
-      
-      <h2>Типы покрытий и технологии восстановления</h2>
-      <p>Мы работаем со всеми типами полов: паркет, мрамор, гранит, линолеум, керамогранит, терраццо.</p>
-      
-      <h2>Экономические расчеты</h2>
-      <p>Восстановление паркета: от 720 руб./м² vs замена: от 3000 руб./м². Экономия: 70%.</p>
-      
-      <h2>Гарантии и сроки</h2>
-      <p>Гарантия на паркет с лаком Loba - до 8 лет. Сроки работ: 1 день для офиса 100 м².</p>
-      
-      <p><a href="https://arenda-kovrov-mirum.ru/chistka_polov.html">Читать полное руководство с ценами →</a></p>
-    ]]></content:encoded>
-    <description>Полное руководство по восстановлению полов от специалистов МИРУМ. Как сэкономить до 70% на ремонте полов, технологии восстановления, гарантии до 8 лет.</description>
-    <media:content url="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after1.webp" medium="image">
-      <media:title>Восстановление линолеума до и после</media:title>
-      <media:description>Удаление желтых пятен, восстановление цвета</media:description>
-    </media:content>
-  </item>
-  
-  <!-- СТАТЬЯ 2: FAQ (ОБНОВЛЕННАЯ) -->
-  <item>
-    <title>50+ ответов на вопросы об услугах МИРУМ | Полный FAQ 2025</title>
-    <link>https://arenda-kovrov-mirum.ru/FAQ.html</link>
-    <guid isPermaLink="false">mirum-faq-20251225</guid>
-    <pubDate>Thu, 30 Dec 2025 11:00:00 +0300</pubDate>
-    <author>support@arenda-kovrov-mirum.ru (Поддержка МИРУМ)</author>
-    <category>FAQ</category>
-    <category>Вопросы</category>
-    <category>Гид</category>
-    <category>Аренда ковров</category>
-    <category>Восстановление полов</category>
-    <category>Мойка витрин</category>
-    <category>Аутстаффинг</category>
-    <dc:creator>Команда поддержки МИРУМ</dc:creator>
-    <content:encoded><![CDATA[
-      <h1>50+ ответов на вопросы об услугах МИРУМ | Полный FAQ 2025</h1>
-      <p>Обновленная версия FAQ с ответами на 50+ самых частых вопросов от клиентов. 4 категории: аренда ковров, мойка витрин, восстановление полов, аутстаффинг.</p>
-      
-      <h2>Новые разделы FAQ</h2>
-      <ul>
-        <li><strong>Восстановление полов:</strong> 6 вопросов о паркете, линолеуме, мраморе</li>
-        <li><strong>Аутстаффинг:</strong> 6 вопросов о ЧАЗ и экономии на налогах</li>
-        <li><strong>Аренда ковров:</strong> 20 вопросов обновлены</li>
-        <li><strong>Мойка витрин:</strong> 10 вопросов дополнены</li>
-      </ul>
-      
-      <h2>Новые функции на странице FAQ</h2>
-      <p>Поиск по вопросам, фильтрация по категориям, быстрая навигация, форма для вопросов.</p>
-      
-      <p><a href="https://arenda-kovrov-mirum.ru/FAQ.html">Читать все 50+ ответов →</a></p>
-    ]]></content:encoded>
-    <description>Обновленный FAQ МИРУМ 2025: 50+ ответов на вопросы об аренде ковров, мойке витрин, восстановлении полов и аутстаффинге. Поиск, категории, навигация.</description>
-  </item>
-  
-  <!-- СТАТЬЯ 3: Грязезащитные ковры -->
-  <item>
-    <title>Аренда грязезащитных ковров: 20 фактов для бизнеса 2025</title>
-    <link>https://arenda-kovrov-mirum.ru/#services</link>
-    <guid isPermaLink="false">mirum-mats-20251225</guid>
-    <pubDate>Thu, 30 Dec 2025 12:00:00 +0300</pubDate>
-    <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
-    <category>Грязезащита</category>
-    <category>Аренда ковров</category>
-    <category>Бизнес-решения</category>
-    <category>Экономика</category>
-    <dc:creator>Дмитрий Рыбак</dc:creator>
-    <content:encoded><![CDATA[
-      <h1>Аренда грязезащитных ковров: 20 фактов для бизнеса 2025</h1>
-      <p><strong>Эксперт:</strong> Дмитрий Рыбак, генеральный директор МИРУМ (опыт с 2009 года)</p>
-      <p>20 актуальных фактов об аренде грязезащитных ковров в 2025 году. Новые технологии, экономические расчеты, региональные особенности.</p>
-      
-      <h2>Цены 2025 года</h2>
-      <p>Аренда ковра 115×200 см: от 760 руб./замена. Экономия на уборке: до 40%.</p>
-      
-      <h2>Региональные особенности</h2>
-      <p>Москва/СПб: замена 1 раз в 2 недели. Регионы: по согласованному графику.</p>
-      
-      <h2>Новые услуги</h2>
-      <p>Ковры с логотипом, комбинированные системы, пробный период 2 недели.</p>
-      
-      <p><a href="https://arenda-kovrov-mirum.ru/#services">Читать 20 фактов →</a></p>
-    ]]></content:encoded>
-    <description>20 актуальных фактов об аренде грязезащитных ковров в 2025 году. Цены, технологии, экономическая выгода, региональные особенности от экспертов МИРУМ.</description>
-  </item>
-  
-  <!-- СТАТЬЯ 4: Аутстаффинг (НОВАЯ тема) -->
-  <item>
-    <title>Аутстаффинг персонала: легальная экономия до 40% на налогах</title>
+    <title>Аутстаффинг персонала: полное руководство 2026 | МИРУМ</title>
     <link>https://arenda-kovrov-mirum.ru/outstaffing.html</link>
-    <guid isPermaLink="false">mirum-outstaffing-20251225</guid>
-    <pubDate>Thu, 30 Dec 2025 13:00:00 +0300</pubDate>
+    <guid isPermaLink="false">mirum-outstaffing-20260106</guid>
+    <pubDate>Wed, 06 Jan 2026 10:00:00 +0300</pubDate>
     <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
     <category>Аутстаффинг</category>
     <category>ЧАЗ</category>
@@ -139,9 +37,12 @@
     <category>Экономия</category>
     <dc:creator>Максим Петров</dc:creator>
     <content:encoded><![CDATA[
-      <h1>Аутстаффинг персонала: легальная экономия до 40% на налогах</h1>
+      <h1>Аутстаффинг персонала: полное руководство 2026</h1>
       <p><strong>Эксперт:</strong> Максим Петров, финансовый директор МИРУМ, MBA</p>
       <p>Полное руководство по аутстаффингу и ЧАЗ (Частичная Аренда Заемных Сотрудников). Как легально снизить налоговую нагрузку на 30-40%.</p>
+      
+      <h2>Новая страница аутстаффинга на основном сайте МИРУМ</h2>
+      <p>Консолидация контента с resursoria.ru для усиления SEO-позиций. Все материалы по аутстаффингу теперь доступны на основном сайте.</p>
       
       <h2>Что такое ЧАЗ?</h2>
       <p>ЧАЗ - легальный способ оптимизации налогов при котором сотрудники оформляются в кадровое агентство, но работают на вашем предприятии.</p>
@@ -149,12 +50,76 @@
       <h2>Экономические расчеты</h2>
       <p>При ФОТ 1 000 000 руб./месяц экономия составляет 300 000-400 000 руб./месяц.</p>
       
-      <h2>Сроки перевода</h2>
-      <p>Перевод персонала на ЧАЗ занимает 5-10 рабочих дней с сохранением трудового стажа.</p>
-      
-      <p><a href="https://arenda-kovrov-mirum.ru/outstaffing.html">Читать руководство по аутстаффингу →</a></p>
+      <p><a href="https://arenda-kovrov-mirum.ru/outstaffing.html">Читать полное руководство по аутстаффингу →</a></p>
     ]]></content:encoded>
-    <description>Полное руководство по аутстаффингу персонала и ЧАЗ от финансовых экспертов МИРУМ. Как легально сэкономить до 40% на налогах, расчеты экономии, кейсы.</description>
+    <description>Полное руководство по аутстаффингу персонала и ЧАЗ от финансовых экспертов МИРУМ. Консолидация контента с resursoria.ru на основном сайте.</description>
+  </item>
+  
+  <!-- СТАТЬЯ 2: Восстановление полов -->
+  <item>
+    <title>Восстановление полов вместо замены: экономия до 70% | МИРУМ</title>
+    <link>https://arenda-kovrov-mirum.ru/chistka_polov.html</link>
+    <guid isPermaLink="false">mirum-restoration-20260106</guid>
+    <pubDate>Wed, 06 Jan 2026 11:00:00 +0300</pubDate>
+    <author>expert@arenda-kovrov-mirum.ru (Эксперт МИРУМ)</author>
+    <category>Восстановление полов</category>
+    <category>Паркет</category>
+    <category>Линолеум</category>
+    <category>Мрамор</category>
+    <category>Экономия</category>
+    <dc:creator>Специалисты МИРУМ</dc:creator>
+    <content:encoded><![CDATA[
+      <h1>Восстановление полов вместо замены: экономия до 70%</h1>
+      <p><strong>Эксперт:</strong> Команда специалистов МИРУМ (опыт с 2009 года)</p>
+      <p>Полное руководство по восстановлению всех типов напольных покрытий. Почему в 90% случаев восстановление выгоднее полной замены.</p>
+      
+      <h2>Обновленная страница восстановления полов</h2>
+      <p>Добавлены новые кейсы, фотографии до/после, калькуляторы экономии.</p>
+      
+      <h2>Типы покрытий и технологии</h2>
+      <p>Мы работаем со всеми типами полов: паркет, мрамор, гранит, линолеум, керамогранит, терраццо.</p>
+      
+      <p><a href="https://arenda-kovrov-mirum.ru/chistka_polov.html">Читать руководство с ценами и кейсами →</a></p>
+    ]]></content:encoded>
+    <description>Обновленное руководство по восстановлению полов от специалистов МИРУМ. Кейсы, фотографии, расчеты экономии.</description>
+    <media:content url="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after1.webp" medium="image">
+      <media:title>Восстановление линолеума до и после</media:title>
+      <media:description>Удаление желтых пятен, восстановление цвета</media:description>
+    </media:content>
+  </item>
+  
+  <!-- СТАТЬЯ 3: Обновление технических файлов -->
+  <item>
+    <title>Обновление сайта МИРУМ: новая структура и SEO-оптимизация</title>
+    <link>https://arenda-kovrov-mirum.ru/</link>
+    <guid isPermaLink="false">mirum-update-20260106</guid>
+    <pubDate>Wed, 06 Jan 2026 12:00:00 +0300</pubDate>
+    <author>dev@arenda-kovrov-mirum.ru (Разработчик МИРУМ)</author>
+    <category>Разработка</category>
+    <category>SEO</category>
+    <category>Оптимизация</category>
+    <category>Структура</category>
+    <dc:creator>Команда разработки</dc:creator>
+    <content:encoded><![CDATA[
+      <h1>Обновление сайта МИРУМ: новая структура и SEO-оптимизация</h1>
+      <p><strong>Дата:</strong> 06 января 2026 года</p>
+      <p>Масштабное обновление технической базы сайта МИРУМ с фокусом на SEO и мобильную оптимизацию.</p>
+      
+      <h2>Основные изменения</h2>
+      <ul>
+        <li>Обновлены все технические файлы (robots.txt, sitemaps, manifest)</li>
+        <li>Добавлены новые страницы услуг</li>
+        <li>Консолидация контента с resursoria.ru</li>
+        <li>Улучшена мобильная оптимизация</li>
+        <li>Добавлена микроразметка для ИИ</li>
+      </ul>
+      
+      <h2>Новая структура</h2>
+      <p>19 модульных блоков, мобильный-first дизайн, интеграция с Telegram/Email CRM.</p>
+      
+      <p><a href="https://arenda-kovrov-mirum.ru/">Посмотреть обновленный сайт →</a></p>
+    ]]></content:encoded>
+    <description>Масштабное обновление сайта МИРУМ: новая структура, SEO-оптимизация, консолидация контента.</description>
   </item>
 
 </channel>

@@ -1,38 +1,64 @@
 # humans.txt for arenda-kovrov-mirum.ru
-# Last update: 2025-12-30
+# Company: ООО "МИРУМ" (мирум.рент)
+# Last update: 2026-01-06
 
 /* TEAM */
   Founder: Дмитрий Рыбак
   Site: https://arenda-kovrov-mirum.ru/
   Email: matservice@yandex.ru
-  Twitter: @mirum_rent
+  Telegram: @mirum_rent
+  Phone: +7 (977) 000-51-27
   
-  Developer: AI-Assisted Development
+  Developer: Full-Stack Development Team
   Site: https://arenda-kovrov-mirum.ru/
   Contact: via Telegram +7 (977) 000-51-27
+  GitHub: https://github.com/Mirum-rent
   
   Designer: МИРУМ Design Team
   Site: https://arenda-kovrov-mirum.ru/
   Style: Modern Business Clean
+  Colors: #16a085 (primary)
 
 /* THANKS */
   Font Awesome: https://fontawesome.com/
   Google Fonts: https://fonts.google.com/
-  GitHub: https://github.com/
-  OpenAI: ChatGPT assistance
+  GitHub Pages: https://pages.github.com/
+  Leaflet.js: https://leafletjs.com/
+  Schema.org: https://schema.org/
 
 /* SITE */
-  Last update: 2025-12-30
+  Last update: 2026-01-06
   Language: Russian
   Doctype: HTML5
   Components: 19 modular blocks
-  IDE: VS Code
-  Standards: HTML5, CSS3, ES6+
-  CSS Preprocessor: Native CSS
-  JS Framework: Vanilla JavaScript
+  Architecture: Mobile-first
+  Framework: Vanilla JavaScript
+  Hosting: GitHub Pages
+  Version: 6.0
+
+/* SERVICES */
+  1. Аренда грязезащитных ковров (с 2009)
+  2. Мойка витрин и фасадов
+  3. Восстановление полов (паркет, мрамор, линолеум)
+  4. Аутстаффинг персонала (ЧАЗ)
+
+/* GEOGRAPHY */
+  Cities: 40+ городов России
+  Regions: Все федеральные округа
+  Focus: Москва, МО, Санкт-Петербург
+
+/* TECHNICAL */
+  Frontend: HTML5, CSS3, ES6+
+  Styling: CSS Grid, Flexbox
+  Icons: Font Awesome 6
+  Maps: Leaflet.js
+  PWA: Progressive Web App
+  SEO: Schema.org, Open Graph
+  Performance: Lazy loading, Image optimization
 
 /* NOTE */
-  This site uses AI-assisted development
-  for improved user experience and SEO optimization
-  All content is verified by human experts
+  This site uses modern web technologies
+  All content is verified by company experts
   Company founded in 2009
+  Professional cleaning services
+  Focus on mobile users and AI recommendations
