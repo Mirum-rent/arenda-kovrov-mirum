@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<!-- ============================================
+     ARENDA-KOVROV.HTML - Страница аренды ковров
+     Версия: 6.0 (05.01.2026)
+     ============================================ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ============ SEO МЕТАДАННЫЕ ============ -->
+    <title>Аренда грязезащитных ковров в Москве, СПб, по всей России | МИРУМ</title>
+    <meta name="description" content="✅ Аренда грязезащитных ковров для офисов, магазинов, медицинских учреждений. Работаем по всей России с 2009 года. Регулярная замена, чистка, все документы.">
+    
+    <!-- Каноническая ссылка -->
+    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/arenda-kovrov.html" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Ключевые слова -->
+    <meta name="keywords" content="аренда грязезащитных ковров, аренда входных ковриков, ковры для офиса, ковры для магазина, грязезащитные покрытия, замена ковров, обслуживание ковров">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Аренда грязезащитных ковров | МИРУМ с 2009 года">
+    <meta property="og:description" content="Профессиональная аренда ковров для бизнеса. Регулярная замена, чистка, все документы. Работаем по всей России.">
+    <meta property="og:url" content="https://arenda-kovrov-mirum.ru/arenda-kovrov.html">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/carpet_sample.webp">
+    
+    <!-- ============ ФАВИКОНЫ ============ -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
+    <!-- ============ СТИЛИ ============ -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 768px)">
+    
+    <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Дополнительные стили для страницы -->
+    <style>
+        /* Дополнительные стили для страницы аренды ковров */
+        .carpet-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .carpet-type-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding: 25px;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .carpet-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .carpet-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .carpet-size {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .carpet-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 15px 0;
+        }
+        
+        .carpet-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .carpet-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-light);
+        }
+        
+        .carpet-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .regions-list {
+            columns: 3;
+            column-gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .regions-list li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        
+        @media (max-width: 768px) {
+            .regions-list {
+                columns: 2;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .regions-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============ НАЧАЛО HEADER ============ -->
+    <script src="/includes/header.js"></script>
+    <!-- ============ КОНЕЦ HEADER ============ -->
+
+    <!-- ============ НАЧАЛО ОСНОВНОГО КОНТЕНТА ============ -->
+    <main>
+        <!-- ============ ГЕРОЙ-БАННЕР ============ -->
+        <section class="service-hero">
+            <div class="container">
+                <h1>Аренда грязезащитных ковров для бизнеса</h1>
+                <p>Профессиональное решение для чистоты ваших помещений. Регулярная замена, чистка, обслуживание. Работаем по всей России с 2009 года.</p>
+                
+                <div class="service-features">
+                    <div class="service-feature">
+                        <i class="fas fa-sync-alt"></i>
+                        <div>Регулярная замена</div>
+                        <small>По вашему графику</small>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-truck"></i>
+                        <div>Бесплатная доставка</div>
+                        <small>И установка</small>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-file-contract"></i>
+                        <div>Все документы</div>
+                        <small>Для бухгалтерии</small>
+                    </div>
+                    <div class="service-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>Гарантия качества</div>
+                        <small>Всегда чистые ковры</small>
+                    </div>
+                </div>
+                
+                <a href="/calculator.html" class="btn btn-telegram" style="font-size: 1.1rem; padding: 15px 30px;">
+                    <i class="fas fa-calculator"></i> Рассчитать стоимость
+                </a>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ ГЕРОЙ-БАННЕРА ============ -->
+
+        <!-- ============ ТИПЫ КОВРОВ ============ -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Размеры и стоимость аренды ковров</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">
+                    Подбираем оптимальный размер под ваше помещение. Все ковры износостойкие, легко чистятся, имеют противоскользящее покрытие.
+                </p>
+                
+                <div class="carpet-types-grid">
+                    <!-- Ковер 85×60 -->
+                    <div class="carpet-type-card">
+                        <div class="carpet-icon">
+                            <i class="fas fa-vector-square"></i>
+                        </div>
+                        <div class="carpet-size">85 × 60 см</div>
+                        <div class="carpet-price">от 180 ₽/замена</div>
+                        <p>Идеально для небольших офисов, кабинетов, лифтовых холлов.</p>
+                        <ul class="carpet-features">
+                            <li>Для помещений до 20 м²</li>
+                            <li>Толщина 8 мм</li>
+                            <li>Противоскользящее основание</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ковер 85×150 -->
+                    <div class="carpet-type-card">
+                        <div class="carpet-icon">
+                            <i class="fas fa-border-all"></i>
+                        </div>
+                        <div class="carpet-size">85 × 150 см</div>
+                        <div class="carpet-price">от 420 ₽/замена</div>
+                        <p>Для средних офисов, приемных, небольших магазинов.</p>
+                        <ul class="carpet-features">
+                            <li>Для помещений 20-50 м²</li>
+                            <li>Толщина 10 мм</li>
+                            <li>Усиленные края</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Ковер 115×200 -->
+                    <div class="carpet-type-card">
+                        <div class="carpet-icon">
+                            <i class="fas fa-expand-alt"></i>
+                        </div>
+                        <div class="carpet-size">115 × 200 см</div>
+                        <div class="carpet-price">от 760 ₽/замена</div>
+                        <p>Для крупных офисов, торговых залов, медицинских центров.</p>
+                        <ul class="carpet-features">
+                            <li>Для помещений 50-100 м²</li>
+                            <li>Толщина 12 мм</li>
+                            <li>Особая износостойкость</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 40px;">
+                    <p><strong>Полную стоимость для вашего города смотрите в <a href="/calculator.html">калькуляторе</a></strong></p>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ ТИПОВ КОВРОВ ============ -->
+
+        <!-- ============ ПРЕИМУЩЕСТВА ============ -->
+        <section class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Почему аренда выгоднее покупки?</h2>
+                
+                <div class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>Аренда ковров у МИРУМ</th>
+                            <th>Покупка собственных ковров</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Первоначальные затраты</strong></td>
+                            <td>0 ₽ (только арендная плата)</td>
+                            <td>от 3 000 до 20 000 ₽ за ковер</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Обслуживание</strong></td>
+                            <td>Включено в стоимость</td>
+                            <td>Самостоятельно или + 500 ₽/мойка</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Замена при износе</strong></td>
+                            <td>Бесплатно</td>
+                            <td>Покупать новый ковер</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Хранение грязных ковров</strong></td>
+                            <td>Не нужно (забираем)</td>
+                            <td>Нужно место для хранения</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Доставка</strong></td>
+                            <td>Бесплатно</td>
+                            <td>от 500 ₽ за доставку</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Документы</strong></td>
+                            <td>Полный пакет (акты, счета)</td>
+                            <td>Только чек при покупке</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="text-center mt-40">
+                    <p style="font-size: 1.1rem; color: var(--accent-color); font-weight: 600;">
+                        <i class="fas fa-calculator"></i> Экономия при аренде: <span style="font-size: 1.3rem;">40-60%</span> в первый год
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ ПРЕИМУЩЕСТВ ============ -->
+
+        <!-- ============ РЕГИОНЫ РАБОТЫ ============ -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Работаем по всей России</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">
+                    От Калининграда до Владивостока - мы доставляем и обслуживаем ковры в вашем городе.
+                </p>
+                
+                <div class="regions-grid">
+                    <div class="region-group">
+                        <h4>Центральный ФО</h4>
+                        <ul>
+                            <li>Москва</li>
+                            <li>Московская область</li>
+                            <li>Санкт-Петербург</li>
+                            <li>Ленинградская область</li>
+                            <li>Воронеж</li>
+                            <li>Тверь</li>
+                            <li>Ярославль</li>
+                            <li>Тула</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="region-group">
+                        <h4>Приволжский ФО</h4>
+                        <ul>
+                            <li>Казань</li>
+                            <li>Уфа</li>
+                            <li>Нижний Новгород</li>
+                            <li>Самара</li>
+                            <li>Пермь</li>
+                            <li>Саратов</li>
+                            <li>Оренбург</li>
+                            <li>Пенза</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="region-group">
+                        <h4>Уральский ФО</h4>
+                        <ul>
+                            <li>Екатеринбург</li>
+                            <li>Челябинск</li>
+                            <li>Тюмень</li>
+                            <li>Магнитогорск</li>
+                            <li>Сургут</li>
+                            <li>Нижневартовск</li>
+                            <li>Курган</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="region-group">
+                        <h4>Сибирский ФО</h4>
+                        <ul>
+                            <li>Новосибирск</li>
+                            <li>Омск</li>
+                            <li>Красноярск</li>
+                            <li>Иркутск</li>
+                            <li>Барнаул</li>
+                            <li>Кемерово</li>
+                            <li>Томск</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-40">
+                    <p><strong>И еще 50+ городов по всей России</strong></p>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ РЕГИОНОВ ============ -->
+
+        <!-- ============ FAQ ============ -->
+        <section class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Частые вопросы по аренде ковров</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Как часто нужно менять ковры?
+                        </div>
+                        <p>Рекомендуемая частота: в офисах - 1 раз в неделю, в магазинах - 2 раза в неделю, в медицинских учреждениях - ежедневно. Мы подстроимся под ваш график.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Что делать, если ковер испортился?
+                        </div>
+                        <p>Просто сообщите нам - мы бесплатно заменим его на новый. Все риски износа мы берем на себя.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Можно ли арендовать ковры на пробный период?
+                        </div>
+                        <p>Да, предлагаем тестовый период 2 недели. Если не понравится - вернем деньги.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Какие документы вы предоставляете?
+                        </div>
+                        <p>Договор аренды, акты выполненных работ, счета-оферты. Работаем с НДС.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Как происходит доставка и установка?
+                        </div>
+                        <p>Наши курьеры привезут чистые ковры и заберут грязные. Установка занимает 5-10 минут.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Можно ли изменить частоту замены?
+                        </div>
+                        <p>Да, в любой момент. Просто сообщите нам - мы скорректируем график.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ FAQ ============ -->
+
+        <!-- ============ КОНТАКТЫ ============ -->
+        <section id="contacts" class="section" style="padding: 80px 0;">
+            <div class="container">
+                <h2 class="section-title">Заказать аренду ковров</h2>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Контакты по аренде ковров</h3>
+                        
+                        <div class="contact-item">
+                            <i class="fab fa-telegram"></i>
+                            <div>
+                                <strong>Telegram (предпочтительно):</strong>
+                                <a href="https://t.me/+79770005127">+7 (977) 000-51-27</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Электронная почта:</strong>
+                                <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Телефон:</strong>
+                                <a href="tel:+79770005127">+7 (977) 000-51-27</a>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px; padding: 15px; background: rgba(22, 160, 133, 0.1); border-radius: var(--border-radius);">
+                            <strong><i class="fas fa-bolt"></i> Быстрый старт:</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">
+                                • Начнем работу уже завтра<br>
+                                • Бесплатный выезд для замера<br>
+                                • Тестовый период 2 недели
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Форма обратной связи -->
+                    <div class="contact-form">
+                        <h3>Заявка на аренду ковров</h3>
+                        <form id="contactForm" method="POST">
+                            <div class="form-group">
+                                <label for="contactName">Название компании *</label>
+                                <input type="text" id="contactName" name="name" required placeholder="ООО Ромашка">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactCity">Город *</label>
+                                    <input type="text" id="contactCity" name="city" required placeholder="Москва">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactPhone">Телефон *</label>
+                                    <input type="tel" id="contactPhone" name="phone" required placeholder="+7 (999) 123-45-67">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactArea">Площадь помещения (м²)</label>
+                                <input type="number" id="contactArea" name="area" placeholder="100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactMessage">Дополнительная информация</label>
+                                <textarea id="contactMessage" name="message" rows="4" placeholder="Тип помещения, желаемая частота замены, особые требования..."></textarea>
+                            </div>
+                            
+                            <!-- Чекбокс согласия -->
+                            <div class="consent-checkbox">
+                                <input type="checkbox" id="contactConsent" name="consent" required>
+                                <label for="contactConsent">
+                                    Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">политикой обработки персональных данных</a>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-telegram" style="width: 100%;">
+                                <i class="fab fa-telegram"></i> Отправить заявку на аренду
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ КОНТАКТОВ ============ -->
+    </main>
+    <!-- ============ КОНЕЦ ОСНОВНОГО КОНТЕНТА ============ -->
+
+    <!-- ============ НАЧАЛО FOOTER ============ -->
+    <script src="/includes/footer.js"></script>
+    <!-- ============ КОНЕЦ FOOTER ============ -->
+
+    <!-- ============ СКРИПТЫ ============ -->
+    <script src="/js/schema.js"></script>
+    <script src="/js/forms.js"></script>
+    
+    <script>
+        // Инициализация автоформатирования телефона
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('contactPhone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    
+                    if (value.startsWith('7') || value.startsWith('8')) {
+                        value = '+7' + value.substring(1);
+                    } else if (!value.startsWith('+7') && value.length > 0) {
+                        value = '+7' + value;
+                    }
+                    
+                    if (value.length > 2) {
+                        value = value.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3-$4-$5');
+                    }
+                    
+                    e.target.value = value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- ============ КОНЕЦ ARENDA-KOVROV.HTML ============ -->
