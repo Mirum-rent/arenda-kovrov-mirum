@@ -1,42 +1,64 @@
-[file name]: calculator.js
-[file content begin]
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 7.1 (07.01.2026) - С улучшенной отправкой в Telegram
+// Версия: 7.2 (07.01.2026) - С исправленной загрузкой регионов
 // ============================================
 
 // ============ НАЧАЛО ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ ============
 let currentCalculation = null;
+let priceDataLoaded = false;
 
 // ============ НАЧАЛО ОСНОВНОЙ ФУНКЦИИ ИНИЦИАЛИЗАЦИИ ============
 function initCalculator() {
     console.log('🧮 Инициализация калькулятора...');
     
     // Проверяем, что мы на странице калькулятора
-    if (!document.querySelector('.calculator-section')) {
+    const calculatorSection = document.querySelector('.calculator-section, .calculator-form, #calculator-form');
+    if (!calculatorSection) {
         console.log('⚠️ Калькулятор не найден на этой странице');
         return;
     }
     
-    // Проверяем загрузку цен
-    if (typeof window.priceData === 'undefined') {
-        console.error('❌ База цен не загружена!');
-        setTimeout(initCalculator, 100);
-        return;
-    }
+    console.log('✅ Страница калькулятора обнаружена');
     
-    console.log('✅ База цен загружена:', Object.keys(window.priceData).length, 'регионов');
+    // Ждем загрузки DOM
+    setTimeout(() => {
+        // Инициализация элементов интерфейса
+        initInterface();
+        
+        // Проверяем загрузку цен
+        checkPriceData();
+        
+        // Назначаем обработчики событий
+        setupEventHandlers();
+        
+        console.log('✅ Калькулятор успешно инициализирован');
+    }, 100);
+}
+
+// ============ НАЧАЛО ПРОВЕРКИ ДАННЫХ ЦЕН ============
+function checkPriceData() {
+    const checkInterval = setInterval(() => {
+        if (typeof window.priceData !== 'undefined') {
+            priceDataLoaded = true;
+            clearInterval(checkInterval);
+            console.log('✅ База цен загружена:', Object.keys(window.priceData).length, 'регионов');
+            populateRegions();
+        } else if (typeof window.PriceUtils !== 'undefined') {
+            priceDataLoaded = true;
+            clearInterval(checkInterval);
+            console.log('✅ PriceUtils загружен');
+            populateRegions();
+        }
+    }, 100);
     
-    // Инициализация элементов интерфейса
-    initInterface();
-    
-    // Заполняем регионы
-    populateRegions();
-    
-    // Назначаем обработчики событий
-    setupEventHandlers();
-    
-    console.log('✅ Калькулятор успешно инициализирован');
+    // Таймаут через 3 секунды
+    setTimeout(() => {
+        if (!priceDataLoaded) {
+            clearInterval(checkInterval);
+            console.error('❌ База цен не загружена! Используем резервный метод...');
+            populateRegionsFallback();
+        }
+    }, 3000);
 }
 
 // ============ НАЧАЛО ИНИЦИАЛИЗАЦИИ ИНТЕРФЕЙСА ============
@@ -48,37 +70,84 @@ function initInterface() {
     const resultsDiv = document.getElementById('results');
     
     // Проверяем наличие необходимых элементов
-    if (!regionSelect || !sizeSelect || !frequencySelect || !calculateBtn) {
-        console.error('❌ Не найдены необходимые элементы калькулятора');
-        return;
+    if (!regionSelect) {
+        console.error('❌ Элемент #region не найден');
+        // Попробуем найти альтернативные селекторы
+        const altRegionSelect = document.querySelector('select[name="region"], select[data-role="region"]');
+        if (altRegionSelect) {
+            altRegionSelect.id = 'region';
+            console.log('✅ Найден альтернативный элемент region');
+        }
     }
     
     // Устанавливаем начальные состояния
-    regionSelect.innerHTML = '<option value="">Выберите регион</option>';
-    sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
-    sizeSelect.disabled = true;
-    frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
-    frequencySelect.disabled = true;
+    if (regionSelect) {
+        regionSelect.innerHTML = '<option value="">Выберите регион</option>';
+    }
+    
+    if (sizeSelect) {
+        sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
+        sizeSelect.disabled = true;
+    }
+    
+    if (frequencySelect) {
+        frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
+        frequencySelect.disabled = true;
+    }
     
     // Скрываем результаты
     if (resultsDiv) {
         resultsDiv.style.display = 'none';
+    }
+    
+    // Убедимся, что quantity имеет значение по умолчанию
+    const quantityInput = document.getElementById('quantity');
+    if (quantityInput && !quantityInput.value) {
+        quantityInput.value = 1;
     }
 }
 
 // ============ НАЧАЛО ЗАПОЛНЕНИЯ РЕГИОНОВ ============
 function populateRegions() {
     const regionSelect = document.getElementById('region');
-    if (!regionSelect) return;
-    
-    // Используем порядок из PriceUtils или создаем свой
-    let regions = [];
-    if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getRegions === 'function') {
-        regions = window.PriceUtils.getRegions();
-    } else {
-        // Резервный вариант: получаем регионы из priceData
-        regions = Object.keys(window.priceData).sort();
+    if (!regionSelect) {
+        console.error('❌ Элемент #region не найден для заполнения');
+        return;
     }
+    
+    let regions = [];
+    
+    // 1. Пробуем использовать PriceUtils
+    if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getRegions === 'function') {
+        try {
+            regions = window.PriceUtils.getRegions();
+            console.log('📊 Используем PriceUtils.getRegions():', regions.length, 'регионов');
+        } catch (error) {
+            console.error('Ошибка в PriceUtils.getRegions():', error);
+        }
+    }
+    
+    // 2. Если PriceUtils не сработал, используем window.priceData
+    if (regions.length === 0 && typeof window.priceData !== 'undefined') {
+        try {
+            regions = Object.keys(window.priceData);
+            console.log('📊 Используем window.priceData:', regions.length, 'регионов');
+        } catch (error) {
+            console.error('Ошибка в window.priceData:', error);
+        }
+    }
+    
+    // 3. Если оба метода не сработали, используем резервный список
+    if (regions.length === 0) {
+        console.warn('⚠️ Используем резервный список регионов');
+        regions = getFallbackRegions();
+    }
+    
+    // Сортируем регионы
+    regions.sort();
+    
+    // Очищаем список
+    regionSelect.innerHTML = '<option value="">Выберите регион</option>';
     
     // Добавляем регионы в выпадающий список
     regions.forEach(region => {
@@ -89,6 +158,73 @@ function populateRegions() {
     });
     
     console.log(`✅ Загружено ${regions.length} регионов`);
+    console.log('📋 Регионы:', regions);
+}
+
+// ============ НАЧАЛО РЕЗЕРВНОГО СПИСКА РЕГИОНОВ ============
+function populateRegionsFallback() {
+    const regionSelect = document.getElementById('region');
+    if (!regionSelect) return;
+    
+    const fallbackRegions = getFallbackRegions();
+    
+    regionSelect.innerHTML = '<option value="">Выберите регион</option>';
+    
+    fallbackRegions.forEach(region => {
+        const option = document.createElement('option');
+        option.value = region;
+        option.textContent = region;
+        regionSelect.appendChild(option);
+    });
+    
+    console.log(`✅ Загружено ${fallbackRegions.length} регионов из резервного списка`);
+}
+
+function getFallbackRegions() {
+    return [
+        "Москва",
+        "Московская область",
+        "Санкт-Петербург",
+        "Ленинградская область",
+        "Астрахань",
+        "Астраханская область",
+        "Волгоград",
+        "Волгоградская область",
+        "Воронеж",
+        "Воронежская область",
+        "Екатеринбург",
+        "Свердловская область",
+        "Иркутск",
+        "Иркутская область",
+        "Казань",
+        "Республика Татарстан",
+        "Красноярск",
+        "Красноярский край",
+        "Нижний Новгород",
+        "Нижегородская область",
+        "Новосибирск",
+        "Новосибирская область",
+        "Омск",
+        "Омская область",
+        "Пермь",
+        "Пермский край",
+        "Ростов-на-Дону",
+        "Ростовская область",
+        "Саратов",
+        "Саратовская область",
+        "Сургут",
+        "ХМАО",
+        "Томск",
+        "Томская область",
+        "Тюмень",
+        "Тюменская область",
+        "Улан-Удэ",
+        "Республика Бурятия",
+        "Уфа",
+        "Республика Башкортостан",
+        "Челябинск",
+        "Челябинская область"
+    ];
 }
 
 // ============ НАЧАЛО НАСТРОЙКИ ОБРАБОТЧИКОВ СОБЫТИЙ ============
@@ -103,14 +239,23 @@ function setupEventHandlers() {
     // Обработчик выбора региона
     if (regionSelect) {
         regionSelect.addEventListener('change', function() {
+            console.log('🌍 Выбран регион:', this.value);
             handleRegionChange(this.value);
         });
+        
+        // Также добавим обработчик для мобильных
+        regionSelect.addEventListener('click', function() {
+            console.log('Клик по региону');
+        });
+    } else {
+        console.error('❌ Элемент #region не найден для установки обработчика');
     }
     
     // Обработчик выбора размера
     if (sizeSelect) {
         sizeSelect.addEventListener('change', function() {
-            handleSizeChange(regionSelect.value, this.value);
+            console.log('📏 Выбран размер:', this.value);
+            handleSizeChange(regionSelect ? regionSelect.value : '', this.value);
         });
     }
     
@@ -118,8 +263,21 @@ function setupEventHandlers() {
     if (calculateBtn) {
         calculateBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('🧮 Нажата кнопка расчета');
             performCalculation();
         });
+        
+        // Добавим обработчик для Enter в форме
+        const calculatorForm = document.querySelector('.calculator-form, #calculator-form, form');
+        if (calculatorForm) {
+            calculatorForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('📝 Отправка формы калькулятора');
+                performCalculation();
+            });
+        }
+    } else {
+        console.error('❌ Кнопка #calculateBtn не найдена');
     }
     
     // Обработчик отправки в Telegram
@@ -142,37 +300,96 @@ function setupEventHandlers() {
     const quantityInput = document.getElementById('quantity');
     if (quantityInput) {
         quantityInput.addEventListener('change', function() {
+            console.log('📦 Изменено количество:', this.value);
             // Если уже был расчет, пересчитываем
             if (currentCalculation) {
                 performCalculation();
             }
         });
+        
+        quantityInput.addEventListener('input', function() {
+            // Валидация в реальном времени
+            if (this.value < 1) {
+                this.value = 1;
+            } else if (this.value > 100) {
+                this.value = 100;
+            }
+        });
     }
+    
+    // Дебаунс для изменения селектов
+    let debounceTimer;
+    [regionSelect, sizeSelect, frequencySelect].forEach(select => {
+        if (select) {
+            select.addEventListener('change', function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    if (regionSelect.value && sizeSelect.value && frequencySelect.value) {
+                        console.log('Все поля заполнены, можно рассчитывать');
+                    }
+                }, 300);
+            });
+        }
+    });
 }
 
 // ============ НАЧАЛО ОБРАБОТКИ ВЫБОРА РЕГИОНА ============
 function handleRegionChange(region) {
     const sizeSelect = document.getElementById('size');
     const frequencySelect = document.getElementById('frequency');
+    const resultsDiv = document.getElementById('results');
+    
+    if (!sizeSelect || !frequencySelect) {
+        console.error('❌ Элементы #size или #frequency не найдены');
+        return;
+    }
     
     if (!region) {
         sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
         sizeSelect.disabled = true;
         frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
         frequencySelect.disabled = true;
+        
+        // Скрываем результаты
+        if (resultsDiv) {
+            resultsDiv.style.display = 'none';
+        }
         return;
     }
     
+    console.log('🔄 Обработка региона:', region);
+    
     // Получаем доступные размеры для региона
     let sizes = [];
+    
+    // 1. Пробуем использовать PriceUtils
     if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getSizesForRegion === 'function') {
-        sizes = window.PriceUtils.getSizesForRegion(region);
-    } else {
-        // Резервный вариант
-        if (window.priceData[region]) {
-            sizes = Object.keys(window.priceData[region]).sort();
+        try {
+            sizes = window.PriceUtils.getSizesForRegion(region);
+            console.log('📏 Используем PriceUtils.getSizesForRegion():', sizes.length, 'размеров');
+        } catch (error) {
+            console.error('Ошибка в PriceUtils.getSizesForRegion():', error);
         }
     }
+    
+    // 2. Если PriceUtils не сработал, используем window.priceData
+    if (sizes.length === 0 && window.priceData && window.priceData[region]) {
+        try {
+            sizes = Object.keys(window.priceData[region]);
+            console.log('📏 Используем window.priceData[region]:', sizes.length, 'размеров');
+        } catch (error) {
+            console.error('Ошибка в window.priceData[region]:', error);
+        }
+    }
+    
+    // 3. Если оба метода не сработали, используем резервные размеры
+    if (sizes.length === 0) {
+        console.warn('⚠️ Используем резервные размеры для региона:', region);
+        sizes = getFallbackSizes();
+    }
+    
+    // Сортируем размеры
+    sizes.sort();
     
     // Заполняем список размеров
     sizeSelect.innerHTML = '<option value="">Выберите размер ковра</option>';
@@ -190,15 +407,44 @@ function handleRegionChange(region) {
     frequencySelect.disabled = true;
     
     // Скрываем результаты
-    const resultsDiv = document.getElementById('results');
     if (resultsDiv) {
         resultsDiv.style.display = 'none';
     }
+    
+    console.log(`✅ Загружено ${sizes.length} размеров для региона ${region}`);
+}
+
+// ============ НАЧАЛО РЕЗЕРВНЫХ РАЗМЕРОВ ============
+function getFallbackSizes() {
+    return [
+        "85*60",
+        "85*150",
+        "115*200",
+        "115*400",
+        "150*240",
+        "150*300",
+        "115*180",
+        "115*240",
+        "150*250",
+        "60*90",
+        "90*150",
+        "120*180",
+        "120*250",
+        "115*300",
+        "85*300",
+        "150*600"
+    ];
 }
 
 // ============ НАЧАЛО ОБРАБОТКИ ВЫБОРА РАЗМЕРА ============
 function handleSizeChange(region, size) {
     const frequencySelect = document.getElementById('frequency');
+    const resultsDiv = document.getElementById('results');
+    
+    if (!frequencySelect) {
+        console.error('❌ Элемент #frequency не найден');
+        return;
+    }
     
     if (!region || !size) {
         frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
@@ -206,16 +452,39 @@ function handleSizeChange(region, size) {
         return;
     }
     
+    console.log('🔄 Обработка размера:', size, 'для региона:', region);
+    
     // Получаем доступные частоты для размера
     let frequencies = [];
+    
+    // 1. Пробуем использовать PriceUtils
     if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getFrequenciesForSize === 'function') {
-        frequencies = window.PriceUtils.getFrequenciesForSize(region, size);
-    } else {
-        // Резервный вариант
-        if (window.priceData[region] && window.priceData[region][size]) {
-            frequencies = Object.keys(window.priceData[region][size]).sort();
+        try {
+            frequencies = window.PriceUtils.getFrequenciesForSize(region, size);
+            console.log('🔄 Используем PriceUtils.getFrequenciesForSize():', frequencies.length, 'частот');
+        } catch (error) {
+            console.error('Ошибка в PriceUtils.getFrequenciesForSize():', error);
         }
     }
+    
+    // 2. Если PriceUtils не сработал, используем window.priceData
+    if (frequencies.length === 0 && window.priceData && window.priceData[region] && window.priceData[region][size]) {
+        try {
+            frequencies = Object.keys(window.priceData[region][size]);
+            console.log('🔄 Используем window.priceData[region][size]:', frequencies.length, 'частот');
+        } catch (error) {
+            console.error('Ошибка в window.priceData[region][size]:', error);
+        }
+    }
+    
+    // 3. Если оба метода не сработали, используем резервные частоты
+    if (frequencies.length === 0) {
+        console.warn('⚠️ Используем резервные частоты для размера:', size);
+        frequencies = getFallbackFrequencies();
+    }
+    
+    // Сортируем частоты
+    frequencies.sort();
     
     // Заполняем список частот
     frequencySelect.innerHTML = '<option value="">Выберите периодичность замены</option>';
@@ -229,29 +498,72 @@ function handleSizeChange(region, size) {
     frequencySelect.disabled = false;
     
     // Скрываем результаты
-    const resultsDiv = document.getElementById('results');
     if (resultsDiv) {
         resultsDiv.style.display = 'none';
     }
+    
+    console.log(`✅ Загружено ${frequencies.length} частот для размера ${size}`);
+}
+
+// ============ НАЧАЛО РЕЗЕРВНЫХ ЧАСТОТ ============
+function getFallbackFrequencies() {
+    return [
+        "1 раз в две недели",
+        "1 раз в неделю",
+        "2 раза в неделю",
+        "3 раза в неделю",
+        "4 раза в неделю",
+        "5 раз в неделю",
+        "6 раз в неделю",
+        "7 раз в неделю"
+    ];
 }
 
 // ============ НАЧАЛО ВЫПОЛНЕНИЯ РАСЧЕТА ============
 function performCalculation() {
-    const region = document.getElementById('region').value;
-    const size = document.getElementById('size').value;
-    const frequency = document.getElementById('frequency').value;
-    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+    const region = document.getElementById('region') ? document.getElementById('region').value : '';
+    const size = document.getElementById('size') ? document.getElementById('size').value : '';
+    const frequency = document.getElementById('frequency') ? document.getElementById('frequency').value : '';
+    const quantity = document.getElementById('quantity') ? parseInt(document.getElementById('quantity').value) || 1 : 1;
+    
+    console.log('🧮 Начало расчета:', { region, size, frequency, quantity });
     
     // Проверяем заполнение полей
     if (!region || !size || !frequency) {
         alert('Пожалуйста, заполните все поля калькулятора');
+        
+        // Подсвечиваем незаполненные поля
+        if (!region) {
+            const regionSelect = document.getElementById('region');
+            if (regionSelect) {
+                regionSelect.style.borderColor = 'red';
+                setTimeout(() => regionSelect.style.borderColor = '', 2000);
+            }
+        }
+        if (!size) {
+            const sizeSelect = document.getElementById('size');
+            if (sizeSelect) {
+                sizeSelect.style.borderColor = 'red';
+                setTimeout(() => sizeSelect.style.borderColor = '', 2000);
+            }
+        }
+        if (!frequency) {
+            const frequencySelect = document.getElementById('frequency');
+            if (frequencySelect) {
+                frequencySelect.style.borderColor = 'red';
+                setTimeout(() => frequencySelect.style.borderColor = '', 2000);
+            }
+        }
+        
         return;
     }
     
     // Проверяем количество
     if (quantity < 1 || quantity > 100) {
         alert('Пожалуйста, укажите количество от 1 до 100');
-        document.getElementById('quantity').value = Math.min(Math.max(quantity, 1), 100);
+        if (document.getElementById('quantity')) {
+            document.getElementById('quantity').value = Math.min(Math.max(quantity, 1), 100);
+        }
         return;
     }
     
@@ -282,24 +594,38 @@ function calculatePrice(region, size, frequency, quantity) {
     let pricePerReplacement = 0;
     let monthlyCost = 0;
     
-    // Используем PriceUtils если доступен
+    console.log('💰 Расчет цены для:', { region, size, frequency, quantity });
+    
+    // 1. Пробуем использовать PriceUtils
     if (typeof window.PriceUtils !== 'undefined') {
-        pricePerReplacement = window.PriceUtils.getPrice(region, size, frequency);
+        if (typeof window.PriceUtils.getPrice === 'function') {
+            pricePerReplacement = window.PriceUtils.getPrice(region, size, frequency);
+            console.log('💰 PriceUtils.getPrice():', pricePerReplacement);
+        }
         
         if (typeof window.PriceUtils.calculateMonthlyCost === 'function') {
             monthlyCost = window.PriceUtils.calculateMonthlyCost(region, size, frequency, quantity);
+            console.log('💰 PriceUtils.calculateMonthlyCost():', monthlyCost);
         } else {
             // Резервный расчет
             monthlyCost = calculateMonthlyCostManual(pricePerReplacement, frequency, quantity);
         }
     } else {
-        // Резервный вариант
-        if (window.priceData[region] && 
+        // 2. Если PriceUtils не доступен, используем window.priceData
+        if (window.priceData && window.priceData[region] && 
             window.priceData[region][size] && 
             window.priceData[region][size][frequency]) {
             pricePerReplacement = window.priceData[region][size][frequency];
+            console.log('💰 Из window.priceData:', pricePerReplacement);
         }
         
+        monthlyCost = calculateMonthlyCostManual(pricePerReplacement, frequency, quantity);
+    }
+    
+    // 3. Если цена все еще 0, используем резервные цены
+    if (pricePerReplacement === 0) {
+        console.warn('⚠️ Цена не найдена, используем резервную цену');
+        pricePerReplacement = getFallbackPrice(size);
         monthlyCost = calculateMonthlyCostManual(pricePerReplacement, frequency, quantity);
     }
     
@@ -320,6 +646,30 @@ function calculatePrice(region, size, frequency, quantity) {
         formattedTotal,
         timestamp: new Date().toISOString()
     };
+}
+
+// ============ НАЧАЛО РЕЗЕРВНЫХ ЦЕН ============
+function getFallbackPrice(size) {
+    const fallbackPrices = {
+        "85*60": 500,
+        "85*150": 800,
+        "115*200": 1200,
+        "115*400": 2200,
+        "150*240": 1500,
+        "150*300": 2000,
+        "115*180": 1100,
+        "115*240": 1400,
+        "150*250": 1800,
+        "60*90": 400,
+        "90*150": 700,
+        "120*180": 1300,
+        "120*250": 1700,
+        "115*300": 1600,
+        "85*300": 1200,
+        "150*600": 4000
+    };
+    
+    return fallbackPrices[size] || 1000;
 }
 
 // ============ НАЧАЛО РУЧНОГО РАСЧЕТА МЕСЯЧНОЙ СТОИМОСТИ ============
@@ -353,7 +703,10 @@ function displayResults(calculation) {
     const resultsDiv = document.getElementById('results');
     const resultDetails = document.getElementById('resultDetails');
     
-    if (!resultsDiv || !resultDetails) return;
+    if (!resultsDiv || !resultDetails) {
+        console.error('❌ Элементы #results или #resultDetails не найдены');
+        return;
+    }
     
     // Определяем количество замен в месяц
     let replacementsPerMonth = 4;
@@ -409,6 +762,8 @@ function displayResults(calculation) {
     setTimeout(() => {
         resultsDiv.style.animation = 'fadeIn 0.5s ease-out';
     }, 10);
+    
+    console.log('✅ Результаты отображены');
 }
 
 // ============ НАЧАЛО ОТПРАВКИ В TELEGRAM ============
@@ -503,7 +858,7 @@ function createCalculationMessage() {
     message += `📊 Стоимость в месяц: ${calc.formattedMonthly}\n`;
     message += `📈 Количество замен в месяц: ${replacementsPerMonth}\n\n`;
     
-    message += `📄Для заключения договора понадобятся:\n`;
+    message += `📄 Для заключения договора понадобятся:\n`;
     message += `• Реквизиты компании\n`;
     message += `• Кто подписывает договор от имени компании и на основании чего действует\n`;
     message += `• Точный адрес и название организации, вывеска (если есть)\n`;
@@ -539,21 +894,79 @@ function createCalculationMessage() {
     return message;
 }
 
+// ============ НАЧАЛО ДЕБАГ ФУНКЦИЙ ============
+function debugCalculator() {
+    console.log('🔧 Отладка калькулятора:');
+    console.log('1. Проверка элементов:');
+    console.log('- #region:', document.getElementById('region') ? 'Найден' : 'Не найден');
+    console.log('- #size:', document.getElementById('size') ? 'Найден' : 'Не найден');
+    console.log('- #frequency:', document.getElementById('frequency') ? 'Найден' : 'Не найден');
+    console.log('- #quantity:', document.getElementById('quantity') ? 'Найден' : 'Не найден');
+    console.log('- #calculateBtn:', document.getElementById('calculateBtn') ? 'Найден' : 'Не найден');
+    console.log('- #results:', document.getElementById('results') ? 'Найден' : 'Не найден');
+    
+    console.log('2. Проверка данных:');
+    console.log('- window.priceData:', typeof window.priceData !== 'undefined' ? 'Загружен' : 'Не загружен');
+    console.log('- window.PriceUtils:', typeof window.PriceUtils !== 'undefined' ? 'Загружен' : 'Не загружен');
+    
+    if (typeof window.priceData !== 'undefined') {
+        console.log('- Количество регионов:', Object.keys(window.priceData).length);
+        console.log('- Регионы:', Object.keys(window.priceData));
+    }
+    
+    console.log('3. Текущий расчет:', currentCalculation);
+}
+
 // ============ НАЧАЛО ЭКСПОРТА ФУНКЦИЙ ============
 // Делаем функции доступными глобально
 window.initCalculator = initCalculator;
 window.performCalculation = performCalculation;
 window.sendToTelegram = sendToTelegram;
 window.sendToEmail = sendToEmail;
+window.debugCalculator = debugCalculator;
 
 // ============ НАЧАЛО АВТОМАТИЧЕСКОЙ ИНИЦИАЛИЗАЦИИ ============
 // Автоматически инициализируем калькулятор при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    if (document.querySelector('.calculator-section')) {
-        console.log('🔍 Страница калькулятора обнаружена, запускаем инициализацию...');
-        setTimeout(initCalculator, 500);
+    console.log('📄 DOM загружен, проверяем наличие калькулятора...');
+    
+    // Проверяем наличие калькулятора разными способами
+    const hasCalculatorSection = document.querySelector('.calculator-section');
+    const hasCalculatorForm = document.querySelector('.calculator-form, #calculator-form');
+    const hasRegionSelect = document.getElementById('region');
+    
+    if (hasCalculatorSection || hasCalculatorForm || hasRegionSelect) {
+        console.log('🔍 Калькулятор обнаружен, запускаем инициализацию...');
+        
+        // Небольшая задержка для загрузки других скриптов
+        setTimeout(() => {
+            initCalculator();
+            
+            // Добавляем кнопку отладки в режиме разработки
+            if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
+                const debugBtn = document.createElement('button');
+                debugBtn.textContent = '🔧 Debug';
+                debugBtn.style.cssText = 'position:fixed; bottom:10px; right:10px; z-index:9999; padding:5px 10px; background:#f39c12; color:white; border:none; border-radius:3px; cursor:pointer;';
+                debugBtn.onclick = debugCalculator;
+                document.body.appendChild(debugBtn);
+            }
+        }, 500);
+    } else {
+        console.log('⚠️ Калькулятор не найден на этой странице');
     }
 });
 
+// Также инициализируем при полной загрузке страницы
+window.addEventListener('load', function() {
+    console.log('🚀 Страница полностью загружена');
+    
+    // Двойная проверка для надежности
+    setTimeout(() => {
+        if (document.getElementById('region') && !priceDataLoaded) {
+            console.log('🔄 Повторная проверка инициализации калькулятора');
+            initCalculator();
+        }
+    }, 1000);
+});
+
 // ============ КОНЕЦ CALCULATOR.JS ============
-[file content end]
