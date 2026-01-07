@@ -276,7 +276,7 @@ p {
     color: var(--accent-color);
 }
 
-/* Кнопки связи в хедере */
+/* ============ КНОПКИ СВЯЗИ В ХЕДЕРЕ ============ */
 .header-contacts {
     display: flex;
     gap: 10px;
@@ -285,13 +285,45 @@ p {
 }
 
 .header-contacts .btn {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-    min-height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
+    padding: 10px 15px !important;
+    font-size: 0.85rem !important;
+    min-height: 36px !important;
+    min-width: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: 600 !important;
+}
+
+.header-contacts .btn-telegram {
+    background-color: var(--telegram-color) !important;
+    color: white !important;
+    border: 2px solid var(--telegram-color) !important;
+}
+
+.header-contacts .btn-telegram:hover {
+    background-color: #0077b3 !important;
+    border-color: #0077b3 !important;
+}
+
+.header-contacts .btn-primary {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    border: 2px solid var(--accent-color) !important;
+}
+
+.header-contacts .btn-primary:hover {
+    background-color: var(--light-accent) !important;
+    border-color: var(--light-accent) !important;
+}
+
+/* Для мобильных кнопки в хедере скрываем */
+@media (max-width: 768px) {
+    .header-contacts {
+        display: none !important;
+    }
 }
 
 /* Мобильное меню-бургер (скрыто на десктопе) */

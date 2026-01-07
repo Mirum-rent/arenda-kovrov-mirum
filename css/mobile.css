@@ -594,4 +594,32 @@
     }
 }
 
+/* ============ АНИМАЦИИ ДЛЯ УБИРАЮЩЕГОСЯ ХЕДЕРА И ГЕРОЯ ============ */
+@media (max-width: 768px) {
+    .hero {
+        transition: all 0.3s ease !important;
+    }
+    
+    .hero.hidden {
+        opacity: 0 !important;
+        transform: translateY(-50px) !important;
+        height: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+    }
+    
+    /* Быстрое скрытие для калькулятора */
+    .calculator-page .main-header.hidden,
+    .calculator-page .hero.hidden {
+        transform: translateY(-100%) !important;
+    }
+    
+    .calculator-page .hero.hidden {
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 0 !important;
+    }
+}
+
 /* ============ КОНЕЦ MOBILE.CSS ============ */
