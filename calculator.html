@@ -1,7 +1,9 @@
+[file name]: calculator.html
+[file content begin]
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 7.0 (07.01.2026) - САМОСТОЯТЕЛЬНАЯ СТРАНИЦА
+     Версия: 7.1 (07.01.2026) - С ИСПРАВЛЕННОЙ КОНТРАСТНОСТЬЮ
      ============================================ -->
 <html lang="ru">
 <head>
@@ -88,13 +90,13 @@
                     Калькулятор стоимости аренды ковров
                 </h1>
                 
-                <p style="font-size: clamp(1rem, 2vw, 1.1rem); max-width: 800px; margin: 0 auto 30px; line-height: 1.6; color: #e0e0e0;">
+                <p style="font-size: clamp(1rem, 2vw, 1.1rem); max-width: 800px; margin: 0 auto 30px; line-height: 1.6; color: #ffffff;">
                     Рассчитайте стоимость аренды грязезащитных ковров для вашего города. 
                     Выберите регион, размер ковра и периодичность замены.
                 </p>
                 
-                <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
-                    <p style="margin: 0; font-size: 0.95rem;">
+                <div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
+                    <p style="margin: 0; font-size: 0.95rem; color: #ffffff;">
                         <i class="fas fa-info-circle" style="color: #1abc9c;"></i> 
                         Все цены указаны за одну замену ковра. В стоимость включена доставка, установка и чистка.
                     </p>
@@ -183,8 +185,8 @@
                             </button>
                         </div>
                         
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
-                            <p style="margin: 0; font-size: 0.9rem; color: #e0e0e0;">
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.2); border-radius: 8px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #ffffff;">
                                 <i class="fas fa-lightbulb"></i> 
                                 <strong>Совет:</strong> Отправьте расчет нашему менеджеру для уточнения деталей и получения коммерческого предложения.
                             </p>
@@ -219,52 +221,54 @@
                     <h3><i class="fas fa-city"></i> Примерные цены в популярных городах (за одну замену):</h3>
                     
                     <div class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Город</th>
-                                <th>Ковер 85×60 см</th>
-                                <th>Ковер 85×150 см</th>
-                                <th>Ковер 115×200 см</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Москва</strong></td>
-                                <td>180 ₽</td>
-                                <td>420 ₽</td>
-                                <td>760 ₽</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Санкт-Петербург</strong></td>
-                                <td>340 ₽</td>
-                                <td>510 ₽</td>
-                                <td>830 ₽</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Екатеринбург</strong></td>
-                                <td>190 ₽</td>
-                                <td>360 ₽</td>
-                                <td>580 ₽</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Новосибирск</strong></td>
-                                <td>200 ₽</td>
-                                <td>400 ₽</td>
-                                <td>610 ₽</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Казань</strong></td>
-                                <td>190 ₽</td>
-                                <td>360 ₽</td>
-                                <td>580 ₽</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Уфа</strong></td>
-                                <td>200 ₽</td>
-                                <td>360 ₽</td>
-                                <td>550 ₽</td>
-                            </tr>
-                        </tbody>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Город</th>
+                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Ковер 85×60 см</th>
+                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Ковер 85×150 см</th>
+                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Ковер 115×200 см</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Москва</strong></td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">180 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">420 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">760 ₽</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Санкт-Петербург</strong></td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">340 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">510 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">830 ₽</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Екатеринбург</strong></td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">190 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">360 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">580 ₽</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Новосибирск</strong></td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">200 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">400 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">610 ₽</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Казань</strong></td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">190 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">360 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">580 ₽</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Уфа</strong></td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">200 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">360 ₽</td>
+                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">550 ₽</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     
                     <p style="text-align: center; margin-top: 20px; font-style: italic; color: var(--text-light);">
@@ -492,3 +496,4 @@
 </body>
 </html>
 <!-- ============ КОНЕЦ CALCULATOR.HTML ============ -->
+[file content end]
