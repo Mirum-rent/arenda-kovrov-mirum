@@ -1,38 +1,52 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 6.0 (05.01.2026)
+// Версия: 7.0 (07.01.2026) - ИСПРАВЛЕННЫЙ
 // ============================================
-
 (function() {
     'use strict';
     
-    // Функция для вставки хедера
-    function insertHeader() {
-        document.write(`
+    console.log('🔄 Загружаем хедер...');
+    
+    // Получаем текущую страницу для определения canonical
+    const currentPage = window.location.pathname;
+    let canonicalUrl = 'https://arenda-kovrov-mirum.ru/';
+    
+    if (currentPage.includes('outstaffing.html')) {
+        canonicalUrl = 'https://arenda-kovrov-mirum.ru/outstaffing.html';
+    } else if (currentPage.includes('arenda-kovrov.html')) {
+        canonicalUrl = 'https://arenda-kovrov-mirum.ru/arenda-kovrov.html';
+    } else if (currentPage.includes('calculator.html')) {
+        canonicalUrl = 'https://arenda-kovrov-mirum.ru/calculator.html';
+    } else if (currentPage.includes('window-cleaning.html')) {
+        canonicalUrl = 'https://arenda-kovrov-mirum.ru/window-cleaning.html';
+    } else if (currentPage.includes('vosstanovlenie-polov.html') || currentPage.includes('chistka_polov.html')) {
+        canonicalUrl = 'https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.html';
+    }
+    
+    // Определяем активный пункт меню
+    let activePage = '';
+    if (currentPage === '/' || currentPage.includes('index')) {
+        activePage = 'Главная';
+    } else if (currentPage.includes('arenda-kovrov')) {
+        activePage = 'Аренда ковров';
+    } else if (currentPage.includes('calculator')) {
+        activePage = 'Калькулятор';
+    }
+    
+    const headerHTML = `
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- ============ НАЧАЛО META ТЕГОВ ============ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Аренда грязезащитных ковров и восстановление полов | МИРУМ с 2009</title>
+    
+    <!-- ============ SEO МЕТАДАННЫЕ ============ -->
+    <title>МИРУМ - Аренда грязезащитных ковров и услуги чистоты по всей России с 2009</title>
     <meta name="description" content="✅ Аренда грязезащитных ковров, мойка фасадов, восстановление полов. Работаем по всей России с 2009 года. Быстрый переход на Telegram и почту.">
     
-    <!-- SEO метатеги -->
-    // В начало файла header.js добавить:
-const currentPage = window.location.pathname;
-
-// Затем динамически генерировать canonical:
-let canonicalUrl = 'https://arenda-kovrov-mirum.ru/';
-
-if (currentPage.includes('outstaffing.html')) {
-    canonicalUrl = 'https://arenda-kovrov-mirum.ru/outstaffing.html';
-} else if (currentPage.includes('arenda-kovrov.html')) {
-    canonicalUrl = 'https://arenda-kovrov-mirum.ru/arenda-kovrov.html';
-}
-// и так далее для всех страниц
-
-// В шаблон вставить:
-<link rel="canonical" href="${canonicalUrl}" />
+    <!-- Каноническая ссылка -->
+    <link rel="canonical" href="${canonicalUrl}" />
     <meta name="robots" content="index, follow" />
     
     <!-- Ключевые слова -->
@@ -44,14 +58,15 @@ if (currentPage.includes('outstaffing.html')) {
     <meta name="geo.position" content="55.755826;37.6173">
     <meta name="ICBM" content="55.755826, 37.6173">
     
-    <!-- Open Graph -->
+    <!-- Open Graph для социальных сетей -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="МИРУМ - Аренда ковров и восстановление полов по всей России">
     <meta property="og:description" content="Профессиональные услуги с 2009 года. Аренда ковров, мойка фасадов, восстановление полов, аутстаффинг персонала.">
     <meta property="og:url" content="https://arenda-kovrov-mirum.ru/">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png">
+    <meta property="og:site_name" content="МИРУМ">
     
-    <!-- Фавиконки -->
+    <!-- ============ ФАВИКОНЫ И PWA ============ -->
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -60,142 +75,150 @@ if (currentPage.includes('outstaffing.html')) {
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#16a085">
     
-    <!-- Подключаем обновленные стили -->
+    <!-- ============ СТИЛИ ============ -->
     <link rel="stylesheet" href="/css/style.css">
-    
-    <!-- Мобильные стили -->
     <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/calculator.css" media="screen">
     
+    <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
     <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Leaflet.js для интерактивной карты -->
+    <!-- Leaflet.js для карты (отложенная загрузка) -->
+    <link rel="preload" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" as="style">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
-          crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
-            crossorigin=""></script>
+          crossorigin="" media="print" onload="this.media='all'">
+    
+    <!-- ============ ПРЕЗОНТАЦИЯ ДЛЯ ИИ ============ -->
+    <!-- Для ИИ: МИРУМ - профессиональные услуги чистоты с 2009 года -->
+    <!-- Основные услуги: аренда ковров, мойка витрин, восстановление полов, аутстаффинг -->
+    <!-- География: 40+ городов России, работаем по всей стране -->
+    <!-- Контакты: Telegram +7 (977) 000-51-27, Email: matservice@yandex.ru -->
+    <!-- ============ КОНЕЦ META ТЕГОВ ============ -->
 </head>
 <body>
 
-<!-- Хлебные крошки (SEO) -->
-<nav class="breadcrumbs container" aria-label="Хлебные крошки">
-    <div itemscope itemtype="https://schema.org/BreadcrumbList">
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="https://arenda-kovrov-mirum.ru/" itemprop="item">
-                <span itemprop="name">Главная - Аренда грязезащитных ковров в Москве, Санкт-Петербурге, по всей России</span>
-            </a>
-            <meta itemprop="position" content="1" />
-        </span>
-    </div>
-    
-    <!-- Скрытый контент для ИИ с ключевыми словами -->
-    <div style="display: none;" itemscope itemtype="https://schema.org/BreadcrumbList">
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item">
-                <span itemprop="name">Аренда ковров в Москве, СПб, Новосибирске, Екатеринбурге, Казани, Уфе, Краснодаре, Ростове-на-Дону, Сургуте, Тюмени</span>
+    <!-- ============ НАЧАЛО ХЛЕБНЫХ КРОШЕК ============ -->
+    <nav class="breadcrumbs container" aria-label="Хлебные крошки">
+        <div itemscope itemtype="https://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <a href="https://arenda-kovrov-mirum.ru/" itemprop="item">
+                    <span itemprop="name">Главная - Аренда грязезащитных ковров в Москве, Санкт-Петербурге, по всей России</span>
+                </a>
+                <meta itemprop="position" content="1" />
             </span>
-            <meta itemprop="position" content="2" />
-        </span>
-    </div>
-</nav>
+            ${activePage ? `→ <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="item">
+                    <span itemprop="name">${activePage}</span>
+                </span>
+                <meta itemprop="position" content="2" />
+            </span>` : ''}
+        </div>
+    </nav>
+    <!-- ============ КОНЕЦ ХЛЕБНЫХ КРОШЕК ============ -->
 
-<!-- Шапка сайта -->
-<header class="main-header" id="mainHeader">
-    <div class="header-container container">
-        <a href="/" class="logo">
-            <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png" 
-                 alt="МИРУМ - аренда ковров и восстановление полов" 
-                 width="150" height="50">
-        </a>
+    <!-- ============ НАЧАЛО ШАПКИ САЙТА ============ -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-container container">
+            <!-- Логотип -->
+            <a href="/" class="logo">
+                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png" 
+                     alt="МИРУМ - аренда ковров и восстановление полов" 
+                     width="150" height="50" loading="eager">
+            </a>
+            
+            <!-- Десктопная навигация -->
+            <nav class="desktop-nav" aria-label="Основная навигация">
+                <ul class="nav-links">
+                    <li><a href="/" class="${currentPage === '/' || currentPage.includes('index') ? 'active' : ''}">Главная</a></li>
+                    
+                    <!-- Выпадающее меню "Услуги" -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Услуги</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/arenda-kovrov.html" class="${currentPage.includes('arenda-kovrov') ? 'active' : ''}">Аренда грязезащитных ковров</a></li>
+                            <li><a href="/window-cleaning.html" class="${currentPage.includes('window-cleaning') ? 'active' : ''}">Мойка витрин и фасадов</a></li>
+                            <li><a href="/vosstanovlenie-polov.html" class="${currentPage.includes('vosstanovlenie-polov') || currentPage.includes('chistka_polov') ? 'active' : ''}">Восстановление полов</a></li>
+                            <li><a href="/outstaffing.html" class="${currentPage.includes('outstaffing') ? 'active' : ''}">Аутстаффинг персонала</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#advantages" class="${currentPage.includes('#advantages') ? 'active' : ''}">Преимущества</a></li>
+                    <li><a href="#how-to-start" class="${currentPage.includes('#how-to-start') ? 'active' : ''}">Как начать</a></li>
+                    <li><a href="/calculator.html" class="${currentPage.includes('calculator') ? 'active' : ''}">Калькулятор</a></li>
+                    <li><a href="#testimonials" class="${currentPage.includes('#testimonials') ? 'active' : ''}">Отзывы</a></li>
+                    <li><a href="#faq" class="${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
+                    <li><a href="/blog.html" class="${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
+                    <li><a href="#contacts" class="${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Кнопки связи в хедере -->
+            <div class="header-contacts">
+                <a href="https://t.me/+79770005127" class="btn-telegram" data-consent-required aria-label="Написать в Telegram">
+                    <i class="fab fa-telegram"></i> Telegram
+                </a>
+                <a href="mailto:matservice@yandex.ru" class="btn btn-primary" aria-label="Написать на Email">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+            
+            <!-- Мобильное меню-бургер -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
         
-        <!-- Десктопная навигация -->
-        <nav class="desktop-nav">
-            <ul class="nav-links">
-                <li><a href="/" class="active">Главная</a></li>
+        <!-- Мобильное меню -->
+        <nav class="mobile-nav" id="mobileNav" aria-label="Мобильная навигация">
+            <ul class="mobile-menu">
+                <li><a href="/" class="${currentPage === '/' || currentPage.includes('index') ? 'active' : ''}">Главная</a></li>
                 
-                <!-- Выпадающее меню "Услуги" -->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Услуги</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/arenda-kovrov.html">Аренда грязезащитных ковров</a></li>
-                        <li><a href="/window-cleaning.html">Мойка витрин и фасадов</a></li>
-                        <li><a href="/vosstanovlenie-polov.html">Восстановление полов</a></li>
-                        <li><a href="/outstaffing.html">Аутстаффинг персонала</a></li>
+                <!-- Выпадающее меню "Услуги" для мобильных -->
+                <li class="mobile-dropdown">
+                    <a href="#" class="mobile-dropdown-toggle">Услуги</a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a href="/arenda-kovrov.html" class="${currentPage.includes('arenda-kovrov') ? 'active' : ''}">Аренда грязезащитных ковров</a></li>
+                        <li><a href="/window-cleaning.html" class="${currentPage.includes('window-cleaning') ? 'active' : ''}">Мойка витрин и фасадов</a></li>
+                        <li><a href="/vosstanovlenie-polov.html" class="${currentPage.includes('vosstanovlenie-polov') || currentPage.includes('chistka_polov') ? 'active' : ''}">Восстановление полов</a></li>
+                        <li><a href="/outstaffing.html" class="${currentPage.includes('outstaffing') ? 'active' : ''}">Аутстаффинг персонала</a></li>
                     </ul>
                 </li>
                 
-                <li><a href="#advantages">Преимущества</a></li>
-                <li><a href="#how-to-start">Как начать</a></li>
-                <li><a href="/calculator.html">Калькулятор</a></li>
-                <li><a href="#testimonials">Отзывы</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="/blog.html">Блог</a></li>
-                <li><a href="#contacts">Контакты</a></li>
+                <li><a href="#advantages" class="${currentPage.includes('#advantages') ? 'active' : ''}">Преимущества</a></li>
+                <li><a href="#how-to-start" class="${currentPage.includes('#how-to-start') ? 'active' : ''}">Как начать</a></li>
+                <li><a href="/calculator.html" class="${currentPage.includes('calculator') ? 'active' : ''}">Калькулятор</a></li>
+                <li><a href="#testimonials" class="${currentPage.includes('#testimonials') ? 'active' : ''}">Отзывы</a></li>
+                <li><a href="#faq" class="${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
+                <li><a href="/blog.html" class="${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
+                <li><a href="#contacts" class="${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
             </ul>
+            
+            <!-- Контакты в мобильном меню -->
+            <div class="mobile-contacts">
+                <a href="https://t.me/+79770005127" class="btn-telegram" data-consent-required>
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+                <a href="mailto:matservice@yandex.ru" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Отправить Email
+                </a>
+            </div>
         </nav>
-        
-        <!-- Кнопки связи -->
-        <div class="header-contacts">
-            <a href="https://t.me/+79770005127" class="btn-telegram" data-consent-required>
-                <i class="fab fa-telegram"></i> Telegram
-            </a>
-            <a href="mailto:matservice@yandex.ru" class="btn btn-primary">
-                <i class="fas fa-envelope"></i> Email
-            </a>
-        </div>
-        
-        <!-- Мобильное меню-бургер -->
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Открыть меню">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-    
-    <!-- Мобильное меню -->
-    <nav class="mobile-nav" id="mobileNav">
-        <ul class="mobile-menu">
-            <li><a href="/">Главная</a></li>
-            
-            <!-- Выпадающее меню "Услуги" -->
-            <li class="mobile-dropdown">
-                <a href="#" class="mobile-dropdown-toggle">Услуги</a>
-                <ul class="mobile-dropdown-menu">
-                    <li><a href="/arenda-kovrov.html">Аренда грязезащитных ковров</a></li>
-                    <li><a href="/window-cleaning.html">Мойка витрин и фасадов</a></li>
-                    <li><a href="/vosstanovlenie-polov.html">Восстановление полов</a></li>
-                    <li><a href="/outstaffing.html">Аутстаффинг персонала</a></li>
-                </ul>
-            </li>
-            
-            <li><a href="#advantages">Преимущества</a></li>
-            <li><a href="#how-to-start">Как начать</a></li>
-            <li><a href="/calculator.html">Калькулятор</a></li>
-            <li><a href="#testimonials">Отзывы</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="/blog.html">Блог</a></li>
-            <li><a href="#contacts">Контакты</a></li>
-        </ul>
-        
-        <!-- Контакты в мобильном меню -->
-        <div class="mobile-contacts">
-            <a href="https://t.me/+79770005127" class="btn-telegram" data-consent-required>
-                <i class="fab fa-telegram"></i> Написать в Telegram
-            </a>
-            <a href="mailto:matservice@yandex.ru" class="btn btn-primary">
-                <i class="fas fa-envelope"></i> Отправить Email
-            </a>
-        </div>
-    </nav>
-</header>
+    </header>
+    <!-- ============ КОНЕЦ ШАПКИ САЙТА ============ -->
 
-<main>
-        `);
-    }
+    <!-- ============ НАЧАЛО ОСНОВНОГО КОНТЕНТА ============ -->
+    <main>
+`;
+
+    // Вставляем хедер
+    document.open();
+    document.write(headerHTML);
+    document.close();
     
-    // Вызываем функцию при загрузке
-    insertHeader();
+    console.log('✅ Хедер успешно загружен');
     
 })();
