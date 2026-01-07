@@ -1,6 +1,8 @@
+[file name]: mobile.js
+[file content begin]
 // ============================================
 // MOBILE.JS - Мобильная оптимизация для МИРУМ
-// Версия: 5.0 (30.12.2025)
+// Версия: 5.1 (07.01.2026) - С исправленным выбором частоты в калькуляторе
 // ============================================
 
 (function() {
@@ -370,6 +372,9 @@
     function setupCalculatorMobile() {
         console.log('📱 Применяем мобильные настройки для калькулятора');
         
+        // Исправляем проблему с выбором частоты замены
+        fixFrequencySelection();
+        
         // Адаптируем элементы калькулятора
         adaptCalculatorElements();
         
@@ -387,7 +392,112 @@
         // Обработка изменений размера для калькулятора
         window.addEventListener('resize', function() {
             adaptCalculatorElements();
+            fixFrequencySelection();
         });
+    }
+    
+    // Функция для исправления выбора частоты замены
+    function fixFrequencySelection() {
+        const isMobile = window.innerWidth <= 768;
+        const regionSelect = document.getElementById('region');
+        const sizeSelect = document.getElementById('size');
+        const frequencySelect = document.getElementById('frequency');
+        
+        if (!isMobile || !regionSelect || !sizeSelect || !frequencySelect) {
+            return;
+        }
+        
+        // Переустанавливаем обработчики событий для мобильной версии
+        if (regionSelect) {
+            regionSelect.addEventListener('change', function() {
+                handleRegionChangeMobile(this.value);
+            });
+        }
+        
+        if (sizeSelect) {
+            sizeSelect.addEventListener('change', function() {
+                handleSizeChangeMobile(regionSelect.value, this.value);
+            });
+        }
+    }
+    
+    function handleRegionChangeMobile(region) {
+        const sizeSelect = document.getElementById('size');
+        const frequencySelect = document.getElementById('frequency');
+        
+        if (!region) {
+            sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
+            sizeSelect.disabled = true;
+            frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
+            frequencySelect.disabled = true;
+            return;
+        }
+        
+        // Получаем доступные размеры для региона
+        let sizes = [];
+        if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getSizesForRegion === 'function') {
+            sizes = window.PriceUtils.getSizesForRegion(region);
+        } else if (window.priceData && window.priceData[region]) {
+            // Резервный вариант
+            sizes = Object.keys(window.priceData[region]).sort();
+        }
+        
+        // Заполняем список размеров
+        sizeSelect.innerHTML = '<option value="">Выберите размер ковра</option>';
+        sizes.forEach(size => {
+            const option = document.createElement('option');
+            option.value = size;
+            option.textContent = size;
+            sizeSelect.appendChild(option);
+        });
+        
+        sizeSelect.disabled = false;
+        
+        // Сбрасываем частоту
+        frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
+        frequencySelect.disabled = true;
+        
+        // Скрываем результаты
+        const resultsDiv = document.getElementById('results');
+        if (resultsDiv) {
+            resultsDiv.style.display = 'none';
+        }
+    }
+    
+    function handleSizeChangeMobile(region, size) {
+        const frequencySelect = document.getElementById('frequency');
+        
+        if (!region || !size) {
+            frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
+            frequencySelect.disabled = true;
+            return;
+        }
+        
+        // Получаем доступные частоты для размера
+        let frequencies = [];
+        if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getFrequenciesForSize === 'function') {
+            frequencies = window.PriceUtils.getFrequenciesForSize(region, size);
+        } else if (window.priceData && window.priceData[region] && window.priceData[region][size]) {
+            // Резервный вариант
+            frequencies = Object.keys(window.priceData[region][size]).sort();
+        }
+        
+        // Заполняем список частот
+        frequencySelect.innerHTML = '<option value="">Выберите периодичность замены</option>';
+        frequencies.forEach(frequency => {
+            const option = document.createElement('option');
+            option.value = frequency;
+            option.textContent = frequency;
+            frequencySelect.appendChild(option);
+        });
+        
+        frequencySelect.disabled = false;
+        
+        // Скрываем результаты
+        const resultsDiv = document.getElementById('results');
+        if (resultsDiv) {
+            resultsDiv.style.display = 'none';
+        }
     }
     
     function adaptCalculatorElements() {
@@ -395,7 +505,7 @@
         
         if (isMobile) {
             // Увеличиваем размеры элементов формы
-            document.querySelectorAll('.calculator-content select, .calculator-content input').forEach(el => {
+            document.querySelectorAll('.calculator-form select, .calculator-form input').forEach(el => {
                 el.style.fontSize = '16px'; // Предотвращает зум в iOS
                 el.style.padding = '12px 15px';
                 el.style.minHeight = '44px';
@@ -579,3 +689,4 @@
     };
     
 })();
+[file content end]
