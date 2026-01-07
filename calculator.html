@@ -1,86 +1,494 @@
 <!DOCTYPE html>
+<!-- ============================================
+     CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
+     Версия: 7.0 (07.01.2026) - САМОСТОЯТЕЛЬНАЯ СТРАНИЦА
+     ============================================ -->
 <html lang="ru">
 <head>
-    <title>Калькулятор стоимости аренды ковров | МИРУМ</title>
-    <!-- Метатеги подключаются через header.js -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- ============ SEO МЕТАДАННЫЕ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
+    <title>Калькулятор стоимости аренды грязезащитных ковров | МИРУМ</title>
+    <meta name="description" content="✅ Рассчитайте стоимость аренды грязезащитных ковров для вашего города. Цены для Москвы, СПб, Екатеринбурга, Новосибирска и других городов России.">
+    
+    <!-- Каноническая ссылка -->
+    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/calculator.html" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Ключевые слова для калькулятора -->
+    <meta name="keywords" content="калькулятор аренды ковров, стоимость аренды ковров, расчет стоимости ковров, цена на аренду ковров, ковры для офиса цена, грязезащитные ковры стоимость">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Калькулятор аренды ковров | МИРУМ">
+    <meta property="og:description" content="Рассчитайте стоимость аренды грязезащитных ковров для вашего города. Быстрый расчет онлайн.">
+    <meta property="og:url" content="https://arenda-kovrov-mirum.ru/calculator.html">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/carpet_sample.webp">
+    
+    <!-- ============ ФАВИКОНЫ ============ -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
+    <!-- ============ СТИЛИ ============ -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/calculator.css">
+    
+    <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ============ МИКРОРАЗМЕТКА ДЛЯ ИИ ============ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Калькулятор аренды ковров МИРУМ",
+        "description": "Интерактивный калькулятор для расчета стоимости аренды грязезащитных ковров",
+        "url": "https://arenda-kovrov-mirum.ru/calculator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "price": "180",
+                "priceCurrency": "RUB",
+                "unitText": "замена ковра"
+            }
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "МИРУМ",
+            "url": "https://arenda-kovrov-mirum.ru/"
+        }
+    }
+    </script>
+    
+    <!-- Для ИИ: Это калькулятор стоимости аренды грязезащитных ковров -->
+    <!-- Рассчитывает цены для 40+ городов России -->
+    <!-- Интегрирован с базой цен prices.js -->
 </head>
 <body>
-    <!-- Хедер подключается через JS -->
+    <!-- ============ НАЧАЛО HEADER ============ -->
     <script src="/includes/header.js"></script>
+    <!-- ============ КОНЕЦ HEADER ============ -->
 
-    <!-- Основной контент калькулятора -->
-    <section class="calculator-section">
-        <div class="container">
-            <h1 style="text-align: center; margin-bottom: 30px;">Калькулятор аренды ковров</h1>
-            
-            <div class="calculator-container">
-                <!-- Форма калькулятора -->
-                <div class="calculator-form">
-                    <div class="form-group">
-                        <label for="region">Регион</label>
-                        <select id="region">
-                            <option value="">Выберите регион</option>
-                            <!-- Регионы загружаются через JS -->
-                        </select>
+    <!-- ============ НАЧАЛО ОСНОВНОГО КОНТЕНТА КАЛЬКУЛЯТОРА ============ -->
+    <main>
+        <!-- ============ ГЕРОЙ-БАННЕР КАЛЬКУЛЯТОРА ============ -->
+        <section class="hero" style="background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%); color: white; padding: 80px 0 40px; text-align: center;">
+            <div class="container">
+                <h1 style="color: white; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 20px;">
+                    Калькулятор стоимости аренды ковров
+                </h1>
+                
+                <p style="font-size: clamp(1rem, 2vw, 1.1rem); max-width: 800px; margin: 0 auto 30px; line-height: 1.6; color: #e0e0e0;">
+                    Рассчитайте стоимость аренды грязезащитных ковров для вашего города. 
+                    Выберите регион, размер ковра и периодичность замены.
+                </p>
+                
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
+                    <p style="margin: 0; font-size: 0.95rem;">
+                        <i class="fas fa-info-circle" style="color: #1abc9c;"></i> 
+                        Все цены указаны за одну замену ковра. В стоимость включена доставка, установка и чистка.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ ГЕРОЙ-БАННЕРА ============ -->
+
+        <!-- ============ ОСНОВНОЙ КАЛЬКУЛЯТОР ============ -->
+        <section class="calculator-section">
+            <div class="container">
+                <div class="calculator-container">
+                    <!-- Форма калькулятора -->
+                    <div class="calculator-form">
+                        <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">
+                            <i class="fas fa-calculator"></i> Рассчитать стоимость
+                        </h2>
+                        
+                        <div class="form-group">
+                            <label for="region">
+                                <i class="fas fa-map-marker-alt"></i> Регион
+                            </label>
+                            <select id="region" aria-label="Выберите регион">
+                                <option value="">Выберите регион</option>
+                                <!-- Регионы загружаются через JS -->
+                            </select>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">
+                                Выберите город или область, где нужны ковры
+                            </p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="size">
+                                <i class="fas fa-ruler-combined"></i> Размер ковра
+                            </label>
+                            <select id="size" disabled aria-label="Выберите размер ковра">
+                                <option value="">Сначала выберите регион</option>
+                            </select>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">
+                                Доступные размеры зависят от выбранного региона
+                            </p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="frequency">
+                                <i class="fas fa-sync-alt"></i> Периодичность замены
+                            </label>
+                            <select id="frequency" disabled aria-label="Выберите периодичность замены">
+                                <option value="">Сначала выберите размер</option>
+                            </select>
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">
+                                Как часто нужно менять ковры
+                            </p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quantity">
+                                <i class="fas fa-layer-group"></i> Количество ковров
+                            </label>
+                            <input type="number" id="quantity" value="1" min="1" max="100" 
+                                   aria-label="Введите количество ковров">
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">
+                                Укажите необходимое количество одинаковых ковров
+                            </p>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="calculateBtn" aria-label="Рассчитать стоимость">
+                            <i class="fas fa-calculator"></i> Рассчитать стоимость
+                        </button>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="size">Размер ковра</label>
-                        <select id="size" disabled>
-                            <option value="">Сначала выберите регион</option>
-                        </select>
+                    <!-- Результаты расчета -->
+                    <div class="calculator-results" id="results" style="display: none;">
+                        <h3><i class="fas fa-chart-bar"></i> Результаты расчета</h3>
+                        
+                        <div id="resultDetails">
+                            <!-- Результаты загружаются через JS -->
+                        </div>
+                        
+                        <div class="results-actions">
+                            <button class="btn btn-telegram" id="sendToTelegram" aria-label="Отправить расчет в Telegram">
+                                <i class="fab fa-telegram"></i> Отправить в Telegram
+                            </button>
+                            <button class="btn btn-primary" id="sendToEmail" aria-label="Отправить расчет на Email">
+                                <i class="fas fa-envelope"></i> Отправить на Email
+                            </button>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                            <p style="margin: 0; font-size: 0.9rem; color: #e0e0e0;">
+                                <i class="fas fa-lightbulb"></i> 
+                                <strong>Совет:</strong> Отправьте расчет нашему менеджеру для уточнения деталей и получения коммерческого предложения.
+                            </p>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="frequency">Периодичность замены</label>
-                        <select id="frequency" disabled>
-                            <option value="">Сначала выберите размер</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="quantity">Количество ковров</label>
-                        <input type="number" id="quantity" value="1" min="1">
-                    </div>
-                    
-                    <button class="btn btn-primary" id="calculateBtn">Рассчитать стоимость</button>
                 </div>
                 
-                <!-- Результаты -->
-                <div class="calculator-results" id="results" style="display: none;">
-                    <h3>Результаты расчета</h3>
-                    <div id="resultDetails"></div>
+                <!-- Информация о том, что включено в стоимость -->
+                <div class="calculator-info">
+                    <h3><i class="fas fa-check-circle"></i> Что включено в стоимость аренды:</h3>
+                    <ul>
+                        <li><strong>Бесплатная доставка</strong> - привозим чистые ковры прямо к вам</li>
+                        <li><strong>Установка и замена</strong> - наши курьеры установят и заберут грязные ковры</li>
+                        <li><strong>Профессиональная чистка</strong> - все ковры проходят санитарную обработку</li>
+                        <li><strong>Замена при износе</strong> - бесплатно меняем изношенные ковры на новые</li>
+                        <li><strong>Все документы</strong> - договор, акты, счета для бухгалтерии</li>
+                        <li><strong>Гибкий график</strong> - подстроимся под ваш режим работы</li>
+                    </ul>
                     
-                    <div class="results-actions">
-                        <button class="btn btn-telegram" id="sendToTelegram">
-                            <i class="fab fa-telegram"></i> Отправить в Telegram
-                        </button>
-                        <button class="btn btn-primary" id="sendToEmail">
-                            <i class="fas fa-envelope"></i> Отправить на Email
-                        </button>
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="/arenda-kovrov.html" class="btn btn-secondary" style="margin-right: 10px;">
+                            <i class="fas fa-info-circle"></i> Подробнее об аренде ковров
+                        </a>
+                        <a href="#contacts" class="btn btn-telegram">
+                            <i class="fas fa-headset"></i> Задать вопрос менеджеру
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Таблица примерных цен для популярных городов -->
+                <div class="calculator-info" style="margin-top: 40px;">
+                    <h3><i class="fas fa-city"></i> Примерные цены в популярных городах (за одну замену):</h3>
+                    
+                    <div class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Город</th>
+                                <th>Ковер 85×60 см</th>
+                                <th>Ковер 85×150 см</th>
+                                <th>Ковер 115×200 см</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Москва</strong></td>
+                                <td>180 ₽</td>
+                                <td>420 ₽</td>
+                                <td>760 ₽</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Санкт-Петербург</strong></td>
+                                <td>340 ₽</td>
+                                <td>510 ₽</td>
+                                <td>830 ₽</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Екатеринбург</strong></td>
+                                <td>190 ₽</td>
+                                <td>360 ₽</td>
+                                <td>580 ₽</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Новосибирск</strong></td>
+                                <td>200 ₽</td>
+                                <td>400 ₽</td>
+                                <td>610 ₽</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Казань</strong></td>
+                                <td>190 ₽</td>
+                                <td>360 ₽</td>
+                                <td>580 ₽</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Уфа</strong></td>
+                                <td>200 ₽</td>
+                                <td>360 ₽</td>
+                                <td>550 ₽</td>
+                            </tr>
+                        </tbody>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 20px; font-style: italic; color: var(--text-light);">
+                        * Точную стоимость для вашего города рассчитайте в калькуляторе выше
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ ОСНОВНОГО КАЛЬКУЛЯТОРА ============ -->
+
+        <!-- ============ FAQ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
+        <section class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Частые вопросы по расчету стоимости</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Как рассчитывается итоговая стоимость?
+                        </div>
+                        <p>Стоимость = цена за замену × количество замен в месяц × количество ковров. Например, для 2 ковров с заменой 1 раз в неделю: цена × 4 (недели) × 2 (ковра).</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Можно ли арендовать ковры разного размера?
+                        </div>
+                        <p>Да, конечно! Просто сделайте несколько расчетов для разных размеров, а затем отправьте все результаты нашему менеджеру для составления общего коммерческого предложения.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Что делать, если моего города нет в списке?
+                        </div>
+                        <p>Работаем по всей России! Если вашего города нет в списке, выберите ближайший крупный город или отправьте запрос через форму ниже - мы рассчитаем стоимость индивидуально.</p>
+                    </div>
+                    
+                    <div class="faq-item-main">
+                        <div class="faq-question-main">
+                            <i class="fas fa-question-circle"></i>
+                            Есть ли скидки при больших объемах?
+                        </div>
+                        <p>Да, предоставляем корпоративные скидки при аренде от 10 ковров или при долгосрочном сотрудничестве от 6 месяцев. Отправьте расчет для получения персонального предложения.</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Информация о доставке и обслуживании -->
-            <div class="calculator-info">
-                <h3>Что включено в стоимость:</h3>
-                <ul>
-                    <li>✅ Бесплатная доставка и установка</li>
-                    <li>✅ Регулярная замена по графику</li>
-                    <li>✅ Чистка и дезинфекция ковров</li>
-                    <li>✅ Замена изношенных ковров</li>
-                    <li>✅ Все документы для бухгалтерии</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        </section>
+        <!-- ============ КОНЕЦ FAQ ============ -->
 
-    <!-- Футер подключается через JS -->
+        <!-- ============ КОНТАКТЫ ДЛЯ УТОЧНЕНИЯ ============ -->
+        <section id="contacts" class="section">
+            <div class="container">
+                <h2 class="section-title">Нужна помощь с расчетом?</h2>
+                <p class="text-center" style="max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">
+                    Наши менеджеры помогут подобрать оптимальное решение для вашего объекта и рассчитают индивидуальные условия.
+                </p>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Контакты для связи</h3>
+                        
+                        <div class="contact-item">
+                            <i class="fab fa-telegram"></i>
+                            <div>
+                                <strong>Telegram (быстрее всего):</strong>
+                                <a href="https://t.me/+79770005127">+7 (977) 000-51-27</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Электронная почта:</strong>
+                                <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Телефон:</strong>
+                                <a href="tel:+79770005127">+7 (977) 000-51-27</a>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px; padding: 15px; background: rgba(22, 160, 133, 0.1); border-radius: var(--border-radius);">
+                            <strong><i class="fas fa-bolt"></i> Быстрая консультация:</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">
+                                • Ответим в течение 15 минут в рабочее время<br>
+                                • Подготовим коммерческое предложение за 1 час<br>
+                                • Бесплатный выезд для замера в вашем городе
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Простая форма для вопросов -->
+                    <div class="contact-form">
+                        <h3>Задать вопрос по расчету</h3>
+                        <form id="calculatorContactForm">
+                            <div class="form-group">
+                                <label for="calcName">Ваше имя *</label>
+                                <input type="text" id="calcName" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="calcPhone">Телефон *</label>
+                                <input type="tel" id="calcPhone" name="phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="calcQuestion">Ваш вопрос</label>
+                                <textarea id="calcQuestion" name="question" rows="3" placeholder="Напишите вопрос по расчету или укажите особенности вашего объекта..."></textarea>
+                            </div>
+                            
+                            <div class="consent-checkbox">
+                                <input type="checkbox" id="calcConsent" name="consent" required>
+                                <label for="calcConsent">
+                                    Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">политикой обработки данных</a>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-telegram" style="width: 100%;">
+                                <i class="fab fa-telegram"></i> Отправить вопрос
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============ КОНЕЦ КОНТАКТОВ ============ -->
+    </main>
+    <!-- ============ КОНЕЦ ОСНОВНОГО КОНТЕНТА КАЛЬКУЛЯТОРА ============ -->
+
+    <!-- ============ НАЧАЛО FOOTER ============ -->
     <script src="/includes/footer.js"></script>
+    <!-- ============ КОНЕЦ FOOTER ============ -->
+
+    <!-- ============ СКРИПТЫ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
+    <!-- Основные скрипты -->
+    <script src="/js/main.js"></script>
+    <script src="/js/mobile.js"></script>
     
     <!-- Скрипты калькулятора -->
-    <script src="/js/calculator.js"></script>
     <script src="/js/prices.js"></script>
+    <script src="/js/calculator.js"></script>
+    
+    <!-- Форматирование телефона и обработка формы -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Инициализация калькулятора...');
+            
+            // Форматирование телефона
+            const phoneInput = document.getElementById('calcPhone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    
+                    if (value.startsWith('7') || value.startsWith('8')) {
+                        value = '+7' + value.substring(1);
+                    } else if (!value.startsWith('+7') && value.length > 0) {
+                        value = '+7' + value;
+                    }
+                    
+                    if (value.length > 2) {
+                        value = value.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3-$4-$5');
+                    }
+                    
+                    e.target.value = value;
+                });
+            }
+            
+            // Обработка формы вопросов
+            const calcForm = document.getElementById('calculatorContactForm');
+            if (calcForm) {
+                calcForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Проверяем согласие
+                    const consentCheckbox = document.getElementById('calcConsent');
+                    if (!consentCheckbox.checked) {
+                        alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                        consentCheckbox.focus();
+                        return;
+                    }
+                    
+                    // Собираем данные
+                    const name = document.getElementById('calcName').value.trim();
+                    const phone = document.getElementById('calcPhone').value.trim();
+                    const question = document.getElementById('calcQuestion').value.trim();
+                    
+                    if (!name || !phone) {
+                        alert('Пожалуйста, заполните обязательные поля');
+                        return;
+                    }
+                    
+                    // Формируем сообщение для Telegram
+                    const message = `❓ ВОПРОС ПО РАСЧЕТУ КАЛЬКУЛЯТОРА ❓\n\n` +
+                                   `👤 Имя: ${name}\n` +
+                                   `📞 Телефон: ${phone}\n` +
+                                   `${question ? `❓ Вопрос:\n${question}\n\n` : ''}` +
+                                   `🌐 Страница: Калькулятор\n` +
+                                   `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+                    
+                    // Открываем Telegram
+                    const telegramUrl = `https://t.me/+79770005127?text=${encodeURIComponent(message)}`;
+                    window.open(telegramUrl, '_blank');
+                    
+                    // Очищаем форму
+                    calcForm.reset();
+                    
+                    // Сообщение пользователю
+                    alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
+                });
+            }
+            
+            // Инициализация калькулятора из calculator.js
+            if (typeof initCalculator === 'function') {
+                initCalculator();
+            }
+        });
+    </script>
 </body>
 </html>
+<!-- ============ КОНЕЦ CALCULATOR.HTML ============ -->
