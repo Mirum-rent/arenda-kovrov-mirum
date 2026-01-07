@@ -1,13 +1,47 @@
 // === НАЧАЛО MAIN.JS ===
 // Основные функции для сайта МИРУМ
+// Версия: 2.1 (07.01.2026) - Поддержка исправлений для Telegram
 // ============================================
-// ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ КАЛЬКУЛЯТОРА
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ main.js загружен');
+    
+    // Инициализация выпадающего меню
+    initDropdownMenu();
+    
+    // Плавная прокрутка для якорных ссылок
+    initSmoothScroll();
+    
+    // Инициализация кнопки "Наверх"
+    initScrollToTop();
+    
+    // Проверка текущей страницы для активного меню
+    setActiveNavItem();
+    
+    // Инициализация мобильного меню
+    initMobileMenu();
+    
+    // Инициализация карты (если она есть на странице)
+    if (document.getElementById('russiaMap')) {
+        initMap();
+    }
+    
+    // Улучшенная инициализация калькулятора
+    if (document.querySelector('.calculator-form')) {
+        initCalculatorEnhanced();
+    }
+});
+
+// ============================================
+// УЛУЧШЕННЫЕ ФУНКЦИИ ДЛЯ КАЛЬКУЛЯТОРА
 // ============================================
 
 // Улучшенная функция для инициализации калькулятора
 function initCalculatorEnhanced() {
     const calculatorForm = document.querySelector('.calculator-form');
     if (!calculatorForm) return;
+    
+    console.log('🔧 Улучшенная инициализация калькулятора');
     
     // Добавляем класс для страницы калькулятора
     document.body.classList.add('calculator-page');
@@ -85,88 +119,49 @@ function sendOrderToTelegramEnhanced() {
             return;
         }
         
-        // Получаем цены из localStorage или расчетов
-        const orderPositions = getOrderPositions();
-        let message = '🧮 Расчет аренды ковров МИРУМ:\n\n';
+        // Создаем короткое сообщение
+        let message = '🧮 Расчет аренды ковров\n\n';
+        message += `📍 ${region}\n`;
+        message += `📏 ${size}\n`;
+        message += `🔄 ${frequency}\n`;
+        message += `📦 ${quantity} шт.\n\n`;
+        message += `📞 Свяжитесь для уточнения деталей.\n`;
+        message += `⏰ ${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}`;
         
-        if (orderPositions.length > 0) {
-            orderPositions.forEach((pos, index) => {
-                message += `${index + 1}. ${pos.size}, ${pos.quantity} шт.\n`;
-                message += `   Частота: ${pos.frequency}\n`;
-                message += `   Регион: ${pos.region}\n`;
-                message += `   Цена за замену: ${pos.pricePerChange} ₽\n`;
-                message += `   Стоимость в месяц: ${pos.monthlyCost} ₽\n\n`;
-            });
-            
-            const total = orderPositions.reduce((sum, pos) => sum + pos.monthlyCost, 0);
-            message += `💰 Общая стоимость в месяц: ${total} ₽\n`;
-        } else {
-            // Базовая информация из формы
-            message += `📍 Регион: ${region}\n`;
-            message += `📏 Размер ковра: ${size}\n`;
-            message += `🔄 Частота замены: ${frequency}\n`;
-            message += `📦 Количество: ${quantity} шт.\n\n`;
-            message += `📊 Для точного расчета заполните калькулятор полностью.\n`;
-        }
-        
-        message += `\n📞 Свяжитесь со мной для уточнения деталей.\n`;
-        message += `⏰ Время запроса: ${new Date().toLocaleString('ru-RU')}\n`;
-        message += `🌐 Страница: Калькулятор`;
-        
+        // Проверяем длину URL
         const encodedMessage = encodeURIComponent(message);
         const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
         
-        window.open(telegramUrl, '_blank');
+        if (telegramUrl.length > 2000) {
+            // Создаем еще более короткое сообщение
+            const shortMessage = '🧮 Расчет ковров\n\nПрошу связаться для обсуждения деталей.';
+            const shortEncoded = encodeURIComponent(shortMessage);
+            const shortUrl = `https://t.me/+79770005127?text=${shortEncoded}`;
+            
+            if (shortUrl.length > 2000) {
+                alert('Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
+                return;
+            }
+            
+            window.open(shortUrl, '_blank');
+        } else {
+            window.open(telegramUrl, '_blank');
+        }
+        
+        // Показываем подтверждение
+        setTimeout(() => {
+            alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.');
+        }, 1000);
         
     } catch (error) {
         console.error('Ошибка отправки в Telegram:', error);
-        alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram.');
+        alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
     }
 }
 
-// Обновляем инициализацию в DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    // ... существующий код ...
-    
-    // Улучшенная инициализация калькулятора
-    if (document.querySelector('.calculator-form')) {
-        initCalculatorEnhanced();
-    }
-    
-    // ... остальной код ...
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ main.js загружен');
-    
-    // Инициализация выпадающего меню
-    initDropdownMenu();
-    
-    // Плавная прокрутка для якорных ссылок
-    initSmoothScroll();
-    
-    // Инициализация кнопки "Наверх"
-    initScrollToTop();
-    
-    // Проверка текущей страницы для активного меню
-    setActiveNavItem();
-    
-    // Инициализация калькулятора (если он есть на странице)
-    if (document.querySelector('.calculator-form')) {
-        initCalculator();
-    }
-    
-    // Инициализация карты (если она есть на странице)
-    if (document.getElementById('russiaMap')) {
-        initMap();
-    }
-    
-    // Инициализация мобильного меню
-    initMobileMenu();
-    
-    // Инициализация формы обратной связи
-    initContactForm();
-});
+// ============================================
+// ОСНОВНЫЕ ФУНКЦИИ САЙТА
+// ============================================
 
 // Функция для инициализации выпадающего меню
 function initDropdownMenu() {
@@ -400,61 +395,6 @@ function initMap() {
     }
 }
 
-// Функция для инициализации формы обратной связи
-function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Получаем данные формы
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const phone = document.getElementById('contactPhone').value;
-            const message = document.getElementById('contactMessage').value;
-            const consent = document.getElementById('contactConsent').checked;
-            
-            // Проверяем согласие
-            if (!consent) {
-                alert('Пожалуйста, дайте согласие на обработку данных');
-                return;
-            }
-            
-            // Формируем сообщение для Telegram
-            let telegramMessage = `📞 Новая заявка с сайта:\n`;
-            telegramMessage += `👤 Имя: ${name}\n`;
-            telegramMessage += `📧 Email: ${email}\n`;
-            telegramMessage += `📞 Телефон: ${phone}\n`;
-            
-            if (message) {
-                telegramMessage += `📝 Сообщение: ${message}\n`;
-            }
-            
-            telegramMessage += `🌐 Страница: ${window.location.href}\n`;
-            telegramMessage += `⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
-            
-            // Кодируем сообщение для URL
-            const encodedMessage = encodeURIComponent(telegramMessage);
-            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
-            
-            // Открываем Telegram
-            window.open(telegramUrl, '_blank');
-            
-            // Сбрасываем форму
-            contactForm.reset();
-            
-            // Показываем сообщение об успехе
-            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-        });
-    }
-}
-
-// Функция для инициализации калькулятора
-function initCalculator() {
-    // Эта функция будет в отдельном файле calculator.js
-    console.log('Калькулятор найден, инициализация в calculator.js');
-}
-
 // Утилитные функции
 function supportsLocalStorage() {
     try {
@@ -479,7 +419,8 @@ window.initScrollToTop = initScrollToTop;
 window.setActiveNavItem = setActiveNavItem;
 window.initMobileMenu = initMobileMenu;
 window.initMap = initMap;
-window.initContactForm = initContactForm;
+window.initCalculatorEnhanced = initCalculatorEnhanced;
+window.sendOrderToTelegramEnhanced = sendOrderToTelegramEnhanced;
 
 console.log('✅ Все функции main.js инициализированы');
 // === КОНЕЦ MAIN.JS ===

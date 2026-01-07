@@ -1,6 +1,6 @@
 // ============================================
 // FORMS.JS - Обработка всех форм на сайте
-// Версия: 6.0 (05.01.2026)
+// Версия: 6.1 (07.01.2026) - Исправлена отправка в Telegram
 // ============================================
 
 (function() {
@@ -54,6 +54,73 @@
         }
         
         return value;
+    }
+    
+    /**
+     * Создание короткого сообщения для Telegram (чтобы избежать длинных URL)
+     * @param {Object} data - Данные формы
+     * @returns {string} - Короткое сообщение
+     */
+    function createShortTelegramMessage(data) {
+        let message = `📋 Заявка с сайта\n\n`;
+        
+        if (data.name) message += `👤 ${data.name}\n`;
+        if (data.phone) message += `📞 ${data.phone}\n`;
+        if (data.email) message += `📧 ${data.email}\n`;
+        if (data.company) message += `🏢 ${data.company}\n`;
+        if (data.city) message += `📍 ${data.city}\n`;
+        if (data.service) message += `🔧 ${data.service}\n`;
+        
+        if (data.message && data.message.length > 100) {
+            message += `📝 ${data.message.substring(0, 100)}...\n`;
+        } else if (data.message) {
+            message += `📝 ${data.message}\n`;
+        }
+        
+        message += `\n🌐 ${window.location.href}\n`;
+        message += `⏰ ${new Date().toLocaleTimeString('ru-RU')}`;
+        
+        // Ограничиваем длину сообщения
+        if (message.length > 500) {
+            message = message.substring(0, 497) + '...';
+        }
+        
+        return message;
+    }
+    
+    /**
+     * Открытие Telegram с сообщением (с проверкой длины URL)
+     * @param {string} message - Сообщение для отправки
+     */
+    function openTelegramWithMessage(message) {
+        try {
+            // Кодируем сообщение
+            const encodedMessage = encodeURIComponent(message);
+            const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodedMessage}`;
+            
+            // Проверяем длину URL
+            if (telegramUrl.length > 2000) {
+                // Создаем еще более короткое сообщение
+                const shortMessage = message.length > 200 ? message.substring(0, 197) + '...' : message;
+                const shortEncoded = encodeURIComponent(shortMessage);
+                const shortUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${shortEncoded}`;
+                
+                if (shortUrl.length > 2000) {
+                    // Если все еще слишком длинно, показываем инструкцию
+                    alert('Сообщение слишком длинное. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
+                    return;
+                }
+                
+                window.open(shortUrl, '_blank');
+            } else {
+                window.open(telegramUrl, '_blank');
+            }
+            
+            return true;
+        } catch (error) {
+            console.error('Ошибка при открытии Telegram:', error);
+            return false;
+        }
     }
     
     /**
@@ -118,23 +185,25 @@
             }
             
             // Формируем сообщение для Telegram
-            const telegramMessage = `📋 НОВАЯ ЗАЯВКА С САЙТА 📋\n\n` +
-                                  `👤 Имя: ${name}\n` +
-                                  `📞 Телефон: ${formatPhone(phone)}\n` +
-                                  (email ? `📧 Email: ${email}\n` : '') +
-                                  (message ? `📝 Сообщение:\n${message}\n` : '') +
-                                  `🌐 Страница: ${window.location.href}\n` +
-                                  `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            const telegramMessage = createShortTelegramMessage({
+                name,
+                phone: formatPhone(phone),
+                email,
+                message
+            });
             
             // Открываем Telegram
-            const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodeURIComponent(telegramMessage)}`;
-            window.open(telegramUrl, '_blank');
+            const success = openTelegramWithMessage(telegramMessage);
             
-            // Очищаем форму
-            form.reset();
-            
-            // Показываем сообщение об успехе
-            showSuccess('Открывается Telegram с готовым сообщением. Просто нажмите "Отправить"!');
+            if (success) {
+                // Очищаем форму
+                form.reset();
+                
+                // Показываем сообщение об успехе
+                setTimeout(() => {
+                    showSuccess('Telegram открыт! Нажмите "Отправить" чтобы отправить заявку.');
+                }, 500);
+            }
         });
         
         // Автоформатирование телефона
@@ -190,7 +259,7 @@
                 return;
             }
             
-            // Формируем сообщение для Telegram
+            // Текст услуги
             const serviceTypeText = {
                 'regular': 'Регулярная мойка',
                 'one-time': 'Разовая мойка',
@@ -199,24 +268,27 @@
                 '': 'Не указано'
             }[serviceType] || 'Не указано';
             
-            const telegramMessage = `📋 ЗАЯВКА НА МОЙКУ ВИТРИН 📋\n\n` +
-                                  `🏢 Компания: ${company}\n` +
-                                  `📍 Город: ${city}\n` +
-                                  `📞 Телефон: ${formatPhone(phone)}\n` +
-                                  `🔧 Тип услуги: ${serviceTypeText}\n` +
-                                  (message ? `📝 Дополнительно:\n${message}\n` : '') +
-                                  `🌐 Страница: ${window.location.href}\n` +
-                                  `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            // Формируем сообщение для Telegram
+            const telegramMessage = createShortTelegramMessage({
+                company,
+                city,
+                phone: formatPhone(phone),
+                service: serviceTypeText,
+                message
+            });
             
             // Открываем Telegram
-            const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodeURIComponent(telegramMessage)}`;
-            window.open(telegramUrl, '_blank');
+            const success = openTelegramWithMessage(telegramMessage);
             
-            // Очищаем форму
-            form.reset();
-            
-            // Показываем сообщение об успехе
-            showSuccess('Открывается Telegram с готовым сообщением. Просто нажмите "Отправить"!');
+            if (success) {
+                // Очищаем форму
+                form.reset();
+                
+                // Показываем сообщение об успехе
+                setTimeout(() => {
+                    showSuccess('Telegram открыт! Нажмите "Отправить" чтобы отправить заявку на мойку витрин.');
+                }, 500);
+            }
         });
     }
     
@@ -266,22 +338,24 @@
             }[service] || 'Не указана';
             
             // Формируем сообщение для Telegram
-            const telegramMessage = `📋 БЫСТРАЯ ЗАЯВКА С САЙТА 📋\n\n` +
-                                  `👤 Имя: ${name}\n` +
-                                  `📞 Телефон: ${formatPhone(phone)}\n` +
-                                  `🔧 Услуга: ${serviceText}\n\n` +
-                                  `🌐 Страница: ${window.location.href}\n` +
-                                  `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            const telegramMessage = createShortTelegramMessage({
+                name,
+                phone: formatPhone(phone),
+                service: serviceText
+            });
             
             // Открываем Telegram
-            const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodeURIComponent(telegramMessage)}`;
-            window.open(telegramUrl, '_blank');
+            const success = openTelegramWithMessage(telegramMessage);
             
-            // Очищаем форму
-            form.reset();
-            
-            // Показываем сообщение об успехе
-            showSuccess('Открывается Telegram с готовым сообщением. Просто нажмите "Отправить"!');
+            if (success) {
+                // Очищаем форму
+                form.reset();
+                
+                // Показываем сообщение об успехе
+                setTimeout(() => {
+                    showSuccess('Telegram открыт! Нажмите "Отправить" чтобы отправить быструю заявку.');
+                }, 500);
+            }
         });
     }
     
@@ -313,7 +387,9 @@
         initAllForms,
         validatePhone,
         validateEmail,
-        formatPhone
+        formatPhone,
+        createShortTelegramMessage,
+        openTelegramWithMessage
     };
     
 })();
