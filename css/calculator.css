@@ -1,180 +1,261 @@
 /* ============================================
-   CALCULATOR.CSS - Мобильные стили калькулятора
-   Версия: 5.0 (30.12.2025)
-============================================ */
+   CALCULATOR.CSS - Стили для калькулятора МИРУМ
+   Версия: 7.0 (07.01.2026) - ОТДЕЛЬНЫЙ ФАЙЛ
+   ============================================ */
 
-/* Основные стили */
+/* ============ ОСНОВНЫЕ СТИЛИ КАЛЬКУЛЯТОРА ============ */
 .calculator-section {
-    padding: 20px 0;
+    padding: clamp(60px, 10vw, 100px) 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     min-height: 100vh;
 }
 
-.container {
+.calculator-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 15px;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #2c3e50;
-    font-size: 24px;
-    padding: 10px;
-}
-
-/* Вкладки */
-.tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ddd;
-    overflow-x: auto;
-    padding-bottom: 5px;
-}
-
-.tab-btn {
-    flex: 1;
-    padding: 15px 20px;
-    background: #f5f5f5;
-    border: none;
-    border-radius: 8px 8px 0 0;
-    cursor: pointer;
-    font-weight: 600;
-    color: #666;
-    font-size: 16px;
-    min-width: 160px;
-    text-align: center;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-.tab-btn.active {
-    background: #16a085;
-    color: white;
-}
-
-.tab-btn:hover {
-    background: #e0e0e0;
-}
-
-.tab-btn.active:hover {
-    background: #16a085;
-}
-
-/* Контент калькулятора */
-.calculator-content {
-    display: none;
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.3s ease;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-.calculator-content.active {
+/* ============ ФОРМА КАЛЬКУЛЯТОРА ============ */
+.calculator-form {
+    padding: clamp(30px, 5vw, 40px);
+    background: white;
+}
+
+.calculator-form .form-group {
+    margin-bottom: 25px;
+}
+
+.calculator-form label {
     display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Формы */
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 600;
-    color: #333;
-    font-size: 14px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
 }
 
-select, input {
+.calculator-form select,
+.calculator-form input {
     width: 100%;
-    padding: 14px;
-    border: 2px solid #ddd;
+    padding: 15px;
+    border: 2px solid var(--border-color);
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 16px; /* Предотвращает зум в iOS */
+    transition: all 0.3s ease;
     background: white;
-    transition: border-color 0.3s;
 }
 
-select:focus, input:focus {
+.calculator-form select:focus,
+.calculator-form input:focus {
     outline: none;
-    border-color: #16a085;
+    border-color: var(--accent-color);
     box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
 }
 
-select {
-    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 20px;
+.calculator-form select:disabled {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
-/* Кнопки */
-.btn {
+/* ============ КНОПКА РАСЧЕТА ============ */
+#calculateBtn {
     width: 100%;
-    padding: 16px;
-    background: #16a085;
-    color: white;
+    padding: 18px;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--light-accent) 100%);
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    color: white;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s;
-}
-
-.btn:hover {
-    background: #138a72;
-}
-
-.btn-telegram {
-    background: #0088cc;
-}
-
-.btn-telegram:hover {
-    background: #0077b3;
-}
-
-.btn-secondary {
-    background: #f5f5f5;
-    color: #333;
-    border: 2px solid #ddd;
-}
-
-.btn-secondary:hover {
-    background: #e0e0e0;
-}
-
-/* Результаты */
-.result {
-    margin-top: 25px;
-    padding: 20px;
-    background: #e8f4fd;
+    transition: all 0.3s ease;
     border-radius: 8px;
-    display: none;
-    animation: slideIn 0.5s ease;
 }
 
-.result.active {
-    display: block;
+#calculateBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(22, 160, 133, 0.3);
 }
 
-@keyframes slideIn {
+#calculateBtn:active {
+    transform: translateY(-1px);
+}
+
+/* ============ РЕЗУЛЬТАТЫ РАСЧЕТА ============ */
+.calculator-results {
+    padding: clamp(30px, 5vw, 40px);
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    border-top: 5px solid var(--accent-color);
+}
+
+.calculator-results h3 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.result-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.result-label {
+    font-weight: 600;
+    color: #1abc9c;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.result-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+}
+
+.result-hint {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* ============ КНОПКИ ДЕЙСТВИЙ ============ */
+.results-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.results-actions .btn {
+    padding: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.results-actions .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ============ ИНФОРМАЦИЯ О ДОСТАВКЕ ============ */
+.calculator-info {
+    margin-top: 40px;
+    padding: 30px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.calculator-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.calculator-info ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calculator-info li {
+    padding: 12px 0;
+    padding-left: 40px;
+    position: relative;
+    color: var(--text-light);
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.calculator-info li:last-child {
+    border-bottom: none;
+}
+
+.calculator-info li:before {
+    content: '✓';
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ============ МОБИЛЬНАЯ АДАПТАЦИЯ КАЛЬКУЛЯТОРА ============ */
+@media (max-width: 768px) {
+    .calculator-section {
+        padding: 40px 15px;
+    }
+    
+    .calculator-container {
+        border-radius: 15px;
+        margin: 0 10px;
+    }
+    
+    .calculator-form,
+    .calculator-results {
+        padding: 25px;
+    }
+    
+    .calculator-form select,
+    .calculator-form input {
+        padding: 14px;
+        font-size: 16px !important; /* Важно для iOS */
+    }
+    
+    .results-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .result-item {
+        padding: 15px;
+    }
+    
+    .result-value {
+        font-size: 1.2rem;
+    }
+    
+    .calculator-info {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+    
+    .calculator-info li {
+        padding-left: 35px;
+        font-size: 1rem;
+    }
+}
+
+/* ============ ТАБЛЕТКИ ============ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .calculator-container {
+        max-width: 90%;
+    }
+    
+    .results-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ============ АНИМАЦИИ ============ */
+@keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -185,220 +266,46 @@ select {
     }
 }
 
-.result h3 {
-    margin-bottom: 15px;
-    color: #2c3e50;
-    font-size: 18px;
+.calculator-results {
+    animation: fadeIn 0.5s ease-out;
 }
 
-.result-item {
-    background: white;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    border-left: 4px solid #16a085;
-    font-size: 14px;
-}
-
-.total {
-    font-size: 16px;
-    font-weight: bold;
-    color: #2c3e50;
-    padding: 15px;
-    background: white;
-    border-radius: 6px;
-    margin-top: 15px;
-    text-align: center;
-}
-
-/* Месяцы для тендера */
-.month-inputs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.month-box {
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 6px;
-    text-align: center;
-}
-
-.month-box label {
-    font-size: 12px;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.month-box input {
-    padding: 10px;
-    font-size: 14px;
-    margin-bottom: 5px;
-    text-align: center;
-    width: 100%;
-}
-
-/* Уведомления */
-.notice {
-    padding: 15px;
-    background: #fff3cd;
-    color: #856404;
-    border-radius: 5px;
-    margin: 15px 0;
-    border-left: 4px solid #ffc107;
-    display: none;
-    font-size: 14px;
-}
-
-.notice.active {
-    display: block;
-}
-
-.notice.success {
-    background: #d4edda;
-    color: #155724;
-    border-left-color: #28a745;
-}
-
-/* Загрузка */
-.loading {
-    display: none;
-    text-align: center;
-    padding: 30px;
-}
-
-.loading.active {
-    display: block;
-}
-
-.spinner {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #16a085;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 10px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Кнопка удаления */
-.remove-btn {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    margin-top: 5px;
-    font-size: 12px;
-}
-
-.remove-btn:hover {
-    background: #c0392b;
-}
-
-/* Позиции */
-.positions-list {
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-}
-
-/* ============ МОБИЛЬНАЯ АДАПТАЦИЯ ============ */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 10px;
+/* ============ ПРИНТЕР ============ */
+@media print {
+    .calculator-section {
+        background: white !important;
+        padding: 20px 0 !important;
     }
     
-    h1 {
-        font-size: 20px;
-        margin-bottom: 15px;
+    .calculator-container {
+        box-shadow: none !important;
+        border: 1px solid #ddd;
     }
     
-    .tabs {
-        flex-direction: column;
+    .results-actions {
+        display: none !important;
     }
     
-    .tab-btn {
-        width: 100%;
-        border-radius: 8px;
-        margin-bottom: 5px;
-        min-width: auto;
-        padding: 12px 15px;
+    .telegram-float,
+    .scroll-to-top {
+        display: none !important;
+    }
+}
+
+/* ============ ВЫСОКАЯ КОНТРАСТНОСТЬ ============ */
+@media (prefers-contrast: high) {
+    .calculator-form select,
+    .calculator-form input {
+        border: 2px solid #000;
     }
     
-    .calculator-content {
-        padding: 20px;
-        margin: 0 5px;
-    }
-    
-    .month-inputs {
-        grid-template-columns: repeat(3, 1fr);
+    .calculator-results {
+        border-top: 5px solid #000;
     }
     
     .result-item {
-        font-size: 13px;
-        padding: 12px;
-    }
-    
-    .total {
-        font-size: 15px;
-        padding: 12px;
-    }
-    
-    .btn {
-        padding: 15px;
-        font-size: 15px;
+        border-left: 4px solid #000;
     }
 }
 
-@media (max-width: 480px) {
-    .month-inputs {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    h1 {
-        font-size: 18px;
-    }
-    
-    select, input {
-        padding: 12px;
-        font-size: 16px;
-    }
-    
-    .form-group label {
-        font-size: 13px;
-    }
-    
-    .result {
-        padding: 15px;
-    }
-    
-    .tab-btn {
-        font-size: 14px;
-        padding: 10px 12px;
-    }
-}
-
-@media (max-width: 350px) {
-    .month-inputs {
-        grid-template-columns: 1fr;
-    }
-    
-    .calculator-content {
-        padding: 15px;
-    }
-    
-    h1 {
-        font-size: 16px;
-    }
-}
+/* ============ КОНЕЦ CALCULATOR.CSS ============ */
