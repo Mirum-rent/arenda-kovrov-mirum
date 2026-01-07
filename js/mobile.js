@@ -1,8 +1,6 @@
-[file name]: mobile.js
-[file content begin]
 // ============================================
 // MOBILE.JS - Мобильная оптимизация для МИРУМ
-// Версия: 5.1 (07.01.2026) - С исправленным выбором частоты в калькуляторе
+// Версия: 5.2 (07.01.2026) - С ИСПРАВЛЕННЫМ СКРЫВАЮЩИМСЯ ХЕДЕРОМ
 // ============================================
 
 (function() {
@@ -31,8 +29,8 @@
             // 1. Инициализация мобильного меню
             initMobileMenu();
             
-            // 2. Настройка скрытия хедера при скролле
-            initHeaderHide();
+            // 2. Настройка скрытия хедера и героя при скролле
+            initHeaderAndHeroHide();
             
             // 3. Адаптация элементов под мобильные
             adaptElementsForMobile();
@@ -205,14 +203,16 @@
         };
     }
     
-    // ============ 2. СКРЫТИЕ ХЕДЕРА ПРИ СКРОЛЛЕ ============
-    function initHeaderHide() {
+    // ============ 2. СКРЫТИЕ ХЕДЕРА И ГЕРОЯ ПРИ СКРОЛЛЕ ============
+    function initHeaderAndHeroHide() {
         const header = document.getElementById('mainHeader');
+        const hero = document.querySelector('.hero');
         if (!header) return;
         
-        // В калькуляторе всегда скрываем хедер
+        // В калькуляторе скрываем сразу
         if (window.location.pathname.includes('calculator.html')) {
             header.classList.add('hidden');
+            if (hero) hero.classList.add('hidden');
             return;
         }
         
@@ -235,31 +235,70 @@
             isScrolling = true;
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Если открыто мобильное меню - не скрываем хедер
+            // Не скрываем при открытом меню
             if (isMobileMenuOpen) {
                 isScrolling = false;
                 return;
             }
             
-            // Определяем направление скролла
             const isScrollingDown = scrollTop > lastScrollTop;
+            const heroHeight = hero ? hero.offsetHeight : 0;
             
-            // При скролле вниз скрываем, вверх - показываем
-            if (isScrollingDown && scrollTop > SCROLL_THRESHOLD) {
+            // При скролле вниз скрываем хедер и герой
+            if (isScrollingDown && scrollTop > 100) {
                 header.classList.add('hidden');
+                if (hero && scrollTop > heroHeight * 0.7) {
+                    hero.style.opacity = '0.3';
+                    hero.style.transform = 'translateY(-20px)';
+                    hero.style.transition = 'all 0.3s ease';
+                }
             } else {
                 header.classList.remove('hidden');
+                if (hero) {
+                    hero.style.opacity = '1';
+                    hero.style.transform = 'translateY(0)';
+                }
             }
             
             lastScrollTop = scrollTop;
             
-            // Сбрасываем флаг через короткое время
             setTimeout(() => {
                 isScrolling = false;
             }, 100);
         }, 10);
         
         window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Показываем хедер при наведении
+        if (window.innerWidth > 768) {
+            header.addEventListener('mouseenter', function() {
+                header.classList.remove('hidden');
+            });
+        }
+        
+        // Показываем хедер при касании на мобильных
+        if ('ontouchstart' in window) {
+            document.addEventListener('touchstart', function() {
+                if (isMobileMenuOpen) return;
+                header.classList.remove('hidden');
+                if (hero) {
+                    hero.style.opacity = '1';
+                    hero.style.transform = 'translateY(0)';
+                }
+                setTimeout(() => {
+                    if (!isMobileMenuOpen) {
+                        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                        if (currentScroll > 100) {
+                            header.classList.add('hidden');
+                            if (hero && currentScroll > hero.offsetHeight * 0.7) {
+                                hero.style.opacity = '0.3';
+                                hero.style.transform = 'translateY(-20px)';
+                            }
+                        }
+                    }
+                }, 2000);
+            });
+        }
     }
     
     // ============ 3. АДАПТАЦИЯ ЭЛЕМЕНТОВ ============
@@ -394,6 +433,13 @@
             adaptCalculatorElements();
             fixFrequencySelection();
         });
+        
+        // Автоматически скрываем хедер и герой на калькуляторе
+        const header = document.getElementById('mainHeader');
+        const hero = document.querySelector('.hero');
+        
+        if (header) header.classList.add('hidden');
+        if (hero) hero.classList.add('hidden');
     }
     
     // Функция для исправления выбора частоты замены
@@ -689,4 +735,3 @@
     };
     
 })();
-[file content end]

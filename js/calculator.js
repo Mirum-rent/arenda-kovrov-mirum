@@ -1,6 +1,6 @@
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 7.3 (07.01.2026) - Исправлена отправка в Telegram
+// Версия: 7.4 (07.01.2026) - С ИСПРАВЛЕННЫМ СООБЩЕНИЕМ В TELEGRAM И РЕЖИМОМ СКРИНШОТА
 // ============================================
 
 // ============ НАЧАЛО ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ ============
@@ -30,6 +30,9 @@ function initCalculator() {
         
         // Назначаем обработчики событий
         setupEventHandlers();
+        
+        // Инициализация режима скриншота
+        initScreenshotMode();
         
         console.log('✅ Калькулятор успешно инициализирован');
     }, 100);
@@ -587,6 +590,14 @@ function performCalculation() {
             }, 300);
         }
     }
+    
+    // Активируем режим скриншота на мобильных
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            const event = new Event('mobile-screenshot-ready');
+            window.dispatchEvent(event);
+        }, 500);
+    }
 }
 
 // ============ НАЧАЛО РАСЧЕТА ЦЕНЫ ============
@@ -727,7 +738,7 @@ function displayResults(calculation) {
         
         <div class="result-item">
             <div class="result-label">Размер ковра</div>
-            <div class="result-value">${calculation.size}</div>
+            <div class="result-value">${calculation.size.replace('*', '×')}</div>
         </div>
         
         <div class="result-item">
@@ -766,6 +777,81 @@ function displayResults(calculation) {
     console.log('✅ Результаты отображены');
 }
 
+// ============ НАЧАЛО СОЗДАНИЯ КОРОТКОГО СООБЩЕНИЯ ДЛЯ TELEGRAM ============
+function createShortTelegramMessage() {
+    if (!currentCalculation) return '';
+    
+    const calc = currentCalculation;
+    
+    // Определяем количество замен в месяц
+    let replacementsPerMonth = 4;
+    if (calc.frequency.includes('1 раз в две недели')) replacementsPerMonth = 2;
+    else if (calc.frequency.includes('1 раз в неделю')) replacementsPerMonth = 4;
+    else if (calc.frequency.includes('2 раза в неделю')) replacementsPerMonth = 8;
+    else if (calc.frequency.includes('3 раза в неделю')) replacementsPerMonth = 12;
+    else if (calc.frequency.includes('4 раза в неделю')) replacementsPerMonth = 16;
+    else if (calc.frequency.includes('5 раз в неделю')) replacementsPerMonth = 20;
+    else if (calc.frequency.includes('6 раз в неделю')) replacementsPerMonth = 24;
+    else if (calc.frequency.includes('7 раз в неделю')) replacementsPerMonth = 28;
+    
+    let message = `🧮 РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
+    
+    message += `📍 Регион: ${calc.region}\n`;
+    message += `📏 Размер ковра: ${calc.size.replace('*', '×')}\n`;
+    message += `🔄 Частота замены: ${calc.frequency}\n`;
+    message += `📦 Количество: ${calc.quantity} шт.\n\n`;
+    
+    message += `💰 Цена за замену: ${calc.formattedPrice}\n`;
+    message += `📊 Стоимость за 4 недели: ${formatPrice(calc.monthlyCost)}\n\n`;
+    
+    message += `📄 Для заключения договора потребуются:\n`;
+    message += `• Реквизиты компании\n`;
+    message += `• Подписант (ФИО, основание полномочий)\n`;
+    message += `• Точный адрес объекта и название, вывеска\n`;
+    message += `• Режим работы объекта\n`;
+    message += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
+    
+    message += `📝 Условия:\n`;
+    message += `Счёт выставляется только за фактические замены.\n`;
+    message += `Возможно включить НДС 22% — цена увеличится на ставку налога.\n\n`;
+    
+    message += `📞 Связь:\n`;
+    message += `Telegram: t.me/+79770005127\n`;
+    message += `Email: matservice@yandex.ru\n`;
+    message += `Сайт: arenda-kovrov-mirum.ru\n\n`;
+    
+    message += `⏰ Расчёт: ${new Date().toLocaleString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    })}`;
+    
+    return message;
+}
+
+// ============ НАЧАЛО СОЗДАНИЯ ОЧЕНЬ КОРОТКОГО СООБЩЕНИЯ ДЛЯ TELEGRAM ============
+function createVeryShortTelegramMessage() {
+    if (!currentCalculation) return '';
+    
+    const calc = currentCalculation;
+    
+    let message = `🧮 Расчет аренды ковров\n\n`;
+    
+    message += `${calc.region}, ${calc.size.replace('*', '×')}\n`;
+    message += `${calc.frequency}, ${calc.quantity} шт.\n\n`;
+    
+    message += `Цена: ${calc.formattedPrice} за замену\n`;
+    message += `В месяц: ${formatPrice(calc.monthlyCost)}\n\n`;
+    
+    message += `Свяжитесь для заказа.\n`;
+    message += `⏰ ${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}`;
+    
+    return message;
+}
+
 // ============ НАЧАЛО ОТПРАВКИ В TELEGRAM ============
 function sendToTelegram() {
     if (!currentCalculation) {
@@ -774,10 +860,7 @@ function sendToTelegram() {
     }
     
     try {
-        // Проверяем, мобильное ли устройство
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        
-        // Формируем короткое сообщение
+        // Формируем сообщение
         const message = createShortTelegramMessage();
         
         // Кодируем для URL
@@ -808,6 +891,7 @@ function sendToTelegram() {
         
         // Показываем подтверждение с задержкой
         setTimeout(() => {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             if (isMobile) {
                 alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\nМы свяжемся с вами в течение 15 минут.');
             } else {
@@ -821,59 +905,68 @@ function sendToTelegram() {
     }
 }
 
-// ============ НАЧАЛО СОЗДАНИЯ КОРОТКОГО СООБЩЕНИЯ ДЛЯ TELEGRAM ============
-function createShortTelegramMessage() {
+// ============ НАЧАЛО СОЗДАНИЯ КОРОТКОГО СООБЩЕНИЯ ДЛЯ EMAIL ============
+function createShortEmailMessage() {
     if (!currentCalculation) return '';
     
     const calc = currentCalculation;
     
-    // Определяем количество замен в месяц
-    let replacementsPerMonth = 4;
-    if (calc.frequency.includes('1 раз в две недели')) replacementsPerMonth = 2;
-    else if (calc.frequency.includes('2 раза в неделю')) replacementsPerMonth = 8;
-    else if (calc.frequency.includes('3 раза в неделю')) replacementsPerMonth = 12;
-    else if (calc.frequency.includes('4 раза в неделю')) replacementsPerMonth = 16;
-    else if (calc.frequency.includes('5 раз в неделю')) replacementsPerMonth = 20;
-    else if (calc.frequency.includes('6 раз в неделю')) replacementsPerMonth = 24;
-    else if (calc.frequency.includes('7 раз в неделю')) replacementsPerMonth = 28;
+    let message = `Расчет аренды ковров МИРУМ\n\n`;
     
-    let message = `🧮 РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
+    message += `Регион: ${calc.region}\n`;
+    message += `Размер ковра: ${calc.size.replace('*', '×')}\n`;
+    message += `Периодичность замены: ${calc.frequency}\n`;
+    message += `Количество: ${calc.quantity} шт.\n\n`;
     
-    message += `📍 Регион: ${calc.region}\n`;
-    message += `📏 Размер: ${calc.size}\n`;
-    message += `🔄 Замена: ${calc.frequency}\n`;
-    message += `📦 Количество: ${calc.quantity} шт.\n\n`;
+    message += `Цена за одну замену: ${calc.formattedPrice}\n`;
+    message += `Стоимость в месяц: ${calc.formattedMonthly}\n\n`;
     
-    message += `💰 Цена за замену: ${calc.formattedPrice}\n`;
-    message += `📊 Стоимость в месяц: ${calc.formattedMonthly}\n`;
-    message += `📈 Замен в месяц: ${replacementsPerMonth}\n\n`;
+    message += `Для заключения договора понадобятся:\n`;
+    message += `• Реквизиты компании\n`;
+    message += `• Подписант (ФИО, основание полномочий)\n`;
+    message += `• Точный адрес объекта и название, вывеска\n`;
+    message += `• Режим работы объекта\n`;
+    message += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
     
-    message += `📞 Для заказа или вопросов:\n`;
-    message += `• Telegram: https://t.me/+79770005127\n`;
-    message += `• Email: matservice@yandex.ru\n\n`;
+    message += `Счет выставляется только за фактические замены.\n`;
+    message += `Возможно включить НДС 22% — цена увеличится на ставку налога.\n\n`;
     
-    message += `⏰ Расчет: ${new Date().toLocaleString('ru-RU')}\n`;
-    message += `🌐 Сайт: arenda-kovrov-mirum.ru`;
+    message += `Что входит в стоимость:\n`;
+    message += `- Бесплатная доставка\n`;
+    message += `- Установка и замена\n`;
+    message += `- Профессиональная чистка\n`;
+    message += `- Замена при износе\n`;
+    message += `- Все документы\n`;
+    message += `- Гибкий график\n\n`;
+    
+    message += `Телефон для связи: +7 (977) 000-51-27\n`;
+    message += `Email: matservice@yandex.ru\n`;
+    message += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
+    
+    message += `Расчет выполнен: ${new Date().toLocaleString('ru-RU')}`;
     
     return message;
 }
 
-// ============ НАЧАЛО СОЗДАНИЯ ОЧЕНЬ КОРОТКОГО СООБЩЕНИЯ ДЛЯ TELEGRAM ============
-function createVeryShortTelegramMessage() {
+// ============ НАЧАЛО СОЗДАНИЯ ОЧЕНЬ КОРОТКОГО СООБЩЕНИЯ ДЛЯ EMAIL ============
+function createVeryShortEmailMessage() {
     if (!currentCalculation) return '';
     
     const calc = currentCalculation;
     
-    let message = `🧮 Расчет аренды ковров\n\n`;
+    let message = `Расчет аренды ковров МИРУМ\n\n`;
     
-    message += `${calc.region}, ${calc.size}\n`;
-    message += `${calc.frequency}, ${calc.quantity} шт.\n\n`;
+    message += `Регион: ${calc.region}\n`;
+    message += `Размер: ${calc.size.replace('*', '×')}\n`;
+    message += `Замена: ${calc.frequency}\n`;
+    message += `Количество: ${calc.quantity} шт.\n\n`;
     
-    message += `Цена: ${calc.formattedPrice} за замену\n`;
+    message += `Цена за замену: ${calc.formattedPrice}\n`;
     message += `В месяц: ${calc.formattedMonthly}\n\n`;
     
-    message += `Свяжитесь для заказа.\n`;
-    message += `⏰ ${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}`;
+    message += `Прошу связаться для обсуждения деталей.\n\n`;
+    
+    message += `Расчет: ${new Date().toLocaleDateString('ru-RU')}`;
     
     return message;
 }
@@ -922,84 +1015,74 @@ function sendToEmail() {
     }
 }
 
-// ============ НАЧАЛО СОЗДАНИЯ КОРОТКОГО СООБЩЕНИЯ ДЛЯ EMAIL ============
-function createShortEmailMessage() {
-    if (!currentCalculation) return '';
+// ============ НАЧАЛО ФУНКЦИИ ДЛЯ РЕЖИМА СКРИНШОТА ============
+function initScreenshotMode() {
+    // Создаем кнопку переключения режима скриншота
+    const screenshotBtn = document.createElement('button');
+    screenshotBtn.className = 'screenshot-toggle';
+    screenshotBtn.innerHTML = '📱';
+    screenshotBtn.title = 'Режим для скриншота';
+    screenshotBtn.style.cssText = `
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        z-index: 999;
+        background: #16a085;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        font-size: 1rem;
+    `;
     
-    const calc = currentCalculation;
+    document.body.appendChild(screenshotBtn);
     
-    // Определяем количество замен в месяц
-    let replacementsPerMonth = 4;
-    if (calc.frequency.includes('1 раз в две недели')) replacementsPerMonth = 2;
-    else if (calc.frequency.includes('2 раза в неделю')) replacementsPerMonth = 8;
-    else if (calc.frequency.includes('3 раза в неделю')) replacementsPerMonth = 12;
-    else if (calc.frequency.includes('4 раза в неделю')) replacementsPerMonth = 16;
-    else if (calc.frequency.includes('5 раз в неделю')) replacementsPerMonth = 20;
-    else if (calc.frequency.includes('6 раз в неделю')) replacementsPerMonth = 24;
-    else if (calc.frequency.includes('7 раз в неделю')) replacementsPerMonth = 28;
+    screenshotBtn.addEventListener('click', function() {
+        document.body.classList.toggle('screenshot-mode');
+        
+        if (document.body.classList.contains('screenshot-mode')) {
+            // В режиме скриншота
+            screenshotBtn.innerHTML = '❌';
+            screenshotBtn.title = 'Выйти из режима скриншота';
+            screenshotBtn.style.background = '#e74c3c';
+            
+            // Прокручиваем к результатам
+            const results = document.getElementById('results');
+            if (results && results.style.display !== 'none') {
+                results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            // Скрываем лишние элементы
+            document.querySelectorAll('.telegram-float, .scroll-to-top, .cookie-notice').forEach(el => {
+                el.style.display = 'none';
+            });
+        } else {
+            // Выход из режима скриншота
+            screenshotBtn.innerHTML = '📱';
+            screenshotBtn.title = 'Режим для скриншота';
+            screenshotBtn.style.background = '#16a085';
+            
+            // Показываем элементы обратно
+            document.querySelectorAll('.telegram-float, .scroll-to-top, .cookie-notice').forEach(el => {
+                el.style.display = '';
+            });
+        }
+    });
     
-    let message = `Расчет аренды ковров МИРУМ\n\n`;
-    
-    message += `Регион: ${calc.region}\n`;
-    message += `Размер ковра: ${calc.size}\n`;
-    message += `Периодичность замены: ${calc.frequency}\n`;
-    message += `Количество: ${calc.quantity} шт.\n\n`;
-    
-    message += `Цена за одну замену: ${calc.formattedPrice}\n`;
-    message += `Стоимость в месяц: ${calc.formattedMonthly}\n`;
-    message += `Количество замен в месяц: ${replacementsPerMonth}\n\n`;
-    
-    message += `Для заключения договора понадобятся:\n`;
-    message += `• Реквизиты компании\n`;
-    message += `• Кто подписывает договор\n`;
-    message += `• Адрес организации\n`;
-    message += `• Режим работы объекта\n`;
-    message += `• Контактное лицо (ФИО и телефон)\n\n`;
-    
-    message += `Счет выставляется только за фактические замены.\n\n`;
-    
-    message += `Что входит в стоимость:\n`;
-    message += `- Бесплатная доставка\n`;
-    message += `- Установка и замена\n`;
-    message += `- Профессиональная чистка\n`;
-    message += `- Замена при износе\n`;
-    message += `- Все документы\n`;
-    message += `- Гибкий график\n\n`;
-    
-    message += `ВНИМАНИЕ! Можем включить в счет НДС 22%.\n\n`;
-    
-    message += `Телефон для связи: +7 (977) 000-51-27\n`;
-    message += `Email: matservice@yandex.ru\n`;
-    message += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
-    
-    message += `Расчет выполнен: ${new Date().toLocaleString('ru-RU')}`;
-    
-    return message;
-}
-
-// ============ НАЧАЛО СОЗДАНИЯ ОЧЕНЬ КОРОТКОГО СООБЩЕНИЯ ДЛЯ EMAIL ============
-function createVeryShortEmailMessage() {
-    if (!currentCalculation) return '';
-    
-    const calc = currentCalculation;
-    
-    let message = `Расчет аренды ковров МИРУМ\n\n`;
-    
-    message += `Регион: ${calc.region}\n`;
-    message += `Размер: ${calc.size}\n`;
-    message += `Замена: ${calc.frequency}\n`;
-    message += `Количество: ${calc.quantity} шт.\n\n`;
-    
-    message += `Цена за замену: ${calc.formattedPrice}\n`;
-    message += `В месяц: ${calc.formattedMonthly}\n\n`;
-    
-    message += `Прошу связаться для обсуждения деталей.\n\n`;
-    
-    message += `Контакт для связи указан в подписи письма.\n\n`;
-    
-    message += `Расчет: ${new Date().toLocaleDateString('ru-RU')}`;
-    
-    return message;
+    // Автоматически включаем режим скриншота на мобильных при расчете
+    window.addEventListener('mobile-screenshot-ready', function() {
+        if (window.innerWidth <= 768 && currentCalculation) {
+            document.body.classList.add('screenshot-mode');
+            screenshotBtn.innerHTML = '❌';
+            screenshotBtn.style.background = '#e74c3c';
+        }
+    });
 }
 
 // ============ НАЧАЛО ДЕБАГ ФУНКЦИЙ ============
@@ -1032,6 +1115,7 @@ window.performCalculation = performCalculation;
 window.sendToTelegram = sendToTelegram;
 window.sendToEmail = sendToEmail;
 window.debugCalculator = debugCalculator;
+window.initScreenshotMode = initScreenshotMode;
 
 // ============ НАЧАЛО АВТОМАТИЧЕСКОЙ ИНИЦИАЛИЗАЦИИ ============
 // Автоматически инициализируем калькулятор при загрузке страницы
