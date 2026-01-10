@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 8.0 (Упрощенный интерфейс с реальным расчетом)
+     Версия: 9.0 (Автоматическое добавление + НДС)
      ============================================ -->
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
-    <!-- ============ SEO МЕТАДАННЫЕ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
     <title>Калькулятор стоимости аренды грязезащитных ковров | МИРУМ</title>
     <meta name="description" content="✅ Рассчитайте стоимость аренды грязезащитных ковров для вашего города. Цены для Москвы, СПб, Екатеринбурга, Новосибирска и других городов России.">
     
-    <!-- Каноническая ссылка -->
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/calculator.html" />
     <meta name="robots" content="index, follow" />
     
-    <!-- Ключевые слова для калькулятора -->
     <meta name="keywords" content="калькулятор аренды ковров, стоимость аренды ковров, расчет стоимости ковров, цена на аренду ковров, ковры для офиса цена, грязезащитные ковры стоимость">
     
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Калькулятор аренды ковров | МИРУМ">
     <meta property="og:description" content="Рассчитайте стоимость аренды грязезащитных ковров для вашего города. Быстрый расчет онлайн.">
     <meta property="og:url" content="https://arenda-kovrov-mirum.ru/calculator.html">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/carpet_sample.webp">
     
-    <!-- ============ ФАВИКОНЫ ============ -->
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -35,14 +30,11 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#16a085">
     
-    <!-- ============ СТИЛИ ============ -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/calculator.css">
     
-    <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- ============ МИКРОРАЗМЕТКА ДЛЯ ИИ ============ -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -70,13 +62,9 @@
     </script>
 </head>
 <body>
-    <!-- ============ НАЧАЛО HEADER ============ -->
     <script src="/includes/header.js"></script>
-    <!-- ============ КОНЕЦ HEADER ============ -->
 
-    <!-- ============ НАЧАЛО ОСНОВНОГО КОНТЕНТА КАЛЬКУЛЯТОРА ============ -->
     <main>
-        <!-- ============ ГЕРОЙ-БАННЕР КАЛЬКУЛЯТОРА ============ -->
         <section class="hero" style="background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%); color: white; padding: 80px 0 40px; text-align: center;">
             <div class="container">
                 <h1 style="color: white; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 20px;">
@@ -97,7 +85,6 @@
             </div>
         </section>
 
-        <!-- ============ ОСНОВНОЙ КАЛЬКУЛЯТОР ============ -->
         <section class="calculator-section">
             <div class="container">
                 <div class="tabs">
@@ -105,12 +92,15 @@
                     <button class="tab-btn" onclick="showTab('tender')">Тендерный</button>
                 </div>
                 
-                <!-- Стандартный калькулятор -->
                 <div id="standard-calc" class="calculator-container">
                     <div class="calculator-form">
                         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">
                             <i class="fas fa-calculator"></i> Рассчитать стоимость
                         </h2>
+                        
+                        <p style="text-align: center; color: #666; margin-bottom: 25px;">
+                            Заполните поля ниже - позиции будут добавляться автоматически
+                        </p>
                         
                         <div class="form-group">
                             <label for="region">
@@ -158,15 +148,8 @@
                                 Укажите необходимое количество одинаковых ковров
                             </p>
                         </div>
-                        
-                        <!-- Здесь будет отображаться расчет для одной позиции -->
-                        
-                        <button class="btn btn-primary" id="addPositionBtn">
-                            <i class="fas fa-plus"></i> Добавить позицию в расчет
-                        </button>
                     </div>
                     
-                    <!-- Список добавленных позиций -->
                     <div class="positions-list" id="positionsList">
                         <h3 style="margin-bottom: 20px; color: var(--primary-color);">
                             <i class="fas fa-list"></i> Добавленные позиции
@@ -178,13 +161,9 @@
                         </div>
                     </div>
                     
-                    <!-- Итоговый результат -->
-                    <div id="totalResult" style="padding: 20px; display: none;">
-                        <!-- Итоговый расчет будет здесь -->
-                    </div>
+                    <div id="totalResult" style="padding: 20px; display: none;"></div>
                 </div>
                 
-                <!-- Тендерный калькулятор -->
                 <div id="tender-calc" class="calculator-container" style="display: none;">
                     <div class="calculator-form">
                         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">
@@ -209,22 +188,17 @@
                             </select>
                         </div>
                         
-                        <div class="month-inputs" id="monthInputs">
-                            <!-- Месяцы будут добавлены через JS -->
-                        </div>
+                        <div class="month-inputs" id="monthInputs"></div>
                         
                         <button class="btn btn-primary" id="calculateTenderBtn" style="margin-top: 20px;">
                             <i class="fas fa-calculator"></i> Рассчитать тендер
                         </button>
                     </div>
                     
-                    <!-- Результаты тендерного расчета -->
                     <div class="calculator-results" id="tender-result" style="display: none;">
                         <h3><i class="fas fa-file-invoice-dollar"></i> Расчет по тендеру</h3>
                         
-                        <div id="tenderPositions">
-                            <!-- Позиции тендера загружаются через JS -->
-                        </div>
+                        <div id="tenderPositions"></div>
                         
                         <div id="tenderTotal" style="background: rgba(22, 160, 133, 0.2); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 18px; font-weight: bold;">
                             Общая стоимость: <span id="tenderTotalValue">0</span> ₽
@@ -238,7 +212,24 @@
                     </div>
                 </div>
                 
-                <!-- Информация о том, что включено в стоимость -->
+                <div class="documents-info">
+                    <h4><i class="fas fa-file-contract"></i> Для заключения договора потребуются:</h4>
+                    <ul>
+                        <li>Реквизиты компании</li>
+                        <li>Подписант (ФИО, основание полномочий)</li>
+                        <li>Точный адрес объекта и название, вывеска</li>
+                        <li>Режим работы объекта</li>
+                        <li>Контактное лицо (ФИО, телефон) для связи с курьером</li>
+                    </ul>
+                    
+                    <div style="margin-top: 15px; padding: 15px; background: #e8f4fd; border-radius: 8px;">
+                        <p style="margin: 0; color: #2c3e50; font-size: 0.9rem;">
+                            <i class="fas fa-info-circle" style="color: #3498db;"></i> 
+                            <strong>Условия:</strong> Счёт выставляется только за фактические замены. Возможно включить НДС 22% — цена увеличится на ставку налога.
+                        </p>
+                    </div>
+                </div>
+                
                 <div class="calculator-info">
                     <h3><i class="fas fa-check-circle"></i> Что включено в стоимость аренды:</h3>
                     <ul>
@@ -259,70 +250,9 @@
                         </a>
                     </div>
                 </div>
-                
-                <!-- Таблица примерных цен -->
-                <div class="calculator-info" style="margin-top: 40px;">
-                    <h3><i class="fas fa-city"></i> Примерные цены в популярных городах (за одну замену):</h3>
-                    
-                    <div class="comparison-table">
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <thead>
-                                <tr>
-                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Город</th>
-                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Ковер 85×60 см</th>
-                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Ковер 85×150 см</th>
-                                    <th style="padding: 12px; text-align: left; background: var(--primary-color); color: white;">Ковер 115×200 см</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Москва</strong></td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">180 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">420 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">760 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Санкт-Петербург</strong></td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">340 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">510 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">830 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Екатеринбург</strong></td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">190 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">360 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">580 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Новосибирск</strong></td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">200 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">400 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">610 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Казань</strong></td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">190 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">360 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">580 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Уфа</strong></td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">200 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">360 ₽</td>
-                                    <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">550 ₽</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 20px; font-style: italic; color: var(--text-light);">
-                        * Точную стоимость для вашего города рассчитайте в калькуляторе выше
-                    </p>
-                </div>
             </div>
         </section>
 
-        <!-- ============ FAQ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
         <section class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Частые вопросы по расчету стоимости</h2>
@@ -331,25 +261,25 @@
                     <div class="faq-item-main">
                         <div class="faq-question-main">
                             <i class="fas fa-question-circle"></i>
-                            Как рассчитывается итоговая стоимость?
+                            Как работает автоматическое добавление позиций?
                         </div>
-                        <p>Стоимость = цена за замену × количество замен в месяц × количество ковров. Например, для 2 ковров с заменой 1 раз в неделю: цена × 4 (недели) × 2 (ковра).</p>
+                        <p>Просто заполните все поля: регион, размер ковра, периодичность замены и количество. Позиция автоматически добавится в расчет. Измените количество - позиция обновится.</p>
                     </div>
                     
                     <div class="faq-item-main">
                         <div class="faq-question-main">
                             <i class="fas fa-question-circle"></i>
-                            Можно ли арендовать ковры разного размера?
+                            Можно ли арендовать ковры в разных регионах?
                         </div>
-                        <p>Да, конечно! Просто сделайте несколько расчетов для разных размеров, а затем отправьте все результаты нашему менеджеру для составления общего коммерческого предложения.</p>
+                        <p>Да! Просто выберите разные регионы для каждой позиции. Калькулятор автоматически покажет "Разные регионы" в итоговом расчете.</p>
                     </div>
                     
                     <div class="faq-item-main">
                         <div class="faq-question-main">
                             <i class="fas fa-question-circle"></i>
-                            Что делать, если моего города нет в списке?
+                            Что такое расчет за 4 недели?
                         </div>
-                        <p>Работаем по всей России! Если вашего города нет в списке, выберите ближайший крупный город или отправьте запрос через форму ниже - мы рассчитаем стоимость индивидуально.</p>
+                        <p>Мы считаем стоимость за 4 недели, а не за месяц, потому что в разных месяцах разное количество дней. Это более точный расчет для регулярных замен.</p>
                     </div>
                     
                     <div class="faq-item-main">
@@ -357,13 +287,12 @@
                             <i class="fas fa-question-circle"></i>
                             Есть ли скидки при больших объемах?
                         </div>
-                        <p>Да, предоставляем корпоративные скидки при аренде от 10 ковров или при долгосрочном сотрудничестве от 6 месяцев. Отправьте расчет для получения персонального предложения.</p>
+                        <p>Да, предоставляем корпоративные скидки при аренде от 10 ковров или при долгосрочном сотрудничестве от 6 месяцев.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============ КОНТАКТЫ ДЛЯ УТОЧНЕНИЯ ============ -->
         <section id="contacts" class="section">
             <div class="container">
                 <h2 class="section-title">Нужна помощь с расчетом?</h2>
@@ -409,7 +338,6 @@
                         </div>
                     </div>
                     
-                    <!-- Простая форма для вопросов -->
                     <div class="contact-form">
                         <h3>Задать вопрос по расчету</h3>
                         <form id="calculatorContactForm">
@@ -445,11 +373,8 @@
         </section>
     </main>
 
-    <!-- ============ НАЧАЛО FOOTER ============ -->
     <script src="/includes/footer.js"></script>
-    <!-- ============ КОНЕЦ FOOTER ============ -->
 
-    <!-- ============ СКРИПТЫ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
     <script src="/js/main.js"></script>
     <script src="/js/prices.js"></script>
     <script src="/js/calculator.js"></script>
