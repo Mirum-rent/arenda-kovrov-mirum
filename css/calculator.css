@@ -1,6 +1,6 @@
 /* ============================================
    CALCULATOR.CSS - Стили для калькулятора МИРУМ
-   Версия: 7.2 (07.01.2026) - СТИЛИ ДЛЯ НЕСКОЛЬКИХ ПОЗИЦИЙ
+   Версия: 7.3 (07.01.2026) - СТИЛИ ДЛЯ РЕАЛЬНОГО ВРЕМЕНИ РАСЧЕТА
    ============================================ */
 
 /* ============ ОСНОВНЫЕ СТИЛИ КАЛЬКУЛЯТОРА ============ */
@@ -132,6 +132,64 @@
     -moz-appearance: none;
 }
 
+/* ============ ПРЕВЬЮ РАСЧЕТА В РЕАЛЬНОМ ВРЕМЕНИ ============ */
+#calculationPreview {
+    background: linear-gradient(135deg, #e8f4fd 0%, #d4e7fa 100%);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border-left: 4px solid #3498db;
+    display: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+#calculationPreview.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#previewContent {
+    font-size: 0.95rem;
+}
+
+#previewContent strong {
+    color: #2c3e50;
+}
+
+#addFromPreview {
+    flex: 1;
+    background: #3498db !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+#addFromPreview:hover {
+    background: #2980b9 !important;
+    transform: translateY(-2px) !important;
+}
+
+#clearPreview {
+    background: #e74c3c !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    width: 40px !important;
+    transition: all 0.3s ease !important;
+}
+
+#clearPreview:hover {
+    background: #c0392b !important;
+}
+
 /* ============ КНОПКИ КАЛЬКУЛЯТОРА ============ */
 #addPositionBtn {
     background: #3498db !important;
@@ -223,9 +281,6 @@
 }
 
 .position-item button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     background: #e74c3c;
     color: white;
     border: none;
@@ -234,10 +289,44 @@
     cursor: pointer;
     font-size: 14px;
     transition: background 0.3s ease;
+    min-width: 30px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .position-item button:hover {
     background: #c0392b;
+}
+
+.position-item .fa-map-marker-alt {
+    color: #7f8c8d;
+    margin-right: 5px;
+}
+
+/* ============ ИТОГОВЫЙ БЛОК В СПИСКЕ ПОЗИЦИЙ ============ */
+#positionsTotal {
+    background: #16a085;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(22, 160, 133, 0.3);
+}
+
+#positionsTotal div:first-child {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+#positionsTotal div:last-child {
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.9;
 }
 
 /* ============ РЕЗУЛЬТАТЫ РАСЧЕТА ============ */
@@ -529,6 +618,11 @@
         padding-right: 45px;
     }
     
+    #calculationPreview {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
     .month-inputs {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -540,6 +634,11 @@
     .position-item {
         padding: 12px;
         font-size: 0.9rem;
+    }
+    
+    #positionsTotal {
+        padding: 12px;
+        font-size: 16px;
     }
     
     .results-actions {
@@ -576,6 +675,11 @@
         padding: 14px !important;
         font-size: 0.95rem !important;
     }
+    
+    #addFromPreview, #clearPreview {
+        padding: 12px !important;
+        font-size: 0.9rem !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -586,6 +690,10 @@
     .tab-btn {
         font-size: 13px;
         padding: 10px;
+    }
+    
+    #calculationPreview {
+        padding: 12px;
     }
 }
 
@@ -627,6 +735,17 @@
     }
 }
 
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .calculator-results {
     animation: fadeIn 0.5s ease-out;
 }
@@ -642,6 +761,10 @@
 
 .position-item {
     animation: slideIn 0.3s ease-out;
+}
+
+#calculationPreview {
+    animation: slideInFromTop 0.3s ease-out;
 }
 
 /* ============ ПРИНТЕР ============ */
@@ -682,6 +805,10 @@
     }
     
     .position-item {
+        border-left: 4px solid #000;
+    }
+    
+    #calculationPreview {
         border-left: 4px solid #000;
     }
 }
