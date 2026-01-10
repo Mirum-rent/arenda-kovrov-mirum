@@ -1,563 +1,58 @@
 // ============================================
-// MOBILE.JS - Мобильная оптимизация для МИРУМ
-// Версия: 5.2 (07.01.2026) - С ИСПРАВЛЕННЫМ СКРЫВАЮЩИМСЯ ХЕДЕРОМ
+// MOBILE.JS - Мобильная оптимизация для калькулятора
+// Версия: 6.0 (Упрощенная версия)
 // ============================================
 
 (function() {
     'use strict';
     
-    // ============ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ============
-    let lastScrollTop = 0;
-    let isScrolling = false;
-    let isMobileMenuOpen = false;
-    const SCROLL_THRESHOLD = 100;
-    const HEADER_HEIGHT_MOBILE = 60;
-    
-    // ============ ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ ============
     document.addEventListener('DOMContentLoaded', function() {
         console.log('📱 mobile.js инициализирован');
         
         // Проверяем, находимся ли мы на странице калькулятора
         const isCalculatorPage = window.location.pathname.includes('calculator') || 
-                               window.location.pathname.includes('calc') ||
                                document.querySelector('.calculator-section');
         
         if (isCalculatorPage) {
-            console.log('📊 Найдена страница калькулятора, применяем специальные настройки');
+            console.log('📊 Найдена страница калькулятора');
             setupCalculatorMobile();
-        } else {
-            // 1. Инициализация мобильного меню
-            initMobileMenu();
-            
-            // 2. Настройка скрытия хедера и героя при скролле
-            initHeaderAndHeroHide();
-            
-            // 3. Адаптация элементов под мобильные
-            adaptElementsForMobile();
-            
-            // 4. Проверка контрастности
-            checkContrastIssues();
-            
-            // 5. Обработка изменений размера окна
-            window.addEventListener('resize', handleResize);
-            
-            // 6. Предотвращение зума iOS
-            preventIOSZoom();
-            
-            // 7. Инициализация плавной прокрутки
-            initSmoothScroll();
         }
         
         console.log('✅ Мобильная оптимизация активирована');
     });
     
-    // ============ 1. МОБИЛЬНОЕ МЕНЮ ============
-    function initMobileMenu() {
-        const header = document.querySelector('.main-header');
-        if (!header) return;
-        
-        // Проверяем, нужно ли создавать мобильное меню
-        if (window.innerWidth > 768) {
-            // На десктопе используем существующую навигацию
-            return;
-        }
-        
-        // Находим или создаем кнопку меню-бургер
-        let menuToggle = document.getElementById('mobileMenuToggle');
-        if (!menuToggle) {
-            menuToggle = document.querySelector('.mobile-menu-toggle');
-        }
-        
-        if (!menuToggle) {
-            console.warn('❌ Кнопка мобильного меню не найдена');
-            return;
-        }
-        
-        // Находим или создаем мобильное меню
-        let mobileNav = document.getElementById('mobileNav');
-        if (!mobileNav) {
-            mobileNav = document.querySelector('.mobile-nav');
-        }
-        
-        if (!mobileNav) {
-            console.warn('❌ Мобильное меню не найдено');
-            return;
-        }
-        
-        // Обработчик клика по кнопке меню
-        menuToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            toggleMobileMenu();
-        });
-        
-        // Закрытие меню при клике на ссылку
-        mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Для выпадающих меню
-                if (this.classList.contains('mobile-dropdown-toggle')) {
-                    e.preventDefault();
-                    const dropdown = this.closest('.mobile-dropdown');
-                    if (dropdown) {
-                        dropdown.classList.toggle('active');
-                    }
-                    return;
-                }
-                
-                // Для обычных ссылок закрываем меню
-                if (this.getAttribute('href') !== '#') {
-                    closeMobileMenu();
-                }
-            });
-        });
-        
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', function(e) {
-            if (isMobileMenuOpen && 
-                !mobileNav.contains(e.target) && 
-                !menuToggle.contains(e.target)) {
-                closeMobileMenu();
-            }
-        });
-        
-        // Закрытие меню при нажатии Esc
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && isMobileMenuOpen) {
-                closeMobileMenu();
-            }
-        });
-        
-        // Функции управления меню
-        function toggleMobileMenu() {
-            if (isMobileMenuOpen) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        }
-        
-        function openMobileMenu() {
-            menuToggle.classList.add('active');
-            mobileNav.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            isMobileMenuOpen = true;
-            
-            // Добавляем оверлей
-            addOverlay();
-        }
-        
-        function closeMobileMenu() {
-            menuToggle.classList.remove('active');
-            mobileNav.classList.remove('active');
-            document.body.style.overflow = '';
-            isMobileMenuOpen = false;
-            
-            // Удаляем оверлей
-            removeOverlay();
-        }
-        
-        function addOverlay() {
-            let overlay = document.querySelector('.mobile-menu-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.className = 'mobile-menu-overlay';
-                overlay.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.5);
-                    z-index: 999;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                `;
-                document.body.appendChild(overlay);
-                
-                setTimeout(() => {
-                    overlay.style.opacity = '1';
-                }, 10);
-                
-                overlay.addEventListener('click', closeMobileMenu);
-            }
-        }
-        
-        function removeOverlay() {
-            const overlay = document.querySelector('.mobile-menu-overlay');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    if (overlay.parentNode) {
-                        overlay.parentNode.removeChild(overlay);
-                    }
-                }, 300);
-            }
-        }
-        
-        // Экспорт функций
-        window.MobileMenu = {
-            open: openMobileMenu,
-            close: closeMobileMenu,
-            toggle: toggleMobileMenu
-        };
-    }
-    
-    // ============ 2. СКРЫТИЕ ХЕДЕРА И ГЕРОЯ ПРИ СКРОЛЛЕ ============
-    function initHeaderAndHeroHide() {
-        const header = document.getElementById('mainHeader');
-        const hero = document.querySelector('.hero');
-        if (!header) return;
-        
-        // В калькуляторе скрываем сразу
-        if (window.location.pathname.includes('calculator.html')) {
-            header.classList.add('hidden');
-            if (hero) hero.classList.add('hidden');
-            return;
-        }
-        
-        // Дебаунс для производительности
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-        
-        const handleScroll = debounce(function() {
-            if (isScrolling || isMobileMenuOpen) return;
-            
-            isScrolling = true;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Не скрываем при открытом меню
-            if (isMobileMenuOpen) {
-                isScrolling = false;
-                return;
-            }
-            
-            const isScrollingDown = scrollTop > lastScrollTop;
-            const heroHeight = hero ? hero.offsetHeight : 0;
-            
-            // При скролле вниз скрываем хедер и герой
-            if (isScrollingDown && scrollTop > 100) {
-                header.classList.add('hidden');
-                if (hero && scrollTop > heroHeight * 0.7) {
-                    hero.style.opacity = '0.3';
-                    hero.style.transform = 'translateY(-20px)';
-                    hero.style.transition = 'all 0.3s ease';
-                }
-            } else {
-                header.classList.remove('hidden');
-                if (hero) {
-                    hero.style.opacity = '1';
-                    hero.style.transform = 'translateY(0)';
-                }
-            }
-            
-            lastScrollTop = scrollTop;
-            
-            setTimeout(() => {
-                isScrolling = false;
-            }, 100);
-        }, 10);
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        
-        // Показываем хедер при наведении
-        if (window.innerWidth > 768) {
-            header.addEventListener('mouseenter', function() {
-                header.classList.remove('hidden');
-            });
-        }
-        
-        // Показываем хедер при касании на мобильных
-        if ('ontouchstart' in window) {
-            document.addEventListener('touchstart', function() {
-                if (isMobileMenuOpen) return;
-                header.classList.remove('hidden');
-                if (hero) {
-                    hero.style.opacity = '1';
-                    hero.style.transform = 'translateY(0)';
-                }
-                setTimeout(() => {
-                    if (!isMobileMenuOpen) {
-                        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-                        if (currentScroll > 100) {
-                            header.classList.add('hidden');
-                            if (hero && currentScroll > hero.offsetHeight * 0.7) {
-                                hero.style.opacity = '0.3';
-                                hero.style.transform = 'translateY(-20px)';
-                            }
-                        }
-                    }
-                }, 2000);
-            });
-        }
-    }
-    
-    // ============ 3. АДАПТАЦИЯ ЭЛЕМЕНТОВ ============
-    function adaptElementsForMobile() {
-        const isMobile = window.innerWidth <= 768;
-        
-        if (isMobile) {
-            // Увеличиваем размеры кликабельных элементов
-            document.querySelectorAll('button:not(.mobile-menu-toggle), a.btn, input[type="submit"]').forEach(el => {
-                if (el.offsetHeight < 44 || el.offsetWidth < 44) {
-                    el.style.minHeight = '44px';
-                    el.style.minWidth = '44px';
-                }
-            });
-            
-            // Увеличиваем отступы для удобства касания
-            document.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea, select').forEach(el => {
-                const computedStyle = window.getComputedStyle(el);
-                const paddingTop = parseInt(computedStyle.paddingTop);
-                const paddingBottom = parseInt(computedStyle.paddingBottom);
-                
-                if (paddingTop + paddingBottom < 20) {
-                    el.style.paddingTop = '12px';
-                    el.style.paddingBottom = '12px';
-                }
-            });
-            
-            // Оптимизируем таблицы для горизонтального скролла
-            document.querySelectorAll('table').forEach(table => {
-                if (table.offsetWidth > window.innerWidth * 0.9) {
-                    table.style.display = 'block';
-                    table.style.overflowX = 'auto';
-                    table.style.webkitOverflowScrolling = 'touch';
-                    
-                    // Добавляем индикатор скролла
-                    if (!table.parentNode.querySelector('.scroll-indicator')) {
-                        const indicator = document.createElement('div');
-                        indicator.className = 'scroll-indicator';
-                        indicator.innerHTML = '↔️';
-                        indicator.style.cssText = `
-                            text-align: center;
-                            padding: 5px;
-                            font-size: 12px;
-                            color: #666;
-                        `;
-                        table.parentNode.insertBefore(indicator, table);
-                    }
-                }
-            });
-            
-            // Улучшаем изображения
-            document.querySelectorAll('img').forEach(img => {
-                if (!img.hasAttribute('loading')) {
-                    img.setAttribute('loading', 'lazy');
-                }
-            });
-        }
-    }
-    
-    // ============ 4. ПРОВЕРКА КОНТРАСТНОСТИ ============
-    function checkContrastIssues() {
-        // Простая проверка проблемных мест
-        const elementsToCheck = [
-            '.hero p',
-            '.testimonials-preview p',
-            '.footer p',
-            '.footer a:not(.btn)',
-            '.advantage-card',
-            '.step-card'
-        ];
-        
-        elementsToCheck.forEach(selector => {
-            document.querySelectorAll(selector).forEach(el => {
-                const style = window.getComputedStyle(el);
-                const bgColor = style.backgroundColor;
-                const color = style.color;
-                
-                // Простая эвристика для темных фонов
-                if (isDarkBackground(bgColor)) {
-                    if (!isBrightText(color)) {
-                        el.classList.add('contrast-fix-dark');
-                    }
-                }
-            });
-        });
-        
-        // Вспомогательные функции
-        function isDarkBackground(rgb) {
-            // Преобразуем rgb(r, g, b) в значения
-            const match = rgb.match(/\d+/g);
-            if (!match) return false;
-            
-            const [r, g, b] = match.map(Number);
-            // Яркость по формуле
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-            return brightness < 128;
-        }
-        
-        function isBrightText(rgb) {
-            const match = rgb.match(/\d+/g);
-            if (!match) return false;
-            
-            const [r, g, b] = match.map(Number);
-            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-            return brightness > 180;
-        }
-    }
-    
-    // ============ 5. НАСТРОЙКИ КАЛЬКУЛЯТОРА ============
+    // ============ НАСТРОЙКИ КАЛЬКУЛЯТОРА ДЛЯ МОБИЛЬНЫХ ============
     function setupCalculatorMobile() {
-        console.log('📱 Применяем мобильные настройки для калькулятора');
-        
-        // Исправляем проблему с выбором частоты замены
-        fixFrequencySelection();
+        console.log('📱 Настраиваем калькулятор для мобильных');
         
         // Адаптируем элементы калькулятора
         adaptCalculatorElements();
         
-        // Добавляем автофокус на первое поле
-        const firstInput = document.querySelector('.calculator-content.active select, .calculator-content.active input');
-        if (firstInput && window.innerWidth <= 768) {
-            setTimeout(() => {
-                firstInput.focus();
-            }, 500);
-        }
-        
         // Улучшаем UX на мобильных
         improveCalculatorUX();
         
-        // Обработка изменений размера для калькулятора
+        // Предотвращаем зум iOS при фокусе
+        preventIOSZoom();
+        
+        // Обработка изменений размера
         window.addEventListener('resize', function() {
             adaptCalculatorElements();
-            fixFrequencySelection();
         });
-        
-        // Автоматически скрываем хедер и герой на калькуляторе
-        const header = document.getElementById('mainHeader');
-        const hero = document.querySelector('.hero');
-        
-        if (header) header.classList.add('hidden');
-        if (hero) hero.classList.add('hidden');
-    }
-    
-    // Функция для исправления выбора частоты замены
-    function fixFrequencySelection() {
-        const isMobile = window.innerWidth <= 768;
-        const regionSelect = document.getElementById('region');
-        const sizeSelect = document.getElementById('size');
-        const frequencySelect = document.getElementById('frequency');
-        
-        if (!isMobile || !regionSelect || !sizeSelect || !frequencySelect) {
-            return;
-        }
-        
-        // Переустанавливаем обработчики событий для мобильной версии
-        if (regionSelect) {
-            regionSelect.addEventListener('change', function() {
-                handleRegionChangeMobile(this.value);
-            });
-        }
-        
-        if (sizeSelect) {
-            sizeSelect.addEventListener('change', function() {
-                handleSizeChangeMobile(regionSelect.value, this.value);
-            });
-        }
-    }
-    
-    function handleRegionChangeMobile(region) {
-        const sizeSelect = document.getElementById('size');
-        const frequencySelect = document.getElementById('frequency');
-        
-        if (!region) {
-            sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
-            sizeSelect.disabled = true;
-            frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
-            frequencySelect.disabled = true;
-            return;
-        }
-        
-        // Получаем доступные размеры для региона
-        let sizes = [];
-        if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getSizesForRegion === 'function') {
-            sizes = window.PriceUtils.getSizesForRegion(region);
-        } else if (window.priceData && window.priceData[region]) {
-            // Резервный вариант
-            sizes = Object.keys(window.priceData[region]).sort();
-        }
-        
-        // Заполняем список размеров
-        sizeSelect.innerHTML = '<option value="">Выберите размер ковра</option>';
-        sizes.forEach(size => {
-            const option = document.createElement('option');
-            option.value = size;
-            option.textContent = size;
-            sizeSelect.appendChild(option);
-        });
-        
-        sizeSelect.disabled = false;
-        
-        // Сбрасываем частоту
-        frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
-        frequencySelect.disabled = true;
-        
-        // Скрываем результаты
-        const resultsDiv = document.getElementById('results');
-        if (resultsDiv) {
-            resultsDiv.style.display = 'none';
-        }
-    }
-    
-    function handleSizeChangeMobile(region, size) {
-        const frequencySelect = document.getElementById('frequency');
-        
-        if (!region || !size) {
-            frequencySelect.innerHTML = '<option value="">Сначала выберите размер</option>';
-            frequencySelect.disabled = true;
-            return;
-        }
-        
-        // Получаем доступные частоты для размера
-        let frequencies = [];
-        if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getFrequenciesForSize === 'function') {
-            frequencies = window.PriceUtils.getFrequenciesForSize(region, size);
-        } else if (window.priceData && window.priceData[region] && window.priceData[region][size]) {
-            // Резервный вариант
-            frequencies = Object.keys(window.priceData[region][size]).sort();
-        }
-        
-        // Заполняем список частот
-        frequencySelect.innerHTML = '<option value="">Выберите периодичность замены</option>';
-        frequencies.forEach(frequency => {
-            const option = document.createElement('option');
-            option.value = frequency;
-            option.textContent = frequency;
-            frequencySelect.appendChild(option);
-        });
-        
-        frequencySelect.disabled = false;
-        
-        // Скрываем результаты
-        const resultsDiv = document.getElementById('results');
-        if (resultsDiv) {
-            resultsDiv.style.display = 'none';
-        }
     }
     
     function adaptCalculatorElements() {
         const isMobile = window.innerWidth <= 768;
         
         if (isMobile) {
-            // Увеличиваем размеры элементов формы
+            // Увеличиваем размеры элементов формы для удобства касания
             document.querySelectorAll('.calculator-form select, .calculator-form input').forEach(el => {
                 el.style.fontSize = '16px'; // Предотвращает зум в iOS
-                el.style.padding = '12px 15px';
+                el.style.padding = '15px';
                 el.style.minHeight = '44px';
+                el.style.borderRadius = '10px';
             });
             
-            // Адаптируем сетку месяцев
+            // Адаптируем сетку месяцев для тендера
             const monthInputs = document.querySelector('.month-inputs');
             if (monthInputs) {
                 if (window.innerWidth <= 480) {
@@ -569,72 +64,85 @@
             
             // Адаптируем кнопки
             document.querySelectorAll('.calculator-content .btn').forEach(btn => {
-                btn.style.padding = '15px';
+                btn.style.padding = '16px';
                 btn.style.fontSize = '16px';
+                btn.style.minHeight = '44px';
+                btn.style.borderRadius = '10px';
+            });
+            
+            // Адаптируем позиции
+            document.querySelectorAll('.position-item').forEach(item => {
+                item.style.padding = '15px';
+                item.style.marginBottom = '15px';
+                item.style.fontSize = '15px';
+            });
+            
+            // Адаптируем табы
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.style.padding = '15px';
+                btn.style.fontSize = '15px';
                 btn.style.minHeight = '44px';
             });
             
-            // Оптимизируем результаты
-            document.querySelectorAll('.result-item').forEach(item => {
-                item.style.padding = '12px';
-                item.style.fontSize = '14px';
+            // Адаптируем таблицу
+            const tables = document.querySelectorAll('table');
+            tables.forEach(table => {
+                if (table.offsetWidth > window.innerWidth) {
+                    table.style.display = 'block';
+                    table.style.overflowX = 'auto';
+                    table.style.webkitOverflowScrolling = 'touch';
+                }
             });
         }
     }
     
     function improveCalculatorUX() {
-        // Автоматический расчет при изменении полей
-        document.querySelectorAll('#region, #size, #frequency, #quantity').forEach(el => {
-            el.addEventListener('change', function() {
-                if (window.calculateCurrentPosition) {
-                    window.calculateCurrentPosition();
-                }
-            });
-        });
-        
-        // Автоскролл к результатам при расчете тендера
-        const calculateTenderBtn = document.getElementById('calculateTenderBtn');
-        if (calculateTenderBtn) {
-            calculateTenderBtn.addEventListener('click', function() {
-                setTimeout(() => {
-                    const results = document.getElementById('tender-result');
-                    if (results && window.innerWidth <= 768) {
-                        results.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'start' 
-                        });
-                    }
-                }, 300);
-            });
-        }
-        
         // Улучшаем клавиатуру на мобильных
         document.querySelectorAll('input[type="number"]').forEach(input => {
             input.setAttribute('inputmode', 'numeric');
             input.setAttribute('pattern', '[0-9]*');
         });
-    }
-    
-    // ============ 6. ОБРАБОТКА ИЗМЕНЕНИЯ РАЗМЕРА ============
-    function handleResize() {
-        // Закрываем мобильное меню при переходе на десктоп
-        if (window.innerWidth > 768 && isMobileMenuOpen) {
-            if (window.MobileMenu && typeof window.MobileMenu.close === 'function') {
-                window.MobileMenu.close();
-            }
+        
+        // Автоскролл к результатам при добавлении позиции
+        const addPositionBtn = document.getElementById('addPositionBtn');
+        if (addPositionBtn) {
+            const originalClick = addPositionBtn.onclick;
+            addPositionBtn.onclick = function(e) {
+                if (originalClick) originalClick.call(this, e);
+                
+                setTimeout(() => {
+                    if (window.innerWidth <= 768) {
+                        const positionsList = document.getElementById('positionsList');
+                        if (positionsList) {
+                            positionsList.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    }
+                }, 300);
+            };
         }
         
-        // Переадаптируем элементы
-        adaptElementsForMobile();
-        
-        // Обновляем хедер
-        const header = document.getElementById('mainHeader');
-        if (header && window.innerWidth > 768) {
-            header.classList.remove('hidden');
+        // Автоскролл к результатам тендера
+        const calculateTenderBtn = document.getElementById('calculateTenderBtn');
+        if (calculateTenderBtn) {
+            calculateTenderBtn.addEventListener('click', function() {
+                setTimeout(() => {
+                    if (window.innerWidth <= 768) {
+                        const results = document.getElementById('tender-result');
+                        if (results) {
+                            results.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    }
+                }, 300);
+            });
         }
     }
     
-    // ============ 7. ПРЕДОТВРАЩЕНИЕ ZOOM iOS ============
     function preventIOSZoom() {
         if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
             document.addEventListener('touchstart', function(event) {
@@ -653,85 +161,5 @@
             }, false);
         }
     }
-    
-    // ============ 8. ПЛАВНАЯ ПРОКРУТКА ============
-    function initSmoothScroll() {
-        // Переопределяем плавную прокрутку для лучшей производительности
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                
-                if (href === '#' || href.startsWith('http')) return;
-                
-                const targetElement = document.querySelector(href);
-                if (targetElement) {
-                    e.preventDefault();
-                    
-                    // Закрываем мобильное меню если открыто
-                    if (isMobileMenuOpen && window.MobileMenu && typeof window.MobileMenu.close === 'function') {
-                        window.MobileMenu.close();
-                    }
-                    
-                    const header = document.querySelector('.main-header');
-                    const headerHeight = header ? header.offsetHeight : 0;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = targetPosition - headerHeight;
-                    
-                    // Используем requestAnimationFrame для плавности
-                    const startPosition = window.pageYOffset;
-                    const distance = offsetPosition - startPosition;
-                    const duration = 500;
-                    let startTime = null;
-                    
-                    function animation(currentTime) {
-                        if (startTime === null) startTime = currentTime;
-                        const timeElapsed = currentTime - startTime;
-                        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-                        window.scrollTo(0, run);
-                        
-                        if (timeElapsed < duration) {
-                            requestAnimationFrame(animation);
-                        }
-                    }
-                    
-                    // Функция easing
-                    function easeInOutQuad(t, b, c, d) {
-                        t /= d/2;
-                        if (t < 1) return c/2*t*t + b;
-                        t--;
-                        return -c/2 * (t*(t-2) - 1) + b;
-                    }
-                    
-                    requestAnimationFrame(animation);
-                    
-                    // Обновляем URL
-                    if (history.pushState) {
-                        history.pushState(null, null, href);
-                    }
-                }
-            });
-        });
-    }
-    
-    // ============ УТИЛИТЫ ============
-    function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
-    
-    function getMobileOS() {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        
-        if (/android/i.test(userAgent)) return 'Android';
-        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return 'iOS';
-        
-        return 'unknown';
-    }
-    
-    // ============ ЭКСПОРТ ============
-    window.MobileUtils = {
-        isMobile: isMobileDevice,
-        getOS: getMobileOS,
-        isMenuOpen: () => isMobileMenuOpen
-    };
     
 })();
