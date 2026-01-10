@@ -1,6 +1,6 @@
 /* ============================================
    CALCULATOR.CSS - Стили для калькулятора МИРУМ
-   Версия: 7.1 (07.01.2026) - СОВРЕМЕННЫЙ ДИЗАЙН
+   Версия: 7.2 (07.01.2026) - СТИЛИ ДЛЯ НЕСКОЛЬКИХ ПОЗИЦИЙ
    ============================================ */
 
 /* ============ ОСНОВНЫЕ СТИЛИ КАЛЬКУЛЯТОРА ============ */
@@ -18,6 +18,40 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ============ ТАБЫ ============ */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: #f1f1f1;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: #3498db;
+    color: white;
+    font-weight: 600;
+}
+
+.tab-btn:hover {
+    background: #e0e0e0;
+}
+
+.tab-btn.active:hover {
+    background: #2980b9;
 }
 
 /* ============ ФОРМА КАЛЬКУЛЯТОРА ============ */
@@ -98,12 +132,31 @@
     -moz-appearance: none;
 }
 
-/* ============ КНОПКА РАСЧЕТА ============ */
+/* ============ КНОПКИ КАЛЬКУЛЯТОРА ============ */
+#addPositionBtn {
+    background: #3498db !important;
+    color: white !important;
+    border: none !important;
+    width: 100% !important;
+    padding: 15px !important;
+    margin-bottom: 10px !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+#addPositionBtn:hover {
+    background: #2980b9 !important;
+    transform: translateY(-2px) !important;
+}
+
 #calculateBtn {
     width: 100%;
     padding: 18px 30px;
     font-size: 1.2rem;
-    margin-top: 20px;
+    margin-top: 10px;
     background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
     border: none;
     color: white;
@@ -143,6 +196,48 @@
 #calculateBtn:active {
     transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(22, 160, 133, 0.3);
+}
+
+/* ============ СПИСОК ДОБАВЛЕННЫХ ПОЗИЦИЙ ============ */
+.positions-list {
+    padding: 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.position-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.position-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.position-item button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.position-item button:hover {
+    background: #c0392b;
 }
 
 /* ============ РЕЗУЛЬТАТЫ РАСЧЕТА ============ */
@@ -222,6 +317,45 @@
     color: rgba(255, 255, 255, 0.7);
     margin-top: 8px;
     font-style: italic;
+}
+
+/* ============ МЕСЯЦЫ ДЛЯ ТЕНДЕРНОГО КАЛЬКУЛЯТОРА ============ */
+.month-inputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.month-box {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.month-box label {
+    font-size: 12px;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+    font-weight: 600;
+}
+
+.month-box input {
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 5px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.month-box input:focus {
+    outline: none;
+    border-color: #16a085;
+    box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.2);
 }
 
 /* ============ КНОПКИ ДЕЙСТВИЙ ============ */
@@ -369,6 +503,15 @@
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     }
     
+    .tabs {
+        margin-bottom: 20px;
+    }
+    
+    .tab-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
     .calculator-form,
     .calculator-results {
         padding: 25px;
@@ -384,6 +527,19 @@
     .calculator-form select {
         background-position: right 18px center;
         padding-right: 45px;
+    }
+    
+    .month-inputs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .positions-list {
+        padding: 15px;
+    }
+    
+    .position-item {
+        padding: 12px;
+        font-size: 0.9rem;
     }
     
     .results-actions {
@@ -415,6 +571,22 @@
         padding: 16px 25px;
         border-radius: 10px;
     }
+    
+    #addPositionBtn {
+        padding: 14px !important;
+        font-size: 0.95rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .month-inputs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tab-btn {
+        font-size: 13px;
+        padding: 10px;
+    }
 }
 
 /* ============ ТАБЛЕТКИ ============ */
@@ -425,6 +597,10 @@
     
     .results-actions {
         grid-template-columns: 1fr 1fr;
+    }
+    
+    .month-inputs {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -463,9 +639,10 @@
 .result-item:nth-child(1) { animation-delay: 0.1s; }
 .result-item:nth-child(2) { animation-delay: 0.2s; }
 .result-item:nth-child(3) { animation-delay: 0.3s; }
-.result-item:nth-child(4) { animation-delay: 0.4s; }
-.result-item:nth-child(5) { animation-delay: 0.5s; }
-.result-item:nth-child(6) { animation-delay: 0.6s; }
+
+.position-item {
+    animation: slideIn 0.3s ease-out;
+}
 
 /* ============ ПРИНТЕР ============ */
 @media print {
@@ -503,83 +680,10 @@
     .result-item {
         border-left: 4px solid #000;
     }
-}
-
-/* ============ ОПТИМИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ СКРИНШОТОВ ============ */
-@media (max-width: 768px) {
-    /* Компактное отображение результатов */
-    .calculator-results {
-        max-height: 85vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
     
-    .result-item {
-        margin-bottom: 10px;
-        padding: 15px;
-    }
-    
-    .result-value {
-        font-size: 1.2rem;
-    }
-    
-    /* Скрываем необязательные элементы при скриншоте */
-    .results-actions {
-        position: sticky;
-        bottom: 0;
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-        padding: 15px 0 10px;
-        margin: 20px -25px -25px;
-        padding: 15px 25px;
-    }
-    
-    /* Компактная таблица цен */
-    .calculator-info table {
-        font-size: 0.85rem;
-    }
-    
-    .calculator-info th,
-    .calculator-info td {
-        padding: 8px 10px;
+    .position-item {
+        border-left: 4px solid #000;
     }
 }
-
-/* Компактный режим для скриншотов */
-.screenshot-mode .calculator-container {
-    margin-top: 0;
-    border-radius: 0;
-}
-
-.screenshot-mode .calculator-results {
-    max-height: 85vh;
-}
-
-/* Кнопка для включения режима скриншота */
-.screenshot-toggle {
-    position: fixed;
-    top: 70px;
-    right: 20px;
-    z-index: 999;
-    background: #16a085;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-    .screenshot-toggle {
-        top: 10px;
-        right: 70px;
-    }
-}
-
 
 /* ============ КОНЕЦ CALCULATOR.CSS ============ */
