@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 7.3 (07.01.2026) - С ВОЗМОЖНОСТЬЮ ДОБАВЛЕНИЯ НЕСКОЛЬКИХ ПОЗИЦИЙ
+     Версия: 8.0 (Упрощенный интерфейс с реальным расчетом)
      ============================================ -->
 <html lang="ru">
 <head>
@@ -37,7 +37,6 @@
     
     <!-- ============ СТИЛИ ============ -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 768px)">
     <link rel="stylesheet" href="/css/calculator.css">
     
     <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
@@ -69,10 +68,6 @@
         }
     }
     </script>
-    
-    <!-- Для ИИ: Это калькулятор стоимости аренды грязезащитных ковров -->
-    <!-- Рассчитывает цены для 40+ городов России -->
-    <!-- Интегрирован с базой цен prices.js -->
 </head>
 <body>
     <!-- ============ НАЧАЛО HEADER ============ -->
@@ -101,14 +96,13 @@
                 </div>
             </div>
         </section>
-        <!-- ============ КОНЕЦ ГЕРОЙ-БАННЕРА ============ -->
 
         <!-- ============ ОСНОВНОЙ КАЛЬКУЛЯТОР ============ -->
         <section class="calculator-section">
             <div class="container">
-                <div class="tabs" style="display: flex; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
-                    <button class="tab-btn active" onclick="showTab('standard')" style="flex: 1; padding: 15px; border: none; background: #f1f1f1; font-size: 16px; cursor: pointer; text-align: center;">Стандартный</button>
-                    <button class="tab-btn" onclick="showTab('tender')" style="flex: 1; padding: 15px; border: none; background: #f1f1f1; font-size: 16px; cursor: pointer; text-align: center;">Тендерный</button>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('standard')">Стандартный</button>
+                    <button class="tab-btn" onclick="showTab('tender')">Тендерный</button>
                 </div>
                 
                 <!-- Стандартный калькулятор -->
@@ -124,7 +118,6 @@
                             </label>
                             <select id="region" aria-label="Выберите регион">
                                 <option value="">Выберите регион</option>
-                                <!-- Регионы загружаются через JS -->
                             </select>
                             <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">
                                 Выберите город или область, где нужны ковры
@@ -166,46 +159,28 @@
                             </p>
                         </div>
                         
-                        <button class="btn btn-primary" id="addPositionBtn" style="background: #3498db; margin-bottom: 10px;">
-                            <i class="fas fa-plus"></i> Добавить позицию
-                        </button>
+                        <!-- Здесь будет отображаться расчет для одной позиции -->
                         
-                        <button class="btn btn-primary" id="calculateBtn" aria-label="Рассчитать стоимость">
-                            <i class="fas fa-calculator"></i> Рассчитать общую стоимость
+                        <button class="btn btn-primary" id="addPositionBtn">
+                            <i class="fas fa-plus"></i> Добавить позицию в расчет
                         </button>
                     </div>
                     
                     <!-- Список добавленных позиций -->
-                    <div class="positions-list" id="positionsList" style="padding: 20px; background: #f8f9fa; display: none;">
+                    <div class="positions-list" id="positionsList">
                         <h3 style="margin-bottom: 20px; color: var(--primary-color);">
                             <i class="fas fa-list"></i> Добавленные позиции
                         </h3>
-                        <div id="positionsContainer"></div>
-                    </div>
-                    
-                    <!-- Результаты расчета -->
-                    <div class="calculator-results" id="results" style="display: none;">
-                        <h3><i class="fas fa-chart-bar"></i> Результаты расчета</h3>
-                        
-                        <div id="resultDetails">
-                            <!-- Результаты загружаются через JS -->
-                        </div>
-                        
-                        <div class="results-actions">
-                            <button class="btn btn-telegram" id="sendToTelegram" aria-label="Отправить расчет в Telegram">
-                                <i class="fab fa-telegram"></i> Отправить в Telegram
-                            </button>
-                            <button class="btn btn-primary" id="sendToEmail" aria-label="Отправить расчет на Email">
-                                <i class="fas fa-envelope"></i> Отправить на Email
-                            </button>
-                        </div>
-                        
-                        <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.2); border-radius: 8px;">
-                            <p style="margin: 0; font-size: 0.9rem; color: #ffffff;">
-                                <i class="fas fa-lightbulb"></i> 
-                                <strong>Совет:</strong> Отправьте расчет нашему менеджеру для уточнения деталей и получения коммерческого предложения.
+                        <div id="positionsContainer">
+                            <p style="text-align: center; color: #666; padding: 20px;">
+                                Позиции не добавлены
                             </p>
                         </div>
+                    </div>
+                    
+                    <!-- Итоговый результат -->
+                    <div id="totalResult" style="padding: 20px; display: none;">
+                        <!-- Итоговый расчет будет здесь -->
                     </div>
                 </div>
                 
@@ -222,7 +197,6 @@
                             </label>
                             <select id="tender-region" aria-label="Выберите регион для тендера">
                                 <option value="">Выберите регион</option>
-                                <!-- Регионы загружаются через JS -->
                             </select>
                         </div>
                         
@@ -235,7 +209,7 @@
                             </select>
                         </div>
                         
-                        <div class="month-inputs" id="monthInputs" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px;">
+                        <div class="month-inputs" id="monthInputs">
                             <!-- Месяцы будут добавлены через JS -->
                         </div>
                         
@@ -286,7 +260,7 @@
                     </div>
                 </div>
                 
-                <!-- Таблица примерных цен для популярных городов -->
+                <!-- Таблица примерных цен -->
                 <div class="calculator-info" style="margin-top: 40px;">
                     <h3><i class="fas fa-city"></i> Примерные цены в популярных городах (за одну замену):</h3>
                     
@@ -347,7 +321,6 @@
                 </div>
             </div>
         </section>
-        <!-- ============ КОНЕЦ ОСНОВНОГО КАЛЬКУЛЯТОРА ============ -->
 
         <!-- ============ FAQ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
         <section class="section bg-light">
@@ -389,7 +362,6 @@
                 </div>
             </div>
         </section>
-        <!-- ============ КОНЕЦ FAQ ============ -->
 
         <!-- ============ КОНТАКТЫ ДЛЯ УТОЧНЕНИЯ ============ -->
         <section id="contacts" class="section">
@@ -471,24 +443,17 @@
                 </div>
             </div>
         </section>
-        <!-- ============ КОНЕЦ КОНТАКТОВ ============ -->
     </main>
-    <!-- ============ КОНЕЦ ОСНОВНОГО КОНТЕНТА КАЛЬКУЛЯТОРА ============ -->
 
     <!-- ============ НАЧАЛО FOOTER ============ -->
     <script src="/includes/footer.js"></script>
     <!-- ============ КОНЕЦ FOOTER ============ -->
 
     <!-- ============ СКРИПТЫ ДЛЯ КАЛЬКУЛЯТОРА ============ -->
-    <!-- Основные скрипты -->
     <script src="/js/main.js"></script>
-    <script src="/js/mobile.js"></script>
-    
-    <!-- Скрипты калькулятора -->
     <script src="/js/prices.js"></script>
     <script src="/js/calculator.js"></script>
     
-    <!-- Форматирование телефона и обработка формы -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🔧 Инициализация калькулятора страницы...');
@@ -519,7 +484,6 @@
                 calcForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    // Проверяем согласие
                     const consentCheckbox = document.getElementById('calcConsent');
                     if (!consentCheckbox.checked) {
                         alert('Пожалуйста, дайте согласие на обработку персональных данных');
@@ -527,7 +491,6 @@
                         return;
                     }
                     
-                    // Собираем данные
                     const name = document.getElementById('calcName').value.trim();
                     const phone = document.getElementById('calcPhone').value.trim();
                     const question = document.getElementById('calcQuestion').value.trim();
@@ -537,7 +500,6 @@
                         return;
                     }
                     
-                    // Формируем сообщение для Telegram
                     const message = `❓ ВОПРОС ПО РАСЧЕТУ КАЛЬКУЛЯТОРА ❓\n\n` +
                                    `👤 Имя: ${name}\n` +
                                    `📞 Телефон: ${phone}\n` +
@@ -545,19 +507,15 @@
                                    `🌐 Страница: Калькулятор\n` +
                                    `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
                     
-                    // Открываем Telegram
                     const telegramUrl = `https://t.me/+79770005127?text=${encodeURIComponent(message)}`;
                     window.open(telegramUrl, '_blank');
                     
-                    // Очищаем форму
                     calcForm.reset();
-                    
-                    // Сообщение пользователю
                     alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
                 });
             }
             
-            // Автоматически скрываем хедер и герой на странице калькулятора
+            // Автоматически скрываем хедер и герой
             if (window.location.pathname.includes('calculator.html')) {
                 const header = document.getElementById('mainHeader');
                 const hero = document.querySelector('.hero');
@@ -566,40 +524,41 @@
                 if (hero) hero.classList.add('hidden');
             }
             
-            // Инициализация калькулятора
-            if (typeof initCalculator === 'function') {
-                setTimeout(() => {
-                    initCalculator();
-                }, 500);
-            }
-            
             // Функции для табов
             window.showTab = function(tabName) {
-                // Скрываем все калькуляторы
                 document.getElementById('standard-calc').style.display = 'none';
                 document.getElementById('tender-calc').style.display = 'none';
                 
-                // Убираем активный класс со всех кнопок
                 document.querySelectorAll('.tab-btn').forEach(btn => {
                     btn.classList.remove('active');
-                    btn.style.background = '#f1f1f1';
                 });
                 
-                // Показываем нужный калькулятор
                 if (tabName === 'standard') {
                     document.getElementById('standard-calc').style.display = 'block';
                     document.querySelectorAll('.tab-btn')[0].classList.add('active');
-                    document.querySelectorAll('.tab-btn')[0].style.background = '#3498db';
-                    document.querySelectorAll('.tab-btn')[0].style.color = 'white';
                 } else {
                     document.getElementById('tender-calc').style.display = 'block';
                     document.querySelectorAll('.tab-btn')[1].classList.add('active');
-                    document.querySelectorAll('.tab-btn')[1].style.background = '#3498db';
-                    document.querySelectorAll('.tab-btn')[1].style.color = 'white';
                 }
             };
+            
+            // Инициализация месяцев для тендера
+            const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+            const container = document.getElementById('monthInputs');
+            if (container) {
+                container.innerHTML = '';
+                months.forEach(month => {
+                    const div = document.createElement('div');
+                    div.className = 'month-box';
+                    div.innerHTML = `
+                        <label>${month}</label>
+                        <input type="number" min="0" placeholder="Кол-во" id="${month}-qty">
+                        <input type="number" min="0" placeholder="Замены" id="${month}-changes">
+                    `;
+                    container.appendChild(div);
+                });
+            }
         });
     </script>
 </body>
 </html>
-<!-- ============ КОНЕЦ CALCULATOR.HTML ============ -->
