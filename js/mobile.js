@@ -1,6 +1,6 @@
 // ============================================
 // MOBILE.JS - Мобильная оптимизация для калькулятора
-// Версия: 6.0 (Упрощенная версия)
+// Версия: 7.0 (Оптимизация под новую логику)
 // ============================================
 
 (function() {
@@ -9,7 +9,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         console.log('📱 mobile.js инициализирован');
         
-        // Проверяем, находимся ли мы на странице калькулятора
         const isCalculatorPage = window.location.pathname.includes('calculator') || 
                                document.querySelector('.calculator-section');
         
@@ -17,24 +16,15 @@
             console.log('📊 Найдена страница калькулятора');
             setupCalculatorMobile();
         }
-        
-        console.log('✅ Мобильная оптимизация активирована');
     });
     
-    // ============ НАСТРОЙКИ КАЛЬКУЛЯТОРА ДЛЯ МОБИЛЬНЫХ ============
     function setupCalculatorMobile() {
         console.log('📱 Настраиваем калькулятор для мобильных');
         
-        // Адаптируем элементы калькулятора
         adaptCalculatorElements();
-        
-        // Улучшаем UX на мобильных
         improveCalculatorUX();
-        
-        // Предотвращаем зум iOS при фокусе
         preventIOSZoom();
         
-        // Обработка изменений размера
         window.addEventListener('resize', function() {
             adaptCalculatorElements();
         });
@@ -44,15 +34,13 @@
         const isMobile = window.innerWidth <= 768;
         
         if (isMobile) {
-            // Увеличиваем размеры элементов формы для удобства касания
             document.querySelectorAll('.calculator-form select, .calculator-form input').forEach(el => {
-                el.style.fontSize = '16px'; // Предотвращает зум в iOS
+                el.style.fontSize = '16px';
                 el.style.padding = '15px';
                 el.style.minHeight = '44px';
                 el.style.borderRadius = '10px';
             });
             
-            // Адаптируем сетку месяцев для тендера
             const monthInputs = document.querySelector('.month-inputs');
             if (monthInputs) {
                 if (window.innerWidth <= 480) {
@@ -62,29 +50,12 @@
                 }
             }
             
-            // Адаптируем кнопки
-            document.querySelectorAll('.calculator-content .btn').forEach(btn => {
-                btn.style.padding = '16px';
-                btn.style.fontSize = '16px';
-                btn.style.minHeight = '44px';
-                btn.style.borderRadius = '10px';
-            });
-            
-            // Адаптируем позиции
             document.querySelectorAll('.position-item').forEach(item => {
                 item.style.padding = '15px';
                 item.style.marginBottom = '15px';
                 item.style.fontSize = '15px';
             });
             
-            // Адаптируем табы
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.style.padding = '15px';
-                btn.style.fontSize = '15px';
-                btn.style.minHeight = '44px';
-            });
-            
-            // Адаптируем таблицу
             const tables = document.querySelectorAll('table');
             tables.forEach(table => {
                 if (table.offsetWidth > window.innerWidth) {
@@ -93,38 +64,21 @@
                     table.style.webkitOverflowScrolling = 'touch';
                 }
             });
+            
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.style.padding = '16px';
+                btn.style.fontSize = '16px';
+                btn.style.minHeight = '44px';
+            });
         }
     }
     
     function improveCalculatorUX() {
-        // Улучшаем клавиатуру на мобильных
         document.querySelectorAll('input[type="number"]').forEach(input => {
             input.setAttribute('inputmode', 'numeric');
             input.setAttribute('pattern', '[0-9]*');
         });
         
-        // Автоскролл к результатам при добавлении позиции
-        const addPositionBtn = document.getElementById('addPositionBtn');
-        if (addPositionBtn) {
-            const originalClick = addPositionBtn.onclick;
-            addPositionBtn.onclick = function(e) {
-                if (originalClick) originalClick.call(this, e);
-                
-                setTimeout(() => {
-                    if (window.innerWidth <= 768) {
-                        const positionsList = document.getElementById('positionsList');
-                        if (positionsList) {
-                            positionsList.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'start' 
-                            });
-                        }
-                    }
-                }, 300);
-            };
-        }
-        
-        // Автоскролл к результатам тендера
         const calculateTenderBtn = document.getElementById('calculateTenderBtn');
         if (calculateTenderBtn) {
             calculateTenderBtn.addEventListener('click', function() {
