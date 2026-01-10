@@ -1,9 +1,9 @@
 /* ============================================
    CALCULATOR.CSS - Стили для калькулятора МИРУМ
-   Версия: 8.0 (Упрощенный интерфейс)
+   Версия: 9.0 (С переключателем НДС)
    ============================================ */
 
-/* ============ ОСНОВНЫЕ СТИЛИ КАЛЬКУЛЯТОРА ============ */
+/* ============ ОСНОВНЫЕ СТИЛИ ============ */
 .calculator-section {
     padding: clamp(60px, 10vw, 100px) 0;
     background: linear-gradient(135deg, #f0f4f8 0%, #e6ebf0 100%);
@@ -60,7 +60,7 @@
     color: white;
 }
 
-/* ============ ФОРМА КАЛЬКУЛЯТОРА ============ */
+/* ============ ФОРМА ============ */
 .calculator-form {
     padding: clamp(30px, 5vw, 40px);
     background: white;
@@ -126,7 +126,6 @@
     border-color: #e9ecef;
 }
 
-/* Кастомные стрелки для select */
 .calculator-form select {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -138,41 +137,59 @@
     -moz-appearance: none;
 }
 
-/* ============ РЕЗУЛЬТАТ ДЛЯ ОДНОЙ ПОЗИЦИИ ============ */
-#singlePositionResult {
-    animation: fadeIn 0.3s ease-out;
+/* ============ ПЕРЕКЛЮЧАТЕЛЬ НДС ============ */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
-/* ============ КНОПКА ДОБАВЛЕНИЯ ПОЗИЦИИ ============ */
-#addPositionBtn {
-    background: #3498db !important;
-    color: white !important;
-    border: none !important;
-    width: 100% !important;
-    padding: 15px !important;
-    margin: 20px 0 !important;
-    border-radius: 12px !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-#addPositionBtn:hover {
-    background: #2980b9 !important;
-    transform: translateY(-2px) !important;
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
 }
 
-/* ============ СПИСОК ДОБАВЛЕННЫХ ПОЗИЦИЙ ============ */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #16a085;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* ============ СПИСОК ПОЗИЦИЙ ============ */
 .positions-list {
     padding: 20px;
     background: #f8f9fa;
     border-top: 1px solid #e9ecef;
     border-bottom: 1px solid #e9ecef;
+    display: none;
 }
 
 .position-item {
@@ -192,7 +209,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.position-item button {
+.remove-position-btn {
     background: #e74c3c;
     color: white;
     border: none;
@@ -208,7 +225,7 @@
     justify-content: center;
 }
 
-.position-item button:hover {
+.remove-position-btn:hover {
     background: #c0392b;
 }
 
@@ -245,10 +262,6 @@
 .results-actions .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.results-actions .btn:active {
-    transform: translateY(-1px);
 }
 
 /* ============ ТЕНДЕРНЫЙ КАЛЬКУЛЯТОР ============ */
@@ -290,160 +303,41 @@
     box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.2);
 }
 
-/* ============ РЕЗУЛЬТАТЫ ТЕНДЕРНОГО РАСЧЕТА ============ */
-.calculator-results {
-    padding: clamp(30px, 5vw, 40px);
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.calculator-results:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #1abc9c, #16a085, #1abc9c);
-}
-
-.calculator-results h3 {
-    color: white;
-    margin-bottom: 25px;
-    font-size: 1.5rem;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    padding-bottom: 15px;
-}
-
-.calculator-results h3:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: #1abc9c;
-}
-
-.result-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
+/* ============ ИНФОРМАЦИЯ О ДОКУМЕНТАХ ============ */
+.documents-info {
+    background: #f8f9fa;
+    padding: 25px;
     border-radius: 12px;
+    margin-top: 30px;
+    border-left: 4px solid #3498db;
+}
+
+.documents-info h4 {
+    color: #2c3e50;
     margin-bottom: 15px;
-    border-left: 4px solid #1abc9c;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.result-item:hover {
-    transform: translateX(5px);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.result-label {
-    font-weight: 600;
-    color: #1abc9c;
-    margin-bottom: 5px;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.result-value {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* ============ ИНФОРМАЦИЯ О ДОСТАВКЕ ============ */
-.calculator-info {
-    margin-top: 40px;
-    padding: 35px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.calculator-info:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #1abc9c, #16a085, #1abc9c);
-}
-
-.calculator-info h3 {
-    color: var(--primary-color);
-    margin-bottom: 25px;
-    text-align: center;
-    font-size: 1.4rem;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.calculator-info h3:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--accent-color);
-}
-
-.calculator-info ul {
-    list-style: none;
-    padding: 0;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.calculator-info li {
-    padding: 15px 0;
-    padding-left: 45px;
-    position: relative;
-    color: var(--text-light);
-    font-size: 1.05rem;
-    border-bottom: 1px solid rgba(224, 224, 224, 0.5);
-    transition: color 0.3s ease;
-}
-
-.calculator-info li:hover {
-    color: var(--primary-color);
-}
-
-.calculator-info li:last-child {
-    border-bottom: none;
-}
-
-.calculator-info li:before {
-    content: '✓';
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    color: var(--accent-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-    background: rgba(22, 160, 133, 0.1);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+}
+
+.documents-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.documents-info li {
+    padding: 8px 0;
+    padding-left: 30px;
+    position: relative;
+    color: #555;
+}
+
+.documents-info li:before {
+    content: '•';
+    position: absolute;
+    left: 15px;
+    color: #3498db;
+    font-weight: bold;
 }
 
 /* ============ МОБИЛЬНАЯ АДАПТАЦИЯ ============ */
@@ -460,7 +354,6 @@
     }
     
     .tabs {
-        margin-bottom: 20px;
         border-radius: 8px;
     }
     
@@ -503,20 +396,25 @@
         gap: 12px;
     }
     
-    .calculator-info {
-        padding: 25px 20px;
-        margin: 25px 0;
-        border-radius: 16px;
+    .switch {
+        width: 50px;
+        height: 28px;
     }
     
-    .calculator-info li {
-        padding-left: 40px;
-        font-size: 1rem;
+    .slider:before {
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
     }
     
-    #addPositionBtn {
-        padding: 14px !important;
-        font-size: 0.95rem !important;
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+    
+    .documents-info {
+        padding: 20px;
+        margin-top: 20px;
     }
 }
 
@@ -571,25 +469,5 @@
     to {
         opacity: 1;
         transform: translateX(0);
-    }
-}
-
-/* ============ ВЫСОКАЯ КОНТРАСТНОСТЬ ============ */
-@media (prefers-contrast: high) {
-    .calculator-form select,
-    .calculator-form input {
-        border: 2px solid #000;
-    }
-    
-    .calculator-results {
-        border-top: 5px solid #000;
-    }
-    
-    .result-item {
-        border-left: 4px solid #000;
-    }
-    
-    .position-item {
-        border-left: 4px solid #000;
     }
 }
