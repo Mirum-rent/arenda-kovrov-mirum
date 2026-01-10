@@ -1,6 +1,6 @@
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 8.0 (07.01.2026) - С ВОЗМОЖНОСТЬЮ ДОБАВЛЕНИЯ НЕСКОЛЬКИХ ПОЗИЦИЙ
+// Версия: 8.1 (07.01.2026) - РЕАЛЬНОЕ ВРЕМЯ РАСЧЕТА + РЕГИОН В ТГ
 // ============================================
 
 // ============ НАЧАЛО ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ ============
@@ -12,7 +12,7 @@ let tenderPositions = []; // Массив для тендерных позици
 
 // ============ НАЧАЛО ОСНОВНОЙ ФУНКЦИИ ИНИЦИАЛИЗАЦИИ ============
 function initCalculator() {
-    console.log('🧮 Инициализация калькулятора (версия с несколькими позициями)...');
+    console.log('🧮 Инициализация калькулятора (реальное время расчета)...');
     
     // Проверяем, что мы на странице калькулятора
     const calculatorSection = document.querySelector('.calculator-section, .calculator-form, #calculator-form');
@@ -34,8 +34,361 @@ function initCalculator() {
         // Назначаем обработчики событий
         setupEventHandlers();
         
+        // Инициализируем расчет в реальном времени
+        initRealTimeCalculation();
+        
         console.log('✅ Калькулятор успешно инициализирован');
     }, 100);
+}
+
+// ============ НАЧАЛО ИНИЦИАЛИЗАЦИИ РАСЧЕТА В РЕАЛЬНОМ ВРЕМЕНИ ============
+function initRealTimeCalculation() {
+    const regionSelect = document.getElementById('region');
+    const sizeSelect = document.getElementById('size');
+    const frequencySelect = document.getElementById('frequency');
+    const quantityInput = document.getElementById('quantity');
+    
+    if (!regionSelect || !sizeSelect || !frequencySelect || !quantityInput) return;
+    
+    // События для расчета в реальном времени
+    const calculateRealTime = () => {
+        const region = regionSelect.value;
+        const size = sizeSelect.value;
+        const frequency = frequencySelect.value;
+        const quantity = parseInt(quantityInput.value) || 1;
+        
+        if (region && size && frequency && quantity > 0) {
+            const pricePerReplacement = getPriceForPosition(region, size, frequency);
+            const replacements = getReplacementsCount(frequency);
+            const monthlyCost = pricePerReplacement * replacements * quantity;
+            
+            // Обновляем превью расчета
+            updateCalculationPreview(region, size, frequency, quantity, pricePerReplacement, monthlyCost);
+        } else {
+            hideCalculationPreview();
+        }
+    };
+    
+    // Вешаем обработчики на все поля
+    regionSelect.addEventListener('change', calculateRealTime);
+    sizeSelect.addEventListener('change', calculateRealTime);
+    frequencySelect.addEventListener('change', calculateRealTime);
+    quantityInput.addEventListener('input', calculateRealTime);
+    
+    // Создаем элемент для превью расчета
+    createCalculationPreview();
+}
+
+// ============ НАЧАЛО СОЗДАНИЯ ПРЕВЬЮ РАСЧЕТА ============
+function createCalculationPreview() {
+    const form = document.querySelector('.calculator-form');
+    if (!form) return;
+    
+    const previewDiv = document.createElement('div');
+    previewDiv.id = 'calculationPreview';
+    previewDiv.style.cssText = `
+        background: linear-gradient(135deg, #e8f4fd 0%, #d4e7fa 100%);
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+        border-left: 4px solid #3498db;
+        display: none;
+        transition: all 0.3s ease;
+    `;
+    
+    previewDiv.innerHTML = `
+        <h4 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 1.1rem;">
+            <i class="fas fa-eye"></i> Предварительный расчет
+        </h4>
+        <div id="previewContent" style="font-size: 0.95rem;">
+            <!-- Контент будет обновляться -->
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 10px;">
+            <button id="addFromPreview" style="flex: 1; background: #3498db; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-plus"></i> Добавить эту позицию
+            </button>
+            <button id="clearPreview" style="background: #e74c3c; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; width: 40px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Вставляем после формы или перед кнопками
+    const addPositionBtn = document.getElementById('addPositionBtn');
+    if (addPositionBtn) {
+        form.insertBefore(previewDiv, addPositionBtn);
+    } else {
+        form.appendChild(previewDiv);
+    }
+    
+    // Обработчики кнопок превью
+    document.getElementById('addFromPreview').addEventListener('click', function() {
+        addPositionFromPreview();
+    });
+    
+    document.getElementById('clearPreview').addEventListener('click', function() {
+        hideCalculationPreview();
+    });
+}
+
+// ============ НАЧАЛО ОБНОВЛЕНИЯ ПРЕВЬЮ РАСЧЕТА ============
+function updateCalculationPreview(region, size, frequency, quantity, pricePerReplacement, monthlyCost) {
+    const previewDiv = document.getElementById('calculationPreview');
+    const previewContent = document.getElementById('previewContent');
+    
+    if (!previewDiv || !previewContent) return;
+    
+    const replacements = getReplacementsCount(frequency);
+    
+    previewContent.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div><strong>Регион:</strong></div>
+            <div>${region}</div>
+            
+            <div><strong>Размер:</strong></div>
+            <div>${size.replace('*', '×')}</div>
+            
+            <div><strong>Частота:</strong></div>
+            <div>${frequency}</div>
+            
+            <div><strong>Количество:</strong></div>
+            <div>${quantity} шт.</div>
+        </div>
+        
+        <div style="background: white; padding: 10px; border-radius: 8px; margin-top: 10px;">
+            <div style="color: #2c3e50; font-weight: 600; margin-bottom: 5px;">Расчет:</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.9rem;">
+                <div>Цена за замену:</div>
+                <div><strong>${formatPrice(pricePerReplacement)}</strong></div>
+                
+                <div>Замен в месяц:</div>
+                <div>${replacements}</div>
+                
+                <div>Стоимость в месяц:</div>
+                <div style="color: #e74c3c; font-weight: 700; font-size: 1.1rem;">
+                    ${formatPrice(monthlyCost)}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    previewDiv.style.display = 'block';
+    
+    // Анимация появления
+    setTimeout(() => {
+        previewDiv.style.opacity = '1';
+        previewDiv.style.transform = 'translateY(0)';
+    }, 10);
+}
+
+// ============ НАЧАЛО СКРЫТИЯ ПРЕВЬЮ ============
+function hideCalculationPreview() {
+    const previewDiv = document.getElementById('calculationPreview');
+    if (previewDiv) {
+        previewDiv.style.opacity = '0';
+        previewDiv.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            previewDiv.style.display = 'none';
+        }, 300);
+    }
+    
+    // Очищаем поля
+    document.getElementById('quantity').value = 1;
+}
+
+// ============ НАЧАЛО ДОБАВЛЕНИЯ ПОЗИЦИИ ИЗ ПРЕВЬЮ ============
+function addPositionFromPreview() {
+    const region = document.getElementById('region').value;
+    const size = document.getElementById('size').value;
+    const frequency = document.getElementById('frequency').value;
+    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+    
+    if (!region || !size || !frequency) {
+        alert('Пожалуйста, заполните все поля');
+        return;
+    }
+    
+    const pricePerReplacement = getPriceForPosition(region, size, frequency);
+    
+    if (pricePerReplacement === 0) {
+        alert('Не удалось определить цену для выбранных параметров');
+        return;
+    }
+    
+    const replacements = getReplacementsCount(frequency);
+    const monthlyCost = pricePerReplacement * replacements * quantity;
+    
+    const position = {
+        id: Date.now() + Math.random(),
+        region,
+        size,
+        frequency,
+        quantity,
+        pricePerReplacement,
+        monthlyCost,
+        replacements
+    };
+    
+    positions.push(position);
+    updatePositionsList();
+    
+    // Показываем список позиций
+    const positionsList = document.getElementById('positionsList');
+    if (positionsList) {
+        positionsList.style.display = 'block';
+    }
+    
+    // Скрываем превью
+    hideCalculationPreview();
+    
+    // Прокручиваем к списку позиций
+    if (positionsList) {
+        positionsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    // Обновляем общий расчет
+    updateTotalCalculation();
+}
+
+// ============ НАЧАЛО ОБНОВЛЕНИЯ ОБЩЕГО РАСЧЕТА ============
+function updateTotalCalculation() {
+    if (positions.length === 0) {
+        // Скрываем итоговый блок
+        const positionsList = document.getElementById('positionsList');
+        if (positionsList) {
+            positionsList.style.display = 'none';
+        }
+        return;
+    }
+    
+    let totalMonthlyCost = 0;
+    let totalReplacements = 0;
+    let totalPositions = positions.length;
+    
+    positions.forEach(position => {
+        totalMonthlyCost += position.monthlyCost;
+        totalReplacements += position.replacements * position.quantity;
+    });
+    
+    // Сохраняем расчет для отправки
+    currentCalculation = {
+        positions: positions,
+        totalMonthlyCost,
+        totalReplacements,
+        totalPositions
+    };
+    
+    // Обновляем итоговый блок в списке позиций
+    updateTotalInPositionsList(totalMonthlyCost);
+}
+
+// ============ НАЧАЛО ОБНОВЛЕНИЯ ИТОГА В СПИСКЕ ПОЗИЦИЙ ============
+function updateTotalInPositionsList(totalMonthlyCost) {
+    const totalElement = document.getElementById('positionsTotal');
+    if (!totalElement) {
+        // Создаем элемент если его нет
+        const positionsContainer = document.getElementById('positionsContainer');
+        if (positionsContainer) {
+            const totalDiv = document.createElement('div');
+            totalDiv.id = 'positionsTotal';
+            totalDiv.style.cssText = `
+                background: #16a085;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                margin-top: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+            `;
+            positionsContainer.appendChild(totalDiv);
+        }
+    }
+    
+    const totalElementNow = document.getElementById('positionsTotal');
+    if (totalElementNow) {
+        totalElementNow.innerHTML = `
+            <div>Общая стоимость в месяц: ${formatPrice(totalMonthlyCost)}</div>
+            <div style="font-size: 14px; font-weight: normal; margin-top: 5px;">
+                ${positions.length} позиции, ${currentCalculation.totalReplacements} замен в месяц
+            </div>
+        `;
+    }
+}
+
+// ============ НАЧАЛО ОБНОВЛЕНИЯ СПИСКА ПОЗИЦИЙ ============
+function updatePositionsList() {
+    const positionsContainer = document.getElementById('positionsContainer');
+    if (!positionsContainer) return;
+    
+    if (positions.length === 0) {
+        positionsContainer.innerHTML = '<p style="text-align: center; color: #666;">Позиции не добавлены</p>';
+        
+        // Удаляем итоговый блок если он есть
+        const totalElement = document.getElementById('positionsTotal');
+        if (totalElement) {
+            totalElement.remove();
+        }
+        return;
+    }
+    
+    let html = '';
+    
+    positions.forEach((position, index) => {
+        html += `
+            <div class="position-item" style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid #3498db; position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: bold; color: #2c3e50; margin-bottom: 5px;">
+                            ${position.size.replace('*', '×')} × ${position.quantity} шт.
+                        </div>
+                        <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">
+                            ${position.frequency} (${position.replacements} замен/мес)
+                        </div>
+                        <div style="font-size: 0.9rem; color: #27ae60;">
+                            <strong>Цена за замену:</strong> ${formatPrice(position.pricePerReplacement)}
+                        </div>
+                        <div style="font-size: 0.9rem; color: #c0392b; margin-top: 5px;">
+                            <strong>Стоимость в месяц:</strong> ${formatPrice(position.monthlyCost)}
+                        </div>
+                        <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 5px;">
+                            <i class="fas fa-map-marker-alt"></i> ${position.region}
+                        </div>
+                    </div>
+                    <button onclick="removePosition(${index})" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: background 0.3s ease; min-width: 30px; min-height: 30px;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    positionsContainer.innerHTML = html;
+    
+    // Обновляем общий расчет
+    updateTotalCalculation();
+}
+
+// ============ НАЧАЛО УДАЛЕНИЯ ПОЗИЦИИ ============
+function removePosition(index) {
+    if (index >= 0 && index < positions.length) {
+        positions.splice(index, 1);
+        updatePositionsList();
+        
+        // Если позиций не осталось, скрываем список
+        if (positions.length === 0) {
+            const positionsList = document.getElementById('positionsList');
+            if (positionsList) {
+                positionsList.style.display = 'none';
+            }
+        }
+        
+        // Скрываем результаты если они были показаны
+        const resultsDiv = document.getElementById('results');
+        if (resultsDiv) {
+            resultsDiv.style.display = 'none';
+        }
+    }
 }
 
 // ============ НАЧАЛО ПРОВЕРКИ ДАННЫХ ЦЕН ============
@@ -290,19 +643,19 @@ function setupEventHandlers() {
         });
     }
     
-    // Обработчик кнопки добавления позиции
+    // Обработчик кнопки добавления позиции (старая кнопка)
     if (addPositionBtn) {
         addPositionBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            addPosition();
+            addPositionFromPreview();
         });
     }
     
-    // Обработчик кнопки расчета
+    // Обработчик кнопки расчета (показ итогов)
     if (calculateBtn) {
         calculateBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            performCalculation();
+            showFinalResults();
         });
     }
     
@@ -328,14 +681,6 @@ function setupEventHandlers() {
         sendToEmailBtn.addEventListener('click', function(e) {
             e.preventDefault();
             sendCalculatorToEmail();
-        });
-    }
-    
-    // Обработчик изменения количества
-    const quantityInput = document.getElementById('quantity');
-    if (quantityInput) {
-        quantityInput.addEventListener('change', function() {
-            // Обновляем расчет при изменении количества
         });
     }
     
@@ -564,113 +909,6 @@ function getFallbackFrequencies() {
     ];
 }
 
-// ============ НАЧАЛО ДОБАВЛЕНИЯ ПОЗИЦИИ ============
-function addPosition() {
-    const region = document.getElementById('region') ? document.getElementById('region').value : '';
-    const size = document.getElementById('size') ? document.getElementById('size').value : '';
-    const frequency = document.getElementById('frequency') ? document.getElementById('frequency').value : '';
-    const quantity = document.getElementById('quantity') ? parseInt(document.getElementById('quantity').value) || 1 : 1;
-    
-    if (!region || !size || !frequency) {
-        alert('Пожалуйста, заполните все поля калькулятора');
-        return;
-    }
-    
-    if (quantity < 1 || quantity > 100) {
-        alert('Пожалуйста, укажите количество от 1 до 100');
-        if (document.getElementById('quantity')) {
-            document.getElementById('quantity').value = Math.min(Math.max(quantity, 1), 100);
-        }
-        return;
-    }
-    
-    const pricePerReplacement = getPriceForPosition(region, size, frequency);
-    
-    if (pricePerReplacement === 0) {
-        alert('Не удалось определить цену для выбранных параметров');
-        return;
-    }
-    
-    const replacements = getReplacementsCount(frequency);
-    const monthlyCost = pricePerReplacement * replacements * quantity;
-    
-    const position = {
-        id: Date.now() + Math.random(),
-        region,
-        size,
-        frequency,
-        quantity,
-        pricePerReplacement,
-        monthlyCost,
-        replacements
-    };
-    
-    positions.push(position);
-    updatePositionsList();
-    
-    // Показываем список позиций
-    const positionsList = document.getElementById('positionsList');
-    if (positionsList) {
-        positionsList.style.display = 'block';
-    }
-    
-    // Очищаем форму для следующей позиции
-    document.getElementById('quantity').value = 1;
-}
-
-// ============ НАЧАЛО ОБНОВЛЕНИЯ СПИСКА ПОЗИЦИЙ ============
-function updatePositionsList() {
-    const positionsContainer = document.getElementById('positionsContainer');
-    if (!positionsContainer) return;
-    
-    if (positions.length === 0) {
-        positionsContainer.innerHTML = '<p style="text-align: center; color: #666;">Позиции не добавлены</p>';
-        return;
-    }
-    
-    let html = '';
-    let totalMonthlyCost = 0;
-    
-    positions.forEach((position, index) => {
-        totalMonthlyCost += position.monthlyCost;
-        
-        html += `
-            <div class="position-item" style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid #3498db; position: relative;">
-                <strong>${position.size.replace('*', '×')}</strong> × ${position.quantity} шт.<br>
-                ${position.frequency} (${position.replacements} замен в месяц)<br>
-                Цена за замену: ${formatPrice(position.pricePerReplacement)}<br>
-                <strong>Стоимость в месяц: ${formatPrice(position.monthlyCost)}</strong>
-                <button onclick="removePosition(${index})" style="position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">×</button>
-            </div>
-        `;
-    });
-    
-    // Добавляем итоговую сумму
-    html += `
-        <div style="background: #16a085; color: white; padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 18px; font-weight: bold;">
-            Общая стоимость в месяц: ${formatPrice(totalMonthlyCost)}
-        </div>
-    `;
-    
-    positionsContainer.innerHTML = html;
-}
-
-// ============ НАЧАЛО УДАЛЕНИЯ ПОЗИЦИИ ============
-function removePosition(index) {
-    if (index >= 0 && index < positions.length) {
-        positions.splice(index, 1);
-        updatePositionsList();
-        
-        // Если позиций не осталось, скрываем список
-        if (positions.length === 0) {
-            const positionsList = document.getElementById('positionsList');
-            if (positionsList) {
-                positionsList.style.display = 'none';
-            }
-        }
-    }
-}
-
 // ============ НАЧАЛО РАСЧЕТА ЦЕНЫ ДЛЯ ПОЗИЦИИ ============
 function getPriceForPosition(region, size, frequency) {
     let pricePerReplacement = 0;
@@ -736,34 +974,13 @@ function formatPrice(price) {
     }).format(price);
 }
 
-// ============ НАЧАЛО ВЫПОЛНЕНИЯ РАСЧЕТА ============
-function performCalculation() {
+// ============ НАЧАЛО ПОКАЗА ФИНАЛЬНЫХ РЕЗУЛЬТАТОВ ============
+function showFinalResults() {
     if (positions.length === 0) {
         alert('Пожалуйста, добавьте хотя бы одну позицию');
         return;
     }
     
-    // Рассчитываем общую стоимость
-    let totalMonthlyCost = 0;
-    let totalReplacements = 0;
-    
-    positions.forEach(position => {
-        totalMonthlyCost += position.monthlyCost;
-        totalReplacements += position.replacements * position.quantity;
-    });
-    
-    currentCalculation = {
-        positions: positions,
-        totalMonthlyCost,
-        totalReplacements,
-        positionCount: positions.length
-    };
-    
-    displayResults(currentCalculation);
-}
-
-// ============ НАЧАЛО ОТОБРАЖЕНИЯ РЕЗУЛЬТАТОВ ============
-function displayResults(calculation) {
     const resultsDiv = document.getElementById('results');
     const resultDetails = document.getElementById('resultDetails');
     
@@ -771,28 +988,41 @@ function displayResults(calculation) {
     
     let html = `
         <div class="result-item">
+            <div class="result-label">Общий регион</div>
+            <div class="result-value">${getCommonRegion()}</div>
+            <div class="result-hint">Основной регион расчета</div>
+        </div>
+        
+        <div class="result-item">
             <div class="result-label">Количество позиций</div>
-            <div class="result-value">${calculation.positionCount} шт.</div>
+            <div class="result-value">${currentCalculation.totalPositions} шт.</div>
         </div>
         
         <div class="result-item">
             <div class="result-label">Всего замен в месяц</div>
-            <div class="result-value">${calculation.totalReplacements}</div>
+            <div class="result-value">${currentCalculation.totalReplacements}</div>
         </div>
         
         <div class="result-item" style="background: rgba(52, 152, 219, 0.2);">
             <div class="result-label">Общая стоимость в месяц</div>
-            <div class="result-value">${formatPrice(calculation.totalMonthlyCost)}</div>
+            <div class="result-value">${formatPrice(currentCalculation.totalMonthlyCost)}</div>
         </div>
         
         <div style="margin-top: 20px;">
             <h4 style="color: white; margin-bottom: 10px;">Состав заказа:</h4>
     `;
     
-    calculation.positions.forEach((position, index) => {
+    currentCalculation.positions.forEach((position, index) => {
         html += `
             <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 0.9rem;">
-                ${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт. (${position.frequency}) - ${formatPrice(position.monthlyCost)}/мес
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span><strong>${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.</strong></span>
+                    <span style="color: #1abc9c;">${formatPrice(position.monthlyCost)}/мес</span>
+                </div>
+                <div style="color: #bdc3c7; font-size: 0.85rem;">
+                    <div>${position.frequency} (${position.replacements} замен/мес)</div>
+                    <div><i class="fas fa-map-marker-alt"></i> ${position.region} | Цена за замену: ${formatPrice(position.pricePerReplacement)}</div>
+                </div>
             </div>
         `;
     });
@@ -804,6 +1034,22 @@ function displayResults(calculation) {
     
     // Прокручиваем к результатам
     resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ============ НАЧАЛО ОПРЕДЕЛЕНИЯ ОБЩЕГО РЕГИОНА ============
+function getCommonRegion() {
+    if (positions.length === 0) return 'Не указан';
+    
+    // Проверяем, все ли позиции в одном регионе
+    const firstRegion = positions[0].region;
+    const allSameRegion = positions.every(pos => pos.region === firstRegion);
+    
+    if (allSameRegion) {
+        return firstRegion;
+    } else {
+        // Если регионы разные, показываем "Разные регионы"
+        return 'Разные регионы';
+    }
 }
 
 // ============ НАЧАЛО ТЕНДЕРНОГО РАСЧЕТА ============
@@ -919,19 +1165,24 @@ function createCalculatorTelegramMessage() {
     if (!currentCalculation) return '';
     
     const calc = currentCalculation;
+    const commonRegion = getCommonRegion();
     
     let message = `🧮 РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
     
-    message += `📊 Количество позиций: ${calc.positionCount}\n`;
+    message += `📍 Регион: ${commonRegion}\n`;
+    message += `📊 Количество позиций: ${calc.totalPositions}\n`;
     message += `🔄 Всего замен в месяц: ${calc.totalReplacements}\n`;
     message += `💰 Общая стоимость в месяц: ${formatPrice(calc.totalMonthlyCost)}\n\n`;
     
-    message += `📄 Состав заказа:\n`;
+    message += `📄 Детализация заказа:\n`;
     calc.positions.forEach((position, index) => {
-        message += `${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
+        message += `\n${index + 1}. ${position.region} - ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
         message += `   ${position.frequency} (${position.replacements} замен/мес)\n`;
-        message += `   Стоимость: ${formatPrice(position.monthlyCost)}/мес\n\n`;
+        message += `   Цена за одну замену: ${formatPrice(position.pricePerReplacement)}\n`;
+        message += `   Стоимость: ${formatPrice(position.monthlyCost)}/мес\n`;
     });
+    
+    message += `\n📋 ИТОГО: ${formatPrice(calc.totalMonthlyCost)} в месяц\n\n`;
     
     message += `📄 Для заключения договора потребуются:\n`;
     message += `• Реквизиты компании\n`;
@@ -963,14 +1214,18 @@ function sendCalculatorToTelegram() {
         const message = createCalculatorTelegramMessage();
         
         if (message.length > 3500) {
-            alert('Сообщение слишком длинное. Telegram не пропускает такие длинные сообщения.\n\nПожалуйста, напишите нам в Telegram напрямую: @+79770005127\n\nМы произведем расчет за вас и пришлем готовый результат.');
-            return;
+            // Создаем укороченную версию
+            const shortMessage = createShortTelegramMessage();
+            const encodedMessage = encodeURIComponent(shortMessage);
+            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+            
+            window.open(telegramUrl, '_blank');
+        } else {
+            const encodedMessage = encodeURIComponent(message);
+            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+            
+            window.open(telegramUrl, '_blank');
         }
-        
-        const encodedMessage = encodeURIComponent(message);
-        const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
-        
-        window.open(telegramUrl, '_blank');
         
         console.log('📤 Расчет калькулятора отправлен в Telegram');
         
@@ -982,6 +1237,35 @@ function sendCalculatorToTelegram() {
         console.error('Ошибка отправки в Telegram:', error);
         alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
     }
+}
+
+// ============ НАЧАЛО СОЗДАНИЯ КОРОТКОГО СООБЩЕНИЯ ДЛЯ TELEGRAM ============
+function createShortTelegramMessage() {
+    if (!currentCalculation) return '';
+    
+    const calc = currentCalculation;
+    const commonRegion = getCommonRegion();
+    
+    let message = `🧮 РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
+    
+    message += `📍 Регион: ${commonRegion}\n`;
+    message += `📊 Позиций: ${calc.totalPositions}\n`;
+    message += `💰 ИТОГО: ${formatPrice(calc.totalMonthlyCost)}/мес\n\n`;
+    
+    message += `📄 Позиции:\n`;
+    calc.positions.forEach((position, index) => {
+        if (index < 5) { // Ограничиваем количество позиций для краткости
+            message += `${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт. = ${formatPrice(position.monthlyCost)}/мес\n`;
+        }
+    });
+    
+    if (calc.totalPositions > 5) {
+        message += `... и еще ${calc.totalPositions - 5} позиций\n`;
+    }
+    
+    message += `\n📞 Связь: t.me/+79770005127`;
+    
+    return message;
 }
 
 // ============ НАЧАЛО ОТПРАВКИ ТЕНДЕРА В TELEGRAM ============
@@ -1014,8 +1298,8 @@ function sendTenderToTelegram() {
         if (message.length > 3500) {
             message = `📋 ТЕНДЕРНЫЙ РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
             message += `📍 Регион: ${calc.region}\n`;
-            message += `📏 Размер ковра: ${calc.size.replace('*', '×')}\n`;
-            message += `💰 Общая стоимость: ${formatPrice(calc.totalCost)}\n\n`;
+            message += `📏 Размер: ${calc.size.replace('*', '×')}\n`;
+            message += `💰 ИТОГО: ${formatPrice(calc.totalCost)}\n\n`;
             message += `📞 Связь: t.me/+79770005127`;
         }
         
@@ -1039,19 +1323,24 @@ function createCalculatorEmailMessage() {
     if (!currentCalculation) return '';
     
     const calc = currentCalculation;
+    const commonRegion = getCommonRegion();
     
     let message = `Расчет аренды ковров МИРУМ\n\n`;
     
-    message += `Количество позиций: ${calc.positionCount}\n`;
+    message += `Регион: ${commonRegion}\n`;
+    message += `Количество позиций: ${calc.totalPositions}\n`;
     message += `Всего замен в месяц: ${calc.totalReplacements}\n`;
     message += `Общая стоимость в месяц: ${calc.totalMonthlyCost.toLocaleString('ru-RU')} руб.\n\n`;
     
-    message += `Состав заказа:\n`;
+    message += `Детализация заказа:\n\n`;
     calc.positions.forEach((position, index) => {
-        message += `${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
-        message += `   ${position.frequency} (${position.replacements} замен/мес)\n`;
-        message += `   Стоимость: ${position.monthlyCost.toLocaleString('ru-RU')} руб./мес\n\n`;
+        message += `${index + 1}. ${position.region} - ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
+        message += `   ${position.frequency} (${position.replacements} замен в месяц)\n`;
+        message += `   Цена за одну замену: ${position.pricePerReplacement.toLocaleString('ru-RU')} руб.\n`;
+        message += `   Стоимость в месяц: ${position.monthlyCost.toLocaleString('ru-RU')} руб.\n\n`;
     });
+    
+    message += `ИТОГО: ${calc.totalMonthlyCost.toLocaleString('ru-RU')} руб. в месяц\n\n`;
     
     message += `Для заключения договора понадобятся:\n`;
     message += `• Реквизиты компании\n`;
@@ -1078,7 +1367,7 @@ function sendCalculatorToEmail() {
     }
     
     try {
-        const subject = encodeURIComponent(`Расчет аренды ковров МИРУМ - ${positions.length} позиций`);
+        const subject = encodeURIComponent(`Расчет аренды ковров МИРУМ - ${getCommonRegion()} - ${positions.length} позиций`);
         const body = encodeURIComponent(createCalculatorEmailMessage());
         const emailUrl = `mailto:matservice@yandex.ru?subject=${subject}&body=${body}`;
         
@@ -1098,8 +1387,8 @@ function sendCalculatorToEmail() {
 // Только нужные функции для калькулятора
 window.Calculator = {
     init: initCalculator,
-    calculate: performCalculation,
-    addPosition: addPosition,
+    calculate: showFinalResults,
+    addPosition: addPositionFromPreview,
     removePosition: removePosition,
     calculateTender: calculateTender,
     sendToTelegram: sendCalculatorToTelegram,
