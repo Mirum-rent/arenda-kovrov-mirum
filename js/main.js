@@ -1,6 +1,6 @@
 // === НАЧАЛО MAIN.JS ===
 // Основные функции для сайта МИРУМ
-// Версия: 2.1 (07.01.2026) - Поддержка исправлений для Telegram
+// Версия: 2.2 (07.01.2026) - Поддержка нескольких позиций в калькуляторе
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -41,7 +41,7 @@ function initCalculatorEnhanced() {
     const calculatorForm = document.querySelector('.calculator-form');
     if (!calculatorForm) return;
     
-    console.log('🔧 Улучшенная инициализация калькулятора');
+    console.log('🔧 Улучшенная инициализация калькулятора с несколькими позициями');
     
     // Добавляем класс для страницы калькулятора
     document.body.classList.add('calculator-page');
@@ -108,50 +108,18 @@ function initCalculatorEnhanced() {
 // Улучшенная функция отправки в Telegram
 function sendOrderToTelegramEnhanced() {
     try {
-        // Получаем данные из формы
-        const region = document.getElementById('region')?.value;
-        const size = document.getElementById('size')?.value;
-        const frequency = document.getElementById('frequency')?.value;
-        const quantity = document.getElementById('quantity')?.value;
-        
-        if (!region || !size || !frequency || !quantity) {
-            alert('Пожалуйста, заполните все поля калькулятора');
+        // Проверяем, есть ли расчет
+        if (typeof window.currentCalculation === 'undefined' || !window.currentCalculation) {
+            alert('Сначала выполните расчет');
             return;
         }
         
-        // Создаем короткое сообщение
-        let message = '🧮 Расчет аренды ковров\n\n';
-        message += `📍 ${region}\n`;
-        message += `📏 ${size}\n`;
-        message += `🔄 ${frequency}\n`;
-        message += `📦 ${quantity} шт.\n\n`;
-        message += `📞 Свяжитесь для уточнения деталей.\n`;
-        message += `⏰ ${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}`;
-        
-        // Проверяем длину URL
-        const encodedMessage = encodeURIComponent(message);
-        const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
-        
-        if (telegramUrl.length > 2000) {
-            // Создаем еще более короткое сообщение
-            const shortMessage = '🧮 Расчет ковров\n\nПрошу связаться для обсуждения деталей.';
-            const shortEncoded = encodeURIComponent(shortMessage);
-            const shortUrl = `https://t.me/+79770005127?text=${shortEncoded}`;
-            
-            if (shortUrl.length > 2000) {
-                alert('Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
-                return;
-            }
-            
-            window.open(shortUrl, '_blank');
+        // Используем функцию из calculator.js
+        if (typeof window.sendCalculatorToTelegram === 'function') {
+            window.sendCalculatorToTelegram();
         } else {
-            window.open(telegramUrl, '_blank');
+            alert('Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
         }
-        
-        // Показываем подтверждение
-        setTimeout(() => {
-            alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.');
-        }, 1000);
         
     } catch (error) {
         console.error('Ошибка отправки в Telegram:', error);

@@ -1,16 +1,18 @@
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 7.6 (07.01.2026) - НЕЗАВИСИМЫЙ ОТ ДРУГИХ ФАЙЛОВ
+// Версия: 8.0 (07.01.2026) - С ВОЗМОЖНОСТЬЮ ДОБАВЛЕНИЯ НЕСКОЛЬКИХ ПОЗИЦИЙ
 // ============================================
 
 // ============ НАЧАЛО ГЛОБАЛЬНЫХ ПЕРЕМЕННЫХ ============
 let currentCalculation = null;
 let priceDataLoaded = false;
 let isSendingToTelegram = false;
+let positions = []; // Массив для хранения позиций
+let tenderPositions = []; // Массив для тендерных позиций
 
 // ============ НАЧАЛО ОСНОВНОЙ ФУНКЦИИ ИНИЦИАЛИЗАЦИИ ============
 function initCalculator() {
-    console.log('🧮 Инициализация калькулятора (независимая версия)...');
+    console.log('🧮 Инициализация калькулятора (версия с несколькими позициями)...');
     
     // Проверяем, что мы на странице калькулятора
     const calculatorSection = document.querySelector('.calculator-section, .calculator-form, #calculator-form');
@@ -67,6 +69,8 @@ function initInterface() {
     const sizeSelect = document.getElementById('size');
     const frequencySelect = document.getElementById('frequency');
     const resultsDiv = document.getElementById('results');
+    const tenderRegionSelect = document.getElementById('tender-region');
+    const tenderSizeSelect = document.getElementById('tender-size');
     
     // Устанавливаем начальные состояния
     if (regionSelect) {
@@ -83,6 +87,18 @@ function initInterface() {
         frequencySelect.disabled = true;
     }
     
+    if (tenderRegionSelect) {
+        tenderRegionSelect.innerHTML = '<option value="">Выберите регион</option>';
+    }
+    
+    if (tenderSizeSelect) {
+        tenderSizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
+        tenderSizeSelect.disabled = true;
+    }
+    
+    // Инициализируем месяцы для тендера
+    initMonths();
+    
     // Скрываем результаты
     if (resultsDiv) {
         resultsDiv.style.display = 'none';
@@ -93,12 +109,38 @@ function initInterface() {
     if (quantityInput && !quantityInput.value) {
         quantityInput.value = 1;
     }
+    
+    // Очищаем список позиций
+    positions = [];
+    updatePositionsList();
+}
+
+// ============ НАЧАЛО ИНИЦИАЛИЗАЦИИ МЕСЯЦЕВ ДЛЯ ТЕНДЕРА ============
+function initMonths() {
+    const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    const container = document.getElementById('monthInputs');
+    
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    months.forEach(month => {
+        const div = document.createElement('div');
+        div.className = 'month-box';
+        div.style.cssText = 'padding: 10px; background: #f8f9fa; border-radius: 6px; text-align: center;';
+        div.innerHTML = `
+            <label style="font-size: 12px; margin-bottom: 5px; display: block;">${month}</label>
+            <input type="number" min="0" placeholder="Кол-во" id="${month}-qty" style="padding: 8px; font-size: 14px; margin-bottom: 5px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="number" min="0" placeholder="Замены" id="${month}-changes" style="padding: 8px; font-size: 14px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+        `;
+        container.appendChild(div);
+    });
 }
 
 // ============ НАЧАЛО ЗАПОЛНЕНИЯ РЕГИОНОВ ============
 function populateRegions() {
     const regionSelect = document.getElementById('region');
-    if (!regionSelect) return;
+    const tenderRegionSelect = document.getElementById('tender-region');
     
     let regions = [];
     
@@ -123,30 +165,55 @@ function populateRegions() {
     }
     
     regions.sort();
-    regionSelect.innerHTML = '<option value="">Выберите регион</option>';
     
-    regions.forEach(region => {
-        const option = document.createElement('option');
-        option.value = region;
-        option.textContent = region;
-        regionSelect.appendChild(option);
-    });
+    // Заполняем оба селекта
+    if (regionSelect) {
+        regionSelect.innerHTML = '<option value="">Выберите регион</option>';
+        regions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region;
+            option.textContent = region;
+            regionSelect.appendChild(option);
+        });
+    }
+    
+    if (tenderRegionSelect) {
+        tenderRegionSelect.innerHTML = '<option value="">Выберите регион</option>';
+        regions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region;
+            option.textContent = region;
+            tenderRegionSelect.appendChild(option);
+        });
+    }
 }
 
 // ============ НАЧАЛО РЕЗЕРВНОГО СПИСКА РЕГИОНОВ ============
 function populateRegionsFallback() {
     const regionSelect = document.getElementById('region');
-    if (!regionSelect) return;
+    const tenderRegionSelect = document.getElementById('tender-region');
     
     const fallbackRegions = getFallbackRegions();
-    regionSelect.innerHTML = '<option value="">Выберите регион</option>';
     
-    fallbackRegions.forEach(region => {
-        const option = document.createElement('option');
-        option.value = region;
-        option.textContent = region;
-        regionSelect.appendChild(option);
-    });
+    if (regionSelect) {
+        regionSelect.innerHTML = '<option value="">Выберите регион</option>';
+        fallbackRegions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region;
+            option.textContent = region;
+            regionSelect.appendChild(option);
+        });
+    }
+    
+    if (tenderRegionSelect) {
+        tenderRegionSelect.innerHTML = '<option value="">Выберите регион</option>';
+        fallbackRegions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region;
+            option.textContent = region;
+            tenderRegionSelect.appendChild(option);
+        });
+    }
 }
 
 function getFallbackRegions() {
@@ -201,8 +268,13 @@ function setupEventHandlers() {
     const regionSelect = document.getElementById('region');
     const sizeSelect = document.getElementById('size');
     const calculateBtn = document.getElementById('calculateBtn');
+    const addPositionBtn = document.getElementById('addPositionBtn');
     const sendToTelegramBtn = document.getElementById('sendToTelegram');
     const sendToEmailBtn = document.getElementById('sendToEmail');
+    const tenderRegionSelect = document.getElementById('tender-region');
+    const tenderSizeSelect = document.getElementById('tender-size');
+    const calculateTenderBtn = document.getElementById('calculateTenderBtn');
+    const sendTenderToTelegramBtn = document.getElementById('sendTenderToTelegram');
     
     // Обработчик выбора региона
     if (regionSelect) {
@@ -218,42 +290,31 @@ function setupEventHandlers() {
         });
     }
     
+    // Обработчик кнопки добавления позиции
+    if (addPositionBtn) {
+        addPositionBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            addPosition();
+        });
+    }
+    
     // Обработчик кнопки расчета
     if (calculateBtn) {
-        // Удаляем старые обработчики
-        calculateBtn.replaceWith(calculateBtn.cloneNode(true));
-        const newCalculateBtn = document.getElementById('calculateBtn');
-        
-        newCalculateBtn.addEventListener('click', function(e) {
+        calculateBtn.addEventListener('click', function(e) {
             e.preventDefault();
             performCalculation();
         });
-        
-        // Обработчик для формы
-        const calculatorForm = document.querySelector('.calculator-form, #calculator-form, form');
-        if (calculatorForm) {
-            calculatorForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                performCalculation();
-            });
-        }
     }
     
     // Обработчик отправки в Telegram
     if (sendToTelegramBtn) {
-        // Удаляем старые обработчики
-        sendToTelegramBtn.replaceWith(sendToTelegramBtn.cloneNode(true));
-        const newTelegramBtn = document.getElementById('sendToTelegram');
-        
-        newTelegramBtn.addEventListener('click', function(e) {
+        sendToTelegramBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
             if (isSendingToTelegram) return;
             
             isSendingToTelegram = true;
-            
-            // Вызываем нашу функцию
             sendCalculatorToTelegram();
             
             setTimeout(() => {
@@ -274,9 +335,28 @@ function setupEventHandlers() {
     const quantityInput = document.getElementById('quantity');
     if (quantityInput) {
         quantityInput.addEventListener('change', function() {
-            if (currentCalculation) {
-                performCalculation();
-            }
+            // Обновляем расчет при изменении количества
+        });
+    }
+    
+    // Обработчики для тендерного калькулятора
+    if (tenderRegionSelect) {
+        tenderRegionSelect.addEventListener('change', function() {
+            handleTenderRegionChange(this.value);
+        });
+    }
+    
+    if (calculateTenderBtn) {
+        calculateTenderBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            calculateTender();
+        });
+    }
+    
+    if (sendTenderToTelegramBtn) {
+        sendTenderToTelegramBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            sendTenderToTelegram();
         });
     }
 }
@@ -339,6 +419,62 @@ function handleRegionChange(region) {
     
     if (resultsDiv) {
         resultsDiv.style.display = 'none';
+    }
+}
+
+// ============ НАЧАЛО ОБРАБОТКИ ВЫБОРА РЕГИОНА ДЛЯ ТЕНДЕРА ============
+function handleTenderRegionChange(region) {
+    const tenderSizeSelect = document.getElementById('tender-size');
+    const tenderResultDiv = document.getElementById('tender-result');
+    
+    if (!tenderSizeSelect) return;
+    
+    if (!region) {
+        tenderSizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
+        tenderSizeSelect.disabled = true;
+        
+        if (tenderResultDiv) {
+            tenderResultDiv.style.display = 'none';
+        }
+        return;
+    }
+    
+    let sizes = [];
+    
+    if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getSizesForRegion === 'function') {
+        try {
+            sizes = window.PriceUtils.getSizesForRegion(region);
+        } catch (error) {
+            console.error('Ошибка в PriceUtils.getSizesForRegion():', error);
+        }
+    }
+    
+    if (sizes.length === 0 && window.priceData && window.priceData[region]) {
+        try {
+            sizes = Object.keys(window.priceData[region]);
+        } catch (error) {
+            console.error('Ошибка в window.priceData[region]:', error);
+        }
+    }
+    
+    if (sizes.length === 0) {
+        sizes = getFallbackSizes();
+    }
+    
+    sizes.sort();
+    tenderSizeSelect.innerHTML = '<option value="">Выберите размер ковра</option>';
+    
+    sizes.forEach(size => {
+        const option = document.createElement('option');
+        option.value = size;
+        option.textContent = size;
+        tenderSizeSelect.appendChild(option);
+    });
+    
+    tenderSizeSelect.disabled = false;
+    
+    if (tenderResultDiv) {
+        tenderResultDiv.style.display = 'none';
     }
 }
 
@@ -428,8 +564,8 @@ function getFallbackFrequencies() {
     ];
 }
 
-// ============ НАЧАЛО ВЫПОЛНЕНИЯ РАСЧЕТА ============
-function performCalculation() {
+// ============ НАЧАЛО ДОБАВЛЕНИЯ ПОЗИЦИИ ============
+function addPosition() {
     const region = document.getElementById('region') ? document.getElementById('region').value : '';
     const size = document.getElementById('size') ? document.getElementById('size').value : '';
     const frequency = document.getElementById('frequency') ? document.getElementById('frequency').value : '';
@@ -448,13 +584,95 @@ function performCalculation() {
         return;
     }
     
-    const calculation = calculatePrice(region, size, frequency, quantity);
-    currentCalculation = calculation;
-    displayResults(calculation);
+    const pricePerReplacement = getPriceForPosition(region, size, frequency);
+    
+    if (pricePerReplacement === 0) {
+        alert('Не удалось определить цену для выбранных параметров');
+        return;
+    }
+    
+    const replacements = getReplacementsCount(frequency);
+    const monthlyCost = pricePerReplacement * replacements * quantity;
+    
+    const position = {
+        id: Date.now() + Math.random(),
+        region,
+        size,
+        frequency,
+        quantity,
+        pricePerReplacement,
+        monthlyCost,
+        replacements
+    };
+    
+    positions.push(position);
+    updatePositionsList();
+    
+    // Показываем список позиций
+    const positionsList = document.getElementById('positionsList');
+    if (positionsList) {
+        positionsList.style.display = 'block';
+    }
+    
+    // Очищаем форму для следующей позиции
+    document.getElementById('quantity').value = 1;
 }
 
-// ============ НАЧАЛО РАСЧЕТА ЦЕНЫ ============
-function calculatePrice(region, size, frequency, quantity) {
+// ============ НАЧАЛО ОБНОВЛЕНИЯ СПИСКА ПОЗИЦИЙ ============
+function updatePositionsList() {
+    const positionsContainer = document.getElementById('positionsContainer');
+    if (!positionsContainer) return;
+    
+    if (positions.length === 0) {
+        positionsContainer.innerHTML = '<p style="text-align: center; color: #666;">Позиции не добавлены</p>';
+        return;
+    }
+    
+    let html = '';
+    let totalMonthlyCost = 0;
+    
+    positions.forEach((position, index) => {
+        totalMonthlyCost += position.monthlyCost;
+        
+        html += `
+            <div class="position-item" style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid #3498db; position: relative;">
+                <strong>${position.size.replace('*', '×')}</strong> × ${position.quantity} шт.<br>
+                ${position.frequency} (${position.replacements} замен в месяц)<br>
+                Цена за замену: ${formatPrice(position.pricePerReplacement)}<br>
+                <strong>Стоимость в месяц: ${formatPrice(position.monthlyCost)}</strong>
+                <button onclick="removePosition(${index})" style="position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">×</button>
+            </div>
+        `;
+    });
+    
+    // Добавляем итоговую сумму
+    html += `
+        <div style="background: #16a085; color: white; padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 18px; font-weight: bold;">
+            Общая стоимость в месяц: ${formatPrice(totalMonthlyCost)}
+        </div>
+    `;
+    
+    positionsContainer.innerHTML = html;
+}
+
+// ============ НАЧАЛО УДАЛЕНИЯ ПОЗИЦИИ ============
+function removePosition(index) {
+    if (index >= 0 && index < positions.length) {
+        positions.splice(index, 1);
+        updatePositionsList();
+        
+        // Если позиций не осталось, скрываем список
+        if (positions.length === 0) {
+            const positionsList = document.getElementById('positionsList');
+            if (positionsList) {
+                positionsList.style.display = 'none';
+            }
+        }
+    }
+}
+
+// ============ НАЧАЛО РАСЧЕТА ЦЕНЫ ДЛЯ ПОЗИЦИИ ============
+function getPriceForPosition(region, size, frequency) {
     let pricePerReplacement = 0;
     
     if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getPrice === 'function') {
@@ -469,27 +687,21 @@ function calculatePrice(region, size, frequency, quantity) {
         pricePerReplacement = getFallbackPrice(size);
     }
     
-    let replacements = 4;
-    if (frequency.includes('1 раз в две недели')) replacements = 2;
-    else if (frequency.includes('2 раза в неделю')) replacements = 8;
-    else if (frequency.includes('3 раза в неделю')) replacements = 12;
-    else if (frequency.includes('4 раза в неделю')) replacements = 16;
-    else if (frequency.includes('5 раз в неделю')) replacements = 20;
-    else if (frequency.includes('6 раз в неделю')) replacements = 24;
-    else if (frequency.includes('7 раз в неделю')) replacements = 28;
+    return pricePerReplacement;
+}
+
+// ============ НАЧАЛО РАСЧЕТА КОЛИЧЕСТВА ЗАМЕН ============
+function getReplacementsCount(frequency) {
+    if (frequency.includes('1 раз в две недели')) return 2;
+    else if (frequency.includes('1 раз в неделю')) return 4;
+    else if (frequency.includes('2 раза в неделю')) return 8;
+    else if (frequency.includes('3 раза в неделю')) return 12;
+    else if (frequency.includes('4 раза в неделю')) return 16;
+    else if (frequency.includes('5 раз в неделю')) return 20;
+    else if (frequency.includes('6 раз в неделю')) return 24;
+    else if (frequency.includes('7 раз в неделю')) return 28;
     
-    const monthlyCost = pricePerReplacement * replacements * quantity;
-    
-    return {
-        region,
-        size,
-        frequency,
-        quantity,
-        pricePerReplacement,
-        monthlyCost,
-        formattedPrice: formatPrice(pricePerReplacement),
-        formattedMonthly: formatPrice(monthlyCost)
-    };
+    return 4; // По умолчанию
 }
 
 function getFallbackPrice(size) {
@@ -524,6 +736,32 @@ function formatPrice(price) {
     }).format(price);
 }
 
+// ============ НАЧАЛО ВЫПОЛНЕНИЯ РАСЧЕТА ============
+function performCalculation() {
+    if (positions.length === 0) {
+        alert('Пожалуйста, добавьте хотя бы одну позицию');
+        return;
+    }
+    
+    // Рассчитываем общую стоимость
+    let totalMonthlyCost = 0;
+    let totalReplacements = 0;
+    
+    positions.forEach(position => {
+        totalMonthlyCost += position.monthlyCost;
+        totalReplacements += position.replacements * position.quantity;
+    });
+    
+    currentCalculation = {
+        positions: positions,
+        totalMonthlyCost,
+        totalReplacements,
+        positionCount: positions.length
+    };
+    
+    displayResults(currentCalculation);
+}
+
 // ============ НАЧАЛО ОТОБРАЖЕНИЯ РЕЗУЛЬТАТОВ ============
 function displayResults(calculation) {
     const resultsDiv = document.getElementById('results');
@@ -531,51 +769,149 @@ function displayResults(calculation) {
     
     if (!resultsDiv || !resultDetails) return;
     
-    let replacementsPerMonth = 4;
-    if (calculation.frequency.includes('1 раз в две недели')) replacementsPerMonth = 2;
-    else if (calculation.frequency.includes('2 раза в неделю')) replacementsPerMonth = 8;
-    else if (calculation.frequency.includes('3 раза в неделю')) replacementsPerMonth = 12;
-    else if (calculation.frequency.includes('4 раза в неделю')) replacementsPerMonth = 16;
-    else if (calculation.frequency.includes('5 раз в неделю')) replacementsPerMonth = 20;
-    else if (calculation.frequency.includes('6 раз в неделю')) replacementsPerMonth = 24;
-    else if (calculation.frequency.includes('7 раз в неделю')) replacementsPerMonth = 28;
+    let html = `
+        <div class="result-item">
+            <div class="result-label">Количество позиций</div>
+            <div class="result-value">${calculation.positionCount} шт.</div>
+        </div>
+        
+        <div class="result-item">
+            <div class="result-label">Всего замен в месяц</div>
+            <div class="result-value">${calculation.totalReplacements}</div>
+        </div>
+        
+        <div class="result-item" style="background: rgba(52, 152, 219, 0.2);">
+            <div class="result-label">Общая стоимость в месяц</div>
+            <div class="result-value">${formatPrice(calculation.totalMonthlyCost)}</div>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <h4 style="color: white; margin-bottom: 10px;">Состав заказа:</h4>
+    `;
     
-    resultDetails.innerHTML = `
+    calculation.positions.forEach((position, index) => {
+        html += `
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 6px; margin-bottom: 8px; font-size: 0.9rem;">
+                ${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт. (${position.frequency}) - ${formatPrice(position.monthlyCost)}/мес
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    
+    resultDetails.innerHTML = html;
+    resultsDiv.style.display = 'block';
+    
+    // Прокручиваем к результатам
+    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ============ НАЧАЛО ТЕНДЕРНОГО РАСЧЕТА ============
+function calculateTender() {
+    const region = document.getElementById('tender-region') ? document.getElementById('tender-region').value : '';
+    const size = document.getElementById('tender-size') ? document.getElementById('tender-size').value : '';
+    
+    if (!region || !size) {
+        alert('Пожалуйста, выберите регион и размер');
+        return;
+    }
+    
+    const pricePerReplacement = getPriceForPosition(region, size, "1 раз в неделю");
+    
+    if (pricePerReplacement === 0) {
+        alert('Не удалось определить цену для выбранных параметров');
+        return;
+    }
+    
+    const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    let totalCost = 0;
+    let tenderPositions = [];
+    
+    months.forEach(month => {
+        const qtyInput = document.getElementById(`${month}-qty`);
+        const changesInput = document.getElementById(`${month}-changes`);
+        
+        const qty = qtyInput ? parseInt(qtyInput.value) || 0 : 0;
+        const changes = changesInput ? parseInt(changesInput.value) || 0 : 0;
+        
+        if (qty > 0 && changes > 0) {
+            const cost = pricePerReplacement * qty * changes;
+            totalCost += cost;
+            
+            tenderPositions.push({
+                month,
+                size,
+                quantity: qty,
+                changes,
+                cost
+            });
+        }
+    });
+    
+    if (tenderPositions.length === 0) {
+        alert('Пожалуйста, укажите данные хотя бы для одного месяца');
+        return;
+    }
+    
+    displayTenderResults(tenderPositions, totalCost, region, size, pricePerReplacement);
+}
+
+// ============ НАЧАЛО ОТОБРАЖЕНИЯ РЕЗУЛЬТАТОВ ТЕНДЕРА ============
+function displayTenderResults(tenderPositions, totalCost, region, size, pricePerReplacement) {
+    const tenderResultDiv = document.getElementById('tender-result');
+    const tenderPositionsContainer = document.getElementById('tenderPositions');
+    const tenderTotalValue = document.getElementById('tenderTotalValue');
+    
+    if (!tenderResultDiv || !tenderPositionsContainer) return;
+    
+    let html = `
         <div class="result-item">
             <div class="result-label">Регион</div>
-            <div class="result-value">${calculation.region}</div>
+            <div class="result-value">${region}</div>
         </div>
         
         <div class="result-item">
             <div class="result-label">Размер ковра</div>
-            <div class="result-value">${calculation.size.replace('*', '×')}</div>
+            <div class="result-value">${size.replace('*', '×')}</div>
         </div>
         
         <div class="result-item">
-            <div class="result-label">Периодичность замены</div>
-            <div class="result-value">${calculation.frequency}</div>
-            <div class="result-hint">(${replacementsPerMonth} замен в месяц)</div>
+            <div class="result-label">Цена за замену</div>
+            <div class="result-value">${formatPrice(pricePerReplacement)}</div>
         </div>
         
-        <div class="result-item">
-            <div class="result-label">Количество ковров</div>
-            <div class="result-value">${calculation.quantity} шт.</div>
-        </div>
-        
-        <div class="result-item" style="background: rgba(22, 160, 133, 0.2);">
-            <div class="result-label">Цена за одну замену</div>
-            <div class="result-value">${calculation.formattedPrice}</div>
-            <div class="result-hint">Включена доставка и чистка</div>
-        </div>
-        
-        <div class="result-item" style="background: rgba(52, 152, 219, 0.2);">
-            <div class="result-label">Стоимость в месяц</div>
-            <div class="result-value">${calculation.formattedMonthly}</div>
-            <div class="result-hint">За ${calculation.quantity} ковр${calculation.quantity === 1 ? 'а' : 'ов'}</div>
-        </div>
+        <div style="margin-top: 20px;">
+            <h4 style="color: white; margin-bottom: 10px;">Детализация по месяцам:</h4>
     `;
     
-    resultsDiv.style.display = 'block';
+    tenderPositions.forEach(position => {
+        html += `
+            <div class="result-item" style="margin-bottom: 8px;">
+                <div class="result-label">${position.month}</div>
+                <div class="result-value">${position.quantity} ковров × ${position.changes} замен = ${formatPrice(position.cost)}</div>
+            </div>
+        `;
+    });
+    
+    tenderPositionsContainer.innerHTML = html;
+    
+    if (tenderTotalValue) {
+        tenderTotalValue.textContent = formatPrice(totalCost);
+    }
+    
+    tenderResultDiv.style.display = 'block';
+    
+    // Сохраняем данные тендера
+    window.tenderCalculation = {
+        positions: tenderPositions,
+        totalCost,
+        region,
+        size,
+        pricePerReplacement
+    };
+    
+    // Прокручиваем к результатам
+    tenderResultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ============ НАЧАЛО СОЗДАНИЯ ПОЛНОГО СООБЩЕНИЯ ДЛЯ TELEGRAM ============
@@ -586,13 +922,16 @@ function createCalculatorTelegramMessage() {
     
     let message = `🧮 РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
     
-    message += `📍 Регион: ${calc.region}\n`;
-    message += `📏 Размер ковра: ${calc.size.replace('*', '×')}\n`;
-    message += `🔄 Частота замены: ${calc.frequency}\n`;
-    message += `📦 Количество: ${calc.quantity} шт.\n\n`;
+    message += `📊 Количество позиций: ${calc.positionCount}\n`;
+    message += `🔄 Всего замен в месяц: ${calc.totalReplacements}\n`;
+    message += `💰 Общая стоимость в месяц: ${formatPrice(calc.totalMonthlyCost)}\n\n`;
     
-    message += `💰 Цена за замену: ${calc.formattedPrice}\n`;
-    message += `📊 Стоимость за 4 недели: ${formatPrice(calc.monthlyCost)}\n\n`;
+    message += `📄 Состав заказа:\n`;
+    calc.positions.forEach((position, index) => {
+        message += `${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
+        message += `   ${position.frequency} (${position.replacements} замен/мес)\n`;
+        message += `   Стоимость: ${formatPrice(position.monthlyCost)}/мес\n\n`;
+    });
     
     message += `📄 Для заключения договора потребуются:\n`;
     message += `• Реквизиты компании\n`;
@@ -623,7 +962,6 @@ function sendCalculatorToTelegram() {
     try {
         const message = createCalculatorTelegramMessage();
         
-        // Проверка длины сообщения
         if (message.length > 3500) {
             alert('Сообщение слишком длинное. Telegram не пропускает такие длинные сообщения.\n\nПожалуйста, напишите нам в Telegram напрямую: @+79770005127\n\nМы произведем расчет за вас и пришлем готовый результат.');
             return;
@@ -635,7 +973,6 @@ function sendCalculatorToTelegram() {
         window.open(telegramUrl, '_blank');
         
         console.log('📤 Расчет калькулятора отправлен в Telegram');
-        console.log('Длина сообщения:', message.length, 'символов');
         
         setTimeout(() => {
             alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\nМы свяжемся с вами в течение 15 минут.');
@@ -643,6 +980,56 @@ function sendCalculatorToTelegram() {
         
     } catch (error) {
         console.error('Ошибка отправки в Telegram:', error);
+        alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
+    }
+}
+
+// ============ НАЧАЛО ОТПРАВКИ ТЕНДЕРА В TELEGRAM ============
+function sendTenderToTelegram() {
+    if (!window.tenderCalculation) {
+        alert('Сначала выполните расчет тендера');
+        return;
+    }
+    
+    try {
+        const calc = window.tenderCalculation;
+        
+        let message = `📋 ТЕНДЕРНЫЙ РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
+        
+        message += `📍 Регион: ${calc.region}\n`;
+        message += `📏 Размер ковра: ${calc.size.replace('*', '×')}\n`;
+        message += `💰 Цена за замену: ${formatPrice(calc.pricePerReplacement)}\n`;
+        message += `💰 Общая стоимость: ${formatPrice(calc.totalCost)}\n\n`;
+        
+        message += `📅 Детализация по месяцам:\n`;
+        calc.positions.forEach(position => {
+            message += `• ${position.month}: ${position.quantity} ковров × ${position.changes} замен = ${formatPrice(position.cost)}\n`;
+        });
+        
+        message += `\n📞 Связь:\n`;
+        message += `Telegram: t.me/+79770005127\n`;
+        message += `Email: matservice@yandex.ru\n`;
+        message += `Сайт: arenda-kovrov-mirum.ru`;
+        
+        if (message.length > 3500) {
+            message = `📋 ТЕНДЕРНЫЙ РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
+            message += `📍 Регион: ${calc.region}\n`;
+            message += `📏 Размер ковра: ${calc.size.replace('*', '×')}\n`;
+            message += `💰 Общая стоимость: ${formatPrice(calc.totalCost)}\n\n`;
+            message += `📞 Связь: t.me/+79770005127`;
+        }
+        
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+        
+        window.open(telegramUrl, '_blank');
+        
+        setTimeout(() => {
+            alert('Telegram открыт! Нажмите "Отправить" чтобы отправить тендерный расчет.');
+        }, 1000);
+        
+    } catch (error) {
+        console.error('Ошибка отправки тендера в Telegram:', error);
         alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
     }
 }
@@ -655,13 +1042,16 @@ function createCalculatorEmailMessage() {
     
     let message = `Расчет аренды ковров МИРУМ\n\n`;
     
-    message += `Регион: ${calc.region}\n`;
-    message += `Размер ковра: ${calc.size.replace('*', '×')}\n`;
-    message += `Периодичность замены: ${calc.frequency}\n`;
-    message += `Количество: ${calc.quantity} шт.\n\n`;
+    message += `Количество позиций: ${calc.positionCount}\n`;
+    message += `Всего замен в месяц: ${calc.totalReplacements}\n`;
+    message += `Общая стоимость в месяц: ${calc.totalMonthlyCost.toLocaleString('ru-RU')} руб.\n\n`;
     
-    message += `Цена за одну замену: ${calc.formattedPrice}\n`;
-    message += `Стоимость в месяц: ${calc.formattedMonthly}\n\n`;
+    message += `Состав заказа:\n`;
+    calc.positions.forEach((position, index) => {
+        message += `${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
+        message += `   ${position.frequency} (${position.replacements} замен/мес)\n`;
+        message += `   Стоимость: ${position.monthlyCost.toLocaleString('ru-RU')} руб./мес\n\n`;
+    });
     
     message += `Для заключения договора понадобятся:\n`;
     message += `• Реквизиты компании\n`;
@@ -672,14 +1062,6 @@ function createCalculatorEmailMessage() {
     
     message += `Счет выставляется только за фактические замены.\n`;
     message += `Возможно включить НДС 22% — цена увеличится на ставку налога.\n\n`;
-    
-    message += `Что входит в стоимость:\n`;
-    message += `- Бесплатная доставка\n`;
-    message += `- Установка и замена\n`;
-    message += `- Профессиональная чистка\n`;
-    message += `- Замена при износе\n`;
-    message += `- Все документы\n`;
-    message += `- Гибкий график\n\n`;
     
     message += `Телефон для связи: +7 (977) 000-51-27\n`;
     message += `Email: matservice@yandex.ru\n`;
@@ -696,7 +1078,7 @@ function sendCalculatorToEmail() {
     }
     
     try {
-        const subject = encodeURIComponent(`Расчет аренды ковров МИРУМ - ${currentCalculation.region}`);
+        const subject = encodeURIComponent(`Расчет аренды ковров МИРУМ - ${positions.length} позиций`);
         const body = encodeURIComponent(createCalculatorEmailMessage());
         const emailUrl = `mailto:matservice@yandex.ru?subject=${subject}&body=${body}`;
         
@@ -717,9 +1099,16 @@ function sendCalculatorToEmail() {
 window.Calculator = {
     init: initCalculator,
     calculate: performCalculation,
+    addPosition: addPosition,
+    removePosition: removePosition,
+    calculateTender: calculateTender,
     sendToTelegram: sendCalculatorToTelegram,
+    sendTenderToTelegram: sendTenderToTelegram,
     sendToEmail: sendCalculatorToEmail
 };
+
+// Экспортируем функции для удаления позиций
+window.removePosition = removePosition;
 
 // ============ НАЧАЛО АВТОМАТИЧЕСКОЙ ИНИЦИАЛИЗАЦИИ ============
 // Изолированная инициализация только для калькулятора
