@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 7.2 (07.01.2026) - С ИСПРАВЛЕННЫМ ТЕЛЕГРАММ-СООБЩЕНИЕМ И СКРЫВАЮЩИМСЯ ХЕДЕРОМ
+     Версия: 7.3 (07.01.2026) - С ВОЗМОЖНОСТЬЮ ДОБАВЛЕНИЯ НЕСКОЛЬКИХ ПОЗИЦИЙ
      ============================================ -->
 <html lang="ru">
 <head>
@@ -106,8 +106,13 @@
         <!-- ============ ОСНОВНОЙ КАЛЬКУЛЯТОР ============ -->
         <section class="calculator-section">
             <div class="container">
-                <div class="calculator-container">
-                    <!-- Форма калькулятора -->
+                <div class="tabs" style="display: flex; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
+                    <button class="tab-btn active" onclick="showTab('standard')" style="flex: 1; padding: 15px; border: none; background: #f1f1f1; font-size: 16px; cursor: pointer; text-align: center;">Стандартный</button>
+                    <button class="tab-btn" onclick="showTab('tender')" style="flex: 1; padding: 15px; border: none; background: #f1f1f1; font-size: 16px; cursor: pointer; text-align: center;">Тендерный</button>
+                </div>
+                
+                <!-- Стандартный калькулятор -->
+                <div id="standard-calc" class="calculator-container">
                     <div class="calculator-form">
                         <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">
                             <i class="fas fa-calculator"></i> Рассчитать стоимость
@@ -161,9 +166,21 @@
                             </p>
                         </div>
                         
-                        <button class="btn btn-primary" id="calculateBtn" aria-label="Рассчитать стоимость">
-                            <i class="fas fa-calculator"></i> Рассчитать стоимость
+                        <button class="btn btn-primary" id="addPositionBtn" style="background: #3498db; margin-bottom: 10px;">
+                            <i class="fas fa-plus"></i> Добавить позицию
                         </button>
+                        
+                        <button class="btn btn-primary" id="calculateBtn" aria-label="Рассчитать стоимость">
+                            <i class="fas fa-calculator"></i> Рассчитать общую стоимость
+                        </button>
+                    </div>
+                    
+                    <!-- Список добавленных позиций -->
+                    <div class="positions-list" id="positionsList" style="padding: 20px; background: #f8f9fa; display: none;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary-color);">
+                            <i class="fas fa-list"></i> Добавленные позиции
+                        </h3>
+                        <div id="positionsContainer"></div>
                     </div>
                     
                     <!-- Результаты расчета -->
@@ -188,6 +205,61 @@
                                 <i class="fas fa-lightbulb"></i> 
                                 <strong>Совет:</strong> Отправьте расчет нашему менеджеру для уточнения деталей и получения коммерческого предложения.
                             </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Тендерный калькулятор -->
+                <div id="tender-calc" class="calculator-container" style="display: none;">
+                    <div class="calculator-form">
+                        <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary-color);">
+                            <i class="fas fa-file-contract"></i> Тендерный расчет
+                        </h2>
+                        
+                        <div class="form-group">
+                            <label for="tender-region">
+                                <i class="fas fa-map-marker-alt"></i> Регион
+                            </label>
+                            <select id="tender-region" aria-label="Выберите регион для тендера">
+                                <option value="">Выберите регион</option>
+                                <!-- Регионы загружаются через JS -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tender-size">
+                                <i class="fas fa-ruler-combined"></i> Размер ковра
+                            </label>
+                            <select id="tender-size" disabled aria-label="Выберите размер ковра для тендера">
+                                <option value="">Сначала выберите регион</option>
+                            </select>
+                        </div>
+                        
+                        <div class="month-inputs" id="monthInputs" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px;">
+                            <!-- Месяцы будут добавлены через JS -->
+                        </div>
+                        
+                        <button class="btn btn-primary" id="calculateTenderBtn" style="margin-top: 20px;">
+                            <i class="fas fa-calculator"></i> Рассчитать тендер
+                        </button>
+                    </div>
+                    
+                    <!-- Результаты тендерного расчета -->
+                    <div class="calculator-results" id="tender-result" style="display: none;">
+                        <h3><i class="fas fa-file-invoice-dollar"></i> Расчет по тендеру</h3>
+                        
+                        <div id="tenderPositions">
+                            <!-- Позиции тендера загружаются через JS -->
+                        </div>
+                        
+                        <div id="tenderTotal" style="background: rgba(22, 160, 133, 0.2); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 18px; font-weight: bold;">
+                            Общая стоимость: <span id="tenderTotalValue">0</span> ₽
+                        </div>
+                        
+                        <div class="results-actions">
+                            <button class="btn btn-telegram" id="sendTenderToTelegram">
+                                <i class="fab fa-telegram"></i> Отправить тендер в Telegram
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -500,6 +572,32 @@
                     initCalculator();
                 }, 500);
             }
+            
+            // Функции для табов
+            window.showTab = function(tabName) {
+                // Скрываем все калькуляторы
+                document.getElementById('standard-calc').style.display = 'none';
+                document.getElementById('tender-calc').style.display = 'none';
+                
+                // Убираем активный класс со всех кнопок
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.background = '#f1f1f1';
+                });
+                
+                // Показываем нужный калькулятор
+                if (tabName === 'standard') {
+                    document.getElementById('standard-calc').style.display = 'block';
+                    document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                    document.querySelectorAll('.tab-btn')[0].style.background = '#3498db';
+                    document.querySelectorAll('.tab-btn')[0].style.color = 'white';
+                } else {
+                    document.getElementById('tender-calc').style.display = 'block';
+                    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                    document.querySelectorAll('.tab-btn')[1].style.background = '#3498db';
+                    document.querySelectorAll('.tab-btn')[1].style.color = 'white';
+                }
+            };
         });
     </script>
 </body>
