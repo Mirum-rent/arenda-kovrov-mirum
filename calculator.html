@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 9.0 (Автоматическое добавление + НДС)
+     Версия: 10.0 (Улучшенный UX + кнопка добавления позиции)
      ============================================ -->
 <html lang="ru">
 <head>
@@ -60,6 +60,36 @@
         }
     }
     </script>
+    
+    <style>
+        /* Дополнительные стили для улучшения отображения на калькуляторе */
+        .calculator-container {
+            transition: all 0.3s ease;
+        }
+        
+        .form-group p {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* Стили для кнопки добавления позиции */
+        #addPositionBtn i {
+            font-size: 1.1em;
+            margin-right: 8px;
+        }
+        
+        /* Анимация при добавлении позиции */
+        @keyframes highlight {
+            0% { background-color: rgba(46, 204, 113, 0.2); }
+            100% { background-color: white; }
+        }
+        
+        .position-item.highlight {
+            animation: highlight 1s ease;
+        }
+    </style>
 </head>
 <body>
     <script src="/includes/header.js"></script>
@@ -68,18 +98,19 @@
         <section class="hero" style="background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%); color: white; padding: 80px 0 40px; text-align: center;">
             <div class="container">
                 <h1 style="color: white; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 20px;">
-                    Калькулятор стоимости аренды ковров
+                    <i class="fas fa-calculator"></i> Калькулятор стоимости аренды ковров
                 </h1>
                 
                 <p style="font-size: clamp(1rem, 2vw, 1.1rem); max-width: 800px; margin: 0 auto 30px; line-height: 1.6; color: #ffffff;">
                     Рассчитайте стоимость аренды грязезащитных ковров для вашего города. 
-                    Выберите регион, размер ковра и периодичность замены.
+                    Выберите регион, размер ковра и периодичность замены. Позиции добавляются автоматически!
                 </p>
                 
                 <div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
                     <p style="margin: 0; font-size: 0.95rem; color: #ffffff;">
                         <i class="fas fa-info-circle" style="color: #1abc9c;"></i> 
                         Все цены указаны за одну замену ковра. В стоимость включена доставка, установка и чистка.
+                        Можно работать как с НДС, так и без НДС.
                     </p>
                 </div>
             </div>
@@ -155,13 +186,15 @@
                             <i class="fas fa-list"></i> Добавленные позиции
                         </h3>
                         <div id="positionsContainer">
-                            <p style="text-align: center; color: #666; padding: 20px;">
-                                Позиции не добавлены
-                            </p>
+                            <div style="text-align: center; color: #666; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                                <i class="fas fa-info-circle" style="font-size: 24px; margin-bottom: 10px; display: block; color: #3498db;"></i>
+                                <p>Позиции не добавлены</p>
+                                <p style="font-size: 0.9rem; margin-top: 10px;">Заполните форму выше, и позиция добавится автоматически</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div id="totalResult" style="padding: 20px; display: none;"></div>
+                    <div id="totalResult" style="display: none;"></div>
                 </div>
                 
                 <div id="tender-calc" class="calculator-container" style="display: none;">
@@ -190,7 +223,7 @@
                         
                         <div class="month-inputs" id="monthInputs"></div>
                         
-                        <button class="btn btn-primary" id="calculateTenderBtn" style="margin-top: 20px;">
+                        <button class="btn btn-primary" id="calculateTenderBtn" style="margin-top: 20px; width: 100%; padding: 15px; font-size: 16px; min-height: 44px;">
                             <i class="fas fa-calculator"></i> Рассчитать тендер
                         </button>
                     </div>
@@ -200,12 +233,12 @@
                         
                         <div id="tenderPositions"></div>
                         
-                        <div id="tenderTotal" style="background: rgba(22, 160, 133, 0.2); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 18px; font-weight: bold;">
+                        <div id="tenderTotal" style="background: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 18px; font-weight: bold;">
                             Общая стоимость: <span id="tenderTotalValue">0</span> ₽
                         </div>
                         
-                        <div class="results-actions">
-                            <button class="btn btn-telegram" id="sendTenderToTelegram">
+                        <div class="results-actions" style="margin-top: 20px;">
+                            <button class="btn btn-telegram" id="sendTenderToTelegram" style="width: 100%; padding: 15px; font-size: 16px; min-height: 44px;">
                                 <i class="fab fa-telegram"></i> Отправить тендер в Telegram
                             </button>
                         </div>
@@ -225,7 +258,7 @@
                     <div style="margin-top: 15px; padding: 15px; background: #e8f4fd; border-radius: 8px;">
                         <p style="margin: 0; color: #2c3e50; font-size: 0.9rem;">
                             <i class="fas fa-info-circle" style="color: #3498db;"></i> 
-                            <strong>Условия:</strong> Счёт выставляется только за фактические замены. Возможно включить НДС 22% — цена увеличится на ставку налога.
+                            <strong>Условия:</strong> Счёт выставляется только за фактические замены. Возможно включить НДС 22% — цена увеличится на ставку налога. Можем работать как с НДС, так и без НДС.
                         </p>
                     </div>
                 </div>
@@ -432,11 +465,46 @@
                                    `🌐 Страница: Калькулятор\n` +
                                    `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
                     
-                    const telegramUrl = `https://t.me/+79770005127?text=${encodeURIComponent(message)}`;
-                    window.open(telegramUrl, '_blank');
+                    // Используем метод копирования текста
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = message;
+                    tempTextArea.style.position = 'fixed';
+                    tempTextArea.style.left = '-9999px';
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    
+                    try {
+                        const successful = document.execCommand('copy');
+                        if (successful) {
+                            const telegramUrl = `https://t.me/+79770005127`;
+                            window.open(telegramUrl, '_blank');
+                            
+                            setTimeout(() => {
+                                alert('✅ Текст вопроса скопирован!\n\n' +
+                                      '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
+                                      '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
+                                      '3. Отправьте сообщение\n\n' +
+                                      'Мы ответим в течение 15 минут!');
+                            }, 1000);
+                        } else {
+                            const encodedMessage = encodeURIComponent(message);
+                            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+                            window.open(telegramUrl, '_blank');
+                            
+                            alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
+                        }
+                    } catch (err) {
+                        console.error('Не удалось скопировать текст:', err);
+                        const encodedMessage = encodeURIComponent(message);
+                        const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+                        window.open(telegramUrl, '_blank');
+                        
+                        alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
+                    } finally {
+                        document.body.removeChild(tempTextArea);
+                    }
                     
                     calcForm.reset();
-                    alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
                 });
             }
             
