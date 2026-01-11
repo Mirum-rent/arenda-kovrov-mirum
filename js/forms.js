@@ -1,6 +1,6 @@
 // ============================================
 // FORMS.JS - Обработка всех форм на сайте
-// Версия: 6.1 (07.01.2026) - Исправлена отправка в Telegram
+// Версия: 6.2 (Улучшенная отправка в Telegram)
 // ============================================
 
 (function() {
@@ -57,28 +57,28 @@
     }
     
     /**
-     * Создание короткого сообщения для Telegram (чтобы избежать длинных URL)
+     * Создание короткого сообщения для Telegram
      * @param {Object} data - Данные формы
      * @returns {string} - Короткое сообщение
      */
     function createShortTelegramMessage(data) {
-        let message = `📋 Заявка с сайта\n\n`;
+        let message = `📋 Заявка с сайта МИРУМ\n\n`;
         
-        if (data.name) message += `👤 ${data.name}\n`;
-        if (data.phone) message += `📞 ${data.phone}\n`;
-        if (data.email) message += `📧 ${data.email}\n`;
-        if (data.company) message += `🏢 ${data.company}\n`;
-        if (data.city) message += `📍 ${data.city}\n`;
-        if (data.service) message += `🔧 ${data.service}\n`;
+        if (data.name) message += `👤 Имя: ${data.name}\n`;
+        if (data.phone) message += `📞 Телефон: ${data.phone}\n`;
+        if (data.email) message += `📧 Email: ${data.email}\n`;
+        if (data.company) message += `🏢 Компания: ${data.company}\n`;
+        if (data.city) message += `📍 Город: ${data.city}\n`;
+        if (data.service) message += `🔧 Услуга: ${data.service}\n`;
         
         if (data.message && data.message.length > 100) {
-            message += `📝 ${data.message.substring(0, 100)}...\n`;
+            message += `📝 Сообщение: ${data.message.substring(0, 100)}...\n`;
         } else if (data.message) {
-            message += `📝 ${data.message}\n`;
+            message += `📝 Сообщение: ${data.message}\n`;
         }
         
-        message += `\n🌐 ${window.location.href}\n`;
-        message += `⏰ ${new Date().toLocaleTimeString('ru-RU')}`;
+        message += `\n🌐 Страница: ${window.location.href}\n`;
+        message += `🕒 Время: ${new Date().toLocaleTimeString('ru-RU')}`;
         
         // Ограничиваем длину сообщения
         if (message.length > 500) {
@@ -89,12 +89,42 @@
     }
     
     /**
-     * Открытие Telegram с сообщением (с проверкой длины URL)
+     * Открытие Telegram с сообщением (улучшенная версия)
      * @param {string} message - Сообщение для отправки
+     * @returns {boolean} - Успешно ли выполнено
      */
     function openTelegramWithMessage(message) {
         try {
-            // Кодируем сообщение
+            // Используем метод копирования текста для надежности
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = message;
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.left = '-9999px';
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}`;
+                    window.open(telegramUrl, '_blank');
+                    
+                    setTimeout(() => {
+                        alert('✅ Текст сообщения скопирован!\n\n' +
+                              '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
+                              '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
+                              '3. Отправьте сообщение\n\n' +
+                              'Мы свяжемся с вами в течение 15 минут!');
+                    }, 1000);
+                    return true;
+                }
+            } catch (err) {
+                console.error('Не удалось скопировать текст:', err);
+            } finally {
+                document.body.removeChild(tempTextArea);
+            }
+            
+            // Fallback: старая логика для совместимости
             const encodedMessage = encodeURIComponent(message);
             const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodedMessage}`;
             
@@ -106,9 +136,8 @@
                 const shortUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${shortEncoded}`;
                 
                 if (shortUrl.length > 2000) {
-                    // Если все еще слишком длинно, показываем инструкцию
                     alert('Сообщение слишком длинное. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
-                    return;
+                    return false;
                 }
                 
                 window.open(shortUrl, '_blank');
@@ -116,9 +145,80 @@
                 window.open(telegramUrl, '_blank');
             }
             
+            setTimeout(() => {
+                alert('✅ Telegram открыт!\n\n' +
+                      'Нажмите "Отправить" чтобы отправить заявку.\n' +
+                      'Мы свяжемся с вами в течение 15 минут!');
+            }, 1000);
+            
             return true;
         } catch (error) {
             console.error('Ошибка при открытии Telegram:', error);
+            
+            // Показываем сообщение с инструкцией
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.8);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 25px; border-radius: 10px; max-width: 500px; width: 100%;">
+                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Не удалось открыть Telegram</h3>
+                    <p>Пожалуйста, отправьте сообщение вручную:</p>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <p style="margin: 0 0 10px 0; font-weight: bold;">Telegram:</p>
+                        <p style="margin: 0; font-size: 1.1rem; color: #2c3e50;">@+79770005127</p>
+                    </div>
+                    <p>Скопируйте текст ниже и отправьте его в Telegram:</p>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px;">
+                        ${message.replace(/\n/g, '<br>')}
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button onclick="copyFormText()" style="padding: 12px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Копировать текст</button>
+                        <button onclick="this.closest('.modal').remove()" style="padding: 12px 20px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer;">Закрыть</button>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('modal');
+            document.body.appendChild(modal);
+            
+            // Добавляем функцию копирования
+            window.copyFormText = function() {
+                const textDiv = modal.querySelector('div[style*="font-family: monospace"]');
+                const text = textDiv.textContent || textDiv.innerText;
+                
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = text;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    const copyBtn = modal.querySelector('button[onclick*="copyFormText"]');
+                    copyBtn.textContent = 'Скопировано!';
+                    copyBtn.style.background = '#27ae60';
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Копировать текст';
+                        copyBtn.style.background = '#3498db';
+                    }, 2000);
+                } catch (err) {
+                    console.error('Не удалось скопировать:', err);
+                } finally {
+                    document.body.removeChild(tempTextArea);
+                }
+            };
+            
             return false;
         }
     }
@@ -128,7 +228,7 @@
      * @param {string} message - Текст сообщения
      */
     function showSuccess(message) {
-        alert(message);
+        alert('✅ ' + message);
     }
     
     /**
@@ -137,6 +237,74 @@
      */
     function showError(message) {
         alert('❌ ' + message);
+    }
+    
+    /**
+     * Показать уведомление (toast)
+     * @param {string} message - Текст уведомления
+     * @param {string} type - Тип (success, error, info)
+     */
+    function showToast(message, type = 'info') {
+        // Удаляем существующие уведомления
+        const existingToast = document.querySelector('.form-toast');
+        if (existingToast) {
+            existingToast.remove();
+        }
+        
+        // Создаем уведомление
+        const toast = document.createElement('div');
+        toast.className = 'form-toast';
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: ${type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#3498db'};
+            color: white;
+            border-radius: 8px;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+            font-size: 14px;
+            font-weight: 500;
+        `;
+        
+        toast.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(toast);
+        
+        // Добавляем стили анимации
+        if (!document.querySelector('#form-toast-styles')) {
+            const style = document.createElement('style');
+            style.id = 'form-toast-styles';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Удаляем через 3 секунды
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 3000);
     }
     
     // ============ ОБРАБОТКА ФОРМ ============
@@ -198,11 +366,7 @@
             if (success) {
                 // Очищаем форму
                 form.reset();
-                
-                // Показываем сообщение об успехе
-                setTimeout(() => {
-                    showSuccess('Telegram открыт! Нажмите "Отправить" чтобы отправить заявку.');
-                }, 500);
+                showToast('Заявка отправлена! Мы свяжемся с вами в течение 15 минут', 'success');
             }
         });
         
@@ -283,11 +447,7 @@
             if (success) {
                 // Очищаем форму
                 form.reset();
-                
-                // Показываем сообщение об успехе
-                setTimeout(() => {
-                    showSuccess('Telegram открыт! Нажмите "Отправить" чтобы отправить заявку на мойку витрин.');
-                }, 500);
+                showToast('Заявка на мойку витрин отправлена!', 'success');
             }
         });
     }
@@ -350,11 +510,7 @@
             if (success) {
                 // Очищаем форму
                 form.reset();
-                
-                // Показываем сообщение об успехе
-                setTimeout(() => {
-                    showSuccess('Telegram открыт! Нажмите "Отправить" чтобы отправить быструю заявку.');
-                }, 500);
+                showToast('Быстрая заявка отправлена!', 'success');
             }
         });
     }
@@ -376,7 +532,67 @@
             });
         });
         
+        // Инициализация форм на странице калькулятора
+        initCalculatorContactForm();
+        
         console.log(`✅ Формы инициализированы`);
+    }
+    
+    /**
+     * Обработка формы контактов на странице калькулятора
+     */
+    function initCalculatorContactForm() {
+        const form = document.getElementById('calculatorContactForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const consentCheckbox = document.getElementById('calcConsent');
+            if (!consentCheckbox || !consentCheckbox.checked) {
+                showError('Пожалуйста, дайте согласие на обработку персональных данных');
+                consentCheckbox?.focus();
+                return;
+            }
+            
+            const name = document.getElementById('calcName')?.value.trim() || '';
+            const phone = document.getElementById('calcPhone')?.value.trim() || '';
+            const question = document.getElementById('calcQuestion')?.value.trim() || '';
+            
+            if (!name) {
+                showError('Пожалуйста, введите ваше имя');
+                document.getElementById('calcName')?.focus();
+                return;
+            }
+            
+            if (!phone || !validatePhone(phone)) {
+                showError('Пожалуйста, введите корректный номер телефона');
+                document.getElementById('calcPhone')?.focus();
+                return;
+            }
+            
+            const message = `❓ ВОПРОС ПО КАЛЬКУЛЯТОРУ АРЕНДЫ КОВРОВ ❓\n\n` +
+                           `👤 Имя: ${name}\n` +
+                           `📞 Телефон: ${formatPhone(phone)}\n` +
+                           `${question ? `❓ Вопрос:\n${question}\n\n` : ''}` +
+                           `🌐 Страница: Калькулятор\n` +
+                           `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            const success = openTelegramWithMessage(message);
+            
+            if (success) {
+                form.reset();
+                showToast('Вопрос отправлен! Мы ответим в течение 15 минут', 'success');
+            }
+        });
+        
+        // Автоформатирование телефона
+        const phoneInput = document.getElementById('calcPhone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                e.target.value = formatPhone(e.target.value);
+            });
+        }
     }
     
     // ============ ИНИЦИАЛИЗАЦИЯ ============
@@ -389,7 +605,8 @@
         validateEmail,
         formatPhone,
         createShortTelegramMessage,
-        openTelegramWithMessage
+        openTelegramWithMessage,
+        showToast
     };
     
 })();
