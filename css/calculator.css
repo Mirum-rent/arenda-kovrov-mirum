@@ -1,80 +1,55 @@
 /* ============================================
    CALCULATOR.CSS - Стили для калькулятора МИРУМ
-   Версия: 9.0 (С переключателем НДС)
+   Версия: 6.0 (Улучшенный UX)
    ============================================ */
 
 /* ============ ОСНОВНЫЕ СТИЛИ ============ */
 .calculator-section {
-    padding: clamp(60px, 10vw, 100px) 0;
-    background: linear-gradient(135deg, #f0f4f8 0%, #e6ebf0 100%);
-    min-height: 100vh;
+    padding: 40px 0;
+    background-color: var(--background-color);
 }
 
 .calculator-container {
-    max-width: 800px;
-    margin: 0 auto;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
 }
 
-/* ============ ТАБЫ ============ */
 .tabs {
     display: flex;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ddd;
-    max-width: 800px;
-    margin: 0 auto 30px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    overflow: hidden;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0;
 }
 
 .tab-btn {
-    flex: 1;
-    padding: 15px;
+    padding: 12px 25px;
+    background: none;
     border: none;
-    background: #f1f1f1;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-    color: #333;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
     font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: -2px;
 }
 
 .tab-btn.active {
-    background: #3498db;
-    color: white;
+    color: var(--accent-color);
+    border-bottom: 3px solid var(--accent-color);
 }
 
-.tab-btn:hover {
-    background: #e0e0e0;
-    color: #333;
-}
-
-.tab-btn.active:hover {
-    background: #2980b9;
-    color: white;
+.tab-btn:hover:not(.active) {
+    color: var(--primary-color);
 }
 
 /* ============ ФОРМА ============ */
 .calculator-form {
-    padding: clamp(30px, 5vw, 40px);
-    background: white;
-    position: relative;
-}
-
-.calculator-form:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #16a085, #1abc9c, #16a085);
+    margin-bottom: 30px;
 }
 
 .calculator-form .form-group {
@@ -82,67 +57,208 @@
 }
 
 .calculator-form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: var(--primary-color);
-    font-size: 1.1rem;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
 .calculator-form select,
 .calculator-form input {
     width: 100%;
-    padding: 15px 20px;
-    border: 2px solid #e1e5e9;
-    border-radius: 12px;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
     font-size: 16px;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     background: white;
-    color: #333;
-    font-weight: 500;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.calculator-form select:hover,
-.calculator-form input:hover {
-    border-color: #b8c2cc;
+    font-family: inherit;
 }
 
 .calculator-form select:focus,
 .calculator-form input:focus {
     outline: none;
-    border-color: #16a085;
-    box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.15);
-    transform: translateY(-1px);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
 }
 
-.calculator-form select:disabled {
-    background-color: #f8f9fa;
+.calculator-form select:disabled,
+.calculator-form input:disabled {
+    background: #f8f9fa;
     cursor: not-allowed;
     opacity: 0.7;
-    border-color: #e9ecef;
 }
 
-.calculator-form select {
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 20px center;
-    background-size: 16px;
-    padding-right: 50px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+/* ============ МЕСЯЦЫ ДЛЯ ТЕНДЕРА ============ */
+.month-inputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
 }
 
-/* ============ ПЕРЕКЛЮЧАТЕЛЬ НДС ============ */
+.month-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.month-box label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.month-box input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ============ СПИСОК ПОЗИЦИЙ ============ */
+.positions-list {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-top: 30px;
+    border: 2px solid #f0f0f0;
+}
+
+.positions-list h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+/* ============ РЕЗУЛЬТАТЫ ============ */
+.calculator-results {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+}
+
+.calculator-results h3 {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.result-label {
+    font-weight: 500;
+}
+
+.result-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* ============ ИНФОРМАЦИОННЫЕ БЛОКИ ============ */
+.documents-info {
+    background: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--accent-color);
+}
+
+.documents-info h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.documents-info ul {
+    list-style: none;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.documents-info li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-light);
+}
+
+.documents-info li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.calculator-info {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+    box-shadow: var(--box-shadow);
+}
+
+.calculator-info h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.calculator-info ul {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.calculator-info li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.calculator-info li::before {
+    content: '✓';
+    position: absolute;
+    left: 10px;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* ============ СТИЛИ ПЕРЕКЛЮЧАТЕЛЯ НДС ============ */
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
-    height: 34px;
+    height: 30px;
 }
 
 .switch input {
@@ -160,14 +276,14 @@
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 34px;
+    border-radius: 30px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 22px;
+    width: 22px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -176,63 +292,28 @@
 }
 
 input:checked + .slider {
-    background-color: #16a085;
+    background-color: #27ae60;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #27ae60;
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px);
+    transform: translateX(30px);
 }
 
-/* ============ СПИСОК ПОЗИЦИЙ ============ */
-.positions-list {
-    padding: 20px;
-    background: #f8f9fa;
-    border-top: 1px solid #e9ecef;
-    border-bottom: 1px solid #e9ecef;
-    display: none;
-}
-
-.position-item {
-    background: white;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border-left: 4px solid #3498db;
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-    animation: slideIn 0.3s ease-out;
-}
-
-.position-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.remove-position-btn {
-    background: #e74c3c;
-    color: white;
+/* ============ КНОПКИ ============ */
+.calculator-actions .btn {
+    transition: all 0.3s ease;
+    font-weight: 600;
     border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s ease;
-    min-width: 30px;
-    min-height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
 }
 
-.remove-position-btn:hover {
-    background: #c0392b;
-}
-
-/* ============ ИТОГОВЫЙ РЕЗУЛЬТАТ ============ */
-#totalResult {
-    padding: 20px;
-    animation: fadeIn 0.5s ease-out;
+.calculator-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .results-actions {
@@ -242,232 +323,321 @@ input:checked + .slider:before {
     margin-top: 20px;
 }
 
-.results-actions .btn {
-    padding: 16px 20px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 12px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+/* ============ ИНФОРМАЦИЯ О НДС ============ */
+.vat-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ============ КНОПКА ДОБАВЛЕНИЯ ПОЗИЦИИ ============ */
+#addPositionBtn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
     border: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-.results-actions .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* ============ ТЕНДЕРНЫЙ КАЛЬКУЛЯТОР ============ */
-.month-inputs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.month-box {
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 6px;
-    text-align: center;
-}
-
-.month-box label {
-    font-size: 12px;
-    margin-bottom: 5px;
-    display: block;
-    color: #333;
-    font-weight: 600;
-}
-
-.month-box input {
-    padding: 8px;
-    font-size: 14px;
-    margin-bottom: 5px;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.month-box input:focus {
-    outline: none;
-    border-color: #16a085;
-    box-shadow: 0 0 0 2px rgba(22, 160, 133, 0.2);
-}
-
-/* ============ ИНФОРМАЦИЯ О ДОКУМЕНТАХ ============ */
-.documents-info {
-    background: #f8f9fa;
-    padding: 25px;
-    border-radius: 12px;
-    margin-top: 30px;
-    border-left: 4px solid #3498db;
-}
-
-.documents-info h4 {
-    color: #2c3e50;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
-.documents-info ul {
-    list-style: none;
-    padding: 0;
+#addPositionBtn:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #2471a3 100%);
+    transform: translateY(-2px);
 }
 
-.documents-info li {
-    padding: 8px 0;
-    padding-left: 30px;
-    position: relative;
-    color: #555;
+/* ============ СТИЛИ ДЛЯ ИНФОРМАЦИОННОГО БЛОКА ============ */
+.info-box {
+    background: #e8f4fd;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    margin: 15px 0;
+    font-size: 0.9rem;
 }
 
-.documents-info li:before {
-    content: '•';
-    position: absolute;
-    left: 15px;
-    color: #3498db;
-    font-weight: bold;
+.info-box strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
 }
 
-/* ============ МОБИЛЬНАЯ АДАПТАЦИЯ ============ */
+/* ============ АДАПТИВНОСТЬ ============ */
 @media (max-width: 768px) {
+    /* Основные стили */
     .calculator-section {
-        padding: 40px 15px;
-        background: #f0f4f8;
+        padding: 20px 0 !important;
     }
     
     .calculator-container {
-        border-radius: 16px;
-        margin: 0;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        padding: 20px;
     }
     
+    /* Табы */
     .tabs {
-        border-radius: 8px;
+        flex-wrap: wrap;
     }
     
     .tab-btn {
-        padding: 12px;
-        font-size: 14px;
-    }
-    
-    .calculator-form {
-        padding: 25px;
-    }
-    
-    .calculator-form select,
-    .calculator-form input {
-        padding: 14px 18px;
-        font-size: 16px !important;
-        border-radius: 10px;
-    }
-    
-    .calculator-form select {
-        background-position: right 18px center;
-        padding-right: 45px;
-    }
-    
-    .month-inputs {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .positions-list {
-        padding: 15px;
-    }
-    
-    .position-item {
-        padding: 12px;
+        flex: 1;
+        min-width: 120px;
+        padding: 10px 15px;
         font-size: 0.9rem;
+        text-align: center;
     }
     
-    .results-actions {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
+    /* Переключатель НДС */
     .switch {
         width: 50px;
-        height: 28px;
+        height: 26px;
     }
     
     .slider:before {
-        height: 20px;
-        width: 20px;
+        height: 18px;
+        width: 18px;
         left: 4px;
         bottom: 4px;
     }
     
     input:checked + .slider:before {
-        transform: translateX(22px);
+        transform: translateX(24px);
     }
     
-    .documents-info {
+    /* Месяцы для тендера */
+    .month-inputs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Кнопки */
+    .calculator-actions .btn {
+        font-size: 14px;
+        padding: 12px 15px;
+        min-height: 44px;
+    }
+    
+    .results-actions {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    
+    /* Позиции */
+    .position-item {
+        padding: 12px !important;
+        font-size: 14px !important;
+    }
+    
+    .position-item .remove-position-btn {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        font-size: 12px !important;
+    }
+    
+    /* Форма */
+    .calculator-form select,
+    .calculator-form input {
+        font-size: 16px !important;
+        min-height: 44px;
+    }
+    
+    /* Информационные блоки */
+    .documents-info,
+    .calculator-info {
         padding: 20px;
-        margin-top: 20px;
     }
 }
 
 @media (max-width: 480px) {
+    /* Переключатель НДС */
+    .switch {
+        width: 45px;
+        height: 24px;
+    }
+    
+    .slider:before {
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(21px);
+    }
+    
+    /* Месяцы для тендера */
     .month-inputs {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
     
-    .tab-btn {
+    /* Кнопки */
+    .calculator-actions .btn {
         font-size: 13px;
-        padding: 10px;
+        padding: 10px 12px;
     }
     
-    .results-actions .btn {
-        padding: 14px;
-        font-size: 0.9rem;
+    /* Информация о НДС */
+    .vat-info {
+        font-size: 12px !important;
+        padding: 8px !important;
+    }
+    
+    /* Табы */
+    .tab-btn {
+        min-width: 100px;
+        padding: 8px 10px;
+        font-size: 0.85rem;
     }
 }
 
-/* ============ ТАБЛЕТКИ ============ */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .calculator-container {
-        max-width: 90%;
-    }
-    
-    .results-actions {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .month-inputs {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* ============ АНИМАЦИИ ============ */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ============ СТИЛИ ДЛЯ УВЕДОМЛЕНИЙ ============ */
+.calculator-toast {
+    animation: slideIn 0.3s ease;
 }
 
 @keyframes slideIn {
     from {
+        transform: translateX(100%);
         opacity: 0;
-        transform: translateX(-20px);
     }
     to {
-        opacity: 1;
         transform: translateX(0);
+        opacity: 1;
     }
 }
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ============ ОТСТУПЫ ДЛЯ МОБИЛЬНЫХ ============ */
+@media (max-width: 768px) {
+    .calculator-form,
+    .positions-list,
+    #totalResult {
+        margin-bottom: 20px;
+    }
+    
+    /* Увеличиваем зоны клика для мобильных */
+    .calculator-form select,
+    .calculator-form input,
+    .calculator-actions .btn,
+    .position-item,
+    .remove-position-btn {
+        min-height: 44px;
+    }
+    
+    /* Улучшаем читаемость текста */
+    h1, h2, h3, h4 {
+        line-height: 1.3;
+    }
+    
+    p, li {
+        line-height: 1.5;
+    }
+}
+
+/* ============ ПЕЧАТЬ ============ */
+@media print {
+    .calculator-actions,
+    .calculator-form,
+    .mobile-menu-toggle,
+    .telegram-float,
+    .scroll-to-top,
+    .tab-btn:not(.active) {
+        display: none !important;
+    }
+    
+    .position-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #000 !important;
+        margin-bottom: 10px !important;
+    }
+    
+    #totalResult {
+        background: white !important;
+        color: black !important;
+        border: 2px solid #000 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    #totalResult * {
+        color: black !important;
+    }
+    
+    .calculator-container,
+    .documents-info,
+    .calculator-info {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .tab-btn.active {
+        border: 1px solid #000 !important;
+        color: #000 !important;
+        background: white !important;
+    }
+}
+
+/* ============ СПЕЦИАЛЬНЫЕ СТИЛИ ДЛЯ iOS ============ */
+@supports (-webkit-touch-callout: none) {
+    .calculator-form select,
+    .calculator-form input {
+        font-size: 16px !important; /* Предотвращает зум */
+    }
+    
+    .calculator-actions .btn {
+        padding: 15px;
+    }
+}
+
+/* ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ БЛОКА С НДС ============ */
+.vat-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.vat-toggle-text {
+    flex: 1;
+}
+
+.vat-toggle-text strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.vat-toggle-text small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.vat-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ============ КОНЕЦ CALCULATOR.CSS ============ */
