@@ -401,8 +401,7 @@ function sendToTelegram() {
                     alert('✅ Текст расчета скопирован!\n\n' +
                           '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
                           '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
-                          '3. Отправьте сообщение\n\n' +
-                          'Мы свяжемся с вами в течение 15 минут!');
+                          '3. Отправьте сообщение\n\n' );
                 }, 1000);
             } else {
                 // Если не удалось скопировать, открываем с текстом в URL
@@ -411,7 +410,7 @@ function sendToTelegram() {
                 window.open(fallbackUrl, '_blank');
                 
                 setTimeout(() => {
-                    alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\nМы свяжемся с вами в течение 15 минут.');
+                    alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\n');
                 }, 1000);
             }
         } catch (err) {
@@ -423,7 +422,7 @@ function sendToTelegram() {
             window.open(fallbackUrl, '_blank');
             
             setTimeout(() => {
-                alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\nМы свяжемся с вами в течение 15 минут.');
+                alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\n');
             }, 1000);
         } finally {
             document.body.removeChild(tempTextArea);
@@ -585,8 +584,7 @@ function sendToEmail() {
         body += `Email: matservice@yandex.ru\n`;
         body += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
         
-        body += `Мы свяжемся с вами в течение 15 минут!`;
-        
+                
         const encodedSubject = encodeURIComponent(subject);
         const encodedBody = encodeURIComponent(body);
         const emailUrl = `mailto:matservice@yandex.ru?subject=${encodedSubject}&body=${encodedBody}`;
@@ -1264,8 +1262,7 @@ function sendTenderToTelegram() {
                     alert('✅ Текст тендерного расчета скопирован!\n\n' +
                           '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
                           '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
-                          '3. Отправьте сообщение\n\n' +
-                          'Мы свяжемся с вами в течение 15 минут!');
+                          '3. Отправьте сообщение\n\n');
                 }, 1000);
             } else {
                 const encodedMessage = encodeURIComponent(message);
