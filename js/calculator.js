@@ -1,6 +1,6 @@
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 11.0 (Улучшенный UX + кнопка добавления позиции)
+// Версия: 11.1 (Упрощенные сообщения в ТГ и Email)
 // ============================================
 
 // ============ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ============
@@ -491,89 +491,44 @@ function sendToTelegram() {
 function createTelegramMessage() {
     let totalCostWithoutVAT = 0;
     let totalCostWithVAT = 0;
-    let allSameRegion = true;
-    const firstRegion = positions[0].region;
     
     positions.forEach(position => {
         totalCostWithoutVAT += position.costPer4Weeks;
-        if (position.region !== firstRegion) {
-            allSameRegion = false;
-        }
     });
     
     totalCostWithVAT = totalCostWithoutVAT * (1 + VAT_RATE);
     
-    let message = `🧮 РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n`;
-    
-    if (allSameRegion) {
-        message += `📍 Регион: ${firstRegion}\n`;
-    } else {
-        message += `📍 Регионы: Разные\n`;
-    }
-    
-    message += `📅 Дата расчета: ${new Date().toLocaleDateString('ru-RU')}\n`;
-    message += `⏰ Время: ${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}\n\n`;
-    
-    message += `💰 ${includeVAT ? 'РАСЧЕТ С НДС 22%' : 'РАСЧЕТ БЕЗ НДС'}\n`;
-    
-    if (includeVAT) {
-        message += `• Общая стоимость за 4 недели (с НДС): ${formatPrice(totalCostWithVAT)}\n`;
-        message += `• Без НДС: ${formatPrice(totalCostWithoutVAT)}\n`;
-        message += `• НДС 22%: ${formatPrice(totalCostWithVAT - totalCostWithoutVAT)}\n\n`;
-    } else {
-        message += `• Общая стоимость за 4 недели (без НДС): ${formatPrice(totalCostWithoutVAT)}\n`;
-        message += `• С НДС 22%: ${formatPrice(totalCostWithVAT)}\n`;
-        message += `• Наценка за НДС: ${formatPrice(totalCostWithVAT - totalCostWithoutVAT)}\n\n`;
-    }
-    
-    message += `📦 СОСТАВ ЗАКАЗА:\n`;
-    message += `================\n`;
+    let message = `РАСЧЕТ АРЕНДЫ КОВРОВ\n\n`;
     
     positions.forEach((position, index) => {
         const priceWithVAT = includeVAT ? position.pricePerReplacement * (1 + VAT_RATE) : position.pricePerReplacement;
         const costWithVAT = includeVAT ? position.costPer4Weeks * (1 + VAT_RATE) : position.costPer4Weeks;
         
-        message += `\n${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
-        if (!allSameRegion) {
-            message += `   📍 ${position.region}\n`;
-        }
-        message += `   🔄 ${position.frequency}\n`;
-        message += `   💰 Цена за замену: ${formatPrice(priceWithVAT)} ${includeVAT ? '(с НДС)' : ''}\n`;
-        message += `   📊 Стоимость за 4 недели: ${formatPrice(costWithVAT)} ${includeVAT ? '(с НДС)' : ''}\n`;
+        message += `${index + 1}. Размер ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
+        message += `   📍 ${position.region}\n`;
+        message += `   Замены ${position.frequency}\n`;
+        message += `   Цена за 1 чистый ковер: ${formatPrice(priceWithVAT)} ${includeVAT ? '(с НДС)' : ''}\n`;
+        message += `   📊 Стоимость за 4 недели: ${formatPrice(costWithVAT)} ${includeVAT ? '(с НДС)' : ''}\n\n`;
     });
     
-    message += `\n✅ ВКЛЮЧЕНО В СТОИМОСТЬ:\n`;
-    message += `======================\n`;
-    message += `• Аренда ковра\n`;
-    message += `• Профессиональная чистка/сушка\n`;
-    message += `• Доставка\n`;
-    message += `• Замена при износе\n`;
-    message += `• Все необходимые документы\n\n`;
+    if (includeVAT) {
+        message += `Общая стоимость за 4 недели (с НДС): ${formatPrice(totalCostWithVAT)}\n\n`;
+    } else {
+        message += `Общая стоимость за 4 недели (без НДС): ${formatPrice(totalCostWithoutVAT)}\n`;
+        message += `*С НДС 22%: ${formatPrice(totalCostWithVAT)}\n\n`;
+    }
     
-    message += `📄 ДЛЯ ЗАКЛЮЧЕНИЯ ДОГОВОРА ПОТРЕБУЮТСЯ:\n`;
-    message += `===================================\n`;
+    message += `ДЛЯ ЗАКЛЮЧЕНИЯ ДОГОВОРА ПРИШЛИТЕ:\n`;
     message += `• Реквизиты компании\n`;
     message += `• Подписант (ФИО, основание полномочий)\n`;
     message += `• Точный адрес объекта и название, вывеска\n`;
     message += `• Режим работы объекта\n`;
     message += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
     
-    message += `📝 УСЛОВИЯ:\n`;
-    message += `==========\n`;
-    message += `• Счёт выставляется только за фактические замены\n`;
-    message += `• ${includeVAT ? 'РАБОТАЕМ С НДС 22%' : 'РАБОТАЕМ БЕЗ НДС'}\n`;
-    message += `• Возможна корректировка условий по НДС\n`;
-    message += `• Гибкий график замен\n`;
-    message += `• Бесплатный пробный период (1 неделя)\n\n`;
-    
-    message += `📞 КОНТАКТЫ:\n`;
-    message += `===========\n`;
     message += `Telegram: @+79770005127\n`;
     message += `WhatsApp: +7 (977) 000-51-27\n`;
     message += `Email: matservice@yandex.ru\n`;
-    message += `Сайт: arenda-kovrov-mirum.ru\n\n`;
-    
-    message += `⚡ Мы свяжемся с вами в течение 15 минут!\n`;
+    message += `Сайт: arenda-kovrov-mirum.ru\n`;
     
     return message;
 }
@@ -588,96 +543,45 @@ function sendToEmail() {
     try {
         let totalCostWithoutVAT = 0;
         let totalCostWithVAT = 0;
-        let allSameRegion = true;
-        const firstRegion = positions[0].region;
         
         positions.forEach(position => {
             totalCostWithoutVAT += position.costPer4Weeks;
-            if (position.region !== firstRegion) {
-                allSameRegion = false;
-            }
         });
         
         totalCostWithVAT = totalCostWithoutVAT * (1 + VAT_RATE);
         
         let subject = 'Расчет аренды ковров МИРУМ';
-        if (allSameRegion) {
-            subject += ` - ${firstRegion}`;
-        }
-        if (includeVAT) {
-            subject += ' (с НДС 22%)';
-        } else {
-            subject += ' (без НДС)';
-        }
         subject += ` - ${new Date().toLocaleDateString('ru-RU')}`;
         
-        let body = 'РАСЧЕТ АРЕНДЫ КОВРОВ МИРУМ\n\n';
-        
-        if (allSameRegion) {
-            body += `Регион: ${firstRegion}\n`;
-        } else {
-            body += `Регионы: Разные\n`;
-        }
-        
-        body += `Дата расчета: ${new Date().toLocaleDateString('ru-RU')}\n`;
-        body += `Время: ${new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}\n\n`;
-        
-        body += `${includeVAT ? 'РАСЧЕТ С НДС 22%' : 'РАСЧЕТ БЕЗ НДС'}\n\n`;
-        
-        if (includeVAT) {
-            body += `Общая стоимость за 4 недели (с НДС): ${totalCostWithVAT.toLocaleString('ru-RU')} руб.\n`;
-            body += `Без НДС: ${totalCostWithoutVAT.toLocaleString('ru-RU')} руб.\n`;
-            body += `НДС 22%: ${(totalCostWithVAT - totalCostWithoutVAT).toLocaleString('ru-RU')} руб.\n\n`;
-        } else {
-            body += `Общая стоимость за 4 недели (без НДС): ${totalCostWithoutVAT.toLocaleString('ru-RU')} руб.\n`;
-            body += `С НДС 22%: ${totalCostWithVAT.toLocaleString('ru-RU')} руб.\n`;
-            body += `Наценка за НДС: ${(totalCostWithVAT - totalCostWithoutVAT).toLocaleString('ru-RU')} руб.\n\n`;
-        }
-        
-        body += `СОСТАВ ЗАКАЗА:\n`;
-        body += `==============\n\n`;
+        let body = 'РАСЧЕТ АРЕНДЫ КОВРОВ\n\n';
         
         positions.forEach((position, index) => {
             const priceWithVAT = includeVAT ? position.pricePerReplacement * (1 + VAT_RATE) : position.pricePerReplacement;
             const costWithVAT = includeVAT ? position.costPer4Weeks * (1 + VAT_RATE) : position.costPer4Weeks;
             
-            body += `${index + 1}. ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
-            if (!allSameRegion) {
-                body += `   Регион: ${position.region}\n`;
-            }
-            body += `   Периодичность замены: ${position.frequency}\n`;
-            body += `   Цена за одну замену: ${priceWithVAT.toLocaleString('ru-RU')} руб. ${includeVAT ? '(с НДС)' : ''}\n`;
-            body += `   Стоимость за 4 недели: ${costWithVAT.toLocaleString('ru-RU')} руб. ${includeVAT ? '(с НДС)' : ''}\n\n`;
+            body += `${index + 1}. Размер ${position.size.replace('*', '×')} × ${position.quantity} шт.\n`;
+            body += `   📍 ${position.region}\n`;
+            body += `   Замены ${position.frequency}\n`;
+            body += `   Цена за 1 чистый ковер: ${priceWithVAT.toLocaleString('ru-RU')} руб. ${includeVAT ? '(с НДС)' : ''}\n`;
+            body += `   📊 Стоимость за 4 недели: ${costWithVAT.toLocaleString('ru-RU')} руб. ${includeVAT ? '(с НДС)' : ''}\n\n`;
         });
         
-        body += `ВКЛЮЧЕНО В СТОИМОСТЬ:\n`;
-        body += `===================\n`;
-        body += `• Аренда ковра\n`;
-        body += `• Профессиональная чистка/сушка\n`;
-        body += `• Доставка\n`;
-        body += `• Замена при износе\n`;
-        body += `• Все необходимые документы\n\n`;
+        if (includeVAT) {
+            body += `Общая стоимость за 4 недели (с НДС): ${totalCostWithVAT.toLocaleString('ru-RU')} руб.\n\n`;
+        } else {
+            body += `Общая стоимость за 4 недели (без НДС): ${totalCostWithoutVAT.toLocaleString('ru-RU')} руб.\n`;
+            body += `*С НДС 22%: ${totalCostWithVAT.toLocaleString('ru-RU')} руб.\n\n`;
+        }
         
-        body += `ДЛЯ ЗАКЛЮЧЕНИЯ ДОГОВОРА ПОТРЕБУЮТСЯ:\n`;
-        body += `===================================\n`;
+        body += `ДЛЯ ЗАКЛЮЧЕНИЯ ДОГОВОРА ПРИШЛИТЕ:\n`;
         body += `• Реквизиты компании\n`;
         body += `• Подписант (ФИО, основание полномочий)\n`;
         body += `• Точный адрес объекта и название, вывеска\n`;
         body += `• Режим работы объекта\n`;
         body += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
         
-        body += `УСЛОВИЯ:\n`;
-        body += `========\n`;
-        body += `• Счёт выставляется только за фактические замены\n`;
-        body += `• ${includeVAT ? 'РАБОТАЕМ С НДС 22%' : 'РАБОТАЕМ БЕЗ НДС'}\n`;
-        body += `• Возможна корректировка условий по НДС\n`;
-        body += `• Гибкий график замен\n`;
-        body += `• Бесплатный пробный период (1 неделя)\n\n`;
-        
-        body += `КОНТАКТЫ:\n`;
-        body += `=========\n`;
-        body += `Телефон: +7 (977) 000-51-27\n`;
         body += `Telegram: @+79770005127\n`;
+        body += `WhatsApp: +7 (977) 000-51-27\n`;
         body += `Email: matservice@yandex.ru\n`;
         body += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
         
@@ -1151,9 +1055,9 @@ function getFallbackFrequencies() {
         "2 раза в неделю",
         "3 раза в неделю",
         "4 раза в неделю",
-        "5 раз в неделю",
-        "6 раз в неделю",
-        "7 раз в неделю"
+        "5 раза в неделю",
+        "6 раза в неделю",
+        "7 раза в неделю"
     ];
 }
 
