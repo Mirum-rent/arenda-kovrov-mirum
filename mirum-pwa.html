@@ -1283,22 +1283,26 @@
             return priceData[region][size][frequency];
         }
         
-        function calculateCostPer4Weeks(pricePerReplacement, quantity, frequency) {
-            // Определяем коэффициент замен в месяц
-            const frequencyMultiplier = {
-                "1 раз в две недели": 2,    // 2 замены в месяц
-                "1 раз в неделю": 4,        // 4 замены в месяц
-                "2 раза в неделю": 8,       // 8 замен в месяц
-                "3 раза в неделю": 12,      // 12 замен в месяц
-                "4 раза в неделю": 16,      // 16 замен в месяц
-                "5 раз в неделю": 20,       // 20 замен в месяц
-                "6 раз в неделю": 24,       // 24 замены в месяц
-                "7 раз в неделю": 28        // 28 замен в месяц
-            };
-            
-            const multiplier = frequencyMultiplier[frequency] || 4;
-            return pricePerReplacement * multiplier * quantity;
-        }
+		function calculateCostPer4Weeks(pricePerReplacement, quantity, frequency) {
+			// ВАЖНО: pricePerReplacement - это цена ОДНОЙ замены ОДНОГО ковра
+			
+			// Количество замен в 4 недели (28 дней)
+			const replacementsPer4Weeks = {
+				"1 раз в две недели": 2,    // 2 замены в 4 недели
+				"1 раз в неделю": 4,        // 4 замены в 4 недели
+				"2 раза в неделю": 8,       // 8 замен в 4 недели (2 × 4)
+				"3 раза в неделю": 12,      // 12 замен в 4 недели (3 × 4)
+				"4 раза в неделю": 16,      // 16 замен в 4 недели (4 × 4)
+				"5 раз в неделю": 20,       // 20 замен в 4 недели (5 × 4)
+				"6 раз в неделю": 24,       // 24 замены в 4 недели (6 × 4)
+				"7 раз в неделю": 28        // 28 замен в 4 недели (7 × 4)
+			};
+    
+    const replacementsCount = replacementsPer4Weeks[frequency] || 4;
+    
+    // Формула: (цена_за_одну_замену) × (количество_замен_в_4_недели) × (количество_ковров)
+    return pricePerReplacement * replacementsCount * quantity;
+}
         
         // ============================================
         // ИНИЦИАЛИЗАЦИЯ ИНТЕРФЕЙСА
