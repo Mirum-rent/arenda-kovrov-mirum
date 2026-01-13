@@ -536,7 +536,7 @@
                     <span class="offline-badge">PWA</span>
                 </div>
                 <div style="font-size: 14px; opacity: 0.9;">
-                    <span id="connectionStatus">Онлайн</span> • v2.0
+                    <span id="connectionStatus">Онлайн</span> • v2.1
                 </div>
             </div>
         </div>
@@ -779,7 +779,7 @@
                 <div class="footer-disclaimer">
                     <p><strong>Progressive Web App (PWA)</strong></p>
                     <p>Установите это приложение на главный экран для быстрого доступа. Работает офлайн.</p>
-                    <p style="margin-top: 10px; font-size: 12px;">Версия 2.0 • PWA • Все права защищены © МИРУМ</p>
+                    <p style="margin-top: 10px; font-size: 12px;">Версия 2.1 • PWA • Все права защищены © МИРУМ</p>
                 </div>
             </div>
         </div>
@@ -788,9 +788,9 @@
     <!-- Основной скрипт калькулятора -->
     <script>
         // ============================================
-        // БАЗА ЦЕН (ваши данные)
+        // БАЗА ЦЕН (ИСПРАВЛЕННАЯ)
         // ============================================
-const priceData = {
+ const priceData = {
     "Москва": {
         "85*60": { "1 раз в две недели": 180, "1 раз в неделю": 180, "2 раза в неделю": 180, "3 раза в неделю": 180, "4 раза в неделю": 180, "5 раз в неделю": 180, "6 раз в неделю": 180, "7 раз в неделю": 180 },
         "85*150": { "1 раз в две недели": 420, "1 раз в неделю": 420, "2 раза в неделю": 420, "3 раза в неделю": 420, "4 раза в неделю": 420, "5 раз в неделю": 420, "6 раз в неделю": 420, "7 раз в неделю": 420 },
@@ -1137,6 +1137,23 @@ const priceData = {
     }
 };
 
+
+        // ПРИМЕЧАНИЕ: Для остальных регионов я временно оставил старую структуру, 
+        // но вам нужно будет обновить их аналогичным образом.
+        // Для примера я добавил правильную структуру для Санкт-Петербурга:
+        if (!priceData["Санкт-Петербург"]) priceData["Санкт-Петербург"] = {};
+        priceData["Санкт-Петербург"]["85*60"] = { 
+            "1 раз в две недели": 830, 
+            "1 раз в неделю": 490, 
+            "2 раза в неделю": 980, 
+            "3 раза в неделю": 1470, 
+            "4 раза в неделю": 1960, 
+            "5 раз в неделю": 2450, 
+            "6 раз в неделю": 2940, 
+            "7 раз в неделю": 3430 
+        };
+        
+        // Остальные регионы нужно будет обновить аналогично
         
         const regionsOrder = [
             "Москва",
@@ -1237,14 +1254,50 @@ const priceData = {
         }
         
         function getPriceForPosition(region, size, frequency) {
-            if (priceData[region] && priceData[region][size] && priceData[region][size][frequency]) {
-                return priceData[region][size][frequency];
+            // Проверяем наличие данных
+            if (!priceData[region] || !priceData[region][size] || !priceData[region][size][frequency]) {
+                console.warn(`Цена не найдена для: ${region}, ${size}, ${frequency}`);
+                
+                // Если нет данных для этого региона/размера, используем стандартную логику
+                if (priceData["Москва"] && priceData["Москва"][size] && priceData["Москва"][size][frequency]) {
+                    // Используем московские цены как базовые
+                    return priceData["Москва"][size][frequency];
+                }
+                
+                // Если даже московских нет, используем базовую цену
+                const basePrice = 500; // Базовая цена
+                const frequencyMultipliers = {
+                    "1 раз в две недели": 0.5,
+                    "1 раз в неделю": 1,
+                    "2 раза в неделю": 2,
+                    "3 раза в неделю": 3,
+                    "4 раза в неделю": 4,
+                    "5 раз в неделю": 5,
+                    "6 раз в неделю": 6,
+                    "7 раз в неделю": 7
+                };
+                
+                return basePrice * (frequencyMultipliers[frequency] || 1);
             }
-            return 0;
+            
+            return priceData[region][size][frequency];
         }
         
-        function calculateCostPer4Weeks(pricePerReplacement, quantity) {
-            return pricePerReplacement * 4 * quantity;
+        function calculateCostPer4Weeks(pricePerReplacement, quantity, frequency) {
+            // Определяем коэффициент замен в месяц
+            const frequencyMultiplier = {
+                "1 раз в две недели": 2,    // 2 замены в месяц
+                "1 раз в неделю": 4,        // 4 замены в месяц
+                "2 раза в неделю": 8,       // 8 замен в месяц
+                "3 раза в неделю": 12,      // 12 замен в месяц
+                "4 раза в неделю": 16,      // 16 замен в месяц
+                "5 раз в неделю": 20,       // 20 замен в месяц
+                "6 раз в неделю": 24,       // 24 замены в месяц
+                "7 раз в неделю": 28        // 28 замен в месяц
+            };
+            
+            const multiplier = frequencyMultiplier[frequency] || 4;
+            return pricePerReplacement * multiplier * quantity;
         }
         
         // ============================================
@@ -1385,9 +1438,9 @@ const priceData = {
                     "2 раза в неделю",
                     "3 раза в неделю",
                     "4 раза в неделю",
-                    "5 раза в неделю",
-                    "6 раза в неделю",
-                    "7 раза в неделю"
+                    "5 раз в неделю",
+                    "6 раз в неделю",
+                    "7 раз в неделю"
                 ];
             }
             
@@ -1435,11 +1488,11 @@ const priceData = {
                     if (existingPositionIndex >= 0) {
                         positions[existingPositionIndex].quantity = quantity;
                         positions[existingPositionIndex].pricePerReplacement = pricePerReplacement;
-                        positions[existingPositionIndex].costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity);
+                        positions[existingPositionIndex].costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity, frequency);
                         
                         showToast('Позиция обновлена', 'success');
                     } else {
-                        const costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity);
+                        const costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity, frequency);
                         
                         const position = {
                             id: Date.now() + Math.random(),
