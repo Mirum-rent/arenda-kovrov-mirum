@@ -1,6 +1,6 @@
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 11.1 (Упрощенные сообщения в ТГ и Email)
+// Версия: 12.0 (Исправленный расчет по периодичности)
 // ============================================
 
 // ============ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ============
@@ -127,12 +127,12 @@ function setupAutoPositionAddition() {
                 // Обновляем существующую позицию
                 positions[existingPositionIndex].quantity = quantity;
                 positions[existingPositionIndex].pricePerReplacement = pricePerReplacement;
-                positions[existingPositionIndex].costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity);
+                positions[existingPositionIndex].costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity, frequency);
                 
                 showToast('Позиция обновлена', 'success');
             } else {
                 // Добавляем новую позицию
-                const costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity);
+                const costPer4Weeks = calculateCostPer4Weeks(pricePerReplacement, quantity, frequency);
                 
                 const position = {
                     id: Date.now() + Math.random(),
@@ -606,8 +606,21 @@ function sendToEmail() {
 }
 
 // ============ ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ============
-function calculateCostPer4Weeks(pricePerReplacement, quantity) {
-    return pricePerReplacement * 4 * quantity;
+function calculateCostPer4Weeks(pricePerReplacement, quantity, frequency) {
+    // Определяем коэффициент замен в 4 недели (месяц)
+    const frequencyMultiplier = {
+        "1 раз в две недели": 2,    // 2 замены в 4 недели
+        "1 раз в неделю": 4,        // 4 замены в 4 недели
+        "2 раза в неделю": 8,       // 8 замен в 4 недели
+        "3 раза в неделю": 12,      // 12 замен в 4 недели
+        "4 раза в неделю": 16,      // 16 замен в 4 недели
+        "5 раз в неделю": 20,       // 20 замен в 4 недели
+        "6 раз в неделю": 24,       // 24 замены в 4 недели
+        "7 раз в неделю": 28        // 28 замен в 4 недели
+    };
+    
+    const multiplier = frequencyMultiplier[frequency] || 4;
+    return pricePerReplacement * multiplier * quantity;
 }
 
 function getPriceForPosition(region, size, frequency) {
@@ -622,7 +635,7 @@ function getPriceForPosition(region, size, frequency) {
     }
     
     if (pricePerReplacement === 0) {
-        pricePerReplacement = getFallbackPrice(size);
+        pricePerReplacement = getFallbackPrice(size, frequency);
     }
     
     return pricePerReplacement;
@@ -700,7 +713,7 @@ function showToast(message, type = 'info') {
     }
 }
 
-// ============ ОСТАЛЬНЫЕ ФУНКЦИИ (ОСТАВЛЕНЫ БЕЗ ИЗМЕНЕНИЙ) ============
+// ============ ОСТАЛЬНЫЕ ФУНКЦИИ (С ИСПРАВЛЕНИЯМИ) ============
 function removePosition(index) {
     if (index >= 0 && index < positions.length) {
         positions.splice(index, 1);
@@ -1053,14 +1066,15 @@ function getFallbackFrequencies() {
         "2 раза в неделю",
         "3 раза в неделю",
         "4 раза в неделю",
-        "5 раза в неделю",
-        "6 раза в неделю",
-        "7 раза в неделю"
+        "5 раз в неделю",
+        "6 раз в неделю",
+        "7 раз в неделю"
     ];
 }
 
-function getFallbackPrice(size) {
-    const fallbackPrices = {
+function getFallbackPrice(size, frequency) {
+    // Базовые цены за одну замену для "1 раз в неделю"
+    const basePrices = {
         "85*60": 500,
         "85*150": 800,
         "115*200": 1200,
@@ -1079,7 +1093,21 @@ function getFallbackPrice(size) {
         "150*600": 4000
     };
     
-    return fallbackPrices[size] || 1000;
+    const basePrice = basePrices[size] || 1000;
+    
+    // Корректируем цену в зависимости от частоты
+    const frequencyMultipliers = {
+        "1 раз в две недели": 0.5,    // Половина от цены за неделю
+        "1 раз в неделю": 1,          // Базовая цена
+        "2 раза в неделю": 1,         // Такая же цена за замену
+        "3 раза в неделю": 1,         // Такая же цена за замену
+        "4 раза в неделю": 1,         // Такая же цена за замену
+        "5 раз в неделю": 1,          // Такая же цена за замену
+        "6 раз в неделю": 1,          // Такая же цена за замену
+        "7 раз в неделю": 1           // Такая же цена за замену
+    };
+    
+    return basePrice * (frequencyMultipliers[frequency] || 1);
 }
 
 function initMonths() {
