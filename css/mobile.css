@@ -1,6 +1,6 @@
 /* ============================================
    MOBILE.CSS - Мобильная оптимизация для МИРУМ
-   Версия: 6.0 (18.01.2026) - ПОЛНАЯ АДАПТИВНОСТЬ
+   Версия: 7.0 (18.01.2026) - ПОЛНАЯ АДАПТИВНОСТЬ И КРОСС-БРАУЗЕРНОСТЬ
    ============================================ */
 
 /* ============ ОБЩИЕ МОБИЛЬНЫЕ СТИЛИ ============ */
@@ -246,6 +246,11 @@
         .mobile-nav.active {
             padding-top: calc(80px + env(safe-area-inset-top));
         }
+        
+        /* Фикс для Safari */
+        input, select, textarea {
+            font-size: 16px !important;
+        }
     }
 }
 
@@ -458,6 +463,26 @@
         font-size: 1rem !important;
         line-height: 1.6 !important;
     }
+    
+    /* Калькулятор на планшетах */
+    .calculator-form select,
+    .calculator-form input {
+        font-size: 16px !important;
+        min-height: 44px;
+    }
+    
+    .month-inputs {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    
+    .tabs {
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        min-width: 150px;
+    }
 }
 
 /* ============ БОЛЬШИЕ ДЕСКТОПЫ (1025px и выше) ============ */
@@ -481,6 +506,28 @@
     .benefit-card:hover {
         transform: translateY(-5px);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    /* Калькулятор на больших экранах */
+    .calculator-container {
+        max-width: 1200px;
+        margin: 0 auto 30px;
+    }
+    
+    .calculator-form {
+        max-width: 800px;
+        margin: 0 auto 30px;
+    }
+}
+
+/* ============ ОЧЕНЬ БОЛЬШИЕ ЭКРАНЫ (1441px и выше) ============ */
+@media (min-width: 1441px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .calculator-container {
+        max-width: 1300px;
     }
 }
 
@@ -547,6 +594,34 @@
     .benefit-description {
         color: #b0b0b0;
     }
+    
+    /* Калькулятор в темной теме */
+    .calculator-container {
+        background-color: #2d2d2d;
+        color: #e0e0e0;
+    }
+    
+    .calculator-form label {
+        color: #ffffff;
+    }
+    
+    .calculator-form select,
+    .calculator-form input {
+        background-color: #3d3d3d;
+        border-color: #555;
+        color: #e0e0e0;
+    }
+    
+    .documents-info,
+    .calculator-info {
+        background-color: #2d2d2d;
+        color: #e0e0e0;
+    }
+    
+    .documents-info li,
+    .calculator-info li {
+        color: #b0b0b0;
+    }
 }
 
 /* ============ ВЫСОКОКОНТРАСТНЫЕ РЕЖИМЫ ============ */
@@ -606,13 +681,13 @@
 
 @media (max-width: 767px) {
     html {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
 @media (max-width: 480px) {
     html {
-        font-size: 13px;
+        font-size: 14px;
     }
 }
 
@@ -636,6 +711,11 @@
     
     .mobile-nav {
         transition: none !important;
+    }
+    
+    .calculator-toast,
+    .form-toast {
+        animation: none !important;
     }
 }
 
@@ -732,6 +812,19 @@
     .footer-bottom {
         border-top: 1px solid #000;
     }
+    
+    /* Калькулятор для печати */
+    .calculator-actions,
+    .calculator-form {
+        display: none !important;
+    }
+    
+    .positions-list,
+    #totalResult {
+        display: block !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
 }
 
 /* ============ СПЕЦИАЛЬНЫЕ ФИКСЫ ДЛЯ КОНКРЕТНЫХ БРАУЗЕРОВ ============ */
@@ -757,6 +850,7 @@
     select:focus,
     textarea {
         font-size: 16px !important;
+        line-height: 1.2 !important;
     }
     
     /* Фикс для fixed элементов в iOS */
@@ -766,8 +860,14 @@
     }
     
     /* Улучшение скролла */
-    .mobile-nav {
+    .mobile-nav,
+    .regions-grid {
         -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Фикс для 100vh в iOS */
+    .mobile-nav {
+        height: -webkit-fill-available;
     }
 }
 
@@ -783,6 +883,11 @@
         scrollbar-width: thin;
         scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.1);
     }
+    
+    /* Фикс для высоты */
+    .mobile-nav {
+        height: 100vh;
+    }
 }
 
 /* Edge фиксы */
@@ -795,6 +900,10 @@
     
     .btn {
         padding: 10px 20px;
+    }
+    
+    .mobile-nav {
+        height: 100vh;
     }
 }
 
@@ -813,6 +922,34 @@
     .regions-grid::-webkit-scrollbar-thumb {
         background: var(--accent-color);
         border-radius: 3px;
+    }
+}
+
+/* ============ ПОДДЕРЖКА ДЛЯ СТАРЫХ БРАУЗЕРОВ ============ */
+@supports not (display: grid) {
+    /* Fallback для старых браузеров без поддержки Grid */
+    .advantages-grid,
+    .materials-grid,
+    .benefits-grid,
+    .faq-grid,
+    .results-actions {
+        display: flex !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .advantage-card,
+    .material-card,
+    .benefit-card,
+    .faq-item-main,
+    .results-actions .btn {
+        flex: 1 1 300px !important;
+        margin: 10px !important;
+    }
+    
+    .calculator-form .form-group {
+        float: left;
+        width: 100%;
+        clear: both;
     }
 }
 

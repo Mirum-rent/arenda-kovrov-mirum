@@ -1,6 +1,6 @@
 /* ============================================
    CALCULATOR.CSS - Стили для калькулятора МИРУМ
-   Версия: 6.1 (Исправленная логика НДС)
+   Версия: 7.0 (Оптимизация для всех устройств)
    ============================================ */
 
 /* ============ ОСНОВНЫЕ СТИЛИ ============ */
@@ -15,6 +15,8 @@
     padding: 30px;
     box-shadow: var(--box-shadow);
     margin-bottom: 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .tabs {
@@ -23,6 +25,7 @@
     margin-bottom: 30px;
     border-bottom: 2px solid #eee;
     padding-bottom: 0;
+    flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -36,6 +39,9 @@
     cursor: pointer;
     transition: all 0.3s;
     margin-bottom: -2px;
+    flex: 1;
+    min-width: 160px;
+    text-align: center;
 }
 
 .tab-btn.active {
@@ -68,13 +74,15 @@
 .calculator-form select,
 .calculator-form input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 15px;
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
     font-size: 16px;
     transition: var(--transition);
     background: white;
     font-family: inherit;
+    box-sizing: border-box;
+    min-height: 48px;
 }
 
 .calculator-form select:focus,
@@ -104,6 +112,7 @@
     padding: 15px;
     border-radius: var(--border-radius);
     text-align: center;
+    box-sizing: border-box;
 }
 
 .month-box label {
@@ -116,11 +125,13 @@
 
 .month-box input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
+    box-sizing: border-box;
+    min-height: 44px;
 }
 
 /* ============ СПИСОК ПОЗИЦИЙ ============ */
@@ -130,6 +141,7 @@
     padding: 25px;
     margin-top: 30px;
     border: 2px solid #f0f0f0;
+    box-sizing: border-box;
 }
 
 .positions-list h3 {
@@ -140,6 +152,17 @@
     color: var(--primary-color);
 }
 
+.position-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
 /* ============ РЕЗУЛЬТАТЫ ============ */
 .calculator-results {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -147,6 +170,7 @@
     padding: 25px;
     border-radius: var(--border-radius);
     margin-top: 30px;
+    box-sizing: border-box;
 }
 
 .calculator-results h3 {
@@ -165,6 +189,7 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 .result-label {
@@ -184,6 +209,7 @@
     margin-top: 30px;
     box-shadow: var(--box-shadow);
     border-left: 4px solid var(--accent-color);
+    box-sizing: border-box;
 }
 
 .documents-info h4 {
@@ -221,6 +247,7 @@
     border-radius: var(--border-radius);
     margin-top: 30px;
     box-shadow: var(--box-shadow);
+    box-sizing: border-box;
 }
 
 .calculator-info h3 {
@@ -309,6 +336,8 @@ input:checked + .slider:before {
     font-weight: 600;
     border: none;
     width: 100%;
+    box-sizing: border-box;
+    min-height: 48px;
 }
 
 .calculator-actions .btn:hover {
@@ -331,6 +360,7 @@ input:checked + .slider:before {
     margin-top: 10px;
     font-size: 0.9rem;
     line-height: 1.4;
+    box-sizing: border-box;
 }
 
 /* ============ КНОПКА ДОБАВЛЕНИЯ ПОЗИЦИИ ============ */
@@ -354,6 +384,7 @@ input:checked + .slider:before {
     border-radius: 0 8px 8px 0;
     margin: 15px 0;
     font-size: 0.9rem;
+    box-sizing: border-box;
 }
 
 .info-box strong {
@@ -363,8 +394,22 @@ input:checked + .slider:before {
 }
 
 /* ============ АДАПТИВНОСТЬ ============ */
+@media (max-width: 1024px) {
+    .calculator-container {
+        padding: 25px;
+    }
+    
+    .month-inputs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .tab-btn {
+        min-width: 140px;
+        padding: 12px 20px;
+    }
+}
+
 @media (max-width: 768px) {
-    /* Основные стили */
     .calculator-section {
         padding: 20px 0 !important;
     }
@@ -375,11 +420,14 @@ input:checked + .slider:before {
     
     /* Табы */
     .tabs {
+        flex-direction: row;
         flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
     }
     
     .tab-btn {
-        flex: 1;
+        flex: 1 1 calc(50% - 8px);
         min-width: 120px;
         padding: 10px 15px;
         font-size: 0.9rem;
@@ -405,7 +453,8 @@ input:checked + .slider:before {
     
     /* Месяцы для тендера */
     .month-inputs {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
     
     /* Кнопки */
@@ -439,6 +488,7 @@ input:checked + .slider:before {
     .calculator-form input {
         font-size: 16px !important;
         min-height: 44px;
+        padding: 12px !important;
     }
     
     /* Информационные блоки */
@@ -468,7 +518,7 @@ input:checked + .slider:before {
     
     /* Месяцы для тендера */
     .month-inputs {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 10px;
     }
     
@@ -489,6 +539,14 @@ input:checked + .slider:before {
         min-width: 100px;
         padding: 8px 10px;
         font-size: 0.85rem;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        width: 100%;
     }
 }
 
@@ -602,6 +660,10 @@ input:checked + .slider:before {
     .calculator-actions .btn {
         padding: 15px;
     }
+    
+    .month-box input {
+        font-size: 16px !important;
+    }
 }
 
 /* ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ БЛОКА С НДС ============ */
@@ -613,6 +675,7 @@ input:checked + .slider:before {
     background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     margin: 15px 0;
+    box-sizing: border-box;
 }
 
 .vat-toggle-text {
@@ -638,6 +701,49 @@ input:checked + .slider:before {
     margin-top: 10px;
     font-size: 0.9rem;
     line-height: 1.5;
+    box-sizing: border-box;
+}
+
+/* ============ СТИЛИ ДЛЯ АДАПТИВНОЙ СЕТКИ ============ */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+        padding: 0 15px;
+    }
+    
+    .calculator-form .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .positions-list {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+@media (min-width: 1441px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .calculator-container {
+        max-width: 1200px;
+        margin: 0 auto 30px;
+    }
+}
+
+/* ============ УЛУЧШЕНИЕ ДОСТУПНОСТИ ============ */
+.calculator-form select:focus-visible,
+.calculator-form input:focus-visible,
+.btn:focus-visible,
+.tab-btn:focus-visible {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
 }
 
 /* ============ КОНЕЦ CALCULATOR.CSS ============ */
