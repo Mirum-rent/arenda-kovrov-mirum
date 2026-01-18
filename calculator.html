@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 10.1 (Исправлена логика НДС - расчет всегда без НДС по умолчанию)
+     Версия: 11.0 (Исправлена логика НДС + правильное подключение регионов)
      ============================================ -->
 <html lang="ru">
 <head>
@@ -89,17 +89,6 @@
         .position-item.highlight {
             animation: highlight 1s ease;
         }
-        
-        /* Стили для блока НДС */
-        .vat-notice {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            border-left: 3px solid #3498db;
-        }
     </style>
 </head>
 <body>
@@ -120,7 +109,7 @@
                 <div style="background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;">
                     <p style="margin: 0; font-size: 0.95rem; color: #ffffff;">
                         <i class="fas fa-info-circle" style="color: #1abc9c;"></i> 
-                        Все цены указаны без НДС. Можем работать как с НДС, так и без НДС. 
+                        Все цены указаны без НДС. Можем работать как с НДС 22%, так и без НДС. 
                         Для расчета с НДС включите переключатель в результатах.
                     </p>
                 </div>
