@@ -1,6 +1,6 @@
 // ============================================
 // CALCULATOR.JS - Основной скрипт калькулятора МИРУМ
-// Версия: 13.1 (Информация о НДС только при включенном переключателе)
+// Версия: 14.0 (Убраны задержки, исправлен сброс региона)
 // ============================================
 
 // ============ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ============
@@ -11,7 +11,7 @@ let shouldAutoAdd = true; // Флаг для автоматического до
 
 // ============ ОСНОВНАЯ ФУНКЦИЯ ИНИЦИАЛИЗАЦИИ ============
 function initCalculator() {
-    console.log('🧮 Инициализация калькулятора с улучшенным UX...');
+    console.log('🧮 Инициализация калькулятора...');
     
     const calculatorSection = document.querySelector('.calculator-section');
     if (!calculatorSection) {
@@ -19,17 +19,15 @@ function initCalculator() {
         return;
     }
     
-    // Ждем загрузки DOM
-    setTimeout(() => {
-        initInterface();
-        setupEventHandlers();
-        setupAddPositionButton();
-        
-        // Загружаем регионы после загрузки данных о ценах
-        checkPriceData();
-        
-        console.log('✅ Калькулятор успешно инициализирован');
-    }, 100);
+    // Инициализируем сразу
+    initInterface();
+    setupEventHandlers();
+    setupAddPositionButton();
+    
+    // Загружаем регионы
+    checkPriceData();
+    
+    console.log('✅ Калькулятор успешно инициализирован');
 }
 
 // ============ НАСТРОЙКА КНОПКИ ДОБАВЛЕНИЯ ПОЗИЦИИ ============
@@ -85,7 +83,7 @@ function resetFormForNewPosition() {
     const quantityInput = document.getElementById('quantity');
     
     // Сбрасываем только select-ы, но сохраняем значения по умолчанию
-    if (regionSelect) regionSelect.value = '';
+    // НЕ сбрасываем регион, чтобы пользователь не терял выбор
     if (sizeSelect) {
         sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
         sizeSelect.disabled = true;
@@ -400,7 +398,7 @@ function sendToTelegram() {
                           '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
                           '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
                           '3. Отправьте сообщение\n\n' +
-                          'Мы свяжемся с вами в течение 15 минут!');
+                          'Свяжемся с вами, как можно скорее!');
                 }, 1000);
             } else {
                 // Если не удалось скопировать, открываем с текстом в URL
@@ -410,7 +408,7 @@ function sendToTelegram() {
                 
                 setTimeout(() => {
                     alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\n' +
-                          'Мы свяжемся с вами в течение 15 минут!');
+                          'Свяжемся с вами, как можно скорее!');
                 }, 1000);
             }
         } catch (err) {
@@ -423,7 +421,7 @@ function sendToTelegram() {
             
             setTimeout(() => {
                 alert('Telegram открыт! Нажмите "Отправить" чтобы отправить расчет.\n\n' +
-                      'Мы свяжемся с вами в течение 15 минут!');
+                      'Свяжемся с вами, как можно скорее!');
             }, 1000);
         } finally {
             document.body.removeChild(tempTextArea);
@@ -530,6 +528,11 @@ function createTelegramMessage() {
     message += `• Режим работы объекта\n`;
     message += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
     
+    message += `⚡ Договор заключаем в день обращения\n`;
+    message += `💳 Возможна оплата по карте и по безналичному расчету\n`;
+    message += `📄 Можем работать по ЭДО, если вам так удобно\n`;
+    message += `👤 Можем оформить договор с физлицом\n\n`;
+    
     message += `Telegram: @+79770005127\n`;
     message += `WhatsApp: +7 (977) 000-51-27\n`;
     message += `Email: matservice@yandex.ru\n`;
@@ -590,12 +593,17 @@ function sendToEmail() {
         body += `• Режим работы объекта\n`;
         body += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
         
+        body += `⚡ Договор заключаем в день обращения\n`;
+        body += `💳 Возможна оплата по карте и по безналичному расчету\n`;
+        body += `📄 Можем работать по ЭДО, если вам так удобно\n`;
+        body += `👤 Можем оформить договор с физлицом\n\n`;
+        
         body += `Telegram: @+79770005127\n`;
         body += `WhatsApp: +7 (977) 000-51-27\n`;
         body += `Email: matservice@yandex.ru\n`;
         body += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
         
-        body += `Мы свяжемся с вами в течение 15 минут!`;
+        body += `Свяжемся с вами, как можно скорее!`;
         
         const encodedSubject = encodeURIComponent(subject);
         const encodedBody = encodeURIComponent(body);
@@ -608,7 +616,7 @@ function sendToEmail() {
                   '1. В открывшемся почтовом клиенте проверьте письмо\n' +
                   '2. При необходимости отредактируйте текст\n' +
                   '3. Отправьте письмо\n\n' +
-                  'Мы получим ваше письмо и свяжемся с вами!');
+                  'Свяжемся с вами, как можно скорее!');
         }, 1000);
         
     } catch (error) {
@@ -626,9 +634,9 @@ function calculateCostPer4Weeks(pricePerReplacement, quantity, frequency) {
         "2 раза в неделю": 8,
         "3 раза в неделю": 12,
         "4 раза в неделю": 16,
-        "5 раз в неделю": 20,
-        "6 раз в неделю": 24,
-        "7 раз в неделю": 28
+        "5 раза в неделю": 20,
+        "6 раза в неделю": 24,
+        "7 раза в неделю": 28
     };
     
     const replacementsCount = replacementsPer4Weeks[frequency] || 4;
@@ -802,27 +810,19 @@ function initInterface() {
 function checkPriceData() {
     console.log('🔍 Проверка данных о ценах...');
     
-    const checkInterval = setInterval(() => {
-        // Проверяем наличие данных о ценах
-        if (typeof window.priceData !== 'undefined' && Object.keys(window.priceData).length > 0) {
-            clearInterval(checkInterval);
-            console.log('✅ База цен загружена из window.priceData');
-            populateRegions();
-        } 
-        // Проверяем наличие PriceUtils
-        else if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getRegions === 'function') {
-            clearInterval(checkInterval);
-            console.log('✅ PriceUtils загружен');
-            populateRegions();
-        }
-    }, 100);
-    
-    // Таймаут на случай, если данные не загрузятся
-    setTimeout(() => {
-        clearInterval(checkInterval);
+    // Проверяем сразу без задержек
+    if (typeof window.priceData !== 'undefined' && Object.keys(window.priceData).length > 0) {
+        console.log('✅ База цен загружена из window.priceData');
+        populateRegions();
+    } 
+    // Проверяем наличие PriceUtils
+    else if (typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getRegions === 'function') {
+        console.log('✅ PriceUtils загружен');
+        populateRegions();
+    } else {
         console.log('⚠️ База цен не загружена! Используем резервные данные...');
-        populateRegionsFallback();
-    }, 5000); // Увеличил таймаут до 5 секунд
+        setTimeout(populateRegionsFallback, 100);
+    }
 }
 
 // ============ ЗАПОЛНЕНИЕ РЕГИОНОВ ============
@@ -883,6 +883,13 @@ function populateRegions() {
             option.value = region;
             option.textContent = region;
             tenderRegionSelect.appendChild(option);
+        });
+    }
+    
+    // Настраиваем обработчики для тендерного региона
+    if (tenderRegionSelect) {
+        tenderRegionSelect.addEventListener('change', function() {
+            handleTenderRegionChange(this.value);
         });
     }
 }
@@ -959,6 +966,13 @@ function populateRegionsFallback() {
             option.value = region;
             option.textContent = region;
             tenderRegionSelect.appendChild(option);
+        });
+    }
+    
+    // Настраиваем обработчики для тендерного региона
+    if (tenderRegionSelect) {
+        tenderRegionSelect.addEventListener('change', function() {
+            handleTenderRegionChange(this.value);
         });
     }
 }
@@ -1127,6 +1141,63 @@ function handleSizeChange(region, size) {
     });
     
     frequencySelect.disabled = false;
+}
+
+// ============ ОБРАБОТКА ИЗМЕНЕНИЯ РЕГИОНА ДЛЯ ТЕНДЕРА ============
+function handleTenderRegionChange(region) {
+    console.log(`📍 Выбран регион для тендера: ${region}`);
+    
+    const sizeSelect = document.getElementById('tender-size');
+    
+    if (!sizeSelect) return;
+    
+    if (!region) {
+        sizeSelect.innerHTML = '<option value="">Сначала выберите регион</option>';
+        sizeSelect.disabled = true;
+        return;
+    }
+    
+    let sizes = [];
+    
+    // Пытаемся получить размеры из window.priceData
+    if (window.priceData && window.priceData[region]) {
+        try {
+            sizes = Object.keys(window.priceData[region]);
+            console.log(`✅ Найдено ${sizes.length} размеров для тендера в регионе ${region}`);
+        } catch (error) {
+            console.error('Ошибка при получении размеров для тендера из window.priceData:', error);
+        }
+    }
+    
+    // Если не нашли размеры, проверяем PriceUtils
+    if (sizes.length === 0 && typeof window.PriceUtils !== 'undefined' && typeof window.PriceUtils.getSizesForRegion === 'function') {
+        try {
+            sizes = window.PriceUtils.getSizesForRegion(region);
+            console.log(`✅ Найдено ${sizes.length} размеров через PriceUtils для тендера в регионе ${region}`);
+        } catch (error) {
+            console.error('Ошибка в PriceUtils.getSizesForRegion() для тендера:', error);
+        }
+    }
+    
+    // Если все еще нет размеров, используем резервные данные
+    if (sizes.length === 0) {
+        console.log(`⚠️ Размеры для тендера в регионе ${region} не найдены, используем резервные данные`);
+        sizes = getFallbackSizes();
+    }
+    
+    // Сортируем размеры
+    sizes.sort();
+    
+    // Заполняем селект размеров для тендера
+    sizeSelect.innerHTML = '<option value="">Выберите размер ковра</option>';
+    sizes.forEach(size => {
+        const option = document.createElement('option');
+        option.value = size;
+        option.textContent = size;
+        sizeSelect.appendChild(option);
+    });
+    
+    sizeSelect.disabled = false;
 }
 
 // ============ РЕЗЕРВНЫЕ РАЗМЕРЫ ============
@@ -1322,9 +1393,10 @@ function sendTenderToTelegram() {
         message += `• Режим работы объекта\n`;
         message += `• Контактное лицо (ФИО, телефон) для связи с курьером\n\n`;
         
-        message += `📝 УСЛОВИЯ:\n`;
-        message += `Счёт выставляется только за фактические замены.\n`;
-        message += `Можем работать как с НДС 22%, так и без НДС.\n\n`;
+        message += `⚡ Договор заключаем в день обращения\n`;
+        message += `💳 Возможна оплата по карте и по безналичному расчету\n`;
+        message += `📄 Можем работать по ЭДО, если вам так удобно\n`;
+        message += `👤 Можем оформить договор с физлицом\n\n`;
         
         message += `📞 СВЯЗЬ:\n`;
         message += `Telegram: t.me/+79770005127\n`;
@@ -1350,7 +1422,7 @@ function sendTenderToTelegram() {
                           '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
                           '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
                           '3. Отправьте сообщение\n\n' +
-                          'Мы свяжемся с вами в течение 15 минут!');
+                          'Свяжемся с вами, как можно скорее!');
                 }, 1000);
             } else {
                 const encodedMessage = encodeURIComponent(message);
@@ -1359,7 +1431,7 @@ function sendTenderToTelegram() {
                 
                 setTimeout(() => {
                     alert('Telegram открыт! Нажмите "Отправить" чтобы отправить тендерный расчет.\n\n' +
-                          'Мы свяжемся с вами в течение 15 минут!');
+                          'Свяжемся с вами, как можно скорее!');
                 }, 1000);
             }
         } catch (err) {
@@ -1371,7 +1443,7 @@ function sendTenderToTelegram() {
             
             setTimeout(() => {
                 alert('Telegram открыт! Нажмите "Отправить" чтобы отправить тендерный расчет.\n\n' +
-                      'Мы свяжемся с вами в течение 15 минут!');
+                      'Свяжемся с вами, как можно скорее!');
             }, 1000);
         } finally {
             document.body.removeChild(tempTextArea);
@@ -1406,9 +1478,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hasCalculator) {
         console.log('🔍 Калькулятор обнаружен, запускаем...');
         
-        setTimeout(() => {
-            initCalculator();
-        }, 500);
+        // Инициализируем сразу без задержки
+        initCalculator();
     }
 });
 
