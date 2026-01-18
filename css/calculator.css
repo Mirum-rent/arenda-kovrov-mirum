@@ -1,6 +1,6 @@
 /* ============================================
    CALCULATOR.CSS - Стили для калькулятора МИРУМ
-   Версия: 6.0 (Улучшенный UX)
+   Версия: 6.1 (Исправленная логика НДС - расчет всегда без НДС по умолчанию)
    ============================================ */
 
 /* ============ ОСНОВНЫЕ СТИЛИ ============ */
@@ -362,6 +362,76 @@ input:checked + .slider:before {
     margin-bottom: 5px;
 }
 
+/* ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ БЛОКА С НДС ============ */
+.vat-notice {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border-left: 3px solid #3498db;
+}
+
+.vat-notice strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.vat-notice small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    display: block;
+    margin-top: 5px;
+}
+
+/* Стили для состояния без НДС */
+.vat-off {
+    background: rgba(52, 152, 219, 0.1);
+    border-left-color: #3498db;
+}
+
+/* Стили для состояния с НДС */
+.vat-on {
+    background: rgba(46, 204, 113, 0.1);
+    border-left-color: #2ecc71;
+}
+
+.vat-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.vat-toggle-text {
+    flex: 1;
+}
+
+.vat-toggle-text strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.vat-toggle-text small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.vat-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
 /* ============ АДАПТИВНОСТЬ ============ */
 @media (max-width: 768px) {
     /* Основные стили */
@@ -446,6 +516,22 @@ input:checked + .slider:before {
     .calculator-info {
         padding: 20px;
     }
+    
+    /* Блок НДС */
+    .vat-toggle-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .vat-toggle-text {
+        margin-bottom: 10px;
+    }
+    
+    .vat-notice {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -489,6 +575,15 @@ input:checked + .slider:before {
         min-width: 100px;
         padding: 8px 10px;
         font-size: 0.85rem;
+    }
+    
+    /* Блок НДС */
+    .vat-toggle-text strong {
+        font-size: 0.9rem;
+    }
+    
+    .vat-toggle-text small {
+        font-size: 0.8rem;
     }
 }
 
@@ -602,42 +697,6 @@ input:checked + .slider:before {
     .calculator-actions .btn {
         padding: 15px;
     }
-}
-
-/* ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ БЛОКА С НДС ============ */
-.vat-toggle-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    margin: 15px 0;
-}
-
-.vat-toggle-text {
-    flex: 1;
-}
-
-.vat-toggle-text strong {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1rem;
-}
-
-.vat-toggle-text small {
-    font-size: 0.85rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
-.vat-details {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 12px 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-    font-size: 0.9rem;
-    line-height: 1.5;
 }
 
 /* ============ КОНЕЦ CALCULATOR.CSS ============ */
