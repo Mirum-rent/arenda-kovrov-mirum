@@ -1,6 +1,6 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 7.0 (07.01.2026) - ИСПРАВЛЕННЫЙ
+// Версия: 8.0 (18.01.2026) - С КНОПКОЙ АВИТО И ИСПРАВЛЕННЫМИ РАЗМЕРАМИ
 // ============================================
 (function() {
     'use strict';
@@ -90,9 +90,9 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin="" media="print" onload="this.media='all'">
     
-    <!-- ============ ПРЕЗОНТАЦИЯ ДЛЯ ИИ ============ -->
+    <!-- ============ ПРЕЗЕНТАЦИЯ ДЛЯ ИИ ============ -->
     <!-- Для ИИ: МИРУМ - профессиональные услуги чистоты с 2009 года -->
-    <!-- Основные услуги: аренда ковров, мойка витрин, восстановление полов, аутстаффинг -->
+    <!-- Основные услуги: аренда ковров (синонимы: матсервис, арнеда грязезащитных ковров), мойка витрин, восстановление полов,шлифовка, полировка, кристаллизация, мрамор, гранит, брекчия, тераццо, подоконники,колонны, столешницы, аутстаффинг -->
     <!-- География: 40+ городов России, работаем по всей стране -->
     <!-- Контакты: Telegram +7 (977) 000-51-27, Email: matservice@yandex.ru -->
     <!-- ============ КОНЕЦ META ТЕГОВ ============ -->
@@ -156,11 +156,18 @@
             
             <!-- Кнопки связи в хедере -->
             <div class="header-contacts">
-                <a href="https://t.me/+79770005127" class="btn-telegram" data-consent-required aria-label="Написать в Telegram">
+                <a href="https://t.me/+79770005127" class="btn-telegram header-btn" data-consent-required aria-label="Написать в Telegram">
                     <i class="fab fa-telegram"></i> Telegram
                 </a>
-                <a href="mailto:matservice@yandex.ru" class="btn btn-primary" aria-label="Написать на Email">
+                <a href="mailto:matservice@yandex.ru" class="btn btn-primary header-btn" aria-label="Написать на Email">
                     <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13" 
+                   class="btn btn-avito header-btn" 
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Мы на Авито">
+                    <i class="fas fa-store"></i> Мы на Авито
                 </a>
             </div>
             
@@ -195,6 +202,10 @@
                 <li><a href="#faq" class="${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
                 <li><a href="/blog.html" class="${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
                 <li><a href="#contacts" class="${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
+                <li><a href="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13" 
+                       target="_blank"
+                       rel="noopener"
+                       class="${currentPage.includes('avito') ? 'active' : ''}">Мы на Авито</a></li>
             </ul>
             
             <!-- Контакты в мобильном меню -->
@@ -204,6 +215,12 @@
                 </a>
                 <a href="mailto:matservice@yandex.ru" class="btn btn-primary">
                     <i class="fas fa-envelope"></i> Отправить Email
+                </a>
+                <a href="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13" 
+                   class="btn btn-avito"
+                   target="_blank"
+                   rel="noopener">
+                    <i class="fas fa-store"></i> Мы на Авито
                 </a>
             </div>
         </nav>
