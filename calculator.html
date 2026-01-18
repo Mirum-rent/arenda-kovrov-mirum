@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 11.0 (Исправлена логика НДС + правильное подключение регионов)
+     Версия: 12.0 (Обновленные тексты и улучшенная работа)
      ============================================ -->
 <html lang="ru">
 <head>
@@ -32,6 +32,7 @@
     
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/mobile.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -88,6 +89,61 @@
         
         .position-item.highlight {
             animation: highlight 1s ease;
+        }
+        
+        /* Улучшение для мобильных устройств */
+        @media (max-width: 768px) {
+            .calculator-container {
+                padding: 15px;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+                gap: 5px;
+                margin-bottom: 20px;
+            }
+            
+            .tab-btn {
+                flex: 1 1 calc(50% - 10px);
+                min-width: 140px;
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .calculator-form select,
+            .calculator-form input {
+                font-size: 16px !important; /* Предотвращает зум в iOS */
+                min-height: 44px;
+            }
+            
+            .month-inputs {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px;
+            }
+            
+            .month-box {
+                padding: 10px;
+            }
+            
+            .month-box input {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .month-inputs {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>
@@ -365,10 +421,11 @@
                         <div style="margin-top: 30px; padding: 15px; background: rgba(22, 160, 133, 0.1); border-radius: var(--border-radius);">
                             <strong><i class="fas fa-bolt"></i> Быстрая консультация:</strong>
                             <p style="font-size: 0.9rem; margin-top: 5px;">
-                                • Ответим в течение 15 минут в рабочее время<br>
-                                • Подготовим коммерческое предложение за 1 час<br>
-                                • Бесплатный выезд для замера в вашем городе<br>
-                                • Подберем оптимальный вариант (с НДС или без НДС)
+                                • Свяжемся с вами, как можно скорее<br>
+                                • Договор заключаем в день обращения<br>
+                                • Возможна оплата по карте и по безналичному расчету<br>
+                                • Можем работать по ЭДО, если вам так удобно<br>
+                                • Можем оформить договор с физлицом
                             </p>
                         </div>
                     </div>
@@ -413,6 +470,7 @@
     <script src="/js/main.js"></script>
     <script src="/js/prices.js"></script>
     <script src="/js/calculator.js"></script>
+    <script src="/js/forms.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -438,77 +496,7 @@
                 });
             }
             
-            // Обработка формы вопросов
-            const calcForm = document.getElementById('calculatorContactForm');
-            if (calcForm) {
-                calcForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const consentCheckbox = document.getElementById('calcConsent');
-                    if (!consentCheckbox.checked) {
-                        alert('Пожалуйста, дайте согласие на обработку персональных данных');
-                        consentCheckbox.focus();
-                        return;
-                    }
-                    
-                    const name = document.getElementById('calcName').value.trim();
-                    const phone = document.getElementById('calcPhone').value.trim();
-                    const question = document.getElementById('calcQuestion').value.trim();
-                    
-                    if (!name || !phone) {
-                        alert('Пожалуйста, заполните обязательные поля');
-                        return;
-                    }
-                    
-                    const message = `❓ ВОПРОС ПО РАСЧЕТУ КАЛЬКУЛЯТОРА ❓\n\n` +
-                                   `👤 Имя: ${name}\n` +
-                                   `📞 Телефон: ${phone}\n` +
-                                   `${question ? `❓ Вопрос:\n${question}\n\n` : ''}` +
-                                   `🌐 Страница: Калькулятор\n` +
-                                   `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
-                    
-                    // Используем метод копирования текста
-                    const tempTextArea = document.createElement('textarea');
-                    tempTextArea.value = message;
-                    tempTextArea.style.position = 'fixed';
-                    tempTextArea.style.left = '-9999px';
-                    document.body.appendChild(tempTextArea);
-                    tempTextArea.select();
-                    
-                    try {
-                        const successful = document.execCommand('copy');
-                        if (successful) {
-                            const telegramUrl = `https://t.me/+79770005127`;
-                            window.open(telegramUrl, '_blank');
-                            
-                            setTimeout(() => {
-                                alert('✅ Текст вопроса скопирован!\n\n' +
-                                      '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
-                                      '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
-                                      '3. Отправьте сообщение\n\n' +
-                                      'Мы ответим в течение 15 минут!');
-                            }, 1000);
-                        } else {
-                            const encodedMessage = encodeURIComponent(message);
-                            const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
-                            window.open(telegramUrl, '_blank');
-                            
-                            alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
-                        }
-                    } catch (err) {
-                        console.error('Не удалось скопировать текст:', err);
-                        const encodedMessage = encodeURIComponent(message);
-                        const telegramUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
-                        window.open(telegramUrl, '_blank');
-                        
-                        alert('Открывается Telegram с вашим вопросом. Просто нажмите "Отправить"! Мы ответим в течение 15 минут.');
-                    } finally {
-                        document.body.removeChild(tempTextArea);
-                    }
-                    
-                    calcForm.reset();
-                });
-            }
+            // Обработка формы вопросов (уже в forms.js)
             
             // Автоматически скрываем хедер и герой
             if (window.location.pathname.includes('calculator.html')) {
