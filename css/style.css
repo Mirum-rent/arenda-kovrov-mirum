@@ -1,7 +1,6 @@
-
 /* ============================================
    STYLE.CSS - ПОЛНЫЕ ОСНОВНЫЕ СТИЛИ МИРУМ
-   Версия: 6.2 (07.01.2026) - С исправленным хедером
+   Версия: 7.0 (18.01.2026) - С КНОПКОЙ АВИТО И ИСПРАВЛЕННОЙ АДАПТИВНОСТЬЮ
    ============================================ */
 
 /* ============ ПЕРЕМЕННЫЕ ============ */
@@ -36,6 +35,7 @@
     --success-color: #27ae60;
     --warning-color: #f39c12;
     --danger-color: #e74c3c;
+    --avito-color: #ff6163;            /* Цвет Авито */
 }
 
 /* ============ СБРОС И БАЗОВЫЕ СТИЛИ ============ */
@@ -284,7 +284,7 @@ p {
     margin-left: auto;
 }
 
-.header-contacts .btn {
+.header-contacts .header-btn {
     padding: 10px 15px !important;
     font-size: 0.85rem !important;
     min-height: 36px !important;
@@ -295,28 +295,51 @@ p {
     white-space: nowrap !important;
     border-radius: var(--border-radius) !important;
     font-weight: 600 !important;
+    text-decoration: none !important;
+    border: 2px solid transparent !important;
+    transition: var(--transition) !important;
 }
 
+/* Кнопка Telegram */
 .header-contacts .btn-telegram {
     background-color: var(--telegram-color) !important;
     color: white !important;
-    border: 2px solid var(--telegram-color) !important;
+    border-color: var(--telegram-color) !important;
 }
 
 .header-contacts .btn-telegram:hover {
     background-color: #0077b3 !important;
     border-color: #0077b3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
 }
 
+/* Кнопка Email */
 .header-contacts .btn-primary {
     background-color: var(--accent-color) !important;
     color: white !important;
-    border: 2px solid var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
 }
 
 .header-contacts .btn-primary:hover {
     background-color: var(--light-accent) !important;
     border-color: var(--light-accent) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+}
+
+/* Кнопка Авито */
+.header-contacts .btn-avito {
+    background-color: var(--avito-color) !important;
+    color: white !important;
+    border-color: var(--avito-color) !important;
+}
+
+.header-contacts .btn-avito:hover {
+    background-color: #ff4040 !important;
+    border-color: #ff4040 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 97, 99, 0.3);
 }
 
 /* Для мобильных кнопки в хедере скрываем */
@@ -475,6 +498,18 @@ p {
     margin: 0 !important;
 }
 
+/* Кнопка Авито в мобильном меню */
+.mobile-contacts .btn-avito {
+    background-color: var(--avito-color) !important;
+    color: white !important;
+    border: 2px solid var(--avito-color) !important;
+}
+
+.mobile-contacts .btn-avito:hover {
+    background-color: #ff4040 !important;
+    border-color: #ff4040 !important;
+}
+
 /* ============ КНОПКИ ============ */
 .btn {
     display: inline-flex;
@@ -526,6 +561,21 @@ p {
     border-color: #0077b3 !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3);
+}
+
+.btn-avito {
+    background-color: var(--avito-color) !important;
+    color: #ffffff !important;
+    border: 2px solid var(--avito-color) !important;
+    font-weight: 600;
+}
+
+.btn-avito:hover {
+    background-color: #ff4040 !important;
+    color: #ffffff !important;
+    border-color: #ff4040 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 97, 99, 0.3);
 }
 
 .btn-secondary {
@@ -1126,6 +1176,23 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
     gap: clamp(15px, 2.5vw, 20px);
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.regions-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.regions-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.regions-grid::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
 }
 
 .region-group h4 {
@@ -1559,6 +1626,81 @@ h1 i, h2 i, h3 i, h4 i {
 }
 
 /* ============ АДАПТИВНОСТЬ ============ */
+
+/* ============ ДЕСКТОПЫ (большие экраны) ============ */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+    }
+    
+    .header-contacts .header-btn {
+        min-width: 110px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .nav-links {
+        gap: 25px;
+    }
+    
+    .header-contacts .header-btn {
+        min-width: 120px;
+    }
+}
+
+/* ============ ПЛАНШЕТЫ (768px - 1024px) ============ */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .container {
+        max-width: 960px;
+        padding: 0 15px;
+    }
+    
+    .logo img {
+        width: 130px;
+    }
+    
+    .nav-links {
+        gap: 12px;
+        font-size: 0.9rem;
+    }
+    
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    
+    .header-contacts {
+        gap: 8px;
+    }
+    
+    .header-contacts .header-btn {
+        min-width: 90px;
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .dropdown-menu {
+        min-width: 200px;
+    }
+    
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .regions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 300px;
+    }
+}
+
+/* ============ МОБИЛЬНЫЕ УСТРОЙСТВА (до 768px) ============ */
 @media (max-width: 768px) {
     /* Основные адаптивные стили */
     .container {
@@ -1648,6 +1790,7 @@ h1 i, h2 i, h3 i, h4 i {
         font-size: 0.9rem;
         display: block;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     /* Галерея */
@@ -1702,6 +1845,8 @@ h1 i, h2 i, h3 i, h4 i {
     
     .cookie-btn {
         min-width: 100px;
+        min-height: 44px;
+        padding: 12px 15px !important;
     }
     
     /* Особенности услуг */
@@ -1720,9 +1865,31 @@ h1 i, h2 i, h3 i, h4 i {
     /* Регионы в футере */
     .regions-grid {
         grid-template-columns: 1fr;
+        max-height: 250px;
+    }
+    
+    .region-group {
+        margin-bottom: 20px;
+    }
+    
+    /* Футер */
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-section {
+        width: 100%;
+    }
+    
+    .footer-section p,
+    .footer-links a {
+        font-size: 0.95rem !important;
+        line-height: 1.6;
     }
 }
 
+/* ============ МАЛЕНЬКИЕ МОБИЛЬНЫЕ УСТРОЙСТВА (до 480px) ============ */
 @media (max-width: 480px) {
     .container {
         padding: 0 10px;
@@ -1732,21 +1899,109 @@ h1 i, h2 i, h3 i, h4 i {
         width: 100px;
     }
     
+    .mobile-menu a {
+        padding: 12px 10px;
+        font-size: 15px;
+    }
+    
+    .mobile-contacts a {
+        padding: 12px !important;
+        font-size: 14px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
     .cookie-notice p {
         min-width: auto;
+        font-size: 0.85rem;
+        line-height: 1.4;
     }
     
     .footer-container {
         grid-template-columns: 1fr;
+        gap: 25px;
     }
     
     h1 { font-size: 1.8rem !important; }
     h2 { font-size: 1.5rem !important; }
     h3 { font-size: 1.3rem !important; }
-    p, li { font-size: 1rem !important; line-height: 1.6 !important; }
+    p, li { 
+        font-size: 1rem !important; 
+        line-height: 1.6 !important; 
+    }
+    
+    .section-title h2 {
+        font-size: 1.6rem;
+    }
+    
+    .section-title p {
+        font-size: 1rem;
+    }
+    
+    /* Улучшение контраста для темных тем iOS/Android */
+    .advantage-card,
+    .step-card,
+    .material-card {
+        background-color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Увеличение контраста текста в футере */
+    .footer-links a,
+    .footer-section p,
+    .region-group li {
+        color: #f0f0f0 !important;
+    }
+    
+    .footer-bottom p,
+    .footer-bottom a {
+        color: #ffffff !important;
+    }
 }
 
-/* Увеличение зон клика для мобильных */
+/* ============ СПЕЦИАЛЬНЫЕ НАСТРОЙКИ ДЛЯ iOS ============ */
+@supports (-webkit-touch-callout: none) {
+    /* Улучшение для Safari на iOS */
+    .main-header {
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        background-color: rgba(255, 255, 255, 0.95);
+    }
+    
+    .mobile-nav {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Исправление для фиксированных элементов */
+    .telegram-float,
+    .scroll-to-top {
+        position: fixed;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+/* ============ СПЕЦИАЛЬНЫЕ НАСТРОЙКИ ДЛЯ ANDROID ============ */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    /* Улучшение для Chrome на Android */
+    body {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+    
+    /* Улучшение анимаций */
+    .btn,
+    .advantage-card,
+    .material-card {
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* ============ Увеличение зон клика для мобильных ============ */
 @media (max-width: 768px) {
     .btn, 
     .cookie-btn,
@@ -1762,6 +2017,120 @@ h1 i, h2 i, h3 i, h4 i {
     select, 
     textarea {
         font-size: 16px !important; /* Предотвращает зум в iOS */
+        min-height: 44px;
+        padding: 12px 15px !important;
+    }
+    
+    /* Улучшение для навигации */
+    .nav-links a {
+        padding: 12px 0;
+    }
+    
+    /* Улучшение для карточек */
+    .advantage-card,
+    .material-card {
+        padding: 20px !important;
+    }
+    
+    .advantage-header,
+    .material-content {
+        padding: 15px !important;
+    }
+}
+
+/* ============ ТЕМНЫЕ ТЕМЫ НА МОБИЛЬНЫХ ============ */
+@media (prefers-color-scheme: dark) {
+    /* Автоматическое применение темной темы если система поддерживает */
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    .main-header {
+        background-color: #1e1e1e;
+    }
+    
+    .advantage-card,
+    .step-card,
+    .material-card {
+        background-color: #2d2d2d;
+        color: #e0e0e0;
+    }
+    
+    .advantage-title,
+    .step-header,
+    .material-content h3 {
+        color: #ffffff;
+    }
+    
+    .advantage-text,
+    .step-text,
+    .material-content p {
+        color: #b0b0b0;
+    }
+}
+
+/* ============ ВЫСОКОКОНТРАСТНЫЕ РЕЖИМЫ ============ */
+@media (prefers-contrast: high) {
+    /* Улучшение для пользователей с высококонтрастными настройками */
+    .btn-primary {
+        background-color: #005a00 !important;
+        color: #ffffff !important;
+        border: 2px solid #000000 !important;
+    }
+    
+    .btn-telegram {
+        background-color: #005577 !important;
+        color: #ffffff !important;
+        border: 2px solid #000000 !important;
+    }
+    
+    .btn-avito {
+        background-color: #cc0000 !important;
+        color: #ffffff !important;
+        border: 2px solid #000000 !important;
+    }
+    
+    .nav-links a {
+        text-decoration: underline;
+    }
+}
+
+/* ============ УВЕЛИЧЕНИЕ ТЕКСТА (доступность) ============ */
+@media (min-width: 768px) {
+    /* Базовая настройка для увеличения текста */
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+/* ============ ОТКЛЮЧЕНИЕ АНИМАЦИЙ (доступность) ============ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .btn:hover,
+    .advantage-card:hover,
+    .material-card:hover {
+        transform: none !important;
     }
 }
 
@@ -1778,6 +2147,7 @@ h1 i, h2 i, h3 i, h4 i {
     body {
         font-size: 12pt;
         color: #000;
+        background: white;
     }
     
     a {
@@ -1788,6 +2158,24 @@ h1 i, h2 i, h3 i, h4 i {
     .container {
         max-width: 100%;
         padding: 0;
+    }
+    
+    .main-header {
+        background: white !important;
+        box-shadow: none !important;
+        position: static !important;
+    }
+    
+    .footer {
+        background: white !important;
+        color: #000 !important;
+        border-top: 1px solid #000;
+    }
+    
+    .footer-links a,
+    .footer-section p,
+    .region-group li {
+        color: #000 !important;
     }
 }
 
