@@ -1,8 +1,8 @@
 {
   "name": "МИРУМ Калькулятор",
   "short_name": "Калькулятор МИРУМ",
-  "description": "Автономный калькулятор стоимости аренды ковров. PWA приложение.",
-  "start_url": "/mirum-pwa.html",
+  "description": "Автономный калькулятор стоимости аренды ковров. PWA приложение для менеджеров МИРУМ.",
+  "start_url": "/pwa/mirum-pwa.html",
   "display": "standalone",
   "background_color": "#1a3a5f",
   "theme_color": "#1a3a5f",
@@ -41,7 +41,7 @@
       "name": "Калькулятор стоимости",
       "short_name": "Калькулятор",
       "description": "Рассчитать стоимость аренды ковров",
-      "url": "/mirum-pwa.html",
+      "url": "/pwa/mirum-pwa.html",
       "icons": [
         {
           "src": "/img/favicon-192.png",
@@ -53,7 +53,7 @@
       "name": "Тендерный расчет",
       "short_name": "Тендер",
       "description": "Расчет по месяцам для тендера",
-      "url": "/mirum-pwa.html",
+      "url": "/pwa/mirum-pwa.html",
       "icons": [
         {
           "src": "/img/favicon-192.png",
