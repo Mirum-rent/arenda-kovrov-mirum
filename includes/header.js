@@ -1,13 +1,11 @@
-[file name]: header.js
-[file content begin]
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 9.0 (18.01.2026) - С ДИСКЛЕЙМЕРОМ О ТЕЛЕФОНЕ
+// Версия: 9.1 (29.01.2026) - С ИСПРАВЛЕННЫМ БАННЕРОМ
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем хедер...');
+    console.log('🔄 Загружаем хедер v9.1...');
     
     // Получаем текущую страницу для определения canonical
     const currentPage = window.location.pathname;
@@ -77,9 +75,9 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#16a085">
     
-    <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/mobile.css" media="(max-width: 768px)">
+    <!-- ============ СТИЛИ С ВЕРСИОНИРОВАНИЕМ ============ -->
+    <link rel="stylesheet" href="/css/style.css?v=9.1">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.1" media="(max-width: 768px)">
     <link rel="stylesheet" href="/css/calculator.css" media="screen">
     
     <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
@@ -101,7 +99,8 @@
 </head>
 <body>
 
-    <!-- ============ НАЧАЛО ДИСКЛЕЙМЕРА О ТЕЛЕФОНЕ ============ -->
+    <!-- ============ НАЧАЛО БАННЕРА О ТЕЛЕФОНЕ ============ -->
+    <!-- === БАННЕР НАЧАЛО === -->
     <div class="phone-disclaimer" id="phoneDisclaimer">
         <div class="container">
             <div class="disclaimer-content">
@@ -118,7 +117,8 @@
             </div>
         </div>
     </div>
-    <!-- ============ КОНЕЦ ДИСКЛЕЙМЕРА О ТЕЛЕФОНЕ ============ -->
+    <!-- === БАННЕР КОНЕЦ === -->
+    <!-- ============ КОНЕЦ БАННЕРА О ТЕЛЕФОНЕ ============ -->
 
     <!-- ============ НАЧАЛО ХЛЕБНЫХ КРОШЕК ============ -->
     <nav class="breadcrumbs container" aria-label="Хлебные крошки">
@@ -252,52 +252,32 @@
     <main>
 
 <script>
-    // Скрипт для работы с дисклеймером о телефоне
+    // Скрипт для работы с баннером о телефоне
+    // === БАННЕР НАЧАЛО (скрипт) ===
     document.addEventListener('DOMContentLoaded', function() {
         const disclaimer = document.getElementById('phoneDisclaimer');
         const closeBtn = document.getElementById('disclaimerClose');
         
-        // Проверяем, не закрывал ли пользователь уже дисклеймер
-        if (!localStorage.getItem('phoneDisclaimerClosed')) {
-            // Показываем дисклеймер с задержкой для плавного появления
-            setTimeout(() => {
-                if (disclaimer) {
-                    disclaimer.style.display = 'block';
-                    setTimeout(() => {
-                        disclaimer.classList.add('visible');
-                    }, 10);
-                }
-            }, 500);
+        // Всегда показываем баннер
+        if (disclaimer) {
+            disclaimer.style.display = 'block';
+            disclaimer.classList.add('visible');
         }
         
-        // Обработчик закрытия дисклеймера
+        // Обработчик закрытия баннера
         if (closeBtn) {
             closeBtn.addEventListener('click', function() {
                 if (disclaimer) {
                     disclaimer.classList.remove('visible');
                     setTimeout(() => {
                         disclaimer.style.display = 'none';
-                        localStorage.setItem('phoneDisclaimerClosed', 'true');
+                        // НЕ сохраняем в localStorage - показываем всегда при загрузке
                     }, 300);
                 }
             });
         }
-        
-        // Автоматическое закрытие через 7 дней (сбрасываем сохраненное состояние)
-        const disclaimerClosedDate = localStorage.getItem('phoneDisclaimerClosedDate');
-        const now = new Date().getTime();
-        
-        if (disclaimerClosedDate) {
-            // Если прошло больше 7 дней (7 * 24 * 60 * 60 * 1000 = 604800000 мс)
-            if (now - parseInt(disclaimerClosedDate) > 604800000) {
-                localStorage.removeItem('phoneDisclaimerClosed');
-                localStorage.removeItem('phoneDisclaimerClosedDate');
-            }
-        } else {
-            // Сохраняем дату первого закрытия
-            localStorage.setItem('phoneDisclaimerClosedDate', now.toString());
-        }
     });
+    // === БАННЕР КОНЕЦ (скрипт) ===
 </script>
 `;
 
@@ -306,7 +286,6 @@
     document.write(headerHTML);
     document.close();
     
-    console.log('✅ Хедер успешно загружен');
+    console.log('✅ Хедер v9.1 успешно загружен');
     
 })();
-[file content end]
