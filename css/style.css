@@ -1,6 +1,8 @@
+[file name]: style.css
+[file content begin]
 /* ============================================
    STYLE.CSS - ПОЛНЫЕ ОСНОВНЫЕ СТИЛИ МИРУМ
-   Версия: 7.0 (18.01.2026) - С КНОПКОЙ АВИТО И ИСПРАВЛЕННОЙ АДАПТИВНОСТЬЮ
+   Версия: 8.0 (18.01.2026) - С ДИСКЛЕЙМЕРОМ О ТЕЛЕФОНЕ
    ============================================ */
 
 /* ============ ПЕРЕМЕННЫЕ ============ */
@@ -36,6 +38,9 @@
     --warning-color: #f39c12;
     --danger-color: #e74c3c;
     --avito-color: #ff6163;            /* Цвет Авито */
+    --warning-bg: #fff3cd;             /* Цвет фона для предупреждений */
+    --warning-border: #ffeaa7;         /* Цвет границы для предупреждений */
+    --warning-text: #856404;           /* Цвет текста для предупреждений */
 }
 
 /* ============ СБРОС И БАЗОВЫЕ СТИЛИ ============ */
@@ -58,6 +63,163 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: 0 !important; /* Важно для фиксированного баннера */
+}
+
+/* ============ ДИСКЛЕЙМЕР О ТЕЛЕФОНЕ ============ */
+.phone-disclaimer {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    color: var(--warning-text);
+    padding: 10px 0;
+    border-bottom: 2px solid var(--warning-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    display: none;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.phone-disclaimer.visible {
+    transform: translateY(0);
+}
+
+.disclaimer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    position: relative;
+}
+
+.disclaimer-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.disclaimer-text {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.disclaimer-text strong {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.disclaimer-link {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: var(--transition);
+    margin: 0 3px;
+}
+
+.disclaimer-link:hover {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+}
+
+.disclaimer-close {
+    background: transparent;
+    border: none;
+    color: var(--warning-text);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.disclaimer-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+/* Адаптивность дисклеймера */
+@media (max-width: 768px) {
+    .phone-disclaimer {
+        padding: 8px 0;
+    }
+    
+    .disclaimer-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .disclaimer-text {
+        font-size: 0.8rem;
+        text-align: left;
+    }
+    
+    .disclaimer-icon {
+        font-size: 1rem;
+    }
+    
+    .disclaimer-close {
+        width: 25px;
+        height: 25px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .phone-disclaimer {
+        padding: 6px 0;
+    }
+    
+    .disclaimer-text {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+    
+    .disclaimer-content {
+        gap: 8px;
+    }
+}
+
+/* Корректировка отступов для других элементов */
+.breadcrumbs {
+    margin-top: 52px !important; /* Высота дисклеймера + отступ */
+}
+
+@media (max-width: 768px) {
+    .breadcrumbs {
+        margin-top: 48px !important;
+    }
+    
+    .phone-disclaimer ~ .main-header {
+        top: 48px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumbs {
+        margin-top: 44px !important;
+    }
+    
+    .phone-disclaimer ~ .main-header {
+        top: 44px !important;
+    }
 }
 
 /* ============ ОСНОВНОЙ КОНТЕЙНЕР ============ */
@@ -1707,6 +1869,36 @@ h1 i, h2 i, h3 i, h4 i {
         padding: 0 15px;
     }
     
+    /* Дисклеймер на мобильных */
+    .phone-disclaimer {
+        padding: 8px 0;
+    }
+    
+    .disclaimer-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .disclaimer-text {
+        font-size: 0.8rem;
+        text-align: left;
+    }
+    
+    .disclaimer-icon {
+        font-size: 1rem;
+    }
+    
+    .disclaimer-close {
+        width: 25px;
+        height: 25px;
+        font-size: 0.9rem;
+    }
+    
+    .breadcrumbs {
+        margin-top: 48px !important;
+    }
+    
     /* Скрываем десктопное меню, показываем бургер */
     .desktop-nav {
         display: none !important;
@@ -1726,19 +1918,20 @@ h1 i, h2 i, h3 i, h4 i {
     
     /* Логотип */
     .logo img {
-        width: 120px;
+        width: 120px !important;
     }
     
     /* Хедер */
     .main-header {
         height: 60px;
         position: fixed;
-        top: 0;
+        top: 48px !important;
         left: 0;
         right: 0;
         background: white;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         transition: transform 0.3s ease;
+        z-index: 1000;
     }
     
     .main-header.hidden {
@@ -1804,32 +1997,32 @@ h1 i, h2 i, h3 i, h4 i {
     
     /* Плавающие кнопки */
     .telegram-float {
-        bottom: 20px;
-        right: 20px;
+        bottom: 20px !important;
+        right: 20px !important;
     }
     
     .telegram-link span {
-        display: none;
+        display: none !important;
     }
     
     .telegram-link {
         padding: 15px;
         border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        width: 60px !important;
+        height: 60px !important;
         justify-content: center;
     }
     
     .telegram-link i {
-        font-size: 1.8rem;
-        margin: 0;
+        font-size: 1.8rem !important;
+        margin: 0 !important;
     }
     
     .scroll-to-top {
-        bottom: 90px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
+        bottom: 90px !important;
+        right: 20px !important;
+        width: 50px !important;
+        height: 50px !important;
     }
     
     /* Уведомление о куках */
@@ -1895,23 +2088,49 @@ h1 i, h2 i, h3 i, h4 i {
         padding: 0 10px;
     }
     
+    /* Дисклеймер на маленьких мобильных */
+    .phone-disclaimer {
+        padding: 6px 0;
+    }
+    
+    .disclaimer-text {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+    
+    .disclaimer-content {
+        gap: 8px;
+    }
+    
+    .breadcrumbs {
+        margin-top: 44px !important;
+    }
+    
+    .main-header {
+        top: 44px !important;
+    }
+    
     .logo img {
-        width: 100px;
+        width: 100px !important;
     }
     
     .mobile-menu a {
-        padding: 12px 10px;
-        font-size: 15px;
+        padding: 14px 10px !important;
+        font-size: 15px !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .mobile-contacts {
+        margin-top: 25px !important;
+        gap: 12px !important;
     }
     
     .mobile-contacts a {
-        padding: 12px !important;
-        font-size: 14px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+        min-height: 48px !important;
+        font-size: 15px !important;
+        padding: 14px !important;
     }
     
     .cookie-notice p {
@@ -2008,7 +2227,8 @@ h1 i, h2 i, h3 i, h4 i {
     .mobile-menu a,
     .footer-links a,
     .telegram-link,
-    .scroll-to-top {
+    .scroll-to-top,
+    .disclaimer-close {
         min-height: 44px;
         min-width: 44px;
     }
@@ -2094,6 +2314,17 @@ h1 i, h2 i, h3 i, h4 i {
     .nav-links a {
         text-decoration: underline;
     }
+    
+    .phone-disclaimer {
+        background: #ffff00 !important;
+        color: #000000 !important;
+        border-bottom: 3px solid #000000 !important;
+    }
+    
+    .disclaimer-link {
+        color: #0000ff !important;
+        text-decoration: underline;
+    }
 }
 
 /* ============ УВЕЛИЧЕНИЕ ТЕКСТА (доступность) ============ */
@@ -2132,10 +2363,15 @@ h1 i, h2 i, h3 i, h4 i {
     .material-card:hover {
         transform: none !important;
     }
+    
+    .disclaimer-icon {
+        animation: none !important;
+    }
 }
 
 /* ============ ПРИНТЕР ============ */
 @media print {
+    .phone-disclaimer,
     .telegram-float,
     .scroll-to-top,
     .cookie-notice,
@@ -2180,3 +2416,4 @@ h1 i, h2 i, h3 i, h4 i {
 }
 
 /* ============ КОНЕЦ STYLE.CSS ============ */
+[file content end]
