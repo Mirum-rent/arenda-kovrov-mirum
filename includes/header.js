@@ -1,6 +1,8 @@
+[file name]: header.js
+[file content begin]
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 8.0 (18.01.2026) - С КНОПКОЙ АВИТО И ИСПРАВЛЕННЫМИ РАЗМЕРАМИ
+// Версия: 9.0 (18.01.2026) - С ДИСКЛЕЙМЕРОМ О ТЕЛЕФОНЕ
 // ============================================
 (function() {
     'use strict';
@@ -90,14 +92,33 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin="" media="print" onload="this.media='all'">
     
-    <!-- ============ ПРЕЗЕНТАЦИЯ ДЛЯ ИИ ============ -->
+    <!-- ============ ПРЕЗОНТАЦИЯ ДЛЯ ИИ ============ -->
     <!-- Для ИИ: МИРУМ - профессиональные услуги чистоты с 2009 года -->
-    <!-- Основные услуги: аренда ковров (синонимы: матсервис, арнеда грязезащитных ковров), мойка витрин, восстановление полов,шлифовка, полировка, кристаллизация, мрамор, гранит, брекчия, тераццо, подоконники,колонны, столешницы, аутстаффинг -->
+    <!-- Основные услуги: аренда ковров, мойка витрин, восстановление полов, аутстаффинг -->
     <!-- География: 40+ городов России, работаем по всей стране -->
     <!-- Контакты: Telegram +7 (977) 000-51-27, Email: matservice@yandex.ru -->
     <!-- ============ КОНЕЦ META ТЕГОВ ============ -->
 </head>
 <body>
+
+    <!-- ============ НАЧАЛО ДИСКЛЕЙМЕРА О ТЕЛЕФОНЕ ============ -->
+    <div class="phone-disclaimer" id="phoneDisclaimer">
+        <div class="container">
+            <div class="disclaimer-content">
+                <span class="disclaimer-icon">📱</span>
+                <span class="disclaimer-text">
+                    <strong>Внимание:</strong> В связи с переходом на новое оборудование могут возникать трудности с телефонной связью. 
+                    Мы всегда оперативно отвечаем в 
+                    <a href="https://t.me/+79770005127" class="disclaimer-link">Telegram</a> и на 
+                    <a href="mailto:matservice@yandex.ru" class="disclaimer-link">Email</a>.
+                </span>
+                <button class="disclaimer-close" id="disclaimerClose" aria-label="Закрыть уведомление">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ============ КОНЕЦ ДИСКЛЕЙМЕРА О ТЕЛЕФОНЕ ============ -->
 
     <!-- ============ НАЧАЛО ХЛЕБНЫХ КРОШЕК ============ -->
     <nav class="breadcrumbs container" aria-label="Хлебные крошки">
@@ -229,6 +250,55 @@
 
     <!-- ============ НАЧАЛО ОСНОВНОГО КОНТЕНТА ============ -->
     <main>
+
+<script>
+    // Скрипт для работы с дисклеймером о телефоне
+    document.addEventListener('DOMContentLoaded', function() {
+        const disclaimer = document.getElementById('phoneDisclaimer');
+        const closeBtn = document.getElementById('disclaimerClose');
+        
+        // Проверяем, не закрывал ли пользователь уже дисклеймер
+        if (!localStorage.getItem('phoneDisclaimerClosed')) {
+            // Показываем дисклеймер с задержкой для плавного появления
+            setTimeout(() => {
+                if (disclaimer) {
+                    disclaimer.style.display = 'block';
+                    setTimeout(() => {
+                        disclaimer.classList.add('visible');
+                    }, 10);
+                }
+            }, 500);
+        }
+        
+        // Обработчик закрытия дисклеймера
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                if (disclaimer) {
+                    disclaimer.classList.remove('visible');
+                    setTimeout(() => {
+                        disclaimer.style.display = 'none';
+                        localStorage.setItem('phoneDisclaimerClosed', 'true');
+                    }, 300);
+                }
+            });
+        }
+        
+        // Автоматическое закрытие через 7 дней (сбрасываем сохраненное состояние)
+        const disclaimerClosedDate = localStorage.getItem('phoneDisclaimerClosedDate');
+        const now = new Date().getTime();
+        
+        if (disclaimerClosedDate) {
+            // Если прошло больше 7 дней (7 * 24 * 60 * 60 * 1000 = 604800000 мс)
+            if (now - parseInt(disclaimerClosedDate) > 604800000) {
+                localStorage.removeItem('phoneDisclaimerClosed');
+                localStorage.removeItem('phoneDisclaimerClosedDate');
+            }
+        } else {
+            // Сохраняем дату первого закрытия
+            localStorage.setItem('phoneDisclaimerClosedDate', now.toString());
+        }
+    });
+</script>
 `;
 
     // Вставляем хедер
@@ -239,3 +309,4 @@
     console.log('✅ Хедер успешно загружен');
     
 })();
+[file content end]
