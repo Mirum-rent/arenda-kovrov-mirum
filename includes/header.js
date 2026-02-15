@@ -1,11 +1,11 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 9.1 (29.01.2026) - С ИСПРАВЛЕННЫМ БАННЕРОМ
+// Версия: 9.2 (12.05.2026) - С ИСПРАВЛЕННЫМ БАННЕРОМ
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем хедер v9.1...');
+    console.log('🔄 Загружаем хедер v9.2...');
     
     // Получаем текущую страницу для определения canonical
     const currentPage = window.location.pathname;
@@ -76,8 +76,8 @@
     <meta name="theme-color" content="#16a085">
     
     <!-- ============ СТИЛИ С ВЕРСИОНИРОВАНИЕМ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.1">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.1" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.2">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.2" media="(max-width: 768px)">
     <link rel="stylesheet" href="/css/calculator.css" media="screen">
     
     <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
@@ -268,11 +268,37 @@
         if (closeBtn) {
             closeBtn.addEventListener('click', function() {
                 if (disclaimer) {
+                    // Добавляем класс closed для полного скрытия
+                    disclaimer.classList.add('closed');
+                    // Убираем класс visible
                     disclaimer.classList.remove('visible');
-                    setTimeout(() => {
-                        disclaimer.style.display = 'none';
-                        // НЕ сохраняем в localStorage - показываем всегда при загрузке
-                    }, 300);
+                    
+                    // Корректируем отступы после закрытия баннера
+                    document.body.style.paddingTop = '0';
+                    
+                    // Обновляем положение хедера
+                    const header = document.getElementById('mainHeader');
+                    if (header) {
+                        header.style.top = '0';
+                    }
+                    
+                    // Обновляем отступ основного контента
+                    const main = document.querySelector('main');
+                    if (main) {
+                        main.style.marginTop = '64px'; // Только высота хедера
+                    }
+                    
+                    // Для мобильных устройств
+                    if (window.innerWidth <= 768) {
+                        if (main) {
+                            main.style.marginTop = '60px';
+                        }
+                    }
+                    if (window.innerWidth <= 480) {
+                        if (main) {
+                            main.style.marginTop = '60px';
+                        }
+                    }
                 }
             });
         }
@@ -280,12 +306,11 @@
     // === БАННЕР КОНЕЦ (скрипт) ===
 </script>
 `;
-
     // Вставляем хедер
     document.open();
     document.write(headerHTML);
     document.close();
     
-    console.log('✅ Хедер v9.1 успешно загружен');
+    console.log('✅ Хедер v9.2 успешно загружен');
     
 })();
