@@ -1,6 +1,6 @@
 /* ============================================
    MOBILE.CSS - Мобильная оптимизация для МИРУМ
-   Версия: 9.1 (29.01.2026) - ОПТИМИЗИРОВАННЫЙ
+   Версия: 9.2 (12.05.2026) - ИСПРАВЛЕННАЯ
    ============================================ */
 
 /* ============ ОБЩИЕ МОБИЛЬНЫЕ СТИЛИ ============ */
@@ -135,9 +135,9 @@
         display: none !important;
     }
     
-    /* Основной контент */
+    /* Основной контент - исправлен отступ с учетом баннера */
     main {
-        margin-top: 60px !important;
+        margin-top: 118px !important; /* 60px (хедер) + 58px (баннер) */
     }
     
     /* Секции */
@@ -234,6 +234,15 @@
         right: 20px !important;
         width: 50px !important;
         height: 50px !important;
+        z-index: 998 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: opacity 0.3s ease, visibility 0.3s ease !important;
+    }
+    
+    .scroll-to-top.visible {
+        opacity: 1 !important;
+        visibility: visible !important;
     }
     
     /* Таблицы */
@@ -425,6 +434,11 @@
         width: 100% !important;
         min-height: 44px !important;
     }
+    
+    /* Основной контент для маленьких мобильных */
+    main {
+        margin-top: 114px !important; /* 60px (хедер) + 54px (баннер) */
+    }
 }
 
 /* ============ ПЛАНШЕТЫ (769px - 1024px) ============ */
@@ -485,6 +499,11 @@
         font-size: 1rem !important;
         line-height: 1.6 !important;
     }
+    
+    /* Основной контент для планшетов */
+    main {
+        margin-top: 120px !important; /* 60px (хедер) + 60px (баннер) */
+    }
 }
 
 /* ============ БОЛЬШИЕ ДЕСКТОПЫ (1025px и выше) ============ */
@@ -508,6 +527,11 @@
     .benefit-card:hover {
         transform: translateY(-5px) !important;
         transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    }
+    
+    /* Основной контент для десктопов */
+    main {
+        margin-top: 124px !important; /* 64px (хедер) + 60px (баннер) */
     }
 }
 

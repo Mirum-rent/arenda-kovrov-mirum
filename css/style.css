@@ -1,6 +1,6 @@
 /* ============================================
    STYLE.CSS - ПОЛНЫЕ ОСНОВНЫЕ СТИЛИ МИРУМ
-   Версия: 9.1 (29.01.2026) - ИСПРАВЛЕННЫЙ БАННЕР И ФУТЕР
+   Версия: 9.2 (12.05.2026) - ИСПРАВЛЕННЫЙ БАННЕР И ТЕКСТ
    ============================================ */
 
 /* ============ ПЕРЕМЕННЫЕ ============ */
@@ -85,6 +85,11 @@ body {
 }
 
 .phone-disclaimer.hidden {
+    display: none !important;
+}
+
+/* Класс для скрытия баннера после закрытия */
+.phone-disclaimer.closed {
     display: none !important;
 }
 
@@ -200,9 +205,9 @@ body {
 }
 /* === БАННЕР КОНЕЦ === */
 
-/* Корректировка отступов для других элементов */
+/* Корректировка отступов для других элементов - исправлено для всех устройств */
 .breadcrumbs {
-    margin-top: 62px !important; /* Высота баннера + отступ */
+    margin-top: 60px !important; /* Высота баннера */
 }
 
 @media (max-width: 768px) {
@@ -214,6 +219,23 @@ body {
 @media (max-width: 480px) {
     .breadcrumbs {
         margin-top: 54px !important;
+    }
+}
+
+/* Основной контент - исправлен отступ с учетом баннера и хедера */
+main {
+    margin-top: 124px !important; /* 64px (хедер) + 60px (баннер) */
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-top: 118px !important; /* 60px (хедер) + 58px (баннер) */
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin-top: 114px !important; /* 60px (хедер) + 54px (баннер) */
     }
 }
 
@@ -292,11 +314,25 @@ p {
 .main-header {
     background-color: var(--header-bg) !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-    position: sticky !important;
-    top: 0 !important;
+    position: fixed !important;
+    top: 60px !important; /* Высота баннера */
+    left: 0 !important;
+    right: 0 !important;
     z-index: 1000 !important;
     transition: var(--transition) !important;
     width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        top: 58px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-header {
+        top: 54px !important;
+    }
 }
 
 .header-container {
@@ -1453,7 +1489,7 @@ section {
     cursor: pointer !important;
     opacity: 0 !important;
     visibility: hidden !important;
-    transition: var(--transition) !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease !important;
     z-index: 998 !important;
     font-size: clamp(1.2rem, 2vw, 1.5rem) !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
