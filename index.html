@@ -389,6 +389,347 @@
         </section>
         <!-- ============ КОНЕЦ КОНТАКТОВ ============ -->
     </main>
+	
+	<!-- ============ НАЧАЛО БЛОКА ИНТЕРАКТИВНОЙ КАРТЫ ============ -->
+<!-- Версия: 1.0 (16.02.2026) - Интерактивная карта регионов работы -->
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<section class="map-section section" style="padding: 60px 0; background: var(--background-color);">
+    <div class="container">
+        <h2 class="section-title">География наших услуг</h2>
+        <p class="text-center" style="max-width: 800px; margin: 0 auto 40px;">
+            Работаем по всей России. На карте ниже указаны города и области, где мы уже предоставляем услуги (зеленые маркеры), а также регионы, которые мы активно развиваем (желтые маркеры). Нажмите на маркер, чтобы увидеть цены на популярные размеры ковров.
+        </p>
+
+        <!-- Контейнер для карты -->
+        <div id="mirum-map" style="height: 600px; width: 100%; border-radius: 12px; box-shadow: var(--box-shadow); border: 1px solid var(--border-color); z-index: 1;"></div>
+
+        <!-- Подпись с пояснением -->
+        <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="display: inline-block; width: 20px; height: 20px; background: #27ae60; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></span>
+                <span style="font-size: 0.95rem;">Работаем (есть в прайсе)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="display: inline-block; width: 20px; height: 20px; background: #f39c12; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></span>
+                <span style="font-size: 0.95rem;">Готовимся к запуску</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Проверяем, загружена ли библиотека Leaflet
+        if (typeof L === 'undefined') {
+            console.error('Leaflet не загружен!');
+            return;
+        }
+
+        // Инициализация карты
+        var map = L.map('mirum-map').setView([55.76, 37.64], 4); // Центр на Москву, зум 4 (вся Россия)
+
+        // ============ НАСТРОЙКА ТАЙЛОВ (БЕЗ ПОЛИТИЧЕСКОЙ СИМВОЛИКИ) ============
+        // Используем тайлы OpenStreetMap (французский сервер, нейтральный)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | МИРУМ',
+            subdomains: 'abc',
+            maxZoom: 19,
+            detectRetina: true
+        }).addTo(map);
+
+        // ============ ФУНКЦИЯ ПОЛУЧЕНИЯ ЦЕНЫ ИЗ PRICE.JS ============
+        function getPriceInfo(regionName) {
+            // Ищем регион в базе цен (игнорируем регистр)
+            const foundRegion = Object.keys(window.priceData || {}).find(
+                key => key.toLowerCase().includes(regionName.toLowerCase()) || regionName.toLowerCase().includes(key.toLowerCase())
+            );
+
+            if (!foundRegion || !window.priceData[foundRegion]) {
+                return null; // Регион не найден в прайсе
+            }
+
+            const regionPrices = window.priceData[foundRegion];
+            
+            // Функция поиска ближайшего размера
+            function findClosestSize(targetSize) {
+                const availableSizes = Object.keys(regionPrices);
+                if (availableSizes.length === 0) return null;
+
+                // Пытаемся найти точное совпадение
+                let exact = availableSizes.find(s => s.replace(/\s+/g, '') === targetSize.replace(/\s+/g, ''));
+                if (exact) return exact;
+
+                // Если точного нет, ищем по основным параметрам (например, 150*250 ищем в 150*240, 150*300)
+                const [targetW, targetH] = targetSize.split('*').map(Number);
+                let bestMatch = availableSizes[0];
+                let minDiff = Infinity;
+
+                availableSizes.forEach(size => {
+                    const [w, h] = size.split('*').map(Number);
+                    // Сравниваем сумму площадей или близость параметров
+                    const diff = Math.abs(w - targetW) + Math.abs(h - targetH);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        bestMatch = size;
+                    }
+                });
+                return bestMatch;
+            }
+
+            // Цены для 85*150
+            const size1 = findClosestSize('85*150');
+            const price1week1 = size1 ? (regionPrices[size1]["1 раз в неделю"] || 0) : 0;
+            const price2week1 = size1 ? (regionPrices[size1]["2 раза в неделю"] || 0) : 0;
+            const cost4weeks1_1 = price1week1 * 4 * 1;
+            const cost4weeks2_1 = price2week1 * 8 * 1;
+
+            // Цены для 115*200
+            const size2 = findClosestSize('115*200');
+            const price1week2 = size2 ? (regionPrices[size2]["1 раз в неделю"] || 0) : 0;
+            const price2week2 = size2 ? (regionPrices[size2]["2 раза в неделю"] || 0) : 0;
+            const cost4weeks1_2 = price1week2 * 4 * 1;
+            const cost4weeks2_2 = price2week2 * 8 * 1;
+
+            // Цены для 150*250
+            const size3 = findClosestSize('150*250');
+            const price1week3 = size3 ? (regionPrices[size3]["1 раз в неделю"] || 0) : 0;
+            const price2week3 = size3 ? (regionPrices[size3]["2 раза в неделю"] || 0) : 0;
+            const cost4weeks1_3 = price1week3 * 4 * 1;
+            const cost4weeks2_3 = price2week3 * 8 * 1;
+
+            return {
+                region: foundRegion,
+                size1: size1 || '85×150',
+                price1_1: price1week1,
+                cost4_1: cost4weeks1_1,
+                price2_1: price2week1,
+                cost4_2_1: cost4weeks2_1,
+                size2: size2 || '115×200',
+                price1_2: price1week2,
+                cost4_2: cost4weeks1_2,
+                price2_2: price2week2,
+                cost4_2_2: cost4weeks2_2,
+                size3: size3 || '150×250',
+                price1_3: price1week3,
+                cost4_3: cost4weeks1_3,
+                price2_3: price2week3,
+                cost4_2_3: cost4weeks2_3,
+            };
+        }
+
+        // ============ ФУНКЦИЯ ФОРМАТИРОВАНИЯ ЦЕНЫ ============
+        function formatPrice(price) {
+            if (!price || price === 0) return '— руб.';
+            return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(price);
+        }
+
+        // ============ ДОБАВЛЕНИЕ МАРКЕРОВ (ГОРОДА) ============
+        const cities = [
+            // Центральный ФО (Зеленые - работаем)
+            { name: "Москва", coords: [55.7558, 37.6173], type: 'active' },
+            { name: "Московская область", coords: [55.7558, 37.6173], type: 'active' }, // Маркер в Москву
+            { name: "Тверь", coords: [56.8587, 35.9176], type: 'active' },
+            { name: "Тула", coords: [54.1931, 37.6173], type: 'active' },
+            { name: "Ярославль", coords: [57.6261, 39.8845], type: 'active' },
+            { name: "Брянск", coords: [53.2434, 34.3642], type: 'active' },
+            { name: "Орел", coords: [52.9701, 36.0634], type: 'active' },
+            { name: "Владимир", coords: [56.1291, 40.4070], type: 'active' },
+            { name: "Иваново", coords: [57.0003, 40.9739], type: 'active' },
+            { name: "Калуга", coords: [54.5138, 36.2612], type: 'active' },
+            { name: "Смоленск", coords: [54.7826, 32.0454], type: 'active' },
+            { name: "Белгород", coords: [50.5975, 36.5858], type: 'active' },
+            { name: "Курск", coords: [51.7304, 36.1926], type: 'active' },
+            { name: "Воронеж", coords: [51.6606, 39.2006], type: 'active' },
+            { name: "Тамбов", coords: [52.7212, 41.4522], type: 'active' },
+            { name: "Рязань", coords: [54.6196, 39.7360], type: 'active' },
+            { name: "Липецк", coords: [52.6088, 39.5992], type: 'active' },
+            { name: "Кострома", coords: [57.7671, 40.9269], type: 'active' },
+
+            // Северо-Западный ФО
+            { name: "Санкт-Петербург", coords: [59.9343, 30.3351], type: 'active' },
+            { name: "Ленинградская область", coords: [59.9343, 30.3351], type: 'active' },
+            { name: "Архангельск", coords: [64.5399, 40.5160], type: 'active' },
+            { name: "Мурманск", coords: [68.9707, 33.0747], type: 'active' },
+            { name: "Псков", coords: [57.8194, 28.3318], type: 'active' },
+            { name: "Великий Новгород", coords: [58.5229, 31.2696], type: 'active' },
+            { name: "Калининград", coords: [54.7102, 20.5102], type: 'active' },
+            { name: "Петрозаводск", coords: [61.7895, 34.3496], type: 'active' },
+            { name: "Сыктывкар", coords: [61.6688, 50.8365], type: 'active' },
+            { name: "Вологда", coords: [59.2204, 39.8915], type: 'active' },
+            { name: "Нарьян-Мар", coords: [67.6380, 53.0035], type: 'future' }, // Желтый (готовимся)
+
+            // Южный ФО
+            { name: "Астрахань", coords: [46.3477, 48.0320], type: 'active' },
+            { name: "Астраханская область", coords: [46.3477, 48.0320], type: 'active' },
+            { name: "Краснодар", coords: [45.0448, 38.9760], type: 'active' },
+            { name: "Краснодарский край", coords: [45.0448, 38.9760], type: 'active' },
+            { name: "Ростов-на-Дону", coords: [47.2357, 39.7015], type: 'active' },
+            { name: "Ростовская область", coords: [47.2357, 39.7015], type: 'active' },
+            { name: "Волгоград", coords: [48.7071, 44.5170], type: 'active' },
+            { name: "Волгоградская область", coords: [48.7071, 44.5170], type: 'active' },
+            { name: "Севастополь", coords: [44.6167, 33.5254], type: 'future' }, // Крым - будущее
+            { name: "Симферополь", coords: [44.9572, 34.1108], type: 'future' }, // Крым - будущее
+            { name: "Майкоп", coords: [44.6098, 40.1006], type: 'future' },
+            { name: "Элиста", coords: [46.3083, 44.2700], type: 'future' },
+
+            // Северо-Кавказский ФО
+            { name: "Ставрополь", coords: [45.0445, 41.9691], type: 'active' },
+            { name: "Грозный", coords: [43.3179, 45.6982], type: 'active' },
+            { name: "Махачкала", coords: [42.9849, 47.5046], type: 'active' },
+            { name: "Нальчик", coords: [43.4853, 43.6070], type: 'active' },
+            { name: "Владикавказ", coords: [43.0241, 44.6905], type: 'active' },
+            { name: "Черкесск", coords: [44.2236, 42.0571], type: 'active' },
+            { name: "Магас", coords: [43.1667, 44.8167], type: 'active' },
+
+            // Приволжский ФО
+            { name: "Уфа", coords: [54.7348, 55.9579], type: 'active' },
+            { name: "Республика Башкортостан", coords: [54.7348, 55.9579], type: 'active' },
+            { name: "Казань", coords: [55.7961, 49.1064], type: 'active' },
+            { name: "Республика Татарстан", coords: [55.7961, 49.1064], type: 'active' },
+            { name: "Нижний Новгород", coords: [56.2965, 43.9361], type: 'active' },
+            { name: "Нижегородская область", coords: [56.2965, 43.9361], type: 'active' },
+            { name: "Самара", coords: [53.1959, 50.1063], type: 'active' },
+            { name: "Самарская область", coords: [53.1959, 50.1063], type: 'active' },
+            { name: "Саратов", coords: [51.5336, 46.0343], type: 'active' },
+            { name: "Саратовская область", coords: [51.5336, 46.0343], type: 'active' },
+            { name: "Пенза", coords: [53.2001, 45.0046], type: 'active' },
+            { name: "Пензенская область", coords: [53.2001, 45.0046], type: 'active' },
+            { name: "Ульяновск", coords: [54.3170, 48.4032], type: 'active' },
+            { name: "Ульяновская область", coords: [54.3170, 48.4032], type: 'active' },
+            { name: "Пермь", coords: [58.0105, 56.2502], type: 'active' },
+            { name: "Пермский край", coords: [58.0105, 56.2502], type: 'active' },
+            { name: "Ижевск", coords: [56.8528, 53.2115], type: 'active' },
+            { name: "Удмуртия", coords: [56.8528, 53.2115], type: 'active' },
+            { name: "Оренбург", coords: [51.7730, 55.0989], type: 'active' },
+            { name: "Оренбургская область", coords: [51.7730, 55.0989], type: 'active' },
+            { name: "Йошкар-Ола", coords: [56.6344, 47.8999], type: 'active' },
+            { name: "Республика Марий Эл", coords: [56.6344, 47.8999], type: 'active' },
+            { name: "Саранск", coords: [54.1874, 45.1839], type: 'active' },
+            { name: "Мордовия", coords: [54.1874, 45.1839], type: 'active' },
+            { name: "Чебоксары", coords: [56.1439, 47.2489], type: 'active' },
+            { name: "Чувашия", coords: [56.1439, 47.2489], type: 'active' },
+            { name: "Киров", coords: [58.6035, 49.6679], type: 'active' },
+            { name: "Кировская область", coords: [58.6035, 49.6679], type: 'active' },
+
+            // Уральский ФО
+            { name: "Екатеринбург", coords: [56.8380, 60.5975], type: 'active' },
+            { name: "Свердловская область", coords: [56.8380, 60.5975], type: 'active' },
+            { name: "Тюмень", coords: [57.1522, 65.5272], type: 'active' },
+            { name: "Тюменская область", coords: [57.1522, 65.5272], type: 'active' },
+            { name: "Челябинск", coords: [55.1644, 61.4368], type: 'active' },
+            { name: "Челябинская область", coords: [55.1644, 61.4368], type: 'active' },
+            { name: "Сургут", coords: [61.2540, 73.3962], type: 'active' },
+            { name: "Ханты-Мансийский АО", coords: [61.2540, 73.3962], type: 'active' },
+            { name: "Курган", coords: [55.4649, 65.3051], type: 'active' },
+            { name: "Курганская область", coords: [55.4649, 65.3051], type: 'active' },
+            { name: "Ханты-Мансийск", coords: [61.0066, 69.0186], type: 'active' },
+            { name: "Салехард", coords: [66.5300, 66.6019], type: 'future' }, // ЯНАО - будущее
+
+            // Сибирский ФО
+            { name: "Новосибирск", coords: [55.0302, 82.9204], type: 'active' },
+            { name: "Новосибирская область", coords: [55.0302, 82.9204], type: 'active' },
+            { name: "Иркутск", coords: [52.2864, 104.2807], type: 'active' },
+            { name: "Иркутская область", coords: [52.2864, 104.2807], type: 'active' },
+            { name: "Кемерово", coords: [55.3551, 86.0867], type: 'active' },
+            { name: "Кемеровская область", coords: [55.3551, 86.0867], type: 'active' },
+            { name: "Томск", coords: [56.4951, 84.9728], type: 'active' },
+            { name: "Томская область", coords: [56.4951, 84.9728], type: 'active' },
+            { name: "Омск", coords: [54.9914, 73.3645], type: 'active' },
+            { name: "Омская область", coords: [54.9914, 73.3645], type: 'active' },
+            { name: "Красноярск", coords: [56.0106, 92.8526], type: 'active' },
+            { name: "Красноярский край", coords: [56.0106, 92.8526], type: 'active' },
+            { name: "Барнаул", coords: [53.3548, 83.7697], type: 'active' },
+            { name: "Алтайский край", coords: [53.3548, 83.7697], type: 'active' },
+            { name: "Абакан", coords: [53.7222, 91.4434], type: 'active' },
+            { name: "Республика Хакасия", coords: [53.7222, 91.4434], type: 'active' },
+            { name: "Горно-Алтайск", coords: [51.9582, 85.9603], type: 'future' },
+            { name: "Улан-Удэ", coords: [51.8253, 107.5696], type: 'active' },
+            { name: "Республика Бурятия", coords: [51.8253, 107.5696], type: 'active' },
+            { name: "Чита", coords: [52.0515, 113.4712], type: 'active' },
+            { name: "Забайкальский край", coords: [52.0515, 113.4712], type: 'active' },
+
+            // Дальневосточный ФО
+            { name: "Владивосток", coords: [43.1737, 131.8770], type: 'active' },
+            { name: "Приморский край", coords: [43.1737, 131.8770], type: 'active' },
+            { name: "Хабаровск", coords: [48.4802, 135.0719], type: 'active' },
+            { name: "Хабаровский край", coords: [48.4802, 135.0719], type: 'active' },
+            { name: "Якутск", coords: [62.0355, 129.6755], type: 'future' },
+            { name: "Республика Саха (Якутия)", coords: [62.0355, 129.6755], type: 'future' },
+            { name: "Благовещенск", coords: [50.2907, 127.5272], type: 'active' },
+            { name: "Амурская область", coords: [50.2907, 127.5272], type: 'active' },
+            { name: "Петропавловск-Камчатский", coords: [53.0370, 158.6559], type: 'future' },
+            { name: "Камчатский край", coords: [53.0370, 158.6559], type: 'future' },
+            { name: "Магадан", coords: [59.5612, 150.8301], type: 'future' },
+            { name: "Магаданская область", coords: [59.5612, 150.8301], type: 'future' },
+            { name: "Южно-Сахалинск", coords: [46.9591, 142.7385], type: 'future' },
+            { name: "Сахалинская область", coords: [46.9591, 142.7385], type: 'future' },
+            { name: "Биробиджан", coords: [48.7946, 132.9218], type: 'future' },
+            { name: "Еврейская АО", coords: [48.7946, 132.9218], type: 'future' },
+            { name: "Анадырь", coords: [64.7341, 177.5148], type: 'future' },
+            { name: "Чукотский АО", coords: [64.7341, 177.5148], type: 'future' },
+        ];
+
+        // Перебираем города и добавляем маркеры
+        cities.forEach(city => {
+            const priceInfo = getPriceInfo(city.name);
+            const markerColor = city.type === 'active' ? '#27ae60' : '#f39c12'; // Зеленый или желтый
+
+            // Создаем иконку
+            const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background-color: ${markerColor}; width: 20px; height: 20px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [20, 20],
+                popupAnchor: [0, -10]
+            });
+
+            const marker = L.marker(city.coords, { icon: customIcon }).addTo(map);
+
+            // Формируем содержимое всплывающего окна (popup)
+            let popupContent = `<b>${city.name}</b><br>`;
+
+            if (priceInfo) {
+                popupContent += `
+                    <div style="font-size: 0.85rem; margin-top: 8px;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr><th>Размер</th><th>1 р/нед</th><th>2 р/нед</th></tr>
+                            <tr>
+                                <td>${priceInfo.size1}</td>
+                                <td>${formatPrice(priceInfo.price1_1)}<br><small>за 4 нед: ${formatPrice(priceInfo.cost4_1)}</small></td>
+                                <td>${formatPrice(priceInfo.price2_1)}<br><small>за 4 нед: ${formatPrice(priceInfo.cost4_2_1)}</small></td>
+                            </tr>
+                            <tr>
+                                <td>${priceInfo.size2}</td>
+                                <td>${formatPrice(priceInfo.price1_2)}<br><small>за 4 нед: ${formatPrice(priceInfo.cost4_2)}</small></td>
+                                <td>${formatPrice(priceInfo.price2_2)}<br><small>за 4 нед: ${formatPrice(priceInfo.cost4_2_2)}</small></td>
+                            </tr>
+                            <tr>
+                                <td>${priceInfo.size3}</td>
+                                <td>${formatPrice(priceInfo.price1_3)}<br><small>за 4 нед: ${formatPrice(priceInfo.cost4_3)}</small></td>
+                                <td>${formatPrice(priceInfo.price2_3)}<br><small>за 4 нед: ${formatPrice(priceInfo.cost4_2_3)}</small></td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 8px; text-align: center;"><i>Другие размеры и периодичности — в <a href="/calculator.html" style="color: #16a085;">калькуляторе</a> или уточняйте в <a href="https://t.me/+79770005127" style="color: #0088cc;">Telegram</a>.</i></p>
+                    </div>
+                `;
+            } else {
+                popupContent += `
+                    <div style="font-size: 0.9rem; color: #666; margin-top: 8px;">
+                        <i class="fas fa-info-circle"></i> Мы работаем в этом регионе. Точные цены уточняйте в <a href="https://t.me/+79770005127" style="color: #0088cc;">Telegram</a> или по <a href="mailto:matservice@yandex.ru" style="color: #16a085;">Email</a>.
+                    </div>
+                `;
+            }
+
+            marker.bindPopup(popupContent);
+        });
+
+        console.log('🗺️ Интерактивная карта загружена');
+    });
+</script>
+<!-- ============ КОНЕЦ БЛОКА ИНТЕРАКТИВНОЙ КАРТЫ ============ -->
+	
     <!-- ============ КОНЕЦ ОСНОВНОГО КОНТЕНТА ============ -->
 
     <!-- ============ НАЧАЛО FOOTER ============ -->
