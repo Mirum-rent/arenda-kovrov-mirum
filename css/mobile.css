@@ -867,4 +867,67 @@ img {
     }
 }
 
+/* ============ АДАПТАЦИЯ КАРТЫ ДЛЯ МОБИЛЬНЫХ ============ */
+/* Версия: 1.0 (16.02.2026) */
+
+@media (max-width: 768px) {
+    .map-section {
+        padding: 40px 0 !important;
+    }
+    
+    #mirum-map {
+        height: 450px !important;
+        margin: 20px 0 !important;
+    }
+    
+    /* Уменьшаем всплывающие окна для удобного закрытия */
+    .leaflet-popup-close-button {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 20px !important;
+        line-height: 30px !important;
+    }
+    
+    .leaflet-popup-content {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+    
+    .leaflet-popup-content-wrapper {
+        border-radius: 8px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-section {
+        padding: 30px 0 !important;
+    }
+    
+    #mirum-map {
+        height: 350px !important;
+    }
+    
+    .leaflet-popup-content {
+        min-width: 160px !important;
+        max-width: 200px !important;
+    }
+    
+    .leaflet-popup-content table {
+        font-size: 10px !important;
+    }
+    
+    .leaflet-popup-content td small {
+        font-size: 8px !important;
+    }
+}
+
+/* Улучшение для тач-устройств (большие кнопки закрытия) */
+@media (hover: none) and (pointer: coarse) {
+    .leaflet-popup-close-button {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 24px !important;
+        line-height: 36px !important;
+    }
+}
 /* ============ КОНЕЦ MOBILE.CSS ============ */

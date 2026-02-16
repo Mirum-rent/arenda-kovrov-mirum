@@ -2449,4 +2449,120 @@ h1 i, h2 i, h3 i, h4 i {
     }
 }
 
+/* ============ СТИЛИ ДЛЯ ИНТЕРАКТИВНОЙ КАРТЫ ============ */
+/* Версия: 1.0 (16.02.2026) */
+
+.map-section {
+    background: var(--background-color);
+    position: relative;
+    z-index: 1;
+}
+
+#mirum-map {
+    background: #e9ecef; /* Цвет фона, пока карта грузится */
+}
+
+/* Стили для всплывающих окон (popup) карты */
+.leaflet-popup-content {
+    margin: 15px 20px;
+    min-width: 250px;
+    max-width: 300px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.leaflet-popup-content b {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+}
+
+.leaflet-popup-content table {
+    width: 100%;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.leaflet-popup-content th {
+    background: var(--accent-color);
+    color: white;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.leaflet-popup-content td {
+    padding: 5px 3px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.leaflet-popup-content td small {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    line-height: 1.2;
+}
+
+.leaflet-popup-content p {
+    margin: 8px 0 0 0;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.leaflet-popup-content a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.leaflet-popup-content a:hover {
+    color: var(--primary-color);
+}
+
+/* Улучшение адаптивности карты */
+@media (max-width: 768px) {
+    #mirum-map {
+        height: 450px !important;
+    }
+    
+    .leaflet-popup-content {
+        min-width: 200px;
+        max-width: 250px;
+        margin: 10px 15px;
+    }
+    
+    .leaflet-popup-content table {
+        font-size: 0.7rem;
+    }
+    
+    .leaflet-popup-content td small {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #mirum-map {
+        height: 350px !important;
+    }
+    
+    .leaflet-popup-content {
+        min-width: 180px;
+        max-width: 220px;
+    }
+}
+
+/* Для SEO и ИИ: скрытый блок с геоданными */
+.map-seo-data {
+    display: none;
+    height: 1px;
+    overflow: hidden;
+}
+/* ============ КОНЕЦ СТИЛЕЙ ДЛЯ КАРТЫ ============ */
+
 /* ============ КОНЕЦ STYLE.CSS ============ */
