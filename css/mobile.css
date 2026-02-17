@@ -930,4 +930,223 @@ img {
         line-height: 36px !important;
     }
 }
+
+/* ============ УЛУЧШЕНИЯ ДЛЯ МОБИЛЬНОГО МЕНЮ ============ */
+@media (max-width: 768px) {
+    /* Гарантируем, что меню появляется */
+    .mobile-nav.active {
+        display: block !important;
+        transform: translateX(0) !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;
+    }
+    
+    /* Затемнение фона при открытом меню */
+    body.menu-open {
+        overflow: hidden !important;
+    }
+    
+    /* Улучшение для выпадающих меню */
+    .mobile-dropdown.active .mobile-dropdown-menu {
+        display: block !important;
+        max-height: 500px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        margin: 10px 0 !important;
+    }
+    
+    .mobile-dropdown-menu {
+        max-height: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease !important;
+        padding-left: 20px !important;
+    }
+    
+    /* Увеличение области нажатия */
+    .mobile-menu-toggle {
+        min-width: 48px !important;
+        min-height: 48px !important;
+        padding: 12px !important;
+    }
+    
+    .mobile-menu a, 
+    .mobile-contacts a {
+        padding: 16px 20px !important;
+        font-size: 16px !important;
+        min-height: 56px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Улучшение для картинок */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+    
+    .material-image {
+        height: auto !important;
+        max-height: 200px !important;
+        overflow: hidden !important;
+        background: #f5f5f5 !important;
+    }
+    
+    .material-image img {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+        min-height: 180px !important;
+    }
+}
+
+/* ============ УЛУЧШЕНИЯ ДЛЯ КАЛЬКУЛЯТОРА ============ */
+@media (max-width: 768px) {
+    .calculator-section {
+        padding: 15px !important;
+    }
+    
+    .calculator-form {
+        padding: 15px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 20px !important;
+    }
+    
+    .form-group label {
+        font-size: 15px !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+        font-weight: 600 !important;
+    }
+    
+    .form-group select,
+    .form-group input {
+        width: 100% !important;
+        padding: 16px !important;
+        font-size: 16px !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 10px !important;
+        background: white !important;
+        min-height: 56px !important;
+    }
+    
+    .form-group select:focus,
+    .form-group input:focus {
+        border-color: var(--accent-color) !important;
+        outline: none !important;
+    }
+    
+    /* Стили для позиций */
+    .position-item {
+        background: white !important;
+        border-radius: 12px !important;
+        padding: 15px !important;
+        margin-bottom: 15px !important;
+        border-left: 4px solid var(--accent-color) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+    }
+    
+    .position-item > div:first-child {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+    
+    .position-item .remove-position-btn {
+        position: absolute !important;
+        top: 15px !important;
+        right: 15px !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 8px !important;
+        background: #e74c3c !important;
+        color: white !important;
+        border: none !important;
+        font-size: 18px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Стили для итогов */
+    #totalResult > div:first-child {
+        padding: 20px !important;
+        border-radius: 12px !important;
+    }
+    
+    .calculator-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        margin-top: 20px !important;
+    }
+    
+    .results-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .results-actions .btn,
+    .calculator-actions .btn {
+        width: 100% !important;
+        min-height: 56px !important;
+        font-size: 16px !important;
+        border-radius: 10px !important;
+        margin: 0 !important;
+    }
+    
+    /* Стили для тендера */
+    .month-inputs {
+        display: grid !important;
+        gap: 12px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .month-box {
+        background: #f8f9fa !important;
+        border-radius: 10px !important;
+        padding: 15px !important;
+    }
+    
+    .month-box label {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+        font-weight: 600 !important;
+    }
+    
+    .month-box input {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 8px !important;
+        margin-bottom: 8px !important;
+    }
+}
+
+/* ============ УЛУЧШЕНИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ ============ */
+@media (max-width: 480px) {
+    .month-inputs {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .calculator-section h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    .position-item > div:first-child > div:first-child {
+        margin-bottom: 10px !important;
+    }
+    
+    .position-item [style*="padding-left: 34px"] {
+        padding-left: 0 !important;
+    }
+}
 /* ============ КОНЕЦ MOBILE.CSS ============ */
