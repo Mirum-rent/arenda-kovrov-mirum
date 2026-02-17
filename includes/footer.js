@@ -38,7 +38,7 @@
                             <a href="mailto:matservice@yandex.ru" style="color: #16a085; font-weight: 600; text-decoration: none;">matservice@yandex.ru</a>
                         </p>
                         <p style="margin: 5px 0 0; font-size: 0.85rem; color: var(--text-light);">
-                            <i class="fas fa-clock"></i> Ответ в течение 15 минут
+                            <i class="fas fa-clock"></i> Свяжемся с вами как можно скорее
                         </p>
                     </div>
                 </div>
