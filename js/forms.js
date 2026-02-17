@@ -1,317 +1,415 @@
 // ============================================
-// FORMS.JS - Обработка всех форм на сайте
-// Версия: 7.0 (Обновленные тексты сообщений)
+// FORMS.JS - Обработка всех форм на сайте МИРУМ
+// Версия: 7.2 (18.02.2026) - ПОЛНАЯ, С ВАЛИДАЦИЕЙ
 // ============================================
 
 (function() {
     'use strict';
     
-    console.log('📋 Инициализация обработки форм');
+    console.log('📝 forms.js загружен, версия 7.2');
     
-    // ============ КОНСТАНТЫ И НАСТРОЙКИ ============
-    const TELEGRAM_CHAT_ID = '+79770005127';
-    const DEFAULT_EMAIL = 'matservice@yandex.ru';
+    // Конфигурация
+    const CONFIG = {
+        TELEGRAM: '+79770005127',
+        EMAIL: 'matservice@yandex.ru',
+        VAT_RATE: 0.22
+    };
     
-    // ============ УТИЛИТНЫЕ ФУНКЦИИ ============
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📋 Инициализация обработки форм...');
+        
+        initAllForms();
+        initCalculatorForm();
+        initTenderForm();
+        initFloorForm();
+        initWindowForm();
+        initOutstaffingForm();
+        initFAQForm();
+        initContactForm();
+    });
     
-    /**
-     * Валидация телефона
-     * @param {string} phone - Номер телефона
-     * @returns {boolean} - Валидный ли номер
-     */
+    // ============ ОБЩАЯ ОБРАБОТКА ВСЕХ ФОРМ ============
+    function initAllForms() {
+        document.querySelectorAll('form').forEach(form => {
+            // Добавляем защиту от повторной отправки
+            form.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('button[type="submit"]');
+                if (submitBtn && submitBtn.disabled) {
+                    e.preventDefault();
+                    return;
+                }
+            });
+        });
+    }
+    
+    // ============ ВАЛИДАЦИЯ ТЕЛЕФОНА ============
     function validatePhone(phone) {
-        const cleanPhone = phone.replace(/\D/g, '');
-        // Российские номера: начинаются с 7 или 8, длина 11 цифр
-        return /^[78]\d{10}$/.test(cleanPhone);
+        const clean = phone.replace(/\D/g, '');
+        return clean.length === 11 && (clean.startsWith('7') || clean.startsWith('8'));
     }
     
-    /**
-     * Валидация email
-     * @param {string} email - Email адрес
-     * @returns {boolean} - Валидный ли email
-     */
+    // ============ ВАЛИДАЦИЯ EMAIL ============
     function validateEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
     }
     
-    /**
-     * Форматирование телефона для отображения
-     * @param {string} phone - Номер телефона
-     * @returns {string} - Отформатированный номер
-     */
-    function formatPhone(phone) {
-        let value = phone.replace(/\D/g, '');
-        
-        if (value.startsWith('7') || value.startsWith('8')) {
-            value = '+7' + value.substring(1);
-        } else if (!value.startsWith('+7') && value.length > 0) {
-            value = '+7' + value;
+    // ============ ПРОВЕРКА СОГЛАСИЯ ============
+    function checkConsent(formId) {
+        const consent = document.querySelector(`#${formId} input[type="checkbox"]`);
+        if (!consent || !consent.checked) {
+            alert('Пожалуйста, дайте согласие на обработку персональных данных');
+            if (consent) consent.focus();
+            return false;
         }
-        
-        if (value.length > 2) {
-            value = value.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3-$4-$5');
-        }
-        
-        return value;
+        return true;
     }
     
-    /**
-     * Создание короткого сообщения для Telegram
-     * @param {Object} data - Данные формы
-     * @returns {string} - Короткое сообщение
-     */
-    function createShortTelegramMessage(data) {
-        let message = `📋 Заявка с сайта МИРУМ\n\n`;
-        
-        if (data.name) message += `👤 Имя: ${data.name}\n`;
-        if (data.phone) message += `📞 Телефон: ${data.phone}\n`;
-        if (data.email) message += `📧 Email: ${data.email}\n`;
-        if (data.company) message += `🏢 Компания: ${data.company}\n`;
-        if (data.city) message += `📍 Город: ${data.city}\n`;
-        if (data.service) message += `🔧 Услуга: ${data.service}\n`;
-        
-        if (data.message && data.message.length > 100) {
-            message += `📝 Сообщение: ${data.message.substring(0, 100)}...\n`;
-        } else if (data.message) {
-            message += `📝 Сообщение: ${data.message}\n`;
-        }
-        
-        message += `\n🌐 Страница: ${window.location.href}\n`;
-        message += `🕒 Время: ${new Date().toLocaleTimeString('ru-RU')}`;
-        
-        // Ограничиваем длину сообщения
-        if (message.length > 500) {
-            message = message.substring(0, 497) + '...';
-        }
-        
-        return message;
-    }
-    
-    /**
-     * Открытие Telegram с сообщением (улучшенная версия)
-     * @param {string} message - Сообщение для отправки
-     * @returns {boolean} - Успешно ли выполнено
-     */
-    function openTelegramWithMessage(message) {
+    // ============ ОТПРАВКА В TELEGRAM ============
+    function sendToTelegram(message, form) {
         try {
-            // Используем метод копирования текста для надежности
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = message;
-            tempTextArea.style.position = 'fixed';
-            tempTextArea.style.left = '-9999px';
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
+            // Копируем сообщение в буфер
+            const textarea = document.createElement('textarea');
+            textarea.value = message;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
             
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}`;
-                    window.open(telegramUrl, '_blank');
+            const successful = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            if (successful) {
+                // Открываем Telegram
+                window.open(`https://t.me/${CONFIG.TELEGRAM.replace('+', '')}`, '_blank');
+                
+                setTimeout(() => {
+                    alert('✅ Сообщение скопировано!\n\n1. В открывшемся Telegram нажмите на поле ввода\n2. Вставьте текст (Ctrl+V)\n3. Отправьте сообщение');
                     
-                    setTimeout(() => {
-                        alert('✅ Текст сообщения скопирован!\n\n' +
-                              '1. В открывшемся Telegram нажмите на поле ввода сообщения\n' +
-                              '2. Вставьте текст (Ctrl+V или долгое нажатие → Вставить)\n' +
-                              '3. Отправьте сообщение\n\n' +
-                              'Свяжемся с вами, как можно скорее!');
-                    }, 1000);
-                    return true;
-                }
-            } catch (err) {
-                console.error('Не удалось скопировать текст:', err);
-            } finally {
-                document.body.removeChild(tempTextArea);
-            }
-            
-            // Fallback: старая логика для совместимости
-            const encodedMessage = encodeURIComponent(message);
-            const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodedMessage}`;
-            
-            // Проверяем длину URL
-            if (telegramUrl.length > 2000) {
-                // Создаем еще более короткое сообщение
-                const shortMessage = message.length > 200 ? message.substring(0, 197) + '...' : message;
-                const shortEncoded = encodeURIComponent(shortMessage);
-                const shortUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${shortEncoded}`;
-                
-                if (shortUrl.length > 2000) {
-                    alert('Сообщение слишком длинное. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
-                    return false;
-                }
-                
-                window.open(shortUrl, '_blank');
+                    // Очищаем форму
+                    if (form) form.reset();
+                }, 500);
             } else {
-                window.open(telegramUrl, '_blank');
+                // Fallback - открываем с текстом в URL
+                const encoded = encodeURIComponent(message);
+                window.open(`https://t.me/${CONFIG.TELEGRAM.replace('+', '')}?text=${encoded}`, '_blank');
+                
+                setTimeout(() => {
+                    alert('Telegram открыт! Нажмите "Отправить"');
+                    if (form) form.reset();
+                }, 500);
             }
-            
-            setTimeout(() => {
-                alert('✅ Telegram открыт!\n\n' +
-                      'Нажмите "Отправить" чтобы отправить заявку.\n' +
-                      'Свяжемся с вами, как можно скорее!');
-            }, 1000);
             
             return true;
         } catch (error) {
-            console.error('Ошибка при открытии Telegram:', error);
-            
-            // Показываем сообщение с инструкцией
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0,0,0,0.8);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            `;
-            
-            modal.innerHTML = `
-                <div style="background: white; padding: 25px; border-radius: 10px; max-width: 500px; width: 100%;">
-                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Не удалось открыть Telegram</h3>
-                    <p>Пожалуйста, отправьте сообщение вручную:</p>
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <p style="margin: 0 0 10px 0; font-weight: bold;">Telegram:</p>
-                        <p style="margin: 0; font-size: 1.1rem; color: #2c3e50;">@+79770005127</p>
-                    </div>
-                    <p>Скопируйте текст ниже и отправьте его в Telegram:</p>
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 12px;">
-                        ${message.replace(/\n/g, '<br>')}
-                    </div>
-                    <div style="display: flex; gap: 10px; margin-top: 20px;">
-                        <button onclick="copyFormText()" style="padding: 12px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Копировать текст</button>
-                        <button onclick="this.closest('.modal').remove()" style="padding: 12px 20px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer;">Закрыть</button>
-                    </div>
-                </div>
-            `;
-            
-            modal.classList.add('modal');
-            document.body.appendChild(modal);
-            
-            // Добавляем функцию копирования
-            window.copyFormText = function() {
-                const textDiv = modal.querySelector('div[style*="font-family: monospace"]');
-                const text = textDiv.textContent || textDiv.innerText;
-                
-                const tempTextArea = document.createElement('textarea');
-                tempTextArea.value = text;
-                document.body.appendChild(tempTextArea);
-                tempTextArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    const copyBtn = modal.querySelector('button[onclick*="copyFormText"]');
-                    copyBtn.textContent = 'Скопировано!';
-                    copyBtn.style.background = '#27ae60';
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Копировать текст';
-                        copyBtn.style.background = '#3498db';
-                    }, 2000);
-                } catch (err) {
-                    console.error('Не удалось скопировать:', err);
-                } finally {
-                    document.body.removeChild(tempTextArea);
-                }
-            };
-            
+            console.error('Ошибка отправки:', error);
+            alert('Произошла ошибка. Пожалуйста, отправьте сообщение вручную:\n' + message);
             return false;
         }
     }
     
-    /**
-     * Показать сообщение об успехе
-     * @param {string} message - Текст сообщения
-     */
-    function showSuccess(message) {
-        alert('✅ ' + message);
+    // ============ КАЛЬКУЛЯТОР АРЕНДЫ КОВРОВ ============
+    function initCalculatorForm() {
+        const form = document.getElementById('calculatorForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!checkConsent('calculatorForm')) return;
+            
+            const region = document.getElementById('calc-region')?.value;
+            const size = document.getElementById('calc-size')?.value;
+            const frequency = document.getElementById('calc-frequency')?.value;
+            const quantity = document.getElementById('calc-quantity')?.value;
+            
+            if (!region || !size || !frequency || !quantity) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            // Получаем цену из priceData
+            let price = 1000; // Заглушка
+            if (window.priceData && window.priceData[region] && window.priceData[region][size]) {
+                price = window.priceData[region][size][frequency] || 1000;
+            }
+            
+            const total = price * parseInt(quantity) * getFrequencyMultiplier(frequency);
+            
+            const message = createCalculatorMessage({
+                region, size, frequency, quantity, price, total
+            });
+            
+            sendToTelegram(message, form);
+        });
     }
     
-    /**
-     * Показать сообщение об ошибке
-     * @param {string} message - Текст сообщения
-     */
-    function showError(message) {
-        alert('❌ ' + message);
+    function getFrequencyMultiplier(freq) {
+        const multipliers = {
+            '1 раз в две недели': 2,
+            '1 раз в неделю': 4,
+            '2 раза в неделю': 8,
+            '3 раза в неделю': 12,
+            '4 раза в неделю': 16,
+            '5 раз в неделю': 20,
+            '6 раз в неделю': 24,
+            '7 раз в неделю': 28
+        };
+        return multipliers[freq] || 4;
     }
     
-    /**
-     * Показать уведомление (toast)
-     * @param {string} message - Текст уведомления
-     * @param {string} type - Тип (success, error, info)
-     */
-    function showToast(message, type = 'info') {
-        // Удаляем существующие уведомления
-        const existingToast = document.querySelector('.form-toast');
-        if (existingToast) {
-            existingToast.remove();
-        }
-        
-        // Создаем уведомление
-        const toast = document.createElement('div');
-        toast.className = 'form-toast';
-        toast.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background: ${type === 'success' ? '#27ae60' : type === 'error' ? '#e74c3c' : '#3498db'};
-            color: white;
-            border-radius: 8px;
-            z-index: 10000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            animation: slideIn 0.3s ease;
-            max-width: 300px;
-            font-size: 14px;
-            font-weight: 500;
-        `;
-        
-        toast.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        document.body.appendChild(toast);
-        
-        // Добавляем стили анимации
-        if (!document.querySelector('#form-toast-styles')) {
-            const style = document.createElement('style');
-            style.id = 'form-toast-styles';
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        // Удаляем через 3 секунды
-        setTimeout(() => {
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
-        }, 3000);
+    function createCalculatorMessage(data) {
+        return `🧮 НОВЫЙ РАСЧЕТ АРЕНДЫ КОВРОВ
+
+📍 Регион: ${data.region}
+📏 Размер: ${data.size}
+🔄 Периодичность: ${data.frequency}
+🔢 Количество: ${data.quantity} шт.
+💰 Цена за замену: ${data.price} ₽
+📊 Итого за месяц: ${data.total} ₽
+
+🌐 Страница: Калькулятор
+🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
     }
     
-    // ============ ОБРАБОТКА ФОРМ ============
+    // ============ ТЕНДЕРНЫЙ КАЛЬКУЛЯТОР ============
+    function initTenderForm() {
+        const form = document.getElementById('tenderForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!checkConsent('tenderForm')) return;
+            
+            const region = document.getElementById('tender-region')?.value;
+            const size = document.getElementById('tender-size')?.value;
+            
+            if (!region || !size) {
+                alert('Пожалуйста, выберите регион и размер');
+                return;
+            }
+            
+            // Собираем данные по месяцам
+            let message = `📋 ТЕНДЕРНЫЙ РАСЧЕТ АРЕНДЫ КОВРОВ\n\n`;
+            message += `📍 Регион: ${region}\n`;
+            message += `📏 Размер: ${size}\n\n`;
+            message += `📅 Детализация по месяцам:\n`;
+            
+            let total = 0;
+            const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
+                          'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+            
+            months.forEach(month => {
+                const qty = document.getElementById(`${month}-qty`)?.value;
+                const changes = document.getElementById(`${month}-changes`)?.value;
+                
+                if (qty && changes && parseInt(qty) > 0 && parseInt(changes) > 0) {
+                    const monthTotal = 1000 * parseInt(qty) * parseInt(changes); // Заглушка
+                    total += monthTotal;
+                    message += `• ${month}: ${qty} ковров × ${changes} замен = ${monthTotal.toLocaleString('ru-RU')} ₽\n`;
+                }
+            });
+            
+            message += `\n💰 ИТОГО: ${total.toLocaleString('ru-RU')} ₽\n\n`;
+            message += `🌐 Страница: Тендерный калькулятор\n`;
+            message += `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            sendToTelegram(message, form);
+        });
+    }
     
-    /**
-     * Обработка формы обратной связи
-     */
+    // ============ ВОССТАНОВЛЕНИЕ ПОЛОВ ============
+    function initFloorForm() {
+        const form = document.getElementById('floorRestorationForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!checkConsent('floorRestorationForm')) return;
+            
+            const name = document.getElementById('contactName')?.value.trim();
+            const phone = document.getElementById('contactPhone')?.value.trim();
+            const floorType = document.getElementById('floorType')?.value;
+            const area = document.getElementById('area')?.value;
+            
+            if (!name || !phone) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
+                return;
+            }
+            
+            const floorTypes = {
+                'parket': 'Паркет',
+                'marble': 'Мрамор',
+                'granite': 'Гранит',
+                'linoleum': 'Линолеум',
+                'ceramic': 'Керамогранит',
+                'other': 'Другое'
+            };
+            
+            const message = `📋 ЗАЯВКА НА ВОССТАНОВЛЕНИЕ ПОЛОВ
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+🏢 Тип пола: ${floorTypes[floorType] || 'Не указан'}
+📏 Площадь: ${area || 'Не указана'} м²
+
+🌐 Страница: Восстановление полов
+🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            sendToTelegram(message, form);
+        });
+    }
+    
+    // ============ МОЙКА ВИТРИН ============
+    function initWindowForm() {
+        const form = document.getElementById('windowCleaningForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!checkConsent('windowCleaningForm')) return;
+            
+            const company = document.getElementById('company')?.value.trim();
+            const city = document.getElementById('city')?.value.trim();
+            const phone = document.getElementById('contactPhone')?.value.trim();
+            const serviceType = document.getElementById('serviceType')?.value;
+            
+            if (!company || !city || !phone) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
+                return;
+            }
+            
+            const services = {
+                'regular': 'Регулярная мойка',
+                'one-time': 'Разовая мойка',
+                'complex': 'Комплексная мойка фасада',
+                'highrise': 'Высотные работы'
+            };
+            
+            const message = `📋 ЗАЯВКА НА МОЙКУ ВИТРИН
+
+🏢 Компания: ${company}
+📍 Город: ${city}
+📞 Телефон: ${phone}
+🔧 Услуга: ${services[serviceType] || 'Не указана'}
+
+🌐 Страница: Мойка витрин
+🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            sendToTelegram(message, form);
+        });
+    }
+    
+    // ============ АУТСТАФФИНГ ============
+    function initOutstaffingForm() {
+        const form = document.getElementById('outstaffingForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!checkConsent('outstaffingForm')) return;
+            
+            const name = document.getElementById('outstaffName')?.value.trim();
+            const phone = document.getElementById('outstaffPhone')?.value.trim();
+            const company = document.getElementById('outstaffCompany')?.value.trim();
+            const employees = document.getElementById('outstaffEmployees')?.value;
+            
+            if (!name || !phone) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
+                return;
+            }
+            
+            const message = `📋 ЗАЯВКА НА АУТСТАФФИНГ
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+🏢 Компания: ${company || 'Не указана'}
+👥 Количество сотрудников: ${employees || 'Не указано'}
+
+🌐 Страница: Аутстаффинг
+🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            sendToTelegram(message, form);
+        });
+    }
+    
+    // ============ ФОРМА FAQ ============
+    function initFAQForm() {
+        const form = document.getElementById('faqForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!checkConsent('faqForm')) return;
+            
+            const name = document.getElementById('name')?.value.trim();
+            const phone = document.getElementById('phone')?.value.trim();
+            const email = document.getElementById('email')?.value.trim();
+            const category = document.getElementById('faqCategory')?.value;
+            const question = document.getElementById('question')?.value.trim();
+            
+            if (!name || !phone || !question) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
+                return;
+            }
+            
+            if (email && !validateEmail(email)) {
+                alert('Пожалуйста, введите корректный email');
+                return;
+            }
+            
+            const categories = {
+                'kovry': 'Аренда ковров',
+                'vitrini': 'Мойка витрин',
+                'poly': 'Восстановление полов',
+                'outstaff': 'Аутстаффинг',
+                'other': 'Другое'
+            };
+            
+            const message = `❓ НОВЫЙ ВОПРОС ИЗ FAQ
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+📧 Email: ${email || 'не указан'}
+🏷 Категория: ${categories[category] || 'Не указана'}
+
+❔ Вопрос:
+${question}
+
+🌐 Страница: FAQ
+🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
+            
+            sendToTelegram(message, form);
+        });
+    }
+    
+    // ============ КОНТАКТНАЯ ФОРМА ============
     function initContactForm() {
         const form = document.getElementById('contactForm');
         if (!form) return;
@@ -319,295 +417,49 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Проверяем согласие
-            const consentCheckbox = document.getElementById('contactConsent');
-            if (!consentCheckbox || !consentCheckbox.checked) {
-                showError('Пожалуйста, дайте согласие на обработку персональных данных');
-                consentCheckbox?.focus();
+            if (!checkConsent('contactForm')) return;
+            
+            const name = document.getElementById('contactName')?.value.trim();
+            const phone = document.getElementById('contactPhone')?.value.trim();
+            const email = document.getElementById('contactEmail')?.value.trim();
+            const message = document.getElementById('contactMessage')?.value.trim();
+            
+            if (!name || !phone || !email) {
+                alert('Пожалуйста, заполните обязательные поля');
                 return;
             }
             
-            // Собираем данные
-            const name = document.getElementById('contactName')?.value.trim() || '';
-            const email = document.getElementById('contactEmail')?.value.trim() || '';
-            const phone = document.getElementById('contactPhone')?.value.trim() || '';
-            const message = document.getElementById('contactMessage')?.value.trim() || '';
-            
-            // Валидация
-            if (!name) {
-                showError('Пожалуйста, введите ваше имя');
-                document.getElementById('contactName')?.focus();
+            if (!validatePhone(phone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
                 return;
             }
             
-            if (!phone || !validatePhone(phone)) {
-                showError('Пожалуйста, введите корректный номер телефона');
-                document.getElementById('contactPhone')?.focus();
+            if (!validateEmail(email)) {
+                alert('Пожалуйста, введите корректный email');
                 return;
             }
             
-            if (email && !validateEmail(email)) {
-                showError('Пожалуйста, введите корректный email адрес');
-                document.getElementById('contactEmail')?.focus();
-                return;
-            }
+            const telegramMessage = `📋 НОВОЕ СООБЩЕНИЕ
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+📧 Email: ${email}
+
+💬 Сообщение:
+${message || 'не указано'}
+
+🌐 Страница: Контакты
+🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
             
-            // Формируем сообщение для Telegram
-            const telegramMessage = createShortTelegramMessage({
-                name,
-                phone: formatPhone(phone),
-                email,
-                message
-            });
-            
-            // Открываем Telegram
-            const success = openTelegramWithMessage(telegramMessage);
-            
-            if (success) {
-                // Очищаем форму
-                form.reset();
-                showToast('Заявка отправлена! Свяжемся с вами, как можно скорее', 'success');
-            }
-        });
-        
-        // Автоформатирование телефона
-        const phoneInput = document.getElementById('contactPhone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                e.target.value = formatPhone(e.target.value);
-            });
-        }
-    }
-    
-    /**
-     * Обработка формы заявки на мойку витрин
-     */
-    function initWindowCleaningForm() {
-        const form = document.getElementById('window-cleaning-form');
-        if (!form) return;
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Проверяем согласие
-            const consentCheckbox = document.getElementById('privacy-agreement');
-            if (!consentCheckbox || !consentCheckbox.checked) {
-                showError('Пожалуйста, дайте согласие на обработку персональных данных');
-                consentCheckbox?.focus();
-                return;
-            }
-            
-            // Собираем данные
-            const company = document.getElementById('company')?.value.trim() || '';
-            const city = document.getElementById('city')?.value.trim() || '';
-            const phone = document.getElementById('phone')?.value.trim() || '';
-            const serviceType = document.getElementById('service-type')?.value || '';
-            const message = document.getElementById('message')?.value.trim() || '';
-            
-            // Валидация
-            if (!company) {
-                showError('Пожалуйста, введите название компании');
-                document.getElementById('company')?.focus();
-                return;
-            }
-            
-            if (!city) {
-                showError('Пожалуйста, введите город');
-                document.getElementById('city')?.focus();
-                return;
-            }
-            
-            if (!phone || !validatePhone(phone)) {
-                showError('Пожалуйста, введите корректный номер телефона');
-                document.getElementById('phone')?.focus();
-                return;
-            }
-            
-            // Текст услуги
-            const serviceTypeText = {
-                'regular': 'Регулярная мойка',
-                'one-time': 'Разовая мойка',
-                'complex': 'Комплексная мойка фасада',
-                'subscription': 'Абонентское обслуживание',
-                '': 'Не указано'
-            }[serviceType] || 'Не указано';
-            
-            // Формируем сообщение для Telegram
-            const telegramMessage = createShortTelegramMessage({
-                company,
-                city,
-                phone: formatPhone(phone),
-                service: serviceTypeText,
-                message
-            });
-            
-            // Открываем Telegram
-            const success = openTelegramWithMessage(telegramMessage);
-            
-            if (success) {
-                // Очищаем форму
-                form.reset();
-                showToast('Заявка на мойку витрин отправлена!', 'success');
-            }
+            sendToTelegram(telegramMessage, form);
         });
     }
     
-    /**
-     * Обработка быстрой формы на главной
-     */
-    function initQuickForm() {
-        const form = document.getElementById('quickContactForm');
-        if (!form) return;
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Проверяем согласие
-            const consentCheckbox = document.getElementById('quickConsent');
-            if (!consentCheckbox || !consentCheckbox.checked) {
-                showError('Пожалуйста, дайте согласие на обработку персональных данных');
-                consentCheckbox?.focus();
-                return;
-            }
-            
-            // Собираем данные
-            const name = document.getElementById('quickName')?.value.trim() || '';
-            const phone = document.getElementById('quickPhone')?.value.trim() || '';
-            const service = document.getElementById('quickService')?.value || '';
-            
-            // Валидация
-            if (!name) {
-                showError('Пожалуйста, введите ваше имя');
-                document.getElementById('quickName')?.focus();
-                return;
-            }
-            
-            if (!phone || !validatePhone(phone)) {
-                showError('Пожалуйста, введите корректный номер телефона');
-                document.getElementById('quickPhone')?.focus();
-                return;
-            }
-            
-            // Текст услуги
-            const serviceText = {
-                'kovry': 'Аренда ковров',
-                'vitriny': 'Мойка витрин',
-                'poly': 'Восстановление полов',
-                'outstaffing': 'Аутстаффинг',
-                '': 'Не указана'
-            }[service] || 'Не указана';
-            
-            // Формируем сообщение для Telegram
-            const telegramMessage = createShortTelegramMessage({
-                name,
-                phone: formatPhone(phone),
-                service: serviceText
-            });
-            
-            // Открываем Telegram
-            const success = openTelegramWithMessage(telegramMessage);
-            
-            if (success) {
-                // Очищаем форму
-                form.reset();
-                showToast('Быстрая заявка отправлена!', 'success');
-            }
-        });
-    }
-    
-    /**
-     * Инициализация всех форм на странице
-     */
-    function initAllForms() {
-        console.log('📝 Инициализация форм на странице');
-        
-        initContactForm();
-        initWindowCleaningForm();
-        initQuickForm();
-        
-        // Инициализация автоформатирования телефона во всех формах
-        document.querySelectorAll('input[type="tel"]').forEach(input => {
-            input.addEventListener('input', function(e) {
-                e.target.value = formatPhone(e.target.value);
-            });
-        });
-        
-        // Инициализация форм на странице калькулятора
-        initCalculatorContactForm();
-        
-        console.log(`✅ Формы инициализированы`);
-    }
-    
-    /**
-     * Обработка формы контактов на странице калькулятора
-     */
-    function initCalculatorContactForm() {
-        const form = document.getElementById('calculatorContactForm');
-        if (!form) return;
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const consentCheckbox = document.getElementById('calcConsent');
-            if (!consentCheckbox || !consentCheckbox.checked) {
-                showError('Пожалуйста, дайте согласие на обработку персональных данных');
-                consentCheckbox?.focus();
-                return;
-            }
-            
-            const name = document.getElementById('calcName')?.value.trim() || '';
-            const phone = document.getElementById('calcPhone')?.value.trim() || '';
-            const question = document.getElementById('calcQuestion')?.value.trim() || '';
-            
-            if (!name) {
-                showError('Пожалуйста, введите ваше имя');
-                document.getElementById('calcName')?.focus();
-                return;
-            }
-            
-            if (!phone || !validatePhone(phone)) {
-                showError('Пожалуйста, введите корректный номер телефона');
-                document.getElementById('calcPhone')?.focus();
-                return;
-            }
-            
-            const message = `❓ ВОПРОС ПО КАЛЬКУЛЯТОРУ АРЕНДЫ КОВРОВ ❓\n\n` +
-                           `👤 Имя: ${name}\n` +
-                           `📞 Телефон: ${formatPhone(phone)}\n` +
-                           `${question ? `❓ Вопрос:\n${question}\n\n` : ''}` +
-                           `🌐 Страница: Калькулятор\n` +
-                           `🕒 Время: ${new Date().toLocaleString('ru-RU')}`;
-            
-            const success = openTelegramWithMessage(message);
-            
-            if (success) {
-                form.reset();
-                showToast('Вопрос отправлен! Свяжемся с вами, как можно скорее', 'success');
-            }
-        });
-        
-        // Автоформатирование телефона
-        const phoneInput = document.getElementById('calcPhone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                e.target.value = formatPhone(e.target.value);
-            });
-        }
-    }
-    
-    // ============ ИНИЦИАЛИЗАЦИЯ ============
-    document.addEventListener('DOMContentLoaded', initAllForms);
-    
-    // ============ ЭКСПОРТ ============
-    window.FormsManager = {
-        initAllForms,
+    // Экспорт для использования в других скриптах
+    window.Forms = {
+        sendToTelegram,
         validatePhone,
-        validateEmail,
-        formatPhone,
-        createShortTelegramMessage,
-        openTelegramWithMessage,
-        showToast
+        validateEmail
     };
     
 })();
-// ============ КОНЕЦ FORMS.JS ============

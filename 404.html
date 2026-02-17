@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- ============================================
+     404.HTML - Страница ошибки 404
+     Версия: 1.0 (18.02.2026)
+     ============================================ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <title>Страница не найдена (404) | МИРУМ</title>
+    <meta name="description" content="Страница не найдена. Вернитесь на главную или воспользуйтесь поиском.">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- ФАВИКОНЫ -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
+    <!-- СТИЛИ -->
+    <link rel="stylesheet" href="/css/style.css?v=9.7">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .error-container {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 20px rgba(22,160,133,0.2);
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .error-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto 30px;
+        }
+        
+        .error-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .error-btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .error-btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .error-btn-primary:hover {
+            background: var(--light-accent);
+            transform: translateY(-2px);
+        }
+        
+        .error-btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .error-btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <script src="/includes/header.js"></script>
+    
+    <main>
+        <div class="error-container">
+            <div>
+                <div class="error-code">404</div>
+                <h1 class="error-title">Страница не найдена</h1>
+                <p class="error-text">Возможно, она была удалена или вы перешли по неверной ссылке. Но не переживайте — у нас есть много других полезных страниц!</p>
+                
+                <div class="error-buttons">
+                    <a href="/" class="error-btn error-btn-primary">
+                        <i class="fas fa-home"></i> На главную
+                    </a>
+                    <a href="/gallery.html" class="error-btn error-btn-secondary">
+                        <i class="fas fa-images"></i> Смотреть галерею
+                    </a>
+                    <a href="/calculator.html" class="error-btn error-btn-secondary">
+                        <i class="fas fa-calculator"></i> Калькулятор
+                    </a>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <p style="color: var(--text-light);">Или напишите нам в Telegram — мы поможем!</p>
+                    <a href="https://t.me/+79770005127" class="btn btn-telegram" style="margin-top: 15px;">
+                        <i class="fab fa-telegram"></i> Написать в Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/includes/footer.js"></script>
+
+</body>
+</html>
+<!-- ============ КОНЕЦ 404.HTML ============ -->

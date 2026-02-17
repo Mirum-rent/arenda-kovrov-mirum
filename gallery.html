@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<!-- ============================================
+     GALLERY.HTML - Полная фотогалерея МИРУМ
+     Версия: 9.0 (18.02.2026) - 100+ ФОТОГРАФИЙ
+     ============================================ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- ============ СЕО МЕТАДАННЫЕ ============ -->
+    <title>Фотогалерея | МИРУМ - 100+ реальных примеров работ по всей России</title>
+    <meta name="description" content="✅ Фотогалерея МИРУМ: 100+ реальных фотографий с объектов. Аренда грязезащитных ковров, мойка витрин, восстановление полов. Примеры работ в Москве, СПб, Екатеринбурге, Казани и других городах.">
+    <meta name="keywords" content="фотогалерея, примеры работ, аренда ковров фото, мойка витрин фото, восстановление полов фото, до и после, кейсы клининга, реальные проекты, фотографии объектов">
+    
+    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/gallery.html" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Фотогалерея МИРУМ - 100+ примеров работ">
+    <meta property="og:description" content="Реальные фотографии с объектов по всей России: аренда ковров, мойка витрин, восстановление полов. До и после.">
+    <meta property="og:url" content="https://arenda-kovrov-mirum.ru/gallery.html">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_1.webp">
+    
+    <!-- ============ ФАВИКОНЫ ============ -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
+    <!-- ============ СТИЛИ ============ -->
+    <link rel="stylesheet" href="/css/style.css?v=9.6">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.6" media="(max-width: 768px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ГАЛЕРЕИ ============ -->
+    <style>
+        /* Герой-секция */
+        .gallery-hero {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%);
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        
+        .gallery-hero h1 {
+            color: white !important;
+            margin-bottom: 15px;
+        }
+        
+        .gallery-hero p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Статистика */
+        .gallery-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .gallery-stat {
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .gallery-stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #16a085;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Категории */
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 0 15px;
+        }
+        
+        .gallery-category-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #2c3e50;
+        }
+        
+        .gallery-category-btn.active,
+        .gallery-category-btn:hover {
+            background: #16a085;
+            color: white;
+            border-color: #16a085;
+        }
+        
+        /* Сетка галереи */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        /* Элемент галереи */
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Бейдж категории */
+        .gallery-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #16a085;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Информация о фото */
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px 15px 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
+        
+        .gallery-info h3 {
+            color: white;
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+        }
+        
+        .gallery-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* Бейдж "До/После" */
+        .before-after-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .before-after-badge.before {
+            background: rgba(231, 76, 60, 0.9);
+        }
+        
+        .before-after-badge.after {
+            background: rgba(46, 204, 113, 0.9);
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            margin-top: 5vh;
+        }
+        
+        .modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: white;
+            padding: 20px 0;
+        }
+        
+        .modal-caption h2 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .modal-caption p {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #16a085;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            pointer-events: none;
+        }
+        
+        .modal-nav button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.3s;
+        }
+        
+        .modal-nav button:hover {
+            background: #16a085;
+        }
+        
+        /* Кнопка загрузить еще */
+        .load-more {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .load-more-btn {
+            background: white;
+            border: 2px solid #16a085;
+            color: #16a085;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .load-more-btn:hover {
+            background: #16a085;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(22,160,133,0.3);
+        }
+        
+        /* Пустые состояния */
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .gallery-hero {
+                padding: 60px 0 30px;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-stats {
+                gap: 20px;
+            }
+            
+            .gallery-stat {
+                min-width: 120px;
+            }
+            
+            .gallery-stat-number {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .gallery-categories {
+                gap: 10px;
+            }
+            
+            .gallery-category-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 70vh;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
+            
+            .modal-nav {
+                padding: 0 15px;
+            }
+            
+            .modal-nav button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 16/9;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HEADER (ОБЩИЙ) ============ -->
+    <script src="/includes/header.js"></script>
+    
+    <!-- ============ ОСНОВНОЙ КОНТЕНТ ============ -->
+    <main>
+        
+        <!-- Хлебные крошки -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+                if (breadcrumbCurrent) {
+                    breadcrumbCurrent.style.display = 'inline';
+                    breadcrumbCurrent.innerHTML = `
+                        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <span itemprop="item">
+                                <span itemprop="name" class="current-page">Фотогалерея</span>
+                            </span>
+                            <meta itemprop="position" content="2" />
+                        </span>
+                    `;
+                }
+            });
+        </script>
+
+        <!-- ГЕРОЙ-СЕКЦИЯ -->
+        <section class="gallery-hero">
+            <div class="container">
+                <h1>Фотогалерея наших работ</h1>
+                <p>Более 100 реальных фотографий с объектов по всей России. Аренда грязезащитных ковров, мойка витрин, восстановление полов до и после. Москва, Санкт-Петербург, Екатеринбург, Казань, Новосибирск и другие города.</p>
+                
+                <div class="gallery-stats">
+                    <div class="gallery-stat">
+                        <span class="gallery-stat-number">100+</span>
+                        <span class="gallery-stat-label">фотографий</span>
+                    </div>
+                    <div class="gallery-stat">
+                        <span class="gallery-stat-number">40+</span>
+                        <span class="gallery-stat-label">городов</span>
+                    </div>
+                    <div class="gallery-stat">
+                        <span class="gallery-stat-number">500+</span>
+                        <span class="gallery-stat-label">объектов</span>
+                    </div>
+                    <div class="gallery-stat">
+                        <span class="gallery-stat-number">16</span>
+                        <span class="gallery-stat-label">лет опыта</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КАТЕГОРИИ -->
+        <div class="container">
+            <div class="gallery-categories">
+                <button class="gallery-category-btn active" data-category="all">Все работы (100+)</button>
+                <button class="gallery-category-btn" data-category="kovry">Аренда ковров (45)</button>
+                <button class="gallery-category-btn" data-category="vitrini">Мойка витрин (30)</button>
+                <button class="gallery-category-btn" data-category="poly">Восстановление полов (35)</button>
+            </div>
+        </div>
+
+        <!-- ОСНОВНАЯ СЕТКА ГАЛЕРЕИ -->
+        <div class="container">
+            <div class="gallery-grid" id="galleryGrid">
+                
+                <!-- ============ КАТЕГОРИЯ: АРЕНДА КОВРОВ (45 ФОТО) ============ -->
+                
+                <!-- Фото 1-10: Москва и МО -->
+                <div class="gallery-item" data-category="kovry" data-index="1">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_1.webp" loading="lazy" alt="Грязезащитные ковры в стоматологии">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Стоматологическая клиника</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва, ЦАО</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="2">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_2.webp" loading="lazy" alt="Ковры в салоне красоты">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Салон красоты</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="3">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_3.webp" loading="lazy" alt="Грязезащита в массажном салоне">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Массажный салон</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Уфа</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="4">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_4.webp" loading="lazy" alt="Ковры в юридическом кабинете">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Юридический кабинет</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Астрахань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="5">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_5.webp" loading="lazy" alt="Грязезащита в стоматологическом кабинете">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Стоматологический кабинет</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Новосибирск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="6">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_6.webp" loading="lazy" alt="Ковры в парикмахерской">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Парикмахерская</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="7">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_7.webp" loading="lazy" alt="Грязезащита в салоне маникюра">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Салон маникюра</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="8">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_8.webp" loading="lazy" alt="Ковры в цветочном магазине">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Цветочный магазин</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Челябинск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="9">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_9.webp" loading="lazy" alt="Грязезащита в кофейне">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Кофейня</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Пермь</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="10">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_10.webp" loading="lazy" alt="Ковры в сетевом магазине">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Сетевой магазин</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <!-- Фото 11-20: Московская область и регионы -->
+                <div class="gallery-item" data-category="kovry" data-index="11">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_11.webp" loading="lazy" alt="Грязезащита в магазине у дома">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Магазин у дома</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Московская область</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="12">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_12.webp" loading="lazy" alt="Ковры в торговом центре">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Торговый центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="13">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_13.webp" loading="lazy" alt="Грязезащита в бизнес-центре">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Бизнес-центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Уфа</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="14">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_14.webp" loading="lazy" alt="Ковры в школе">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Школа</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Астрахань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="15">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_15.webp" loading="lazy" alt="Грязезащита в институте">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Институт</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Новосибирск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="16">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_16.webp" loading="lazy" alt="Ковры в автошколе">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Автошкола</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="17">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_17.webp" loading="lazy" alt="Грязезащита в тату-салоне">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Тату-салон</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="18">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_18.webp" loading="lazy" alt="Ковры в ресторане">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Ресторан</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Челябинск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="19">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_19.webp" loading="lazy" alt="Грязезащита в медицинском центре">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Медицинский центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Пермь</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="20">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_20.webp" loading="lazy" alt="Ковры в автоцентре">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Автоцентр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <!-- Фото 21-30: Различные объекты -->
+                <div class="gallery-item" data-category="kovry" data-index="21">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_21.webp" loading="lazy" alt="Ковры в массажном салоне Балашиха">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Массажный салон</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Балашиха</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="22">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_22.webp" loading="lazy" alt="Ковры в СПА-центре">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>СПА-центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Реутов</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="23">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(1).webp" loading="lazy" alt="Грязезащитные ковры в поликлинике">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Городская поликлиника</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="24">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(3).webp" loading="lazy" alt="Ковры в барбершопе">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Барбершоп</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="25">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(4).webp" loading="lazy" alt="Грязезащита в лаборатории">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Медицинская лаборатория</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Уфа</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="26">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(5).webp" loading="lazy" alt="Ковры в школе">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Школа</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="27">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(6).webp" loading="lazy" alt="Грязезащита в больнице">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Городская больница</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="28">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(7).webp" loading="lazy" alt="Ковры в институте">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Институт</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="29">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(8).webp" loading="lazy" alt="Грязезащита в центре организации">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Центр организации движения</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="30">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov%20(9).webp" loading="lazy" alt="Ковры в салоне красоты">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Салон красоты</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <!-- Фото 31-35: Тюмень и регионы -->
+                <div class="gallery-item" data-category="kovry" data-index="31">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_tumen%20(1).webp" loading="lazy" alt="Грязезащита в центре соцзащиты">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Центр соцзащиты</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="32">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_tumen%20(2).webp" loading="lazy" alt="Ковры в администрации">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Административное здание</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="33">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arendda_kovrov_tumen%20(3).webp" loading="lazy" alt="Грязезащита в школе искусств">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Детская художественная школа</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="34">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_tumen%20(4).webp" loading="lazy" alt="Ковры в ветклинике">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Ветеринарная клиника</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="35">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arendda_kovrov_tumen%20(5).webp" loading="lazy" alt="Грязезащита в центре занятости">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Центр занятости</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <!-- Фото 36-40: Разное -->
+                <div class="gallery-item" data-category="kovry" data-index="36">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_cheljabinsk%20(1).webp" loading="lazy" alt="Ковры в логистической компании">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Логистическая компания</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Челябинск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="37">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_cheljabinsk%20(2).webp" loading="lazy" alt="Ковры в УК">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Управляющая компания</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Челябинск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="38">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_cheljabinsk%20(3).webp" loading="lazy" alt="Ковры в медицинском центре">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Медицинский центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Челябинск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="39">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_moscow%20(1).webp" loading="lazy" alt="Ковры в администрации">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Районная администрация</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="40">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_moscow%20(2).webp" loading="lazy" alt="Ковры в ТСЖ">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>ТСЖ</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <!-- Фото 41-45: Оставшиеся -->
+                <div class="gallery-item" data-category="kovry" data-index="41">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_moscow%20(3).webp" loading="lazy" alt="Ковры в поликлинике">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Городская поликлиника</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="42">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice_moscow%20(4).webp" loading="lazy" alt="Ковры в архитектурном бюро">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Архитектурное бюро</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="43">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/service_kovrov%20(1).webp" loading="lazy" alt="Ковры в массажном салоне">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Массажный салон</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="44">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/service_kovrov%20(2).webp" loading="lazy" alt="Ковры в барбершопе">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Барбершоп</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Новосибирск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="kovry" data-index="45">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice%20(1).webp" loading="lazy" alt="Ковры в автосервисе">
+                    <span class="gallery-badge">Аренда ковров</span>
+                    <div class="gallery-info">
+                        <h3>Автосервис</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Ростов-на-Дону</div>
+                    </div>
+                </div>
+                
+                <!-- ============ КАТЕГОРИЯ: МОЙКА ВИТРИН (30 ФОТО) ============ -->
+                
+                <!-- Фото 46-55: Основные -->
+                <div class="gallery-item" data-category="vitrini" data-index="46">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/moika_fasadov%20(1).webp" loading="lazy" alt="Мойка фасада офисного центра">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Офисный центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="47">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/moika_fasadov%20(2).webp" loading="lazy" alt="Мойка фасада магазина">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин на Невском</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="48">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/moika_fasadov%20(3).webp" loading="lazy" alt="Высотные работы">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Бизнес-центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="49">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/moika_fasadov%20(4).webp" loading="lazy" alt="Мойка витрин бутика">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Бутик одежды</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Казань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="50">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/moika_fasadov%20(5).webp" loading="lazy" alt="Мойка фасада ресторана">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Ресторан на набережной</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Сочи</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="51">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_fasadov.webp" loading="lazy" alt="Мойка фасада Москва-Сити">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Москва-Сити</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="52">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(1).webp" loading="lazy" alt="Мойка витрины салона красоты">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Салон красоты</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Краснодар</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="53">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(10).webp" loading="lazy" alt="Мойка витрины аптеки">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Аптека</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Новосибирск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="54">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(17).webp" loading="lazy" alt="Мойка витрины магазина обуви">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин обуви</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Ростов-на-Дону</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="55">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(18).webp" loading="lazy" alt="Мойка витрины магазина электроники">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин электроники</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Уфа</div>
+                    </div>
+                </div>
+                
+                <!-- Продолжение мойки витрин -->
+                <div class="gallery-item" data-category="vitrini" data-index="56">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(20).webp" loading="lazy" alt="Мойка витрины ювелирного салона">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Ювелирный салон</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="57">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(21).webp" loading="lazy" alt="Мойка витрины магазина косметики">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин косметики</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Пермь</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="58">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(22).webp" loading="lazy" alt="Мойка витрины магазина одежды">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин одежды</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Челябинск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="59">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(7).webp" loading="lazy" alt="Мойка витрины цветочного магазина">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Цветочный магазин</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Воронеж</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="60">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/mojka_vitrin%20(9).webp" loading="lazy" alt="Мойка витрины кофейни">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Кофейня</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Самара</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="61">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/moyka_fasadov.webp" loading="lazy" alt="Мойка фасада бизнес-центра">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Бизнес-центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Нижний Новгород</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="62">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning1.webp" loading="lazy" alt="Мойка витрин магазина">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин одежды</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="63">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning2.webp" loading="lazy" alt="Чистка вывески">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Салон красоты</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="64">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning3.webp" loading="lazy" alt="Мойка фасада">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Торговый центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Краснодар</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="65">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning4.webp" loading="lazy" alt="Высотные работы">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Бизнес-центр</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="66">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning5.webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Бутик</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Казань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="67">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning6.webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Ресторан</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Сочи</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="68">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning7.webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Нижний Новгород</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="69">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning8.webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Аптека</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Самара</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="70">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning9.webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Кофейня</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Волгоград</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="71">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning10.webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Магазин</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Саратов</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="72">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/%D0%9C%D1%8B%D1%82%D1%8C%D0%B5_%D0%B2%D0%B8%D1%82%D1%80%D0%B8%D0%BD%20(1).webp" loading="lazy" alt="Мойка витрин">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Универмаг</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Саратов</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="vitrini" data-index="73">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/%D0%9C%D1%8B%D1%82%D1%8C%D0%B5_%D0%B2%D0%B8%D1%82%D1%80%D0%B8%D0%BD%20(2).webp" loading="lazy" alt="Мойка витрин ресторана">
+                    <span class="gallery-badge">Мойка витрин</span>
+                    <div class="gallery-info">
+                        <h3>Ресторан</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Волгоград</div>
+                    </div>
+                </div>
+                
+                <!-- ============ КАТЕГОРИЯ: ВОССТАНОВЛЕНИЕ ПОЛОВ (35 ФОТО) ============ -->
+                
+                <!-- Фото 74-80: До/После -->
+                <div class="gallery-item" data-category="poly" data-index="74">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_parket.webp" loading="lazy" alt="Паркет до восстановления">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>Паркет до циклевки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="75">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_parket2.webp" loading="lazy" alt="Паркет после восстановления">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Паркет после циклевки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="76">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Mramor_pol.webp" loading="lazy" alt="Мрамор до шлифовки">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>Мрамор до шлифовки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="77">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Mramor_pol2.webp" loading="lazy" alt="Мрамор после полировки">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Мрамор после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Санкт-Петербург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="78">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Granitn_pol.webp" loading="lazy" alt="Гранит до полировки">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>Гранит до полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="79">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Granit_pol2.webp" loading="lazy" alt="Гранит после полировки">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Гранит после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="80">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly-collage_before1.webp" loading="lazy" alt="Линолеум с пятнами">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>Линолеум с желтыми пятнами</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Казань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="81">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after1.webp" loading="lazy" alt="Линолеум после обработки">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Линолеум после обработки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Казань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="82">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_brecchia.webp" loading="lazy" alt="Брекчия">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Брекчия</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Нижний Новгород</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="83">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_teraccio.webp" loading="lazy" alt="Терраццо">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Терраццо</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Самара</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="84">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after1.webp" loading="lazy" alt="Восстановленный пол">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Восстановленный пол</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Воронеж</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="85">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after2.webp" loading="lazy" alt="Восстановленный пол">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Восстановленный пол</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Ростов-на-Дону</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="86">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after3.webp" loading="lazy" alt="Восстановленный пол">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Восстановленный пол</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Краснодар</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="87">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after4.webp" loading="lazy" alt="Восстановленный пол">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Восстановленный пол</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Волгоград</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="88">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after5.webp" loading="lazy" alt="Восстановленный пол">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Восстановленный пол</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Саратов</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="89">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poy_before1.webp" loading="lazy" alt="Пол до реставрации">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>До реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="90">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poy_before2.webp" loading="lazy" alt="Пол до реставрации">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>До реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> СПб</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="91">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poy_before3.webp" loading="lazy" alt="Пол до реставрации">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>До реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="92">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poy_before4.webp" loading="lazy" alt="Пол до реставрации">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>До реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Казань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="93">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poy_before5.webp" loading="lazy" alt="Пол до реставрации">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>До реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Нижний Новгород</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="94">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poy_before6.webp" loading="lazy" alt="Пол до реставрации">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>До реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Самара</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="95">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_brecchia2.webp" loading="lazy" alt="Брекчия">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Брекчия после реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Нижний Новгород</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="96">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_teraccio2.webp" loading="lazy" alt="Терраццо">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Терраццо после реставрации</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Самара</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="97">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly-collage_before2.webp" loading="lazy" alt="Линолеум до">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>Линолеум до</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Пермь</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="98">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after2.webp" loading="lazy" alt="Линолеум после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Линолеум после</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Пермь</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="99">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly-collage_before3.webp" loading="lazy" alt="Линолеум до">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge before">ДО</span>
+                    <div class="gallery-info">
+                        <h3>Линолеум до</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="100">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_collage_after3.webp" loading="lazy" alt="Линолеум после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <span class="before-after-badge after">ПОСЛЕ</span>
+                    <div class="gallery-info">
+                        <h3>Линолеум после</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Тюмень</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="101">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after1.webp" loading="lazy" alt="Камень после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Камень после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Москва</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="102">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after2.webp" loading="lazy" alt="Камень после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Камень после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> СПб</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="103">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after3.webp" loading="lazy" alt="Камень после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Камень после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Екатеринбург</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="104">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after4.webp" loading="lazy" alt="Камень после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Камень после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Казань</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="105">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Poly_after5.webp" loading="lazy" alt="Камень после">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Камень после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Нижний Новгород</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="106">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Pol_parket.webp" loading="lazy" alt="Паркет">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Паркет после циклевки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Новосибирск</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="107">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Mramor_pol2.webp" loading="lazy" alt="Мрамор">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Мрамор после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Краснодар</div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="poly" data-index="108">
+                    <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/Poly/Granit_pol2.webp" loading="lazy" alt="Гранит">
+                    <span class="gallery-badge">Восстановление полов</span>
+                    <div class="gallery-info">
+                        <h3>Гранит после полировки</h3>
+                        <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Ростов-на-Дону</div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Кнопка "Загрузить еще" (пока скрыта, т.к. все фото уже на странице) -->
+            <div class="load-more" style="display: none;">
+                <button class="load-more-btn" id="loadMoreBtn">
+                    <i class="fas fa-plus"></i> Загрузить еще
+                </button>
+            </div>
+            
+            <!-- Сообщение "Ничего не найдено" -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-images" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+                <h3>По вашему запросу ничего не найдено</h3>
+                <p>Попробуйте выбрать другую категорию</p>
+            </div>
+            
+        </div>
+
+        <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ПРОСМОТРА ФОТО -->
+        <div id="modal" class="modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div class="modal-caption" id="modalCaption"></div>
+            <div class="modal-nav">
+                <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ПРИЗЫВ К ДЕЙСТВИЮ -->
+        <div class="container" style="text-align: center; margin: 60px 0;">
+            <h2 style="color: #2c3e50; margin-bottom: 20px;">Хотите так же?</h2>
+            <p style="color: #666; max-width: 600px; margin: 0 auto 30px;">Закажите наши услуги и получите качественный результат. Напишите нам в Telegram для консультации и расчета.</p>
+            <a href="https://t.me/+79770005127" class="btn btn-telegram" style="font-size: 1.1rem; padding: 15px 40px;">
+                <i class="fab fa-telegram"></i> Получить консультацию
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ============ FOOTER (ОБЩИЙ) ============ -->
+    <script src="/includes/footer.js"></script>
+
+    <!-- ============ СКРИПТЫ ДЛЯ ГАЛЕРЕИ ============ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Элементы
+            const categoryBtns = document.querySelectorAll('.gallery-category-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeBtn = document.querySelector('.close-modal');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const noResults = document.getElementById('noResults');
+            
+            let currentIndex = 0;
+            let currentItems = [];
+            
+            // 1. ПЕРЕКЛЮЧЕНИЕ КАТЕГОРИЙ
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Обновляем активную кнопку
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    let visibleCount = 0;
+                    
+                    // Фильтруем элементы
+                    galleryItems.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                            visibleCount++;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Показываем сообщение, если ничего нет
+                    if (visibleCount === 0) {
+                        noResults.style.display = 'block';
+                    } else {
+                        noResults.style.display = 'none';
+                    }
+                });
+            });
+            
+            // 2. ОТКРЫТИЕ МОДАЛЬНОГО ОКНА
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    const img = this.querySelector('img');
+                    const title = this.querySelector('.gallery-info h3')?.textContent || '';
+                    const location = this.querySelector('.gallery-location')?.textContent || '';
+                    const category = this.querySelector('.gallery-badge')?.textContent || '';
+                    
+                    modalImg.src = img.src;
+                    modalCaption.innerHTML = `<h2>${title}</h2><p>${location} | ${category}</p>`;
+                    
+                    // Определяем текущую категорию и индекс для навигации
+                    const activeCategory = document.querySelector('.gallery-category-btn.active').dataset.category;
+                    currentItems = Array.from(galleryItems).filter(item => 
+                        activeCategory === 'all' || item.dataset.category === activeCategory
+                    );
+                    
+                    currentIndex = currentItems.indexOf(this);
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // 3. ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // 4. НАВИГАЦИЯ ПО ФОТО
+            function showImage(index) {
+                if (index < 0) index = currentItems.length - 1;
+                if (index >= currentItems.length) index = 0;
+                
+                const item = currentItems[index];
+                const img = item.querySelector('img');
+                const title = item.querySelector('.gallery-info h3')?.textContent || '';
+                const location = item.querySelector('.gallery-location')?.textContent || '';
+                const category = item.querySelector('.gallery-badge')?.textContent || '';
+                
+                modalImg.src = img.src;
+                modalCaption.innerHTML = `<h2>${title}</h2><p>${location} | ${category}</p>`;
+                currentIndex = index;
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                showImage(currentIndex - 1);
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                showImage(currentIndex + 1);
+            });
+            
+            // 5. КНОПКА "ЗАГРУЗИТЬ ЕЩЕ" (для будущего использования)
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    // Здесь можно добавить логику подгрузки фото
+                    alert('Функция загрузки еще фото будет доступна позже');
+                });
+            }
+            
+        });
+    </script>
+
+</body>
+</html>
+<!-- ============ КОНЕЦ GALLERY.HTML ============ -->

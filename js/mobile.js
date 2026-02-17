@@ -1,87 +1,88 @@
 // ============================================
-// MOBILE.JS - ПОЛНАЯ мобильная оптимизация для МИРУМ
-// Версия: 3.1 (17.02.2026) - ИСПРАВЛЕННАЯ (бургер, картинки, кэш)
+// MOBILE.JS - Мобильная оптимизация для МИРУМ
+// Версия: 3.2 (18.02.2026) - ПОЛНАЯ, ИСПРАВЛЕННАЯ
 // ============================================
 
 (function() {
     'use strict';
     
-    console.log('📱 Загружаем mobile.js v3.1...');
+    console.log('📱 mobile.js загружен, версия 3.2');
     
-    function initMobileMenu() {
-        console.log('📱 Инициализация мобильного меню...');
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📱 Инициализация мобильных функций...');
         
+        initMobileMenu();
+        initTouchOptimization();
+        initTableScroll();
+        initCalculatorMobile();
+        preventIOSZoom();
+        handleOrientationChange();
+    });
+    
+    // ============ МОБИЛЬНОЕ МЕНЮ ============
+    function initMobileMenu() {
         const menuToggle = document.getElementById('mobileMenuToggle');
         const mobileNav = document.getElementById('mobileNav');
         
-        // Проверяем наличие элементов меню
         if (!menuToggle || !mobileNav) {
             console.warn('📱 Элементы мобильного меню не найдены');
             return;
         }
         
-        console.log('✅ Мобильное меню найдено');
+        // Клонируем элементы для очистки старых обработчиков
+        const newToggle = menuToggle.cloneNode(true);
+        const newNav = mobileNav.cloneNode(true);
         
-        // Удаляем старые обработчики, клонируя и заменяя элемент (для очистки)
-        const newMenuToggle = menuToggle.cloneNode(true);
-        menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+        menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+        mobileNav.parentNode.replaceChild(newNav, mobileNav);
         
-        const newMobileNav = mobileNav.cloneNode(true);
-        mobileNav.parentNode.replaceChild(newMobileNav, mobileNav);
+        const finalToggle = document.getElementById('mobileMenuToggle');
+        const finalNav = document.getElementById('mobileNav');
         
-        // Получаем новые ссылки на элементы
-        const finalMenuToggle = document.getElementById('mobileMenuToggle');
-        const finalMobileNav = document.getElementById('mobileNav');
-        const finalMobileDropdowns = finalMobileNav.querySelectorAll('.mobile-dropdown');
-        
-        // Обработчик клика по бургеру
-        finalMenuToggle.addEventListener('click', function(e) {
+        // Открытие/закрытие меню
+        finalToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
             this.classList.toggle('active');
-            finalMobileNav.classList.toggle('active');
+            finalNav.classList.toggle('active');
             
-            // Блокируем прокрутку body когда меню открыто
-            if (finalMobileNav.classList.contains('active')) {
+            if (finalNav.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
                 document.body.classList.add('menu-open');
-                console.log('📱 Меню открыто');
             } else {
                 document.body.style.overflow = '';
                 document.body.classList.remove('menu-open');
-                console.log('📱 Меню закрыто');
             }
         });
         
-        // Закрытие меню при клике на ссылку
-        finalMobileNav.querySelectorAll('a').forEach(link => {
+        // Закрытие при клике на ссылку
+        finalNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
-                finalMenuToggle.classList.remove('active');
-                finalMobileNav.classList.remove('active');
+                finalToggle.classList.remove('active');
+                finalNav.classList.remove('active');
                 document.body.style.overflow = '';
                 document.body.classList.remove('menu-open');
             });
         });
         
-        // Закрытие меню при клике вне его (на затемненную область)
+        // Закрытие при клике вне меню
         document.addEventListener('click', function(e) {
-            if (finalMobileNav.classList.contains('active') && 
-                !finalMobileNav.contains(e.target) && 
-                !finalMenuToggle.contains(e.target)) {
-                finalMenuToggle.classList.remove('active');
-                finalMobileNav.classList.remove('active');
+            if (finalNav.classList.contains('active') && 
+                !finalNav.contains(e.target) && 
+                !finalToggle.contains(e.target)) {
+                finalToggle.classList.remove('active');
+                finalNav.classList.remove('active');
                 document.body.style.overflow = '';
                 document.body.classList.remove('menu-open');
             }
         });
         
-        // Обработка мобильных выпадающих списков
-        finalMobileDropdowns.forEach(dropdown => {
+        // Мобильные выпадающие списки
+        finalNav.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
             const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
             
             if (toggle) {
-                // Удаляем старые обработчики, клонируя
                 const newToggle = toggle.cloneNode(true);
                 toggle.parentNode.replaceChild(newToggle, toggle);
                 
@@ -89,234 +90,24 @@
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    // Закрываем другие открытые дропдауны
-                    finalMobileDropdowns.forEach(other => {
+                    // Закрываем другие открытые
+                    finalNav.querySelectorAll('.mobile-dropdown').forEach(other => {
                         if (other !== dropdown && other.classList.contains('active')) {
                             other.classList.remove('active');
                         }
                     });
                     
                     dropdown.classList.toggle('active');
-                    console.log('📱 Дропдаун: ' + (dropdown.classList.contains('active') ? 'открыт' : 'закрыт'));
                 });
             }
         });
     }
     
-    // ============ ФУНКЦИИ ДЛЯ КАЛЬКУЛЯТОРА ============
-    function initCalculatorMobile() {
-        console.log('📊 Настраиваем калькулятор для мобильных');
-        
-        adaptCalculatorElements();
-        improveCalculatorUX();
-        preventIOSZoom();
-        
-        window.addEventListener('resize', function() {
-            adaptCalculatorElements();
-        });
-    }
-    
-    function adaptCalculatorElements() {
-        const isMobile = window.innerWidth <= 768;
-        
-        if (isMobile) {
-            // Адаптация форм
-            document.querySelectorAll('.calculator-form select, .calculator-form input, .form-group select, .form-group input').forEach(el => {
-                el.style.fontSize = '16px';
-                el.style.padding = '15px';
-                el.style.minHeight = '48px';
-                el.style.borderRadius = '8px';
-                el.style.border = '1px solid #ddd';
-            });
-            
-            // Адаптация сетки месяцев для тендера
-            const monthInputs = document.querySelector('.month-inputs');
-            if (monthInputs) {
-                if (window.innerWidth <= 480) {
-                    monthInputs.style.display = 'grid';
-                    monthInputs.style.gridTemplateColumns = 'repeat(2, 1fr)';
-                } else {
-                    monthInputs.style.display = 'grid';
-                    monthInputs.style.gridTemplateColumns = 'repeat(3, 1fr)';
-                }
-                monthInputs.style.gap = '10px';
-            }
-            
-            // Адаптация позиций в корзине
-            document.querySelectorAll('.position-item').forEach(item => {
-                item.style.padding = '15px';
-                item.style.marginBottom = '15px';
-                item.style.fontSize = '15px';
-                item.style.flexDirection = 'column';
-            });
-            
-            // Адаптация таблиц
-            const tables = document.querySelectorAll('.comparison-table, table');
-            tables.forEach(table => {
-                if (table.offsetWidth > window.innerWidth - 40) {
-                    table.style.display = 'block';
-                    table.style.overflowX = 'auto';
-                    table.style.webkitOverflowScrolling = 'touch';
-                    table.style.whiteSpace = 'nowrap';
-                }
-            });
-            
-            // Адаптация кнопок
-            document.querySelectorAll('.btn, .calculator-actions button, .results-actions button').forEach(btn => {
-                btn.style.padding = '16px 20px';
-                btn.style.fontSize = '16px';
-                btn.style.minHeight = '48px';
-                btn.style.width = '100%';
-                btn.style.marginBottom = '10px';
-            });
-            
-            // Адаптация блоков с результатами
-            const totalResult = document.getElementById('totalResult');
-            if (totalResult) {
-                totalResult.style.padding = '15px';
-                totalResult.style.margin = '15px 0';
-            }
-            
-            // Делаем кнопки удаления побольше
-            document.querySelectorAll('.remove-position-btn').forEach(btn => {
-                btn.style.width = '44px';
-                btn.style.height = '44px';
-                btn.style.fontSize = '18px';
-            });
-        } else {
-            // Возвращаем стили для десктопа
-            document.querySelectorAll('.btn, .calculator-actions button, .results-actions button').forEach(btn => {
-                btn.style.width = '';
-                btn.style.marginBottom = '';
-            });
-        }
-    }
-    
-    function improveCalculatorUX() {
-        // Улучшение ввода чисел
-        document.querySelectorAll('input[type="number"]').forEach(input => {
-            input.setAttribute('inputmode', 'numeric');
-            input.setAttribute('pattern', '[0-9]*');
-            
-            // Предотвращаем появление ползунков на мобильных
-            input.style.MozAppearance = 'textfield';
-        });
-        
-        // Автоматическая прокрутка к результатам после расчета тендера
-        const calculateTenderBtn = document.getElementById('calculateTenderBtn');
-        if (calculateTenderBtn) {
-            calculateTenderBtn.addEventListener('click', function() {
-                setTimeout(() => {
-                    if (window.innerWidth <= 768) {
-                        const results = document.getElementById('tender-result');
-                        if (results && results.style.display !== 'none') {
-                            results.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'center' 
-                            });
-                        }
-                    }
-                }, 300);
-            });
-        }
-        
-        // Автоматическая прокрутка после добавления позиции
-        const addPositionBtn = document.getElementById('addPositionBtn');
-        if (addPositionBtn) {
-            addPositionBtn.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    const form = document.querySelector('.calculator-form');
-                    if (form) {
-                        setTimeout(() => {
-                            form.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'start' 
-                            });
-                        }, 100);
-                    }
-                }
-            });
-        }
-    }
-    
-    function preventIOSZoom() {
-        // Защита от зума на iOS при фокусе на полях ввода
-        if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-            document.addEventListener('touchstart', function(event) {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            }, { passive: false });
-            
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(event) {
-                const now = Date.now();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-            
-            // Увеличиваем размер шрифта в полях ввода, чтобы iOS не зумил
-            document.querySelectorAll('input, select, textarea').forEach(el => {
-                el.style.fontSize = '16px';
-            });
-        }
-    }
-    
-    // ============ ОБЩАЯ ОПТИМИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ ============
-    function initMobileOptimizations() {
-        console.log('📱 Применяем общую мобильную оптимизацию...');
-        
-        // Оптимизация загрузки изображений
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.classList.add('loaded');
-                        observer.unobserve(img);
-                    }
-                });
-            }, { rootMargin: '50px' });
-            
-            images.forEach(img => imageObserver.observe(img));
-        } else {
-            // Fallback для старых браузеров
-            images.forEach(img => img.classList.add('loaded'));
-        }
-        
-        // Обработка поворота экрана
-        let resizeTimeout;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(function() {
-                console.log('📱 Изменение размера экрана: ' + window.innerWidth + 'px');
-                
-                // Если ширина больше 768px, закрываем мобильное меню
-                if (window.innerWidth > 768) {
-                    const menuToggle = document.getElementById('mobileMenuToggle');
-                    const mobileNav = document.getElementById('mobileNav');
-                    
-                    if (menuToggle && mobileNav && mobileNav.classList.contains('active')) {
-                        menuToggle.classList.remove('active');
-                        mobileNav.classList.remove('active');
-                        document.body.style.overflow = '';
-                        document.body.classList.remove('menu-open');
-                    }
-                }
-                
-                // Переадаптируем калькулятор
-                adaptCalculatorElements();
-            }, 250);
-        });
-        
-        // Улучшение touch-событий
-        document.querySelectorAll('.btn, a, button, .mobile-menu-toggle').forEach(el => {
+    // ============ ОПТИМИЗАЦИЯ ДЛЯ ТАЧ-УСТРОЙСТВ ============
+    function initTouchOptimization() {
+        // Увеличиваем зоны клика
+        document.querySelectorAll('.btn, a, button, .faq-question, .gallery-item').forEach(el => {
             el.addEventListener('touchstart', function() {
-                // Добавляем небольшой эффект нажатия
                 this.style.opacity = '0.8';
             }, { passive: true });
             
@@ -325,28 +116,242 @@
             }, { passive: true });
         });
         
-        console.log('✅ Мобильная оптимизация завершена');
+        // Предотвращаем залипание при скролле
+        document.addEventListener('touchmove', function() {
+            // Ничего не делаем, просто разрешаем скролл
+        }, { passive: true });
     }
     
-    // Основная инициализация
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('📱 DOM загружен, инициализация...');
+    // ============ ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ ТАБЛИЦ ============
+    function initTableScroll() {
+        const tables = document.querySelectorAll('.comparison-table, .size-table, .price-table');
         
-        // Инициализация мобильного меню (общая для всех страниц)
-        initMobileMenu();
+        tables.forEach(table => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-wrapper';
+            wrapper.style.cssText = `
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 20px 0;
+            `;
+            
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+    }
+    
+    // ============ АДАПТАЦИЯ КАЛЬКУЛЯТОРА ============
+    function initCalculatorMobile() {
+        if (!document.querySelector('.calculator-section')) return;
         
-        // Проверка на страницу калькулятора
-        const isCalculatorPage = window.location.pathname.includes('calculator') || 
-                                document.querySelector('.calculator-section') ||
-                                document.querySelector('.calculator-form');
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (max-width: 768px) {
+                .calculator-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 20px !important;
+                }
+                
+                .calculator-actions {
+                    flex-direction: column !important;
+                }
+                
+                .calculator-actions .btn {
+                    width: 100% !important;
+                    margin: 5px 0 !important;
+                }
+                
+                .positions-list .position-item {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                }
+                
+                .positions-list .position-price {
+                    margin-left: 0 !important;
+                    margin-top: 10px !important;
+                }
+                
+                .month-inputs {
+                    grid-template-columns: 1fr !important;
+                }
+                
+                .form-row {
+                    grid-template-columns: 1fr !important;
+                }
+                
+                .calculator-form select,
+                .calculator-form input {
+                    font-size: 16px !important;
+                    min-height: 44px !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // ============ ЗАЩИТА ОТ ЗУМА НА IOS ============
+    function preventIOSZoom() {
+        if (!/iPhone|iPad|iPod/.test(navigator.userAgent)) return;
         
-        if (isCalculatorPage) {
-            console.log('📊 Обнаружена страница калькулятора');
-            initCalculatorMobile();
+        // Предотвращаем зум при двойном тапе
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Увеличиваем шрифт в полях ввода
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.style.fontSize = '16px';
+        });
+    }
+    
+    // ============ ОБРАБОТКА ПОВОРОТА ЭКРАНА ============
+    function handleOrientationChange() {
+        let resizeTimer;
+        
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            
+            // Закрываем меню при повороте на десктопную ширину
+            if (window.innerWidth > 768) {
+                const menuToggle = document.getElementById('mobileMenuToggle');
+                const mobileNav = document.getElementById('mobileNav');
+                
+                if (menuToggle && mobileNav && mobileNav.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            // Обновляем высоту vh для мобильных (проблема с адресной строкой)
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+            resizeTimer = setTimeout(() => {
+                console.log('📱 Изменение размера экрана:', window.innerWidth, 'x', window.innerHeight);
+            }, 250);
+        });
+        
+        // Устанавливаем начальное значение vh
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    // ============ ДОБАВЛЯЕМ CSS-ПЕРЕМЕННЫЕ ============
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Mobile-first стили */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+            
+            h1 { font-size: 1.8rem !important; }
+            h2 { font-size: 1.5rem !important; }
+            h3 { font-size: 1.3rem !important; }
+            
+            .section {
+                padding: 40px 0 !important;
+            }
+            
+            .grid-3, .grid-4 {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            
+            /* Таблицы */
+            .table-wrapper {
+                margin: 15px -15px !important;
+                width: calc(100% + 30px) !important;
+                padding: 0 15px !important;
+            }
+            
+            /* Галерея */
+            .gallery-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 16/9 !important;
+            }
+            
+            /* FAQ */
+            .faq-question {
+                padding: 15px 40px 15px 15px !important;
+                font-size: 1rem !important;
+            }
+            
+            /* Кнопки */
+            .btn {
+                min-height: 44px !important;
+                padding: 12px 20px !important;
+            }
+            
+            /* Плавающие элементы */
+            .telegram-float {
+                bottom: 15px !important;
+                right: 15px !important;
+            }
+            
+            .telegram-link span {
+                display: none !important;
+            }
+            
+            .telegram-link {
+                width: 56px !important;
+                height: 56px !important;
+                border-radius: 50% !important;
+                padding: 0 !important;
+                justify-content: center !important;
+            }
+            
+            .telegram-link i {
+                font-size: 1.8rem !important;
+                margin: 0 !important;
+            }
+            
+            .scroll-to-top {
+                bottom: 80px !important;
+                right: 15px !important;
+                width: 44px !important;
+                height: 44px !important;
+            }
         }
         
-        // Общая оптимизация для всех мобильных устройств
-        initMobileOptimizations();
-    });
+        @media (max-width: 480px) {
+            .container {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+            
+            h1 { font-size: 1.6rem !important; }
+            h2 { font-size: 1.4rem !important; }
+            h3 { font-size: 1.2rem !important; }
+            
+            .faq-question {
+                padding: 12px 35px 12px 12px !important;
+            }
+        }
+        
+        /* Исправление для iOS */
+        @supports (-webkit-touch-callout: none) {
+            .main-header {
+                -webkit-backdrop-filter: saturate(180%) blur(20px);
+                backdrop-filter: saturate(180%) blur(20px);
+                background-color: rgba(255, 255, 255, 0.95);
+            }
+            
+            .mobile-nav {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    `;
+    document.head.appendChild(style);
     
 })();

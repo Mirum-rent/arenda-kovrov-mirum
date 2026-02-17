@@ -1,11 +1,11 @@
 {
-  "name": "МИРУМ Калькулятор",
-  "short_name": "Калькулятор МИРУМ",
-  "description": "Автономный калькулятор стоимости аренды ковров. PWA приложение для менеджеров МИРУМ.",
-  "start_url": "/pwa/mirum-pwa.html",
+  "name": "МИРУМ - профессиональные услуги чистоты",
+  "short_name": "МИРУМ",
+  "description": "Аренда грязезащитных ковров, мойка витрин, восстановление полов, аутстаффинг. Работаем по всей России с 2009 года.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#1a3a5f",
-  "theme_color": "#1a3a5f",
+  "theme_color": "#16a085",
   "orientation": "portrait",
   "scope": "/",
   "lang": "ru-RU",
@@ -30,6 +30,16 @@
       "type": "image/png"
     },
     {
+      "src": "/img/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
       "src": "/img/logo.png",
       "sizes": "512x512",
       "type": "image/png"
@@ -41,7 +51,7 @@
       "name": "Калькулятор стоимости",
       "short_name": "Калькулятор",
       "description": "Рассчитать стоимость аренды ковров",
-      "url": "/pwa/mirum-pwa.html",
+      "url": "/calculator.html",
       "icons": [
         {
           "src": "/img/favicon-192.png",
@@ -50,10 +60,34 @@
       ]
     },
     {
-      "name": "Тендерный расчет",
-      "short_name": "Тендер",
-      "description": "Расчет по месяцам для тендера",
-      "url": "/pwa/mirum-pwa.html",
+      "name": "Фотогалерея",
+      "short_name": "Галерея",
+      "description": "100+ реальных работ",
+      "url": "/gallery.html",
+      "icons": [
+        {
+          "src": "/img/favicon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "FAQ",
+      "short_name": "FAQ",
+      "description": "Часто задаваемые вопросы",
+      "url": "/FAQ.html",
+      "icons": [
+        {
+          "src": "/img/favicon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Контакты",
+      "short_name": "Контакты",
+      "description": "Связаться с нами",
+      "url": "/#contacts",
       "icons": [
         {
           "src": "/img/favicon-192.png",

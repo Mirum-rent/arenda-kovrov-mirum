@@ -1,6 +1,7 @@
 # humans.txt for arenda-kovrov-mirum.ru
 # Company: ООО "МИРУМ" (мирум.рент)
-# Last update: 2026-01-06
+# Last update: 2026-02-18
+# Version: 5.0
 
 /* TEAM */
   Founder: Дмитрий Рыбак
@@ -17,48 +18,97 @@
   Designer: МИРУМ Design Team
   Site: https://arenda-kovrov-mirum.ru/
   Style: Modern Business Clean
-  Colors: #16a085 (primary)
+  Colors: #16a085 (primary), #2c3e50 (secondary)
+
+  Content Team: Эксперты МИРУМ
+  Authors: Дмитрий Рыбак, Анна Смирнова, Максим Петров
+  Contributors: Технологи, инженеры, финансисты с 16-летним опытом
 
 /* THANKS */
-  Font Awesome: https://fontawesome.com/
-  Google Fonts: https://fonts.google.com/
-  GitHub Pages: https://pages.github.com/
-  Leaflet.js: https://leafletjs.com/
-  Schema.org: https://schema.org/
+  Font Awesome: https://fontawesome.com/ - иконочный шрифт
+  Google Fonts: https://fonts.google.com/ - шрифты
+  GitHub Pages: https://pages.github.com/ - хостинг
+  Leaflet.js: https://leafletjs.com/ - интерактивная карта
+  Schema.org: https://schema.org/ - микроразметка
+  OpenStreetMap: https://www.openstreetmap.org/ - картография
 
 /* SITE */
-  Last update: 2026-01-06
+  Last update: 2026-02-18
   Language: Russian
   Doctype: HTML5
-  Components: 19 modular blocks
-  Architecture: Mobile-first
+  Components: Modular blocks, 36+ файлов
+  Architecture: Mobile-first, Responsive
   Framework: Vanilla JavaScript
   Hosting: GitHub Pages
-  Version: 6.0
+  Version: 9.7
+
+/* PAGES */
+  1. Главная (index.html) - версия 9.0
+  2. Аренда ковров (arenda-kovrov.html) - версия 9.0
+  3. Мойка витрин (window-cleaning.html) - версия 9.0
+  4. Восстановление полов (vosstanovlenie-polov.html) - версия 9.0
+  5. Аутстаффинг (outstaffing.html) - версия 9.0
+  6. Калькулятор (calculator.html) - версия 8.0
+  7. FAQ (FAQ.html) - версия 9.0
+  8. Блог (blog.html) - версия 9.0
+  9. Отзывы (testimonials.html) - версия 4.0
+  10. Галерея (gallery.html) - версия 9.0
+  11. Политика (privacy-policy.html) - версия 4.0
+  12. Погода (pogoda.html) - версия 9.0
+  13. Соглашение (terms-of-use.html) - версия 1.0
+  14. 404 (404.html) - версия 1.0
 
 /* SERVICES */
   1. Аренда грязезащитных ковров (с 2009)
+     - Более 50 регионов
+     - Более 20 размеров
+     - Регулярная замена
+  
   2. Мойка витрин и фасадов
-  3. Восстановление полов (паркет, мрамор, линолеум)
+     - Высотные работы
+     - Ночные смены
+     - Абонентское обслуживание
+  
+  3. Восстановление полов
+     - Паркет, мрамор, гранит, линолеум
+     - Экономия до 70%
+     - Гарантия до 8 лет
+  
   4. Аутстаффинг персонала (ЧАЗ)
+     - Снижение налогов до 40%
+     - Легализация иностранцев
+     - Защита от проверок
 
 /* GEOGRAPHY */
-  Cities: 40+ городов России
+  Cities: 50+ городов России
   Regions: Все федеральные округа
-  Focus: Москва, МО, Санкт-Петербург
+  Focus: Москва, МО, Санкт-Петербург, ЛО, Екатеринбург, Казань, Уфа, Новосибирск
 
 /* TECHNICAL */
   Frontend: HTML5, CSS3, ES6+
-  Styling: CSS Grid, Flexbox
+  Styling: CSS Grid, Flexbox, CSS Variables
   Icons: Font Awesome 6
   Maps: Leaflet.js
-  PWA: Progressive Web App
-  SEO: Schema.org, Open Graph
-  Performance: Lazy loading, Image optimization
+  PWA: Progressive Web App manifest
+  SEO: Schema.org, Open Graph, Microdata
+  Performance: Lazy loading, Image optimization, Critical CSS
+  Accessibility: WCAG 2.1 compliant
+
+/* STATISTICS */
+  Total files: 36+
+  HTML pages: 13
+  CSS files: 3
+  JS files: 6
+  Images: 100+
+  Regions in price database: 50+
+  FAQ questions: 50+
+  Blog articles: 40+
+  Gallery photos: 100+
 
 /* NOTE */
   This site uses modern web technologies
   All content is verified by company experts
   Company founded in 2009
-  Professional cleaning services
+  16+ years of experience
+  500+ satisfied clients
   Focus on mobile users and AI recommendations

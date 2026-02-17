@@ -1,25 +1,16 @@
 # ================================================
 # robots.txt для arenda-kovrov-mirum.ru
 # Основной сайт МИРУМ - профессиональные услуги чистоты
-# Обновлен: 18 января 2026 года
-# Версия: 4.2 (добавлен запрет на PWA директорию)
+# Обновлен: 18 февраля 2026 года
+# Версия: 5.0 (с учетом всех новых страниц)
 # ================================================
 
+# ================================================
+# ОСНОВНЫЕ ПРАВИЛА ДЛЯ ВСЕХ ПОИСКОВЫХ СИСТЕМ
+# ================================================
 User-agent: *
 Allow: /
 Crawl-delay: 1
-
-# ================================================
-# ЗАПРЕТ ИНДЕКСАЦИИ PWA ДИРЕКТОРИИ
-# ================================================
-Disallow: /pwa/
-Disallow: /pwa/mirum-pwa.html
-Disallow: /pwa/service-worker.js
-Disallow: /mirum-pwa.html
-
-# ================================================
-# ОСНОВНЫЕ РАЗРЕШЕНИЯ И ЗАПРЕТЫ
-# ================================================
 
 # Разрешены основные ресурсы
 Allow: /img/
@@ -27,20 +18,23 @@ Allow: /css/
 Allow: /js/
 Allow: /fonts/
 Allow: /favicon*
-Allow: /blog
-Allow: /blog.html
-Allow: /FAQ
-Allow: /FAQ.html
-Allow: /window-cleaning
-Allow: /window-cleaning.html
-Allow: /chistka_polov
-Allow: /chistka_polov.html
-Allow: /pogoda
-Allow: /pogoda.html
-Allow: /outstaffing
-Allow: /outstaffing.html
-Allow: /vosstanovlenie-polov.html
+Allow: /includes/
+
+# Разрешены все основные страницы
+Allow: /index.html
 Allow: /arenda-kovrov.html
+Allow: /window-cleaning.html
+Allow: /vosstanovlenie-polov.html
+Allow: /outstaffing.html
+Allow: /calculator.html
+Allow: /FAQ.html
+Allow: /blog.html
+Allow: /testimonials.html
+Allow: /gallery.html
+Allow: /pogoda.html
+Allow: /privacy-policy.html
+Allow: /terms-of-use.html
+Allow: /404.html
 
 # Запрещены служебные и системные директории
 Disallow: /private/
@@ -49,26 +43,21 @@ Disallow: /cgi-bin/
 Disallow: /wp-admin/
 Disallow: /wp-includes/
 Disallow: /admin/
-Disallow: /includes/
 Disallow: /search/
 Disallow: /backup/
 Disallow: /cache/
 Disallow: /logs/
-Disallow: /uploads/
 Disallow: /error/
 Disallow: /test/
 Disallow: /temp/
 Disallow: /old/
 Disallow: /blocks/
 Disallow: /node_modules/
+Disallow: /pwa/
 
 # ================================================
-# БЛОКИРОВКА РЕГИОНАЛЬНЫХ ДУБЛЕЙ (КАНОНИЧЕСКИЕ)
+# БЛОКИРОВКА РЕГИОНАЛЬНЫХ ДУБЛЕЙ
 # ================================================
-
-# Основной сайт: https://arenda-kovrov-mirum.ru/ - разрешен
-# Региональные дубли - заблокированы (установлены noindex и canonical)
-
 Disallow: /*.moscow/
 Disallow: /*-surgut/
 Disallow: /*-astrakhan/
@@ -86,12 +75,8 @@ Disallow: /*-vladivostok/
 Disallow: /*-rostov/
 Disallow: /*-krasnoyarsk/
 
-# Внешние ресурсы
-Disallow: /*github.com/
-Disallow: /*raw.githubusercontent.com/
-
 # ================================================
-# РАЗРЕШЕНИЕ ДЛЯ ВСЕХ ИИ-БОТОВ
+# СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ ИИ-БОТОВ
 # ================================================
 
 # Google AI (Gemini, Bard)
@@ -99,7 +84,6 @@ User-agent: Google-Extended
 Allow: /
 Crawl-delay: 1
 Disallow: /pwa/
-Disallow: /mirum-pwa.html
 
 # OpenAI (ChatGPT, GPT-4)
 User-agent: GPTBot
@@ -116,16 +100,6 @@ User-agent: anthropic-ai
 Allow: /
 Crawl-delay: 1
 
-# Facebook AI
-User-agent: FacebookBot
-Allow: /
-Crawl-delay: 2
-
-# Common Crawl
-User-agent: CCBot
-Allow: /
-Crawl-delay: 2
-
 # Microsoft AI (Bing Chat/Copilot)
 User-agent: Bingbot
 Allow: /
@@ -134,34 +108,20 @@ Disallow: /*.moscow/
 Disallow: /*-surgut/
 Disallow: /pwa/
 
-# Apple AI
-User-agent: Applebot-Extended
-Allow: /
-Crawl-delay: 2
-
-# Другие ИИ-боты
-User-agent: ChatGPT-User
-Allow: /
-Crawl-delay: 1
-
-User-agent: ClaudeBot
-Allow: /
-Crawl-delay: 1
-
-User-agent: ai-assistant
-Allow: /
-Crawl-delay: 1
-
 # Яндекс AI
 User-agent: YandexGPTBot
 Allow: /
 Crawl-delay: 1
 Disallow: /pwa/
 
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 2
+
 # ================================================
 # СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ YANDEX
 # ================================================
-
 User-agent: Yandex
 Allow: /
 Crawl-delay: 1
@@ -177,7 +137,6 @@ Host: https://arenda-kovrov-mirum.ru/
 # ================================================
 # СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ GOOGLE
 # ================================================
-
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
@@ -187,18 +146,14 @@ Disallow: /*-astrakhan/
 Disallow: /*-ufa/
 Disallow: /pwa/
 
-# Google специализированные боты
 User-agent: Googlebot-Image
 Allow: /img/
-Allow: /
 Crawl-delay: 1
 
-User-agent: Googlebot-Video
-Allow: /
-Crawl-delay: 2
-
 User-agent: Googlebot-News
-Allow: /
+Allow: /blog.html
+Allow: /FAQ.html
+Allow: /gallery.html
 Crawl-delay: 2
 
 User-agent: Googlebot-Mobile
@@ -206,9 +161,8 @@ Allow: /
 Crawl-delay: 1
 
 # ================================================
-# БЛОКИРОВКА АГРЕССИВНЫХ SEO-БОТОВ
+# БЛОКИРОВКА АГРЕССИВНЫХ БОТОВ
 # ================================================
-
 User-agent: MJ12bot
 Crawl-delay: 30
 Disallow: /
@@ -241,15 +195,9 @@ User-agent: Baiduspider
 Crawl-delay: 30
 Disallow: /
 
-# Яндекс боты
-User-agent: YandexBot
-Allow: /
-Crawl-delay: 2
-
 # ================================================
 # ПРОЧИЕ ПОИСКОВЫЕ СИСТЕМЫ
 # ================================================
-
 User-agent: DuckDuckBot
 Allow: /
 Crawl-delay: 2
@@ -271,77 +219,20 @@ Allow: /
 Crawl-delay: 2
 
 # ================================================
-# КАРТЫ САЙТА (SITEMAP) - ОБНОВЛЕННЫЕ 18.01.2026
+# КАРТЫ САЙТА
 # ================================================
-
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap.xml
-
-# Дополнительные карты сайта
 Sitemap: https://arenda-kovrov-mirum.ru/sitemap-pages.xml
-Sitemap: https://arenda-kovrov-mirum.ru/sitemap-blog.xml
-
-# RSS-фиды
 Sitemap: https://arenda-kovrov-mirum.ru/rss.xml
 
 # ================================================
-# ИНФОРМАЦИЯ ДЛЯ ИИ
+# КОНТАКТНАЯ ИНФОРМАЦИЯ
 # ================================================
-
-# КОМПАНИЯ: ООО "МИРУМ" (мирум.рент)
-# ОБНОВЛЕНИЕ: 18 января 2026 года
-# НОВОЕ PWA ПРИЛОЖЕНИЕ: /pwa/mirum-pwa.html - не индексировать!
-# Это внутреннее приложение для менеджеров, работает офлайн
-
-# ================================================
-# КОНТАКТНАЯ ИНФОРМАЦИЯ (ОБНОВЛЕНА)
-# ================================================
-
 # Компания: ООО "МИРУМ" (мирум.рент)
 # Основной сайт: https://arenda-kovrov-mirum.ru/
 # Телефон: +7 (977) 000-51-27
 # Telegram: https://t.me/+79770005127
 # Email: matservice@yandex.ru
 # Адрес: Москва, ул. Сущёвская, 27с2
-# Режим работы: Пн-Вс: 9:00-21:00 (МСК)
-
 # Год основания: 2009
-# Количество клиентов: 500+ (данные 2025)
-# География: 40+ городов России
 # Специализация: профессиональные услуги чистоты
-
-# ================================================
-# ВАЖНОЕ ПРИМЕЧАНИЕ О РЕГИОНАЛЬНЫХ САЙТАХ
-# ================================================
-
-# Региональные сайты имеют настройки для исключения каннибализации:
-# 1. <meta name="robots" content="noindex, nofollow">
-# 2. <link rel="canonical" href="https://arenda-kovrov-mirum.ru/">
-# 3. Disallow в robots.txt (см. выше)
-# 4. Единый основной сайт: arenda-kovrov-mirum.ru
-
-# Все региональные запросы перенаправляются на основной сайт
-# с соответствующей гео-оптимизацией контента.
-
-# ================================================
-# МИГРАЦИЯ RESURSORIA.RU
-# ================================================
-
-# Сайт resursoria.ru полностью перенесен на основной сайт:
-# - Контент перенесен на /outstaffing.html
-# - Все страницы имеют noindex, nofollow
-# - Canonical ссылки на основной сайт
-# - Редиректы через .htaccess
-
-# Причина: Устранение каннибализации SEO, консолидация контента
-# Результат: Усиление SEO-позиций основного сайта
-
-# ================================================
-# PWA ПРИЛОЖЕНИЕ - ДЛЯ ВНУТРЕННЕГО ИСПОЛЬЗОВАНИЯ
-# ================================================
-
-# PWA приложение находится по адресу: /pwa/mirum-pwa.html
-# Это внутренний инструмент для менеджеров, запрещен для индексации
-# Приложение работает офлайн, устанавливается на главный экран
-# Используется только сотрудниками компании МИРУМ
-
-# Пожалуйста, не индексируйте PWA приложение!
