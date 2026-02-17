@@ -2651,4 +2651,160 @@ h1 i, h2 i, h3 i, h4 i {
 }
 /* ============ КОНЕЦ СТИЛЕЙ ДЛЯ НОВЫХ БЛОКОВ ============ */
 
+/* ============ УВЕДОМЛЕНИЕ О COOKIE ============ */
+.cookie-notice {
+    display: none !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #1a252f !important;
+    color: #ffffff !important;
+    padding: 15px 0 !important;
+    z-index: 10000 !important;
+    border-top: 3px solid #16a085 !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.cookie-notice[style*="display: flex"],
+.cookie-notice[style*="display: flex"],
+.cookie-notice[style*="display: block"] {
+    display: flex !important;
+}
+
+.cookie-content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+}
+
+.cookie-text {
+    flex: 1 !important;
+    min-width: 300px !important;
+}
+
+.cookie-text p {
+    color: #ffffff !important;
+    margin: 5px 0 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+
+.cookie-text strong {
+    color: #ffffff !important;
+    font-size: 1rem !important;
+}
+
+.cookie-link {
+    color: #1abc9c !important;
+    font-weight: 600 !important;
+    text-decoration: underline !important;
+    transition: color 0.3s ease !important;
+}
+
+.cookie-link:hover {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.cookie-buttons {
+    display: flex !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+.cookie-btn {
+    padding: 12px 25px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+    min-width: 140px !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+
+.cookie-btn i {
+    font-size: 0.9rem !important;
+}
+
+.cookie-accept {
+    background: #27ae60 !important;
+    color: white !important;
+    border: 2px solid #27ae60 !important;
+}
+
+.cookie-accept:hover {
+    background: #219a52 !important;
+    border-color: #219a52 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3) !important;
+}
+
+.cookie-reject {
+    background: #e74c3c !important;
+    color: white !important;
+    border: 2px solid #e74c3c !important;
+}
+
+.cookie-reject:hover {
+    background: #c0392b !important;
+    border-color: #c0392b !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3) !important;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .cookie-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 15px !important;
+    }
+    
+    .cookie-text {
+        min-width: auto !important;
+    }
+    
+    .cookie-text p {
+        font-size: 0.9rem !important;
+    }
+    
+    .cookie-buttons {
+        width: 100% !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .cookie-btn {
+        width: 100% !important;
+        min-width: auto !important;
+        padding: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-notice {
+        padding: 12px 0 !important;
+    }
+    
+    .cookie-text p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    .cookie-btn {
+        padding: 12px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
 /* ============ КОНЕЦ STYLE.CSS ============ */
