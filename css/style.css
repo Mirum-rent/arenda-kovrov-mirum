@@ -2565,4 +2565,90 @@ h1 i, h2 i, h3 i, h4 i {
 }
 /* ============ КОНЕЦ СТИЛЕЙ ДЛЯ КАРТЫ ============ */
 
+/* ============ СТИЛИ ДЛЯ НОВЫХ БЛОКОВ АУТСТАФФИНГА ============ */
+/* Версия: 1.0 (17.02.2026) */
+
+/* Стили для карточек преимуществ на странице аутстаффинга */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.benefit-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--accent-color);
+    transition: var(--transition);
+}
+.benefit-card:hover { transform: translateY(-5px); box-shadow: var(--box-shadow-hover); }
+.benefit-icon {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    display: block;
+}
+.benefit-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.benefit-description { color: var(--text-light); line-height: 1.6; }
+
+/* Стили для карточек кейсов */
+.case-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+.case-card:hover { transform: translateY(-5px); box-shadow: var(--box-shadow-hover); }
+.case-card h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+.case-card p { color: var(--text-light); line-height: 1.6; }
+.case-card strong { color: var(--accent-color); }
+
+/* Стили для калькулятора (если не определены ранее) */
+.calculator-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+.calculator-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+}
+
+/* Стили для hero-features (бейджи) */
+.hero-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 2rem 0;
+}
+.feature-badge {
+    background: rgba(255,255,255,0.1);
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-size: 0.9rem;
+    color: white;
+}
+/* ============ КОНЕЦ СТИЛЕЙ ДЛЯ НОВЫХ БЛОКОВ ============ */
+
 /* ============ КОНЕЦ STYLE.CSS ============ */

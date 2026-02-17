@@ -1155,4 +1155,22 @@ img {
         padding-left: 0 !important;
     }
 }
+
+/* ============ АДАПТАЦИЯ НОВЫХ БЛОКОВ АУТСТАФФИНГА ============ */
+@media (max-width: 768px) {
+    .benefits-grid { grid-template-columns: 1fr; gap: 20px; }
+    .cases-grid { grid-template-columns: 1fr; gap: 20px; }
+
+    /* Калькулятор */
+    .calculator-wrapper { padding: 20px; }
+    .calculator-grid { grid-template-columns: 1fr !important; gap: 20px; }
+
+    /* Герой */
+    .hero-features { flex-direction: column; align-items: center; }
+    .feature-badge { width: 100%; max-width: 300px; text-align: center; }
+
+    /* Цены */
+    .pricing-cards { grid-template-columns: 1fr; gap: 20px; }
+}
+/* ============ КОНЕЦ АДАПТАЦИИ ============ */
 /* ============ КОНЕЦ MOBILE.CSS ============ */
