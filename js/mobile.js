@@ -1,40 +1,18 @@
 // ============================================
 // MOBILE.JS - ПОЛНАЯ мобильная оптимизация для МИРУМ
-// Версия: 3.0 (17.02.2026) - Объединенная версия (меню + калькулятор)
+// Версия: 3.1 (17.02.2026) - ИСПРАВЛЕННАЯ (бургер, картинки, кэш)
 // ============================================
 
 (function() {
     'use strict';
     
-    console.log('📱 Загружаем mobile.js v3.0...');
+    console.log('📱 Загружаем mobile.js v3.1...');
     
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('📱 DOM загружен, инициализация...');
-        
-        // Инициализация мобильного меню (общая для всех страниц)
-        initMobileMenu();
-        
-        // Проверка на страницу калькулятора
-        const isCalculatorPage = window.location.pathname.includes('calculator') || 
-                                document.querySelector('.calculator-section') ||
-                                document.querySelector('.calculator-form');
-        
-        if (isCalculatorPage) {
-            console.log('📊 Обнаружена страница калькулятора');
-            initCalculatorMobile();
-        }
-        
-        // Общая оптимизация для всех мобильных устройств
-        initMobileOptimizations();
-    });
-    
-    // ============ ОСНОВНАЯ ФУНКЦИЯ МОБИЛЬНОГО МЕНЮ ============
     function initMobileMenu() {
         console.log('📱 Инициализация мобильного меню...');
         
         const menuToggle = document.getElementById('mobileMenuToggle');
         const mobileNav = document.getElementById('mobileNav');
-        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
         
         // Проверяем наличие элементов меню
         if (!menuToggle || !mobileNav) {
@@ -44,55 +22,75 @@
         
         console.log('✅ Мобильное меню найдено');
         
+        // Удаляем старые обработчики, клонируя и заменяя элемент (для очистки)
+        const newMenuToggle = menuToggle.cloneNode(true);
+        menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+        
+        const newMobileNav = mobileNav.cloneNode(true);
+        mobileNav.parentNode.replaceChild(newMobileNav, mobileNav);
+        
+        // Получаем новые ссылки на элементы
+        const finalMenuToggle = document.getElementById('mobileMenuToggle');
+        const finalMobileNav = document.getElementById('mobileNav');
+        const finalMobileDropdowns = finalMobileNav.querySelectorAll('.mobile-dropdown');
+        
         // Обработчик клика по бургеру
-        menuToggle.addEventListener('click', function(e) {
+        finalMenuToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
             this.classList.toggle('active');
-            mobileNav.classList.toggle('active');
+            finalMobileNav.classList.toggle('active');
             
             // Блокируем прокрутку body когда меню открыто
-            if (mobileNav.classList.contains('active')) {
+            if (finalMobileNav.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
+                document.body.classList.add('menu-open');
                 console.log('📱 Меню открыто');
             } else {
                 document.body.style.overflow = '';
+                document.body.classList.remove('menu-open');
                 console.log('📱 Меню закрыто');
             }
         });
         
         // Закрытие меню при клике на ссылку
-        mobileNav.querySelectorAll('a').forEach(link => {
+        finalMobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
-                menuToggle.classList.remove('active');
-                mobileNav.classList.remove('active');
+                finalMenuToggle.classList.remove('active');
+                finalMobileNav.classList.remove('active');
                 document.body.style.overflow = '';
+                document.body.classList.remove('menu-open');
             });
         });
         
         // Закрытие меню при клике вне его (на затемненную область)
         document.addEventListener('click', function(e) {
-            if (mobileNav.classList.contains('active') && 
-                !mobileNav.contains(e.target) && 
-                !menuToggle.contains(e.target)) {
-                menuToggle.classList.remove('active');
-                mobileNav.classList.remove('active');
+            if (finalMobileNav.classList.contains('active') && 
+                !finalMobileNav.contains(e.target) && 
+                !finalMenuToggle.contains(e.target)) {
+                finalMenuToggle.classList.remove('active');
+                finalMobileNav.classList.remove('active');
                 document.body.style.overflow = '';
+                document.body.classList.remove('menu-open');
             }
         });
         
         // Обработка мобильных выпадающих списков
-        mobileDropdowns.forEach(dropdown => {
+        finalMobileDropdowns.forEach(dropdown => {
             const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
             
             if (toggle) {
-                toggle.addEventListener('click', function(e) {
+                // Удаляем старые обработчики, клонируя
+                const newToggle = toggle.cloneNode(true);
+                toggle.parentNode.replaceChild(newToggle, toggle);
+                
+                newToggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     
                     // Закрываем другие открытые дропдауны
-                    mobileDropdowns.forEach(other => {
+                    finalMobileDropdowns.forEach(other => {
                         if (other !== dropdown && other.classList.contains('active')) {
                             other.classList.remove('active');
                         }
@@ -105,7 +103,7 @@
         });
     }
     
-    // ============ ФУНКЦИИ ДЛЯ КАЛЬКУЛЯТОРА (из вашего файла) ============
+    // ============ ФУНКЦИИ ДЛЯ КАЛЬКУЛЯТОРА ============
     function initCalculatorMobile() {
         console.log('📊 Настраиваем калькулятор для мобильных');
         
@@ -306,6 +304,7 @@
                         menuToggle.classList.remove('active');
                         mobileNav.classList.remove('active');
                         document.body.style.overflow = '';
+                        document.body.classList.remove('menu-open');
                     }
                 }
                 
@@ -328,5 +327,26 @@
         
         console.log('✅ Мобильная оптимизация завершена');
     }
+    
+    // Основная инициализация
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📱 DOM загружен, инициализация...');
+        
+        // Инициализация мобильного меню (общая для всех страниц)
+        initMobileMenu();
+        
+        // Проверка на страницу калькулятора
+        const isCalculatorPage = window.location.pathname.includes('calculator') || 
+                                document.querySelector('.calculator-section') ||
+                                document.querySelector('.calculator-form');
+        
+        if (isCalculatorPage) {
+            console.log('📊 Обнаружена страница калькулятора');
+            initCalculatorMobile();
+        }
+        
+        // Общая оптимизация для всех мобильных устройств
+        initMobileOptimizations();
+    });
     
 })();
