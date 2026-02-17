@@ -1,6 +1,6 @@
 /* ============================================
    MOBILE.CSS - Мобильная оптимизация для МИРУМ
-   Версия: 9.2 (12.05.2026) - ИСПРАВЛЕННАЯ
+   Версия: 9.5 (17.02.2026) - ИСПРАВЛЕННАЯ (бургер, картинки, кэш)
    ============================================ */
 
 /* ============ ОБЩИЕ МОБИЛЬНЫЕ СТИЛИ ============ */
@@ -120,6 +120,30 @@
     
     .mobile-nav.active {
         transform: translateX(0) !important;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;
+    }
+    
+    /* Затемнение фона при открытом меню */
+    body.menu-open {
+        overflow: hidden !important;
+    }
+    
+    /* Улучшение для выпадающих меню */
+    .mobile-dropdown.active .mobile-dropdown-menu {
+        display: block !important;
+        max-height: 500px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        margin: 10px 0 !important;
+    }
+    
+    .mobile-dropdown-menu {
+        max-height: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease !important;
+        padding-left: 20px !important;
     }
     
     /* Скрываем ненужные элементы */
@@ -945,24 +969,6 @@ img {
     /* Затемнение фона при открытом меню */
     body.menu-open {
         overflow: hidden !important;
-    }
-    
-    /* Улучшение для выпадающих меню */
-    .mobile-dropdown.active .mobile-dropdown-menu {
-        display: block !important;
-        max-height: 500px !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        margin: 10px 0 !important;
-    }
-    
-    .mobile-dropdown-menu {
-        max-height: 0 !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-        overflow: hidden !important;
-        transition: all 0.3s ease !important;
-        padding-left: 20px !important;
     }
     
     /* Увеличение области нажатия */
