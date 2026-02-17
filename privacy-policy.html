@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- ============ SEO МЕТАДАННЫЕ ============ -->
     <title>Политика конфиденциальности и обработки персональных данных | МИРУМ</title>
     <meta name="description" content="Политика конфиденциальности, согласие на обработку персональных данных и пользовательское соглашение ООО «МИРУМ». Ваша конфиденциальность защищена.">
     <meta name="keywords" content="политика конфиденциальности, обработка персональных данных, согласие на обработку, пользовательское соглашение, защита данных, аренда ковров">
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/privacy-policy.html" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- ============ ФАВИКОНЫ И PWA ============ -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -14,6 +26,7 @@
     <meta property="og:description" content="Политика конфиденциальности и обработки персональных данных ООО «МИРУМ»">
     <meta property="og:url" content="https://arenda-kovrov-mirum.ru/privacy-policy.html">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png">
+    <meta property="og:site_name" content="МИРУМ">
     
     <!-- Schema.org markup -->
     <script type="application/ld+json">
@@ -542,7 +555,7 @@
         <ul>
             <li><strong>По электронной почте:</strong> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a> (с пометкой «Отзыв согласия на обработку персональных данных»);</li>
             <li><strong>Через мессенджер Telegram:</strong> <a href="https://t.me/+79770005127">@mirum_matservice</a>;</li>
-            <li><strong>По почтовому адресу:</strong> 414038, г. Астрахань, ул. Латышева, д. 18 для ООО "МИРУМ".</li>
+            <li><strong>По почтовому адресу:</strong> 414038, г. Астрахань, ул. Латышева, д. 18, ООО «МИРУМ».</li>
         </ul>
         
         <p>11.2. Запрос должен содержать: фамилию, имя, отчество субъекта, контактные данные для обратной связи, информацию о том, на обработку каких именно персональных данных отзывается согласие.</p>
@@ -627,6 +640,7 @@
             <p><strong>ИНН:</strong> 3019008619</p>
             <p><strong>ОГРН:</strong> 1133019002599</p>
             <p><strong>Юридический адрес:</strong> 414038, г. Астрахань, ул. Латышева, д. 18</p>
+            <p><strong>Фактический адрес:</strong> 127055, г. Москва, ул. Сущёвская, 27с2</p>
             <p><strong>Телефон:</strong> <a href="tel:+79770005127">+7 (977) 000-51-27</a> (только для срочных вопросов, предпочтительно письменное общение)</p>
             <p><strong>Email для заявок и коммерческих предложений:</strong> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></p>
             <p><strong>Telegram (предпочтительный канал связи):</strong> <a href="https://t.me/+79770005127">@mirum_matservice</a></p>
@@ -641,7 +655,7 @@
 
         <div class="update-date">
             Дата последнего обновления: 17 февраля 2026 г.<br>
-            Версия документа: 3.0
+            Версия документа: 3.1
         </div>
 
         <!-- Кнопка "Наверх" -->
@@ -663,7 +677,7 @@
             });
         });
 
-        // Подсветка активного пункта в навигации при прокрутке (опционально)
+        // Подсветка активного пункта в навигации при прокрутке
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('.anchor');
             const navLinks = document.querySelectorAll('.page-nav a');
@@ -679,7 +693,6 @@
             });
             
             navLinks.forEach(link => {
-                link.classList.remove('active');
                 if (link.getAttribute('href') === '#' + current) {
                     link.style.background = 'var(--accent-color)';
                     link.style.color = 'white';
