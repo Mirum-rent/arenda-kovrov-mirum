@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      ARENDA-KOVROV.HTML - Аренда грязезащитных ковров
-     Версия: 9.0 (17.02.2026) - С ОБЩИМИ HEADER/FOOTER
+     Версия: 9.1 (20.02.2026) - ДОБАВЛЕН БЛОК С ПРИМЕРОМ ДОГОВОРА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -10,8 +10,8 @@
     
     <!-- ============ СЕО МЕТАДАННЫЕ ============ -->
     <title>Аренда грязезащитных ковров в Москве и РФ | МИРУМ с 2009</title>
-    <meta name="description" content="✅ Аренда грязезащитных ковров для офисов, магазинов, медицинских учреждений. Работаем по всей России с 2009 года. Регулярная замена, чистка, доставка. Калькулятор онлайн.">
-    <meta name="keywords" content="аренда грязезащитных ковров, аренда входных ковриков, грязезащитные ковры для офиса, ковры для магазинов, аренда ковров москва">
+    <meta name="description" content="✅ Аренда грязезащитных ковров для офисов, магазинов, медицинских учреждений. Работаем по всей России с 2009 года. Регулярная замена, чистка, доставка. Калькулятор онлайн. Пример договора.">
+    <meta name="keywords" content="аренда грязезащитных ковров, аренда входных ковриков, грязезащитные ковры для офиса, ковры для магазинов, аренда ковров москва, договор аренды ковров">
     
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/arenda-kovrov.html" />
     <meta name="robots" content="index, follow" />
@@ -22,7 +22,7 @@
     
     <meta property="og:type" content="website">
     <meta property="og:title" content="Аренда грязезащитных ковров | МИРУМ с 2009">
-    <meta property="og:description" content="Профессиональная аренда грязезащитных ковров с заменой и обслуживанием. Работаем по всей России.">
+    <meta property="og:description" content="Профессиональная аренда грязезащитных ковров с заменой и обслуживанием. Работаем по всей России. Пример договора.">
     <meta property="og:url" content="https://arenda-kovrov-mirum.ru/arenda-kovrov.html">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_1.webp">
     
@@ -36,8 +36,8 @@
     <meta name="theme-color" content="#16a085">
     
     <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.6">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.6" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.7">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
     <link rel="stylesheet" href="/css/calculator.css?v=7.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -114,6 +114,118 @@
             background: rgba(22, 160, 133, 0.05);
         }
         
+        /* Стили для блока с договором */
+        .contract-preview-section {
+            background: var(--background-color);
+            padding: 60px 0;
+        }
+        
+        .contract-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-top: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .contract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .contract-header h3 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .contract-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .contract-preview {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent-color);
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .contract-preview p {
+            margin-bottom: 10px;
+        }
+        
+        .contract-preview .contract-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contract-preview .example-value {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .contract-preview .signature-block {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .contract-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .full-contract {
+            display: none;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px dashed var(--border-color);
+        }
+        
+        .full-contract.show {
+            display: block;
+        }
+        
+        .btn-toggle-contract {
+            background: none;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-toggle-contract:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+        
         @media (max-width: 768px) {
             .service-hero h1 {
                 font-size: 2rem;
@@ -136,6 +248,21 @@
             .size-table th,
             .size-table td {
                 padding: 10px;
+            }
+            
+            .contract-preview {
+                font-size: 0.8rem;
+                padding: 15px;
+            }
+            
+            .contract-actions {
+                flex-direction: column;
+            }
+            
+            .signature-block {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 20px;
             }
         }
     </style>
@@ -173,6 +300,7 @@
                 if (breadcrumbCurrent) {
                     breadcrumbCurrent.style.display = 'inline';
                     breadcrumbCurrent.innerHTML = `
+                        <span class="breadcrumb-separator">→</span>
                         <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                             <span itemprop="item">
                                 <span itemprop="name" class="current-page">Аренда грязезащитных ковров</span>
@@ -252,6 +380,123 @@
             </div>
         </section>
 
+        <!-- ============ БЛОК С ПРИМЕРОМ ДОГОВОРА ============ -->
+        <section class="contract-preview-section">
+            <div class="container">
+                <h2 class="section-title">Пример договора (ознакомительная версия)</h2>
+                <p class="text-center">Вы можете заранее ознакомиться с типовой формой договора аренды ковров. Все переменные заменены на примеры.</p>
+                
+                <div class="contract-card">
+                    <div class="contract-header">
+                        <h3><i class="fas fa-file-contract" style="color: var(--accent-color); margin-right: 10px;"></i> Договор об оказании услуг № Д-2026/02/20-001</h3>
+                        <span class="contract-badge">Образец</span>
+                    </div>
+                    
+                    <div class="contract-preview" id="contractPreview">
+                        <p><strong>г. Москва</strong></p>
+                        <p>________________________________________________________</p>
+                        
+                        <p><span class="example-value">ООО "Пример Плюс"</span>, именуемое в дальнейшем «Заказчик», в лице <span class="example-value">Генерального директора Иванова Ивана Ивановича</span>, действующего на основании <span class="example-value">Устава</span>, и ООО «МИРУМ», в лице генерального директора Рыбака Д.А., действующего на основании Устава, именуемое «Исполнитель», заключили настоящий Договор:</p>
+                        
+                        <p class="contract-title">1. ПРЕДМЕТ ДОГОВОРА</p>
+                        
+                        <p>1.1. Услуги и параметры<br>
+                        Исполнитель предоставляет Заказчику во временное пользование грязезащитные ворсовые покрытия (далее - Ковры) на условиях:</p>
+                        
+                        <p>1.1.1. Автоматическая замена<br>
+                        Замена ковров производится автоматически в соответствии с указанной периодичностью.<br>
+                        Заказчик вправе запросить внеочередную замену, уведомив Исполнителя не менее чем за 3 рабочих дня.</p>
+                        
+                        <p><strong>Параметры услуги (пример):</strong><br>
+                        • Адрес объекта: <span class="example-value">г. Москва, ул. Тверская, д. 15, офис 305</span><br>
+                        • Размер ковра: <span class="example-value">85×150 см</span><br>
+                        • Количество: <span class="example-value">2 шт.</span><br>
+                        • Периодичность замены: <span class="example-value">1 раз в 7 дней</span><br>
+                        • Стоимость (без НДС) за 4 недели: <span class="example-value">3 360 ₽</span></p>
+                        
+                        <p>1.2. Право собственности и условия использования<br>
+                        1.2.1. Ковры остаются собственностью Исполнителя. Передача владения Заказчику исключена.<br>
+                        1.2.2. Запрещено: перемещать ковры на другие объекты без письменного согласия Исполнителя; передавать третьим лицам, ремонтировать или изменять конструкцию.</p>
+                        
+                        <p>1.3. Возмещение ущерба<br>
+                        1.3.1. Факты утери/порчи (не требуют дополнительных доказательств): отсутствие ковра на объекте при плановой замене или между заменами; любые повреждения, включая: несмываемые следы (краска, химикаты, технические жидкости); термические повреждения (ожоги, оплавления); механические повреждения (разрывы, порезы); следы строительных работ (шпаклевка, цемент, монтажная пена).</p>
+                        
+                        <p>1.3.2. Стоимость возмещения включает: рыночную стоимость ковра на дату повреждения (но не менее <span class="example-value">8 000 руб./м²</span> без НДС); расходы на доставку, таможенные платежи (если ковер приобретен за пределами РФ); упущенную выгоду за период простоя; затраты на оформление документов, переговоры и доказывание факта утери/порчи.</p>
+                        
+                        <p class="contract-title">2. СТОИМОСТЬ И ИЗМЕНЕНИЕ ЦЕН</p>
+                        
+                        <p>2.1. Стоимость услуг указывается в спецификациях к договору.<br>
+                        2.2. Изменение цены: Исполнитель вправе изменить цену не чаще 1 раза в квартал с уведомлением за 30 дней через юридически значимые каналы. При отсутствии возражений в течение 5 дней изменения вступают в силу. Допсоглашение не требуется.</p>
+                        
+                        <p class="contract-title">3. ПОРЯДОК ПОДПИСАНИЯ И ЭДО</p>
+                        
+                        <p>3.1. Юридическая сила документов. Стороны согласовали, что имеют полную силу: PDF с электронной подписью/печатью; сканы, фото, распечатки (черно-белые или цветные); документы, переданные через email, мессенджеры или ЭДО (СБИС, Диадок, Такснет).<br>
+                        3.1.1. Не принимаются претензии к отсутствию «живой» подписи/печати или качеству передачи.</p>
+                        
+                        <p>3.2. Алгоритм подписания<br>
+                        3.2.1. Исполнитель направляет документ (PDF с подписью и печатью).<br>
+                        3.2.2. Заказчик в течение 3 рабочих дней: направляет подписанный документ (скан, фото, PDF); или совершает конклюдентные действия (оплата, использование ковров).<br>
+                        3.2.3. Молчание = согласие. Документ считается подписанным при отсутствии возражений.</p>
+                        
+                        <p class="contract-title">4. ОТВЕТСТВЕННОСТЬ</p>
+                        
+                        <p>4.1. Неустойка: <span class="example-value">0,3%</span> от суммы задолженности за каждый день просрочки. Стороны признают неустойку соразмерной.<br>
+                        4.2. Приостановка услуг: При задолженности >10 дней Исполнитель вправе приостановить услуги с уведомлением. Возобновление — в течение 3 дней после погашения.<br>
+                        4.3. Хранение ковров после расторжения: Невозврат в течение 5 дней = оплата <span class="example-value">500 руб./день</span> за каждый ковер.</p>
+                        
+                        <div class="signature-block">
+                            <div>
+                                <p><strong>ИСПОЛНИТЕЛЬ — ООО «МИРУМ»</strong><br>
+                                ИНН: 3019008619<br>
+                                КПП: 301901001<br>
+                                р/с: 40702810210000670459 в АО «ТБанк»<br>
+                                БИК: 044525974</p>
+                                <p>____________________ /Рыбак Д.А./</p>
+                                <p>М.П.</p>
+                            </div>
+                            <div>
+                                <p><strong>ЗАКАЗЧИК — ООО "Пример Плюс"</strong><br>
+                                ИНН: <span class="example-value">7701123456</span><br>
+                                КПП: <span class="example-value">770101001</span><br>
+                                р/с: <span class="example-value">40702810738000012345</span> в ПАО «Сбербанк»<br>
+                                БИК: <span class="example-value">044525225</span></p>
+                                <p>____________________ /Иванов И.И./</p>
+                                <p>М.П.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contract-actions">
+                        <button class="btn-toggle-contract" id="toggleContractBtn">
+                            <i class="fas fa-chevron-down"></i> Показать полный текст договора
+                        </button>
+                        <a href="https://t.me/+79770005127" class="btn btn-telegram">
+                            <i class="fab fa-telegram"></i> Задать вопрос по договору
+                        </a>
+                    </div>
+                    
+                    <div class="full-contract" id="fullContract">
+                        <div class="contract-preview" style="max-height: none;">
+                            <!-- Здесь мог бы быть полный текст договора, но для примера оставим ссылку на скачивание -->
+                            <p style="text-align: center; padding: 40px 20px;">
+                                <i class="fas fa-file-word" style="font-size: 48px; color: var(--accent-color); margin-bottom: 20px; display: block;"></i>
+                                Полная версия типового договора доступна для скачивания по запросу у наших менеджеров.
+                            </p>
+                            <p style="text-align: center;">
+                                <a href="https://t.me/+79770005127" class="btn btn-primary">
+                                    <i class="fab fa-telegram"></i> Запросить полную версию
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-light); text-align: center;">
+                        <i class="fas fa-info-circle"></i> Данный текст является ознакомительной версией. Все указанные компании, имена и реквизиты вымышлены и используются только в качестве примера.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- КАК НАЧАТЬ -->
         <section class="section">
             <div class="container">
@@ -260,7 +505,7 @@
                 <div class="process-steps">
                     <div class="process-step"><h3>1. Оставить заявку</h3><p>Напишите нам в Telegram. Укажите город, нужные размеры и частоту замены.</p></div>
                     <div class="process-step"><h3>2. Получить расчет</h3><p>Мы подготовим коммерческое предложение с точной стоимостью.</p></div>
-                    <div class="process-step"><h3>3. Заключить договор</h3><p>Подписываем договор (ЭДО или бумажный).</p></div>
+                    <div class="process-step"><h3>3. Заключить договор</h3><p>Подписываем договор (ЭДО или бумажный). Ознакомьтесь с примером выше.</p></div>
                     <div class="process-step"><h3>4. Получить ковры</h3><p>Доставляем чистые ковры и устанавливаем их.</p></div>
                 </div>
             </div>
@@ -269,8 +514,8 @@
         <!-- ПРИЗЫВ К ДЕЙСТВИЮ -->
         <section style="background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%); color: white; padding: 60px 0; text-align: center;">
             <div class="container">
-                <h2 style="color: white;">Остались вопросы?</h2>
-                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 20px auto;">Напишите нам в Telegram — поможем с выбором и расчетом.</p>
+                <h2 style="color: white;">Остались вопросы по договору?</h2>
+                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 20px auto;">Напишите нам в Telegram — наши юристы проконсультируют вас по всем пунктам.</p>
                 <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #16a085;">
                     <i class="fab fa-telegram"></i> Написать в Telegram
                 </a>
@@ -286,6 +531,27 @@
     <script src="/js/prices.js?v=7.1"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            
+            // Логика для кнопки "Показать полный текст договора"
+            const toggleBtn = document.getElementById('toggleContractBtn');
+            const fullContract = document.getElementById('fullContract');
+            
+            if (toggleBtn && fullContract) {
+                toggleBtn.addEventListener('click', function() {
+                    const isHidden = fullContract.style.display === 'none' || !fullContract.classList.contains('show');
+                    
+                    if (isHidden) {
+                        fullContract.classList.add('show');
+                        fullContract.style.display = 'block';
+                        toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Скрыть полный текст договора';
+                    } else {
+                        fullContract.classList.remove('show');
+                        fullContract.style.display = 'none';
+                        toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Показать полный текст договора';
+                    }
+                });
+            }
+            
             // Форматирование телефона в формах
             const phoneInputs = document.querySelectorAll('input[type="tel"]');
             phoneInputs.forEach(input => {

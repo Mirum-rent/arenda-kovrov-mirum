@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      INDEX.HTML - ГЛАВНАЯ СТРАНИЦА МИРУМ
-     Версия: 9.0 (17.02.2026) - С ОБЩИМИ HEADER/FOOTER
+     Версия: 9.1 (20.02.2026) - ДОБАВЛЕН БЛОК ОТЗЫВОВ С КАРУСЕЛЬЮ
      ============================================ -->
 <html lang="ru">
 <head>
@@ -37,8 +37,8 @@
     <meta name="theme-color" content="#16a085">
     
     <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.6">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.6" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.7">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ТОЛЬКО ДЛЯ ГЛАВНОЙ ============ -->
@@ -97,12 +97,205 @@
             padding: 80px 0;
         }
         
-        .gallery-preview {
+        /* Стили для карусели отзывов */
+        .testimonials-carousel-section {
+            background: var(--background-color);
             padding: 80px 0;
+            position: relative;
         }
         
-        .testimonials-preview {
-            padding: 80px 0;
+        .carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding: 0 50px;
+        }
+        
+        .testimonials-carousel {
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 30px;
+        }
+        
+        .carousel-slide {
+            flex: 0 0 calc(33.333% - 20px);
+            min-width: 0;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: var(--transition);
+            border-top: 4px solid var(--accent-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .testimonial-preview h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .testimonial-preview h4 i {
+            color: var(--accent-color);
+        }
+        
+        .testimonial-preview p {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .btn-show-testimonial, .btn-hide-testimonial {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            margin-top: auto;
+        }
+        
+        .btn-show-testimonial:hover, .btn-hide-testimonial:hover {
+            color: var(--light-accent);
+            transform: translateY(-2px);
+        }
+        
+        .testimonial-full {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .testimonial-content h5 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-content p {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .testimonial-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .image-caption {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .testimonial-date, .testimonial-sign {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        .testimonial-sign {
+            font-weight: 600;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        
+        .carousel-btn:hover {
+            background: var(--light-accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-btn.prev {
+            left: 0;
+        }
+        
+        .carousel-btn.next {
+            right: 0;
+        }
+        
+        .carousel-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(1);
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .carousel-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 1024px) {
+            .carousel-slide {
+                flex: 0 0 calc(50% - 15px);
+            }
         }
         
         @media (max-width: 768px) {
@@ -122,6 +315,26 @@
             .hero-buttons .btn {
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .carousel-container {
+                padding: 0 40px;
+            }
+            
+            .carousel-slide {
+                flex: 0 0 100%;
+            }
+            
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .carousel-container {
+                padding: 0 35px;
             }
         }
     </style>
@@ -359,6 +572,28 @@
             </div>
         </section>
 
+        <!-- ============ ОТЗЫВЫ (РЕКОМЕНДАТЕЛЬНЫЕ ПИСЬМА) ============ -->
+        <section id="testimonials" class="testimonials-carousel-section">
+            <div class="container">
+                <h2 class="section-title">Рекомендательные письма наших клиентов</h2>
+                <p class="text-center">Реальные отзывы от наших партнеров по всей России</p>
+            </div>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn prev" id="carouselPrev" aria-label="Предыдущие отзывы">❮</button>
+                
+                <div class="testimonials-carousel" id="testimonialsCarousel">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Отзывы будут загружены сюда через JavaScript -->
+                    </div>
+                </div>
+                
+                <button class="carousel-btn next" id="carouselNext" aria-label="Следующие отзывы">❯</button>
+            </div>
+            
+            <div class="carousel-dots" id="carouselDots"></div>
+        </section>
+
         <!-- ============ FAQ ============ -->
         <section id="faq" class="faq-main">
             <div class="container">
@@ -387,7 +622,7 @@
                 </div>
                 
                 <div class="text-center">
-                    <a href="/FAQ.html" class="btn btn-primary">Все вопросы (50+)</a>
+                    <a href="/faq.html" class="btn btn-primary">Все вопросы (50+)</a>
                 </div>
             </div>
         </section>
@@ -408,14 +643,330 @@
     <!-- ============ FOOTER (ОБЩИЙ) ============ -->
     <script src="/includes/footer.js"></script>
 
-    <!-- Дополнительные скрипты для главной -->
-    <script src="/js/forms.js?v=7.1"></script>
-    
-    <!-- Скрипт для интерактивной карты (если нужна) -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Данные для отзывов -->
+    <script>
+        const testimonialsData = [
+            {
+                id: 1,
+                company: "ООО «ДИАНА»",
+                preview: "Обратились в компанию МИРУМ за услугой по аренде входных ковриков и были приятно удивлены скорости реагирования на запрос и доведения дела до подписания договора...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «ДИАНА»",
+                    details: "<strong>ООО «ДИАНА»</strong><br>ИНН 7721286782<br>КПП 77210001<br>ОГРН 1157746188709<br>Адрес: г. Москва, Волжский Бульвар 5-1<br>Генеральный директор Абрамов Р.В.",
+                    text: "Обратились в компанию МИРУМ за услугой по аренде входных ковриков (матсервис) и были приятно удивлены скорости реагирования на запрос и доведения дела до подписания договора и начала работ. Сами работы также оказываются на высоком уровне. Хотим отметить профессионализм сотрудников, которые качественно исполняют возложенные на них обязанности, помогая тем самым поддерживать чистоту на наших объектах.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-diana.webp"
+                }
+            },
+            {
+                id: 2,
+                company: "Программа «Триумф XXI века»",
+                preview: "Коллектив программы «Триумф XXI века» благодарит сотрудников за усердие и высокое качество оказанных услуг, а руководство за грамотную организацию работ на объекте...",
+                full: {
+                    header: "Рекомендательное письмо от программы «Триумф XXI века»",
+                    details: "<strong>Руководитель программы «Триумф XXI века»</strong><br>Народный артист России<br>Запашный Мстислав Мстиславович<br>г. Сочи, проспект Пушкина, 5",
+                    text: "Коллектив программы «Триумф XXI века», в лице Народного артиста России Запашного Мстислава Мстиславовича, благодарит сотрудников за усердие и высокое качество оказанных услуг, а руководство за грамотную организацию работ на объекте.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-zapahny.webp",
+                    extra: "<p class='testimonial-date'>24.11.2010 г.</p>"
+                }
+            },
+            {
+                id: 3,
+                company: "ООО «Посуда-Центр сервис»",
+                preview: "ООО «МИРУМ» на протяжении нескольких лет показал себя с лучшей стороны в решении самых разнообразных задач, запросы обрабатываются вовремя и качественно...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «Посуда-Центр сервис»",
+                    text: "ООО «МИРУМ» на протяжении нескольких лет показал себя с лучшей стороны в решении самых разнообразных задач, запросы обрабатываются вовремя и качественно. Недочеты устраняются быстро. Хочется отметить работу отдельных сотрудников, отвечающих за взаимодействие с нашей компанией. К выполнению своих обязанностей подходят ответственно и учитывают все наши просьбы и пожелания.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-posuda-center.webp",
+                    extra: "<p class='testimonial-date'>21 мая 2018 г.</p>"
+                }
+            },
+            {
+                id: 4,
+                company: "ООО ПКФ «Контакт»",
+                preview: "ООО ПКФ «Контакт» благодарит коллектив агентства «Мирум» за высокое качество выполненных услуг. Особенно хотелось бы отметить скорость и оперативность реагирования...",
+                full: {
+                    header: "Рекомендательное письмо от ООО ПКФ «Контакт»",
+                    text: "ООО ПКФ «Контакт» благодарит коллектив агентства «Мирум» за высокое качество выполненных услуг. Особенно хотелось бы отметить скорость и оперативность реагирования на изменяющиеся цели и задачи. Очень понравилось работать с агентством, так как они учитывают особенности работы на конкретном объекте и с конкретным заказчиком.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-kontact.webp",
+                    extra: "<p class='testimonial-sign'>Технический директор Л.Г. Егоркина</p>"
+                }
+            },
+            {
+                id: 5,
+                company: "ООО «ОКЕЙ»",
+                preview: "Супермаркет О'Кей в городе Сочи выражает искреннюю благодарность Компании «МИРУМ» за профессионализм и высокое качество работы сотрудников...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «ОКЕЙ»",
+                    details: "<strong>Супермаркет О'Кей в городе Сочи</strong>",
+                    text: "Супермаркет О'Кей в городе Сочи выражает искреннюю благодарность Компании «МИРУМ» в лице исполнительного директора Рыбак Дмитрия Александровича за профессионализм и высокое качество работы сотрудников, ответственных за чистку и замену напольных ковровых покрытий, установленных на нашем объекте. Высоко ценим взаимопонимание, которое у нас сложилось за время сотрудничества с Компанией «МИРУМ»! Также благодарим за четкость, исполнительность и оперативность в процессе работы.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-ok.webp"
+                }
+            },
+            {
+                id: 6,
+                company: "АО «Ричмонт Транспортные Услуги»",
+                preview: "Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров...",
+                full: {
+                    header: "Рекомендательное письмо от АО «Ричмонт Транспортные Услуги»",
+                    text: "Рекомендуем компанию МИРУМ, как надежного и опытного поставщика услуг по аренде грязезащитных ковров. За все время работы у нас не было к ним нареканий. Сотрудники работают быстро, качественно и профессионально. Вовремя получаем консультации по интересующим нас вопросам. Услуги полностью удовлетворяют нашим потребностям - сотрудничество будем продолжать и развивать. Спасибо за работу!",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-hertz.webp"
+                }
+            },
+            {
+                id: 7,
+                company: "ООО «Остин» Южный филиал",
+                preview: "Универсальный спортивный магазин «Остин» (в г. Сочи) с 2012 года эффективно сотрудничает с Компанией «МИРУМ»...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «Остин» Южный филиал",
+                    text: "Универсальный спортивный магазин «Остин» (в г. Сочи) с 2012 года эффективно сотрудничает с Компанией «МИРУМ», оказывающей комплексные услуги по профессиональному уходу за объектами недвижимости в области промышленного клининга и сервисных услуг, в частности, по уборке торговых залов и помещений. За время работы специалисты Компании «МИРУМ» зарекомендовали себя квалифицированными и опытными работниками, представляющими надежного и ответственного партнера в лице господина Д. А. Рыбак.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-ostin-sochi.webp"
+                }
+            },
+            {
+                id: 8,
+                company: "Сбербанк России ОАО",
+                preview: "Астраханское отделение №8625 Сберегательного банка России ОАО выражает благодарность агентству «Мирум» за профессиональный подход к делу...",
+                full: {
+                    header: "Рекомендательное письмо от Сбербанк России ОАО",
+                    text: "Астраханское отделение №8625 Сберегательного банка России ОАО выражает благодарность агентству «Мирум» за профессиональный подход к делу. Согласно договору был успешно осуществлен и в полном объеме завершен проект по уборке, восстановлению и гидрофобизации филиалов нашей организации. Со стороны агентства «Мирум» был осуществлен четкий контроль по проведению всех работ, связанных с проектом, а так же мгновенное исправление выявленных недочетов в ходе работы и участие в оптимизации процесса.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-sber.webp",
+                    extra: "<p class='testimonial-sign'>Начальник Административного отдела Е. В. Черников</p>"
+                }
+            },
+            {
+                id: 9,
+                company: "ООО «Остин» (г. Смоленск)",
+                preview: "ООО «Мирум» является нашим постоянным поставщиком клиниговых услуг. За время сотрудничества мы ни разу не были разочарованы в результате работы...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «Остин» (г. Смоленск)",
+                    text: "ООО «Мирум» является нашим постоянным поставщиком клиниговых услуг. За время сотрудничества мы ни разу не были разочарованы в результате работы данной компании. Сотрудники ООО «Мирум» привыкли выполнять поставленные задачи с учетом потребностей Заказчика и в соответствии с профессиональными требованиям. Налаживанию тесных партнерских отношений между нашими компаниями, также способствовала высокая культура общения руководителя ООО «Мирум». Я готова рекомендовать эту компанию как надежного поставщика и ответственного партнера.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-ostin-smolensk.webp",
+                    extra: "<p class='testimonial-sign'>Директор магазина «Остин», ТЦ «Галактика» в г. Смоленск<br>Забелина А.Г.</p>"
+                }
+            },
+            {
+                id: 10,
+                company: "ООО «Кредитэкспресс»",
+                preview: "ООО «Кредитэкспресс» искренне благодарит коллектив агентства «Мирум» за профессиональную и оперативную организацию процесса по химической чистке ковролина...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «Кредитэкспресс»",
+                    text: "ООО «Кредитэкспресс» искренне благодарит коллектив агентства «Мирум» за профессиональную и оперативную организацию процесса по химической чистке ковролина нашего офиса. Очень понравилось бережное и внимательное отношение ваших сотрудников к имуществу нашей компании, и то, как быстро и слаженно они работают. Все наши пожелания сразу находили отклик и получали воплощение на деле.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-creditexpress.webp",
+                    extra: "<p class='testimonial-sign'>Начальник ИТ Бобров В.А</p>"
+                }
+            },
+            {
+                id: 11,
+                company: "ЗАО «Торговый дом «ПЕРЕКРЕСТОК»",
+                preview: "Работая с компанией Мирум, мы благодарны за сотрудничество и взаимопонимание со стороны компании...",
+                full: {
+                    header: "Рекомендательное письмо от ЗАО «Торговый дом «ПЕРЕКРЕСТОК»",
+                    text: "Работая с компанией Мирум, мы благодарны за сотрудничество и взаимопонимание со стороны компании. Очень довольны компетентным и профессиональным персоналом Вашей фирмы, в частности региональным представителем Григорьевой Ириной Михайловной, которая занимается координацией работы на объекте всегда быстро и оперативно. Надеемся на дальнейшее плодотворное сотрудничество!",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-perekrestok.webp",
+                    extra: "<p class='testimonial-date'>03.10.2014 г.</p>"
+                }
+            },
+            {
+                id: 12,
+                company: "ООО «Макдоналдс»",
+                preview: "Представительство ООО «Макдоналдс» хотело выразить Вам и Вашей команде искреннюю благодарность за качественную и эффективную работу...",
+                full: {
+                    header: "Рекомендательное письмо от ООО «Макдоналдс»",
+                    details: "<strong>Представительство ООО «Макдоналдс»</strong><br>Директор ресторана Богданова Е.И.",
+                    text: "Представительство ООО «Макдоналдс» в лице директора ресторана Богдановой Е.И., действующей на основании доверенности № 10/12-Д от 01.02.10 г. хотела выразить Вам и Вашей команде искреннюю благодарность за качественную и эффективную работу по подготовке и проведению мероприятий по мойке крыши ресторана «Макдоналдс» в г.Астрахань, расположенному по адресу: ул. Анри Барбюса, д.21 а. Большое спасибо за чуткость и внимание, аккуратность, быстрое реагирование и мобильность, а также за понимание особенностей работы с нами.",
+                    image: "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/review/review-macdonalds.webp",
+                    extra: "<p class='testimonial-sign'>Директор ресторана Богданова Е.И.</p>"
+                }
+            }
+        ];
+    </script>
+
+    <!-- Скрипт для карусели и отзывов -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Форматирование телефона в формах
+            const track = document.getElementById('carouselTrack');
+            const prevBtn = document.getElementById('carouselPrev');
+            const nextBtn = document.getElementById('carouselNext');
+            const dotsContainer = document.getElementById('carouselDots');
+            
+            let currentIndex = 0;
+            let slidesPerView = 3;
+            let totalSlides = testimonialsData.length;
+            
+            // Определяем количество слайдов в зависимости от ширины экрана
+            function updateSlidesPerView() {
+                if (window.innerWidth <= 768) {
+                    slidesPerView = 1;
+                } else if (window.innerWidth <= 1024) {
+                    slidesPerView = 2;
+                } else {
+                    slidesPerView = 3;
+                }
+                return slidesPerView;
+            }
+            
+            // Отрисовка отзывов
+            function renderTestimonials() {
+                if (!track) return;
+                
+                track.innerHTML = '';
+                
+                testimonialsData.forEach((testimonial, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'carousel-slide';
+                    slide.innerHTML = `
+                        <div class="testimonial-card" data-id="${testimonial.id}">
+                            <div class="testimonial-preview">
+                                <h4><i class="fas fa-file-alt"></i> ${testimonial.company}</h4>
+                                <p>${testimonial.preview}</p>
+                                <button class="btn-show-testimonial" data-testimonial="${testimonial.id}">
+                                    Читать полностью <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="testimonial-full" id="testimonial-full-${testimonial.id}" style="display: none;">
+                                <div class="testimonial-content">
+                                    <h5>${testimonial.full.header || ''}</h5>
+                                    ${testimonial.full.details ? `<p>${testimonial.full.details}</p>` : ''}
+                                    <p>${testimonial.full.text}</p>
+                                    <div class="testimonial-image">
+                                        <img src="${testimonial.full.image}" alt="Рекомендательное письмо" loading="lazy">
+                                        <div class="image-caption">Оригинал письма</div>
+                                    </div>
+                                    ${testimonial.full.extra || ''}
+                                </div>
+                                <button class="btn-hide-testimonial" data-testimonial="${testimonial.id}">
+                                    Свернуть <i class="fas fa-chevron-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    track.appendChild(slide);
+                });
+                
+                // Обновляем позицию карусели
+                updateCarousel();
+                
+                // Добавляем обработчики для кнопок внутри отзывов
+                addTestimonialHandlers();
+            }
+            
+            // Обновление позиции карусели
+            function updateCarousel() {
+                if (!track) return;
+                
+                const slideWidth = track.children[0]?.offsetWidth || 0;
+                const gap = 30; // gap между слайдами
+                
+                track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+                
+                // Обновляем кнопки
+                if (prevBtn) {
+                    prevBtn.disabled = currentIndex === 0;
+                }
+                
+                const maxIndex = Math.max(0, totalSlides - slidesPerView);
+                if (nextBtn) {
+                    nextBtn.disabled = currentIndex >= maxIndex;
+                }
+                
+                // Обновляем точки
+                updateDots();
+            }
+            
+            // Обновление точек
+            function updateDots() {
+                if (!dotsContainer) return;
+                
+                const dotsCount = Math.ceil(totalSlides / slidesPerView);
+                dotsContainer.innerHTML = '';
+                
+                for (let i = 0; i < dotsCount; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = `carousel-dot ${i === Math.floor(currentIndex / slidesPerView) ? 'active' : ''}`;
+                    dot.addEventListener('click', () => {
+                        currentIndex = i * slidesPerView;
+                        updateCarousel();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+            
+            // Добавление обработчиков для кнопок "Читать полностью" и "Свернуть"
+            function addTestimonialHandlers() {
+                // Показать полный отзыв
+                document.querySelectorAll('.btn-show-testimonial').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const id = this.getAttribute('data-testimonial');
+                        const fullContent = document.getElementById(`testimonial-full-${id}`);
+                        if (fullContent) {
+                            fullContent.style.display = 'block';
+                            this.style.display = 'none';
+                            
+                            // Плавная прокрутка к открытому письму
+                            setTimeout(() => {
+                                fullContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }, 100);
+                        }
+                    });
+                });
+                
+                // Скрыть полный отзыв
+                document.querySelectorAll('.btn-hide-testimonial').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const id = this.getAttribute('data-testimonial');
+                        const fullContent = document.getElementById(`testimonial-full-${id}`);
+                        const previewButton = document.querySelector(`.btn-show-testimonial[data-testimonial="${id}"]`);
+                        
+                        if (fullContent && previewButton) {
+                            fullContent.style.display = 'none';
+                            previewButton.style.display = 'inline-flex';
+                            
+                            // Прокрутка обратно к превью
+                            previewButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                });
+            }
+            
+            // Обработчики кнопок карусели
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateCarousel();
+                    }
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const maxIndex = Math.max(0, totalSlides - slidesPerView);
+                    if (currentIndex < maxIndex) {
+                        currentIndex++;
+                        updateCarousel();
+                    }
+                });
+            }
+            
+            // Обновление при изменении размера окна
+            window.addEventListener('resize', () => {
+                const newSlidesPerView = updateSlidesPerView();
+                if (newSlidesPerView !== slidesPerView) {
+                    slidesPerView = newSlidesPerView;
+                    currentIndex = Math.min(currentIndex, Math.max(0, totalSlides - slidesPerView));
+                    updateCarousel();
+                } else {
+                    updateCarousel();
+                }
+            });
+            
+            // Инициализация
+            updateSlidesPerView();
+            renderTestimonials();
+            
+            // Форматирование телефона в формах (если есть)
             const phoneInputs = document.querySelectorAll('input[type="tel"]');
             phoneInputs.forEach(input => {
                 input.addEventListener('input', function(e) {
@@ -434,7 +985,6 @@
                     attribution: '&copy; OpenStreetMap | МИРУМ'
                 }).addTo(map);
                 
-                // Добавить маркеры городов
                 const cities = [
                     { name: "Москва", coords: [55.7558, 37.6173] },
                     { name: "СПб", coords: [59.9343, 30.3351] },
