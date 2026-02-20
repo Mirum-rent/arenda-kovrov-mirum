@@ -531,7 +531,6 @@ function createTelegramMessage() {
     message += `👤 Можем оформить договор с физлицом\n\n`;
     
     message += `Telegram: @+79770005127\n`;
-    message += `WhatsApp: +7 (977) 000-51-27\n`;
     message += `Email: matservice@yandex.ru\n`;
     message += `Сайт: arenda-kovrov-mirum.ru\n`;
     
@@ -596,7 +595,6 @@ function sendToEmail() {
         body += `👤 Можем оформить договор с физлицом\n\n`;
         
         body += `Telegram: @+79770005127\n`;
-        body += `WhatsApp: +7 (977) 000-51-27\n`;
         body += `Email: matservice@yandex.ru\n`;
         body += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
         
