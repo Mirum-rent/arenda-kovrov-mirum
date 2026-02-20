@@ -1,11 +1,11 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 9.6 (20.02.2026) - ИСПРАВЛЕНА ЛОГИКА БАННЕРА И ОТСТУПОВ
+// Версия: 9.7 (20.02.2026) - ИСПРАВЛЕНА НАВИГАЦИЯ ПО ЯКОРЯМ
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем хедер v9.6...');
+    console.log('🔄 Загружаем хедер v9.7...');
     
     // Получаем текущую страницу для определения canonical
     const currentPage = window.location.pathname;
@@ -588,14 +588,14 @@
                         </ul>
                     </li>
                     
-                    <li><a href="#advantages" class="\${currentPage.includes('#advantages') ? 'active' : ''}">Преимущества</a></li>
-                    <li><a href="#how-to-start" class="\${currentPage.includes('#how-to-start') ? 'active' : ''}">Как начать</a></li>
+                    <li><a href="/#advantages" class="\${window.location.hash === '#advantages' ? 'active' : ''}">Преимущества</a></li>
+                    <li><a href="/#how-to-start" class="\${window.location.hash === '#how-to-start' ? 'active' : ''}">Как начать</a></li>
                     <li><a href="/calculator.html" class="\${currentPage.includes('calculator') ? 'active' : ''}">Калькулятор</a></li>
-                    <li><a href="#testimonials" class="\${currentPage.includes('#testimonials') ? 'active' : ''}">Отзывы</a></li>
-                    <li><a href="#faq" class="\${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
+                    <li><a href="/#testimonials" class="\${window.location.hash === '#testimonials' ? 'active' : ''}">Отзывы</a></li>
+                    <li><a href="/#faq" class="\${window.location.hash === '#faq' ? 'active' : ''}">FAQ</a></li>
                     <li><a href="/blog.html" class="\${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
                     <li><a href="/pogoda.html" class="\${currentPage.includes('pogoda') ? 'active' : ''}">Погода</a></li>
-                    <li><a href="#contacts" class="\${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
+                    <li><a href="/#contacts" class="\${window.location.hash === '#contacts' ? 'active' : ''}">Контакты</a></li>
                 </ul>
             </nav>
             
@@ -640,14 +640,14 @@
                     </ul>
                 </li>
                 
-                <li><a href="#advantages" class="\${currentPage.includes('#advantages') ? 'active' : ''}">Преимущества</a></li>
-                <li><a href="#how-to-start" class="\${currentPage.includes('#how-to-start') ? 'active' : ''}">Как начать</a></li>
+                <li><a href="/#advantages" class="\${window.location.hash === '#advantages' ? 'active' : ''}">Преимущества</a></li>
+                <li><a href="/#how-to-start" class="\${window.location.hash === '#how-to-start' ? 'active' : ''}">Как начать</a></li>
                 <li><a href="/calculator.html" class="\${currentPage.includes('calculator') ? 'active' : ''}">Калькулятор</a></li>
-                <li><a href="#testimonials" class="\${currentPage.includes('#testimonials') ? 'active' : ''}">Отзывы</a></li>
-                <li><a href="#faq" class="\${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
+                <li><a href="/#testimonials" class="\${window.location.hash === '#testimonials' ? 'active' : ''}">Отзывы</a></li>
+                <li><a href="/#faq" class="\${window.location.hash === '#faq' ? 'active' : ''}">FAQ</a></li>
                 <li><a href="/blog.html" class="\${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
                 <li><a href="/pogoda.html" class="\${currentPage.includes('pogoda') ? 'active' : ''}">Погода</a></li>
-                <li><a href="#contacts" class="\${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
+                <li><a href="/#contacts" class="\${window.location.hash === '#contacts' ? 'active' : ''}">Контакты</a></li>
                 <li><a href="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13" 
                        target="_blank"
                        rel="noopener"
@@ -697,9 +697,6 @@
 
             // Устанавливаем отступ для main
             main.style.marginTop = (bannerHeight + headerHeight) + 'px';
-            
-            // Для мобильных устройств может потребоваться дополнительная проверка,
-            // но общая логика теперь работает от фактической высоты элементов.
         }
 
         // Функция закрытия баннера
@@ -710,9 +707,7 @@
 
             if (disclaimer) {
                 disclaimer.classList.add('closed');
-                // Сохраняем состояние в sessionStorage, чтобы при обновлении страницы баннер не появлялся
                 sessionStorage.setItem('disclaimerClosed', 'true');
-                // Пересчитываем отступы после закрытия баннера
                 updateSpacing();
             }
         }
@@ -728,13 +723,11 @@
                     disclaimer.classList.add('closed');
                 }
             } else {
-                // Если баннер не закрыт, показываем его (убираем класс closed, если он был)
                 if (disclaimer) {
                     disclaimer.classList.remove('closed');
                 }
             }
 
-            // Устанавливаем обработчик на кнопку закрытия
             if (closeBtn) {
                 closeBtn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -742,17 +735,104 @@
                 });
             }
 
-            // Первоначальная установка отступов
-            // Используем setTimeout, чтобы браузер успел отрисовать элементы и рассчитать их высоту
             setTimeout(updateSpacing, 10);
-            
-            // Также обновим отступы при изменении размера окна (например, поворот экрана на мобильном)
             window.addEventListener('resize', updateSpacing);
             
             console.log('✅ Баннер и отступы инициализированы');
         });
     })();
     // ============ КОНЕЦ СКРИПТА УПРАВЛЕНИЯ БАННЕРОМ ============
+
+    // ============ СКРИПТ УПРАВЛЕНИЯ ЯКОРНЫМИ ССЫЛКАМИ ============
+    (function() {
+        // Функция для плавной прокрутки к элементу
+        function smoothScrollToElement(element) {
+            if (!element) return;
+            
+            const header = document.getElementById('mainHeader');
+            const disclaimer = document.getElementById('phoneDisclaimer');
+            
+            let offset = header ? header.offsetHeight : 60;
+            if (disclaimer && !disclaimer.classList.contains('closed')) {
+                offset += disclaimer.offsetHeight;
+            }
+            
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Функция обработки клика по якорной ссылке
+        function handleAnchorClick(e) {
+            const link = e.currentTarget;
+            const href = link.getAttribute('href');
+            
+            // Пропускаем ссылки, которые не являются внутренними якорями
+            if (!href || href === '#' || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+                return;
+            }
+
+            // Разбираем ссылку на путь и якорь
+            const [path, anchor] = href.split('#');
+            
+            // Если ссылка ведет на другую страницу
+            if (path && path !== '' && path !== window.location.pathname && !path.startsWith('#')) {
+                // Если есть якорь, добавляем его к URL при переходе
+                if (anchor) {
+                    window.location.href = path + '#' + anchor;
+                }
+                return; // Позволяем браузеру выполнить стандартный переход
+            }
+
+            // Если ссылка ведет на якорь на этой же странице
+            if (anchor) {
+                e.preventDefault();
+                
+                // Ищем элемент с таким id
+                const targetElement = document.getElementById(anchor);
+                
+                if (targetElement) {
+                    // Плавно прокручиваем к элементу
+                    smoothScrollToElement(targetElement);
+                    
+                    // Обновляем URL без перезагрузки страницы
+                    history.pushState(null, null, '#' + anchor);
+                } else {
+                    console.warn('Элемент с id "' + anchor + '" не найден на странице');
+                }
+            }
+        }
+
+        // Инициализация обработчиков после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            // Находим все ссылки, которые могут быть якорными
+            const anchorLinks = document.querySelectorAll('a[href*="#"]');
+            
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', handleAnchorClick);
+            });
+
+            // Если в URL есть якорь при загрузке страницы, прокручиваем к нему
+            if (window.location.hash) {
+                const anchor = window.location.hash.substring(1); // убираем #
+                const targetElement = document.getElementById(anchor);
+                
+                if (targetElement) {
+                    // Даем время на загрузку всех элементов (особенно хедера)
+                    setTimeout(() => {
+                        smoothScrollToElement(targetElement);
+                    }, 300);
+                }
+            }
+            
+            console.log('✅ Навигация по якорям инициализирована');
+        });
+    })();
+    // ============ КОНЕЦ СКРИПТА УПРАВЛЕНИЯ ЯКОРНЫМИ ССЫЛКАМИ ============
 </script>
 `;
 
@@ -761,6 +841,6 @@
     document.write(headerHTML);
     document.close();
     
-    console.log('✅ Хедер v9.6 успешно загружен');
+    console.log('✅ Хедер v9.7 успешно загружен');
     
 })();
