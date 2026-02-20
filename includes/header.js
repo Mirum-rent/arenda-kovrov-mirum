@@ -1,11 +1,11 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 9.5 (17.02.2026) - ИСПРАВЛЕННАЯ (бургер, кэш)
+// Версия: 9.6 (20.02.2026) - ИСПРАВЛЕНА ЛОГИКА БАННЕРА И ОТСТУПОВ
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем хедер v9.5...');
+    console.log('🔄 Загружаем хедер v9.6...');
     
     // Получаем текущую страницу для определения canonical
     const currentPage = window.location.pathname;
@@ -21,6 +21,8 @@
         canonicalUrl = 'https://arenda-kovrov-mirum.ru/window-cleaning.html';
     } else if (currentPage.includes('vosstanovlenie-polov.html') || currentPage.includes('chistka_polov.html')) {
         canonicalUrl = 'https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.html';
+    } else if (currentPage.includes('pogoda.html')) {
+        canonicalUrl = 'https://arenda-kovrov-mirum.ru/pogoda.html';
     }
     
     // Определяем активный пункт меню
@@ -31,6 +33,8 @@
         activePage = 'Аренда ковров';
     } else if (currentPage.includes('calculator')) {
         activePage = 'Калькулятор';
+    } else if (currentPage.includes('pogoda')) {
+        activePage = 'Погода';
     }
     
     const headerHTML = `
@@ -76,9 +80,9 @@
     <meta name="theme-color" content="#16a085">
     
     <!-- ============ СТИЛИ С ВЕРСИОНИРОВАНИЕМ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.5">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.5" media="(max-width: 768px)">
-    <link rel="stylesheet" href="/css/calculator.css" media="screen">
+    <link rel="stylesheet" href="/css/style.css?v=9.7">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/calculator.css?v=7.0" media="screen">
     
     <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
     <!-- Font Awesome для иконок -->
@@ -530,6 +534,9 @@
                 if (path.includes('privacy-policy')) 
                     return { name: 'Политика конфиденциальности', position: 2 };
                 
+                if (path.includes('pogoda')) 
+                    return { name: 'Прогноз погоды', position: 2 };
+                
                 return null;
             }
             
@@ -587,6 +594,7 @@
                     <li><a href="#testimonials" class="\${currentPage.includes('#testimonials') ? 'active' : ''}">Отзывы</a></li>
                     <li><a href="#faq" class="\${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
                     <li><a href="/blog.html" class="\${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
+                    <li><a href="/pogoda.html" class="\${currentPage.includes('pogoda') ? 'active' : ''}">Погода</a></li>
                     <li><a href="#contacts" class="\${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
                 </ul>
             </nav>
@@ -638,6 +646,7 @@
                 <li><a href="#testimonials" class="\${currentPage.includes('#testimonials') ? 'active' : ''}">Отзывы</a></li>
                 <li><a href="#faq" class="\${currentPage.includes('#faq') ? 'active' : ''}">FAQ</a></li>
                 <li><a href="/blog.html" class="\${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
+                <li><a href="/pogoda.html" class="\${currentPage.includes('pogoda') ? 'active' : ''}">Погода</a></li>
                 <li><a href="#contacts" class="\${currentPage.includes('#contacts') ? 'active' : ''}">Контакты</a></li>
                 <li><a href="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13" 
                        target="_blank"
@@ -668,65 +677,90 @@
     <main>
 
 <script>
-    // Скрипт для работы с баннером о телефоне
-    // === БАННЕР НАЧАЛО (скрипт) ===
-    document.addEventListener('DOMContentLoaded', function() {
-        const disclaimer = document.getElementById('phoneDisclaimer');
-        const closeBtn = document.getElementById('disclaimerClose');
-        
-        // Всегда показываем баннер
-        if (disclaimer) {
-            disclaimer.style.display = 'block';
-            disclaimer.classList.add('visible');
+    // ============ СКРИПТ УПРАВЛЕНИЯ БАННЕРОМ И ОТСТУПАМИ ============
+    (function() {
+        // Функция для установки отступов с учетом состояния баннера
+        function updateSpacing() {
+            const disclaimer = document.getElementById('phoneDisclaimer');
+            const header = document.getElementById('mainHeader');
+            const main = document.querySelector('main');
+            
+            if (!header || !main) return;
+
+            // Проверяем, закрыт ли баннер (по классу или по sessionStorage)
+            const isBannerClosed = disclaimer ? disclaimer.classList.contains('closed') : true;
+            const bannerHeight = disclaimer && !isBannerClosed ? disclaimer.offsetHeight : 0;
+            const headerHeight = header.offsetHeight;
+
+            // Устанавливаем позицию хедера
+            header.style.top = bannerHeight + 'px';
+
+            // Устанавливаем отступ для main
+            main.style.marginTop = (bannerHeight + headerHeight) + 'px';
+            
+            // Для мобильных устройств может потребоваться дополнительная проверка,
+            // но общая логика теперь работает от фактической высоты элементов.
         }
-        
-        // Обработчик закрытия баннера
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
+
+        // Функция закрытия баннера
+        function closeBanner() {
+            const disclaimer = document.getElementById('phoneDisclaimer');
+            const header = document.getElementById('mainHeader');
+            const main = document.querySelector('main');
+
+            if (disclaimer) {
+                disclaimer.classList.add('closed');
+                // Сохраняем состояние в sessionStorage, чтобы при обновлении страницы баннер не появлялся
+                sessionStorage.setItem('disclaimerClosed', 'true');
+                // Пересчитываем отступы после закрытия баннера
+                updateSpacing();
+            }
+        }
+
+        // Инициализация при загрузке DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            const disclaimer = document.getElementById('phoneDisclaimer');
+            const closeBtn = document.getElementById('disclaimerClose');
+            
+            // Проверяем, было ли закрытие в этой сессии
+            if (sessionStorage.getItem('disclaimerClosed') === 'true') {
                 if (disclaimer) {
-                    // Добавляем класс closed для полного скрытия
                     disclaimer.classList.add('closed');
-                    // Убираем класс visible
-                    disclaimer.classList.remove('visible');
-                    
-                    // Корректируем отступы после закрытия баннера
-                    document.body.style.paddingTop = '0';
-                    
-                    // Обновляем положение хедера
-                    const header = document.getElementById('mainHeader');
-                    if (header) {
-                        header.style.top = '0';
-                    }
-                    
-                    // Обновляем отступ основного контента
-                    const main = document.querySelector('main');
-                    if (main) {
-                        main.style.marginTop = '64px'; // Только высота хедера
-                    }
-                    
-                    // Для мобильных устройств
-                    if (window.innerWidth <= 768) {
-                        if (main) {
-                            main.style.marginTop = '60px';
-                        }
-                    }
-                    if (window.innerWidth <= 480) {
-                        if (main) {
-                            main.style.marginTop = '60px';
-                        }
-                    }
                 }
-            });
-        }
-    });
-    // === БАННЕР КОНЕЦ (скрипт) ===
+            } else {
+                // Если баннер не закрыт, показываем его (убираем класс closed, если он был)
+                if (disclaimer) {
+                    disclaimer.classList.remove('closed');
+                }
+            }
+
+            // Устанавливаем обработчик на кнопку закрытия
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    closeBanner();
+                });
+            }
+
+            // Первоначальная установка отступов
+            // Используем setTimeout, чтобы браузер успел отрисовать элементы и рассчитать их высоту
+            setTimeout(updateSpacing, 10);
+            
+            // Также обновим отступы при изменении размера окна (например, поворот экрана на мобильном)
+            window.addEventListener('resize', updateSpacing);
+            
+            console.log('✅ Баннер и отступы инициализированы');
+        });
+    })();
+    // ============ КОНЕЦ СКРИПТА УПРАВЛЕНИЯ БАННЕРОМ ============
 </script>
 `;
+
     // Вставляем хедер
     document.open();
     document.write(headerHTML);
     document.close();
     
-    console.log('✅ Хедер v9.5 успешно загружен');
+    console.log('✅ Хедер v9.6 успешно загружен');
     
 })();
