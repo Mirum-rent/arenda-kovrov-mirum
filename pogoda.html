@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      POGODA.HTML - Прогноз погоды для замены ковров
-     Версия: 9.1 (20.02.2026) - ПОЛНОСТЬЮ ВОССТАНОВЛЕННАЯ
+     Версия: 9.2 (20.02.2026) - ИСПРАВЛЕНЫ ОТСТУПЫ И ЦВЕТ ТЕКСТА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -41,7 +41,7 @@
         .weather-hero {
             background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%);
             color: white;
-            padding: 80px 0 40px;
+            padding: 80px 0 60px; /* Увеличил нижний отступ, чтобы текст не налезал на контейнер */
             text-align: center;
         }
         
@@ -55,11 +55,12 @@
             max-width: 800px;
             margin: 0 auto;
             font-size: 1.1rem;
+            line-height: 1.5;
         }
         
         .weather-container {
             max-width: 1200px;
-            margin: -50px auto 40px;
+            margin: -30px auto 40px; /* Уменьшил отрицательный отступ с -50px до -30px */
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -207,6 +208,13 @@
             font-size: 1.3rem;
         }
         
+        /* --- ИСПРАВЛЕНИЕ: Делаем весь текст внутри рекомендаций белым --- */
+        .recommendation-card p,
+        .recommendation-card div,
+        .recommendation-card strong {
+            color: #ffffff;
+        }
+        
         .replacement-schedule {
             background: rgba(255,255,255,0.2);
             padding: 20px;
@@ -219,6 +227,7 @@
             font-weight: 700;
             color: #2ecc71;
         }
+        /* --- КОНЕЦ ИСПРАВЛЕНИЯ --- */
         
         .weather-loader {
             display: none;
@@ -253,7 +262,7 @@
         
         @media (max-width: 768px) {
             .weather-hero {
-                padding: 60px 0 30px;
+                padding: 60px 0 40px; /* На мобильных тоже чуть увеличил нижний отступ */
             }
             
             .weather-hero h1 {
@@ -261,7 +270,7 @@
             }
             
             .weather-container {
-                margin: -30px 15px 30px;
+                margin: -20px 15px 30px; /* На мобильных отступ чуть меньше */
                 padding: 20px;
             }
             
@@ -347,7 +356,7 @@
         <section class="weather-hero">
             <div class="container">
                 <h1>Прогноз погоды для замены ковров</h1>
-                <p>Планируйте замену грязезащитных ковров по актуальному прогнозу погоды. Оптимизируйте график и снижайте расходы</p>
+                <p>Планируйте замену грязезащитных ковров по актуальному прогнозу погоды. Оптимизируйте график и снижайте расходы</p> <!-- Текст теперь на своем месте -->
             </div>
         </section>
 
