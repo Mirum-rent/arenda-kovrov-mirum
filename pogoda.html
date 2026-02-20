@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      POGODA.HTML - Прогноз погоды для замены ковров
-     Версия: 9.0 (18.02.2026) - ОБНОВЛЕННАЯ
+     Версия: 9.1 (20.02.2026) - ПОЛНОСТЬЮ ВОССТАНОВЛЕННАЯ
      ============================================ -->
 <html lang="ru">
 <head>
@@ -331,6 +331,7 @@
                 if (breadcrumbCurrent) {
                     breadcrumbCurrent.style.display = 'inline';
                     breadcrumbCurrent.innerHTML = `
+                        <span class="breadcrumb-separator">→</span>
                         <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                             <span itemprop="item">
                                 <span itemprop="name" class="current-page">Прогноз погоды</span>
