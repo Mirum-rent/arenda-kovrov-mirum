@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 12.0 (Обновленные тексты и улучшенная работа)
+     Версия: 13.0 (20.02.2026) - ИСПРАВЛЕН ПОРЯДОК ПОДКЛЮЧЕНИЯ СКРИПТОВ
      ============================================ -->
 <html lang="ru">
 <head>
@@ -14,14 +14,6 @@
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/calculator.html" />
     <meta name="robots" content="index, follow" />
     
-    <meta name="keywords" content="калькулятор аренды ковров, стоимость аренды ковров, расчет стоимости ковров, цена на аренду ковров, ковры для офиса цена, грязезащитные ковры стоимость">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Калькулятор аренды ковров | МИРУМ">
-    <meta property="og:description" content="Рассчитайте стоимость аренды грязезащитных ковров для вашего города. Быстрый расчет онлайн.">
-    <meta property="og:url" content="https://arenda-kovrov-mirum.ru/calculator.html">
-    <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/carpet_sample.webp">
-    
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -33,7 +25,6 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/calculator.css">
     <link rel="stylesheet" href="/css/mobile.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script type="application/ld+json">
@@ -44,106 +35,34 @@
         "description": "Интерактивный калькулятор для расчета стоимости аренды грязезащитных ковров",
         "url": "https://arenda-kovrov-mirum.ru/calculator.html",
         "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "priceSpecification": {
-                "@type": "PriceSpecification",
-                "price": "180",
-                "priceCurrency": "RUB",
-                "unitText": "замена ковра"
-            }
-        },
-        "creator": {
-            "@type": "Organization",
-            "name": "МИРУМ",
-            "url": "https://arenda-kovrov-mirum.ru/"
-        }
+        "operatingSystem": "Any"
     }
     </script>
     
     <style>
-        /* Дополнительные стили для улучшения отображения на калькуляторе */
-        .calculator-container {
-            transition: all 0.3s ease;
-        }
+        .calculator-container { transition: all 0.3s ease; }
+        .form-group p { margin-top: 5px; font-size: 0.9rem; color: #666; line-height: 1.4; }
+        #addPositionBtn i { font-size: 1.1em; margin-right: 8px; }
         
-        .form-group p {
-            margin-top: 5px;
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.4;
-        }
-        
-        /* Стили для кнопки добавления позиции */
-        #addPositionBtn i {
-            font-size: 1.1em;
-            margin-right: 8px;
-        }
-        
-        /* Анимация при добавлении позиции */
         @keyframes highlight {
             0% { background-color: rgba(46, 204, 113, 0.2); }
             100% { background-color: white; }
         }
+        .position-item.highlight { animation: highlight 1s ease; }
         
-        .position-item.highlight {
-            animation: highlight 1s ease;
-        }
-        
-        /* Улучшение для мобильных устройств */
         @media (max-width: 768px) {
-            .calculator-container {
-                padding: 15px;
-            }
-            
-            .tabs {
-                flex-wrap: wrap;
-                gap: 5px;
-                margin-bottom: 20px;
-            }
-            
-            .tab-btn {
-                flex: 1 1 calc(50% - 10px);
-                min-width: 140px;
-                padding: 10px;
-                font-size: 0.9rem;
-            }
-            
-            .calculator-form select,
-            .calculator-form input {
-                font-size: 16px !important; /* Предотвращает зум в iOS */
-                min-height: 44px;
-            }
-            
-            .month-inputs {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 10px;
-            }
-            
-            .month-box {
-                padding: 10px;
-            }
-            
-            .month-box input {
-                padding: 10px;
-                font-size: 16px;
-            }
+            .calculator-container { padding: 15px; }
+            .tabs { flex-wrap: wrap; gap: 5px; margin-bottom: 20px; }
+            .tab-btn { flex: 1 1 calc(50% - 10px); min-width: 140px; padding: 10px; font-size: 0.9rem; }
+            .calculator-form select, .calculator-form input { font-size: 16px !important; min-height: 44px; }
+            .month-inputs { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+            .month-box { padding: 10px; }
+            .month-box input { padding: 10px; font-size: 16px; }
         }
-        
         @media (max-width: 480px) {
-            .tabs {
-                flex-direction: column;
-            }
-            
-            .tab-btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .month-inputs {
-                grid-template-columns: 1fr !important;
-            }
+            .tabs { flex-direction: column; }
+            .tab-btn { width: 100%; }
+            .month-inputs { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -353,7 +272,7 @@
                             <i class="fas fa-question-circle"></i>
                             Как работает автоматическое добавление позиций?
                         </div>
-                        <p>Просто заполните все поля: регион, размер ковра, периодичность замены и количество. Позиция автоматически добавится в расчет. Измените количество - позиция обновится.</p>
+                        <p>Просто заполните все поля: регион, размер ковра, периодичность замены и количество. Позиция автоматически добавится в расчет.</p>
                     </div>
                     
                     <div class="faq-item-main">
@@ -361,7 +280,7 @@
                             <i class="fas fa-question-circle"></i>
                             Можно ли арендовать ковры в разных регионах?
                         </div>
-                        <p>Да! Просто выберите разные регионы для каждой позиции. Калькулятор автоматически покажет "Разные регионы" в итоговом расчете.</p>
+                        <p>Да! Просто выберите разные регионы для каждой позиции. Калькулятор автоматически покажет "Разные регионы".</p>
                     </div>
                     
                     <div class="faq-item-main">
@@ -369,7 +288,7 @@
                             <i class="fas fa-question-circle"></i>
                             Что такое расчет за 4 недели?
                         </div>
-                        <p>Мы считаем стоимость за 4 недели, а не за месяц, потому что в разных месяцах разное количество дней. Это более точный расчет для регулярных замен.</p>
+                        <p>Мы считаем стоимость за 4 недели (28 дней), а не за месяц, потому что в разных месяцах разное количество дней.</p>
                     </div>
                     
                     <div class="faq-item-main">
@@ -377,7 +296,7 @@
                             <i class="fas fa-question-circle"></i>
                             Как работает расчет с НДС?
                         </div>
-                        <p>По умолчанию расчет идет без НДС. Если вам нужен расчет с НДС 22%, просто включите переключатель "Можем работать с НДС 22%" в результатах расчета. Цена увеличится на ставку налога.</p>
+                        <p>По умолчанию расчет идет без НДС. Если нужен расчет с НДС 22%, включите переключатель в результатах.</p>
                     </div>
                 </div>
             </div>
@@ -387,7 +306,7 @@
             <div class="container">
                 <h2 class="section-title">Нужна помощь с расчетом?</h2>
                 <p class="text-center" style="max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">
-                    Наши менеджеры помогут подобрать оптимальное решение для вашего объекта и рассчитают индивидуальные условия.
+                    Наши менеджеры помогут подобрать оптимальное решение для вашего объекта.
                 </p>
                 
                 <div class="contact-container">
@@ -397,7 +316,7 @@
                         <div class="contact-item">
                             <i class="fab fa-telegram"></i>
                             <div>
-                                <strong>Telegram (быстрее всего):</strong>
+                                <strong>Telegram:</strong>
                                 <a href="https://t.me/+79770005127">+7 (977) 000-51-27</a>
                             </div>
                         </div>
@@ -405,7 +324,7 @@
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
-                                <strong>Электронная почта:</strong>
+                                <strong>Email:</strong>
                                 <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a>
                             </div>
                         </div>
@@ -424,7 +343,7 @@
                                 • Свяжемся с вами, как можно скорее<br>
                                 • Договор заключаем в день обращения<br>
                                 • Возможна оплата по карте и по безналичному расчету<br>
-                                • Можем работать по ЭДО, если вам так удобно<br>
+                                • Можем работать по ЭДО<br>
                                 • Можем оформить договор с физлицом
                             </p>
                         </div>
@@ -445,7 +364,7 @@
                             
                             <div class="form-group">
                                 <label for="calcQuestion">Ваш вопрос</label>
-                                <textarea id="calcQuestion" name="question" rows="3" placeholder="Напишите вопрос по расчету или укажите особенности вашего объекта..."></textarea>
+                                <textarea id="calcQuestion" name="question" rows="3" placeholder="Напишите вопрос по расчету..."></textarea>
                             </div>
                             
                             <div class="consent-checkbox">
@@ -465,12 +384,14 @@
         </section>
     </main>
 
-    <script src="/includes/footer.js"></script>
-
-    <script src="/js/main.js"></script>
+    <!-- ВАЖНО: СКРИПТЫ ПОДКЛЮЧАЮТСЯ В ПРАВИЛЬНОМ ПОРЯДКЕ -->
     <script src="/js/prices.js"></script>
+    <script src="/js/main.js"></script>
     <script src="/js/calculator.js"></script>
     <script src="/js/forms.js"></script>
+    
+    <!-- FOOTER.js ДОЛЖЕН БЫТЬ ПОСЛЕДНИМ -->
+    <script src="/includes/footer.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -494,17 +415,6 @@
                     
                     e.target.value = value;
                 });
-            }
-            
-            // Обработка формы вопросов (уже в forms.js)
-            
-            // Автоматически скрываем хедер и герой
-            if (window.location.pathname.includes('calculator.html')) {
-                const header = document.getElementById('mainHeader');
-                const hero = document.querySelector('.hero');
-                
-                if (header) header.classList.add('hidden');
-                if (hero) hero.classList.add('hidden');
             }
             
             // Функции для табов
@@ -541,7 +451,20 @@
                     container.appendChild(div);
                 });
             }
+            
+            // Принудительная инициализация калькулятора после загрузки всех скриптов
+            setTimeout(() => {
+                if (typeof window.Calculator !== 'undefined' && window.Calculator.init) {
+                    window.Calculator.init();
+                } else {
+                    console.log('⚠️ Calculator не найден, пробуем initCalculator()');
+                    if (typeof initCalculator === 'function') {
+                        initCalculator();
+                    }
+                }
+            }, 100);
         });
     </script>
+
 </body>
 </html>
