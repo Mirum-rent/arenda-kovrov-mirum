@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!-- ============================================
+     OUTSTAFFING.HTML - Аутстаффинг персонала
+     Версия: 9.0 (17.02.2026) - С ОБЩИМИ HEADER/FOOTER
+     ============================================ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- ============ СЕО МЕТАДАННЫЕ ============ -->
+    <title>Аутстаффинг персонала в Москве и РФ | Вывод сотрудников за штат | МИРУМ</title>
+    <meta name="description" content="✅ Аутстаффинг (вывод персонала за штат) через аккредитованных партнеров. Снижаем налоги до 40%, легализуем мигрантов, берем на себя кадровые риски. Работаем по всей России.">
+    <meta name="keywords" content="аутстаффинг, аутсорсинг персонала, аренда персонала, лизинг персонала, вывод персонала за штат, предоставление персонала, частное агентство занятости, чаз, снижение налогов">
+    
+    <link rel="canonical" href="https://arenda-kovrov-mirum.ru/outstaffing.html" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="geo.region" content="RU">
+    <meta name="geo.placename" content="Russia">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Аутстаффинг персонала под ключ | МИРУМ">
+    <meta property="og:description" content="Оформляем ваших сотрудников в штат наших компаний-партнеров. Вы снижаете налоги и забываете о кадровых рисках.">
+    <meta property="og:url" content="https://arenda-kovrov-mirum.ru/outstaffing.html">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png">
+    
+    <!-- ============ ФАВИКОНЫ ============ -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#16a085">
+    
+    <!-- ============ СТИЛИ ============ -->
+    <link rel="stylesheet" href="/css/style.css?v=9.6">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.6" media="(max-width: 768px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ============ -->
+    <style>
+        .service-hero {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        .service-hero h1 {
+            color: white !important;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .service-hero .accent {
+            color: #2ecc71 !important;
+        }
+        
+        .service-hero p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .service-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        
+        .service-feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 200px;
+        }
+        
+        .service-feature i {
+            font-size: 2rem;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #16a085;
+            display: block;
+        }
+        
+        .case-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #16a085;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .case-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .pricing-card.popular {
+            border-color: #16a085;
+            transform: scale(1.02);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #16a085;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #16a085;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .service-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .service-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .service-feature {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+        }
+    </style>
+    
+    <!-- Микроразметка -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Аутстаффинг персонала",
+        "name": "Аутстаффинг (вывод персонала за штат) по всей России",
+        "description": "Комплексная услуга по переводу сотрудников заказчика в штат компаний-партнеров МИРУМ.",
+        "provider": {
+            "@type": "Organization",
+            "name": "МИРУМ",
+            "url": "https://arenda-kovrov-mirum.ru/",
+            "logo": "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png"
+        },
+        "areaServed": {"@type": "Country", "name": "Россия"}
+    }
+    </script>
+</head>
+<body>
+
+    <!-- ============ HEADER (ОБЩИЙ) ============ -->
+    <script src="/includes/header.js"></script>
+    
+    <!-- ============ ОСНОВНОЙ КОНТЕНТ ============ -->
+    <main>
+        
+        <!-- Хлебные крошки -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+                if (breadcrumbCurrent) {
+                    breadcrumbCurrent.style.display = 'inline';
+                    breadcrumbCurrent.innerHTML = `
+                        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <span itemprop="item">
+                                <span itemprop="name" class="current-page">Аутстаффинг персонала</span>
+                            </span>
+                            <meta itemprop="position" content="2" />
+                        </span>
+                    `;
+                }
+            });
+        </script>
+
+        <!-- ГЕРОЙ -->
+        <section class="service-hero">
+            <div class="container">
+                <h1>Аутстаффинг персонала <span class="accent">под ключ</span></h1>
+                <p>Оформляем ваших сотрудников в штат надежных партнеров с 2009 года. Легальный вывод за штат, снижение налоговой нагрузки до 40%, полная защита от проверок и штрафов.</p>
+                
+                <div class="service-features">
+                    <div class="service-feature"><i class="fas fa-users"></i><div>Вывод до 10 000+</div><small>сотрудников</small></div>
+                    <div class="service-feature"><i class="fas fa-shield-alt"></i><div>Защита от штрафов</div><small>до 80 млн ₽</small></div>
+                    <div class="service-feature"><i class="fas fa-globe"></i><div>Легализация мигрантов</div><small>из 20+ стран</small></div>
+                    <div class="service-feature"><i class="fas fa-bolt"></i><div>Оформление за 1-3 дня</div><small>без простоев</small></div>
+                </div>
+                
+                <a href="https://t.me/+79770005127" class="btn btn-telegram" style="font-size: 1.1rem; padding: 15px 30px;">
+                    <i class="fab fa-telegram"></i> Получить консультацию
+                </a>
+            </div>
+        </section>
+
+        <!-- СТАТИСТИКА -->
+        <section style="padding: 60px 0;">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card"><span class="stat-number">12+</span><span>лет успешной работы</span></div>
+                    <div class="stat-card"><span class="stat-number">500+</span><span>компаний-клиентов</span></div>
+                    <div class="stat-card"><span class="stat-number">35 000+</span><span>сотрудников в управлении</span></div>
+                    <div class="stat-card"><span class="stat-number">0</span><span>штрафов у клиентов</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЧТО ТАКОЕ АУТСТАФФИНГ -->
+        <section class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Что такое аутстаффинг?</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto;">Аутстаффинг — это перевод ваших сотрудников в штат нашей компании-партнера (аккредитованного частного агентства занятости). Они продолжают работать у вас, но юридически являются нашими сотрудниками.</p>
+                
+                <div class="advantages-grid" style="margin-top: 40px;">
+                    <div class="advantage-card"><div class="advantage-header"><i class="fas fa-file-signature"></i> Юридическая схема</div><div class="advantage-content"><p>Ваши сотрудники переводятся в штат нашего партнера, но продолжают работать на ваших объектах.</p></div></div>
+                    <div class="advantage-card"><div class="advantage-header"><i class="fas fa-check-circle"></i> Что остается у вас?</div><div class="advantage-content"><p>Полный контроль над сотрудниками: вы ставите задачи, контролируете качество, применяете KPI.</p></div></div>
+                    <div class="advantage-card"><div class="advantage-header"><i class="fas fa-shield-alt"></i> Что берем на себя мы?</div><div class="advantage-content"><p>Все кадровые риски: оформление, расчет зарплаты, налоги, взаимодействие с ФНС, ГИТ, МВД.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- КЕЙСЫ -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Реальные кейсы из нашей практики</h2>
+                
+                <div class="case-card">
+                    <h3>🏭 Производственная компания</h3>
+                    <p><strong>Ситуация:</strong> Штат 200+ человек, налоговая нагрузка 22% от ФОТ.</p>
+                    <p><strong>Результат:</strong> Налоговая нагрузка снизилась до 9,4%. Экономия <strong>8,3 млн руб. в месяц</strong>.</p>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🚀 Крупный сервис доставки</h3>
+                    <p><strong>Задача:</strong> Быстрое масштабирование с 0 до 10 000 курьеров в 37 регионах.</p>
+                    <p><strong>Результат:</strong> Рост штата в 100 раз за 6 месяцев. Полная легализация иностранцев.</p>
+                </div>
+                
+                <div class="case-card">
+                    <h3>🛡️ Проверка ОВМ (миграционная служба)</h3>
+                    <p><strong>Инцидент:</strong> На объекте обнаружено 199 нелегальных иностранцев. Угроза штрафа ~80 млн руб.</p>
+                    <p><strong>Результат:</strong> Уход от штрафа в 79,6 млн руб. 100% персонала легализованы за 1 день.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЦЕНЫ -->
+        <section class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Ориентиры по стоимости</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div class="pricing-card">
+                        <div class="pricing-title">Для 1 сотрудника</div>
+                        <div class="pricing-price">~74 000 ₽</div>
+                        <ul class="pricing-features" style="list-style: none; padding: 0;">
+                            <li>✓ НДФЛ, взносы включены</li>
+                            <li>✓ Полное кадровое сопровождение</li>
+                        </ul>
+                        <a href="https://t.me/+79770005127" class="btn btn-primary">Узнать точную цену</a>
+                    </div>
+                    
+                    <div class="pricing-card popular">
+                        <div class="pricing-badge">Популярный</div>
+                        <div class="pricing-title">Для компании (ФОТ 1 млн ₽)</div>
+                        <div class="pricing-price">~1 550 000 ₽</div>
+                        <ul class="pricing-features" style="list-style: none; padding: 0;">
+                            <li>✓ Экономия до 400 000 ₽ в месяц</li>
+                            <li>✓ Индивидуальный подход</li>
+                        </ul>
+                        <a href="https://t.me/+79770005127" class="btn btn-primary">Получить расчет</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПРИЗЫВ -->
+        <section style="background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%); color: white; padding: 60px 0; text-align: center;">
+            <div class="container">
+                <h2 style="color: white;">Оптимизируйте кадровые расходы уже сегодня</h2>
+                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 20px auto;">Напишите нам в Telegram — подготовим индивидуальное предложение.</p>
+                <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #16a085;">
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============ FOOTER (ОБЩИЙ) ============ -->
+    <script src="/includes/footer.js"></script>
+
+</body>
+</html>

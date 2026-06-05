@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      ARENDA-KOVROV.HTML - Аренда грязезащитных ковров
-     Версия: 9.3 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
+     Версия: 9.4 (05.06.2026) - ДОБАВЛЕНА JSON-LD РАЗМЕТКА Product
      ============================================ -->
 <html lang="ru">
 <head>
@@ -40,6 +40,38 @@
     <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
     <link rel="stylesheet" href="/css/calculator.css?v=7.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ============ JSON-LD РАЗМЕТКА ДЛЯ PRODUCT ============ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Аренда грязезащитных ковров",
+        "description": "Профессиональная аренда грязезащитных ковров для офисов, магазинов, торговых центров, медицинских учреждений. Регулярная замена, чистка, доставка. Работаем по всей России с 2009 года.",
+        "brand": {
+            "@type": "Brand",
+            "name": "МИРУМ"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "RUB",
+            "lowPrice": "180",
+            "highPrice": "5000",
+            "offerCount": "50",
+            "availability": "https://schema.org/InStock",
+            "validFrom": "2026-06-05"
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Россия"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "МИРУМ",
+            "url": "https://arenda-kovrov-mirum.ru/"
+        }
+    }
+    </script>
     
     <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ============ -->
     <style>
@@ -108,6 +140,8 @@
             cursor: pointer;
             font-size: 1rem;
             min-width: 120px;
+            padding: 12px 25px;
+            border-radius: 50px;
         }
         
         .hero-buttons .btn:hover {
@@ -302,24 +336,6 @@
             }
         }
     </style>
-    
-    <!-- Микроразметка -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Аренда грязезащитных ковров",
-        "name": "Аренда грязезащитных ковров для бизнеса",
-        "description": "Профессиональная аренда входных ковров для офисов, магазинов, медицинских учреждений.",
-        "provider": {
-            "@type": "Organization",
-            "name": "МИРУМ",
-            "url": "https://arenda-kovrov-mirum.ru/",
-            "logo": "https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png"
-        },
-        "areaServed": {"@type": "Country", "name": "Россия"}
-    }
-    </script>
 </head>
 <body>
 
@@ -408,7 +424,7 @@
             </div>
         </section>
 
-        <!-- ============ РАЗМЕРЫ И ЦЕНЫ (ОБНОВЛЕННАЯ ВЕРСИЯ) ============ -->
+        <!-- ============ РАЗМЕРЫ И ЦЕНЫ ============ -->
         <section class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Размеры ковров и цены</h2>

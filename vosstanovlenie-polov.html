@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      VOSSTANOVLENIE-POLOV.HTML - Восстановление полов
-     Версия: 9.2 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
+     Версия: 9.3 (05.06.2026) - ДОБАВЛЕНА JSON-LD РАЗМЕТКА Product
      ============================================ -->
 <html lang="ru">
 <head>
@@ -37,6 +37,38 @@
     <link rel="stylesheet" href="/css/style.css?v=9.8">
     <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- JSON-LD РАЗМЕТКА ДЛЯ PRODUCT -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Восстановление напольных покрытий",
+        "description": "Профессиональное восстановление паркета, мрамора, гранита, линолеума, керамогранита. Шлифовка, полировка, кристаллизация, удаление желтых пятен. Экономия до 70% от стоимости замены. Гарантия до 8 лет. Работаем в Москве и Московской области с 2009 года.",
+        "brand": {
+            "@type": "Brand",
+            "name": "МИРУМ"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "RUB",
+            "lowPrice": "110",
+            "highPrice": "1500",
+            "offerCount": "40",
+            "availability": "https://schema.org/InStock",
+            "validFrom": "2026-06-05"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Москва, Московская область"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "МИРУМ",
+            "url": "https://arenda-kovrov-mirum.ru/"
+        }
+    }
+    </script>
     
     <style>
         .service-hero {

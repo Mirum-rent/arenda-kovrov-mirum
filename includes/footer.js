@@ -1,11 +1,11 @@
 // ============================================
 // FOOTER.JS - Нижняя часть всех страниц МИРУМ
-// Версия: 10.2 (05.06.2026) - РАСШИРЕНИЕ СПИСКА ГОРОДОВ
+// Версия: 10.3 (05.06.2026) - ДОБАВЛЕНА ПОЛНАЯ JSON-LD РАЗМЕТКА LocalBusiness
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем футер v10.2...');
+    console.log('🔄 Загружаем футер v10.3...');
     
     const footerHTML = `
     </main>
@@ -401,8 +401,8 @@
         </div>
     </div>
 
-    <!-- ============ СКРЫТЫЙ SEO-КОНТЕНТ ============ -->
-    <div style="display: none; height: 1px; overflow: hidden;" aria-hidden="true" itemscope itemtype="https://schema.org/Organization">
+    <!-- ============ СКРЫТЫЙ SEO-КОНТЕНТ (LocalBusiness) ============ -->
+    <div style="display: none; height: 1px; overflow: hidden;" aria-hidden="true" itemscope itemtype="https://schema.org/LocalBusiness">
         <span itemprop="name">МИРУМ</span>
         <span itemprop="alternateName">Матсервис</span>
         <span itemprop="alternateName">Ковросервис</span>
@@ -410,11 +410,37 @@
         <span itemprop="foundingDate">2009</span>
         <span itemprop="email">matservice@yandex.ru</span>
         <span itemprop="telephone">+79770005127</span>
+        <span itemprop="priceRange">от 110₽ до 5000₽</span>
+        <meta itemprop="openingHours" content="Mo-Fr 09:00-20:00">
+        <meta itemprop="openingHours" content="Sa 10:00-18:00">
         <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
             <span itemprop="streetAddress">ул. Сущёвская, 27с2</span>
             <span itemprop="addressLocality">Москва</span>
             <span itemprop="postalCode">127055</span>
             <span itemprop="addressCountry">RU</span>
+        </span>
+        <span itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
+            <meta itemprop="latitude" content="55.7792">
+            <meta itemprop="longitude" content="37.5994">
+        </span>
+        <span itemprop="sameAs" content="https://t.me/+79770005127"></span>
+        <span itemprop="sameAs" content="https://wa.me/79770005127"></span>
+        <span itemprop="sameAs" content="https://max.ru/u/79770005127"></span>
+        <span itemprop="sameAs" content="https://www.avito.ru/brands/21b68ab1889c8e24497a2089e18e2a13"></span>
+        <span itemprop="areaServed" itemscope itemtype="https://schema.org/Country">
+            <span itemprop="name">Россия</span>
+        </span>
+        <span itemprop="hasOfferCatalog" itemscope itemtype="https://schema.org/OfferCatalog">
+            <span itemprop="name">Услуги МИРУМ</span>
+            <span itemprop="itemListElement" itemscope itemtype="https://schema.org/OfferCatalog">
+                <span itemprop="name">Аренда грязезащитных ковров</span>
+            </span>
+            <span itemprop="itemListElement" itemscope itemtype="https://schema.org/OfferCatalog">
+                <span itemprop="name">Мойка витрин и фасадов</span>
+            </span>
+            <span itemprop="itemListElement" itemscope itemtype="https://schema.org/OfferCatalog">
+                <span itemprop="name">Восстановление напольных покрытий</span>
+            </span>
         </span>
     </div>
     <!-- ============ КОНЕЦ СКРЫТОГО SEO-КОНТЕНТА ============ -->
@@ -636,6 +662,6 @@
     document.write(footerHTML);
     document.close();
     
-    console.log('✅ Футер v10.2 успешно загружен');
+    console.log('✅ Футер v10.3 успешно загружен');
     
 })();
