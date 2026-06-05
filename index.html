@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      INDEX.HTML - ГЛАВНАЯ СТРАНИЦА МИРУМ
-     Версия: 9.6 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
+     Версия: 9.6 (05.06.2026) - ДОБАВЛЕН БЛОК "ПОДЕЛИТЬСЯ"
      ============================================ -->
 <html lang="ru">
 <head>
@@ -10,7 +10,7 @@
     
     <!-- ============ СЕО МЕТАДАННЫЕ ============ -->
     <title>МИРУМ - Аренда грязезащитных ковров и услуги чистоты по всей России с 2009</title>
-    <meta name="description" content="✅ Аренда грязезащитных ковров, мойка фасадов, восстановление полов. Работаем по всей России с 2009 года. Быстрый переход на Telegram, WhatsApp и почту.">
+    <meta name="description" content="✅ Аренда грязезащитных ковров, мойка фасадов, восстановление полов. Работаем по всей России с 2009 года. Быстрый переход на Telegram, WhatsApp, MAX и почту.">
     <meta name="keywords" content="аренда грязезащитных ковров, мойка фасадов, восстановление полов, шлифовка мрамора, полировка гранита, грязезащита, входные ковры">
     
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/" />
@@ -45,7 +45,7 @@
     <style>
         .hero {
             background: white;
-            padding: 100px 0 60px;
+            padding: 100px 0 40px;
             text-align: center;
         }
         
@@ -97,6 +97,80 @@
         .hero-buttons .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Стили для блока "Поделиться" */
+        .share-section {
+            background: white;
+            padding: 0 0 40px 0;
+            text-align: center;
+        }
+        
+        .share-title {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .share-btn i {
+            font-size: 1.1rem;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .share-telegram {
+            background: #0088cc;
+            color: white;
+        }
+        
+        .share-telegram:hover {
+            background: #0077b3;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+        }
+        
+        .share-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .share-whatsapp:hover {
+            background: #1da851;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        .share-vk {
+            background: #0077FF;
+            color: white;
+        }
+        
+        .share-vk:hover {
+            background: #0066cc;
+            box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
         }
         
         .stats-grid {
@@ -320,7 +394,7 @@
         
         @media (max-width: 768px) {
             .hero {
-                padding: 60px 0 40px;
+                padding: 60px 0 30px;
             }
             
             .hero h1 {
@@ -335,6 +409,17 @@
             .hero-buttons .btn {
                 width: 100%;
                 max-width: 280px;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
             }
             
             .carousel-container {
@@ -442,6 +527,32 @@
                     <a href="https://wa.me/79770005127" class="btn" style="font-size: 1.1rem; padding: 15px 30px; border-radius: 50px; background: #25D366; color: white;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="font-size: 1.1rem; padding: 15px 30px; border-radius: 50px; background: #0055FF; color: white;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="font-size: 1.1rem; padding: 15px 30px; border-radius: 50px; background: #6c757d; color: white;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ БЛОК "ПОДЕЛИТЬСЯ" ============ -->
+        <section class="share-section">
+            <div class="container">
+                <div class="share-title">
+                    <i class="fas fa-share-alt"></i> Поделиться сайтом:
+                </div>
+                <div class="share-buttons">
+                    <button class="share-btn share-telegram" onclick="shareToTelegram()">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </button>
+                    <button class="share-btn share-whatsapp" onclick="shareToWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="share-btn share-vk" onclick="shareToVK()">
+                        <i class="fab fa-vk"></i> VK
+                    </button>
                 </div>
             </div>
         </section>
@@ -597,6 +708,9 @@
                     <a href="https://wa.me/79770005127" class="btn btn-primary" style="background: #25D366; color: white; font-size: 1.1rem; padding: 15px 30px; border-radius: 50px;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
+                    <a href="https://max.ru/u/79770005127" class="btn btn-primary" style="background: #0055FF; color: white; font-size: 1.1rem; padding: 15px 30px; border-radius: 50px;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
                     <a href="mailto:matservice@yandex.ru" class="btn btn-primary" style="background: white; color: #2c5aa0; font-size: 1.1rem; padding: 15px 30px; border-radius: 50px;">
                         <i class="fas fa-envelope"></i> Email
                     </a>
@@ -745,6 +859,29 @@
                 }
             }
         ];
+        
+        // Функции для кнопок "Поделиться"
+        function shareToTelegram() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            window.open(`https://t.me/share/url?url=${url}&text=${title}`, '_blank', 'width=600,height=400');
+        }
+        
+        function shareToWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.title + ' - ' + window.location.href);
+            window.open(`https://wa.me/?text=${text}`, '_blank', 'width=600,height=400');
+        }
+        
+        function shareToVK() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            window.open(`https://vk.com/share.php?url=${url}&title=${title}`, '_blank', 'width=600,height=400');
+        }
+        
+        window.shareToTelegram = shareToTelegram;
+        window.shareToWhatsApp = shareToWhatsApp;
+        window.shareToVK = shareToVK;
     </script>
 
     <!-- Скрипт для карусели и отзывов -->
