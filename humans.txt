@@ -1,7 +1,7 @@
 # humans.txt for arenda-kovrov-mirum.ru
 # Company: ООО "МИРУМ" (мирум.рент)
-# Last update: 2026-02-18
-# Version: 5.0
+# Last update: 2026-06-05
+# Version: 6.0
 
 /* TEAM */
   Founder: Дмитрий Рыбак
@@ -18,7 +18,7 @@
   Designer: МИРУМ Design Team
   Site: https://arenda-kovrov-mirum.ru/
   Style: Modern Business Clean
-  Colors: #16a085 (primary), #2c3e50 (secondary)
+  Colors: #2c5aa0 (primary), #3a7bd5 (light accent)
 
   Content Team: Эксперты МИРУМ
   Authors: Дмитрий Рыбак, Анна Смирнова, Максим Петров
@@ -33,30 +33,29 @@
   OpenStreetMap: https://www.openstreetmap.org/ - картография
 
 /* SITE */
-  Last update: 2026-02-18
+  Last update: 2026-06-05
   Language: Russian
   Doctype: HTML5
   Components: Modular blocks, 36+ файлов
   Architecture: Mobile-first, Responsive
   Framework: Vanilla JavaScript
   Hosting: GitHub Pages
-  Version: 9.7
+  Version: 10.0
 
 /* PAGES */
   1. Главная (index.html) - версия 9.0
   2. Аренда ковров (arenda-kovrov.html) - версия 9.0
   3. Мойка витрин (window-cleaning.html) - версия 9.0
   4. Восстановление полов (vosstanovlenie-polov.html) - версия 9.0
-  5. Аутстаффинг (outstaffing.html) - версия 9.0
-  6. Калькулятор (calculator.html) - версия 8.0
-  7. FAQ (FAQ.html) - версия 9.0
-  8. Блог (blog.html) - версия 9.0
-  9. Отзывы (testimonials.html) - версия 4.0
-  10. Галерея (gallery.html) - версия 9.0
-  11. Политика (privacy-policy.html) - версия 4.0
-  12. Погода (pogoda.html) - версия 9.0
-  13. Соглашение (terms-of-use.html) - версия 1.0
-  14. 404 (404.html) - версия 1.0
+  5. Калькулятор (calculator.html) - версия 8.0
+  6. FAQ (FAQ.html) - версия 9.0
+  7. Блог (blog.html) - версия 9.0
+  8. Отзывы (testimonials.html) - версия 4.0
+  9. Галерея (gallery.html) - версия 9.0
+  10. Политика (privacy-policy.html) - версия 4.0
+  11. Погода (pogoda.html) - версия 9.0
+  12. Соглашение (terms-of-use.html) - версия 1.0
+  13. 404 (404.html) - версия 1.0
 
 /* SERVICES */
   1. Аренда грязезащитных ковров (с 2009)
@@ -73,11 +72,6 @@
      - Паркет, мрамор, гранит, линолеум
      - Экономия до 70%
      - Гарантия до 8 лет
-  
-  4. Аутстаффинг персонала (ЧАЗ)
-     - Снижение налогов до 40%
-     - Легализация иностранцев
-     - Защита от проверок
 
 /* GEOGRAPHY */
   Cities: 50+ городов России
