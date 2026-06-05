@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      CALCULATOR.HTML - Отдельная страница калькулятора МИРУМ
-     Версия: 13.0 (20.02.2026) - ИСПРАВЛЕН ПОРЯДОК ПОДКЛЮЧЕНИЯ СКРИПТОВ
+     Версия: 13.1 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -20,12 +20,52 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/calculator.css">
     <link rel="stylesheet" href="/css/mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
     
     <script type="application/ld+json">
     {
@@ -38,33 +78,6 @@
         "operatingSystem": "Any"
     }
     </script>
-    
-    <style>
-        .calculator-container { transition: all 0.3s ease; }
-        .form-group p { margin-top: 5px; font-size: 0.9rem; color: #666; line-height: 1.4; }
-        #addPositionBtn i { font-size: 1.1em; margin-right: 8px; }
-        
-        @keyframes highlight {
-            0% { background-color: rgba(46, 204, 113, 0.2); }
-            100% { background-color: white; }
-        }
-        .position-item.highlight { animation: highlight 1s ease; }
-        
-        @media (max-width: 768px) {
-            .calculator-container { padding: 15px; }
-            .tabs { flex-wrap: wrap; gap: 5px; margin-bottom: 20px; }
-            .tab-btn { flex: 1 1 calc(50% - 10px); min-width: 140px; padding: 10px; font-size: 0.9rem; }
-            .calculator-form select, .calculator-form input { font-size: 16px !important; min-height: 44px; }
-            .month-inputs { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
-            .month-box { padding: 10px; }
-            .month-box input { padding: 10px; font-size: 16px; }
-        }
-        @media (max-width: 480px) {
-            .tabs { flex-direction: column; }
-            .tab-btn { width: 100%; }
-            .month-inputs { grid-template-columns: 1fr !important; }
-        }
-    </style>
 </head>
 <body>
     <script src="/includes/header.js"></script>
@@ -87,6 +100,21 @@
                         Все цены указаны без НДС. Можем работать как с НДС 22%, так и без НДС. 
                         Для расчета с НДС включите переключатель в результатах.
                     </p>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
                 </div>
             </div>
         </section>
@@ -318,6 +346,22 @@
                             <div>
                                 <strong>Telegram:</strong>
                                 <a href="https://t.me/+79770005127">+7 (977) 000-51-27</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp:</strong>
+                                <a href="https://wa.me/79770005127">+7 (977) 000-51-27</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-comment"></i>
+                            <div>
+                                <strong>MAX:</strong>
+                                <a href="https://max.ru/u/79770005127">+7 (977) 000-51-27</a>
                             </div>
                         </div>
                         

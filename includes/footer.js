@@ -1,11 +1,11 @@
 // ============================================
 // FOOTER.JS - Нижняя часть всех страниц МИРУМ
-// Версия: 10.0 (20.02.2026) - С МЕНЕДЖЕРОМ СОГЛАСИЙ И ПОЛНОЙ ГЕОГРАФИЕЙ
+// Версия: 10.2 (05.06.2026) - РАСШИРЕНИЕ СПИСКА ГОРОДОВ
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем футер v10.0...');
+    console.log('🔄 Загружаем футер v10.2...');
     
     const footerHTML = `
     </main>
@@ -34,6 +34,14 @@
                             <a href="https://t.me/+79770005127" style="color: #0088cc; font-weight: 600; text-decoration: none;">Telegram</a>
                         </p>
                         <p style="margin: 8px 0;">
+                            <i class="fab fa-whatsapp" style="color: #25D366; width: 24px;"></i> 
+                            <a href="https://wa.me/79770005127" style="color: #25D366; font-weight: 600; text-decoration: none;">WhatsApp</a>
+                        </p>
+                        <p style="margin: 8px 0;">
+                            <i class="fas fa-comment" style="color: #0055FF; width: 24px;"></i> 
+                            <a href="https://max.ru/u/79770005127" style="color: #0055FF; font-weight: 600; text-decoration: none;">MAX</a>
+                        </p>
+                        <p style="margin: 8px 0;">
                             <i class="fas fa-envelope" style="color: #16a085; width: 24px;"></i> 
                             <a href="mailto:matservice@yandex.ru" style="color: #16a085; font-weight: 600; text-decoration: none;">matservice@yandex.ru</a>
                         </p>
@@ -51,7 +59,6 @@
                         <li><a href="/arenda-kovrov.html">Аренда ковров</a></li>
                         <li><a href="/window-cleaning.html">Мойка витрин</a></li>
                         <li><a href="/vosstanovlenie-polov.html">Восстановление полов</a></li>
-                        <li><a href="/outstaffing.html">Аутстаффинг</a></li>
                         <li><a href="/calculator.html">Калькулятор</a></li>
                         <li><a href="/FAQ.html">FAQ</a></li>
                         <li><a href="/blog.html">Блог</a></li>
@@ -66,6 +73,8 @@
                     <h3>Контакты</h3>
                     <ul class="footer-links">
                         <li><i class="fab fa-telegram"></i> <a href="https://t.me/+79770005127">Telegram (предпочтительно)</a></li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/79770005127">WhatsApp</a></li>
+                        <li><i class="fas fa-comment"></i> <a href="https://max.ru/u/79770005127">MAX</a></li>
                         <li><i class="fas fa-envelope"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></li>
                         <li><i class="fas fa-phone"></i> <a href="tel:+79770005127">+7 (977) 000-51-27</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Сущёвская, 27с2</li>
@@ -74,8 +83,27 @@
                     
                     <div style="margin-top: 20px; padding: 12px; background: rgba(0, 136, 204, 0.1); border-radius: 8px; border-left: 4px solid #0088cc;">
                         <p style="font-size: 0.85rem; margin: 0;">
-                            <strong>⚠️ Важно:</strong> Предпочитаем письменное общение через <strong>Telegram</strong> или Email для точной фиксации заявок.
+                            <strong>⚠️ Важно:</strong> Предпочитаем письменное общение через мессенджеры или Email для точной фиксации заявок.
                         </p>
+                    </div>
+                </div>
+                
+                <!-- КНОПКИ МЕССЕНДЖЕРОВ -->
+                <div class="footer-section" style="text-align: center;">
+                    <h3>Быстрая связь</h3>
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
+                        <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 10px 20px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                        <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 10px 20px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 10px 20px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-comment"></i> MAX
+                        </a>
+                        <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 10px 20px; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
                     </div>
                 </div>
                 
@@ -193,23 +221,30 @@
                                 <li>Ростов-на-Дону</li>
                                 <li>Волгоград</li>
                                 <li>Севастополь</li>
-                                <li>Симферополь</li>
                                 <li>Майкоп</li>
                                 <li>Элиста</li>
                             </ul>
                         </div>
                         
-                        <!-- Северо-Кавказский -->
+                        <!-- Северо-Кавказский округ -->
                         <div class="region-group">
                             <h4>Северо-Кавказский округ</h4>
                             <ul>
-                                <li>Ставрополь</li>
-                                <li>Грозный</li>
                                 <li>Махачкала</li>
+                                <li>Грозный</li>
                                 <li>Нальчик</li>
                                 <li>Владикавказ</li>
                                 <li>Черкесск</li>
                                 <li>Магас</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Крым -->
+                        <div class="region-group">
+                            <h4>Республика Крым</h4>
+                            <ul>
+                                <li>Симферополь</li>
+                                <li>Севастополь</li>
                             </ul>
                         </div>
                         
@@ -263,6 +298,7 @@
                                 <li>Барнаул</li>
                                 <li>Абакан</li>
                                 <li>Горно-Алтайск</li>
+                                <li>Кызыл</li>
                                 <li>Улан-Удэ</li>
                                 <li>Чита</li>
                             </ul>
@@ -600,6 +636,6 @@
     document.write(footerHTML);
     document.close();
     
-    console.log('✅ Футер v10.0 успешно загружен');
+    console.log('✅ Футер v10.2 успешно загружен');
     
 })();

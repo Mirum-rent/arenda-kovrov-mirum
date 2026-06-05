@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      PRIVACY-POLICY.HTML - Политика конфиденциальности
-     Версия: 4.0 (18.02.2026) - ПОЛНАЯ, ЮРИДИЧЕСКАЯ
+     Версия: 4.1 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК И КОНТАКТОВ
      ============================================ -->
 <html lang="ru">
 <head>
@@ -30,11 +30,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.6">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.6" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.8">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ПОЛИТИКИ ============ -->
@@ -113,6 +113,54 @@
             border-bottom-color: var(--primary-color);
         }
         
+        /* Hero-секция */
+        .privacy-hero {
+            background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%);
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        
+        .privacy-hero h1 {
+            color: white !important;
+            margin-bottom: 15px;
+        }
+        
+        .privacy-hero p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 120px;
+            padding: 12px 25px;
+            border-radius: 50px;
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
         /* Навигация по странице */
         .page-nav {
             background: var(--background-color);
@@ -164,7 +212,7 @@
         
         /* Выделения */
         .highlight {
-            background-color: rgba(22, 160, 133, 0.1);
+            background-color: rgba(44, 90, 160, 0.1);
             padding: 3px 10px;
             border-radius: 5px;
             font-weight: 600;
@@ -245,7 +293,7 @@
             font-style: italic;
         }
         
-        /* Кнопка "Наверх" (дубль, на случай если основная не сработает) */
+        /* Кнопка "Наверх" */
         .back-to-top-page {
             position: fixed;
             bottom: 100px;
@@ -272,6 +320,47 @@
             transform: translateY(-3px);
         }
         
+        /* Контактная секция */
+        .contacts-section {
+            background: var(--background-color);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .contacts-title {
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        
+        .contacts-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contacts-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 120px;
+            padding: 12px 25px;
+            border-radius: 50px;
+        }
+        
+        .contacts-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
         @media (max-width: 768px) {
             .policy-container {
                 padding: 25px;
@@ -285,6 +374,24 @@
             .policy-container h2 {
                 font-size: 1.4rem;
                 margin: 40px 0 20px;
+            }
+            
+            .privacy-hero {
+                padding: 60px 0 30px;
+            }
+            
+            .privacy-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
             }
             
             .page-nav ul {
@@ -302,6 +409,16 @@
                 right: 20px;
                 width: 44px;
                 height: 44px;
+            }
+            
+            .contacts-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contacts-buttons .btn {
+                width: 100%;
+                max-width: 280px;
             }
         }
         
@@ -341,7 +458,7 @@
             }
         },
         "datePublished": "2025-11-08",
-        "dateModified": "2026-02-18"
+        "dateModified": "2026-06-05"
     }
     </script>
 </head>
@@ -370,6 +487,29 @@
                 }
             });
         </script>
+
+        <!-- ГЕРОЙ-СЕКЦИЯ -->
+        <section class="privacy-hero">
+            <div class="container">
+                <h1>Политика конфиденциальности</h1>
+                <p>Обработка персональных данных в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ</p>
+                
+                <div class="hero-buttons">
+                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <!-- ОСНОВНОЙ КОНТЕНТ ПОЛИТИКИ -->
         <div class="policy-container">
@@ -838,6 +978,8 @@
                 <p><strong>Телефон:</strong> <a href="tel:+79770005127">+7 (977) 000-51-27</a> (только для срочных вопросов, предпочтительно письменное общение)</p>
                 <p><strong>Email для заявок и коммерческих предложений:</strong> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></p>
                 <p><strong>Telegram (предпочтительный канал связи):</strong> <a href="https://t.me/+79770005127">@mirum_matservice</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/79770005127">+7 (977) 000-51-27</a></p>
+                <p><strong>MAX:</strong> <a href="https://max.ru/u/79770005127">+7 (977) 000-51-27</a></p>
                 <p><strong>Сайт:</strong> <a href="https://arenda-kovrov-mirum.ru/">https://arenda-kovrov-mirum.ru/</a></p>
                 
                 <p><strong>Часы работы офиса:</strong> Пн-Пт: 9:00-20:00, Сб: 10:00-18:00, Вс: по договоренности (время московское)</p>
@@ -845,20 +987,42 @@
                 <p><strong>Ответственное лицо за организацию обработки персональных данных:</strong> Руководитель отдела клиентского сервиса (контакт через общую почту с пометкой «Для ответственного за ПДн»)</p>
             </div>
 
+            <!-- КОНТАКТНАЯ СЕКЦИЯ С КНОПКАМИ -->
+            <div class="contacts-section">
+                <h3 class="contacts-title">📱 Свяжитесь с нами удобным способом</h3>
+                <div class="contacts-buttons">
+                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-light);">
+                    <i class="fas fa-clock"></i> Ответ в течение 15 минут
+                </p>
+            </div>
+
             <div class="important-note">
                 <strong>⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ</strong>
-                <p>Мы предпочитаем письменное общение через Telegram или Email для точной фиксации заявок в CRM. Это позволяет нам быстрее и качественнее обрабатывать ваши обращения, исключая ошибки, связанные с человеческим фактором и плохой слышимостью по телефону.</p>
+                <p>Мы предпочитаем письменное общение через Telegram, WhatsApp, MAX или Email для точной фиксации заявок в CRM. Это позволяет нам быстрее и качественнее обрабатывать ваши обращения, исключая ошибки, связанные с человеческим фактором и плохой слышимостью по телефону.</p>
                 <p>Телефон используется только для срочных вопросов, когда требуется немедленная связь. Для оформления заявок, получения консультаций и коммерческих предложений, пожалуйста, используйте письменные каналы связи.</p>
                 <p>Благодарим за понимание!</p>
             </div>
 
             <div class="update-date">
-                <p>Дата последнего обновления: 18 февраля 2026 г.</p>
-                <p>Версия документа: 4.0</p>
+                <p>Дата последнего обновления: 05 июня 2026 г.</p>
+                <p>Версия документа: 4.1</p>
                 <p>Документ действует с момента опубликования на сайте и до замены новой версией.</p>
             </div>
 
-            <!-- Кнопка "Наверх" (дубль для надежности) -->
+            <!-- Кнопка "Наверх" -->
             <button class="back-to-top-page" id="backToTopPage" aria-label="Наверх">↑</button>
         </div>
 
@@ -879,7 +1043,6 @@
                     });
                 });
                 
-                // Показывать кнопку при прокрутке вниз
                 window.addEventListener('scroll', function() {
                     if (window.pageYOffset > 500) {
                         backToTopBtn.style.opacity = '1';

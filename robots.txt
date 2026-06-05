@@ -1,8 +1,8 @@
 # ================================================
 # robots.txt для arenda-kovrov-mirum.ru
 # Основной сайт МИРУМ - профессиональные услуги чистоты
-# Обновлен: 18 февраля 2026 года
-# Версия: 5.0 (с учетом всех новых страниц)
+# Обновлен: 05 июня 2026 года
+# Версия: 6.0 (с учетом удаления страницы аутстаффинга)
 # ================================================
 
 # ================================================
@@ -25,7 +25,6 @@ Allow: /index.html
 Allow: /arenda-kovrov.html
 Allow: /window-cleaning.html
 Allow: /vosstanovlenie-polov.html
-Allow: /outstaffing.html
 Allow: /calculator.html
 Allow: /FAQ.html
 Allow: /blog.html
@@ -54,6 +53,7 @@ Disallow: /old/
 Disallow: /blocks/
 Disallow: /node_modules/
 Disallow: /pwa/
+Disallow: /outstaffing.html
 
 # ================================================
 # БЛОКИРОВКА РЕГИОНАЛЬНЫХ ДУБЛЕЙ

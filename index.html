@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      INDEX.HTML - ГЛАВНАЯ СТРАНИЦА МИРУМ
-     Версия: 9.1 (20.02.2026) - ДОБАВЛЕН БЛОК ОТЗЫВОВ С КАРУСЕЛЬЮ
+     Версия: 9.6 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -10,8 +10,8 @@
     
     <!-- ============ СЕО МЕТАДАННЫЕ ============ -->
     <title>МИРУМ - Аренда грязезащитных ковров и услуги чистоты по всей России с 2009</title>
-    <meta name="description" content="✅ Аренда грязезащитных ковров, мойка фасадов, восстановление полов. Работаем по всей России с 2009 года. Быстрый переход на Telegram и почту.">
-    <meta name="keywords" content="аренда грязезащитных ковров, мойка фасадов, восстановление полов, шлифовка мрамора, полировка гранита, аренда персонала, аутстаффинг, грязезащита, входные ковры">
+    <meta name="description" content="✅ Аренда грязезащитных ковров, мойка фасадов, восстановление полов. Работаем по всей России с 2009 года. Быстрый переход на Telegram, WhatsApp и почту.">
+    <meta name="keywords" content="аренда грязезащитных ковров, мойка фасадов, восстановление полов, шлифовка мрамора, полировка гранита, грязезащита, входные ковры">
     
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/" />
     <meta name="robots" content="index, follow" />
@@ -23,7 +23,7 @@
     
     <meta property="og:type" content="website">
     <meta property="og:title" content="МИРУМ - Аренда ковров и восстановление полов по всей России">
-    <meta property="og:description" content="Профессиональные услуги с 2009 года. Аренда ковров, мойка фасадов, восстановление полов, аутстаффинг персонала.">
+    <meta property="og:description" content="Профессиональные услуги с 2009 года. Аренда ковров, мойка фасадов, восстановление полов.">
     <meta property="og:url" content="https://arenda-kovrov-mirum.ru/">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png">
     
@@ -34,37 +34,46 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.7">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.8">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ТОЛЬКО ДЛЯ ГЛАВНОЙ ============ -->
     <style>
         .hero {
-            background: linear-gradient(135deg, #0a1a2f 0%, #1a3a5f 100%);
+            background: white;
             padding: 100px 0 60px;
             text-align: center;
         }
         
         .hero h1 {
-            color: white !important;
+            color: var(--primary-color) !important;
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 20px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            text-shadow: none;
         }
         
         .hero .accent {
-            color: #2ecc71 !important;
+            color: var(--accent-color) !important;
         }
         
         .hero p {
-            color: rgba(255,255,255,0.95) !important;
+            color: var(--text-color) !important;
             font-size: clamp(1rem, 2vw, 1.2rem);
             max-width: 900px;
-            margin: 0 auto 30px;
+            margin: 0 auto 15px;
+        }
+        
+        .hero-subtitle {
+            color: var(--accent-color) !important;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            margin-bottom: 30px;
         }
         
         .hero-buttons {
@@ -72,6 +81,22 @@
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
+        }
+        
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         
         .stats-grid {
@@ -88,13 +113,8 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #16a085;
+            color: #2c5aa0;
             display: block;
-        }
-        
-        .faq-main {
-            background: #f8f9fa;
-            padding: 80px 0;
         }
         
         /* Стили для карусели отзывов */
@@ -300,11 +320,11 @@
         
         @media (max-width: 768px) {
             .hero {
-                padding: 80px 0 40px;
+                padding: 60px 0 40px;
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .hero-buttons {
@@ -314,7 +334,7 @@
             
             .hero-buttons .btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
             }
             
             .carousel-container {
@@ -394,7 +414,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const breadcrumbCurrent = document.getElementById('breadcrumb-current');
                 if (breadcrumbCurrent) {
-                    breadcrumbCurrent.style.display = 'none'; // На главной не показываем
+                    breadcrumbCurrent.style.display = 'none';
                 }
             });
         </script>
@@ -403,20 +423,24 @@
         <section class="hero">
             <div class="container">
                 <h1>
-                    Профессиональные услуги чистоты<br>
-                    <span class="accent">по всей России с 2009 года</span>
+                    Грязезащитные ковры, мойка фасадов,<br>
+                    <span class="accent">восстановление напольных покрытий</span>
                 </h1>
                 <p>
-                    Аренда грязезащитных ковров, мойка фасадов, восстановление полов, аутстаффинг персонала.<br>
+                    Аренда грязезащитных ковров, мойка фасадов, восстановление полов.<br>
                     Работаем с юридическими лицами. Все документы для бухгалтерии.
                 </p>
+                <div class="hero-subtitle">ПО ВСЕЙ РОССИИ С 2009 ГОДА</div>
                 
                 <div class="hero-buttons">
-                    <a href="/calculator.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 15px 30px;">
+                    <a href="/calculator.html" class="btn" style="font-size: 1.1rem; padding: 15px 30px; border-radius: 50px; background: #2c5aa0; color: white;">
                         <i class="fas fa-calculator"></i> Рассчитать стоимость
                     </a>
-                    <a href="https://t.me/+79770005127" class="btn btn-telegram" style="font-size: 1.1rem; padding: 15px 30px;" data-consent-required>
-                        <i class="fab fa-telegram"></i> Написать в Telegram
+                    <a href="https://t.me/+79770005127" class="btn" style="font-size: 1.1rem; padding: 15px 30px; border-radius: 50px; background: white; color: #2c5aa0; border: 2px solid #2c5aa0;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="font-size: 1.1rem; padding: 15px 30px; border-radius: 50px; background: #25D366; color: white;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
                 </div>
             </div>
@@ -449,8 +473,7 @@
         <!-- ============ УСЛУГИ ============ -->
         <section id="services" class="section bg-light">
             <div class="container">
-                <h2 class="section-title">Наши услуги</h2>
-                <p class="text-center">Комплексные решения для чистоты и уюта вашего бизнеса. Работаем по всей России.</p>
+                <h2 class="section-title">УСЛУГИ</h2>
                 
                 <div class="materials-grid">
                     <!-- Услуга 1: Аренда ковров -->
@@ -460,7 +483,7 @@
                                  alt="Аренда грязезащитных ковров" loading="lazy">
                         </div>
                         <div class="material-content">
-                            <h3>Аренда ковров</h3>
+                            <h3>Аренда грязезащитных ковров</h3>
                             <p>Грязезащитные ковры для офисов, магазинов, медицинских учреждений. Регулярная замена, чистка и обслуживание.</p>
                             <div class="material-price">от 180 ₽/замена</div>
                             <a href="/arenda-kovrov.html" class="btn btn-primary" style="margin-top: 15px;">Подробнее</a>
@@ -474,7 +497,7 @@
                                  alt="Мойка витрин и фасадов" loading="lazy">
                         </div>
                         <div class="material-content">
-                            <h3>Мойка витрин</h3>
+                            <h3>Мойка витрин и фасадов</h3>
                             <p>Профессиональная мойка коммерческих фасадов и витрин. Работаем в удобное время, не мешая бизнесу.</p>
                             <div class="material-price">от 500 ₽/м²</div>
                             <a href="/window-cleaning.html" class="btn btn-primary" style="margin-top: 15px;">Подробнее</a>
@@ -485,29 +508,16 @@
                     <div class="material-card">
                         <div class="material-image">
                             <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Poly/Pol_brecchia.webp?raw=true" 
-                                 alt="Восстановление полов" loading="lazy">
+                                 alt="Восстановление напольных покрытий" loading="lazy">
                         </div>
                         <div class="material-content">
-                            <h3>Восстановление полов</h3>
+                            <h3>Восстановление напольных покрытий</h3>
                             <p>Шлифовка, полировка, восстановление паркета, мрамора, гранита, линолеума. Экономия до 70% от замены.</p>
                             <div class="material-price">от 110 ₽/м²</div>
                             <a href="/vosstanovlenie-polov.html" class="btn btn-primary" style="margin-top: 15px;">Подробнее</a>
                         </div>
                     </div>
                     
-                    <!-- Услуга 4: Аутстаффинг -->
-                    <div class="material-card">
-                        <div class="material-image">
-                            <img src="https://github.com/Mirum-rent/arenda-kovrov-mirum/blob/main/img/Autstaffing/gruzchiki.webp?raw=true" 
-                                 alt="Аутстаффинг персонала" loading="lazy">
-                        </div>
-                        <div class="material-content">
-                            <h3>Аутстаффинг</h3>
-                            <p>Оформление клинингового персонала в штат нашей компании. Снижение налоговой нагрузки для вашего бизнеса.</p>
-                            <div class="material-price">от 45 000 ₽/месяц</div>
-                            <a href="/outstaffing.html" class="btn btn-primary" style="margin-top: 15px;">Подробнее</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -518,22 +528,16 @@
                 <h2 class="section-title">Почему выбирают нас</h2>
                 
                 <div class="advantages-grid">
+                    <!-- Блок 1: Опыт + Вся Россия (объединены) -->
                     <div class="advantage-card">
-                        <div class="advantage-header"><i class="fas fa-calendar-alt"></i> Опыт с 2009 года</div>
+                        <div class="advantage-header"><i class="fas fa-calendar-alt"></i> Опыт с 2009 года по всей России</div>
                         <div class="advantage-content">
-                            <h3 class="advantage-title">16 лет на рынке</h3>
-                            <p class="advantage-text">Работаем с 2009 года. Накопили огромный опыт работы с разными типами объектов и покрытий.</p>
+                            <h3 class="advantage-title">16 лет на рынке и работа по всей стране</h3>
+                            <p class="advantage-text">Работаем с 2009 года. Накопили огромный опыт работы с разными типами объектов и покрытий. От Калининграда до Владивостока.</p>
                         </div>
                     </div>
                     
-                    <div class="advantage-card">
-                        <div class="advantage-header"><i class="fas fa-map-marked-alt"></i> Вся Россия</div>
-                        <div class="advantage-content">
-                            <h3 class="advantage-title">Работаем по всей стране</h3>
-                            <p class="advantage-text">От Калининграда до Владивостока. Основные города: Москва, СПб, Екатеринбург, Новосибирск.</p>
-                        </div>
-                    </div>
-                    
+                    <!-- Блок 2: Документы -->
                     <div class="advantage-card">
                         <div class="advantage-header"><i class="fas fa-file-contract"></i> Документы</div>
                         <div class="advantage-content">
@@ -541,32 +545,19 @@
                             <p class="advantage-text">Договор, акты, счета-оферты, ЭДО. Работаем с НДС, подходим для крупных компаний.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ КАК НАЧАТЬ ============ -->
-        <section id="how-to-start" class="section bg-light">
-            <div class="container">
-                <h2 class="section-title">Как начать работать с нами</h2>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <h3>1. Оставить заявку</h3>
-                        <p>Напишите нам в Telegram или на Email. Сообщите город, тип услуги и особенности объекта.</p>
-                        <a href="https://t.me/+79770005127" class="btn btn-telegram" data-consent-required>
-                            <i class="fab fa-telegram"></i> Написать в Telegram
-                        </a>
-                    </div>
                     
-                    <div class="process-step">
-                        <h3>2. Получить расчет</h3>
-                        <p>В течение часа пришлем коммерческое предложение с детальным расчетом стоимости.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <h3>3. Согласовать детали</h3>
-                        <p>Уточним время, особенности объекта и заключим договор. Для начала работы достаточно 30% предоплаты.</p>
+                    <!-- Блок 3: Профессиональная химия и оборудование -->
+                    <div class="advantage-card">
+                        <div class="advantage-header"><i class="fas fa-tools"></i> Профессиональная химия и оборудование</div>
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Качественные материалы и современное оснащение</h3>
+                            <p class="advantage-text">Используем профессиональные моющие средства и оборудование. Регулярная замена ковров с выездом на объект.</p>
+                            <div class="advantage-image" style="margin-top: 15px;">
+                                <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/matservice%20(5).webp" 
+                                     alt="Профессиональная замена грязезащитных ковров" 
+                                     style="width: 100%; border-radius: 8px; object-fit: cover; max-height: 180px;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -594,47 +585,22 @@
             <div class="carousel-dots" id="carouselDots"></div>
         </section>
 
-        <!-- ============ FAQ ============ -->
-        <section id="faq" class="faq-main">
-            <div class="container">
-                <h2 class="section-title">Часто задаваемые вопросы</h2>
-                
-                <div class="faq-grid">
-                    <div class="faq-item-main">
-                        <div class="faq-question-main"><i class="fas fa-question-circle"></i> Сколько стоит аренда?</div>
-                        <p>Стоимость зависит от размера и периодичности. Ковер 85×60 см — от 180₽ за замену, 115×200 см — от 760₽.</p>
-                    </div>
-                    
-                    <div class="faq-item-main">
-                        <div class="faq-question-main"><i class="fas fa-question-circle"></i> В каких регионах работаете?</div>
-                        <p>Мы работаем по всей России: Москва, СПб, Уфа, Астрахань, Сургут, Новосибирск, Тюмень и другие города.</p>
-                    </div>
-                    
-                    <div class="faq-item-main">
-                        <div class="faq-question-main"><i class="fas fa-question-circle"></i> Как быстро начать?</div>
-                        <p>Мы можем начать работу в течение 1-3 рабочих дней после заключения договора.</p>
-                    </div>
-                    
-                    <div class="faq-item-main">
-                        <div class="faq-question-main"><i class="fas fa-question-circle"></i> Работаете с юрлицами?</div>
-                        <p>Да, мы работаем только с юридическими лицами и ИП. Предоставляем все документы для бухгалтерии.</p>
-                    </div>
-                </div>
-                
-                <div class="text-center">
-                    <a href="/faq.html" class="btn btn-primary">Все вопросы (50+)</a>
-                </div>
-            </div>
-        </section>
-
         <!-- ============ ПРИЗЫВ К ДЕЙСТВИЮ ============ -->
         <section style="background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%); color: white; padding: 60px 0; text-align: center;">
             <div class="container">
                 <h2 style="color: white; margin-bottom: 20px;">Нужна консультация?</h2>
-                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 30px;">Напишите нам в Telegram — мы свяжемся с вами, как можно скорее, ответим на все вопросы и подготовим индивидуальное предложение.</p>
-                <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #16a085; font-size: 1.1rem; padding: 15px 40px;">
-                    <i class="fab fa-telegram"></i> Написать в Telegram
-                </a>
+                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 30px;">Напишите нам в Telegram или WhatsApp — мы свяжемся с вами, как можно скорее, ответим на все вопросы и подготовим индивидуальное предложение.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #2c5aa0; font-size: 1.1rem; padding: 15px 30px; border-radius: 50px;">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn btn-primary" style="background: #25D366; color: white; font-size: 1.1rem; padding: 15px 30px; border-radius: 50px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn btn-primary" style="background: white; color: #2c5aa0; font-size: 1.1rem; padding: 15px 30px; border-radius: 50px;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -793,7 +759,6 @@
             let slidesPerView = 3;
             let totalSlides = testimonialsData.length;
             
-            // Определяем количество слайдов в зависимости от ширины экрана
             function updateSlidesPerView() {
                 if (window.innerWidth <= 768) {
                     slidesPerView = 1;
@@ -805,7 +770,6 @@
                 return slidesPerView;
             }
             
-            // Отрисовка отзывов
             function renderTestimonials() {
                 if (!track) return;
                 
@@ -843,23 +807,18 @@
                     track.appendChild(slide);
                 });
                 
-                // Обновляем позицию карусели
                 updateCarousel();
-                
-                // Добавляем обработчики для кнопок внутри отзывов
                 addTestimonialHandlers();
             }
             
-            // Обновление позиции карусели
             function updateCarousel() {
                 if (!track) return;
                 
                 const slideWidth = track.children[0]?.offsetWidth || 0;
-                const gap = 30; // gap между слайдами
+                const gap = 30;
                 
                 track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
                 
-                // Обновляем кнопки
                 if (prevBtn) {
                     prevBtn.disabled = currentIndex === 0;
                 }
@@ -869,11 +828,9 @@
                     nextBtn.disabled = currentIndex >= maxIndex;
                 }
                 
-                // Обновляем точки
                 updateDots();
             }
             
-            // Обновление точек
             function updateDots() {
                 if (!dotsContainer) return;
                 
@@ -891,9 +848,7 @@
                 }
             }
             
-            // Добавление обработчиков для кнопок "Читать полностью" и "Свернуть"
             function addTestimonialHandlers() {
-                // Показать полный отзыв
                 document.querySelectorAll('.btn-show-testimonial').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -903,7 +858,6 @@
                             fullContent.style.display = 'block';
                             this.style.display = 'none';
                             
-                            // Плавная прокрутка к открытому письму
                             setTimeout(() => {
                                 fullContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                             }, 100);
@@ -911,7 +865,6 @@
                     });
                 });
                 
-                // Скрыть полный отзыв
                 document.querySelectorAll('.btn-hide-testimonial').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -923,14 +876,12 @@
                             fullContent.style.display = 'none';
                             previewButton.style.display = 'inline-flex';
                             
-                            // Прокрутка обратно к превью
                             previewButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }
                     });
                 });
             }
             
-            // Обработчики кнопок карусели
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     if (currentIndex > 0) {
@@ -950,7 +901,6 @@
                 });
             }
             
-            // Обновление при изменении размера окна
             window.addEventListener('resize', () => {
                 const newSlidesPerView = updateSlidesPerView();
                 if (newSlidesPerView !== slidesPerView) {
@@ -962,11 +912,9 @@
                 }
             });
             
-            // Инициализация
             updateSlidesPerView();
             renderTestimonials();
             
-            // Форматирование телефона в формах (если есть)
             const phoneInputs = document.querySelectorAll('input[type="tel"]');
             phoneInputs.forEach(input => {
                 input.addEventListener('input', function(e) {
@@ -978,7 +926,6 @@
                 });
             });
             
-            // Карта (если есть элемент)
             if (typeof L !== 'undefined' && document.getElementById('mirum-map')) {
                 var map = L.map('mirum-map').setView([55.76, 37.64], 4);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

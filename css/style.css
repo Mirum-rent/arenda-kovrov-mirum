@@ -1,6 +1,6 @@
 /* ============================================
    STYLE.CSS - ПОЛНЫЕ ОСНОВНЫЕ СТИЛИ МИРУМ
-   Версия: 9.7 (18.02.2026) - ОБЪЕДИНЕННАЯ, ОПТИМИЗИРОВАННАЯ
+   Версия: 10.1 (05.06.2026) - ИЗМЕНЕНИЕ ЦВЕТОВОЙ СХЕМЫ НА СИНЮЮ
    ============================================ */
 
 /* ============ ПЕРЕМЕННЫЕ ============ */
@@ -8,8 +8,8 @@
     /* ЦВЕТОВАЯ ПАЛИТРА */
     --primary-color: #2c3e50;          /* Темно-синий/серый */
     --secondary-color: #34495e;        /* Немного светлее основного */
-    --accent-color: #16a085;           /* Спатифиллумовый зеленый */
-    --light-accent: #1abc9c;           /* Светлый акцентный */
+    --accent-color: #2c5aa0;           /* Синий акцентный */
+    --light-accent: #3a7bd5;           /* Светлый синий акцентный */
     --background-color: #f8f9fa;       /* Светлый фон */
     
     /* ЦВЕТА ТЕКСТА */
@@ -330,7 +330,7 @@ p {
 }
 
 .dropdown-menu a:hover {
-    background: rgba(22, 160, 133, 0.05);
+    background: rgba(44, 90, 160, 0.05);
     color: var(--accent-color);
 }
 
@@ -381,7 +381,7 @@ p {
     background-color: var(--light-accent);
     border-color: var(--light-accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+    box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
 }
 
 .header-contacts .btn-avito {
@@ -486,7 +486,7 @@ p {
 .mobile-menu a:hover,
 .mobile-menu a.active {
     color: var(--accent-color);
-    background: rgba(22, 160, 133, 0.05);
+    background: rgba(44, 90, 160, 0.05);
     padding-left: 20px;
 }
 
@@ -685,7 +685,7 @@ section {
 }
 
 .advantage-header {
-    background-color: rgba(22, 160, 133, 0.1);
+    background-color: rgba(44, 90, 160, 0.1);
     padding: 20px;
     display: flex;
     align-items: center;
@@ -705,7 +705,7 @@ section {
 }
 
 .advantage-stats {
-    background-color: rgba(22, 160, 133, 0.05);
+    background-color: rgba(44, 90, 160, 0.05);
     padding: 10px 15px;
     border-radius: 5px;
     font-size: 0.85rem;
@@ -739,7 +739,7 @@ section {
 }
 
 .material-price {
-    background: rgba(22, 160, 133, 0.1);
+    background: rgba(44, 90, 160, 0.1);
     padding: 10px 15px;
     border-radius: 5px;
     color: var(--accent-color);
@@ -775,7 +775,7 @@ section {
 }
 
 .comparison-table tr:hover {
-    background: rgba(22, 160, 133, 0.05);
+    background: rgba(44, 90, 160, 0.05);
 }
 
 /* ============ ПРОЦЕССЫ (ШАГИ) ============ */
@@ -905,7 +905,7 @@ section {
 .testimonial-icon {
     width: 60px;
     height: 60px;
-    background: rgba(22, 160, 133, 0.1);
+    background: rgba(44, 90, 160, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1030,7 +1030,7 @@ section {
 .form-group textarea:focus {
     border-color: var(--accent-color);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
 }
 
 .form-group textarea {
@@ -1164,7 +1164,7 @@ section {
 }
 
 .footer-bottom a {
-    color: #1abc9c;
+    color: #3a7bd5;
     font-weight: 600;
     text-decoration: none;
     margin: 0 10px;
@@ -1252,7 +1252,7 @@ section {
     color: #ffffff;
     padding: 15px 0;
     z-index: 10000;
-    border-top: 3px solid #16a085;
+    border-top: 3px solid #2c5aa0;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -1282,7 +1282,7 @@ section {
 }
 
 .cookie-link {
-    color: #1abc9c;
+    color: #3a7bd5;
     font-weight: 600;
     text-decoration: underline;
     transition: color 0.3s;
@@ -1344,7 +1344,7 @@ section {
     border-radius: 12px;
     padding: 25px;
     margin: 40px 0;
-    border-left: 4px solid #16a085;
+    border-left: 4px solid #2c5aa0;
 }
 
 .keyword-tags {
@@ -1364,9 +1364,9 @@ section {
 }
 
 .keyword-tag:hover {
-    background: #16a085;
+    background: #2c5aa0;
     color: white;
-    border-color: #16a085;
+    border-color: #2c5aa0;
 }
 
 /* ============ МОДАЛЬНОЕ ОКНО ============ */
@@ -1412,7 +1412,7 @@ section {
 }
 
 .close-modal:hover {
-    color: #16a085;
+    color: #2c5aa0;
 }
 
 .modal-nav {
@@ -1440,7 +1440,7 @@ section {
 }
 
 .modal-nav button:hover {
-    background: #16a085;
+    background: #2c5aa0;
 }
 
 /* ============ АНИМАЦИИ ============ */

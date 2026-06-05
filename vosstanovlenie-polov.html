@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      VOSSTANOVLENIE-POLOV.HTML - Восстановление полов
-     Версия: 9.0 (17.02.2026) - С ОБЩИМИ HEADER/FOOTER
+     Версия: 9.2 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -31,11 +31,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <!-- СТИЛИ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.6">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.6" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.8">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -74,6 +74,32 @@
             min-width: 200px;
         }
         
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
         .before-after-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -110,6 +136,32 @@
         
         .ba-label.before { background: rgba(231, 76, 60, 0.1); color: #c0392b; }
         .ba-label.after { background: rgba(46, 204, 113, 0.1); color: #27ae60; }
+        
+        @media (max-width: 768px) {
+            .service-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .service-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .service-feature {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -126,7 +178,7 @@
                     breadcrumbCurrent.innerHTML = `
                         <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                             <span itemprop="item">
-                                <span itemprop="name" class="current-page">Восстановление полов</span>
+                                <span itemprop="name" class="current-page">Восстановление напольных покрытий</span>
                             </span>
                             <meta itemprop="position" content="2" />
                         </span>
@@ -137,7 +189,7 @@
 
         <section class="service-hero">
             <div class="container">
-                <h1>Профессиональное восстановление полов в Москве и МО</h1>
+                <h1>Восстановление напольных покрытий</h1>
                 <p>Вернем первозданный вид вашему полу: паркет, мрамор, гранит, линолеум, керамогранит. Работаем с 2009 года. Гарантия качества. Бесплатная диагностика.</p>
                 
                 <div class="service-features">
@@ -146,9 +198,20 @@
                     <div class="service-feature"><i class="fas fa-ruble-sign"></i><div>Экономия 50-70%</div><small>Вместо замены</small></div>
                 </div>
                 
-                <a href="https://t.me/+79770005127" class="btn btn-telegram" style="font-size: 1.1rem; padding: 15px 30px;">
-                    <i class="fab fa-telegram"></i> Бесплатная диагностика
-                </a>
+                <div class="hero-buttons">
+                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
             </div>
         </section>
 

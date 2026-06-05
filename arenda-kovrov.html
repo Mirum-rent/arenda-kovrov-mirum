@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      ARENDA-KOVROV.HTML - Аренда грязезащитных ковров
-     Версия: 9.1 (20.02.2026) - ДОБАВЛЕН БЛОК С ПРИМЕРОМ ДОГОВОРА
+     Версия: 9.3 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -33,12 +33,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.7">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
-    <link rel="stylesheet" href="/css/calculator.css?v=7.0">
+    <link rel="stylesheet" href="/css/style.css?v=9.8">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/calculator.css?v=7.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ============ -->
@@ -89,6 +89,32 @@
             font-weight: 600;
         }
         
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
         .size-table {
             width: 100%;
             border-collapse: collapse;
@@ -111,7 +137,7 @@
         }
         
         .size-table tr:hover {
-            background: rgba(22, 160, 133, 0.05);
+            background: rgba(44, 90, 160, 0.05);
         }
         
         /* Стили для блока с договором */
@@ -241,6 +267,16 @@
                 max-width: 300px;
             }
             
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
             .size-table {
                 font-size: 0.9rem;
             }
@@ -315,7 +351,7 @@
         <!-- ГЕРОЙ -->
         <section class="service-hero">
             <div class="container">
-                <h1>Аренда грязезащитных ковров для бизнеса</h1>
+                <h1>Аренда грязезащитных ковров</h1>
                 <p>Профессиональные входные ковры для офисов, магазинов, медицинских учреждений. Регулярная замена, чистка и обслуживание. Работаем по всей России с 2009 года.</p>
                 
                 <div class="service-features">
@@ -324,9 +360,23 @@
                     <div class="service-feature"><i class="fas fa-ruler-combined"></i><div>20+ размеров</div><small>от 85×60 до 150×600</small></div>
                 </div>
                 
-                <a href="/calculator.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 15px 30px;">
-                    <i class="fas fa-calculator"></i> Рассчитать стоимость
-                </a>
+                <div class="hero-buttons">
+                    <a href="/calculator.html" class="btn" style="background: #2c5aa0; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-calculator"></i> Рассчитать стоимость
+                    </a>
+                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -530,7 +580,6 @@
                     
                     <div class="full-contract" id="fullContract">
                         <div class="contract-preview" style="max-height: none;">
-                            <!-- Здесь мог бы быть полный текст договора, но для примера оставим ссылку на скачивание -->
                             <p style="text-align: center; padding: 40px 20px;">
                                 <i class="fas fa-file-word" style="font-size: 48px; color: var(--accent-color); margin-bottom: 20px; display: block;"></i>
                                 Полная версия типового договора доступна для скачивания по запросу у наших менеджеров.
@@ -565,11 +614,11 @@
         </section>
 
         <!-- ПРИЗЫВ К ДЕЙСТВИЮ -->
-        <section style="background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%); color: white; padding: 60px 0; text-align: center;">
+        <section style="background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%); color: white; padding: 60px 0; text-align: center;">
             <div class="container">
                 <h2 style="color: white;">Остались вопросы по договору?</h2>
                 <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 20px auto;">Напишите нам в Telegram — наши юристы проконсультируют вас по всем пунктам.</p>
-                <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #16a085;">
+                <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #2c5aa0;">
                     <i class="fab fa-telegram"></i> Написать в Telegram
                 </a>
             </div>

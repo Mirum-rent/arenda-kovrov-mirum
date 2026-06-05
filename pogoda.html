@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      POGODA.HTML - Прогноз погоды для замены ковров
-     Версия: 9.2 (20.02.2026) - ИСПРАВЛЕНЫ ОТСТУПЫ И ЦВЕТ ТЕКСТА
+     Версия: 9.3 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -29,11 +29,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <!-- ============ СТИЛИ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.7">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/style.css?v=9.8">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- ============ ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ ПОГОДЫ ============ -->
@@ -41,7 +41,7 @@
         .weather-hero {
             background: linear-gradient(135deg, #1a3a5f 0%, #2c5aa0 100%);
             color: white;
-            padding: 80px 0 60px; /* Увеличил нижний отступ, чтобы текст не налезал на контейнер */
+            padding: 80px 0 60px;
             text-align: center;
         }
         
@@ -58,9 +58,35 @@
             line-height: 1.5;
         }
         
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .hero-buttons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        
+        .hero-buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
         .weather-container {
             max-width: 1200px;
-            margin: -30px auto 40px; /* Уменьшил отрицательный отступ с -50px до -30px */
+            margin: -30px auto 40px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -85,7 +111,7 @@
         .city-search input:focus {
             border-color: var(--accent-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(22,160,133,0.1);
+            box-shadow: 0 0 0 3px rgba(44,90,160,0.1);
         }
         
         .city-search button {
@@ -208,7 +234,6 @@
             font-size: 1.3rem;
         }
         
-        /* --- ИСПРАВЛЕНИЕ: Делаем весь текст внутри рекомендаций белым --- */
         .recommendation-card p,
         .recommendation-card div,
         .recommendation-card strong {
@@ -227,7 +252,6 @@
             font-weight: 700;
             color: #2ecc71;
         }
-        /* --- КОНЕЦ ИСПРАВЛЕНИЯ --- */
         
         .weather-loader {
             display: none;
@@ -262,15 +286,25 @@
         
         @media (max-width: 768px) {
             .weather-hero {
-                padding: 60px 0 40px; /* На мобильных тоже чуть увеличил нижний отступ */
+                padding: 60px 0 40px;
             }
             
             .weather-hero h1 {
                 font-size: 1.8rem;
             }
             
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
             .weather-container {
-                margin: -20px 15px 30px; /* На мобильных отступ чуть меньше */
+                margin: -20px 15px 30px;
                 padding: 20px;
             }
             
@@ -356,7 +390,22 @@
         <section class="weather-hero">
             <div class="container">
                 <h1>Прогноз погоды для замены ковров</h1>
-                <p>Планируйте замену грязезащитных ковров по актуальному прогнозу погоды. Оптимизируйте график и снижайте расходы</p> <!-- Текст теперь на своем месте -->
+                <p>Планируйте замену грязезащитных ковров по актуальному прогнозу погоды. Оптимизируйте график и снижайте расходы</p>
+                
+                <div class="hero-buttons">
+                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-comment"></i> MAX
+                    </a>
+                    <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -478,18 +527,16 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            const apiKey = 'DEMO_KEY'; // В реальности использовать OpenWeatherMap API
+            const apiKey = 'DEMO_KEY';
             const cityInput = document.getElementById('cityInput');
             const searchBtn = document.getElementById('searchWeather');
             const weatherLoader = document.getElementById('weatherLoader');
             const currentWeather = document.getElementById('currentWeather');
             
-            // Функция получения случайной температуры (для демо)
             function getRandomTemp() {
                 return Math.floor(Math.random() * 20) - 10;
             }
             
-            // Функция определения погодных условий
             function getWeatherCondition(temp) {
                 if (temp < 0) return {
                     icon: 'fa-snowflake',
@@ -514,7 +561,6 @@
                 };
             }
             
-            // Форматирование даты
             function formatDate() {
                 const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
                 const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
@@ -529,12 +575,10 @@
                 return `${dayOfWeek}, ${day} ${month} ${year}`;
             }
             
-            // Загрузка погоды
             function loadWeather(city) {
                 weatherLoader.style.display = 'block';
                 currentWeather.classList.remove('show');
                 
-                // Имитация загрузки
                 setTimeout(() => {
                     const temp = getRandomTemp();
                     const condition = getWeatherCondition(temp);
@@ -545,7 +589,6 @@
                     document.getElementById('weatherIcon').innerHTML = `<i class="fas ${condition.icon}"></i>`;
                     document.getElementById('weatherIcon').style.color = condition.color;
                     
-                    // Случайные значения для демо
                     document.getElementById('humidity').textContent = Math.floor(Math.random() * 30 + 50) + '%';
                     document.getElementById('windSpeed').textContent = Math.floor(Math.random() * 15 + 5) + ' км/ч';
                     document.getElementById('pressure').textContent = Math.floor(Math.random() * 20 + 750) + ' мм';
@@ -559,7 +602,6 @@
                 }, 1000);
             }
             
-            // Обработчик поиска
             searchBtn.addEventListener('click', function() {
                 const city = cityInput.value.trim();
                 if (city) {
@@ -573,7 +615,6 @@
                 }
             });
             
-            // Загружаем погоду для Москвы при старте
             loadWeather('Москва');
             
         });
@@ -581,4 +622,3 @@
 
 </body>
 </html>
-<!-- ============ КОНЕЦ POGODA.HTML ============ -->

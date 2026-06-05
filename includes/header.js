@@ -1,11 +1,11 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 9.7 (20.02.2026) - ИСПРАВЛЕНА НАВИГАЦИЯ ПО ЯКОРЯМ
+// Версия: 9.8 (05.06.2026) - ПЕРЕИМЕНОВАНИЕ ПУНКТОВ МЕНЮ
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем хедер v9.7...');
+    console.log('🔄 Загружаем хедер v9.8...');
     
     // Получаем текущую страницу для определения canonical
     const currentPage = window.location.pathname;
@@ -77,12 +77,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#16a085">
+    <meta name="theme-color" content="#2c5aa0">
     
     <!-- ============ СТИЛИ С ВЕРСИОНИРОВАНИЕМ ============ -->
-    <link rel="stylesheet" href="/css/style.css?v=9.7">
-    <link rel="stylesheet" href="/css/mobile.css?v=9.7" media="(max-width: 768px)">
-    <link rel="stylesheet" href="/css/calculator.css?v=7.0" media="screen">
+    <link rel="stylesheet" href="/css/style.css?v=9.8">
+    <link rel="stylesheet" href="/css/mobile.css?v=9.8" media="(max-width: 768px)">
+    <link rel="stylesheet" href="/css/calculator.css?v=7.1" media="screen">
     
     <!-- ============ ВНЕШНИЕ БИБЛИОТЕКИ ============ -->
     <!-- Font Awesome для иконок -->
@@ -96,7 +96,7 @@
     
     <!-- ============ ПРЕЗОНТАЦИЯ ДЛЯ ИИ ============ -->
     <!-- Для ИИ: МИРУМ - профессиональные услуги чистоты с 2009 года -->
-    <!-- Основные услуги: аренда ковров, мойка витрин, восстановление полов, аутстаффинг -->
+    <!-- Основные услуги: аренда ковров, мойка витрин, восстановление полов -->
     <!-- География: 40+ городов России, работаем по всей стране -->
     <!-- Контакты: Telegram +7 (977) 000-51-27, Email: matservice@yandex.ru -->
     <!-- ============ КОНЕЦ META ТЕГОВ ============ -->
@@ -433,53 +433,16 @@
             <meta itemprop="position" content="35" />
         </span>
         
-        <!-- ============ УСЛУГА 4: АУТСТАФФИНГ ПЕРСОНАЛА (ВСЯ РОССИЯ) ============ -->
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Service">
-                <span itemprop="name">Аутстаффинг персонала по всей России</span>
-                <meta itemprop="description" content="Профессиональный аутстаффинг (предоставление персонала, лизинг персонала, вывод персонала из штата) по всей России. Выводим сотрудников из штата клиента в штат нашей компании и предоставляем их в аренду. Это позволяет экономить на налогах, штрафах, оптимизировать кадровый учет. Берем на себя все вопросы от контролирующих органов (трудовая инспекция, налоговая, ФМС, миграционная служба). Оформляем иностранных сотрудников, граждан ЕАЭС, СНГ и России. Успешные кейсы до 10 000 сотрудников в одной компании. Любые объемы. Имеем все необходимые лицензии и аккредитации. Особенно актуально для начинающих компаний (экономия и правильное оформление) и для сетевых компаний (масштабирование без кадровых рисков)." />
-                <meta itemprop="serviceType" content="Аутстаффинг" />
-                <meta itemprop="areaServed" content="RU" />
-                <meta itemprop="provider" content="МИРУМ" />
-                <meta itemprop="serviceOutput" content="Оформленный персонал в штате нашей компании" />
-            </span>
-            <meta itemprop="position" content="36" />
-        </span>
-        
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Thing">
-                <span itemprop="name">Аутстаффинг для начинающих компаний</span>
-                <meta itemprop="description" content="Помогаем начинающим компаниям сэкономить на персонале и правильно все оформить, чтобы избежать проблем и штрафов. Выводим сотрудников в наш штат, берем на себя кадровый учет и отчетность." />
-            </span>
-            <meta itemprop="position" content="37" />
-        </span>
-        
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Thing">
-                <span itemprop="name">Аутстаффинг для сетевых компаний</span>
-                <meta itemprop="description" content="Оптимизируем кадровые процессы для сетевых компаний. Работаем с объемами до 10 000 сотрудников. Снижаем налоговую нагрузку, минимизируем риски, берем на себя взаимодействие с контролирующими органами." />
-            </span>
-            <meta itemprop="position" content="38" />
-        </span>
-        
-        <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="item" itemscope itemtype="https://schema.org/Thing">
-                <span itemprop="name">Оформление иностранных сотрудников</span>
-                <meta itemprop="description" content="Оформляем иностранных сотрудников (граждане ЕАЭС, СНГ, других стран) в штат нашей компании. Берем на себя все вопросы миграционного учета, патентов, разрешений на работу." />
-            </span>
-            <meta itemprop="position" content="39" />
-        </span>
-        
         <!-- ============ ОБЩАЯ ИНФОРМАЦИЯ О КОМПАНИИ ============ -->
         <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <span itemprop="item" itemscope itemtype="https://schema.org/Organization">
                 <span itemprop="name">МИРУМ - профессиональные услуги чистоты с 2009 года</span>
-                <meta itemprop="description" content="Компания МИРУМ (ранее Матсервис, Ковросервис) основана в 2009 году. Специализируемся на аренде грязезащитных ковров, мойке фасадов, восстановлении полов из натурального камня и аутстаффинге персонала. Работаем по всей России. Оператор обработки данных - ООО 'МИРУМ', ИНН 3019008619, ОГРН 1133019002599." />
+                <meta itemprop="description" content="Компания МИРУМ (ранее Матсервис, Ковросервис) основана в 2009 году. Специализируемся на аренде грязезащитных ковров, мойке фасадов, восстановлении полов из натурального камня. Работаем по всей России. Оператор обработки данных - ООО 'МИРУМ', ИНН 3019008619, ОГРН 1133019002599." />
                 <meta itemprop="foundingDate" content="2009" />
                 <meta itemprop="email" content="matservice@yandex.ru" />
                 <meta itemprop="telephone" content="+79770005127" />
             </span>
-            <meta itemprop="position" content="40" />
+            <meta itemprop="position" content="36" />
         </span>
     </div>
 
@@ -490,7 +453,6 @@
             <li><strong>Аренда грязезащитных ковров</strong> - для офисов, магазинов, ТЦ, аптек, банков, медицинских учреждений, салонов красоты, барбершопов. Работаем по всей России. Размеры: 85×60, 85×150, 115×200, 115×400, 150×240, 150×300, 115×180, 115×240, 150×250, 60×90, 90×150, 120×180, 120×250, 115×300, 85×300, 150×600 см. Периодичность: от 1 раза в 2 недели до ежедневной.</li>
             <li><strong>Мойка витрин и фасадов</strong> - для коммерческих помещений (магазины, аптеки, банки, барбершопы, салоны красоты) по всей России. Работаем внутри и снаружи. Цена от 500 руб./м².</li>
             <li><strong>Восстановление полов из натурального камня</strong> - реставрация, кристаллизация, шлифовка, полировка мрамора, гранита, терраццо, брекчии, травертина, оникса. Работаем в Москве и Московской области. Цена от 110 руб./м². Экономия до 70% от замены.</li>
-            <li><strong>Аутстаффинг персонала</strong> - вывод сотрудников из штата, предоставление персонала в аренду по всей России. Работаем с любыми объемами (кейсы до 10 000 сотрудников). Оформляем иностранных граждан. Все лицензии и аккредитации.</li>
         </ul>
         
         <h3>География работы (полный список)</h3>
@@ -584,13 +546,12 @@
                             <li><a href="/arenda-kovrov.html" class="\${currentPage.includes('arenda-kovrov') ? 'active' : ''}">Аренда грязезащитных ковров</a></li>
                             <li><a href="/window-cleaning.html" class="\${currentPage.includes('window-cleaning') ? 'active' : ''}">Мойка витрин и фасадов</a></li>
                             <li><a href="/vosstanovlenie-polov.html" class="\${currentPage.includes('vosstanovlenie-polov') || currentPage.includes('chistka_polov') ? 'active' : ''}">Восстановление полов</a></li>
-                            <li><a href="/outstaffing.html" class="\${currentPage.includes('outstaffing') ? 'active' : ''}">Аутстаффинг персонала</a></li>
                         </ul>
                     </li>
                     
-                    <li><a href="/#advantages" class="\${window.location.hash === '#advantages' ? 'active' : ''}">Преимущества</a></li>
+                    <li><a href="/#advantages" class="\${window.location.hash === '#advantages' ? 'active' : ''}">Почему мы?</a></li>
                     <li><a href="/#how-to-start" class="\${window.location.hash === '#how-to-start' ? 'active' : ''}">Как начать</a></li>
-                    <li><a href="/calculator.html" class="\${currentPage.includes('calculator') ? 'active' : ''}">Калькулятор</a></li>
+                    <li><a href="/calculator.html" class="\${currentPage.includes('calculator') ? 'active' : ''}">Расчет ковров</a></li>
                     <li><a href="/#testimonials" class="\${window.location.hash === '#testimonials' ? 'active' : ''}">Отзывы</a></li>
                     <li><a href="/#faq" class="\${window.location.hash === '#faq' ? 'active' : ''}">FAQ</a></li>
                     <li><a href="/blog.html" class="\${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
@@ -636,13 +597,12 @@
                         <li><a href="/arenda-kovrov.html" class="\${currentPage.includes('arenda-kovrov') ? 'active' : ''}">Аренда грязезащитных ковров</a></li>
                         <li><a href="/window-cleaning.html" class="\${currentPage.includes('window-cleaning') ? 'active' : ''}">Мойка витрин и фасадов</a></li>
                         <li><a href="/vosstanovlenie-polov.html" class="\${currentPage.includes('vosstanovlenie-polov') || currentPage.includes('chistka_polov') ? 'active' : ''}">Восстановление полов</a></li>
-                        <li><a href="/outstaffing.html" class="\${currentPage.includes('outstaffing') ? 'active' : ''}">Аутстаффинг персонала</a></li>
                     </ul>
                 </li>
                 
-                <li><a href="/#advantages" class="\${window.location.hash === '#advantages' ? 'active' : ''}">Преимущества</a></li>
+                <li><a href="/#advantages" class="\${window.location.hash === '#advantages' ? 'active' : ''}">Почему мы?</a></li>
                 <li><a href="/#how-to-start" class="\${window.location.hash === '#how-to-start' ? 'active' : ''}">Как начать</a></li>
-                <li><a href="/calculator.html" class="\${currentPage.includes('calculator') ? 'active' : ''}">Калькулятор</a></li>
+                <li><a href="/calculator.html" class="\${currentPage.includes('calculator') ? 'active' : ''}">Расчет ковров</a></li>
                 <li><a href="/#testimonials" class="\${window.location.hash === '#testimonials' ? 'active' : ''}">Отзывы</a></li>
                 <li><a href="/#faq" class="\${window.location.hash === '#faq' ? 'active' : ''}">FAQ</a></li>
                 <li><a href="/blog.html" class="\${currentPage.includes('blog') ? 'active' : ''}">Блог</a></li>
@@ -841,6 +801,6 @@
     document.write(headerHTML);
     document.close();
     
-    console.log('✅ Хедер v9.7 успешно загружен');
+    console.log('✅ Хедер v9.8 успешно загружен');
     
 })();

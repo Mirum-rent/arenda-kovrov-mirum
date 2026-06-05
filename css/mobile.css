@@ -1,6 +1,6 @@
 /* ============================================
    MOBILE.CSS - Мобильная оптимизация для МИРУМ
-   Версия: 9.7 (18.02.2026) - ОБЪЕДИНЕННАЯ, ОПТИМИЗИРОВАННАЯ
+   Версия: 9.8 (05.06.2026) - ИЗМЕНЕНИЕ ЦВЕТОВОЙ СХЕМЫ НА СИНЮЮ
    ============================================ */
 
 /* ============ ОБЩИЕ МОБИЛЬНЫЕ СТИЛИ ============ */
@@ -841,7 +841,7 @@
     }
     
     .breadcrumbs a {
-        color: #1abc9c !important;
+        color: #3a7bd5 !important;
     }
     
     .current-page {
@@ -916,7 +916,7 @@
     }
     
     .faq-quick-nav a:hover {
-        background: #16a085 !important;
+        background: #2c5aa0 !important;
         color: white !important;
     }
     
@@ -927,7 +927,7 @@
     }
     
     .keyword-tag:hover {
-        background: #16a085 !important;
+        background: #2c5aa0 !important;
         color: white !important;
     }
 }
