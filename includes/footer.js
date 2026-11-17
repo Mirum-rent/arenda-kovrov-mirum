@@ -76,7 +76,7 @@
                         <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/79581118514">WhatsApp</a></li>
                         <li><i class="fas fa-comment"></i> <a href="https://max.ru/u/79581118514">MAX</a></li>
                         <li><i class="fas fa-envelope"></i> <a href="mailto:matservice@yandex.ru">matservice@yandex.ru</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+79581118514">+7 (977) 000-51-27</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+79581118514">+7 (958) 111-85-14</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Сущёвская, 27с2</li>
                         <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-20:00, Сб: 10:00-18:00</li>
                     </ul>
@@ -447,8 +447,8 @@
 
     <!-- ============ ПОДКЛЮЧЕНИЕ СКРИПТОВ ============ -->
     <script src="/js/prices.js?v=9.0"></script>
-    <script src="/js/calculator.js?v=9.0"></script>
-    <script src="/js/forms.js?v=8.0"></script>
+    <script src="/js/calculator.js?v=9.1"></script>
+    <script src="/js/forms.js?v=8.1"></script>
     <script src="/js/mobile.js?v=3.1"></script>
     
     <script>
