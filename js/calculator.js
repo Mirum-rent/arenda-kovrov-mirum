@@ -374,7 +374,7 @@ function sendToTelegram() {
         const message = createTelegramMessage();
         
         // Используем метод копирования текста
-        const telegramUrl = `https://t.me/+79770005127`;
+        const telegramUrl = `https://t.me/+79581118514`;
         
         // Создаем временный textarea для копирования
         const tempTextArea = document.createElement('textarea');
@@ -400,7 +400,7 @@ function sendToTelegram() {
             } else {
                 // Если не удалось скопировать, открываем с текстом в URL
                 const encodedMessage = encodeURIComponent(message);
-                const fallbackUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+                const fallbackUrl = `https://t.me/+79581118514?text=${encodedMessage}`;
                 window.open(fallbackUrl, '_blank');
                 
                 setTimeout(() => {
@@ -413,7 +413,7 @@ function sendToTelegram() {
             
             // Fallback: открываем Telegram с текстом в URL
             const encodedMessage = encodeURIComponent(message);
-            const fallbackUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+            const fallbackUrl = `https://t.me/+79581118514?text=${encodedMessage}`;
             window.open(fallbackUrl, '_blank');
             
             setTimeout(() => {
@@ -455,7 +455,7 @@ function sendToTelegram() {
             <div style="background: white; padding: 20px; border-radius: 10px; max-width: 500px; width: 100%;">
                 <h3 style="color: #e74c3c; margin-bottom: 15px;">Ошибка отправки</h3>
                 <p>Скопируйте текст расчета и отправьте в Telegram вручную:</p>
-                <p><strong>Telegram:</strong> @+79770005127</p>
+                <p><strong>Telegram:</strong> @+79581118514</p>
                 ${textArea.outerHTML}
                 <div style="margin-top: 15px; display: flex; gap: 10px;">
                     <button onclick="copyText(this)" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">Копировать текст</button>
@@ -530,7 +530,7 @@ function createTelegramMessage() {
     message += `📄 Можем работать по ЭДО, если вам так удобно\n`;
     message += `👤 Можем оформить договор с физлицом\n\n`;
     
-    message += `Telegram: @+79770005127\n`;
+    message += `Telegram: @+79581118514\n`;
     message += `Email: matservice@yandex.ru\n`;
     message += `Сайт: arenda-kovrov-mirum.ru\n`;
     
@@ -594,7 +594,7 @@ function sendToEmail() {
         body += `📄 Можем работать по ЭДО, если вам так удобно\n`;
         body += `👤 Можем оформить договор с физлицом\n\n`;
         
-        body += `Telegram: @+79770005127\n`;
+        body += `Telegram: @+79581118514\n`;
         body += `Email: matservice@yandex.ru\n`;
         body += `Сайт: https://arenda-kovrov-mirum.ru\n\n`;
         
@@ -1241,7 +1241,7 @@ function sendTenderToTelegram() {
         message += `👤 Можем оформить договор с физлицом\n\n`;
         
         message += `📞 СВЯЗЬ:\n`;
-        message += `Telegram: t.me/+79770005127\n`;
+        message += `Telegram: t.me/+79581118514\n`;
         message += `Email: matservice@yandex.ru\n`;
         message += `Сайт: arenda-kovrov-mirum.ru`;
         
@@ -1256,7 +1256,7 @@ function sendTenderToTelegram() {
         try {
             const successful = document.execCommand('copy');
             if (successful) {
-                const telegramUrl = `https://t.me/+79770005127`;
+                const telegramUrl = `https://t.me/+79581118514`;
                 window.open(telegramUrl, '_blank');
                 
                 setTimeout(() => {
@@ -1268,7 +1268,7 @@ function sendTenderToTelegram() {
                 }, 1000);
             } else {
                 const encodedMessage = encodeURIComponent(message);
-                const fallbackUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+                const fallbackUrl = `https://t.me/+79581118514?text=${encodedMessage}`;
                 window.open(fallbackUrl, '_blank');
                 
                 setTimeout(() => {
@@ -1280,7 +1280,7 @@ function sendTenderToTelegram() {
             console.error('Не удалось скопировать текст:', err);
             
             const encodedMessage = encodeURIComponent(message);
-            const fallbackUrl = `https://t.me/+79770005127?text=${encodedMessage}`;
+            const fallbackUrl = `https://t.me/+79581118514?text=${encodedMessage}`;
             window.open(fallbackUrl, '_blank');
             
             setTimeout(() => {
@@ -1293,7 +1293,7 @@ function sendTenderToTelegram() {
         
     } catch (error) {
         console.error('Ошибка отправки тендера в Telegram:', error);
-        alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79770005127');
+        alert('Произошла ошибка. Пожалуйста, свяжитесь с нами напрямую через Telegram: @+79581118514');
     }
 }
 

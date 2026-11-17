@@ -9,7 +9,7 @@
     console.log('📋 Инициализация обработки форм');
     
     // ============ КОНСТАНТЫ И НАСТРОЙКИ ============
-    const TELEGRAM_CHAT_ID = '+79770005127';
+    const TELEGRAM_CHAT_ID = '+79581118514';
     const DEFAULT_EMAIL = 'matservice@yandex.ru';
     
     // ============ УТИЛИТНЫЕ ФУНКЦИИ ============
@@ -142,7 +142,7 @@
             
             const successful = document.execCommand('copy');
             if (successful) {
-                const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}`;
+                const telegramUrl = `https://t.me/${TELEGRAM_CHAT_ID}`;
                 window.open(telegramUrl, '_blank');
                 
                 setTimeout(() => {
@@ -154,7 +154,7 @@
             console.error('Ошибка копирования:', err);
             
             const encodedMessage = encodeURIComponent(message);
-            const fallbackUrl = `https://t.me/${TELEGRAM_CHAT_ID.replace('+', '')}?text=${encodedMessage}`;
+            const fallbackUrl = `https://t.me/${TELEGRAM_CHAT_ID}?text=${encodedMessage}`;
             window.open(fallbackUrl, '_blank');
             return true;
         }
