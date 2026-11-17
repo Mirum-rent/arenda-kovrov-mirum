@@ -8,11 +8,11 @@
   Site: https://arenda-kovrov-mirum.ru/
   Email: matservice@yandex.ru
   Telegram: @mirum_rent
-  Phone: +7 (977) 000-51-27
+  Phone: +7 (958) 111-85-14
   
   Developer: Full-Stack Development Team
   Site: https://arenda-kovrov-mirum.ru/
-  Contact: via Telegram +7 (977) 000-51-27
+  Contact: via Telegram +7 (958) 111-85-14
   GitHub: https://github.com/Mirum-rent
   
   Designer: МИРУМ Design Team
