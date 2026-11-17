@@ -1,28 +1,167 @@
 // ============================================
 // HEADER.JS - Верхняя часть всех страниц МИРУМ
-// Версия: 9.8 (05.06.2026) - ПЕРЕИМЕНОВАНИЕ ПУНКТОВ МЕНЮ
+// Версия: 9.9 (05.06.2026) - ДОБАВЛЕНА MICRODATA BREADCRUMBLIST
 // ============================================
 (function() {
     'use strict';
     
-    console.log('🔄 Загружаем хедер v9.8...');
+    console.log('🔄 Загружаем хедер v9.9...');
     
-    // Получаем текущую страницу для определения canonical
+    // Получаем текущую страницу для определения canonical и breadcrumbs
     const currentPage = window.location.pathname;
     let canonicalUrl = 'https://arenda-kovrov-mirum.ru/';
     
-    if (currentPage.includes('outstaffing.html')) {
-        canonicalUrl = 'https://arenda-kovrov-mirum.ru/outstaffing.html';
-    } else if (currentPage.includes('arenda-kovrov.html')) {
-        canonicalUrl = 'https://arenda-kovrov-mirum.ru/arenda-kovrov.html';
-    } else if (currentPage.includes('calculator.html')) {
-        canonicalUrl = 'https://arenda-kovrov-mirum.ru/calculator.html';
-    } else if (currentPage.includes('window-cleaning.html')) {
-        canonicalUrl = 'https://arenda-kovrov-mirum.ru/window-cleaning.html';
-    } else if (currentPage.includes('vosstanovlenie-polov.html') || currentPage.includes('chistka_polov.html')) {
-        canonicalUrl = 'https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.html';
-    } else if (currentPage.includes('pogoda.html')) {
-        canonicalUrl = 'https://arenda-kovrov-mirum.ru/pogoda.html';
+    // Определяем параметры для BreadcrumbList
+    let breadcrumbItems = [];
+    
+    // Главная страница (всегда первый элемент)
+    breadcrumbItems.push({
+        position: 1,
+        name: "Главная",
+        item: "https://arenda-kovrov-mirum.ru/"
+    });
+    
+    // Определяем текущую страницу и добавляем второй элемент
+    let currentPageName = "";
+    let currentPageUrl = "";
+    
+    if (currentPage === '/' || currentPage.includes('index')) {
+        currentPageName = "Главная";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/";
+        breadcrumbItems = breadcrumbItems.slice(0, 1); // только главная
+    } else if (currentPage.includes('arenda-kovrov')) {
+        currentPageName = "Аренда грязезащитных ковров";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/arenda-kovrov.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/arenda-kovrov.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('window-cleaning')) {
+        currentPageName = "Мойка витрин и фасадов";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/window-cleaning.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/window-cleaning.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('vosstanovlenie-polov') || currentPage.includes('chistka_polov')) {
+        currentPageName = "Восстановление напольных покрытий";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/vosstanovlenie-polov.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('outstaffing')) {
+        currentPageName = "Аутстаффинг персонала";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/outstaffing.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/outstaffing.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('calculator')) {
+        currentPageName = "Калькулятор стоимости аренды ковров";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/calculator.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/calculator.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: "Услуги",
+            item: "https://arenda-kovrov-mirum.ru/#services"
+        });
+        breadcrumbItems.push({
+            position: 3,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('blog')) {
+        currentPageName = "Экспертный блог";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/blog.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/blog.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('testimonials')) {
+        currentPageName = "Отзывы клиентов";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/testimonials.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/testimonials.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('faq')) {
+        currentPageName = "Часто задаваемые вопросы";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/FAQ.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/FAQ.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('gallery')) {
+        currentPageName = "Фотогалерея";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/gallery.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/gallery.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('pogoda')) {
+        currentPageName = "Прогноз погоды";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/pogoda.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/pogoda.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('privacy-policy')) {
+        currentPageName = "Политика конфиденциальности";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/privacy-policy.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/privacy-policy.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('terms-of-use')) {
+        currentPageName = "Пользовательское соглашение";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/terms-of-use.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/terms-of-use.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else if (currentPage.includes('404')) {
+        currentPageName = "Страница не найдена";
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/404.html";
+        canonicalUrl = "https://arenda-kovrov-mirum.ru/404.html";
+        breadcrumbItems.push({
+            position: 2,
+            name: currentPageName,
+            item: currentPageUrl
+        });
+    } else {
+        // Для любой другой страницы
+        currentPageName = document.title.split('|')[0].trim();
+        currentPageUrl = "https://arenda-kovrov-mirum.ru/" + currentPage;
+        if (currentPageName && currentPageName !== "МИРУМ") {
+            breadcrumbItems.push({
+                position: 2,
+                name: currentPageName,
+                item: currentPageUrl
+            });
+        }
     }
     
     // Определяем активный пункт меню
@@ -36,6 +175,18 @@
     } else if (currentPage.includes('pogoda')) {
         activePage = 'Погода';
     }
+    
+    // Формируем JSON для BreadcrumbList
+    const breadcrumbJson = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbItems.map(item => ({
+            "@type": "ListItem",
+            "position": item.position,
+            "name": item.name,
+            "item": item.item
+        }))
+    };
     
     const headerHTML = `
 <!DOCTYPE html>
@@ -54,7 +205,7 @@
     <meta name="robots" content="index, follow" />
     
     <!-- Ключевые слова -->
-    <meta name="keywords" content="аренда грязезащитных ковров, мойка фасадов, восстановление полов, шлифовка мрамора, полировка гранита, аренда персонала, аутстаффинг, грязезащита, входные ковры">
+    <meta name="keywords" content="аренда грязезащитных ковров, мойка фасадов, восстановление полов, шлифовка мрамора, полировка гранита, грязезащита, входные ковры">
     
     <!-- Гео-метатеги -->
     <meta name="geo.region" content="RU">
@@ -65,7 +216,7 @@
     <!-- Open Graph для социальных сетей -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="МИРУМ - Аренда ковров и восстановление полов по всей России">
-    <meta property="og:description" content="Профессиональные услуги с 2009 года. Аренда ковров, мойка фасадов, восстановление полов, аутстаффинг персонала.">
+    <meta property="og:description" content="Профессиональные услуги с 2009 года. Аренда ковров, мойка фасадов, восстановление полов.">
     <meta property="og:url" content="https://arenda-kovrov-mirum.ru/">
     <meta property="og:image" content="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/logo.png">
     <meta property="og:site_name" content="МИРУМ">
@@ -94,11 +245,16 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin="" media="print" onload="this.media='all'">
     
+    <!-- ============ JSON-LD MICRODATA BREADCRUMBLIST ============ -->
+    <script type="application/ld+json">
+    ${JSON.stringify(breadcrumbJson, null, 2)}
+    </script>
+    
     <!-- ============ ПРЕЗОНТАЦИЯ ДЛЯ ИИ ============ -->
     <!-- Для ИИ: МИРУМ - профессиональные услуги чистоты с 2009 года -->
     <!-- Основные услуги: аренда ковров, мойка витрин, восстановление полов -->
     <!-- География: 40+ городов России, работаем по всей стране -->
-    <!-- Контакты: Telegram +7 (977) 000-51-27, Email: matservice@yandex.ru -->
+    <!-- Контакты: Telegram +7 (977) 000-51-27, WhatsApp +7 (977) 000-51-27, MAX +7 (977) 000-51-27, Email: matservice@yandex.ru -->
     <!-- ============ КОНЕЦ META ТЕГОВ ============ -->
 </head>
 <body>
@@ -112,7 +268,9 @@
                 <span class="disclaimer-text">
                     <strong>Внимание:</strong> В связи с переходом на новое оборудование могут возникать трудности с телефонной связью. 
                     Мы всегда оперативно отвечаем в 
-                    <a href="https://t.me/+79770005127" class="disclaimer-link">Telegram</a> и на 
+                    <a href="https://t.me/+79581118514" class="disclaimer-link">Telegram</a>, 
+                    <a href="https://wa.me/79581118514" class="disclaimer-link">WhatsApp</a>,
+                    <a href="https://max.ru/u/79581118514" class="disclaimer-link">MAX</a> и на 
                     <a href="mailto:matservice@yandex.ru" class="disclaimer-link">Email</a>.
                 </span>
                 <button class="disclaimer-close" id="disclaimerClose" aria-label="Закрыть уведомление">
@@ -440,7 +598,7 @@
                 <meta itemprop="description" content="Компания МИРУМ (ранее Матсервис, Ковросервис) основана в 2009 году. Специализируемся на аренде грязезащитных ковров, мойке фасадов, восстановлении полов из натурального камня. Работаем по всей России. Оператор обработки данных - ООО 'МИРУМ', ИНН 3019008619, ОГРН 1133019002599." />
                 <meta itemprop="foundingDate" content="2009" />
                 <meta itemprop="email" content="matservice@yandex.ru" />
-                <meta itemprop="telephone" content="+79770005127" />
+                <meta itemprop="telephone" content="+79581118514" />
             </span>
             <meta itemprop="position" content="36" />
         </span>
@@ -477,9 +635,6 @@
                 
                 if (path.includes('vosstanovlenie-polov') || path.includes('chistka_polov')) 
                     return { name: 'Восстановление полов из камня', position: 2 };
-                
-                if (path.includes('outstaffing')) 
-                    return { name: 'Аутстаффинг персонала', position: 2 };
                 
                 if (path.includes('calculator')) 
                     return { name: 'Калькулятор стоимости аренды ковров', position: 2 };
@@ -562,8 +717,14 @@
             
             <!-- Кнопки связи в хедере -->
             <div class="header-contacts">
-                <a href="https://t.me/+79770005127" class="btn-telegram header-btn" data-consent-required aria-label="Написать в Telegram">
+                <a href="https://t.me/+79581118514" class="btn-telegram header-btn" data-consent-required aria-label="Написать в Telegram">
                     <i class="fab fa-telegram"></i> Telegram
+                </a>
+                <a href="https://wa.me/79581118514" class="btn btn-primary header-btn" style="background: #25D366; color: white;" aria-label="Написать в WhatsApp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://max.ru/u/79581118514" class="btn btn-primary header-btn" style="background: #0055FF; color: white;" aria-label="Написать в MAX">
+                    <i class="fas fa-comment"></i> MAX
                 </a>
                 <a href="mailto:matservice@yandex.ru" class="btn btn-primary header-btn" aria-label="Написать на Email">
                     <i class="fas fa-envelope"></i> Email
@@ -616,8 +777,14 @@
             
             <!-- Контакты в мобильном меню -->
             <div class="mobile-contacts">
-                <a href="https://t.me/+79770005127" class="btn-telegram" data-consent-required>
+                <a href="https://t.me/+79581118514" class="btn-telegram" data-consent-required>
                     <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+                <a href="https://wa.me/79581118514" class="btn btn-primary" style="background: #25D366; color: white;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://max.ru/u/79581118514" class="btn btn-primary" style="background: #0055FF; color: white;">
+                    <i class="fas fa-comment"></i> MAX
                 </a>
                 <a href="mailto:matservice@yandex.ru" class="btn btn-primary">
                     <i class="fas fa-envelope"></i> Отправить Email
@@ -801,6 +968,6 @@
     document.write(headerHTML);
     document.close();
     
-    console.log('✅ Хедер v9.8 успешно загружен');
+    console.log('✅ Хедер v9.9 успешно загружен');
     
 })();
