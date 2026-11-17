@@ -1,5 +1,5 @@
 // service-worker.js для PWA приложения МИРУМ
-const CACHE_NAME = 'mirum-calculator-pwa-v3-2026-01-18';
+const CACHE_NAME = 'mirum-calculator-pwa-v4-2026-11-17';
 const urlsToCache = [
   '/pwa/mirum-pwa.html',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',

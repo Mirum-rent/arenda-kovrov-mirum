@@ -106,7 +106,7 @@ Progressive Web App (PWA) для расчета стоимости аренды 
 ## 🆘 Поддержка
 
 ### Контакты
-- Telegram: @+79770005127
+- Telegram: @+79581118514
 - Email: matservice@yandex.ru
 - Основной сайт: https://arenda-kovrov-mirum.ru/
 
