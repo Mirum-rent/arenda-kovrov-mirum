@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      ARENDA-KOVROV.HTML - Аренда грязезащитных ковров
-     Версия: 9.4 (05.06.2026) - ДОБАВЛЕНА JSON-LD РАЗМЕТКА Product
+     Версия: 9.6 (05.06.2026) - ДОБАВЛЕНА ВНУТРЕННЯЯ ПЕРЕЛИНКОВКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -286,6 +286,128 @@
             color: white;
         }
         
+        /* Стили для блока полезных статей */
+        .related-posts-section {
+            background: white;
+            padding: 60px 0;
+        }
+        
+        .related-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .related-post-card {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: var(--transition);
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .related-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .related-post-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .related-post-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .related-post-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .related-post-link:hover {
+            color: var(--light-accent);
+            gap: 12px;
+        }
+        
+        /* Стили для блока FAQ */
+        .faq-section {
+            background: var(--background-color);
+            padding: 60px 0;
+        }
+        
+        .faq-section .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-grid-local {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .faq-item-local {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .faq-item-local:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .faq-question-local {
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .faq-question-local i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .faq-answer-local {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item-local.active .faq-answer-local {
+            padding: 0 20px 20px 52px;
+            max-height: 300px;
+        }
+        
+        .faq-answer-local p {
+            margin: 0;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+        
         @media (max-width: 768px) {
             .service-hero h1 {
                 font-size: 2rem;
@@ -334,6 +456,25 @@
                 align-items: flex-start !important;
                 gap: 20px;
             }
+            
+            .related-posts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .faq-grid-local {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .faq-question-local {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .faq-item-local.active .faq-answer-local {
+                padding: 0 15px 15px 47px;
+            }
         }
     </style>
 </head>
@@ -380,13 +521,13 @@
                     <a href="/calculator.html" class="btn" style="background: #2c5aa0; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fas fa-calculator"></i> Рассчитать стоимость
                     </a>
-                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                    <a href="https://t.me/+79581118514" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
                         <i class="fab fa-telegram"></i> Telegram
                     </a>
-                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://wa.me/79581118514" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://max.ru/u/79581118514" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fas fa-comment"></i> MAX
                     </a>
                     <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
@@ -589,7 +730,7 @@
                         <button class="btn-toggle-contract" id="toggleContractBtn">
                             <i class="fas fa-chevron-down"></i> Показать полный текст договора
                         </button>
-                        <a href="https://t.me/+79770005127" class="btn btn-telegram">
+                        <a href="https://t.me/+79581118514" class="btn btn-telegram">
                             <i class="fab fa-telegram"></i> Задать вопрос по договору
                         </a>
                     </div>
@@ -601,7 +742,7 @@
                                 Полная версия типового договора доступна для скачивания по запросу у наших менеджеров.
                             </p>
                             <p style="text-align: center;">
-                                <a href="https://t.me/+79770005127" class="btn btn-primary">
+                                <a href="https://t.me/+79581118514" class="btn btn-primary">
                                     <i class="fab fa-telegram"></i> Запросить полную версию
                                 </a>
                             </p>
@@ -615,30 +756,138 @@
             </div>
         </section>
 
-        <!-- КАК НАЧАТЬ -->
-        <section class="section">
+        <!-- ============ БЛОК ПОЛЕЗНЫХ СТАТЕЙ (ПЕРЕЛИНКОВКА) ============ -->
+        <section class="related-posts-section">
             <div class="container">
-                <h2 class="section-title">Как начать арендовать ковры</h2>
-                
-                <div class="process-steps">
-                    <div class="process-step"><h3>1. Оставить заявку</h3><p>Напишите нам в Telegram. Укажите город, нужные размеры и частоту замены.</p></div>
-                    <div class="process-step"><h3>2. Получить расчет</h3><p>Мы подготовим коммерческое предложение с точной стоимостью.</p></div>
-                    <div class="process-step"><h3>3. Заключить договор</h3><p>Подписываем договор (ЭДО или бумажный). Ознакомьтесь с примером выше.</p></div>
-                    <div class="process-step"><h3>4. Получить ковры</h3><p>Доставляем чистые ковры и устанавливаем их.</p></div>
+                <h2 class="section-title">Полезные статьи об аренде ковров</h2>
+                <div class="related-posts-grid">
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-chart-line"></i> Аренда vs покупка: реальная экономия</h3>
+                        <p>Подробный финансовый анализ: сколько реально можно сэкономить на аренде ковров вместо покупки. Расчеты для офисов, магазинов, медицинских центров.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-calendar-alt"></i> Как часто нужно менять ковры в разных помещениях?</h3>
+                        <p>Рекомендации по частоте замены для офисов, магазинов, медицинских учреждений, ресторанов. Как погода и сезонность влияют на график.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-ruler-combined"></i> Как выбрать размер ковра для входной группы</h3>
+                        <p>Полное руководство по выбору размера: от маленьких 85×60 до огромных 150×600. Как измерить входную группу и не ошибиться.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ПРИЗЫВ К ДЕЙСТВИЮ -->
-        <section style="background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%); color: white; padding: 60px 0; text-align: center;">
+        <!-- ============ БЛОК FAQ ============ -->
+        <section class="faq-section">
             <div class="container">
-                <h2 style="color: white;">Остались вопросы по договору?</h2>
-                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 20px auto;">Напишите нам в Telegram — наши юристы проконсультируют вас по всем пунктам.</p>
-                <a href="https://t.me/+79770005127" class="btn btn-primary" style="background: white; color: #2c5aa0;">
-                    <i class="fab fa-telegram"></i> Написать в Telegram
-                </a>
+                <h2 class="section-title">Часто задаваемые вопросы об аренде ковров</h2>
+                
+                <div class="faq-grid-local">
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Сколько стоит аренда ковров?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Стоимость зависит от региона, размера ковра и периодичности замены. Например, в Москве ковер 85×150 см стоит от 450 ₽ за замену, а 115×200 см — от 800 ₽. Точную стоимость можно рассчитать в нашем <a href="/calculator.html">калькуляторе</a>.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Как часто нужно менять ковры?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Рекомендуемая частота: для офисов — 1-2 раза в неделю, для магазинов и ТЦ — 2-3 раза, для медицинских учреждений — ежедневно. Зимой частоту рекомендуется увеличивать из-за реагентов и снега.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Какие размеры ковров доступны?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>У нас более 20 размеров: от 85×60 см до 150×600 см. Наиболее популярные: 85×150 см, 115×200 см, 115×400 см, 150×240 см, 150×300 см. Подберем размер под любую входную группу.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Кто отвечает за доставку и замену?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Мы полностью берем на себя логистику: доставляем чистые ковры, производим замену, забираем грязные. Вам не нужно думать о транспорте, хранении или стирке.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Работаете ли вы в моем городе?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Мы работаем по всей России: Москва, СПб, Екатеринбург, Казань, Новосибирск, Уфа, Краснодар, Ростов-на-Дону, Тюмень, Челябинск, Нижний Новгород, Самара, Воронеж, Волгоград, Пермь, Сургут, Астрахань, Саратов, Омск, Красноярск, Владивосток и другие города.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+        
+        <!-- JSON-LD разметка для FAQ -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Сколько стоит аренда ковров?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Стоимость зависит от региона, размера ковра и периодичности замены. Например, в Москве ковер 85×150 см стоит от 450 ₽ за замену, а 115×200 см — от 800 ₽. Точную стоимость можно рассчитать в нашем калькуляторе."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Как часто нужно менять ковры?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Рекомендуемая частота: для офисов — 1-2 раза в неделю, для магазинов и ТЦ — 2-3 раза, для медицинских учреждений — ежедневно. Зимой частоту рекомендуется увеличивать из-за реагентов и снега."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Какие размеры ковров доступны?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "У нас более 20 размеров: от 85×60 см до 150×600 см. Наиболее популярные: 85×150 см, 115×200 см, 115×400 см, 150×240 см, 150×300 см. Подберем размер под любую входную группу."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Кто отвечает за доставку и замену?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Мы полностью берем на себя логистику: доставляем чистые ковры, производим замену, забираем грязные. Вам не нужно думать о транспорте, хранении или стирке."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Работаете ли вы в моем городе?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Мы работаем по всей России: Москва, СПб, Екатеринбург, Казань, Новосибирск, Уфа, Краснодар, Ростов-на-Дону, Тюмень, Челябинск, Нижний Новгород, Самара, Воронеж, Волгоград, Пермь, Сургут, Астрахань, Саратов, Омск, Красноярск, Владивосток и другие города."
+                    }
+                }
+            ]
+        }
+        </script>
 
     </main>
 
@@ -669,6 +918,20 @@
                     }
                 });
             }
+            
+            // Логика для аккордеона FAQ
+            const faqItems = document.querySelectorAll('.faq-item-local');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question-local');
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
             
             // Форматирование телефона в формах
             const phoneInputs = document.querySelectorAll('input[type="tel"]');

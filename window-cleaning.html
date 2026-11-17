@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      WINDOW-CLEANING.HTML - Мойка витрин и фасадов
-     Версия: 9.3 (05.06.2026) - ДОБАВЛЕНА JSON-LD РАЗМЕТКА Product
+     Версия: 9.5 (05.06.2026) - ДОБАВЛЕНА ВНУТРЕННЯЯ ПЕРЕЛИНКОВКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -173,6 +173,128 @@
             gap: 5px;
         }
         
+        /* Стили для блока полезных статей */
+        .related-posts-section {
+            background: white;
+            padding: 60px 0;
+        }
+        
+        .related-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .related-post-card {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: var(--transition);
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .related-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .related-post-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .related-post-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .related-post-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .related-post-link:hover {
+            color: var(--light-accent);
+            gap: 12px;
+        }
+        
+        /* Стили для блока FAQ */
+        .faq-section {
+            background: var(--background-color);
+            padding: 60px 0;
+        }
+        
+        .faq-section .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-grid-local {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .faq-item-local {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .faq-item-local:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .faq-question-local {
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .faq-question-local i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .faq-answer-local {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item-local.active .faq-answer-local {
+            padding: 0 20px 20px 52px;
+            max-height: 300px;
+        }
+        
+        .faq-answer-local p {
+            margin: 0;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+        
         @media (max-width: 768px) {
             .service-hero h1 {
                 font-size: 2rem;
@@ -196,6 +318,25 @@
             .hero-buttons .btn {
                 width: 100%;
                 max-width: 280px;
+            }
+            
+            .related-posts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .faq-grid-local {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .faq-question-local {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .faq-item-local.active .faq-answer-local {
+                padding: 0 15px 15px 47px;
             }
         }
     </style>
@@ -235,13 +376,13 @@
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                    <a href="https://t.me/+79581118514" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
                         <i class="fab fa-telegram"></i> Telegram
                     </a>
-                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://wa.me/79581118514" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://max.ru/u/79581118514" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fas fa-comment"></i> MAX
                     </a>
                     <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
@@ -276,9 +417,160 @@
             </div>
         </section>
 
+        <!-- ============ БЛОК ПОЛЕЗНЫХ СТАТЕЙ (ПЕРЕЛИНКОВКА) ============ -->
+        <section class="related-posts-section">
+            <div class="container">
+                <h2 class="section-title">Полезные статьи о мойке витрин</h2>
+                <div class="related-posts-grid">
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-building"></i> Профессиональная мойка витрин: что нужно знать бизнесу</h3>
+                        <p>Почему витрины нужно мыть профессионально, а не своими силами. Экономика вопроса и влияние на продажи.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-chart-line"></i> Абонентское обслуживание vs разовые заказы: что выгоднее?</h3>
+                        <p>Сравниваем два подхода: экономия, удобство планирования, качество результата. Расчет для разных типов объектов.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-cloud-sun"></i> Сезонная мойка фасадов: весна, лето, осень, зима</h3>
+                        <p>Особенности мойки в разное время года. Когда лучше планировать генеральную уборку фасада.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ БЛОК FAQ ============ -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Часто задаваемые вопросы о мойке витрин и фасадов</h2>
+                
+                <div class="faq-grid-local">
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Как часто нужно мыть витрины?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Для поддержания презентабельного вида витрины стоит мыть не реже 1-2 раз в месяц. Для торговых центров с высокими требованиями — еженедельно. Зимой из-за реагентов частоту лучше увеличить.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Работаете ли вы ночью и в выходные?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Да, это наша специализация! Работаем ночью (22:00-6:00), в выходные и праздники, чтобы не мешать вашему бизнесу. Доплат за ночное время нет.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Моете ли вы высокие витрины?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Да, работаем на любой высоте: до 4 м — телескопические штанги, до 20 м — автовышки, выше — промышленные альпинисты с соблюдением техники безопасности.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Какие документы вы предоставляете?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Договор, счет, акт выполненных работ, счет-фактуру, УПД. Работаем с ЭДО. Для бюджетных организаций — по 44-ФЗ.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Удаляете ли вы сложные загрязнения?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Да: цемент, краска, граффити, жир, копоть, птичий помет, кальциевые отложения. Используем специальные профессиональные составы.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- JSON-LD разметка для FAQ -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Как часто нужно мыть витрины?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Для поддержания презентабельного вида витрины стоит мыть не реже 1-2 раз в месяц. Для торговых центров с высокими требованиями — еженедельно. Зимой из-за реагентов частоту лучше увеличить."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Работаете ли вы ночью и в выходные?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Да, это наша специализация! Работаем ночью (22:00-6:00), в выходные и праздники, чтобы не мешать вашему бизнесу. Доплат за ночное время нет."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Моете ли вы высокие витрины?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Да, работаем на любой высоте: до 4 м — телескопические штанги, до 20 м — автовышки, выше — промышленные альпинисты с соблюдением техники безопасности."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Какие документы вы предоставляете?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Договор, счет, акт выполненных работ, счет-фактуру, УПД. Работаем с ЭДО. Для бюджетных организаций — по 44-ФЗ."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Удаляете ли вы сложные загрязнения?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Да: цемент, краска, граффити, жир, копоть, птичий помет, кальциевые отложения. Используем специальные профессиональные составы."
+                    }
+                }
+            ]
+        }
+        </script>
+
     </main>
 
     <script src="/includes/footer.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Логика для аккордеона FAQ
+            const faqItems = document.querySelectorAll('.faq-item-local');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question-local');
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

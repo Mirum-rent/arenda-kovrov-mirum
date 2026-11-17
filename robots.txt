@@ -231,7 +231,7 @@ Sitemap: https://arenda-kovrov-mirum.ru/rss.xml
 # Компания: ООО "МИРУМ" (мирум.рент)
 # Основной сайт: https://arenda-kovrov-mirum.ru/
 # Телефон: +7 (977) 000-51-27
-# Telegram: https://t.me/+79770005127
+# Telegram: https://t.me/+79581118514
 # Email: matservice@yandex.ru
 # Адрес: Москва, ул. Сущёвская, 27с2
 # Год основания: 2009

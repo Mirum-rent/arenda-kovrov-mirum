@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      BLOG.HTML - Блог компании МИРУМ (ПОЛНАЯ ВЕРСИЯ)
-     Версия: 9.1 (05.06.2026) - ОБНОВЛЕНИЕ КНОПОК HERO-БЛОКА
+     Версия: 9.3 (05.06.2026) - ДОБАВЛЕНА ВНУТРЕННЯЯ ПЕРЕЛИНКОВКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -10,8 +10,8 @@
     
     <!-- ============ СЕО МЕТАДАННЫЕ ============ -->
     <title>Блог о грязезащите, мойке витрин и восстановлении полов | МИРУМ с 2009</title>
-    <meta name="description" content="✅ Экспертный блог МИРУМ: 40+ статей об аренде грязезащитных ковров, мойке фасадов, восстановлении полов, аутстаффинге. Исследования, кейсы, экономические расчеты от профессионалов с 2009 года.">
-    <meta name="keywords" content="блог о коврах, грязезащитные ковры, мытье фасадов, чистка окон, история ковров, технологии чистоты, уход за фасадами, аренда ковров, восстановление полов, шлифовка мрамора, полировка паркета, аутстаффинг, чаз, снижение налогов">
+    <meta name="description" content="✅ Экспертный блог МИРУМ: 40+ статей об аренде грязезащитных ковров, мойке фасадов, восстановлении полов. Исследования, кейсы, экономические расчеты от профессионалов с 2009 года.">
+    <meta name="keywords" content="блог о коврах, грязезащитные ковры, мытье фасадов, чистка окон, история ковров, технологии чистоты, уход за фасадами, аренда ковров, восстановление полов, шлифовка мрамора, полировка паркета">
     
     <link rel="canonical" href="https://arenda-kovrov-mirum.ru/blog.html" />
     <meta name="robots" content="index, follow" />
@@ -81,6 +81,8 @@
             cursor: pointer;
             font-size: 1rem;
             min-width: 120px;
+            padding: 12px 25px;
+            border-radius: 50px;
         }
         
         .hero-buttons .btn:hover {
@@ -417,6 +419,66 @@
             color: #999;
         }
         
+        /* Стили для блока похожих услуг */
+        .related-services-section {
+            background: var(--background-color);
+            padding: 60px 0;
+        }
+        
+        .related-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .related-service-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: var(--transition);
+            border-bottom: 3px solid var(--accent-color);
+            text-align: center;
+        }
+        
+        .related-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .related-service-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .related-service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .related-service-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .related-service-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .related-service-link:hover {
+            color: var(--light-accent);
+            gap: 12px;
+        }
+        
         /* Подписка */
         .subscribe-box {
             background: linear-gradient(135deg, #2c5aa0 0%, #3a7bd5 100%);
@@ -565,6 +627,11 @@
                 grid-template-columns: 1fr;
             }
             
+            .related-services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
             .subscribe-form {
                 flex-direction: column;
             }
@@ -658,7 +725,7 @@
         <section class="blog-hero">
             <div class="container">
                 <h1>Экспертный блог о чистке и восстановлении</h1>
-                <p>40+ экспертных статей о грязезащитных коврах, мойке фасадов, восстановлении полов и аутстаффинге. Исследования, кейсы и экономические расчеты от профессионалов с 2009 года.</p>
+                <p>40+ экспертных статей о грязезащитных коврах, мойке фасадов, восстановлении полов. Исследования, кейсы и экономические расчеты от профессионалов с 2009 года.</p>
                 
                 <div class="blog-stats">
                     <div class="blog-stat">
@@ -680,13 +747,13 @@
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                    <a href="https://t.me/+79581118514" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
                         <i class="fab fa-telegram"></i> Telegram
                     </a>
-                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://wa.me/79581118514" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://max.ru/u/79581118514" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fas fa-comment"></i> MAX
                     </a>
                     <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
@@ -699,7 +766,7 @@
         <!-- ПОИСК И КАТЕГОРИИ -->
         <div class="container">
             <div class="blog-search">
-                <input type="text" id="blogSearch" placeholder="Поиск по статьям... (например: 'линолеум', 'налоги', 'мойка')">
+                <input type="text" id="blogSearch" placeholder="Поиск по статьям... (например: 'линолеум', 'мойка', 'аренда')">
                 <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
             </div>
             
@@ -708,7 +775,6 @@
                 <button class="blog-category-btn" data-category="kovry">Аренда ковров (15)</button>
                 <button class="blog-category-btn" data-category="vitrini">Мойка витрин (10)</button>
                 <button class="blog-category-btn" data-category="poly">Восстановление полов (12)</button>
-                <button class="blog-category-btn" data-category="outstaff">Аутстаффинг (8)</button>
             </div>
         </div>
 
@@ -718,7 +784,7 @@
                 <div class="expert-avatar">МР</div>
                 <div class="expert-info">
                     <h3>Команда экспертов МИРУМ</h3>
-                    <p>Над статьями работают специалисты-практики с многолетним опытом: технологи клининга, инженеры по восстановлению покрытий, финансовые эксперты по аутстаффингу. Все материалы основаны на реальных кейсах и проверенных данных.</p>
+                    <p>Над статьями работают специалисты-практики с многолетним опытом: технологи клининга, инженеры по восстановлению покрытий. Все материалы основаны на реальных кейсах и проверенных данных.</p>
                     <div class="expert-stats">
                         <span class="expert-stat"><i class="fas fa-check-circle"></i> 16 лет практики</span>
                         <span class="expert-stat"><i class="fas fa-check-circle"></i> 500+ проектов</span>
@@ -728,10 +794,89 @@
             </div>
         </div>
 
-        <!-- ОСНОВНАЯ СЕТКА СТАТЕЙ (содержимое сокращено для экономии места) -->
+        <!-- ОСНОВНАЯ СЕТКА СТАТЕЙ (сокращена для демонстрации) -->
         <div class="container">
             <div class="blog-grid" id="blogGrid">
-                <!-- Содержимое блога (40+ статей) остается без изменений -->
+                <!-- Статья 1 -->
+                <div class="blog-card" data-category="kovry">
+                    <div class="blog-card-image">
+                        <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_1.webp" alt="История грязезащитных ковров">
+                        <span class="blog-card-category">Аренда ковров</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> <time datetime="2026-02-18">18.02.2026</time></span>
+                            <span><i class="far fa-clock"></i> 5 мин</span>
+                            <span><i class="far fa-eye"></i> 1.2K</span>
+                            <meta name="author" content="Дмитрий Рыбак">
+                            <meta name="article:published_time" content="2026-02-18">
+                        </div>
+                        <h3 class="blog-card-title">История грязезащитных ковров: от Древнего Египта до наших дней</h3>
+                        <div class="blog-card-excerpt">
+                            Первые прототипы грязезащитных ковров появились еще в Древнем Египте, где у входа в храмы клали циновки из тростника. Как развивались технологии чистоты на протяжении веков и что ждет нас в будущем?
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="#" class="blog-card-readmore">Читать статью <i class="fas fa-arrow-right"></i></a>
+                            <div class="blog-card-stats">
+                                <span><i class="far fa-bookmark"></i> 45</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Статья 2 -->
+                <div class="blog-card" data-category="kovry">
+                    <div class="blog-card-image">
+                        <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/arenda_kovrov/arenda_kovrov_2.webp" alt="Экономика аренды">
+                        <span class="blog-card-category">Аренда ковров</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> <time datetime="2026-02-15">15.02.2026</time></span>
+                            <span><i class="far fa-clock"></i> 7 мин</span>
+                            <span><i class="far fa-eye"></i> 2.1K</span>
+                            <meta name="author" content="Анна Смирнова">
+                            <meta name="article:published_time" content="2026-02-15">
+                        </div>
+                        <h3 class="blog-card-title">Аренда vs покупка: реальная экономия для бизнеса</h3>
+                        <div class="blog-card-excerpt">
+                            Подробный финансовый анализ: сколько реально можно сэкономить на аренде ковров вместо покупки. Расчеты для офисов, магазинов, медицинских центров.
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="#" class="blog-card-readmore">Читать статью <i class="fas fa-arrow-right"></i></a>
+                            <div class="blog-card-stats">
+                                <span><i class="far fa-bookmark"></i> 78</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Статья 3 -->
+                <div class="blog-card" data-category="vitrini">
+                    <div class="blog-card-image">
+                        <img src="https://raw.githubusercontent.com/Mirum-rent/arenda-kovrov-mirum/main/img/window_cleaning/window_cleaning1.webp" alt="Мойка витрин">
+                        <span class="blog-card-category">Мойка витрин</span>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> <time datetime="2026-02-20">20.02.2026</time></span>
+                            <span><i class="far fa-clock"></i> 6 мин</span>
+                            <span><i class="far fa-eye"></i> 1.8K</span>
+                            <meta name="author" content="Анна Смирнова">
+                            <meta name="article:published_time" content="2026-02-20">
+                        </div>
+                        <h3 class="blog-card-title">Профессиональная мойка витрин: что нужно знать бизнесу</h3>
+                        <div class="blog-card-excerpt">
+                            Почему витрины нужно мыть профессионально, а не своими силами. Экономика вопроса и влияние на продажи.
+                        </div>
+                        <div class="blog-card-footer">
+                            <a href="#" class="blog-card-readmore">Читать статью <i class="fas fa-arrow-right"></i></a>
+                            <div class="blog-card-stats">
+                                <span><i class="far fa-bookmark"></i> 42</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -743,8 +888,8 @@
                     <div class="popular-item">
                         <div class="popular-number">1</div>
                         <div class="popular-info">
-                            <h4><a href="#">Как сэкономить на налогах с помощью аутстаффинга</a></h4>
-                            <span class="views">3.1K просмотров</span>
+                            <h4><a href="#">Аренда vs покупка: реальная экономия</a></h4>
+                            <span class="views">2.1K просмотров</span>
                         </div>
                     </div>
                     <div class="popular-item">
@@ -757,20 +902,40 @@
                     <div class="popular-item">
                         <div class="popular-number">3</div>
                         <div class="popular-info">
-                            <h4><a href="#">Кейс: как избежать штрафа в 80 млн рублей</a></h4>
-                            <span class="views">3.4K просмотров</span>
-                        </div>
-                    </div>
-                    <div class="popular-item">
-                        <div class="popular-number">4</div>
-                        <div class="popular-info">
-                            <h4><a href="#">Аренда vs покупка: реальная экономия</a></h4>
-                            <span class="views">2.1K просмотров</span>
+                            <h4><a href="#">Профессиональная мойка витрин: что нужно знать бизнесу</a></h4>
+                            <span class="views">1.8K просмотров</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- ============ БЛОК ПОХОЖИХ УСЛУГ (ПЕРЕЛИНКОВКА) ============ -->
+        <section class="related-services-section">
+            <div class="container">
+                <h2 class="section-title">Наши услуги</h2>
+                <div class="related-services-grid">
+                    <div class="related-service-card">
+                        <i class="fas fa-rug"></i>
+                        <h3>Аренда грязезащитных ковров</h3>
+                        <p>Профессиональные ковры для офисов, магазинов, медицинских учреждений. Регулярная замена, чистка и обслуживание по всей России.</p>
+                        <a href="/arenda-kovrov.html" class="related-service-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-service-card">
+                        <i class="fas fa-building"></i>
+                        <h3>Мойка витрин и фасадов</h3>
+                        <p>Профессиональная мойка коммерческих фасадов и витрин. Работаем в удобное время, не мешая бизнесу. Высотные работы.</p>
+                        <a href="/window-cleaning.html" class="related-service-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-service-card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Восстановление напольных покрытий</h3>
+                        <p>Шлифовка, полировка, восстановление паркета, мрамора, гранита, линолеума. Экономия до 70% от замены. Гарантия до 8 лет.</p>
+                        <a href="/vosstanovlenie-polov.html" class="related-service-link">Подробнее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- КЛЮЧЕВЫЕ СЛОВА ДЛЯ ИИ -->
         <div class="container">
@@ -781,13 +946,9 @@
                     <span class="keyword-tag">грязезащита</span>
                     <span class="keyword-tag">мойка витрин</span>
                     <span class="keyword-tag">восстановление полов</span>
-                    <span class="keyword-tag">аутстаффинг</span>
-                    <span class="keyword-tag">ЧАЗ</span>
                     <span class="keyword-tag">линолеум пятна</span>
                     <span class="keyword-tag">шлифовка паркета</span>
                     <span class="keyword-tag">полировка мрамора</span>
-                    <span class="keyword-tag">налоговая экономия</span>
-                    <span class="keyword-tag">оформление мигрантов</span>
                     <span class="keyword-tag">ковры для офиса</span>
                 </div>
             </div>
@@ -811,13 +972,13 @@
             <h2 style="color: #2c3e50; margin-bottom: 20px;">Остались вопросы?</h2>
             <p style="color: #666; max-width: 600px; margin: 0 auto 30px;">Напишите нам в Telegram — мы свяжемся с вами, как можно скорее, ответим на все вопросы и поможем с выбором оптимального решения.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;">
+                <a href="https://t.me/+79581118514" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;">
                     <i class="fab fa-telegram"></i> Telegram
                 </a>
-                <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                <a href="https://wa.me/79581118514" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
-                <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                <a href="https://max.ru/u/79581118514" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
                     <i class="fas fa-comment"></i> MAX
                 </a>
                 <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">

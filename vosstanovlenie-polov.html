@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ============================================
      VOSSTANOVLENIE-POLOV.HTML - Восстановление полов
-     Версия: 9.3 (05.06.2026) - ДОБАВЛЕНА JSON-LD РАЗМЕТКА Product
+     Версия: 9.5 (05.06.2026) - ДОБАВЛЕНА ВНУТРЕННЯЯ ПЕРЕЛИНКОВКА
      ============================================ -->
 <html lang="ru">
 <head>
@@ -169,6 +169,128 @@
         .ba-label.before { background: rgba(231, 76, 60, 0.1); color: #c0392b; }
         .ba-label.after { background: rgba(46, 204, 113, 0.1); color: #27ae60; }
         
+        /* Стили для блока полезных статей */
+        .related-posts-section {
+            background: white;
+            padding: 60px 0;
+        }
+        
+        .related-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .related-post-card {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: var(--transition);
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .related-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .related-post-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .related-post-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .related-post-link {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .related-post-link:hover {
+            color: var(--light-accent);
+            gap: 12px;
+        }
+        
+        /* Стили для блока FAQ */
+        .faq-section {
+            background: var(--background-color);
+            padding: 60px 0;
+        }
+        
+        .faq-section .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-grid-local {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .faq-item-local {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .faq-item-local:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .faq-question-local {
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            background: white;
+        }
+        
+        .faq-question-local i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .faq-answer-local {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item-local.active .faq-answer-local {
+            padding: 0 20px 20px 52px;
+            max-height: 300px;
+        }
+        
+        .faq-answer-local p {
+            margin: 0;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+        
         @media (max-width: 768px) {
             .service-hero h1 {
                 font-size: 2rem;
@@ -192,6 +314,25 @@
             .hero-buttons .btn {
                 width: 100%;
                 max-width: 280px;
+            }
+            
+            .related-posts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .faq-grid-local {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .faq-question-local {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .faq-item-local.active .faq-answer-local {
+                padding: 0 15px 15px 47px;
             }
         }
     </style>
@@ -231,13 +372,13 @@
                 </div>
                 
                 <div class="hero-buttons">
-                    <a href="https://t.me/+79770005127" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
+                    <a href="https://t.me/+79581118514" class="btn" style="background: white; color: #2c5aa0; border: 2px solid #2c5aa0; border-radius: 50px; padding: 12px 25px;" data-consent-required>
                         <i class="fab fa-telegram"></i> Telegram
                     </a>
-                    <a href="https://wa.me/79770005127" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://wa.me/79581118514" class="btn" style="background: #25D366; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </a>
-                    <a href="https://max.ru/u/79770005127" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
+                    <a href="https://max.ru/u/79581118514" class="btn" style="background: #0055FF; color: white; border-radius: 50px; padding: 12px 25px;">
                         <i class="fas fa-comment"></i> MAX
                     </a>
                     <a href="mailto:matservice@yandex.ru" class="btn" style="background: #6c757d; color: white; border-radius: 50px; padding: 12px 25px;">
@@ -299,9 +440,160 @@
             </div>
         </section>
 
+        <!-- ============ БЛОК ПОЛЕЗНЫХ СТАТЕЙ (ПЕРЕЛИНКОВКА) ============ -->
+        <section class="related-posts-section">
+            <div class="container">
+                <h2 class="section-title">Полезные статьи о восстановлении полов</h2>
+                <div class="related-posts-grid">
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-chart-line"></i> Восстановление vs замена: считаем реальную экономию</h3>
+                        <p>Подробные расчеты для разных типов покрытий. Когда выгоднее восстановить, а когда проще заменить.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-border-all"></i> Почему на линолеуме появляются желтые пятна и как с ними бороться?</h3>
+                        <p>Причины появления желтых пятен: миграция пластификаторов, реакция с резиной. Профессиональные методы удаления.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-post-card">
+                        <h3><i class="fas fa-gem"></i> Шлифовка и полировка мрамора: от матовости до зеркального блеска</h3>
+                        <p>Как вернуть блеск мраморным полам. Кристаллизация, шлифовка алмазными фрезами, защита от влаги.</p>
+                        <a href="/blog.html" class="related-post-link">Читать статью <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ БЛОК FAQ ============ -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Часто задаваемые вопросы о восстановлении полов</h2>
+                
+                <div class="faq-grid-local">
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Почему появляются желтые пятна на линолеуме?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Из-за миграции пластификаторов и их реакции с резиновой пылью. Мы удаляем их специальными составами и наносим защитное покрытие, предотвращающее повторное появление на 1-2 года.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Сколько времени занимает восстановление пола?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Линолеум — 50-300 м²/день, мрамор — 30-100 м²/день, паркет — 50-150 м²/день. Офис 100 м² — 1 день, ТЦ 500 м² — 3-4 дня. Работаем ночью и в выходные.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Можно ли восстановить пол с глубокими царапинами?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Да, в большинстве случаев. Паркет — глубокая циклевка, камень — шлифовка алмазными фрезами, линолеум — маскировка специальными составами.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Какая гарантия на восстановление полов?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Паркет — до 8 лет (лак Loba), каменные полы — 2 года, линолеум — 1 год. Гарантия прописана в договоре.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item-local">
+                        <div class="faq-question-local">
+                            <i class="fas fa-question-circle"></i>
+                            Как подготовить помещение к работам?
+                        </div>
+                        <div class="faq-answer-local">
+                            <p>Освободить пол (мы сдвигаем мебель), обеспечить доступ к розеткам, предупредить персонал. Демонтаж плинтусов можем сделать сами.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- JSON-LD разметка для FAQ -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Почему появляются желтые пятна на линолеуме?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Из-за миграции пластификаторов и их реакции с резиновой пылью. Мы удаляем их специальными составами и наносим защитное покрытие, предотвращающее повторное появление на 1-2 года."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Сколько времени занимает восстановление пола?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Линолеум — 50-300 м²/день, мрамор — 30-100 м²/день, паркет — 50-150 м²/день. Офис 100 м² — 1 день, ТЦ 500 м² — 3-4 дня. Работаем ночью и в выходные."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Можно ли восстановить пол с глубокими царапинами?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Да, в большинстве случаев. Паркет — глубокая циклевка, камень — шлифовка алмазными фрезами, линолеум — маскировка специальными составами."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Какая гарантия на восстановление полов?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Паркет — до 8 лет (лак Loba), каменные полы — 2 года, линолеум — 1 год. Гарантия прописана в договоре."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Как подготовить помещение к работам?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Освободить пол (мы сдвигаем мебель), обеспечить доступ к розеткам, предупредить персонал. Демонтаж плинтусов можем сделать сами."
+                    }
+                }
+            ]
+        }
+        </script>
+
     </main>
 
     <script src="/includes/footer.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Логика для аккордеона FAQ
+            const faqItems = document.querySelectorAll('.faq-item-local');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question-local');
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
